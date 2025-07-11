@@ -17,8 +17,14 @@ struct ContentView: View {
     @State private var showResult = false
     @State private var showSaveDialog = false
     @State private var showJournal = false
+    @State private var showTimer = false
     @State private var recordName = ""
     @State private var savedRecords: [CalculationRecord] = []
+    
+    // Для таймера
+    @State private var selectedTimerLabel = ""
+    @State private var selectedTimerMinutes = 0
+    @State private var selectedTimerSeconds = 0
     
     var body: some View {
         VStack(spacing: 20) {
@@ -124,7 +130,8 @@ struct ContentView: View {
             if showResult {
                 CalculationResultView(
                     results: pushResults,
-                    isPushMode: isPushMode
+                    isPushMode: isPushMode,
+                    onStartTimer: startTimer
                 )
             }
             
@@ -149,6 +156,14 @@ struct ContentView: View {
                 onClose: { showJournal = false }
             )
         }
+        .sheet(isPresented: $showTimer) {
+            TimerView(
+                timerLabel: selectedTimerLabel,
+                totalMinutes: selectedTimerMinutes,
+                totalSeconds: selectedTimerSeconds,
+                onClose: { showTimer = false }
+            )
+        }
     }
     
     func calculateTime() {
@@ -169,6 +184,13 @@ struct ContentView: View {
         
         showResult = true
         hideKeyboard()
+    }
+    
+    func startTimer(_ label: String, _ minutes: Int, _ seconds: Int) {
+        selectedTimerLabel = label
+        selectedTimerMinutes = minutes
+        selectedTimerSeconds = seconds
+        showTimer = true
     }
     
     func hideKeyboard() {
