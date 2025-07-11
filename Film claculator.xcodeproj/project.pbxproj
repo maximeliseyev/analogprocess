@@ -19,6 +19,7 @@
 		BFA0C7AB2E2134D800132936 /* SaveRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AA2E2134D600132936 /* SaveRecordView.swift */; };
 		BFA0C7AD2E2134F800132936 /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AC2E2134F600132936 /* JournalView.swift */; };
 		BFA0C7AF2E21351300132936 /* RecordRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AE2E21351000132936 /* RecordRowView.swift */; };
+		BFF4D9FF2E21BECD0097BE82 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF4D9FE2E21BEC90097BE82 /* TimerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		BFA0C7AC2E2134F600132936 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
 		BFA0C7AE2E21351000132936 /* RecordRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRowView.swift; sourceTree = "<group>"; };
 		BFE96A392E2061A0001CF98D /* Film claculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Film claculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFF4D9FE2E21BEC90097BE82 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 		BFA0C7992E2133FC00132936 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BFF4D9FE2E21BEC90097BE82 /* TimerView.swift */,
 				BFA0C7AE2E21351000132936 /* RecordRowView.swift */,
 				BFA0C7AC2E2134F600132936 /* JournalView.swift */,
 				BFA0C7AA2E2134D600132936 /* SaveRecordView.swift */,
@@ -186,6 +189,7 @@
 				BFA0C79D2E2133FC00132936 /* ContentView.swift in Sources */,
 				BFA0C79E2E2133FC00132936 /* Film_claculator.xcdatamodeld in Sources */,
 				BFA0C7A82E2134B400132936 /* CalculationResultView.swift in Sources */,
+				BFF4D9FF2E21BECD0097BE82 /* TimerView.swift in Sources */,
 				BFA0C79F2E2133FC00132936 /* FilmClaculatorApp.swift in Sources */,
 				BFA0C7AD2E2134F800132936 /* JournalView.swift in Sources */,
 				BFA0C7A92E2134BA00132936 /* DevelopmentCalculator.swift in Sources */,
