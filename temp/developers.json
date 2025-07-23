@@ -1,0 +1,15 @@
+{
+  "ilford-id11": {"name": "Ilford ID-11", "manufacturer": "Ilford", "type": "powder", "description": "Стандартный порошковый проявитель", "defaultDilution": "1+1"},
+  "ilford-ddx": {"name": "Ilford DD-X", "manufacturer": "Ilford", "type": "liquid", "description": "Жидкий концентрированный проявитель", "defaultDilution": "1+4"},
+  "ilford-hc": {"name": "Ilford HC", "manufacturer": "Ilford", "type": "liquid", "description": "Высококонтрастный проявитель", "defaultDilution": "1+31"},
+  "ilford-lc29": {"name": "Ilford LC29", "manufacturer": "Ilford", "type": "liquid", "description": "Жидкий проявитель", "defaultDilution": "1+9"},
+  "ilford-ilfosol-3": {"name": "Ilford Ilfosol 3", "manufacturer": "Ilford", "type": "liquid", "description": "Жидкий проявитель", "defaultDilution": "1+9"},
+  "kodak-d76": {"name": "Kodak D-76", "manufacturer": "Kodak", "type": "powder", "description": "Классический порошковый проявитель", "defaultDilution": "1+1"},
+  "kodak-hc110": {"name": "Kodak HC-110", "manufacturer": "Kodak", "type": "liquid", "description": "Универсальный жидкий проявитель", "defaultDilution": "1+31"},
+  "kodak-xtol": {"name": "Kodak XTOL", "manufacturer": "Kodak", "type": "powder", "description": "Современный порошковый проявитель", "defaultDilution": "stock"},
+  "kodak-tmax": {"name": "Kodak T-Max", "manufacturer": "Kodak", "type": "liquid", "description": "Проявитель для плёнок c плоским зерном", "defaultDilution": "1+4"},
+  "rodinal": {"name": "Rodinal", "manufacturer": "Adox", "type": "liquid", "description": "Высококонтрастный жидкий проявитель", "defaultDilution": "1+25"},
+  "microphen": {"name": "Microphen", "manufacturer": "Ilford", "type": "powder", "description": "Порошковый проявитель", "defaultDilution": "1+1"},
+  "perceptol": {"name": "Perceptol", "manufacturer": "Ilford", "type": "powder", "description": "Мелкозернистый проявитель", "defaultDilution": "1+1"},
+  "custom": {"name": "Пользовательский", "manufacturer": "Custom", "type": "custom", "description": "Настройка множителя вручную", "defaultDilution": "custom"}
+} 

@@ -1,0 +1,198 @@
+{
+  "ilford-pan-100": {
+    "name": "Ilford PAN 100",
+    "manufacturer": "Ilford",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 100
+  },
+  "ilford-pan-400": {
+    "name": "Ilford PAN 400",
+    "manufacturer": "Ilford",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 400
+  },
+  "ilford-hp5-plus": {
+    "name": "Ilford HP5+",
+    "manufacturer": "Ilford",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 400
+  },
+  "ilford-fp4-plus": {
+    "name": "Ilford FP4+",
+    "manufacturer": "Ilford",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 125
+  },
+  "ilford-delta-400": {
+    "name": "Ilford Delta 400 Professional",
+    "manufacturer": "Ilford",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 400
+  },
+  "ilford-delta-100": {
+    "name": "Ilford Delta 100 Professional",
+    "manufacturer": "Ilford",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 100
+  },
+  "ilford-delta-3200": {
+    "name": "Ilford Delta 3200 Professional",
+    "manufacturer": "Ilford",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 3200
+  },
+  "ilford-panf-plus": {
+    "name": "Ilford PANF Plus",
+    "manufacturer": "Ilford",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 50
+  },
+  "ilford-sfx-200": {
+    "name": "Ilford SFX 200",
+    "manufacturer": "Ilford",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 200
+  },
+  "kodak-tri-x": {
+    "name": "Kodak Tri-X 400",
+    "manufacturer": "Kodak",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 400
+  },
+  "kodak-tmax-100": {
+    "name": "Kodak T-Max 100",
+    "manufacturer": "Kodak",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 100
+  },
+  "kodak-tmax-400": {
+    "name": "Kodak T-Max 400",
+    "manufacturer": "Kodak",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 400
+  },
+  "kodak-tmax-p3200": {
+    "name": "Kodak T-Max P3200",
+    "manufacturer": "Kodak",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 3200
+  },
+  "kodak-double-x": {
+    "name": "Kodak Double-X 5222",
+    "manufacturer": "Kodak",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 250
+  },
+  "foma-100": {
+    "name": "Fomapan 100",
+    "manufacturer": "Foma",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 100
+  },
+  "foma-200": {
+    "name": "Fomapan 200",
+    "manufacturer": "Foma",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 200
+  },
+  "foma-400": {
+    "name": "Fomapan 400",
+    "manufacturer": "Foma",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 400
+  },
+  "kentmere-100": {
+    "name": "Kentmere 100",
+    "manufacturer": "Kentmere",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 100
+  },
+  "kentmere-400": {
+    "name": "Kentmere 400",
+    "manufacturer": "Kentmere",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 400
+  },
+  "lucky-aerial-1023": {
+    "name": "Lucky Aerial 1023",
+    "manufacturer": "Lucky",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 200
+  },
+  "lucky-shd-400": {
+    "name": "Lucky SHD 400",
+    "manufacturer": "Lucky",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 400
+  },
+  "orwo-un54": {
+    "name": "ORWO UN54",
+    "manufacturer": "ORWO",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 100
+  },
+  "rollei-retro-80s": {
+    "name": "Rollei Retro 80S",
+    "manufacturer": "Rollei",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 80
+  },
+  "rollei-rpx400": {
+    "name": "Rollei RPX400",
+    "manufacturer": "Rollei",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 400
+  },
+  "shanghai-gp3-100": {
+    "name": "Shanghai GP3 100",
+    "manufacturer": "Shanghai",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 100
+  },
+  "tasma-aero-25l": {
+    "name": "Tasma Aero Type-25L",
+    "manufacturer": "Tasma",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 100
+  },
+  "tasma-aero-42l": {
+    "name": "Tasma Aero Type-42L",
+    "manufacturer": "Tasma",
+    "type": "black-white",
+    "description": " ",
+    "defaultISO": 400
+  },
+  "custom": {
+    "name": "Пользовательская",
+    "manufacturer": "Custom",
+    "type": "custom",
+    "description": "Настройка времени вручную",
+    "defaultISO": 400
+  }
+}
