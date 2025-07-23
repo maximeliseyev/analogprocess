@@ -14,15 +14,34 @@ struct PersistenceController {
     static let preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-        }
+        
+        // Создаем тестовые данные для превью
+        let film = Film(context: viewContext)
+        film.id = "test-film"
+        film.name = "Ilford HP5+"
+        film.manufacturer = "Ilford"
+        film.type = "Black & White"
+        film.desc = "Классическая черно-белая пленка"
+        film.defaultISO = 400
+        
+        let developer = Developer(context: viewContext)
+        developer.id = "test-developer"
+        developer.name = "Kodak D-76"
+        developer.manufacturer = "Kodak"
+        developer.type = "powder"
+        developer.desc = "Классический порошковый проявитель"
+        developer.defaultDilution = "1+1"
+        
+        let developmentTime = DevelopmentTime(context: viewContext)
+        developmentTime.dilution = "1+1"
+        developmentTime.iso = 400
+        developmentTime.time = 540
+        developmentTime.film = film
+        developmentTime.developer = developer
+        
         do {
             try viewContext.save()
         } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
@@ -32,15 +51,12 @@ struct PersistenceController {
     let container: NSPersistentContainer
 
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "Film_claculator")
+        container = NSPersistentContainer(name: "FilmСlaculator")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-
                 /*
                  Typical reasons for an error here include:
                  * The parent directory does not exist, cannot be created, or disallows writing.

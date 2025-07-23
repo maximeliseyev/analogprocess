@@ -37,7 +37,7 @@ struct AgitationMode {
             return "Непрерывная ажитация"
         case .cycle(let agitation, let rest):
             return "\(agitation) / \(rest)"
-        case .complex(let phases):
+        case .complex:
             if name == "ORWO" {
                 return "45/15 + 15/45"
             }

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    let initialTime: Int?
+    
     @State private var minutes = ""
     @State private var seconds = ""
     @State private var coefficient = "1.33"
@@ -25,6 +27,13 @@ struct ContentView: View {
     @State private var selectedTimerLabel = ""
     @State private var selectedTimerMinutes = 0
     @State private var selectedTimerSeconds = 0
+    
+    // Core Data сервис
+    @StateObject private var coreDataService = CoreDataService.shared
+    
+    init(initialTime: Int? = nil) {
+        self.initialTime = initialTime
+    }
     
     var body: some View {
         VStack(spacing: 20) {
@@ -92,67 +101,57 @@ struct ContentView: View {
                 
                 // Steps Input
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Количество ступеней:")
+                    Text("Количество шагов:")
                         .font(.headline)
                     
-                    HStack {
-                        Stepper(value: $pushSteps, in: 1...5) {
-                            Text("\(pushSteps)")
-                                .font(.title2)
-                                .fontWeight(.medium)
-                        }
-                        
-                        Spacer()
-                        
-                        Text("(от \(isPushMode ? "+" : "-")1 до \(isPushMode ? "+" : "-")\(pushSteps))")
-                            .font(.caption)
-                            .foregroundColor(.gray)
+                    Stepper(value: $pushSteps, in: 2...10) {
+                        Text("\(pushSteps) шагов")
                     }
                 }
             }
-            .padding(.horizontal)
+            .padding()
+            .background(Color.gray.opacity(0.1))
+            .cornerRadius(10)
             
             // Action Buttons
-            VStack(spacing: 10) {
-                Button(action: calculateTime) {
-                    Text("Рассчитать")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .cornerRadius(10)
+            HStack(spacing: 15) {
+                Button("Рассчитать") {
+                    calculateTime()
                 }
-                .padding(.horizontal)
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.blue)
+                .cornerRadius(10)
                 
-                if showResult {
-                    Button(action: { showSaveDialog = true }) {
-                        Text("Сохранить")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.green)
-                            .cornerRadius(10)
-                    }
-                    .padding(.horizontal)
+                Button("Таймер") {
+                    showTimer = true
                 }
-            }
-            
-            // Results
-            if showResult {
-                CalculationResultView(
-                    results: pushResults,
-                    isPushMode: isPushMode,
-                    onStartTimer: startTimer
-                )
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.green)
+                .cornerRadius(10)
             }
             
             Spacer()
         }
         .padding()
-        .onTapGesture {
-            hideKeyboard()
+        .onAppear {
+            loadRecords()
+            if let initialTime = initialTime {
+                let minutes = initialTime / 60
+                let seconds = initialTime % 60
+                self.minutes = "\(minutes)"
+                self.seconds = "\(seconds)"
+            }
+        }
+        .sheet(isPresented: $showResult) {
+            CalculationResultView(
+                results: pushResults,
+                isPushMode: isPushMode,
+                onStartTimer: startTimer
+            )
         }
         .sheet(isPresented: $showSaveDialog) {
             SaveRecordView(
@@ -210,6 +209,10 @@ struct ContentView: View {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
     
+    func loadRecords() {
+        savedRecords = coreDataService.getCalculationRecords()
+    }
+    
     func saveRecord() {
         guard !recordName.isEmpty,
               let min = Int(minutes), min >= 0,
@@ -218,34 +221,40 @@ struct ContentView: View {
             return
         }
         
-        let record = CalculationRecord(
-            name: recordName,
-            date: Date(),
-            minutes: min,
-            seconds: sec,
-            coefficient: coeff,
-            isPushMode: isPushMode,
-            pushSteps: pushSteps
+        // Сохраняем в Core Data
+        let totalTime = min * 60 + sec
+        coreDataService.saveCalculationRecord(
+            filmName: "Пользовательская пленка",
+            developerName: "Пользовательский проявитель",
+            dilution: "Пользовательское разбавление",
+            iso: 400,
+            temperature: 20.0,
+            time: totalTime
         )
         
-        savedRecords.append(record)
         recordName = ""
         showSaveDialog = false
+        loadRecords() // Обновляем список записей
     }
     
     func loadRecord(_ record: CalculationRecord) {
-        minutes = "\(record.minutes)"
-        seconds = "\(record.seconds)"
-        coefficient = "\(record.coefficient)"
-        isPushMode = record.isPushMode
-        pushSteps = record.pushSteps
+        let totalSeconds = Int(record.time)
+        let minutes = totalSeconds / 60
+        let seconds = totalSeconds % 60
+        
+        self.minutes = "\(minutes)"
+        self.seconds = "\(seconds)"
+        coefficient = "1.33" // Используем стандартный коэффициент
+        isPushMode = true
+        pushSteps = 3
         
         showJournal = false
         calculateTime()
     }
     
     func deleteRecord(_ record: CalculationRecord) {
-        savedRecords.removeAll { $0.id == record.id }
+        coreDataService.deleteCalculationRecord(record)
+        loadRecords() // Обновляем список записей
     }
 }
 

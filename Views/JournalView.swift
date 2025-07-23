@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct JournalView: View {
     let records: [CalculationRecord]
     let onLoadRecord: (CalculationRecord) -> Void
@@ -33,16 +32,15 @@ struct JournalView: View {
                     Spacer()
                 } else {
                     List {
-                        ForEach(records.sorted(by: { $0.date > $1.date }), id: \.id) { record in
+                        ForEach(records, id: \.objectID) { record in
                             RecordRowView(
                                 record: record,
                                 onTap: { onLoadRecord(record) }
                             )
                         }
                         .onDelete { indexSet in
-                            let sortedRecords = records.sorted(by: { $0.date > $1.date })
                             for index in indexSet {
-                                onDeleteRecord(sortedRecords[index])
+                                onDeleteRecord(records[index])
                             }
                         }
                     }

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import CoreData
 
 @MainActor
 class CalculationViewModel: ObservableObject {
@@ -28,6 +29,9 @@ class CalculationViewModel: ObservableObject {
     @Published var selectedTimerLabel = ""
     @Published var selectedTimerMinutes = 0
     @Published var selectedTimerSeconds = 0
+    
+    // Core Data service
+    private let coreDataService = CoreDataService.shared
     
     // MARK: - Computed Properties
     var isValidInput: Bool {
@@ -78,34 +82,44 @@ class CalculationViewModel: ObservableObject {
             return
         }
         
-        let record = CalculationRecord(
-            name: recordName,
-            date: Date(),
-            minutes: min,
-            seconds: sec,
-            coefficient: coeff,
-            isPushMode: isPushMode,
-            pushSteps: pushSteps
+        // Сохраняем в Core Data
+        let totalTime = min * 60 + sec
+        coreDataService.saveCalculationRecord(
+            filmName: "Пользовательская пленка",
+            developerName: "Пользовательский проявитель",
+            dilution: "Пользовательское разбавление",
+            iso: 400,
+            temperature: 20.0,
+            time: totalTime
         )
         
-        savedRecords.append(record)
         recordName = ""
         showSaveDialog = false
+        loadRecords() // Обновляем список записей
+    }
+    
+    func loadRecords() {
+        savedRecords = coreDataService.getCalculationRecords()
     }
     
     func loadRecord(_ record: CalculationRecord) {
-        minutes = "\(record.minutes)"
-        seconds = "\(record.seconds)"
-        coefficient = "\(record.coefficient)"
-        isPushMode = record.isPushMode
-        pushSteps = record.pushSteps
+        let totalSeconds = Int(record.time)
+        let minutes = totalSeconds / 60
+        let seconds = totalSeconds % 60
+        
+        self.minutes = "\(minutes)"
+        self.seconds = "\(seconds)"
+        coefficient = "1.33" // Используем стандартный коэффициент
+        isPushMode = true
+        pushSteps = 3
         
         showJournal = false
         calculateTime()
     }
     
     func deleteRecord(_ record: CalculationRecord) {
-        savedRecords.removeAll { $0.id == record.id }
+        coreDataService.deleteCalculationRecord(record)
+        loadRecords() // Обновляем список записей
     }
     
     func hideKeyboard() {
