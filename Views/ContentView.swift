@@ -28,6 +28,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 20) {
+            // Header
             HStack {
                 Text("Калькулятор")
                     .font(.title3)
@@ -42,78 +43,89 @@ struct ContentView: View {
             }
             .padding(.top)
             
+            // Form
             VStack(alignment: .leading, spacing: 15) {
-                Text("Базовое время:")
-                    .font(.headline)
-                
-                HStack {
-                    TextField("Минуты", text: $minutes)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .keyboardType(.numberPad)
+                // Time Input
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Базовое время:")
+                        .font(.headline)
                     
-                    Text("мин")
-                    
-                    TextField("Секунды", text: $seconds)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .keyboardType(.numberPad)
-                    
-                    Text("сек")
-                }
-                
-                Text("Коэффициент:")
-                    .font(.headline)
-                
-                HStack {
-                    TextField("1.33", text: $coefficient)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .keyboardType(.decimalPad)
-                    
-                    Text("(стандартный 1.33)")
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                }
-                
-                Text("Тип процесса:")
-                    .font(.headline)
-                
-                Picker("Тип процесса", selection: $isPushMode) {
-                    Text("PULL").tag(false)
-                    Text("PUSH").tag(true)
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                
-                Text("Количество ступеней:")
-                    .font(.headline)
-                
-                HStack {
-                    Stepper(value: $pushSteps, in: 1...5) {
-                        Text("\(pushSteps)")
-                            .font(.title2)
-                            .fontWeight(.medium)
+                    HStack {
+                        TextField("Минуты", text: $minutes)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        
+                        Text("мин")
+                        
+                        TextField("Секунды", text: $seconds)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        
+                        Text("сек")
                     }
+                }
+                
+                // Coefficient Input
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Коэффициент:")
+                        .font(.headline)
                     
-                    Spacer()
+                    HStack {
+                        TextField("1.33", text: $coefficient)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        
+                        Text("(стандартный 1.33)")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                }
+                
+                // Process Type
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Тип процесса:")
+                        .font(.headline)
                     
-                    Text("(от \(isPushMode ? "+" : "-")1 до \(isPushMode ? "+" : "-")\(pushSteps))")
-                        .font(.caption)
-                        .foregroundColor(.gray)
+                    Picker("Тип процесса", selection: $isPushMode) {
+                        Text("PULL").tag(false)
+                        Text("PUSH").tag(true)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                }
+                
+                // Steps Input
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Количество ступеней:")
+                        .font(.headline)
+                    
+                    HStack {
+                        Stepper(value: $pushSteps, in: 1...5) {
+                            Text("\(pushSteps)")
+                                .font(.title2)
+                                .fontWeight(.medium)
+                        }
+                        
+                        Spacer()
+                        
+                        Text("(от \(isPushMode ? "+" : "-")1 до \(isPushMode ? "+" : "-")\(pushSteps))")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
                 }
             }
             .padding(.horizontal)
             
-            Button(action: calculateTime) {
-                Text("Рассчитать")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.blue)
-                    .cornerRadius(10)
-            }
-            .padding(.horizontal)
-            
-            if showResult {
-                HStack {
+            // Action Buttons
+            VStack(spacing: 10) {
+                Button(action: calculateTime) {
+                    Text("Рассчитать")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                }
+                .padding(.horizontal)
+                
+                if showResult {
                     Button(action: { showSaveDialog = true }) {
                         Text("Сохранить")
                             .font(.headline)
@@ -123,10 +135,11 @@ struct ContentView: View {
                             .background(Color.green)
                             .cornerRadius(10)
                     }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
             }
             
+            // Results
             if showResult {
                 CalculationResultView(
                     results: pushResults,
