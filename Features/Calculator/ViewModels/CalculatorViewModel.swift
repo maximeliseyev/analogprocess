@@ -1,16 +1,16 @@
 //
-//  CalculationViewModel.swift
+//  CalculatorViewModel.swift
 //  Film claculator
 //
-//  Created by Maxim Eliseyev on 11.07.2025.
+//  Created by Maxim Eliseyev on 12.07.2025.
 //
 
 import SwiftUI
-import Combine
 import CoreData
+import Combine
 
 @MainActor
-class CalculationViewModel: ObservableObject {
+class CalculatorViewModel: ObservableObject {
     // MARK: - Published Properties
     @Published var minutes = ""
     @Published var seconds = ""
@@ -30,10 +30,12 @@ class CalculationViewModel: ObservableObject {
     @Published var selectedTimerMinutes = 0
     @Published var selectedTimerSeconds = 0
     
-    // Core Data service
+    // MARK: - Dependencies
     private let coreDataService = CoreDataService.shared
+    private let calculator = DevelopmentCalculator()
     
     // MARK: - Computed Properties
+    
     var isValidInput: Bool {
         guard let min = Int(minutes), min >= 0,
               let sec = Int(seconds), sec >= 0, sec < 60,
@@ -43,7 +45,8 @@ class CalculationViewModel: ObservableObject {
         return true
     }
     
-    // MARK: - Public Methods
+    // MARK: - Calculation Methods
+    
     func calculateTime() {
         guard isValidInput else { return }
         
@@ -53,7 +56,6 @@ class CalculationViewModel: ObservableObject {
             return
         }
         
-        let calculator = DevelopmentCalculator()
         pushResults = calculator.calculateResults(
             minutes: min,
             seconds: sec,
@@ -66,12 +68,16 @@ class CalculationViewModel: ObservableObject {
         hideKeyboard()
     }
     
+    // MARK: - Timer Methods
+    
     func startTimer(_ label: String, _ minutes: Int, _ seconds: Int) {
         selectedTimerLabel = label
         selectedTimerMinutes = minutes
         selectedTimerSeconds = seconds
         showTimer = true
     }
+    
+    // MARK: - Record Management Methods
     
     func saveRecord() {
         guard !recordName.isEmpty && isValidInput else { return }
@@ -122,8 +128,20 @@ class CalculationViewModel: ObservableObject {
         loadRecords() // Обновляем список записей
     }
     
+    // MARK: - Utility Methods
+    
     func hideKeyboard() {
         // Простая реализация скрытия клавиатуры
         // В реальном приложении здесь будет более сложная логика
+    }
+    
+    func resetForm() {
+        minutes = ""
+        seconds = ""
+        coefficient = "1.33"
+        pushSteps = 3
+        isPushMode = true
+        pushResults = []
+        recordName = ""
     }
 } 

@@ -17,15 +17,34 @@
 		BF41091A2E3109BD00BE2AD8 /* TestAgitationModes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109182E3109BD00BE2AD8 /* TestAgitationModes.swift */; };
 		BF41091B2E3109BD00BE2AD8 /* TestORWOScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109192E3109BD00BE2AD8 /* TestORWOScheme.swift */; };
 		BF4109272E31148700BE2AD8 /* DevelopmentParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109252E31148700BE2AD8 /* DevelopmentParameters.swift */; };
-		BF41092E2E3114E500BE2AD8 /* CalculationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41092D2E3114E500BE2AD8 /* CalculationViewModel.swift */; };
 		BF4109302E31151800BE2AD8 /* DevelopmentSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41092F2E31151800BE2AD8 /* DevelopmentSetupView.swift */; };
 		BF4109332E311C8100BE2AD8 /* FilmСlaculator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF4109312E311C8100BE2AD8 /* FilmСlaculator.xcdatamodeld */; };
 		BF4109352E311CA800BE2AD8 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109342E311CA800BE2AD8 /* CoreDataService.swift */; };
+		BF4109382E31307100BE2AD8 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109372E31307100BE2AD8 /* MainTabView.swift */; };
+		BF41093A2E31308500BE2AD8 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109392E31308500BE2AD8 /* CalculatorView.swift */; };
+		BF41093C2E3130B000BE2AD8 /* CalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41093B2E3130B000BE2AD8 /* CalculatorViewModel.swift */; };
+		BF41093F2E31318D00BE2AD8 /* JournalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41093D2E31318D00BE2AD8 /* JournalViewModel.swift */; };
+		BF4109402E31318D00BE2AD8 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41093E2E31318D00BE2AD8 /* TimerViewModel.swift */; };
+		BF4109512E31615300BE2AD8 /* AppPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109502E31615300BE2AD8 /* AppPreview.swift */; };
+		BF4109532E31622700BE2AD8 /* ComponentPreviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109522E31622700BE2AD8 /* ComponentPreviews.swift */; };
+		BF4109552E31623B00BE2AD8 /* MainPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109542E31623B00BE2AD8 /* MainPreview.swift */; };
+		BF41095B2E3163E400BE2AD8 /* FilmPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109592E3163E400BE2AD8 /* FilmPickerView.swift */; };
+		BF41095C2E3163E400BE2AD8 /* DevelopmentParametersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109582E3163E400BE2AD8 /* DevelopmentParametersView.swift */; };
+		BF41095D2E3163E400BE2AD8 /* DeveloperPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109562E3163E400BE2AD8 /* DeveloperPickerView.swift */; };
+		BF41095E2E3163E400BE2AD8 /* DevelopmentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109572E3163E400BE2AD8 /* DevelopmentHeaderView.swift */; };
+		BF4109602E31640400BE2AD8 /* DeveloperPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41095F2E31640400BE2AD8 /* DeveloperPickerView.swift */; };
+		BF4109622E31641600BE2AD8 /* DilutionPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109612E31641600BE2AD8 /* DilutionPickerView.swift */; };
+		BF4109642E31641B00BE2AD8 /* TemperaturePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109632E31641B00BE2AD8 /* TemperaturePickerView.swift */; };
+		BF4109662E31643100BE2AD8 /* ISOPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109652E31643100BE2AD8 /* ISOPickerView.swift */; };
+		BF41096A2E31653800BE2AD8 /* DevelopmentSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109692E31653800BE2AD8 /* DevelopmentSetupViewModel.swift */; };
+		BF4109702E3166F400BE2AD8 /* TimerControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41096C2E3166F400BE2AD8 /* TimerControlsView.swift */; };
+		BF4109712E3166F400BE2AD8 /* TimerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41096D2E3166F400BE2AD8 /* TimerHeaderView.swift */; };
+		BF4109722E3166F400BE2AD8 /* AgitationIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41096B2E3166F400BE2AD8 /* AgitationIndicatorView.swift */; };
+		BF4109732E3166F400BE2AD8 /* TimerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41096E2E3166F400BE2AD8 /* TimerProgressView.swift */; };
 		BFA0C79B2E2133FC00132936 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFA0C7932E2133FC00132936 /* Assets.xcassets */; };
 		BFA0C79D2E2133FC00132936 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7952E2133FC00132936 /* ContentView.swift */; };
 		BFA0C79F2E2133FC00132936 /* FilmClaculatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7972E2133FC00132936 /* FilmClaculatorApp.swift */; };
 		BFA0C7A02E2133FC00132936 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7982E2133FC00132936 /* Persistence.swift */; };
-		BFA0C7A12E2133FC00132936 /* Calculator.swift in Resources */ = {isa = PBXBuildFile; fileRef = BFA0C7942E2133FC00132936 /* Calculator.swift */; };
 		BFA0C7A82E2134B400132936 /* CalculationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7A72E2134B300132936 /* CalculationResultView.swift */; };
 		BFA0C7A92E2134BA00132936 /* DevelopmentCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7A62E21349100132936 /* DevelopmentCalculator.swift */; };
 		BFA0C7AB2E2134D800132936 /* SaveRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AA2E2134D600132936 /* SaveRecordView.swift */; };
@@ -48,12 +67,32 @@
 		BF4109182E3109BD00BE2AD8 /* TestAgitationModes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAgitationModes.swift; sourceTree = "<group>"; };
 		BF4109192E3109BD00BE2AD8 /* TestORWOScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestORWOScheme.swift; sourceTree = "<group>"; };
 		BF4109252E31148700BE2AD8 /* DevelopmentParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentParameters.swift; sourceTree = "<group>"; };
-		BF41092D2E3114E500BE2AD8 /* CalculationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationViewModel.swift; sourceTree = "<group>"; };
 		BF41092F2E31151800BE2AD8 /* DevelopmentSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentSetupView.swift; sourceTree = "<group>"; };
 		BF4109322E311C8100BE2AD8 /* FilmСlaculator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FilmСlaculator.xcdatamodel"; sourceTree = "<group>"; };
 		BF4109342E311CA800BE2AD8 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		BF4109372E31307100BE2AD8 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		BF4109392E31308500BE2AD8 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
+		BF41093B2E3130B000BE2AD8 /* CalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewModel.swift; sourceTree = "<group>"; };
+		BF41093D2E31318D00BE2AD8 /* JournalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewModel.swift; sourceTree = "<group>"; };
+		BF41093E2E31318D00BE2AD8 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
+		BF4109502E31615300BE2AD8 /* AppPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreview.swift; sourceTree = "<group>"; };
+		BF4109522E31622700BE2AD8 /* ComponentPreviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentPreviews.swift; sourceTree = "<group>"; };
+		BF4109542E31623B00BE2AD8 /* MainPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPreview.swift; sourceTree = "<group>"; };
+		BF4109562E3163E400BE2AD8 /* DeveloperPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperPickerView.swift; sourceTree = "<group>"; };
+		BF4109572E3163E400BE2AD8 /* DevelopmentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentHeaderView.swift; sourceTree = "<group>"; };
+		BF4109582E3163E400BE2AD8 /* DevelopmentParametersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentParametersView.swift; sourceTree = "<group>"; };
+		BF4109592E3163E400BE2AD8 /* FilmPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmPickerView.swift; sourceTree = "<group>"; };
+		BF41095F2E31640400BE2AD8 /* DeveloperPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperPickerView.swift; sourceTree = "<group>"; };
+		BF4109612E31641600BE2AD8 /* DilutionPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DilutionPickerView.swift; sourceTree = "<group>"; };
+		BF4109632E31641B00BE2AD8 /* TemperaturePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperaturePickerView.swift; sourceTree = "<group>"; };
+		BF4109652E31643100BE2AD8 /* ISOPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISOPickerView.swift; sourceTree = "<group>"; };
+		BF4109672E3164A900BE2AD8 /* ParameterRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterRow.swift; sourceTree = "<group>"; };
+		BF4109692E31653800BE2AD8 /* DevelopmentSetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentSetupViewModel.swift; sourceTree = "<group>"; };
+		BF41096B2E3166F400BE2AD8 /* AgitationIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgitationIndicatorView.swift; sourceTree = "<group>"; };
+		BF41096C2E3166F400BE2AD8 /* TimerControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlsView.swift; sourceTree = "<group>"; };
+		BF41096D2E3166F400BE2AD8 /* TimerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerHeaderView.swift; sourceTree = "<group>"; };
+		BF41096E2E3166F400BE2AD8 /* TimerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerProgressView.swift; sourceTree = "<group>"; };
 		BFA0C7932E2133FC00132936 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		BFA0C7942E2133FC00132936 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		BFA0C7952E2133FC00132936 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BFA0C7972E2133FC00132936 /* FilmClaculatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmClaculatorApp.swift; sourceTree = "<group>"; };
 		BFA0C7982E2133FC00132936 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -106,27 +145,199 @@
 		BF41092C2E3114BA00BE2AD8 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				BF41092D2E3114E500BE2AD8 /* CalculationViewModel.swift */,
+				BF41093B2E3130B000BE2AD8 /* CalculatorViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		BF4109362E312CB600BE2AD8 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				BF4109502E31615300BE2AD8 /* AppPreview.swift */,
+				BF4109522E31622700BE2AD8 /* ComponentPreviews.swift */,
+				BFA0C7972E2133FC00132936 /* FilmClaculatorApp.swift */,
+				BF4109542E31623B00BE2AD8 /* MainPreview.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		BF4109412E3133B200BE2AD8 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				BF4109432E3133D900BE2AD8 /* Calculator */,
+				BF4109442E31342500BE2AD8 /* Development */,
+				BF4109482E3134C800BE2AD8 /* Journal */,
+				BF4109492E3134DE00BE2AD8 /* Timer */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		BF4109422E3133BA00BE2AD8 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				BF4109472E31348C00BE2AD8 /* Navigation */,
+				BFA0C7A22E21341400132936 /* Services */,
+				BFA0C7A32E21341F00132936 /* Models */,
+				BF41094E2E31355F00BE2AD8 /* Persistence */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		BF4109432E3133D900BE2AD8 /* Calculator */ = {
+			isa = PBXGroup;
+			children = (
+				BF41092C2E3114BA00BE2AD8 /* ViewModels */,
+				BFA0C7992E2133FC00132936 /* Views */,
+			);
+			path = Calculator;
+			sourceTree = "<group>";
+		};
+		BF4109442E31342500BE2AD8 /* Development */ = {
+			isa = PBXGroup;
+			children = (
+				BF4109452E31343400BE2AD8 /* Views */,
+				BF4109462E31346B00BE2AD8 /* ViewModels */,
+			);
+			path = Development;
+			sourceTree = "<group>";
+		};
+		BF4109452E31343400BE2AD8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BF41095A2E3163E400BE2AD8 /* Components */,
+				BFF4DA042E21C8C30097BE82 /* CustomAgitationView.swift */,
+				BFF4DA022E21C31E0097BE82 /* AgitationSelectionView.swift */,
+				BF41092F2E31151800BE2AD8 /* DevelopmentSetupView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BF4109462E31346B00BE2AD8 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				BF4109692E31653800BE2AD8 /* DevelopmentSetupViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		BF4109472E31348C00BE2AD8 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				BF4109372E31307100BE2AD8 /* MainTabView.swift */,
+				BFA0C7952E2133FC00132936 /* ContentView.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		BF4109482E3134C800BE2AD8 /* Journal */ = {
+			isa = PBXGroup;
+			children = (
+				BF41094A2E3134F000BE2AD8 /* Views */,
+				BF41094B2E3134F700BE2AD8 /* ViewModels */,
+			);
+			path = Journal;
+			sourceTree = "<group>";
+		};
+		BF4109492E3134DE00BE2AD8 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				BF41094C2E31350F00BE2AD8 /* Views */,
+				BF41094D2E31352B00BE2AD8 /* ViewModels */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		BF41094A2E3134F000BE2AD8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BFA0C7AC2E2134F600132936 /* JournalView.swift */,
+				BFA0C7AE2E21351000132936 /* RecordRowView.swift */,
+				BFA0C7AA2E2134D600132936 /* SaveRecordView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BF41094B2E3134F700BE2AD8 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				BF41093D2E31318D00BE2AD8 /* JournalViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		BF41094C2E31350F00BE2AD8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BF41096F2E3166F400BE2AD8 /* Components */,
+				BFF4D9FE2E21BEC90097BE82 /* TimerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BF41094D2E31352B00BE2AD8 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				BF41093E2E31318D00BE2AD8 /* TimerViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		BF41094E2E31355F00BE2AD8 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				BFA0C7982E2133FC00132936 /* Persistence.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		BF41094F2E3135B700BE2AD8 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				BF4109682E3164A900BE2AD8 /* Components */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		BF41095A2E3163E400BE2AD8 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				BF4109562E3163E400BE2AD8 /* DeveloperPickerView.swift */,
+				BF4109572E3163E400BE2AD8 /* DevelopmentHeaderView.swift */,
+				BF4109582E3163E400BE2AD8 /* DevelopmentParametersView.swift */,
+				BF4109592E3163E400BE2AD8 /* FilmPickerView.swift */,
+				BF41095F2E31640400BE2AD8 /* DeveloperPickerView.swift */,
+				BF4109612E31641600BE2AD8 /* DilutionPickerView.swift */,
+				BF4109632E31641B00BE2AD8 /* TemperaturePickerView.swift */,
+				BF4109652E31643100BE2AD8 /* ISOPickerView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		BF4109682E3164A900BE2AD8 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				BF4109672E3164A900BE2AD8 /* ParameterRow.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		BF41096F2E3166F400BE2AD8 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				BF41096B2E3166F400BE2AD8 /* AgitationIndicatorView.swift */,
+				BF41096C2E3166F400BE2AD8 /* TimerControlsView.swift */,
+				BF41096D2E3166F400BE2AD8 /* TimerHeaderView.swift */,
+				BF41096E2E3166F400BE2AD8 /* TimerProgressView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		BFA0C7992E2133FC00132936 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				BF4109082E3104FC00BE2AD8 /* Components */,
-				BFF4DA042E21C8C30097BE82 /* CustomAgitationView.swift */,
-				BFF4DA022E21C31E0097BE82 /* AgitationSelectionView.swift */,
-				BFF4D9FE2E21BEC90097BE82 /* TimerView.swift */,
-				BFA0C7AE2E21351000132936 /* RecordRowView.swift */,
-				BFA0C7AC2E2134F600132936 /* JournalView.swift */,
-				BFA0C7AA2E2134D600132936 /* SaveRecordView.swift */,
 				BFA0C7A72E2134B300132936 /* CalculationResultView.swift */,
-				BFA0C7942E2133FC00132936 /* Calculator.swift */,
-				BF41092F2E31151800BE2AD8 /* DevelopmentSetupView.swift */,
-				BFA0C7952E2133FC00132936 /* ContentView.swift */,
-				BFA0C7972E2133FC00132936 /* FilmClaculatorApp.swift */,
-				BFA0C7982E2133FC00132936 /* Persistence.swift */,
+				BF4109392E31308500BE2AD8 /* CalculatorView.swift */,
+				BF4109082E3104FC00BE2AD8 /* Components */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -161,10 +372,10 @@
 		BFE96A302E2061A0001CF98D = {
 			isa = PBXGroup;
 			children = (
-				BFA0C7A32E21341F00132936 /* Models */,
-				BFA0C7A22E21341400132936 /* Services */,
-				BF41092C2E3114BA00BE2AD8 /* ViewModels */,
-				BFA0C7992E2133FC00132936 /* Views */,
+				BF4109362E312CB600BE2AD8 /* App */,
+				BF4109412E3133B200BE2AD8 /* Features */,
+				BF4109422E3133BA00BE2AD8 /* Core */,
+				BF41094F2E3135B700BE2AD8 /* Shared */,
 				BFA0C7B02E2136A500132936 /* Resources */,
 				BFE96A3A2E2061A0001CF98D /* Products */,
 				BF4109172E3109A400BE2AD8 /* Tests */,
@@ -241,7 +452,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFA0C79B2E2133FC00132936 /* Assets.xcassets in Resources */,
-				BFA0C7A12E2133FC00132936 /* Calculator.swift in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,18 +464,27 @@
 			files = (
 				BF41091A2E3109BD00BE2AD8 /* TestAgitationModes.swift in Sources */,
 				BF41091B2E3109BD00BE2AD8 /* TestORWOScheme.swift in Sources */,
+				BF4109382E31307100BE2AD8 /* MainTabView.swift in Sources */,
 				BF4109332E311C8100BE2AD8 /* FilmСlaculator.xcdatamodeld in Sources */,
 				BF4109272E31148700BE2AD8 /* DevelopmentParameters.swift in Sources */,
+				BF4109602E31640400BE2AD8 /* DeveloperPickerView.swift in Sources */,
 				BFA0C7AB2E2134D800132936 /* SaveRecordView.swift in Sources */,
 				BFA0C7AF2E21351300132936 /* RecordRowView.swift in Sources */,
 				BFA0C79D2E2133FC00132936 /* ContentView.swift in Sources */,
+				BF4109552E31623B00BE2AD8 /* MainPreview.swift in Sources */,
+				BF41093A2E31308500BE2AD8 /* CalculatorView.swift in Sources */,
 				BFA0C7A82E2134B400132936 /* CalculationResultView.swift in Sources */,
 				BF4109102E31052900BE2AD8 /* CalculationFormView.swift in Sources */,
+				BF4109512E31615300BE2AD8 /* AppPreview.swift in Sources */,
 				BF4109112E31052900BE2AD8 /* CoefficientInputView.swift in Sources */,
 				BF4109122E31052900BE2AD8 /* TimeInputView.swift in Sources */,
 				BF4109132E31052900BE2AD8 /* ProcessTypeView.swift in Sources */,
-				BF41092E2E3114E500BE2AD8 /* CalculationViewModel.swift in Sources */,
 				BF4109142E31052900BE2AD8 /* StepsInputView.swift in Sources */,
+				BF4109622E31641600BE2AD8 /* DilutionPickerView.swift in Sources */,
+				BF4109702E3166F400BE2AD8 /* TimerControlsView.swift in Sources */,
+				BF4109712E3166F400BE2AD8 /* TimerHeaderView.swift in Sources */,
+				BF4109722E3166F400BE2AD8 /* AgitationIndicatorView.swift in Sources */,
+				BF4109732E3166F400BE2AD8 /* TimerProgressView.swift in Sources */,
 				BF4109152E31052900BE2AD8 /* HeaderView.swift in Sources */,
 				BF4109162E31052900BE2AD8 /* ActionButtonsView.swift in Sources */,
 				BFF4DA032E21C31E0097BE82 /* AgitationSelectionView.swift in Sources */,
@@ -273,9 +492,20 @@
 				BF4109352E311CA800BE2AD8 /* CoreDataService.swift in Sources */,
 				BFF4DA012E21C2C90097BE82 /* AgitationMode.swift in Sources */,
 				BFA0C79F2E2133FC00132936 /* FilmClaculatorApp.swift in Sources */,
+				BF41095B2E3163E400BE2AD8 /* FilmPickerView.swift in Sources */,
+				BF41095C2E3163E400BE2AD8 /* DevelopmentParametersView.swift in Sources */,
+				BF41095D2E3163E400BE2AD8 /* DeveloperPickerView.swift in Sources */,
+				BF41095E2E3163E400BE2AD8 /* DevelopmentHeaderView.swift in Sources */,
+				BF41093C2E3130B000BE2AD8 /* CalculatorViewModel.swift in Sources */,
 				BFF4DA052E21C8C30097BE82 /* CustomAgitationView.swift in Sources */,
+				BF41096A2E31653800BE2AD8 /* DevelopmentSetupViewModel.swift in Sources */,
 				BFA0C7AD2E2134F800132936 /* JournalView.swift in Sources */,
+				BF4109532E31622700BE2AD8 /* ComponentPreviews.swift in Sources */,
+				BF41093F2E31318D00BE2AD8 /* JournalViewModel.swift in Sources */,
+				BF4109402E31318D00BE2AD8 /* TimerViewModel.swift in Sources */,
 				BF4109302E31151800BE2AD8 /* DevelopmentSetupView.swift in Sources */,
+				BF4109662E31643100BE2AD8 /* ISOPickerView.swift in Sources */,
+				BF4109642E31641B00BE2AD8 /* TemperaturePickerView.swift in Sources */,
 				BFA0C7A92E2134BA00132936 /* DevelopmentCalculator.swift in Sources */,
 				BFA0C7A02E2133FC00132936 /* Persistence.swift in Sources */,
 			);
