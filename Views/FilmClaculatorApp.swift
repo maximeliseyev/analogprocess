@@ -13,7 +13,7 @@ struct FilmClaculatorApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            DevelopmentSetupView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

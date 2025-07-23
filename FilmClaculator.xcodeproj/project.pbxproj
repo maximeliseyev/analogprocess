@@ -16,13 +16,16 @@
 		BF4109162E31052900BE2AD8 /* ActionButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109092E31052900BE2AD8 /* ActionButtonsView.swift */; };
 		BF41091A2E3109BD00BE2AD8 /* TestAgitationModes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109182E3109BD00BE2AD8 /* TestAgitationModes.swift */; };
 		BF41091B2E3109BD00BE2AD8 /* TestORWOScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109192E3109BD00BE2AD8 /* TestORWOScheme.swift */; };
+		BF4109272E31148700BE2AD8 /* DevelopmentParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109252E31148700BE2AD8 /* DevelopmentParameters.swift */; };
+		BF41092E2E3114E500BE2AD8 /* CalculationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41092D2E3114E500BE2AD8 /* CalculationViewModel.swift */; };
+		BF4109302E31151800BE2AD8 /* DevelopmentSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41092F2E31151800BE2AD8 /* DevelopmentSetupView.swift */; };
+		BF4109332E311C8100BE2AD8 /* FilmСlaculator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF4109312E311C8100BE2AD8 /* FilmСlaculator.xcdatamodeld */; };
+		BF4109352E311CA800BE2AD8 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109342E311CA800BE2AD8 /* CoreDataService.swift */; };
 		BFA0C79B2E2133FC00132936 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFA0C7932E2133FC00132936 /* Assets.xcassets */; };
 		BFA0C79D2E2133FC00132936 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7952E2133FC00132936 /* ContentView.swift */; };
-		BFA0C79E2E2133FC00132936 /* Film_claculator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7962E2133FC00132936 /* Film_claculator.xcdatamodeld */; };
 		BFA0C79F2E2133FC00132936 /* FilmClaculatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7972E2133FC00132936 /* FilmClaculatorApp.swift */; };
 		BFA0C7A02E2133FC00132936 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7982E2133FC00132936 /* Persistence.swift */; };
 		BFA0C7A12E2133FC00132936 /* Calculator.swift in Resources */ = {isa = PBXBuildFile; fileRef = BFA0C7942E2133FC00132936 /* Calculator.swift */; };
-		BFA0C7A52E21343B00132936 /* CalculationRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7A42E21343000132936 /* CalculationRecord.swift */; };
 		BFA0C7A82E2134B400132936 /* CalculationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7A72E2134B300132936 /* CalculationResultView.swift */; };
 		BFA0C7A92E2134BA00132936 /* DevelopmentCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7A62E21349100132936 /* DevelopmentCalculator.swift */; };
 		BFA0C7AB2E2134D800132936 /* SaveRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AA2E2134D600132936 /* SaveRecordView.swift */; };
@@ -44,13 +47,16 @@
 		BF41090F2E31052900BE2AD8 /* TimeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInputView.swift; sourceTree = "<group>"; };
 		BF4109182E3109BD00BE2AD8 /* TestAgitationModes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAgitationModes.swift; sourceTree = "<group>"; };
 		BF4109192E3109BD00BE2AD8 /* TestORWOScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestORWOScheme.swift; sourceTree = "<group>"; };
+		BF4109252E31148700BE2AD8 /* DevelopmentParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentParameters.swift; sourceTree = "<group>"; };
+		BF41092D2E3114E500BE2AD8 /* CalculationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationViewModel.swift; sourceTree = "<group>"; };
+		BF41092F2E31151800BE2AD8 /* DevelopmentSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentSetupView.swift; sourceTree = "<group>"; };
+		BF4109322E311C8100BE2AD8 /* FilmСlaculator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FilmСlaculator.xcdatamodel"; sourceTree = "<group>"; };
+		BF4109342E311CA800BE2AD8 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		BFA0C7932E2133FC00132936 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFA0C7942E2133FC00132936 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		BFA0C7952E2133FC00132936 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BFA0C7972E2133FC00132936 /* FilmClaculatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmClaculatorApp.swift; sourceTree = "<group>"; };
 		BFA0C7982E2133FC00132936 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		BFA0C79A2E2133FC00132936 /* Film_claculator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Film_claculator.xcdatamodel; sourceTree = "<group>"; };
-		BFA0C7A42E21343000132936 /* CalculationRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationRecord.swift; sourceTree = "<group>"; };
 		BFA0C7A62E21349100132936 /* DevelopmentCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentCalculator.swift; sourceTree = "<group>"; };
 		BFA0C7A72E2134B300132936 /* CalculationResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationResultView.swift; sourceTree = "<group>"; };
 		BFA0C7AA2E2134D600132936 /* SaveRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveRecordView.swift; sourceTree = "<group>"; };
@@ -97,6 +103,14 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
+		BF41092C2E3114BA00BE2AD8 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				BF41092D2E3114E500BE2AD8 /* CalculationViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		BFA0C7992E2133FC00132936 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +123,7 @@
 				BFA0C7AA2E2134D600132936 /* SaveRecordView.swift */,
 				BFA0C7A72E2134B300132936 /* CalculationResultView.swift */,
 				BFA0C7942E2133FC00132936 /* Calculator.swift */,
+				BF41092F2E31151800BE2AD8 /* DevelopmentSetupView.swift */,
 				BFA0C7952E2133FC00132936 /* ContentView.swift */,
 				BFA0C7972E2133FC00132936 /* FilmClaculatorApp.swift */,
 				BFA0C7982E2133FC00132936 /* Persistence.swift */,
@@ -120,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				BFF4DA002E21C2C90097BE82 /* AgitationMode.swift */,
+				BF4109342E311CA800BE2AD8 /* CoreDataService.swift */,
 				BFA0C7A62E21349100132936 /* DevelopmentCalculator.swift */,
 			);
 			path = Services;
@@ -128,7 +144,7 @@
 		BFA0C7A32E21341F00132936 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				BFA0C7A42E21343000132936 /* CalculationRecord.swift */,
+				BF4109252E31148700BE2AD8 /* DevelopmentParameters.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -136,8 +152,8 @@
 		BFA0C7B02E2136A500132936 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BF4109312E311C8100BE2AD8 /* FilmСlaculator.xcdatamodeld */,
 				BFA0C7932E2133FC00132936 /* Assets.xcassets */,
-				BFA0C7962E2133FC00132936 /* Film_claculator.xcdatamodeld */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -147,6 +163,7 @@
 			children = (
 				BFA0C7A32E21341F00132936 /* Models */,
 				BFA0C7A22E21341400132936 /* Services */,
+				BF41092C2E3114BA00BE2AD8 /* ViewModels */,
 				BFA0C7992E2133FC00132936 /* Views */,
 				BFA0C7B02E2136A500132936 /* Resources */,
 				BFE96A3A2E2061A0001CF98D /* Products */,
@@ -237,25 +254,28 @@
 			files = (
 				BF41091A2E3109BD00BE2AD8 /* TestAgitationModes.swift in Sources */,
 				BF41091B2E3109BD00BE2AD8 /* TestORWOScheme.swift in Sources */,
+				BF4109332E311C8100BE2AD8 /* FilmСlaculator.xcdatamodeld in Sources */,
+				BF4109272E31148700BE2AD8 /* DevelopmentParameters.swift in Sources */,
 				BFA0C7AB2E2134D800132936 /* SaveRecordView.swift in Sources */,
-				BFA0C7A52E21343B00132936 /* CalculationRecord.swift in Sources */,
 				BFA0C7AF2E21351300132936 /* RecordRowView.swift in Sources */,
 				BFA0C79D2E2133FC00132936 /* ContentView.swift in Sources */,
-				BFA0C79E2E2133FC00132936 /* Film_claculator.xcdatamodeld in Sources */,
 				BFA0C7A82E2134B400132936 /* CalculationResultView.swift in Sources */,
 				BF4109102E31052900BE2AD8 /* CalculationFormView.swift in Sources */,
 				BF4109112E31052900BE2AD8 /* CoefficientInputView.swift in Sources */,
 				BF4109122E31052900BE2AD8 /* TimeInputView.swift in Sources */,
 				BF4109132E31052900BE2AD8 /* ProcessTypeView.swift in Sources */,
+				BF41092E2E3114E500BE2AD8 /* CalculationViewModel.swift in Sources */,
 				BF4109142E31052900BE2AD8 /* StepsInputView.swift in Sources */,
 				BF4109152E31052900BE2AD8 /* HeaderView.swift in Sources */,
 				BF4109162E31052900BE2AD8 /* ActionButtonsView.swift in Sources */,
 				BFF4DA032E21C31E0097BE82 /* AgitationSelectionView.swift in Sources */,
 				BFF4D9FF2E21BECD0097BE82 /* TimerView.swift in Sources */,
+				BF4109352E311CA800BE2AD8 /* CoreDataService.swift in Sources */,
 				BFF4DA012E21C2C90097BE82 /* AgitationMode.swift in Sources */,
 				BFA0C79F2E2133FC00132936 /* FilmClaculatorApp.swift in Sources */,
 				BFF4DA052E21C8C30097BE82 /* CustomAgitationView.swift in Sources */,
 				BFA0C7AD2E2134F800132936 /* JournalView.swift in Sources */,
+				BF4109302E31151800BE2AD8 /* DevelopmentSetupView.swift in Sources */,
 				BFA0C7A92E2134BA00132936 /* DevelopmentCalculator.swift in Sources */,
 				BFA0C7A02E2133FC00132936 /* Persistence.swift in Sources */,
 			);
@@ -475,13 +495,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		BFA0C7962E2133FC00132936 /* Film_claculator.xcdatamodeld */ = {
+		BF4109312E311C8100BE2AD8 /* FilmСlaculator.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				BFA0C79A2E2133FC00132936 /* Film_claculator.xcdatamodel */,
+				BF4109322E311C8100BE2AD8 /* FilmСlaculator.xcdatamodel */,
 			);
-			currentVersion = BFA0C79A2E2133FC00132936 /* Film_claculator.xcdatamodel */;
-			path = Film_claculator.xcdatamodeld;
+			currentVersion = BF4109322E311C8100BE2AD8 /* FilmСlaculator.xcdatamodel */;
+			path = "FilmСlaculator.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
