@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 @main
 struct FilmClaculatorApp: App {
@@ -13,7 +14,7 @@ struct FilmClaculatorApp: App {
 
     var body: some Scene {
         WindowGroup {
-            DevelopmentSetupView()
+            ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
