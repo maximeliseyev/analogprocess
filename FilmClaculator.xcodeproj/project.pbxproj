@@ -14,8 +14,6 @@
 		BF4109142E31052900BE2AD8 /* StepsInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41090E2E31052900BE2AD8 /* StepsInputView.swift */; };
 		BF4109152E31052900BE2AD8 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41090C2E31052900BE2AD8 /* HeaderView.swift */; };
 		BF4109162E31052900BE2AD8 /* ActionButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109092E31052900BE2AD8 /* ActionButtonsView.swift */; };
-		BF41091A2E3109BD00BE2AD8 /* TestAgitationModes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109182E3109BD00BE2AD8 /* TestAgitationModes.swift */; };
-		BF41091B2E3109BD00BE2AD8 /* TestORWOScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109192E3109BD00BE2AD8 /* TestORWOScheme.swift */; };
 		BF4109272E31148700BE2AD8 /* DevelopmentParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109252E31148700BE2AD8 /* DevelopmentParameters.swift */; };
 		BF4109302E31151800BE2AD8 /* DevelopmentSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41092F2E31151800BE2AD8 /* DevelopmentSetupView.swift */; };
 		BF4109332E311C8100BE2AD8 /* FilmСlaculator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF4109312E311C8100BE2AD8 /* FilmСlaculator.xcdatamodeld */; };
@@ -32,7 +30,6 @@
 		BF41095C2E3163E400BE2AD8 /* DevelopmentParametersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109582E3163E400BE2AD8 /* DevelopmentParametersView.swift */; };
 		BF41095D2E3163E400BE2AD8 /* DeveloperPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109562E3163E400BE2AD8 /* DeveloperPickerView.swift */; };
 		BF41095E2E3163E400BE2AD8 /* DevelopmentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109572E3163E400BE2AD8 /* DevelopmentHeaderView.swift */; };
-		BF4109602E31640400BE2AD8 /* DeveloperPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41095F2E31640400BE2AD8 /* DeveloperPickerView.swift */; };
 		BF4109622E31641600BE2AD8 /* DilutionPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109612E31641600BE2AD8 /* DilutionPickerView.swift */; };
 		BF4109642E31641B00BE2AD8 /* TemperaturePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109632E31641B00BE2AD8 /* TemperaturePickerView.swift */; };
 		BF4109662E31643100BE2AD8 /* ISOPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109652E31643100BE2AD8 /* ISOPickerView.swift */; };
@@ -50,6 +47,11 @@
 		BFA0C7AB2E2134D800132936 /* SaveRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AA2E2134D600132936 /* SaveRecordView.swift */; };
 		BFA0C7AD2E2134F800132936 /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AC2E2134F600132936 /* JournalView.swift */; };
 		BFA0C7AF2E21351300132936 /* RecordRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AE2E21351000132936 /* RecordRowView.swift */; };
+		BFE12EB02E33C5120044A3A4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BFE12EAE2E33C5120044A3A4 /* Localizable.strings */; };
+		BFE12EB62E33C6800044A3A4 /* temperature-multipliers.json in Resources */ = {isa = PBXBuildFile; fileRef = BFE12EB42E33C6800044A3A4 /* temperature-multipliers.json */; };
+		BFE12EB72E33C6800044A3A4 /* development-times.json in Resources */ = {isa = PBXBuildFile; fileRef = BFE12EB22E33C6800044A3A4 /* development-times.json */; };
+		BFE12EB82E33C6800044A3A4 /* films.json in Resources */ = {isa = PBXBuildFile; fileRef = BFE12EB32E33C6800044A3A4 /* films.json */; };
+		BFE12EB92E33C6800044A3A4 /* developers.json in Resources */ = {isa = PBXBuildFile; fileRef = BFE12EB12E33C6800044A3A4 /* developers.json */; };
 		BFF4D9FF2E21BECD0097BE82 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF4D9FE2E21BEC90097BE82 /* TimerView.swift */; };
 		BFF4DA012E21C2C90097BE82 /* AgitationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF4DA002E21C2C90097BE82 /* AgitationMode.swift */; };
 		BFF4DA032E21C31E0097BE82 /* AgitationSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF4DA022E21C31E0097BE82 /* AgitationSelectionView.swift */; };
@@ -64,8 +66,6 @@
 		BF41090D2E31052900BE2AD8 /* ProcessTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessTypeView.swift; sourceTree = "<group>"; };
 		BF41090E2E31052900BE2AD8 /* StepsInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsInputView.swift; sourceTree = "<group>"; };
 		BF41090F2E31052900BE2AD8 /* TimeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInputView.swift; sourceTree = "<group>"; };
-		BF4109182E3109BD00BE2AD8 /* TestAgitationModes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAgitationModes.swift; sourceTree = "<group>"; };
-		BF4109192E3109BD00BE2AD8 /* TestORWOScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestORWOScheme.swift; sourceTree = "<group>"; };
 		BF4109252E31148700BE2AD8 /* DevelopmentParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentParameters.swift; sourceTree = "<group>"; };
 		BF41092F2E31151800BE2AD8 /* DevelopmentSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentSetupView.swift; sourceTree = "<group>"; };
 		BF4109322E311C8100BE2AD8 /* FilmСlaculator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FilmСlaculator.xcdatamodel"; sourceTree = "<group>"; };
@@ -101,6 +101,12 @@
 		BFA0C7AA2E2134D600132936 /* SaveRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveRecordView.swift; sourceTree = "<group>"; };
 		BFA0C7AC2E2134F600132936 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
 		BFA0C7AE2E21351000132936 /* RecordRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRowView.swift; sourceTree = "<group>"; };
+		BFE12EAC2E33C5120044A3A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BFE12EAD2E33C5120044A3A4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BFE12EB12E33C6800044A3A4 /* developers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = developers.json; sourceTree = "<group>"; };
+		BFE12EB22E33C6800044A3A4 /* development-times.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "development-times.json"; sourceTree = "<group>"; };
+		BFE12EB32E33C6800044A3A4 /* films.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = films.json; sourceTree = "<group>"; };
+		BFE12EB42E33C6800044A3A4 /* temperature-multipliers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "temperature-multipliers.json"; sourceTree = "<group>"; };
 		BFE96A392E2061A0001CF98D /* Film claculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Film claculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFF4D9FE2E21BEC90097BE82 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		BFF4DA002E21C2C90097BE82 /* AgitationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgitationMode.swift; sourceTree = "<group>"; };
@@ -131,15 +137,6 @@
 				BF41090F2E31052900BE2AD8 /* TimeInputView.swift */,
 			);
 			path = Components;
-			sourceTree = "<group>";
-		};
-		BF4109172E3109A400BE2AD8 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				BF4109182E3109BD00BE2AD8 /* TestAgitationModes.swift */,
-				BF4109192E3109BD00BE2AD8 /* TestORWOScheme.swift */,
-			);
-			path = Tests;
 			sourceTree = "<group>";
 		};
 		BF41092C2E3114BA00BE2AD8 /* ViewModels */ = {
@@ -363,10 +360,31 @@
 		BFA0C7B02E2136A500132936 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BFE12EB52E33C6800044A3A4 /* Data */,
+				BFE12EAF2E33C5120044A3A4 /* Localization */,
 				BF4109312E311C8100BE2AD8 /* FilmСlaculator.xcdatamodeld */,
 				BFA0C7932E2133FC00132936 /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		BFE12EAF2E33C5120044A3A4 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				BFE12EAE2E33C5120044A3A4 /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		BFE12EB52E33C6800044A3A4 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				BFE12EB12E33C6800044A3A4 /* developers.json */,
+				BFE12EB22E33C6800044A3A4 /* development-times.json */,
+				BFE12EB32E33C6800044A3A4 /* films.json */,
+				BFE12EB42E33C6800044A3A4 /* temperature-multipliers.json */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		BFE96A302E2061A0001CF98D = {
@@ -378,7 +396,6 @@
 				BF41094F2E3135B700BE2AD8 /* Shared */,
 				BFA0C7B02E2136A500132936 /* Resources */,
 				BFE96A3A2E2061A0001CF98D /* Products */,
-				BF4109172E3109A400BE2AD8 /* Tests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -433,6 +450,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = BFE96A302E2061A0001CF98D;
 			minimizedProjectReferenceProxies = 1;
@@ -452,6 +470,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFA0C79B2E2133FC00132936 /* Assets.xcassets in Resources */,
+				BFE12EB62E33C6800044A3A4 /* temperature-multipliers.json in Resources */,
+				BFE12EB72E33C6800044A3A4 /* development-times.json in Resources */,
+				BFE12EB82E33C6800044A3A4 /* films.json in Resources */,
+				BFE12EB92E33C6800044A3A4 /* developers.json in Resources */,
+				BFE12EB02E33C5120044A3A4 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,12 +485,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF41091A2E3109BD00BE2AD8 /* TestAgitationModes.swift in Sources */,
-				BF41091B2E3109BD00BE2AD8 /* TestORWOScheme.swift in Sources */,
 				BF4109382E31307100BE2AD8 /* MainTabView.swift in Sources */,
 				BF4109332E311C8100BE2AD8 /* FilmСlaculator.xcdatamodeld in Sources */,
 				BF4109272E31148700BE2AD8 /* DevelopmentParameters.swift in Sources */,
-				BF4109602E31640400BE2AD8 /* DeveloperPickerView.swift in Sources */,
 				BFA0C7AB2E2134D800132936 /* SaveRecordView.swift in Sources */,
 				BFA0C7AF2E21351300132936 /* RecordRowView.swift in Sources */,
 				BFA0C79D2E2133FC00132936 /* ContentView.swift in Sources */,
@@ -512,6 +532,18 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BFE12EAE2E33C5120044A3A4 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BFE12EAC2E33C5120044A3A4 /* en */,
+				BFE12EAD2E33C5120044A3A4 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		BFE96A472E2061A3001CF98D /* Debug */ = {

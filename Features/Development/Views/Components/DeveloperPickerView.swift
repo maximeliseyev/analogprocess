@@ -19,7 +19,6 @@ struct DeveloperPickerView: View {
             List(developers) { developer in
                 Button(action: {
                     selectedDeveloper = developer
-                    // Устанавливаем defaultDilution проявителя
                     selectedDilution = developer.defaultDilution ?? ""
                     onDismiss()
                 }) {
@@ -56,14 +55,3 @@ struct DeveloperPickerView: View {
         }
     }
 }
-
-struct DeveloperPickerView_Previews: PreviewProvider {
-    static var previews: some View {
-        DeveloperPickerView(
-            developers: [],
-            selectedDeveloper: .constant(nil),
-            selectedDilution: .constant(""),
-            onDismiss: {}
-        )
-    }
-} 

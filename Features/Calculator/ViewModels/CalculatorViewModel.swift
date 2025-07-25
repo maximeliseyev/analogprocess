@@ -65,7 +65,6 @@ class CalculatorViewModel: ObservableObject {
         )
         
         showResult = true
-        hideKeyboard()
     }
     
     // MARK: - Timer Methods
@@ -129,11 +128,6 @@ class CalculatorViewModel: ObservableObject {
     }
     
     // MARK: - Utility Methods
-    
-    func hideKeyboard() {
-        // Простая реализация скрытия клавиатуры
-        // В реальном приложении здесь будет более сложная логика
-    }
     
     func resetForm() {
         minutes = ""
