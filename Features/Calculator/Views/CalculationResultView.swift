@@ -37,7 +37,7 @@ struct CalculationResultView: View {
                         }) {
                             HStack(spacing: 4) {
                                 Image(systemName: "timer")
-                                Text("Таймер")
+                                Text(NSLocalizedString("timer", comment: "Timer"))
                             }
                             .font(.caption)
                             .foregroundColor(.white)

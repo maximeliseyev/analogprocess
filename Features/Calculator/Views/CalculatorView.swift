@@ -13,46 +13,35 @@ struct CalculatorView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
-                // Header
-                HStack {
-                    Text("Калькулятор времени")
-                        .font(.title3)
-                        .fontWeight(.bold)
-                    
-                    Spacer()
-                }
-                .padding(.top)
-                
-                // Form
                 VStack(alignment: .leading, spacing: 15) {
                     // Time Input
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Базовое время:")
+                        Text(LocalizedStringKey("baseTime"))
                             .font(.headline)
                         
                         HStack {
-                            TextField("Минуты", text: $viewModel.minutes)
+                            TextField(LocalizedStringKey("minutes"), text: $viewModel.minutes)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                             
-                            Text("мин")
+                            Text(LocalizedStringKey("min"))
                             
-                            TextField("Секунды", text: $viewModel.seconds)
+                            TextField(LocalizedStringKey("seconds"), text: $viewModel.seconds)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                             
-                            Text("сек")
+                            Text(LocalizedStringKey("sec"))
                         }
                     }
                     
                     // Coefficient Input
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Коэффициент:")
+                        Text(LocalizedStringKey("ratio"))
                             .font(.headline)
                         
                         HStack {
                             TextField("1.33", text: $viewModel.coefficient)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                             
-                            Text("(стандартный 1.33)")
+                            Text(LocalizedStringKey("standardCoefficient"))
                                 .font(.caption)
                                 .foregroundColor(.gray)
                         }
@@ -70,22 +59,18 @@ struct CalculatorView: View {
                         .pickerStyle(SegmentedPickerStyle())
                     }
                     
-                    // Push Steps (только для PUSH)
                     if viewModel.isPushMode {
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Количество шагов PUSH:")
                                 .font(.headline)
                             
-                            Stepper(value: $viewModel.pushSteps, in: 1...10) {
+                            Stepper(value: $viewModel.pushSteps, in: 1...5) {
                                 Text("\(viewModel.pushSteps) шагов")
                             }
                         }
                     }
                 }
-                
-                Spacer()
-                
-                // Calculate Button
+                                
                 Button(action: viewModel.calculateTime) {
                     Text("Рассчитать")
                         .font(.headline)
@@ -96,17 +81,33 @@ struct CalculatorView: View {
                         .cornerRadius(10)
                 }
                 .disabled(!viewModel.isValidInput)
+                
+                if viewModel.showResult {
+                    Button(action: { viewModel.showSaveDialog = true }) {
+                        Text("Сохранить")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.green)
+                            .cornerRadius(10)
+                    }
+                }
+                
+                if viewModel.showResult {
+                    CalculationResultView(
+                        results: viewModel.pushResults,
+                        isPushMode: viewModel.isPushMode,
+                        onStartTimer: viewModel.startTimer
+                    )
+                }
+                
+                Spacer()
+                        
             }
             .padding()
-            .navigationTitle("Калькулятор")
+            .navigationTitle(LocalizedStringKey("calculator"))
             .navigationBarTitleDisplayMode(.inline)
-        }
-        .sheet(isPresented: $viewModel.showResult) {
-            CalculationResultView(
-                results: viewModel.pushResults,
-                isPushMode: viewModel.isPushMode,
-                onStartTimer: viewModel.startTimer
-            )
         }
         .sheet(isPresented: $viewModel.showSaveDialog) {
             SaveRecordView(
