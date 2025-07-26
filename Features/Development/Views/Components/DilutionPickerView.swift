@@ -21,10 +21,10 @@ struct DilutionPickerView: View {
                             .font(.largeTitle)
                             .foregroundColor(.orange)
                         
-                        Text("Нет доступных разбавлений")
+                        Text(LocalizedStringKey("noDilutionsAvailable"))
                             .font(.headline)
                         
-                        Text("Для выбранной комбинации пленки и проявителя нет данных о разбавлениях")
+                        Text(LocalizedStringKey("noDilutionsDescription"))
                             .font(.body)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
@@ -53,11 +53,11 @@ struct DilutionPickerView: View {
                     }
                 }
             }
-            .navigationTitle("Выберите разбавление")
+            .navigationTitle(LocalizedStringKey("selectDilution"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Отмена") {
+                    Button(LocalizedStringKey("cancel")) {
                         onDismiss()
                     }
                 }

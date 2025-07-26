@@ -12,12 +12,12 @@ struct ProcessTypeView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Тип процесса:")
+            Text(LocalizedStringKey("processType"))
                 .font(.headline)
             
-            Picker("Тип процесса", selection: $isPushMode) {
-                Text("PULL").tag(false)
-                Text("PUSH").tag(true)
+            Picker(LocalizedStringKey("processType"), selection: $isPushMode) {
+                Text(LocalizedStringKey("pull")).tag(false)
+                Text(LocalizedStringKey("push")).tag(true)
             }
             .pickerStyle(SegmentedPickerStyle())
         }

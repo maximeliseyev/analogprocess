@@ -12,14 +12,14 @@ struct CoefficientInputView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Коэффициент:")
+            Text(LocalizedStringKey("coefficient"))
                 .font(.headline)
             
             HStack {
                 TextField("1.33", text: $coefficient)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 
-                Text("(стандартный 1.33)")
+                Text(LocalizedStringKey("standardCoefficient"))
                     .font(.caption)
                     .foregroundColor(.gray)
             }

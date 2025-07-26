@@ -35,11 +35,11 @@ struct ISOPickerView: View {
                 }
                 .buttonStyle(PlainButtonStyle())
             }
-            .navigationTitle("Выберите ISO")
             .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle(LocalizedStringKey("selectISO"))
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Отмена") {
+                ToolbarItem(placement: .primaryAction) {
+                    Button(LocalizedStringKey("cancel")) {
                         onDismiss()
                     }
                 }

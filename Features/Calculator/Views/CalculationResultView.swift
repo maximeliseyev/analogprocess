@@ -14,7 +14,7 @@ struct CalculationResultView: View {
     
     var body: some View {
         VStack(spacing: 15) {
-            Text("Результаты \(isPushMode ? "push" : "pull")-процесса:")
+            Text(LocalizedStringKey("results"))
                 .font(.headline)
             
             VStack(spacing: 8) {
@@ -37,7 +37,7 @@ struct CalculationResultView: View {
                         }) {
                             HStack(spacing: 4) {
                                 Image(systemName: "timer")
-                                Text(NSLocalizedString("timer", comment: "Timer"))
+                                Text(LocalizedStringKey("timer"))
                             }
                             .font(.caption)
                             .foregroundColor(.white)

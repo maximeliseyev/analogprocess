@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ParameterRow: View {
-    let label: String
+    let label: LocalizedStringKey
     let value: String
     let onTap: () -> Void
     
@@ -45,31 +45,31 @@ struct DevelopmentParametersView: View {
     var body: some View {
         VStack(spacing: 20) {
             ParameterRow(
-                label: "Film:",
-                value: viewModel.selectedFilm?.name ?? "Выберите пленку",
+                label: LocalizedStringKey("film"),
+                value: viewModel.selectedFilm?.name ?? "Select Film",
                 onTap: { viewModel.showFilmPicker = true }
             )
             
             ParameterRow(
-                label: "Developer:",
-                value: viewModel.selectedDeveloper?.name ?? "Выберите проявитель",
+                label: LocalizedStringKey("developer"),
+                value: viewModel.selectedDeveloper?.name ?? "Select Developer",
                 onTap: { viewModel.showDeveloperPicker = true }
             )
             
             ParameterRow(
-                label: "Dilution:",
-                value: viewModel.selectedDilution.isEmpty ? "Выберите разбавление" : viewModel.selectedDilution,
+                label: LocalizedStringKey("dilution"),
+                value: viewModel.selectedDilution.isEmpty ? "Select Dilution" : viewModel.selectedDilution,
                 onTap: { viewModel.showDilutionPicker = true }
             )
             
             ParameterRow(
-                label: "ISO/EI:",
+                label: LocalizedStringKey("iso"),
                 value: "\(viewModel.iso)",
                 onTap: { viewModel.showISOPicker = true }
             )
             
             ParameterRow(
-                label: "Temperature (°C):",
+                label: LocalizedStringKey("temperature"),
                 value: "\(Int(viewModel.temperature))°C (Standard)",
                 onTap: { viewModel.showTemperaturePicker = true }
             )

@@ -17,7 +17,7 @@ struct TimerControlsView: View {
             Button(action: onStartPause) {
                 HStack {
                     Image(systemName: isRunning ? "pause.fill" : "play.fill")
-                    Text(isRunning ? "Пауза" : "Старт")
+                    Text(isRunning ? LocalizedStringKey("pause") : LocalizedStringKey("start"))
                 }
                 .font(.headline)
                 .foregroundColor(.white)
@@ -29,7 +29,7 @@ struct TimerControlsView: View {
             Button(action: onReset) {
                 HStack {
                     Image(systemName: "arrow.clockwise")
-                    Text("Сброс")
+                    Text(LocalizedStringKey("reset"))
                 }
                 .font(.headline)
                 .foregroundColor(.white)

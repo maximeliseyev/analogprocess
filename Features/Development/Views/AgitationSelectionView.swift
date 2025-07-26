@@ -8,12 +8,12 @@ struct AgitationSelectionView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
-                Text("Выберите режим ажитации")
+                Text(LocalizedStringKey("agitationSelection"))
                     .font(.title2)
                     .fontWeight(.bold)
                     .padding(.top)
                 
-                Text("Ажитация — процесс перемешивания проявителя для равномерного проявления плёнки")
+                Text(LocalizedStringKey("agitationDescription"))
                     .font(.body)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
@@ -47,7 +47,7 @@ struct AgitationSelectionView: View {
                 
                 Spacer()
                 
-                Button("Продолжить") {
+                Button(LocalizedStringKey("continue")) {
                     onSelect(selectedMode)
                 }
                 .font(.headline)
@@ -60,8 +60,8 @@ struct AgitationSelectionView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Пропустить") {
+                ToolbarItem(placement: .primaryAction) {
+                    Button(LocalizedStringKey("skip")) {
                         onSelect(nil)
                     }
                 }
@@ -90,7 +90,7 @@ struct AgitationModeRow: View {
         Button(action: onTap) {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(mode?.name ?? "Без ажитации")
+                    Text(mode?.name ?? "No Agitation")
                         .font(.headline)
                         .foregroundColor(.primary)
                     
@@ -101,7 +101,7 @@ struct AgitationModeRow: View {
                             .multilineTextAlignment(.leading)
                             .lineLimit(3)
                     } else {
-                        Text("Таймер будет работать без напоминаний")
+                        Text(LocalizedStringKey("noAgitationDescription"))
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
@@ -134,11 +134,11 @@ struct CustomAgitationModeRow: View {
         Button(action: onTap) {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Кастомный режим")
+                    Text(LocalizedStringKey("customAgitation"))
                         .font(.headline)
                         .foregroundColor(.primary)
                     
-                    Text("Создать собственный режим ажитации")
+                    Text(LocalizedStringKey("customAgitationDescription"))
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }

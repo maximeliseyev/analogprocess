@@ -13,7 +13,7 @@ struct CalculatedTimeSection: View {
     
     var body: some View {
         VStack(spacing: 12) {
-            Text("Calculated Time")
+            Text(LocalizedStringKey("calculatedTime"))
                 .font(.headline)
                 .foregroundColor(.white)
             

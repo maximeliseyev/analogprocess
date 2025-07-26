@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct AgitationIndicatorView: View {
     let shouldAgitate: Bool
@@ -23,7 +24,7 @@ struct AgitationIndicatorView: View {
                         .foregroundColor(isInAgitationPhase ? .orange : .blue)
                         .font(.title2)
                     
-                    Text(isInAgitationPhase ? "АЖИТАЦИЯ" : "ПОКОЙ")
+                    Text(isInAgitationPhase ? LocalizedStringKey("agitation") : LocalizedStringKey("rest"))
                         .font(.headline)
                         .foregroundColor(isInAgitationPhase ? .orange : .blue)
                         .fontWeight(.bold)
@@ -39,9 +40,8 @@ struct AgitationIndicatorView: View {
                 .background(isInAgitationPhase ? Color.orange.opacity(0.1) : Color.blue.opacity(0.1))
                 .cornerRadius(20)
                 
-                // Показываем текущую минуту и режим ажитации
                 VStack(spacing: 4) {
-                    Text("Минута \(currentMinute)")
+                    Text("Minute \(currentMinute)")
                         .font(.caption)
                         .foregroundColor(.secondary)
                     

@@ -19,7 +19,6 @@ struct TimerView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 40) {
-                // Заголовок процесса
                 TimerHeaderView(
                     timerLabel: timerLabel,
                     totalMinutes: totalMinutes,
@@ -56,8 +55,8 @@ struct TimerView: View {
             .padding()
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Готово") {
+                ToolbarItem(placement: .primaryAction) {
+                    Button(LocalizedStringKey("done")) {
                         viewModel.stopTimer()
                         onClose()
                     }
@@ -69,12 +68,12 @@ struct TimerView: View {
             .onDisappear {
                 viewModel.stopTimer()
             }
-            .alert("Время вышло!", isPresented: $viewModel.showingAlert) {
+            .alert(LocalizedStringKey("timeUp"), isPresented: $viewModel.showingAlert) {
                 Button("OK") {
                     viewModel.showingAlert = false
                 }
             } message: {
-                Text("Проявка завершена для процесса: \(timerLabel)")
+                Text("\(LocalizedStringKey("developmentCompleteForProcess")) \(timerLabel)")
             }
             .sheet(isPresented: $viewModel.showAgitationSelection) {
                 AgitationSelectionView { mode in

@@ -18,21 +18,20 @@ struct CustomAgitationView: View {
         NavigationView {
             VStack(spacing: 30) {
                 VStack(spacing: 20) {
-                    Text("Настройка кастомного режима")
+                    Text(LocalizedStringKey("customAgitationSetup"))
                         .font(.title2)
                         .fontWeight(.bold)
                         .padding(.top)
                     
-                    Text("Создайте собственный режим ажитации")
+                    Text(LocalizedStringKey("customAgitationSetupDescription"))
                         .font(.body)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
                 }
                 
                 VStack(spacing: 25) {
-                    // Время ажитации
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("Время ажитации")
+                        Text(LocalizedStringKey("agitationTime"))
                             .font(.headline)
                         
                         HStack {
@@ -43,7 +42,7 @@ struct CustomAgitationView: View {
                                         .fontWeight(.medium)
                                         .frame(width: 40)
                                     
-                                    Text("секунд")
+                                    Text(LocalizedStringKey("seconds"))
                                         .font(.body)
                                         .foregroundColor(.secondary)
                                 }
@@ -56,9 +55,8 @@ struct CustomAgitationView: View {
                         .cornerRadius(10)
                     }
                     
-                    // Время покоя
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("Время покоя")
+                        Text(LocalizedStringKey("restTime"))
                             .font(.headline)
                         
                         HStack {
@@ -69,7 +67,7 @@ struct CustomAgitationView: View {
                                         .fontWeight(.medium)
                                         .frame(width: 40)
                                     
-                                    Text("секунд")
+                                    Text(LocalizedStringKey("seconds"))
                                         .font(.body)
                                         .foregroundColor(.secondary)
                                 }
@@ -82,16 +80,15 @@ struct CustomAgitationView: View {
                         .cornerRadius(10)
                     }
                     
-                    // Предпросмотр
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Предпросмотр:")
+                        Text(LocalizedStringKey("preview"))
                             .font(.headline)
                         
-                        Text("Цикл: \(agitationSeconds)с ажитации → \(restSeconds)с покоя")
+                        Text("\(LocalizedStringKey("cycle")): \(agitationSeconds)с ажитации → \(restSeconds)с покоя")
                             .font(.body)
                             .foregroundColor(.secondary)
                         
-                        Text("Общая длительность цикла: \(agitationSeconds + restSeconds)с")
+                        Text("\(LocalizedStringKey("totalCycleDuration")): \(agitationSeconds + restSeconds)с")
                             .font(.body)
                             .foregroundColor(.secondary)
                     }
@@ -103,7 +100,7 @@ struct CustomAgitationView: View {
                 
                 Spacer()
                 
-                Button("Создать режим") {
+                Button(LocalizedStringKey("createMode")) {
                     let customMode = AgitationMode.createCustomMode(
                         agitationSeconds: agitationSeconds,
                         restSeconds: restSeconds
@@ -120,8 +117,8 @@ struct CustomAgitationView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Отмена") {
+                ToolbarItem(placement: .primaryAction) {
+                    Button(LocalizedStringKey("cancel")) {
                         onCancel()
                     }
                 }
