@@ -60,7 +60,7 @@ struct TimerTabView: View {
 }
 
 struct MainTabView: View {
-    @State private var selectedTab = 0
+    @Binding var selectedTab: Int
     @StateObject private var coreDataService = CoreDataService.shared
     @State private var savedRecords: [CalculationRecord] = []
     
