@@ -13,19 +13,19 @@ struct TimeInputView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Базовое время:")
+            Text(LocalizedStringKey("basicTimeLabel"))
                 .font(.headline)
             
             HStack {
-                TextField("Минуты", text: $minutes)
+                TextField(LocalizedStringKey("minutes"), text: $minutes)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 
-                Text("мин")
+                Text(LocalizedStringKey("min"))
                 
-                TextField("Секунды", text: $seconds)
+                TextField(LocalizedStringKey("seconds"), text: $seconds)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 
-                Text("сек")
+                Text(LocalizedStringKey("sec"))
             }
         }
     }

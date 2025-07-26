@@ -15,7 +15,7 @@ class CalculatorViewModel: ObservableObject {
     @Published var minutes = ""
     @Published var seconds = ""
     @Published var coefficient = "1.33"
-    @Published var pushSteps = 3
+    @Published var pushSteps = 5
     @Published var isPushMode = true
     @Published var pushResults: [(label: String, minutes: Int, seconds: Int)] = []
     @Published var showResult = false

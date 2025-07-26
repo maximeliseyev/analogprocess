@@ -13,7 +13,7 @@ struct StepsInputView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Количество ступеней:")
+            Text(LocalizedStringKey("pushSteps"))
                 .font(.headline)
             
             HStack {
@@ -25,7 +25,7 @@ struct StepsInputView: View {
                 
                 Spacer()
                 
-                Text("(от \(isPushMode ? "+" : "-")1 до \(isPushMode ? "+" : "-")\(pushSteps))")
+                Text(LocalizedStringKey("from1to5"))
                     .font(.caption)
                     .foregroundColor(.gray)
             }

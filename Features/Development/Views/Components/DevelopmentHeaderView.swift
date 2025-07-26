@@ -10,12 +10,12 @@ import SwiftUI
 struct DevelopmentHeaderView: View {
     var body: some View {
         VStack(spacing: 10) {
-            Text("Настройка проявки")
+            Text(LocalizedStringKey("developmentSetup"))
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
             
-            Text("Выберите параметры для расчета времени проявки")
+            Text(LocalizedStringKey("developmentSetupDescription"))
                 .font(.body)
                 .foregroundColor(.gray)
                 .multilineTextAlignment(.center)

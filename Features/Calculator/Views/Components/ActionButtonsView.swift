@@ -15,7 +15,7 @@ struct ActionButtonsView: View {
     var body: some View {
         VStack(spacing: 10) {
             Button(action: onCalculate) {
-                Text("Рассчитать")
+                Text(LocalizedStringKey("calculateButton"))
                     .font(.headline)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
@@ -27,7 +27,7 @@ struct ActionButtonsView: View {
             
             if showSaveButton {
                 Button(action: onSave) {
-                    Text("Сохранить")
+                    Text(LocalizedStringKey("saveButton"))
                         .font(.headline)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)

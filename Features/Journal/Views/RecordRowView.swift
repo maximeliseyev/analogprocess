@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct RecordRowView: View {
     let record: CalculationRecord
@@ -22,7 +23,7 @@ struct RecordRowView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
-                Text("\(record.filmName ?? "Пленка") + \(record.developerName ?? "Проявитель")")
+                Text("\(record.filmName ?? "Film") + \(record.developerName ?? "Developer")")
                     .font(.headline)
                 
                 Spacer()

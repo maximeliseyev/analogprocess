@@ -149,7 +149,8 @@
 "calculateButton" = "Расчитать";
 "saveButton" = "Сохарнить";
 "calculator" = "Calculator";
-"results" = "Результаты %@-процесса:";
+"results" = "Результаты:";
+"resultsProcess" = "Результаты %@-процесса:";
 "journalEmpty" = "Журнал пуст";
 "journalEmptyDescription" = "Save your first calculation to see it here";
 "saveCalculation" = "Save calculation";
@@ -171,3 +172,16 @@
 "selectDilution" = "Выберите разведение";
 "selectDeveloperFirst" = "Сначала выберите проявитель";
 "from1to5" = "(от 1 до 5)";
+"continue" = "Продолжить";
+"skip" = "Пропустить";
+"createMode" = "Создать режим";
+"timeUp" = "Время вышло!";
+"development" = "Проявка";
+"selectISO" = "Выберите ISO";
+"selectTemperature" = "Выберите температуру";
+"selectDeveloper" = "Выберите проявитель";
+"selectFilm" = "Выберите плёнку";
+"selectDilution" = "Выберите разведение";
+"presets" = "Пресеты";
+"selectDevelopmentParameters" = "Выберите параметры проявки для запуска таймера";
+"startTimer" = "Запустить таймер";

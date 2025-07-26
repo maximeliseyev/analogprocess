@@ -43,11 +43,11 @@ struct FilmPickerView: View {
                 }
                 .buttonStyle(PlainButtonStyle())
             }
-            .navigationTitle("Выберите пленку")
             .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle(LocalizedStringKey("selectFilm"))
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Отмена") {
+                ToolbarItem(placement: .primaryAction) {
+                    Button(LocalizedStringKey("cancel")) {
                         onDismiss()
                     }
                 }

@@ -12,13 +12,13 @@ struct HeaderView: View {
     
     var body: some View {
         HStack {
-            Text("Калькулятор")
+            Text(LocalizedStringKey("calculator"))
                 .font(.title3)
                 .fontWeight(.bold)
             
             Spacer()
             
-            Button("Журнал") {
+            Button(LocalizedStringKey("journal")) {
                 onJournalTap()
             }
             .foregroundColor(.blue)

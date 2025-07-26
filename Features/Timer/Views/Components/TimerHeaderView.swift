@@ -19,7 +19,7 @@ struct TimerHeaderView: View {
                 .font(.title2)
                 .fontWeight(.bold)
             
-            Text("Время: \(totalMinutes):\(String(format: "%02d", totalSeconds))")
+            Text("\(totalMinutes):\(String(format: "%02d", totalSeconds))")
                 .font(.title3)
                 .foregroundColor(.secondary)
             

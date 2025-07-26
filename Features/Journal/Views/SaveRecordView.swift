@@ -5,7 +5,6 @@
 //  Created by Maxim Eliseyev on 11.07.2025.
 //
 
-import SwiftUICore
 import SwiftUI
 
 
@@ -17,26 +16,26 @@ struct SaveRecordView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
-                Text("Сохранить расчёт")
+                Text(LocalizedStringKey("saveCalculation"))
                     .font(.title2)
                     .fontWeight(.bold)
                     .padding(.top)
                 
-                TextField("Введите название", text: $recordName)
+                TextField(LocalizedStringKey("recordName"), text: $recordName)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                 
                 Spacer()
             }
-            .navigationBarTitleDisplayMode(.inline)
+
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Отмена") {
+                ToolbarItem(placement: .primaryAction) {
+                    Button(LocalizedStringKey("cancel")) {
                         onCancel()
                     }
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Сохранить") {
+                ToolbarItem(placement: .primaryAction) {
+                    Button(LocalizedStringKey("save")) {
                         onSave()
                     }
                     .disabled(recordName.isEmpty)

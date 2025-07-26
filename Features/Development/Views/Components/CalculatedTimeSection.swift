@@ -21,7 +21,7 @@ struct CalculatedTimeSection: View {
     
     var body: some View {
         VStack(spacing: 15) {
-            Text("Время проявки")
+            Text(LocalizedStringKey("developmentTime"))
                 .font(.headline)
                 .foregroundColor(.white)
             
@@ -31,7 +31,7 @@ struct CalculatedTimeSection: View {
                         .font(.system(size: 48, weight: .bold, design: .monospaced))
                         .foregroundColor(.blue)
                     
-                    Text("Нажмите для перехода к калькулятору")
+                    Text(LocalizedStringKey("tapToCalculator"))
                         .font(.caption)
                         .foregroundColor(.gray)
                 }

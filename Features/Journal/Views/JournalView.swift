@@ -18,11 +18,11 @@ struct JournalView: View {
             VStack {
                 if records.isEmpty {
                     VStack(spacing: 20) {
-                        Text("Журнал пуст")
+                        Text(LocalizedStringKey("journalEmpty"))
                             .font(.title3)
                             .foregroundColor(.gray)
                         
-                        Text("Сохраните первый расчёт, чтобы увидеть его здесь")
+                        Text(LocalizedStringKey("journalEmptyDescription"))
                             .font(.body)
                             .foregroundColor(.gray)
                             .multilineTextAlignment(.center)
@@ -46,11 +46,10 @@ struct JournalView: View {
                     }
                 }
             }
-            .navigationTitle("Журнал")
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle(LocalizedStringKey("journal"))
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Готово") {
+                ToolbarItem(placement: .primaryAction) {
+                    Button(LocalizedStringKey("done")) {
                         onClose()
                     }
                 }

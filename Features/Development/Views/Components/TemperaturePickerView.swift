@@ -35,11 +35,11 @@ struct TemperaturePickerView: View {
                 }
                 .buttonStyle(PlainButtonStyle())
             }
-            .navigationTitle("Выберите температуру")
+            .navigationTitle(LocalizedStringKey("selectTemperature"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Отмена") {
+                ToolbarItem(placement: .primaryAction) {
+                    Button(LocalizedStringKey("cancel")) {
                         onDismiss()
                     }
                 }

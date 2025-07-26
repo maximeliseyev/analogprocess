@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct CalculatorView: View {
     @StateObject private var viewModel = CalculatorViewModel()
@@ -49,30 +50,40 @@ struct CalculatorView: View {
                     
                     // Process Type
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Тип процесса:")
+                        Text(LocalizedStringKey("processType"))
                             .font(.headline)
                         
-                        Picker("Тип процесса", selection: $viewModel.isPushMode) {
-                            Text("PULL").tag(false)
-                            Text("PUSH").tag(true)
+                        Picker(LocalizedStringKey("processType"), selection: $viewModel.isPushMode) {
+                            Text(LocalizedStringKey("pull")).tag(false)
+                            Text(LocalizedStringKey("push")).tag(true)
                         }
                         .pickerStyle(SegmentedPickerStyle())
                     }
                     
-                    if viewModel.isPushMode {
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("Количество шагов PUSH:")
-                                .font(.headline)
-                            
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(LocalizedStringKey("numberOfSteps"))
+                            .font(.headline)
+                        
+                        HStack {
                             Stepper(value: $viewModel.pushSteps, in: 1...5) {
-                                Text("\(viewModel.pushSteps) шагов")
+                                Text("\(viewModel.pushSteps)")
+                                    .font(.title2)
+                                    .fontWeight(.medium)
                             }
+                            
+                            Spacer()
+                            
+                            Text(LocalizedStringKey("from1to5"))
+                                .font(.caption)
+                                .foregroundColor(.gray)
                         }
                     }
+                    
                 }
                                 
                 Button(action: viewModel.calculateTime) {
-                    Text("Рассчитать")
+                    Text(LocalizedStringKey("calculateButton"))
                         .font(.headline)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
@@ -84,7 +95,7 @@ struct CalculatorView: View {
                 
                 if viewModel.showResult {
                     Button(action: { viewModel.showSaveDialog = true }) {
-                        Text("Сохранить")
+                        Text(LocalizedStringKey("saveButton"))
                             .font(.headline)
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
