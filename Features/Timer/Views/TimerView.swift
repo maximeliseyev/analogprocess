@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct TimerView: View {
+public struct TimerView: View {
     let timerLabel: String
     let totalMinutes: Int
     let totalSeconds: Int
@@ -8,7 +8,7 @@ struct TimerView: View {
     
     @StateObject private var viewModel: TimerViewModel
     
-    init(timerLabel: String, totalMinutes: Int, totalSeconds: Int, onClose: @escaping () -> Void) {
+    public init(timerLabel: String, totalMinutes: Int, totalSeconds: Int, onClose: @escaping () -> Void) {
         self.timerLabel = timerLabel
         self.totalMinutes = totalMinutes
         self.totalSeconds = totalSeconds
@@ -16,7 +16,7 @@ struct TimerView: View {
         self._viewModel = StateObject(wrappedValue: TimerViewModel(totalMinutes: totalMinutes, totalSeconds: totalSeconds))
     }
     
-    var body: some View {
+    public var body: some View {
         NavigationView {
             VStack(spacing: 40) {
                 TimerHeaderView(
