@@ -29,31 +29,23 @@ public class CoreDataService: ObservableObject {
         
         container.viewContext.automaticallyMergesChangesFromParent = true
         
-        // Загружаем данные при инициализации
         loadInitialData()
     }
     
     // MARK: - Initial Data Loading
     
     private func loadInitialData() {
-        // Проверяем, есть ли уже данные в Core Data
         let filmsCount = try? container.viewContext.count(for: Film.fetchRequest())
         let developersCount = try? container.viewContext.count(for: Developer.fetchRequest())
         
         if filmsCount == 0 || developersCount == 0 {
-            // Загружаем данные из JSON файлов
             loadFilmsFromJSON()
             loadDevelopersFromJSON()
             loadDevelopmentTimesFromJSON()
             loadTemperatureMultipliersFromJSON()
-            
-            // Сохраняем в Core Data
             saveContext()
-            
-            // Обновляем опубликованные массивы
             refreshData()
         } else {
-            // Данные уже есть, просто обновляем массивы
             refreshData()
         }
     }
