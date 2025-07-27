@@ -227,6 +227,19 @@ public class CoreDataService: ObservableObject {
         return dilutions.compactMap { $0.dilution }.sorted()
     }
     
+    func getAvailableISOs(for filmId: String, developerId: String, dilution: String) -> [Int] {
+        let request: NSFetchRequest<DevelopmentTime> = DevelopmentTime.fetchRequest()
+        request.predicate = NSPredicate(
+            format: "film.id == %@ AND developer.id == %@ AND dilution == %@",
+            filmId, developerId, dilution
+        )
+        request.propertiesToFetch = ["iso"]
+        request.returnsDistinctResults = true
+        
+        let isos = (try? container.viewContext.fetch(request)) ?? []
+        return isos.compactMap { $0.iso }.map { Int($0) }.sorted()
+    }
+    
     // MARK: - Calculation Records
     
     public func saveCalculationRecord(filmName: String, developerName: String, dilution: String, iso: Int, temperature: Double, time: Int) {

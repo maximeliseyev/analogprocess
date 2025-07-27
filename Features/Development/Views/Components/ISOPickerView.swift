@@ -10,30 +10,55 @@ import SwiftUI
 struct ISOPickerView: View {
     @Binding var iso: Int
     let onDismiss: () -> Void
+    let availableISOs: [Int]
     
-    private let availableISOs = [50, 100, 125, 200, 250, 400, 500, 800, 1600, 3200, 6400]
+    private let allISOs = [50, 100, 125, 200, 250, 400, 500, 800, 1600, 3200, 6400]
     
     var body: some View {
         NavigationView {
-            List(availableISOs, id: \.self) { isoValue in
-                Button(action: {
-                    iso = isoValue
-                    onDismiss()
-                }) {
-                    HStack {
-                        Text("ISO \(isoValue)")
+            Group {
+                if availableISOs.isEmpty {
+                    VStack(spacing: 20) {
+                        Image(systemName: "info.circle")
+                            .font(.largeTitle)
+                            .foregroundColor(.blue)
+                        
+                        Text("No ISO Options Available")
+                            .font(.headline)
+                        
+                        Text("Please select a film, developer, and dilution first to see available ISO options.")
                             .font(.body)
-                            .foregroundColor(.primary)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                    }
+                    .padding()
+                } else {
+                    List(allISOs, id: \.self) { isoValue in
+                        let isAvailable = availableISOs.contains(isoValue)
                         
-                        Spacer()
-                        
-                        if iso == isoValue {
-                            Image(systemName: "checkmark")
-                                .foregroundColor(.blue)
+                        Button(action: {
+                            if isAvailable {
+                                iso = isoValue
+                                onDismiss()
+                            }
+                        }) {
+                            HStack {
+                                Text("ISO \(isoValue)")
+                                    .font(.body)
+                                    .foregroundColor(isAvailable ? .primary : .secondary)
+                                
+                                Spacer()
+                                
+                                if iso == isoValue {
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.blue)
+                                }
+                            }
                         }
+                        .buttonStyle(PlainButtonStyle())
+                        .disabled(!isAvailable)
                     }
                 }
-                .buttonStyle(PlainButtonStyle())
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(LocalizedStringKey("selectISO"))
@@ -50,9 +75,18 @@ struct ISOPickerView: View {
 
 struct ISOPickerView_Previews: PreviewProvider {
     static var previews: some View {
-        ISOPickerView(
-            iso: .constant(400),
-            onDismiss: {}
-        )
+        Group {
+            ISOPickerView(
+                iso: .constant(400),
+                onDismiss: {},
+                availableISOs: [100, 200, 400, 800]
+            )
+            
+            ISOPickerView(
+                iso: .constant(400),
+                onDismiss: {},
+                availableISOs: []
+            )
+        }
     }
 } 

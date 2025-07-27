@@ -71,7 +71,7 @@ struct DevelopmentParametersView: View {
                 label: LocalizedStringKey("iso"),
                 value: "\(viewModel.iso)",
                 onTap: { viewModel.showISOPicker = true },
-                isDisabled: false
+                isDisabled: viewModel.selectedFilm == nil || viewModel.selectedDeveloper == nil || viewModel.selectedDilution.isEmpty
             )
             
             ParameterRow(

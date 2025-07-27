@@ -86,6 +86,22 @@ class DevelopmentSetupViewModel: ObservableObject {
         return Array(Set(availableDilutions)).sorted()
     }
     
+    func getAvailableISOs() -> [Int] {
+        guard let film = selectedFilm,
+              let developer = selectedDeveloper,
+              let filmId = film.id,
+              let developerId = developer.id,
+              !selectedDilution.isEmpty else {
+            return []
+        }
+        
+        // Получаем доступные ISO из Core Data
+        let availableISOs = dataService.getAvailableISOs(for: filmId, developerId: developerId, dilution: selectedDilution)
+        
+        // Если ISO нет, возвращаем пустой массив
+        return availableISOs
+    }
+    
     func reloadData() {
         dataService.reloadDataFromJSON()
         objectWillChange.send()
