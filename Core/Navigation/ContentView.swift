@@ -8,17 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Binding var colorScheme: ColorScheme?
     @State private var showMainTabs = false
     @State private var selectedTab = 0
     
     var body: some View {
         if showMainTabs {
-            MainTabView(selectedTab: $selectedTab)
+            MainTabView(
+                selectedTab: $selectedTab,
+                onBackToHome: {
+                    showMainTabs = false
+                },
+                colorScheme: $colorScheme
+            )
         } else {
-            HomeView(onSelectTab: { tab in
-                selectedTab = tab
-                showMainTabs = true
-            })
+            HomeView(
+                onSelectTab: { tab in
+                    selectedTab = tab
+                    showMainTabs = true
+                },
+                colorScheme: $colorScheme
+            )
         }
     }
 }

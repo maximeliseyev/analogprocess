@@ -21,14 +21,12 @@ struct AgitationSelectionView: View {
                 
                 ScrollView {
                     LazyVStack(spacing: 12) {
-                        // Опция "Без ажитации"
                         AgitationModeRow(
                             mode: nil,
                             isSelected: selectedMode == nil,
                             onTap: { selectedMode = nil }
                         )
                         
-                        // Предустановленные режимы
                         ForEach(AgitationMode.presets, id: \.id) { mode in
                             AgitationModeRow(
                                 mode: mode,
@@ -37,7 +35,6 @@ struct AgitationSelectionView: View {
                             )
                         }
                         
-                        // Кастомный режим
                         CustomAgitationModeRow(
                             onTap: { showCustomAgitation = true }
                         )

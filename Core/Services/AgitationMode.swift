@@ -39,7 +39,7 @@ struct AgitationMode {
             return "\(agitation) / \(rest)"
         case .complex:
             if name == "ORWO" {
-                return "45/15 + 15/45"
+                return "45 / 15 + 15 / 45"
             }
             else if name == "RAE" {
                 return "Для длительных проявок"

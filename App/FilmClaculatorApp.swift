@@ -11,11 +11,13 @@ import CoreData
 @main
 struct FilmClaculatorApp: App {
     let persistenceController = PersistenceController.shared
+    @State private var colorScheme: ColorScheme? = nil
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(colorScheme: $colorScheme)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .preferredColorScheme(colorScheme)
         }
     }
 }

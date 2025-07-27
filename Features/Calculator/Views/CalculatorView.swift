@@ -15,7 +15,6 @@ struct CalculatorView: View {
         NavigationView {
             VStack(spacing: 20) {
                 VStack(alignment: .leading, spacing: 15) {
-                    // Time Input
                     VStack(alignment: .leading, spacing: 8) {
                         Text(LocalizedStringKey("baseTime"))
                             .font(.headline)
@@ -48,7 +47,6 @@ struct CalculatorView: View {
                         }
                     }
                     
-                    // Process Type
                     VStack(alignment: .leading, spacing: 8) {
                         Text(LocalizedStringKey("processType"))
                             .font(.headline)

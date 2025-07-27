@@ -9,8 +9,8 @@ import Foundation
 import CoreData
 import SwiftUI
 
-class CoreDataService: ObservableObject {
-    static let shared = CoreDataService()
+public class CoreDataService: ObservableObject {
+    public static let shared = CoreDataService()
     
     let container: NSPersistentContainer
     
@@ -242,7 +242,7 @@ class CoreDataService: ObservableObject {
     
     // MARK: - Calculation Records
     
-    func saveCalculationRecord(filmName: String, developerName: String, dilution: String, iso: Int, temperature: Double, time: Int) {
+    public func saveCalculationRecord(filmName: String, developerName: String, dilution: String, iso: Int, temperature: Double, time: Int) {
         let record = CalculationRecord(context: container.viewContext)
         record.filmName = filmName
         record.developerName = developerName
@@ -255,13 +255,13 @@ class CoreDataService: ObservableObject {
         saveContext()
     }
     
-    func getCalculationRecords() -> [CalculationRecord] {
+    public func getCalculationRecords() -> [CalculationRecord] {
         let request: NSFetchRequest<CalculationRecord> = CalculationRecord.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(keyPath: \CalculationRecord.date, ascending: false)]
         return (try? container.viewContext.fetch(request)) ?? []
     }
     
-    func deleteCalculationRecord(_ record: CalculationRecord) {
+    public func deleteCalculationRecord(_ record: CalculationRecord) {
         container.viewContext.delete(record)
         saveContext()
     }

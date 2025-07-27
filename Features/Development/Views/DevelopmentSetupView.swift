@@ -1,10 +1,3 @@
-//
-//  DevelopmentSetupView.swift
-//  Film claculator
-//
-//  Created by Maxim Eliseyev on 12.07.2025.
-//
-
 import SwiftUI
 
 struct CalculatedTimeSection: View {
@@ -46,18 +39,12 @@ struct DevelopmentSetupView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                // Темный фон
                 Color.black
                     .ignoresSafeArea()
                 
-                VStack(spacing: 30) {
-                    // Заголовок
-                    DevelopmentHeaderView()
-                    
-                    // Параметры
+                VStack(spacing: 30) {                    
                     DevelopmentParametersView(viewModel: viewModel)
                     
-                    // Результат расчета
                     if let calculatedTime = viewModel.calculatedTime {
                         CalculatedTimeSection(
                             time: calculatedTime,
@@ -70,6 +57,7 @@ struct DevelopmentSetupView: View {
                     Spacer()
                 }
             }
+            .navigationTitle(LocalizedStringKey("developmentSetup"))
             .navigationBarTitleDisplayMode(.inline)
             .sheet(isPresented: $viewModel.showCalculator) {
                 if viewModel.calculatedTime != nil {
@@ -114,5 +102,3 @@ struct DevelopmentSetupView: View {
         }
     }
 }
-
-

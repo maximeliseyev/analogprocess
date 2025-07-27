@@ -16,7 +16,6 @@ class TimerViewModel: ObservableObject {
     @Published var showAgitationSelection = true
     @Published var selectedAgitationMode: AgitationMode?
     
-    // Ажитация
     @Published var currentMinute: Int = 1
     @Published var shouldAgitate = false
     @Published var agitationTimeRemaining = 0
@@ -132,12 +131,11 @@ class TimerViewModel: ObservableObject {
         shouldAgitate = true
         currentAgitationPhase = mode.getAgitationForMinute(currentMinute, totalMinutes: totalMinutes)
         
-        // Настраиваем начальную ажитацию в зависимости от типа
         if let phase = currentAgitationPhase {
             switch phase {
             case .continuous:
                 isInAgitationPhase = true
-                agitationTimeRemaining = 0 // Бесконечная ажитация
+                agitationTimeRemaining = 0
             case .cycle(let agitation, _):
                 isInAgitationPhase = true
                 agitationTimeRemaining = agitation
@@ -154,7 +152,6 @@ class TimerViewModel: ObservableObject {
     private func updateAgitation() {
         guard shouldAgitate, let mode = selectedAgitationMode else { return }
         
-        // Обновляем текущую фазу ажитации
         let newPhase = mode.getAgitationForMinute(currentMinute, totalMinutes: totalMinutes)
         if newPhase != currentAgitationPhase {
             currentAgitationPhase = newPhase
@@ -165,25 +162,20 @@ class TimerViewModel: ObservableObject {
         
         switch phase {
         case .continuous:
-            // Непрерывная ажитация - ничего не делаем
             break
             
         case .cycle(let agitation, let rest):
             if agitationTimeRemaining > 0 {
                 agitationTimeRemaining -= 1
             } else {
-                // Переключаем фазу
                 if isInAgitationPhase {
-                    // Переходим к покою
                     isInAgitationPhase = false
                     agitationTimeRemaining = rest
                 } else {
-                    // Переходим к ажитации
                     isInAgitationPhase = true
                     agitationTimeRemaining = agitation
                 }
                 
-                // Тактильная обратная связь
                 let impactFeedback = UIImpactFeedbackGenerator(style: .light)
                 impactFeedback.impactOccurred()
             }
@@ -192,16 +184,13 @@ class TimerViewModel: ObservableObject {
             if agitationTimeRemaining > 0 {
                 agitationTimeRemaining -= 1
             } else {
-                // Сбрасываем таймер для следующего цикла
                 agitationTimeRemaining = interval
                 
-                // Тактильная обратная связь
                 let impactFeedback = UIImpactFeedbackGenerator(style: .light)
                 impactFeedback.impactOccurred()
             }
             
         case .custom:
-            // Для кастомных режимов просто показываем информацию
             break
         }
     }
@@ -210,7 +199,6 @@ class TimerViewModel: ObservableObject {
         stopTimer()
         showingAlert = true
         
-        // Вибрация при завершении
         let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
         impactFeedback.impactOccurred()
     }

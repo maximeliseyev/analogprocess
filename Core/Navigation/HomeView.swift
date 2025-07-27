@@ -1,41 +1,60 @@
 import SwiftUI
 
-struct HomeView: View {
+public struct HomeView: View {
     var onSelectTab: (Int) -> Void
+    @Binding var colorScheme: ColorScheme?
     @State private var showSettings = false
     
-    var body: some View {
+    public var body: some View {
         NavigationView {
-            VStack(spacing: 32) {
+            VStack(spacing: 24) {
                 Spacer()
-                ForEach(0..<4) { idx in
-                    Button(action: { onSelectTab(idx) }) {
-                        HStack {
+                
+                Text(LocalizedStringKey("home_description"))
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(nil)
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 10)
+                
+                ForEach(0..<4, id: \.self) { idx in
+                    Button(action: {
+                        onSelectTab(idx)
+                    }) {
+                        HStack(alignment: .center, spacing: 16) {
                             Image(systemName: iconName(for: idx))
-                                .font(.title)
-                            Text(title(for: idx))
-                                .font(.title2)
-                                .fontWeight(.semibold)
+                                .font(.system(size: 28, weight: .semibold))
+                                .frame(width: 36, height: 36)
+                                .foregroundColor(iconColor(for: idx))
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(title(for: idx))
+                                    .font(.headline)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.primary)
+                                Text(subtitle(for: idx))
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                            }
+                            Spacer()
                         }
-                        .foregroundColor(.primary)
-                        .frame(maxWidth: .infinity, minHeight: 60)
-                        .background(Color(.systemGray5))
+                        .padding(.vertical, 18)
+                        .padding(.horizontal, 20)
+                        .background(Color(uiColor: .systemGray6))
                         .cornerRadius(16)
-                        .padding(.horizontal, 24)
+                        .padding(.horizontal, 20)
                     }
                 }
                 Spacer()
             }
             .navigationTitle(LocalizedStringKey("filmClaculator"))
+            .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: { showSettings = true }) {
+                    NavigationLink(destination: SettingsView(colorScheme: $colorScheme)) {
                         Image(systemName: "gearshape")
                     }
                 }
-            }
-            .sheet(isPresented: $showSettings) {
-                SettingsView()
             }
         }
     }
@@ -49,6 +68,15 @@ struct HomeView: View {
         default: return "" }
     }
     
+    func subtitle(for idx: Int) -> String {
+        switch idx {
+        case 0: return NSLocalizedString("home_presets_subtitle", comment: "")
+        case 1: return NSLocalizedString("home_calculator_subtitle", comment: "")
+        case 2: return NSLocalizedString("home_timer_subtitle", comment: "")
+        case 3: return NSLocalizedString("home_journal_subtitle", comment: "")
+        default: return "" }
+    }
+    
     func iconName(for idx: Int) -> String {
         switch idx {
         case 0: return "slider.horizontal.3"
@@ -57,5 +85,20 @@ struct HomeView: View {
         case 3: return "book"
         default: return "square"
         }
+    }
+    
+    func iconColor(for idx: Int) -> Color {
+        switch idx {
+        case 0: return .blue
+        case 1: return .orange
+        case 2: return .red
+        case 3: return .purple
+        default: return .gray
+        }
+    }
+    
+    public init(onSelectTab: @escaping (Int) -> Void, colorScheme: Binding<ColorScheme?>) {
+        self.onSelectTab = onSelectTab
+        self._colorScheme = colorScheme
     }
 } 

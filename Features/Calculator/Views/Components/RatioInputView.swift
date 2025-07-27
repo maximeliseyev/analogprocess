@@ -7,19 +7,19 @@
 
 import SwiftUI
 
-struct CoefficientInputView: View {
-    @Binding var coefficient: String
+struct RatioInputView: View {
+    @Binding var ratio: String
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(LocalizedStringKey("coefficient"))
+            Text(LocalizedStringKey("ratio"))
                 .font(.headline)
             
             HStack {
-                TextField("1.33", text: $coefficient)
+                TextField("1.33", text: $ratio)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 
-                Text(LocalizedStringKey("standardCoefficient"))
+                Text(LocalizedStringKey("standardRatio"))
                     .font(.caption)
                     .foregroundColor(.gray)
             }
@@ -27,9 +27,9 @@ struct CoefficientInputView: View {
     }
 }
 
-struct CoefficientInputView_Previews: PreviewProvider {
+struct RatioInputView_Previews: PreviewProvider {
     static var previews: some View {
-        CoefficientInputView(coefficient: .constant("1.33"))
+        RatioInputView(ratio: .constant("1.33"))
             .padding()
     }
 } 

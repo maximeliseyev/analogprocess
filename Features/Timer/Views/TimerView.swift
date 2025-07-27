@@ -26,7 +26,6 @@ public struct TimerView: View {
                     selectedAgitationMode: viewModel.selectedAgitationMode
                 )
                 
-                // Индикатор ажитации
                 AgitationIndicatorView(
                     shouldAgitate: viewModel.shouldAgitate,
                     selectedAgitationMode: viewModel.selectedAgitationMode,
@@ -36,14 +35,12 @@ public struct TimerView: View {
                     currentAgitationPhase: viewModel.currentAgitationPhase
                 )
                 
-                // Круговой прогресс-бар
                 TimerProgressView(
                     progress: viewModel.progress,
                     displayMinutes: viewModel.displayMinutes,
                     displaySeconds: viewModel.displaySeconds
                 )
                 
-                // Кнопки управления
                 TimerControlsView(
                     isRunning: viewModel.isRunning,
                     onStartPause: viewModel.startPauseTimer,
@@ -54,14 +51,6 @@ public struct TimerView: View {
             }
             .padding()
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button(LocalizedStringKey("done")) {
-                        viewModel.stopTimer()
-                        onClose()
-                    }
-                }
-            }
             .onAppear {
                 viewModel.resetTimer()
             }

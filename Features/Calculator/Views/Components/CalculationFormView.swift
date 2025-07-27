@@ -10,7 +10,7 @@ import SwiftUI
 struct CalculationFormView: View {
     @Binding var minutes: String
     @Binding var seconds: String
-    @Binding var coefficient: String
+    @Binding var ratio: String
     @Binding var isPushMode: Bool
     @Binding var pushSteps: Int
     
@@ -18,7 +18,7 @@ struct CalculationFormView: View {
         VStack(alignment: .leading, spacing: 15) {
             TimeInputView(minutes: $minutes, seconds: $seconds)
             
-            CoefficientInputView(coefficient: $coefficient)
+            RatioInputView(ratio: $ratio)
             
             ProcessTypeView(isPushMode: $isPushMode)
             
@@ -33,7 +33,7 @@ struct CalculationFormView_Previews: PreviewProvider {
         CalculationFormView(
             minutes: .constant("5"),
             seconds: .constant("30"),
-            coefficient: .constant("1.33"),
+            ratio: .constant("1.33"),
             isPushMode: .constant(true),
             pushSteps: .constant(3)
         )

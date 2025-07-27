@@ -46,14 +46,9 @@ struct JournalView: View {
                     }
                 }
             }
+            .padding()
             .navigationTitle(LocalizedStringKey("journal"))
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button(LocalizedStringKey("done")) {
-                        onClose()
-                    }
-                }
-            }
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
