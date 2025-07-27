@@ -68,7 +68,8 @@ struct DevelopmentSetupView: View {
             .sheet(isPresented: $viewModel.showISOPicker) {
                 ISOPickerView(
                     iso: $viewModel.iso,
-                    onDismiss: { viewModel.showISOPicker = false }
+                    onDismiss: { viewModel.showISOPicker = false },
+                    availableISOs: viewModel.getAvailableISOs()
                 )
             }
             .sheet(isPresented: $viewModel.showTemperaturePicker) {
