@@ -17,7 +17,7 @@
 "manualInput" = "Ручной ввод";
 "fromDatabase" = "Из базы данных:";
 "defaultTime" = "Время по умолчанию (данные отсутствуют)";
-"ratio" = "Соотношение:";
+"ratio" = "Коэффициент:";
 "process" = "Процесс:";
 "push" = "Пуш";
 "pull" = "Пулл";
@@ -142,8 +142,7 @@
 "developmentCompleteForProcess" = "Проявка завершена для процесса: %@";
 "calculatorTitle" = "Калькулятор времени";
 "basicTimeLabel" = "Базовое время:";
-"coefficient" = "Коэффициент:";
-"standardCoefficient" = "(стандартно 1.33)";
+"standardRatio" = "(стандартно 1.33)";
 "processType" = "Тип процессе:";
 "pushSteps" = "Количество пуш-супеней:";
 "calculateButton" = "Расчитать";
@@ -164,7 +163,8 @@
 "parameterRow" = "Строка параметров";
 "recordRow" = "Строка записи";
 "calculatorComponents" = "Компоненты калькулятора";
-"filmClaculator" = "Калькулятор проявки плёнки";
+"filmClaculator" = "Калькулятор проявки";
+"home_description" = "Инструменты для выбора и расчёта стандартного времени проявки плёнки или пуш и пулл процессов";
 "journal" = "Журнал";
 "recordName" = "Введите имя";
 "selectFilm" = "Выберите плёнку";
@@ -185,3 +185,13 @@
 "presets" = "Пресеты";
 "selectDevelopmentParameters" = "Выберите параметры проявки для запуска таймера";
 "startTimer" = "Запустить таймер";
+"settings" = "Настройки";
+"home_presets_subtitle" = "Параметры проявки";
+"home_calculator_subtitle" = "Расчет времени";
+"home_timer_subtitle" = "Таймер проявки";
+"home_journal_subtitle" = "Сохраненные записи";
+"settings_theme" = "Тема";
+"settings_theme_mode" = "Режим темы";
+"settings_theme_system" = "Системная";
+"settings_theme_light" = "Светлая";
+"settings_theme_dark" = "Тёмная";

@@ -143,7 +143,7 @@
 "calculatorTitle" = "Time Calculator";
 "basicTimeLabel" = "Basic time:";
 "coefficient" = "Coefficient:";
-"standardCoefficient" = "(standard 1.33)";
+"standardRatio" = "(standard 1.33)";
 "processType" = "Process type:";
 "pushSteps" = "Number of PUSH steps:";
 "numberOfSteps" = "Number of steps:";
@@ -165,7 +165,8 @@
 "parameterRow" = "Parameter Row";
 "recordRow" = "Record Row";
 "calculatorComponents" = "Calculator Components";
-"filmClaculator" = "Film develop calculator";
+"filmClaculator" = "Develop сalculator";
+"home_description" = "Tools for selecting and calculating standard film development time or push and pull processes";
 "journal" = "Journal";
 "recordName" = "Enter name";
 "selectFilm" = "Select film";
@@ -186,3 +187,13 @@
 "presets" = "Presets";
 "selectDevelopmentParameters" = "Select development parameters to start timer";
 "startTimer" = "Start Timer";
+"settings" = "Settings";
+"home_presets_subtitle" = "Development parameters";
+"home_calculator_subtitle" = "Time calculation";
+"home_timer_subtitle" = "Development timer";
+"home_journal_subtitle" = "Saved records";
+"settings_theme" = "Theme";
+"settings_theme_mode" = "Theme mode";
+"settings_theme_system" = "System";
+"settings_theme_light" = "Light";
+"settings_theme_dark" = "Dark";

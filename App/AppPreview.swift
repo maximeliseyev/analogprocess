@@ -10,8 +10,10 @@ import CoreData
 
 // MARK: - Main App Preview
 struct AppPreview: View {
+    @State private var colorScheme: ColorScheme? = nil
+    
     var body: some View {
-        ContentView()
+        ContentView(colorScheme: $colorScheme)
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
