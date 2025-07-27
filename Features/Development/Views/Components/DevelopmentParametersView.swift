@@ -11,6 +11,7 @@ struct ParameterRow: View {
     let label: LocalizedStringKey
     let value: String
     let onTap: () -> Void
+    let isDisabled: Bool
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -22,19 +23,20 @@ struct ParameterRow: View {
                 HStack {
                     Text(value)
                         .font(.body)
-                        .foregroundColor(.white)
+                        .foregroundColor(isDisabled ? .gray : .white)
                     
                     Spacer()
                     
                     Image(systemName: "chevron.down")
-                        .foregroundColor(.gray)
+                        .foregroundColor(isDisabled ? .gray.opacity(0.5) : .gray)
                         .font(.caption)
                 }
                 .padding()
-                .background(Color.gray.opacity(0.3))
+                .background(isDisabled ? Color.gray.opacity(0.1) : Color.gray.opacity(0.3))
                 .cornerRadius(8)
             }
             .buttonStyle(PlainButtonStyle())
+            .disabled(isDisabled)
         }
     }
 }
@@ -47,31 +49,36 @@ struct DevelopmentParametersView: View {
             ParameterRow(
                 label: LocalizedStringKey("film"),
                 value: viewModel.selectedFilm?.name ?? "Select Film",
-                onTap: { viewModel.showFilmPicker = true }
+                onTap: { viewModel.showFilmPicker = true },
+                isDisabled: false
             )
             
             ParameterRow(
                 label: LocalizedStringKey("developer"),
                 value: viewModel.selectedDeveloper?.name ?? "Select Developer",
-                onTap: { viewModel.showDeveloperPicker = true }
+                onTap: { viewModel.showDeveloperPicker = true },
+                isDisabled: false
             )
             
             ParameterRow(
                 label: LocalizedStringKey("dilution"),
                 value: viewModel.selectedDilution.isEmpty ? "Select Dilution" : viewModel.selectedDilution,
-                onTap: { viewModel.showDilutionPicker = true }
+                onTap: { viewModel.showDilutionPicker = true },
+                isDisabled: viewModel.selectedFilm == nil || viewModel.selectedDeveloper == nil
             )
             
             ParameterRow(
                 label: LocalizedStringKey("iso"),
                 value: "\(viewModel.iso)",
-                onTap: { viewModel.showISOPicker = true }
+                onTap: { viewModel.showISOPicker = true },
+                isDisabled: false
             )
             
             ParameterRow(
                 label: LocalizedStringKey("temperature"),
                 value: "\(Int(viewModel.temperature))°C (Standard)",
-                onTap: { viewModel.showTemperaturePicker = true }
+                onTap: { viewModel.showTemperaturePicker = true },
+                isDisabled: false
             )
         }
         .padding(.horizontal, 20)

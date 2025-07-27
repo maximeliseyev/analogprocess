@@ -22,6 +22,15 @@ struct DevelopmentSetupView: View {
                         )
                     }
                     
+                    // Debug button to reload data
+                    #if DEBUG
+                    Button("Force Reload Data") {
+                        viewModel.reloadData()
+                    }
+                    .foregroundColor(.blue)
+                    .padding()
+                    #endif
+                    
                     Spacer()
                 }
             }
@@ -52,7 +61,8 @@ struct DevelopmentSetupView: View {
                 DilutionPickerView(
                     dilutions: viewModel.getAvailableDilutions(),
                     selectedDilution: $viewModel.selectedDilution,
-                    onDismiss: { viewModel.showDilutionPicker = false }
+                    onDismiss: { viewModel.showDilutionPicker = false },
+                    isDisabled: viewModel.selectedFilm == nil || viewModel.selectedDeveloper == nil
                 )
             }
             .sheet(isPresented: $viewModel.showISOPicker) {
