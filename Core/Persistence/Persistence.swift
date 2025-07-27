@@ -21,7 +21,6 @@ struct PersistenceController {
         film.name = "Ilford HP5+"
         film.manufacturer = "Ilford"
         film.type = "Black & White"
-        film.desc = "Классическая черно-белая пленка"
         film.defaultISO = 400
         
         let developer = Developer(context: viewContext)
@@ -29,7 +28,6 @@ struct PersistenceController {
         developer.name = "Kodak D-76"
         developer.manufacturer = "Kodak"
         developer.type = "powder"
-        developer.desc = "Классический порошковый проявитель"
         developer.defaultDilution = "1+1"
         
         let developmentTime = DevelopmentTime(context: viewContext)

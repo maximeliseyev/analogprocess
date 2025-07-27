@@ -28,7 +28,9 @@ class DevelopmentSetupViewModel: ObservableObject {
     private let dataService = CoreDataService.shared
     
     var films: [Film] {
-        dataService.films
+        let films = dataService.films
+        print("📱 DevelopmentSetupViewModel: Got \(films.count) films from dataService")
+        return films
     }
     
     var developers: [Developer] {
@@ -80,7 +82,13 @@ class DevelopmentSetupViewModel: ObservableObject {
             return [developer.defaultDilution ?? ""]
         }
         
-        return availableDilutions
+        // Remove duplicates and sort
+        return Array(Set(availableDilutions)).sorted()
+    }
+    
+    func reloadData() {
+        dataService.reloadDataFromJSON()
+        objectWillChange.send()
     }
     
     // MARK: - Private Methods

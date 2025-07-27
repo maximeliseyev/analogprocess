@@ -63,7 +63,6 @@ public class CoreDataService: ObservableObject {
             guard let name = filmData["name"] as? String,
                   let manufacturer = filmData["manufacturer"] as? String,
                   let type = filmData["type"] as? String,
-                  let description = filmData["description"] as? String,
                   let defaultISO = filmData["defaultISO"] as? Int else {
                 continue
             }
@@ -73,7 +72,6 @@ public class CoreDataService: ObservableObject {
             film.name = name
             film.manufacturer = manufacturer
             film.type = type
-            film.desc = description
             film.defaultISO = Int32(defaultISO)
         }
     }
@@ -89,7 +87,6 @@ public class CoreDataService: ObservableObject {
             guard let name = developerData["name"] as? String,
                   let manufacturer = developerData["manufacturer"] as? String,
                   let type = developerData["type"] as? String,
-                  let description = developerData["description"] as? String,
                   let defaultDilution = developerData["defaultDilution"] as? String else {
                 continue
             }
@@ -99,7 +96,6 @@ public class CoreDataService: ObservableObject {
             developer.name = name
             developer.manufacturer = manufacturer
             developer.type = type
-            developer.desc = description
             developer.defaultDilution = defaultDilution
         }
     }
@@ -164,7 +160,6 @@ public class CoreDataService: ObservableObject {
     }
     
     func refreshData() {
-        // Обновляем опубликованные массивы
         let filmsRequest: NSFetchRequest<Film> = Film.fetchRequest()
         filmsRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Film.name, ascending: true)]
         films = (try? container.viewContext.fetch(filmsRequest)) ?? []
@@ -261,10 +256,7 @@ public class CoreDataService: ObservableObject {
     // MARK: - Data Management
     
     func reloadDataFromJSON() {
-        // Очищаем существующие данные
         clearAllData()
-        
-        // Загружаем заново из JSON
         loadFilmsFromJSON()
         loadDevelopersFromJSON()
         loadDevelopmentTimesFromJSON()

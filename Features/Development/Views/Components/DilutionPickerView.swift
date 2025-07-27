@@ -11,11 +11,27 @@ struct DilutionPickerView: View {
     let dilutions: [String]
     @Binding var selectedDilution: String
     let onDismiss: () -> Void
+    let isDisabled: Bool
     
     var body: some View {
         NavigationView {
             Group {
-                if dilutions.isEmpty {
+                if isDisabled {
+                    VStack(spacing: 20) {
+                        Image(systemName: "info.circle")
+                            .font(.largeTitle)
+                            .foregroundColor(.blue)
+                        
+                        Text("Select Film and Developer First")
+                            .font(.headline)
+                        
+                        Text("Please select a film and developer before choosing a dilution.")
+                            .font(.body)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                    }
+                    .padding()
+                } else if dilutions.isEmpty {
                     VStack(spacing: 20) {
                         Image(systemName: "exclamationmark.triangle")
                             .font(.largeTitle)
@@ -72,13 +88,22 @@ struct DilutionPickerView_Previews: PreviewProvider {
             DilutionPickerView(
                 dilutions: ["1:1", "1:2", "1:4"],
                 selectedDilution: .constant("1:1"),
-                onDismiss: {}
+                onDismiss: {},
+                isDisabled: false
             )
             
             DilutionPickerView(
                 dilutions: [],
                 selectedDilution: .constant(""),
-                onDismiss: {}
+                onDismiss: {},
+                isDisabled: false
+            )
+            
+            DilutionPickerView(
+                dilutions: [],
+                selectedDilution: .constant(""),
+                onDismiss: {},
+                isDisabled: true
             )
         }
     }
