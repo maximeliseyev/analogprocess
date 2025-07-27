@@ -56,13 +56,3 @@ struct FilmPickerView: View {
     }
 }
 
-struct FilmPickerView_Previews: PreviewProvider {
-    static var previews: some View {
-        FilmPickerView(
-            films: [],
-            selectedFilm: .constant(nil),
-            iso: .constant(400),
-            onDismiss: {}
-        )
-    }
-} 

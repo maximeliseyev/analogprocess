@@ -1,37 +1,5 @@
 import SwiftUI
-
-struct CalculatedTimeSection: View {
-    let time: Int
-    let onTap: () -> Void
-    
-    var body: some View {
-        VStack(spacing: 12) {
-            Text(LocalizedStringKey("calculatedTime"))
-                .font(.headline)
-                .foregroundColor(.white)
-            
-            Button(action: onTap) {
-                HStack {
-                    Text("\(time / 60):\(String(format: "%02d", time % 60))")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                    
-                    Spacer()
-                    
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(.gray)
-                        .font(.caption)
-                }
-                .padding()
-                .background(Color.green.opacity(0.3))
-                .cornerRadius(8)
-            }
-            .buttonStyle(PlainButtonStyle())
-        }
-        .padding(.horizontal, 20)
-    }
-}
+import CoreData
 
 struct DevelopmentSetupView: View {
     @StateObject private var viewModel = DevelopmentSetupViewModel()
@@ -100,5 +68,13 @@ struct DevelopmentSetupView: View {
                 )
             }
         }
+    }
+}
+
+// MARK: - Preview
+struct DevelopmentSetupView_Previews: PreviewProvider {
+    static var previews: some View {
+        DevelopmentSetupView()
+            .previewDisplayName("Development setup")
     }
 }
