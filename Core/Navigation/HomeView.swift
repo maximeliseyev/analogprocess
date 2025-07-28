@@ -18,7 +18,7 @@ public struct HomeView: View {
                     .padding(.horizontal, 20)
                     .padding(.bottom, 10)
                 
-                ForEach(0..<4, id: \.self) { idx in
+                ForEach(0..<5, id: \.self) { idx in
                     Button(action: {
                         onSelectTab(idx)
                     }) {
@@ -47,7 +47,7 @@ public struct HomeView: View {
                 }
                 Spacer()
             }
-            .navigationTitle(LocalizedStringKey("filmClaculator"))
+            .navigationTitle(LocalizedStringKey("filmLab"))
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -65,7 +65,7 @@ public struct HomeView: View {
         case 1: return NSLocalizedString("calculator", comment: "")
         case 2: return NSLocalizedString("timer", comment: "")
         case 3: return NSLocalizedString("journal", comment: "")
-//        case 4: return "Manuals"
+        case 4: return NSLocalizedString("manuals", comment: "")
         default: return "" }
     }
     
@@ -75,7 +75,7 @@ public struct HomeView: View {
         case 1: return NSLocalizedString("home_calculator_subtitle", comment: "")
         case 2: return NSLocalizedString("home_timer_subtitle", comment: "")
         case 3: return NSLocalizedString("home_journal_subtitle", comment: "")
-//        case 4: return "Manuals and articles"
+        case 4: return NSLocalizedString("home_manuals_subtitle", comment: "")
         default: return "" }
     }
     
@@ -85,7 +85,7 @@ public struct HomeView: View {
         case 1: return "plus.forwardslash.minus"
         case 2: return "timer"
         case 3: return "book"
-//        case 4: return "folder"
+        case 4: return "folder"
         default: return "square"
         }
     }
@@ -96,7 +96,7 @@ public struct HomeView: View {
         case 1: return .orange
         case 2: return .red
         case 3: return .purple
-//        case 4: return .yellow
+        case 4: return .yellow
         default: return .gray
         }
     }

@@ -163,8 +163,8 @@
 "parameterRow" = "Строка параметров";
 "recordRow" = "Строка записи";
 "calculatorComponents" = "Компоненты калькулятора";
-"filmClaculator" = "Калькулятор проявки";
-"home_description" = "Инструменты для выбора и расчёта стандартного времени проявки плёнки или пуш и пулл процессов";
+"filmLab" = "Film Lab";
+"home_description" = "Полный набор инструментов для проявки плёнки: калькулятор, таймер, журнал и руководства";
 "journal" = "Журнал";
 "recordName" = "Введите имя";
 "selectFilm" = "Выберите плёнку";
@@ -211,3 +211,5 @@
 "agitation_rae_phase_1_rotation_7th_minute" = "1 оборот на 7-ю минуту";
 "agitation_rae_phase_1_rotation_10th_minute" = "1 оборот на 10-ю минуту";
 "agitation_rae_phase_1_rotation_every_5_minutes" = "1 оборот каждые 5 минут";
+"manuals" = "Мануалы";
+"home_manuals_subtitle" = "Статьи и руководства";

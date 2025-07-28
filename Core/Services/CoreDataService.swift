@@ -1,6 +1,6 @@
 //
 //  CoreDataService.swift
-//  Film claculator
+//  Film Lab
 //
 //  Created by Maxim Eliseyev on 12.07.2025.
 //
@@ -19,7 +19,7 @@ public class CoreDataService: ObservableObject {
     @Published var temperatureMultipliers: [TemperatureMultiplier] = []
     
     private init() {
-        container = NSPersistentContainer(name: "FilmСlaculator")
+        container = NSPersistentContainer(name: "FilmLab")
         
         container.loadPersistentStores { description, error in
             if let error = error {
@@ -309,7 +309,7 @@ public class CoreDataService: ObservableObject {
         saveContext()
     }
     
-    private func saveContext() {
+    func saveContext() {
         if container.viewContext.hasChanges {
             do {
                 try container.viewContext.save()

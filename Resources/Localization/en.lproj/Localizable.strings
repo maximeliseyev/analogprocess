@@ -165,8 +165,8 @@
 "parameterRow" = "Parameter Row";
 "recordRow" = "Record Row";
 "calculatorComponents" = "Calculator Components";
-"filmClaculator" = "Develop сalculator";
-"home_description" = "Tools for selecting and calculating standard film development time or push and pull processes";
+"filmLab" = "Film Lab";
+"home_description" = "Complete toolkit for film development: calculator, timer, journal, and guides";
 "journal" = "Journal";
 "recordName" = "Enter name";
 "selectFilm" = "Select film";
@@ -213,3 +213,5 @@
 "agitation_rae_phase_1_rotation_7th_minute" = "1 rotation on 7th minute";
 "agitation_rae_phase_1_rotation_10th_minute" = "1 rotation on 10th minute";
 "agitation_rae_phase_1_rotation_every_5_minutes" = "1 rotation every 5 minutes";
+"manuals" = "Manuals";
+"home_manuals_subtitle" = "Articles and guides";
