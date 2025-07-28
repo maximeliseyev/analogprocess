@@ -1,8 +1,11 @@
 import SwiftUI
+import CoreData
 
 public struct SettingsView: View {
     @Binding var colorScheme: ColorScheme?
     @State private var selectedTheme: Int = 0
+    @State private var showingDataAlert = false
+    @State private var alertMessage = ""
     
     public init(colorScheme: Binding<ColorScheme?>) {
         self._colorScheme = colorScheme

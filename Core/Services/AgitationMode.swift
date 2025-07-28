@@ -1,6 +1,6 @@
 //
 //  AgitationMode.swift
-//  Film claculator
+//  Film Lab
 //
 //  Created by Maxim Eliseyev on 23.07.2025.
 //

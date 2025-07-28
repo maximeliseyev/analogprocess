@@ -8,6 +8,7 @@ public struct MainTabView: View {
     @StateObject private var coreDataService = CoreDataService.shared
     @State private var savedRecords: [CalculationRecord] = []
     @Binding var colorScheme: ColorScheme?
+    @State private var showManuals = false
     
     public var body: some View {
         NavigationView {
@@ -44,14 +45,6 @@ public struct MainTabView: View {
                     Text(LocalizedStringKey("journal"))
                 }
                 .tag(3)
-                
-//                ManualView()
-//                    .tabItem {
-//                        Image(systemName: "folder")
-//                        Text("Manuals")
-//                    }
-//                    .tag(4)
-//                    .hidden()
             }
             .accentColor(.blue)
             .navigationBarBackButtonHidden(true)
@@ -59,6 +52,15 @@ public struct MainTabView: View {
                 Image(systemName: "house")
                     .foregroundColor(.blue)
             })
+            .onChange(of: selectedTab) { newValue in
+                if newValue == 4 {
+                    showManuals = true
+                    selectedTab = 0 // Возвращаемся к первому табу
+                }
+            }
+            .sheet(isPresented: $showManuals) {
+                ManualView()
+            }
         }
     }
     

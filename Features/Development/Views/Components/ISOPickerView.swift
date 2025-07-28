@@ -1,6 +1,6 @@
 //
 //  ISOPickerView.swift
-//  FilmClaculator
+//  Film Lab
 //
 //  Created by Maxim Eliseyev on 12.07.2025.
 //

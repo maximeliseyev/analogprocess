@@ -1,6 +1,6 @@
 //
 //  SwiftDataModels.swift
-//  Film claculator
+//  Film Lab
 //
 //  Created by Maxim Eliseyev on 25.07.2025.
 //

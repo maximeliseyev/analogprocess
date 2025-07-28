@@ -1,6 +1,6 @@
 //
 //  CalculatorView.swift
-//  Film claculator
+//  Film Lab
 //
 //  Created by Maxim Eliseyev on 12.07.2025.
 //

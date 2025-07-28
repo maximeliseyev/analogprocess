@@ -2,7 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>_XCCurrentVersionName</key>
-	<string>FilmСlaculator.xcdatamodel</string>
+	<key>CFBundleGetInfoString</key>
+	<string>Film Lab - Complete toolkit for film development</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict/>
+	</array>
 </dict>
-</plist>
+</plist> 

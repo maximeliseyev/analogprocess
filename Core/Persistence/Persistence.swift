@@ -1,6 +1,6 @@
 //
 //  Persistence.swift
-//  Film claculator
+//  Film Lab
 //
 //  Created by Maxim Eliseyev on 11.07.2025.
 //
@@ -49,7 +49,7 @@ struct PersistenceController {
     let container: NSPersistentContainer
 
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "FilmСlaculator")
+        container = NSPersistentContainer(name: "FilmLab")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }

@@ -1,6 +1,6 @@
 //
 //  TimeInputView.swift
-//  Film claculator
+//  Film Lab
 //
 //  Created by Maxim Eliseyev on 11.07.2025.
 //

@@ -1,6 +1,6 @@
 //
-//  Film_claculatorApp.swift
-//  Film claculator
+//  FilmLabApp.swift
+//  Film Lab
 //
 //  Created by Maxim Eliseyev on 11.07.2025.
 //
@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 @main
-struct FilmClaculatorApp: App {
+struct FilmLabApp: App {
     let persistenceController = PersistenceController.shared
     @State private var colorScheme: ColorScheme? = nil
 

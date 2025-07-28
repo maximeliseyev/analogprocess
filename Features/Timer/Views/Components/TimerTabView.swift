@@ -1,6 +1,6 @@
 //
 //  TimerTabView.swift
-//  Film claculator
+//  Film Lab
 //
 //  Created by Maxim Eliseyev on 26.07.2025.
 //

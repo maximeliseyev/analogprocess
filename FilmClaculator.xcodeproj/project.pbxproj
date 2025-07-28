@@ -15,7 +15,6 @@
 		BF4109162E31052900BE2AD8 /* ActionButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109092E31052900BE2AD8 /* ActionButtonsView.swift */; };
 		BF4109272E31148700BE2AD8 /* DevelopmentParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109252E31148700BE2AD8 /* DevelopmentParameters.swift */; };
 		BF4109302E31151800BE2AD8 /* DevelopmentSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41092F2E31151800BE2AD8 /* DevelopmentSetupView.swift */; };
-		BF4109332E311C8100BE2AD8 /* FilmСlaculator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF4109312E311C8100BE2AD8 /* FilmСlaculator.xcdatamodeld */; };
 		BF4109352E311CA800BE2AD8 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109342E311CA800BE2AD8 /* CoreDataService.swift */; };
 		BF4109382E31307100BE2AD8 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109372E31307100BE2AD8 /* MainTabView.swift */; };
 		BF41093A2E31308500BE2AD8 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109392E31308500BE2AD8 /* CalculatorView.swift */; };
@@ -35,13 +34,17 @@
 		BF4109732E3166F400BE2AD8 /* TimerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41096E2E3166F400BE2AD8 /* TimerProgressView.swift */; };
 		BFA0C79B2E2133FC00132936 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFA0C7932E2133FC00132936 /* Assets.xcassets */; };
 		BFA0C79D2E2133FC00132936 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7952E2133FC00132936 /* ContentView.swift */; };
-		BFA0C79F2E2133FC00132936 /* FilmClaculatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7972E2133FC00132936 /* FilmClaculatorApp.swift */; };
 		BFA0C7A02E2133FC00132936 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7982E2133FC00132936 /* Persistence.swift */; };
 		BFA0C7A82E2134B400132936 /* CalculationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7A72E2134B300132936 /* CalculationResultView.swift */; };
 		BFA0C7A92E2134BA00132936 /* DevelopmentCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7A62E21349100132936 /* DevelopmentCalculator.swift */; };
 		BFA0C7AB2E2134D800132936 /* SaveRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AA2E2134D600132936 /* SaveRecordView.swift */; };
 		BFA0C7AD2E2134F800132936 /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AC2E2134F600132936 /* JournalView.swift */; };
 		BFA0C7AF2E21351300132936 /* RecordRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AE2E21351000132936 /* RecordRowView.swift */; };
+		BFDCB7512E382250000F6CE5 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDCB7502E382250000F6CE5 /* ArticleView.swift */; };
+		BFDCB75A2E38227C000F6CE5 /* basics-article.md in Resources */ = {isa = PBXBuildFile; fileRef = BFDCB7532E38227C000F6CE5 /* basics-article.md */; };
+		BFDCB75C2E38229E000F6CE5 /* Kodak Xtol.md in Resources */ = {isa = PBXBuildFile; fileRef = BFDCB75B2E38229E000F6CE5 /* Kodak Xtol.md */; };
+		BFDCB75E2E382372000F6CE5 /* FilmLabApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDCB75D2E382372000F6CE5 /* FilmLabApp.swift */; };
+		BFDCB7612E382558000F6CE5 /* FilmLab.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFDCB75F2E382558000F6CE5 /* FilmLab.xcdatamodeld */; };
 		BFE12EB02E33C5120044A3A4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BFE12EAE2E33C5120044A3A4 /* Localizable.strings */; };
 		BFE12EB62E33C6800044A3A4 /* temperature-multipliers.json in Resources */ = {isa = PBXBuildFile; fileRef = BFE12EB42E33C6800044A3A4 /* temperature-multipliers.json */; };
 		BFE12EB72E33C6800044A3A4 /* development-times.json in Resources */ = {isa = PBXBuildFile; fileRef = BFE12EB22E33C6800044A3A4 /* development-times.json */; };
@@ -69,7 +72,6 @@
 		BF41090F2E31052900BE2AD8 /* TimeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInputView.swift; sourceTree = "<group>"; };
 		BF4109252E31148700BE2AD8 /* DevelopmentParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentParameters.swift; sourceTree = "<group>"; };
 		BF41092F2E31151800BE2AD8 /* DevelopmentSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentSetupView.swift; sourceTree = "<group>"; };
-		BF4109322E311C8100BE2AD8 /* FilmСlaculator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FilmСlaculator.xcdatamodel"; sourceTree = "<group>"; };
 		BF4109342E311CA800BE2AD8 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		BF4109372E31307100BE2AD8 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		BF4109392E31308500BE2AD8 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
@@ -91,13 +93,17 @@
 		BF41096E2E3166F400BE2AD8 /* TimerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerProgressView.swift; sourceTree = "<group>"; };
 		BFA0C7932E2133FC00132936 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFA0C7952E2133FC00132936 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		BFA0C7972E2133FC00132936 /* FilmClaculatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmClaculatorApp.swift; sourceTree = "<group>"; };
 		BFA0C7982E2133FC00132936 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		BFA0C7A62E21349100132936 /* DevelopmentCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentCalculator.swift; sourceTree = "<group>"; };
 		BFA0C7A72E2134B300132936 /* CalculationResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationResultView.swift; sourceTree = "<group>"; };
 		BFA0C7AA2E2134D600132936 /* SaveRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveRecordView.swift; sourceTree = "<group>"; };
 		BFA0C7AC2E2134F600132936 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
 		BFA0C7AE2E21351000132936 /* RecordRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRowView.swift; sourceTree = "<group>"; };
+		BFDCB7502E382250000F6CE5 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
+		BFDCB7532E38227C000F6CE5 /* basics-article.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "basics-article.md"; sourceTree = "<group>"; };
+		BFDCB75B2E38229E000F6CE5 /* Kodak Xtol.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Kodak Xtol.md"; sourceTree = "<group>"; };
+		BFDCB75D2E382372000F6CE5 /* FilmLabApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmLabApp.swift; sourceTree = "<group>"; };
+		BFDCB7602E382558000F6CE5 /* FilmLab.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FilmLab.xcdatamodel; sourceTree = "<group>"; };
 		BFE12EAC2E33C5120044A3A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BFE12EAD2E33C5120044A3A4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BFE12EB12E33C6800044A3A4 /* developers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = developers.json; sourceTree = "<group>"; };
@@ -154,7 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				BFE12EC02E360C010044A3A4 /* AppPreview.swift */,
-				BFA0C7972E2133FC00132936 /* FilmClaculatorApp.swift */,
+				BFDCB75D2E382372000F6CE5 /* FilmLabApp.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -365,12 +371,70 @@
 		BFA0C7B02E2136A500132936 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BFDCB7592E38227C000F6CE5 /* Articles */,
 				BFE12EB52E33C6800044A3A4 /* Data */,
 				BFE12EAF2E33C5120044A3A4 /* Localization */,
-				BF4109312E311C8100BE2AD8 /* FilmСlaculator.xcdatamodeld */,
 				BFA0C7932E2133FC00132936 /* Assets.xcassets */,
+				BFDCB75F2E382558000F6CE5 /* FilmLab.xcdatamodeld */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		BFDCB7522E38227C000F6CE5 /* agitation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = agitation;
+			sourceTree = "<group>";
+		};
+		BFDCB7542E38227C000F6CE5 /* basics */ = {
+			isa = PBXGroup;
+			children = (
+				BFDCB7532E38227C000F6CE5 /* basics-article.md */,
+			);
+			path = basics;
+			sourceTree = "<group>";
+		};
+		BFDCB7552E38227C000F6CE5 /* developers */ = {
+			isa = PBXGroup;
+			children = (
+				BFDCB75B2E38229E000F6CE5 /* Kodak Xtol.md */,
+			);
+			path = developers;
+			sourceTree = "<group>";
+		};
+		BFDCB7562E38227C000F6CE5 /* film-types */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "film-types";
+			sourceTree = "<group>";
+		};
+		BFDCB7572E38227C000F6CE5 /* push-pull */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "push-pull";
+			sourceTree = "<group>";
+		};
+		BFDCB7582E38227C000F6CE5 /* troubleshooting */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = troubleshooting;
+			sourceTree = "<group>";
+		};
+		BFDCB7592E38227C000F6CE5 /* Articles */ = {
+			isa = PBXGroup;
+			children = (
+				BFDCB7522E38227C000F6CE5 /* agitation */,
+				BFDCB7542E38227C000F6CE5 /* basics */,
+				BFDCB7552E38227C000F6CE5 /* developers */,
+				BFDCB7562E38227C000F6CE5 /* film-types */,
+				BFDCB7572E38227C000F6CE5 /* push-pull */,
+				BFDCB7582E38227C000F6CE5 /* troubleshooting */,
+			);
+			path = Articles;
 			sourceTree = "<group>";
 		};
 		BFE12EAF2E33C5120044A3A4 /* Localization */ = {
@@ -395,6 +459,7 @@
 		BFE12EC42E36DFA40044A3A4 /* Manual */ = {
 			isa = PBXGroup;
 			children = (
+				BFDCB7502E382250000F6CE5 /* ArticleView.swift */,
 				BFE12EC72E36DFCD0044A3A4 /* ManualViewModel.swift */,
 				BFE12EC52E36DFB10044A3A4 /* ManualView.swift */,
 			);
@@ -488,6 +553,8 @@
 				BFE12EB72E33C6800044A3A4 /* development-times.json in Resources */,
 				BFE12EB82E33C6800044A3A4 /* films.json in Resources */,
 				BFE12EB92E33C6800044A3A4 /* developers.json in Resources */,
+				BFDCB75C2E38229E000F6CE5 /* Kodak Xtol.md in Resources */,
+				BFDCB75A2E38227C000F6CE5 /* basics-article.md in Resources */,
 				BFE12EB02E33C5120044A3A4 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -500,10 +567,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF4109382E31307100BE2AD8 /* MainTabView.swift in Sources */,
-				BF4109332E311C8100BE2AD8 /* FilmСlaculator.xcdatamodeld in Sources */,
 				BF4109272E31148700BE2AD8 /* DevelopmentParameters.swift in Sources */,
 				BFA0C7AB2E2134D800132936 /* SaveRecordView.swift in Sources */,
 				BFA0C7AF2E21351300132936 /* RecordRowView.swift in Sources */,
+				BFDCB7512E382250000F6CE5 /* ArticleView.swift in Sources */,
 				BFA0C79D2E2133FC00132936 /* ContentView.swift in Sources */,
 				BFE12EC32E363AC00044A3A4 /* CalculatedTimeSection.swift in Sources */,
 				BF41093A2E31308500BE2AD8 /* CalculatorView.swift in Sources */,
@@ -528,10 +595,10 @@
 				BFF4D9FF2E21BECD0097BE82 /* TimerView.swift in Sources */,
 				BF4109352E311CA800BE2AD8 /* CoreDataService.swift in Sources */,
 				BFF4DA012E21C2C90097BE82 /* AgitationMode.swift in Sources */,
-				BFA0C79F2E2133FC00132936 /* FilmClaculatorApp.swift in Sources */,
 				BF41095B2E3163E400BE2AD8 /* FilmPickerView.swift in Sources */,
 				BF41095C2E3163E400BE2AD8 /* DevelopmentParametersView.swift in Sources */,
 				BF41095D2E3163E400BE2AD8 /* DeveloperPickerView.swift in Sources */,
+				BFDCB75E2E382372000F6CE5 /* FilmLabApp.swift in Sources */,
 				BF41093C2E3130B000BE2AD8 /* CalculatorViewModel.swift in Sources */,
 				BFF4DA052E21C8C30097BE82 /* CustomAgitationView.swift in Sources */,
 				BF41096A2E31653800BE2AD8 /* DevelopmentSetupViewModel.swift in Sources */,
@@ -542,6 +609,7 @@
 				BF4109662E31643100BE2AD8 /* ISOPickerView.swift in Sources */,
 				BF4109642E31641B00BE2AD8 /* TemperaturePickerView.swift in Sources */,
 				BFA0C7A92E2134BA00132936 /* DevelopmentCalculator.swift in Sources */,
+				BFDCB7612E382558000F6CE5 /* FilmLab.xcdatamodeld in Sources */,
 				BFE12EC12E360C010044A3A4 /* AppPreview.swift in Sources */,
 				BFA0C7A02E2133FC00132936 /* Persistence.swift in Sources */,
 			);
@@ -694,7 +762,7 @@
 				DEVELOPMENT_TEAM = PK2473XF3P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Film Dev Calculator";
+				INFOPLIST_KEY_CFBundleDisplayName = "Film Lab";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -706,8 +774,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.filmclaculator;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.filmlab;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -727,7 +795,7 @@
 				DEVELOPMENT_TEAM = PK2473XF3P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Film Dev Calculator";
+				INFOPLIST_KEY_CFBundleDisplayName = "Film Lab";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -739,8 +807,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.filmclaculator;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.filmlab;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -773,13 +841,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		BF4109312E311C8100BE2AD8 /* FilmСlaculator.xcdatamodeld */ = {
+		BFDCB75F2E382558000F6CE5 /* FilmLab.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				BF4109322E311C8100BE2AD8 /* FilmСlaculator.xcdatamodel */,
+				BFDCB7602E382558000F6CE5 /* FilmLab.xcdatamodel */,
 			);
-			currentVersion = BF4109322E311C8100BE2AD8 /* FilmСlaculator.xcdatamodel */;
-			path = "FilmСlaculator.xcdatamodeld";
+			currentVersion = BFDCB7602E382558000F6CE5 /* FilmLab.xcdatamodel */;
+			path = FilmLab.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
