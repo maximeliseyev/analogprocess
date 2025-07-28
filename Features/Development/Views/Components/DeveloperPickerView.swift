@@ -13,6 +13,7 @@ struct DeveloperPickerView: View {
     @Binding var selectedDeveloper: Developer?
     @Binding var selectedDilution: String
     let onDismiss: () -> Void
+    let onDeveloperSelected: ((Developer) -> Void)?
     
     @State private var searchText = ""
     
@@ -39,6 +40,7 @@ struct DeveloperPickerView: View {
                         Button(action: {
                             selectedDeveloper = developer
                             selectedDilution = developer.defaultDilution ?? ""
+                            onDeveloperSelected?(developer)
                             onDismiss()
                         }) {
                             HStack {
@@ -82,5 +84,17 @@ struct DeveloperPickerView: View {
                 }
             }
         }
+    }
+}
+
+struct DeveloperPickerView_Previews: PreviewProvider {
+    static var previews: some View {
+        DeveloperPickerView(
+            developers: [],
+            selectedDeveloper: .constant(nil),
+            selectedDilution: .constant(""),
+            onDismiss: {},
+            onDeveloperSelected: { _ in }
+        )
     }
 }

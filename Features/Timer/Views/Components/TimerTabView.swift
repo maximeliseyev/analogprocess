@@ -24,7 +24,6 @@ public struct TimerTabView: View {
                     .padding(.horizontal)
                 
                 Button(action: {
-                    // Здесь можно добавить логику для настройки таймера
                     showTimer = true
                 }) {
                     HStack {

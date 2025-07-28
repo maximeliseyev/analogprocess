@@ -13,6 +13,7 @@ struct FilmPickerView: View {
     @Binding var selectedFilm: Film?
     @Binding var iso: Int
     let onDismiss: () -> Void
+    let onFilmSelected: ((Film) -> Void)?
     
     @State private var searchText = ""
     
@@ -39,6 +40,7 @@ struct FilmPickerView: View {
                         Button(action: {
                             selectedFilm = film
                             iso = Int(film.defaultISO)
+                            onFilmSelected?(film)
                             onDismiss()
                         }) {
                             HStack {
@@ -82,6 +84,18 @@ struct FilmPickerView: View {
                 }
             }
         }
+    }
+}
+
+struct FilmPickerView_Previews: PreviewProvider {
+    static var previews: some View {
+        FilmPickerView(
+            films: [],
+            selectedFilm: .constant(nil),
+            iso: .constant(400),
+            onDismiss: {},
+            onFilmSelected: { _ in }
+        )
     }
 }
 

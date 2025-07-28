@@ -17,8 +17,8 @@ class DevelopmentSetupViewModel: ObservableObject {
     @Published var iso: Int = 400
     @Published var calculatedTime: Int?
     @Published var showCalculator = false
+    @Published var showTimer = false
     
-    // Для выпадающих списков
     @Published var showFilmPicker = false
     @Published var showDeveloperPicker = false
     @Published var showDilutionPicker = false
@@ -28,9 +28,7 @@ class DevelopmentSetupViewModel: ObservableObject {
     private let dataService = CoreDataService.shared
     
     var films: [Film] {
-        let films = dataService.films
-        print("📱 DevelopmentSetupViewModel: Got \(films.count) films from dataService")
-        return films
+        dataService.films
     }
     
     var developers: [Developer] {
@@ -40,12 +38,14 @@ class DevelopmentSetupViewModel: ObservableObject {
     // MARK: - Public Methods
     
     func selectFilm(_ film: Film) {
+        print("DEBUG: selectFilm called with film: \(film.name ?? "")")
         selectedFilm = film
         iso = Int(film.defaultISO)
         calculateTimeAutomatically()
     }
     
     func selectDeveloper(_ developer: Developer) {
+        print("DEBUG: selectDeveloper called with developer: \(developer.name ?? "")")
         selectedDeveloper = developer
         selectedDilution = developer.defaultDilution ?? ""
         calculateTimeAutomatically()
@@ -74,15 +74,12 @@ class DevelopmentSetupViewModel: ObservableObject {
             return []
         }
         
-        // Получаем доступные разбавления из Core Data
         let availableDilutions = dataService.getAvailableDilutions(for: filmId, developerId: developerId)
         
-        // Если разбавлений нет, возвращаем defaultDilution проявителя
         if availableDilutions.isEmpty {
             return [developer.defaultDilution ?? ""]
         }
         
-        // Remove duplicates and sort
         return Array(Set(availableDilutions)).sorted()
     }
     
@@ -95,10 +92,8 @@ class DevelopmentSetupViewModel: ObservableObject {
             return []
         }
         
-        // Получаем доступные ISO из Core Data
         let availableISOs = dataService.getAvailableISOs(for: filmId, developerId: developerId, dilution: selectedDilution)
         
-        // Если ISO нет, возвращаем пустой массив
         return availableISOs
     }
     
@@ -107,24 +102,33 @@ class DevelopmentSetupViewModel: ObservableObject {
         objectWillChange.send()
     }
     
+    func startTimer() {
+        guard calculatedTime != nil else { return }
+            showTimer = true
+        }
+    
     // MARK: - Private Methods
     
     private func calculateTimeAutomatically() {
         guard let film = selectedFilm,
-              let developer = selectedDeveloper,
-              !selectedDilution.isEmpty else {
+              let developer = selectedDeveloper else {
             calculatedTime = nil
+            print("DEBUG: calculateTimeAutomatically - film or developer is nil")
             return
         }
+        
+        let dilutionToUse = selectedDilution.isEmpty ? (developer.defaultDilution ?? "") : selectedDilution
+        print("DEBUG: calculateTimeAutomatically - film: \(film.name ?? ""), developer: \(developer.name ?? ""), dilution: \(dilutionToUse), iso: \(iso), temperature: \(temperature)")
         
         let parameters = DevelopmentParameters(
             film: film,
             developer: developer,
-            dilution: selectedDilution,
+            dilution: dilutionToUse,
             temperature: temperature,
             iso: iso
         )
         
         calculatedTime = dataService.calculateDevelopmentTime(parameters: parameters)
+        print("DEBUG: calculateTimeAutomatically - calculated time: \(calculatedTime ?? -1)")
     }
 } 

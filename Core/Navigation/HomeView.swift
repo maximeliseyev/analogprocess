@@ -65,6 +65,7 @@ public struct HomeView: View {
         case 1: return NSLocalizedString("calculator", comment: "")
         case 2: return NSLocalizedString("timer", comment: "")
         case 3: return NSLocalizedString("journal", comment: "")
+//        case 4: return "Manuals"
         default: return "" }
     }
     
@@ -74,6 +75,7 @@ public struct HomeView: View {
         case 1: return NSLocalizedString("home_calculator_subtitle", comment: "")
         case 2: return NSLocalizedString("home_timer_subtitle", comment: "")
         case 3: return NSLocalizedString("home_journal_subtitle", comment: "")
+//        case 4: return "Manuals and articles"
         default: return "" }
     }
     
@@ -83,6 +85,7 @@ public struct HomeView: View {
         case 1: return "plus.forwardslash.minus"
         case 2: return "timer"
         case 3: return "book"
+//        case 4: return "folder"
         default: return "square"
         }
     }
@@ -93,6 +96,7 @@ public struct HomeView: View {
         case 1: return .orange
         case 2: return .red
         case 3: return .purple
+//        case 4: return .yellow
         default: return .gray
         }
     }

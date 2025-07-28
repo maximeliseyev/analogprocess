@@ -9,7 +9,8 @@ import SwiftUI
 
 struct CalculatedTimeSection: View {
     let time: Int
-    let onTap: () -> Void
+    let onCalculatorTap: () -> Void
+    let onTimerTap: () -> Void
     
     private var minutes: Int {
         time / 60
@@ -20,32 +21,40 @@ struct CalculatedTimeSection: View {
     }
     
     var body: some View {
-        VStack(spacing: 15) {
-            Text(LocalizedStringKey("developmentTime"))
-                .font(.headline)
-                .foregroundColor(.white)
-            
-            Button(action: onTap) {
-                VStack(spacing: 8) {
+        VStack(spacing: 12) {
+            Button(action: onCalculatorTap) {
+                HStack {
+                    Image(systemName: "plus.forwardslash.minus")
+                        .font(.system(size: 20, design: .monospaced))
                     Text("\(minutes):\(String(format: "%02d", seconds))")
-                        .font(.system(size: 48, weight: .bold, design: .monospaced))
-                        .foregroundColor(.blue)
-                    
-                    Text(LocalizedStringKey("tapToCalculator"))
-                        .font(.caption)
-                        .foregroundColor(.gray)
+                        .font(.system(size: 20, design: .monospaced))
                 }
+                .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
                 .padding()
-                .background(Color.blue.opacity(0.1))
+                .background(Color.blue)
                 .cornerRadius(15)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 15)
-                        .stroke(Color.blue, lineWidth: 2)
-                )
+                .buttonStyle(PlainButtonStyle())
             }
             .buttonStyle(PlainButtonStyle())
+            
+            Button(action: onTimerTap) {
+                HStack {
+                    Image(systemName: "timer")
+                        .font(.system(size: 20, design: .monospaced))
+                    Text("\(minutes):\(String(format: "%02d", seconds))")
+                        .font(.system(size: 20, design: .monospaced))
+                }
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.green)
+                .cornerRadius(12)
+                .buttonStyle(PlainButtonStyle())
+            }
+                
         }
+        .padding(.horizontal, 20)
     }
 }
 
@@ -54,8 +63,9 @@ struct CalculatedTimeSection_Previews: PreviewProvider {
         ZStack {
             Color.black.ignoresSafeArea()
             CalculatedTimeSection(
-                time: 480, // 8 минут
-                onTap: {}
+                time: 450, // 7:30
+                onCalculatorTap: {},
+                onTimerTap: {}
             )
         }
     }

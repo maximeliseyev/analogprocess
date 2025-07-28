@@ -52,6 +52,8 @@
 		BFE12EBF2E34EB960044A3A4 /* TimerTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE12EBE2E34EB960044A3A4 /* TimerTabView.swift */; };
 		BFE12EC12E360C010044A3A4 /* AppPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE12EC02E360C010044A3A4 /* AppPreview.swift */; };
 		BFE12EC32E363AC00044A3A4 /* CalculatedTimeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE12EC22E363AC00044A3A4 /* CalculatedTimeSection.swift */; };
+		BFE12EC62E36DFC00044A3A4 /* ManualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE12EC52E36DFB10044A3A4 /* ManualView.swift */; };
+		BFE12EC82E36DFD60044A3A4 /* ManualViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE12EC72E36DFCD0044A3A4 /* ManualViewModel.swift */; };
 		BFF4D9FF2E21BECD0097BE82 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF4D9FE2E21BEC90097BE82 /* TimerView.swift */; };
 		BFF4DA012E21C2C90097BE82 /* AgitationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF4DA002E21C2C90097BE82 /* AgitationMode.swift */; };
 		BFF4DA032E21C31E0097BE82 /* AgitationSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF4DA022E21C31E0097BE82 /* AgitationSelectionView.swift */; };
@@ -107,6 +109,8 @@
 		BFE12EBE2E34EB960044A3A4 /* TimerTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTabView.swift; sourceTree = "<group>"; };
 		BFE12EC02E360C010044A3A4 /* AppPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreview.swift; sourceTree = "<group>"; };
 		BFE12EC22E363AC00044A3A4 /* CalculatedTimeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedTimeSection.swift; sourceTree = "<group>"; };
+		BFE12EC52E36DFB10044A3A4 /* ManualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualView.swift; sourceTree = "<group>"; };
+		BFE12EC72E36DFCD0044A3A4 /* ManualViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualViewModel.swift; sourceTree = "<group>"; };
 		BFE96A392E2061A0001CF98D /* Film claculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Film claculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFF4D9FE2E21BEC90097BE82 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		BFF4DA002E21C2C90097BE82 /* AgitationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgitationMode.swift; sourceTree = "<group>"; };
@@ -158,6 +162,7 @@
 		BF4109412E3133B200BE2AD8 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				BFE12EC42E36DFA40044A3A4 /* Manual */,
 				BF4109432E3133D900BE2AD8 /* Calculator */,
 				BF4109442E31342500BE2AD8 /* Development */,
 				BF4109482E3134C800BE2AD8 /* Journal */,
@@ -387,6 +392,15 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		BFE12EC42E36DFA40044A3A4 /* Manual */ = {
+			isa = PBXGroup;
+			children = (
+				BFE12EC72E36DFCD0044A3A4 /* ManualViewModel.swift */,
+				BFE12EC52E36DFB10044A3A4 /* ManualView.swift */,
+			);
+			path = Manual;
+			sourceTree = "<group>";
+		};
 		BFE96A302E2061A0001CF98D = {
 			isa = PBXGroup;
 			children = (
@@ -502,6 +516,7 @@
 				BFE12EBC2E34DBE10044A3A4 /* HomeView.swift in Sources */,
 				BFE12EBD2E34DBE10044A3A4 /* SettingsView.swift in Sources */,
 				BF4109142E31052900BE2AD8 /* StepsInputView.swift in Sources */,
+				BFE12EC82E36DFD60044A3A4 /* ManualViewModel.swift in Sources */,
 				BF4109622E31641600BE2AD8 /* DilutionPickerView.swift in Sources */,
 				BF4109702E3166F400BE2AD8 /* TimerControlsView.swift in Sources */,
 				BF4109712E3166F400BE2AD8 /* TimerHeaderView.swift in Sources */,
@@ -509,6 +524,7 @@
 				BF4109732E3166F400BE2AD8 /* TimerProgressView.swift in Sources */,
 				BF4109162E31052900BE2AD8 /* ActionButtonsView.swift in Sources */,
 				BFF4DA032E21C31E0097BE82 /* AgitationSelectionView.swift in Sources */,
+				BFE12EC62E36DFC00044A3A4 /* ManualView.swift in Sources */,
 				BFF4D9FF2E21BECD0097BE82 /* TimerView.swift in Sources */,
 				BF4109352E311CA800BE2AD8 /* CoreDataService.swift in Sources */,
 				BFF4DA012E21C2C90097BE82 /* AgitationMode.swift in Sources */,

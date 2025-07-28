@@ -32,7 +32,6 @@ struct CalculatorView: View {
                         }
                     }
                     
-                    // Coefficient Input
                     VStack(alignment: .leading, spacing: 8) {
                         Text(LocalizedStringKey("ratio"))
                             .font(.headline)
@@ -41,7 +40,7 @@ struct CalculatorView: View {
                             TextField("1.33", text: $viewModel.coefficient)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                             
-                            Text(LocalizedStringKey("standardCoefficient"))
+                            Text(LocalizedStringKey("standardRatio"))
                                 .font(.caption)
                                 .foregroundColor(.gray)
                         }
