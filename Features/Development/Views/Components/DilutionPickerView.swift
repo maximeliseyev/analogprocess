@@ -12,6 +12,7 @@ struct DilutionPickerView: View {
     @Binding var selectedDilution: String
     let onDismiss: () -> Void
     let isDisabled: Bool
+    let onDilutionSelected: ((String) -> Void)?
     
     var body: some View {
         NavigationView {
@@ -50,6 +51,7 @@ struct DilutionPickerView: View {
                     List(dilutions, id: \.self) { dilution in
                         Button(action: {
                             selectedDilution = dilution
+                            onDilutionSelected?(dilution)
                             onDismiss()
                         }) {
                             HStack {
@@ -89,21 +91,24 @@ struct DilutionPickerView_Previews: PreviewProvider {
                 dilutions: ["1:1", "1:2", "1:4"],
                 selectedDilution: .constant("1:1"),
                 onDismiss: {},
-                isDisabled: false
+                isDisabled: false,
+                onDilutionSelected: { _ in }
             )
             
             DilutionPickerView(
                 dilutions: [],
                 selectedDilution: .constant(""),
                 onDismiss: {},
-                isDisabled: false
+                isDisabled: false,
+                onDilutionSelected: { _ in }
             )
             
             DilutionPickerView(
                 dilutions: [],
                 selectedDilution: .constant(""),
                 onDismiss: {},
-                isDisabled: true
+                isDisabled: true,
+                onDilutionSelected: { _ in }
             )
         }
     }

@@ -16,20 +16,23 @@ struct DevelopmentSetupView: View {
                     if let calculatedTime = viewModel.calculatedTime {
                         CalculatedTimeSection(
                             time: calculatedTime,
-                            onTap: {
+                            onCalculatorTap: {
                                 viewModel.showCalculator = true
+                            },
+                            onTimerTap: {
+                                viewModel.startTimer()
                             }
                         )
                     }
                     
                     // Debug button to reload data
-                    #if DEBUG
-                    Button("Force Reload Data") {
-                        viewModel.reloadData()
-                    }
-                    .foregroundColor(.blue)
-                    .padding()
-                    #endif
+//                    #if DEBUG
+//                    Button("Force Reload Data") {
+//                        viewModel.reloadData()
+//                    }
+//                    .foregroundColor(.blue)
+//                    .padding()
+//                    #endif
                     
                     Spacer()
                 }
@@ -46,7 +49,10 @@ struct DevelopmentSetupView: View {
                     films: viewModel.films,
                     selectedFilm: $viewModel.selectedFilm,
                     iso: $viewModel.iso,
-                    onDismiss: { viewModel.showFilmPicker = false }
+                    onDismiss: { viewModel.showFilmPicker = false },
+                    onFilmSelected: { film in
+                        viewModel.selectFilm(film)
+                    }
                 )
             }
             .sheet(isPresented: $viewModel.showDeveloperPicker) {
@@ -54,7 +60,10 @@ struct DevelopmentSetupView: View {
                     developers: viewModel.developers,
                     selectedDeveloper: $viewModel.selectedDeveloper,
                     selectedDilution: $viewModel.selectedDilution,
-                    onDismiss: { viewModel.showDeveloperPicker = false }
+                    onDismiss: { viewModel.showDeveloperPicker = false },
+                    onDeveloperSelected: { developer in
+                        viewModel.selectDeveloper(developer)
+                    }
                 )
             }
             .sheet(isPresented: $viewModel.showDilutionPicker) {
@@ -62,7 +71,10 @@ struct DevelopmentSetupView: View {
                     dilutions: viewModel.getAvailableDilutions(),
                     selectedDilution: $viewModel.selectedDilution,
                     onDismiss: { viewModel.showDilutionPicker = false },
-                    isDisabled: viewModel.selectedFilm == nil || viewModel.selectedDeveloper == nil
+                    isDisabled: viewModel.selectedFilm == nil || viewModel.selectedDeveloper == nil,
+                    onDilutionSelected: { dilution in
+                        viewModel.selectDilution(dilution)
+                    }
                 )
             }
             .sheet(isPresented: $viewModel.showISOPicker) {
@@ -77,6 +89,26 @@ struct DevelopmentSetupView: View {
                     temperature: $viewModel.temperature,
                     onDismiss: { viewModel.showTemperaturePicker = false }
                 )
+            }
+            .sheet(isPresented: $viewModel.showTimer) {
+                if let calculatedTime = viewModel.calculatedTime {
+                    let minutes = calculatedTime / 60
+                    let seconds = calculatedTime % 60
+                    let timerLabel = "\(viewModel.selectedFilm?.name ?? "") + \(viewModel.selectedDeveloper?.name ?? "")"
+                    
+                    TimerView(
+                        timerLabel: timerLabel,
+                        totalMinutes: minutes,
+                        totalSeconds: seconds,
+                        onClose: { viewModel.showTimer = false }
+                    )
+                }
+            }
+            .onChange(of: viewModel.iso) { _ in
+                viewModel.updateISO(viewModel.iso)
+            }
+            .onChange(of: viewModel.temperature) { _ in
+                viewModel.updateTemperature(viewModel.temperature)
             }
         }
     }

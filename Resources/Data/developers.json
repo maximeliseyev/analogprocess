@@ -17,7 +17,7 @@
   "ilford-ilfotec-lc29": {"name": "Ilford ILFOTEC LC29", "manufacturer": "Ilford", "type": "liquid", "defaultDilution": "1+9"},
   "ilford-microphen": {"name": "Ilford Microphen", "manufacturer": "Ilford", "type": "powder", "defaultDilution": "stock"},
   "ilford-perceptol": {"name": "Ilford Perceptol", "manufacturer": "Ilford", "type": "powder", "defaultDilution": "stock"},
-  "kodak-d76": {"name": "Kodak D-76", "manufacturer": "Kodak", "type": "powder", "defaultDilution": "1+1"},
+  "kodak-d76": {"name": "Kodak D-76", "manufacturer": "Kodak", "type": "powder", "defaultDilution": "stock"},
   "kodak-hc110": {"name": "Kodak HC-110", "manufacturer": "Kodak", "type": "liquid", "defaultDilution": "1+31"},
   "kodak-xtol": {"name": "Kodak XTOL", "manufacturer": "Kodak", "type": "powder", "defaultDilution": "stock"},
   "kodak-microdol-x": {"name": "Kodak Microdol-X", "manufacturer": "Kodak", "type": "powder", "defaultDilution": "stock"},

@@ -38,7 +38,10 @@ public class CoreDataService: ObservableObject {
         let filmsCount = try? container.viewContext.count(for: Film.fetchRequest())
         let developersCount = try? container.viewContext.count(for: Developer.fetchRequest())
         
+        print("DEBUG: loadInitialData - films count: \(filmsCount ?? 0), developers count: \(developersCount ?? 0)")
+        
         if filmsCount == 0 || developersCount == 0 {
+            print("DEBUG: loadInitialData - loading data from JSON")
             loadFilmsFromJSON()
             loadDevelopersFromJSON()
             loadDevelopmentTimesFromJSON()
@@ -46,6 +49,7 @@ public class CoreDataService: ObservableObject {
             saveContext()
             refreshData()
         } else {
+            print("DEBUG: loadInitialData - data already exists, refreshing")
             refreshData()
         }
     }
@@ -176,6 +180,8 @@ public class CoreDataService: ObservableObject {
     // MARK: - Development Time Calculation
     
     func getDevelopmentTime(filmId: String, developerId: String, dilution: String, iso: Int) -> Int? {
+        print("DEBUG: getDevelopmentTime - filmId: \(filmId), developerId: \(developerId), dilution: \(dilution), iso: \(iso)")
+        
         let request: NSFetchRequest<DevelopmentTime> = DevelopmentTime.fetchRequest()
         request.predicate = NSPredicate(
             format: "film.id == %@ AND developer.id == %@ AND dilution == %@ AND iso == %d",
@@ -183,10 +189,13 @@ public class CoreDataService: ObservableObject {
         )
         
         guard let developmentTime = try? container.viewContext.fetch(request).first else {
+            print("DEBUG: getDevelopmentTime - no development time found")
             return nil
         }
         
-        return Int(developmentTime.time)
+        let time = Int(developmentTime.time)
+        print("DEBUG: getDevelopmentTime - found time: \(time)")
+        return time
     }
     
     func getTemperatureMultiplier(for temperature: Double) -> Double {
@@ -201,17 +210,21 @@ public class CoreDataService: ObservableObject {
     }
     
     func calculateDevelopmentTime(parameters: DevelopmentParameters) -> Int? {
+        print("DEBUG: calculateDevelopmentTime called")
         guard let baseTime = getDevelopmentTime(
             filmId: parameters.film.id ?? "",
             developerId: parameters.developer.id ?? "",
             dilution: parameters.dilution,
             iso: parameters.iso
         ) else {
+            print("DEBUG: calculateDevelopmentTime - no base time found")
             return nil
         }
         
         let temperatureMultiplier = getTemperatureMultiplier(for: parameters.temperature)
-        return Int(Double(baseTime) * temperatureMultiplier)
+        let finalTime = Int(Double(baseTime) * temperatureMultiplier)
+        print("DEBUG: calculateDevelopmentTime - base time: \(baseTime), multiplier: \(temperatureMultiplier), final time: \(finalTime)")
+        return finalTime
     }
     
     func getAvailableDilutions(for filmId: String, developerId: String) -> [String] {

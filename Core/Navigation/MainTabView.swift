@@ -44,6 +44,14 @@ public struct MainTabView: View {
                     Text(LocalizedStringKey("journal"))
                 }
                 .tag(3)
+                
+//                ManualView()
+//                    .tabItem {
+//                        Image(systemName: "folder")
+//                        Text("Manuals")
+//                    }
+//                    .tag(4)
+//                    .hidden()
             }
             .accentColor(.blue)
             .navigationBarBackButtonHidden(true)
