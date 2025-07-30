@@ -25,7 +25,6 @@ struct DevelopmentSetupView: View {
                         )
                     }
                     
-                    // Debug button to reload data
 //                    #if DEBUG
 //                    Button("Force Reload Data") {
 //                        viewModel.reloadData()
@@ -39,11 +38,6 @@ struct DevelopmentSetupView: View {
             }
             .navigationTitle(LocalizedStringKey("developmentSetup"))
             .navigationBarTitleDisplayMode(.inline)
-            .sheet(isPresented: $viewModel.showCalculator) {
-                if viewModel.calculatedTime != nil {
-                    CalculatorView()
-                }
-            }
             .sheet(isPresented: $viewModel.showFilmPicker) {
                 FilmPickerView(
                     films: viewModel.films,
@@ -99,8 +93,7 @@ struct DevelopmentSetupView: View {
                     TimerView(
                         timerLabel: timerLabel,
                         totalMinutes: minutes,
-                        totalSeconds: seconds,
-                        onClose: { viewModel.showTimer = false }
+                        totalSeconds: seconds
                     )
                 }
             }

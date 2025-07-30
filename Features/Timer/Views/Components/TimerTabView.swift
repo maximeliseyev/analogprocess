@@ -49,8 +49,7 @@ public struct TimerTabView: View {
                 TimerView(
                     timerLabel: timerLabel.isEmpty ? "Development Timer" : timerLabel,
                     totalMinutes: timerMinutes,
-                    totalSeconds: timerSeconds,
-                    onClose: { showTimer = false }
+                    totalSeconds: timerSeconds
                 )
             }
         }

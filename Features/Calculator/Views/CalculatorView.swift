@@ -9,7 +9,20 @@ import SwiftUI
 import CoreData
 
 struct CalculatorView: View {
-    @StateObject private var viewModel = CalculatorViewModel()
+    @StateObject private var viewModel: CalculatorViewModel
+    
+    // Инициализатор для принятия данных из DevelopmentSetupView
+    init(initialTime: Int? = nil, initialTemperature: Double = 20.0) {
+        let vm = CalculatorViewModel()
+        if let time = initialTime {
+            let minutes = time / 60
+            let seconds = time % 60
+            vm.minutes = "\(minutes)"
+            vm.seconds = "\(seconds)"
+            vm.temperature = initialTemperature
+        }
+        _viewModel = StateObject(wrappedValue: vm)
+    }
     
     var body: some View {
         NavigationView {
@@ -57,7 +70,6 @@ struct CalculatorView: View {
                         .pickerStyle(SegmentedPickerStyle())
                     }
                     
-                    
                     VStack(alignment: .leading, spacing: 8) {
                         Text(LocalizedStringKey("numberOfSteps"))
                             .font(.headline)
@@ -77,7 +89,32 @@ struct CalculatorView: View {
                         }
                     }
                     
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(LocalizedStringKey("temperature"))
+                            .font(.headline)
+                        
+                        Button(action: {
+                            viewModel.showTemperaturePicker = true
+                        }) {
+                            HStack {
+                                Text(String(format: "%.1f°C", viewModel.temperature))
+                                    .foregroundColor(.primary)
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                                    .font(.caption)
+                            }
+                            .padding()
+                            .background(Color.gray.opacity(0.1))
+                            .cornerRadius(8)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    }
                 }
+                
+                Spacer()
                                 
                 Button(action: viewModel.calculateTime) {
                     Text(LocalizedStringKey("calculateButton"))
@@ -90,51 +127,52 @@ struct CalculatorView: View {
                 }
                 .disabled(!viewModel.isValidInput)
                 
-                if viewModel.showResult {
-                    Button(action: { viewModel.showSaveDialog = true }) {
-                        Text(LocalizedStringKey("saveButton"))
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.green)
-                            .cornerRadius(10)
-                    }
-                }
-                
-                if viewModel.showResult {
-                    CalculationResultView(
-                        results: viewModel.pushResults,
-                        isPushMode: viewModel.isPushMode,
-                        onStartTimer: viewModel.startTimer
-                    )
-                }
-                
-                Spacer()
-                        
             }
             .padding()
             .navigationTitle(LocalizedStringKey("calculator"))
             .navigationBarTitleDisplayMode(.inline)
+            .sheet(isPresented: $viewModel.showSaveDialog) {
+                SaveRecordView(
+                    recordName: $viewModel.recordName,
+                    onSave: viewModel.saveRecord,
+                    onCancel: { viewModel.showSaveDialog = false }
+                )
+            }
+            .sheet(isPresented: $viewModel.showTimer) {
+                TimerView(
+                    timerLabel: viewModel.selectedTimerLabel,
+                    totalMinutes: viewModel.selectedTimerMinutes,
+                    totalSeconds: viewModel.selectedTimerSeconds
+                )
+            }
+            .sheet(isPresented: $viewModel.showTemperaturePicker) {
+                TemperaturePickerView(
+                    temperature: $viewModel.temperature,
+                    onDismiss: { viewModel.showTemperaturePicker = false }
+                )
+            }.sheet(isPresented: $viewModel.showResult) {
+                CalculationResultView(
+                    results: viewModel.pushResults,
+                    isPushMode: viewModel.isPushMode,
+                    onStartTimer: viewModel.startTimer,
+                    viewModel: viewModel
+                )
+            }
+            .onAppear {
+                viewModel.loadRecords()
+            }
         }
-        .sheet(isPresented: $viewModel.showSaveDialog) {
-            SaveRecordView(
-                recordName: $viewModel.recordName,
-                onSave: viewModel.saveRecord,
-                onCancel: { viewModel.showSaveDialog = false }
-            )
+    }
+}
+
+// MARK: - Preview
+struct CalculatorView_Previews: PreviewProvider {
+    static var previews: some View {
+        ZStack {
+            Color.black.ignoresSafeArea()
+            CalculatorView()
         }
-        .sheet(isPresented: $viewModel.showTimer) {
-            TimerView(
-                timerLabel: viewModel.selectedTimerLabel,
-                totalMinutes: viewModel.selectedTimerMinutes,
-                totalSeconds: viewModel.selectedTimerSeconds,
-                onClose: { viewModel.showTimer = false }
-            )
-        }
-        .onAppear {
-            viewModel.loadRecords()
-        }
+        .previewDisplayName("Calculator")
     }
 }
 
