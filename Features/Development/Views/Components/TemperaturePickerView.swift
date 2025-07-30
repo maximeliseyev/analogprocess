@@ -22,14 +22,13 @@ struct TemperaturePickerView: View {
                 }) {
                     HStack {
                         Text("\(temp, specifier: "%.1f")°C")
-                            .font(.body)
-                            .foregroundColor(.primary)
+                            .primaryTextStyle()
                         
                         Spacer()
                         
                         if temperature == temp {
                             Image(systemName: "checkmark")
-                                .foregroundColor(.blue)
+                                .checkmarkStyle()
                         }
                     }
                 }

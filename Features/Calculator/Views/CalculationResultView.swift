@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct CalculationResultView: View {
     let results: [(label: String, minutes: Int, seconds: Int)]
@@ -23,12 +24,10 @@ struct CalculationResultView: View {
                     HStack {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(result.label)
-                                .font(.system(.body, design: .monospaced))
-                                .fontWeight(.medium)
+                                .monospacedBodyStyle()
                             
                             Text(String(format: "%d:%02d", result.minutes, result.seconds))
-                                .font(.system(.title3, design: .monospaced))
-                                .fontWeight(.bold)
+                                .monospacedTitleStyle()
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         
@@ -40,14 +39,9 @@ struct CalculationResultView: View {
                             }) {
                                 HStack(spacing: 6) {
                                     Image(systemName: "timer")
-                                        .font(.system(size: 16))
+                                        .iconButtonStyle()
                                 }
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 20)
-                                .padding(.vertical, 10)
-                                .frame(minWidth: 80)
-                                .background(Color.blue)
-                                .cornerRadius(10)
+                                .primaryButtonStyle()
                             }
                             
                             Button(action: {
@@ -56,21 +50,13 @@ struct CalculationResultView: View {
                             }) {
                                 HStack(spacing: 6) {
                                     Image(systemName: "square.and.arrow.down")
-                                        .font(.system(size: 16))
+                                        .iconButtonStyle()
                                 }
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 20)
-                                .padding(.vertical, 10)
-                                .frame(minWidth: 80)
-                                .background(Color.green)
-                                .cornerRadius(10)
+                                .secondaryButtonStyle()
                             }
                         }
                     }
-                    .padding(.vertical, 12)
-                    .padding(.horizontal, 16)
-                    .background(Color.gray.opacity(0.1))
-                    .cornerRadius(12)
+                    .cardStyle()
                 }
             }
         }
