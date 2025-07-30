@@ -20,30 +20,28 @@ struct DilutionPickerView: View {
                 if isDisabled {
                     VStack(spacing: 20) {
                         Image(systemName: "info.circle")
-                            .font(.largeTitle)
-                            .foregroundColor(.blue)
+                            .infoIconStyle()
                         
                         Text("Select Film and Developer First")
                             .font(.headline)
+                            .foregroundColor(.primary)
                         
                         Text("Please select a film and developer before choosing a dilution.")
-                            .font(.body)
-                            .foregroundColor(.secondary)
+                            .disabledTextStyle()
                             .multilineTextAlignment(.center)
                     }
                     .padding()
                 } else if dilutions.isEmpty {
                     VStack(spacing: 20) {
                         Image(systemName: "exclamationmark.triangle")
-                            .font(.largeTitle)
-                            .foregroundColor(.orange)
+                            .warningIconStyle()
                         
                         Text(LocalizedStringKey("noDilutionsAvailable"))
                             .font(.headline)
+                            .foregroundColor(.primary)
                         
                         Text(LocalizedStringKey("noDilutionsDescription"))
-                            .font(.body)
-                            .foregroundColor(.secondary)
+                            .disabledTextStyle()
                             .multilineTextAlignment(.center)
                     }
                     .padding()
@@ -63,7 +61,7 @@ struct DilutionPickerView: View {
                                 
                                 if selectedDilution == dilution {
                                     Image(systemName: "checkmark")
-                                        .foregroundColor(.blue)
+                                        .checkmarkStyle()
                                 }
                             }
                         }

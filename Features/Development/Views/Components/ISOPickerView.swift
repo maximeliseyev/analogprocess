@@ -20,15 +20,14 @@ struct ISOPickerView: View {
                 if availableISOs.isEmpty {
                     VStack(spacing: 20) {
                         Image(systemName: "info.circle")
-                            .font(.largeTitle)
-                            .foregroundColor(.blue)
+                            .infoIconStyle()
                         
                         Text("No ISO Options Available")
                             .font(.headline)
+                            .foregroundColor(.primary)
                         
                         Text("Please select a film, developer, and dilution first to see available ISO options.")
-                            .font(.body)
-                            .foregroundColor(.secondary)
+                            .disabledTextStyle()
                             .multilineTextAlignment(.center)
                     }
                     .padding()
@@ -44,14 +43,14 @@ struct ISOPickerView: View {
                         }) {
                             HStack {
                                 Text("ISO \(isoValue)")
-                                    .font(.body)
+                                    .primaryTextStyle()
                                     .foregroundColor(isAvailable ? .primary : .secondary)
                                 
                                 Spacer()
                                 
                                 if iso == isoValue {
                                     Image(systemName: "checkmark")
-                                        .foregroundColor(.blue)
+                                        .checkmarkStyle()
                                 }
                             }
                         }

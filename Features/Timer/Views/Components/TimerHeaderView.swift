@@ -25,7 +25,7 @@ struct TimerHeaderView: View {
             
             if let mode = selectedAgitationMode {
                 Text(mode.name)
-                    .font(.caption)
+                    .captionTextStyle()
                     .foregroundColor(.blue)
             }
         }

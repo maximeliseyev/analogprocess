@@ -15,24 +15,19 @@ struct ParameterRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(label)
-                .font(.headline)
-                .foregroundColor(.white)
+                .headlineTextStyle()
             
             Button(action: onTap) {
                 HStack {
                     Text(value)
-                        .font(.body)
-                        .foregroundColor(.white)
+                        .bodyTextStyle()
                     
                     Spacer()
                     
                     Image(systemName: "chevron.down")
-                        .foregroundColor(.gray)
-                        .font(.caption)
+                        .chevronStyle()
                 }
-                .padding()
-                .background(Color.gray.opacity(0.3))
-                .cornerRadius(8)
+                .parameterCardStyle()
             }
             .buttonStyle(PlainButtonStyle())
         }

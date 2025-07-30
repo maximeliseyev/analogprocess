@@ -46,25 +46,20 @@ struct DeveloperPickerView: View {
                             HStack {
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(developer.name ?? "")
-                                        .font(.headline)
-                                        .foregroundColor(.primary)
+                                        .pickerTitleStyle()
                                     
                                     Text("\(developer.manufacturer ?? "") • \(developer.defaultDilution ?? "")")
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
+                                        .pickerSubtitleStyle()
                                 }
                                 
                                 Spacer()
                                 
                                 if selectedDeveloper?.id == developer.id {
                                     Image(systemName: "checkmark")
-                                        .foregroundColor(.blue)
-                                        .font(.system(size: 16, weight: .medium))
+                                        .checkmarkStyle()
                                 }
                             }
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 12)
-                            .background(Color(.systemBackground))
+                            .pickerCardStyle()
                         }
                         .buttonStyle(PlainButtonStyle())
                         

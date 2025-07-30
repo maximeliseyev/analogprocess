@@ -23,7 +23,7 @@ struct JournalView: View {
                             .foregroundColor(.gray)
                         
                         Text(LocalizedStringKey("journalEmptyDescription"))
-                            .font(.body)
+                            .disabledTextStyle()
                             .foregroundColor(.gray)
                             .multilineTextAlignment(.center)
                     }
