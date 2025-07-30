@@ -21,19 +21,20 @@ struct CalculatedTimeSection: View {
     }
     
     var body: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 8) {
             Button(action: onCalculatorTap) {
                 HStack {
                     Image(systemName: "plus.forwardslash.minus")
-                        .font(.system(size: 20, design: .monospaced))
+                        .font(.system(size: 18, design: .monospaced))
                     Text("\(minutes):\(String(format: "%02d", seconds))")
-                        .font(.system(size: 20, design: .monospaced))
+                        .font(.system(size: 18, design: .monospaced))
                 }
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
-                .padding()
+                .padding(.vertical, 14)
+                .padding(.horizontal, 16)
                 .background(Color.blue)
-                .cornerRadius(15)
+                .cornerRadius(12)
                 .buttonStyle(PlainButtonStyle())
             }
             .buttonStyle(PlainButtonStyle())
@@ -41,20 +42,22 @@ struct CalculatedTimeSection: View {
             Button(action: onTimerTap) {
                 HStack {
                     Image(systemName: "timer")
-                        .font(.system(size: 20, design: .monospaced))
+                        .font(.system(size: 18, design: .monospaced))
                     Text("\(minutes):\(String(format: "%02d", seconds))")
-                        .font(.system(size: 20, design: .monospaced))
+                        .font(.system(size: 18, design: .monospaced))
                 }
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
-                .padding()
+                .padding(.vertical, 14)
+                .padding(.horizontal, 16)
                 .background(Color.green)
                 .cornerRadius(12)
                 .buttonStyle(PlainButtonStyle())
             }
                 
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
     }
 }
 

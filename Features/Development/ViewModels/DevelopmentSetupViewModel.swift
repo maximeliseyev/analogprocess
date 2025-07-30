@@ -25,6 +25,10 @@ class DevelopmentSetupViewModel: ObservableObject {
     @Published var showISOPicker = false
     @Published var showTemperaturePicker = false
     
+    // Навигационные состояния
+    @Published var navigateToCalculator = false
+    @Published var navigateToTimer = false
+    
     private let dataService = CoreDataService.shared
     
     var films: [Film] {
@@ -104,8 +108,13 @@ class DevelopmentSetupViewModel: ObservableObject {
     
     func startTimer() {
         guard calculatedTime != nil else { return }
-            showTimer = true
-        }
+        navigateToTimer = true
+    }
+    
+    func openCalculator() {
+        guard calculatedTime != nil else { return }
+        navigateToCalculator = true
+    }
     
     // MARK: - Private Methods
     

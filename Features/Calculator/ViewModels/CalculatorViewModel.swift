@@ -17,11 +17,13 @@ class CalculatorViewModel: ObservableObject {
     @Published var coefficient = "1.33"
     @Published var pushSteps = 5
     @Published var isPushMode = true
+    @Published var temperature: Double = 20.0
     @Published var pushResults: [(label: String, minutes: Int, seconds: Int)] = []
     @Published var showResult = false
     @Published var showSaveDialog = false
     @Published var showJournal = false
     @Published var showTimer = false
+    @Published var showTemperaturePicker = false
     @Published var recordName = ""
     @Published var savedRecords: [CalculationRecord] = []
     
@@ -79,23 +81,20 @@ class CalculatorViewModel: ObservableObject {
     // MARK: - Record Management Methods
     
     func saveRecord() {
-        guard !recordName.isEmpty && isValidInput else { return }
+        guard !recordName.isEmpty && !pushResults.isEmpty else { return }
         
-        guard let min = Int(minutes), min >= 0,
-              let sec = Int(seconds), sec >= 0,
-              let coeff = Double(coefficient), coeff > 0 else {
-            return
-        }
+        // Сохраняем первый результат как основной (обычно это базовое время)
+        let firstResult = pushResults.first!
+        let totalSeconds = firstResult.minutes * 60 + firstResult.seconds
         
-        // Сохраняем в Core Data
-        let totalTime = min * 60 + sec
+        // Сохраняем в Core Data с информацией о расчете
         coreDataService.saveCalculationRecord(
-            filmName: "Пользовательская пленка",
-            developerName: "Пользовательский проявитель",
-            dilution: "Пользовательское разбавление",
+            filmName: "Расчетное время",
+            developerName: "Пользовательский расчет",
+            dilution: "Коэффициент: \(coefficient), Температура: \(String(format: "%.1f", temperature))°C",
             iso: 400,
-            temperature: 20.0,
-            time: totalTime
+            temperature: temperature,
+            time: totalSeconds
         )
         
         recordName = ""

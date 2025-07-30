@@ -4,15 +4,14 @@ public struct TimerView: View {
     let timerLabel: String
     let totalMinutes: Int
     let totalSeconds: Int
-    let onClose: () -> Void
     
     @StateObject private var viewModel: TimerViewModel
+    @Environment(\.dismiss) private var dismiss
     
-    public init(timerLabel: String, totalMinutes: Int, totalSeconds: Int, onClose: @escaping () -> Void) {
+    public init(timerLabel: String, totalMinutes: Int, totalSeconds: Int) {
         self.timerLabel = timerLabel
         self.totalMinutes = totalMinutes
         self.totalSeconds = totalSeconds
-        self.onClose = onClose
         self._viewModel = StateObject(wrappedValue: TimerViewModel(totalMinutes: totalMinutes, totalSeconds: totalSeconds))
     }
     
