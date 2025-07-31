@@ -8,118 +8,65 @@
 import SwiftUI
 
 struct CustomAgitationView: View {
+    @Binding var agitationMode: AgitationMode
+    let onDismiss: () -> Void
+    
     @State private var agitationSeconds: Int = 15
     @State private var restSeconds: Int = 45
     
-    let onSelect: (AgitationMode) -> Void
-    let onCancel: () -> Void
-    
     var body: some View {
-        NavigationView {
-            VStack(spacing: 30) {
-                VStack(spacing: 20) {
-                    Text(LocalizedStringKey("customAgitationSetup"))
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .padding(.top)
+        NavigationStack {
+            VStack(spacing: 20) {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Agitation Time")
+                        .font(.headline)
                     
-                    Text(LocalizedStringKey("customAgitationSetupDescription"))
+                    Stepper(value: $agitationSeconds, in: 1...60) {
+                        Text("\(agitationSeconds) seconds")
+                    }
+                }
+                
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Rest Time")
+                        .font(.headline)
+                    
+                    Stepper(value: $restSeconds, in: 0...180) {
+                        Text("\(restSeconds) seconds")
+                    }
+                }
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Preview")
+                        .font(.headline)
+                    
+                    Text("Cycle: \(agitationSeconds)s agitation → \(restSeconds)s rest")
                         .font(.body)
                         .foregroundColor(.secondary)
-                        .multilineTextAlignment(.center)
-                }
-                
-                VStack(spacing: 25) {
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text(LocalizedStringKey("agitationTime"))
-                            .font(.headline)
-                        
-                        HStack {
-                            Stepper(value: $agitationSeconds, in: 1...60) {
-                                HStack {
-                                    Text("\(agitationSeconds)")
-                                        .font(.title2)
-                                        .fontWeight(.medium)
-                                        .frame(width: 40)
-                                    
-                                    Text(LocalizedStringKey("seconds"))
-                                        .font(.body)
-                                        .foregroundColor(.secondary)
-                                }
-                            }
-                            
-                            Spacer()
-                        }
-                        .padding()
-                        .background(Color.gray.opacity(0.1))
-                        .cornerRadius(10)
-                    }
                     
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text(LocalizedStringKey("restTime"))
-                            .font(.headline)
-                        
-                        HStack {
-                            Stepper(value: $restSeconds, in: 0...180) {
-                                HStack {
-                                    Text("\(restSeconds)")
-                                        .font(.title2)
-                                        .fontWeight(.medium)
-                                        .frame(width: 40)
-                                    
-                                    Text(LocalizedStringKey("seconds"))
-                                        .font(.body)
-                                        .foregroundColor(.secondary)
-                                }
-                            }
-                            
-                            Spacer()
-                        }
-                        .padding()
-                        .background(Color.gray.opacity(0.1))
-                        .cornerRadius(10)
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(LocalizedStringKey("preview"))
-                            .font(.headline)
-                        
-                        Text("\(LocalizedStringKey("cycle")): \(agitationSeconds)с ажитации → \(restSeconds)с покоя")
-                            .font(.body)
-                            .foregroundColor(.secondary)
-                        
-                        Text("\(LocalizedStringKey("totalCycleDuration")): \(agitationSeconds + restSeconds)с")
-                            .font(.body)
-                            .foregroundColor(.secondary)
-                    }
-                    .padding()
-                    .background(Color.blue.opacity(0.1))
-                    .cornerRadius(10)
+                    Text("Total cycle duration: \(agitationSeconds + restSeconds)s")
+                        .font(.body)
+                        .foregroundColor(.secondary)
                 }
-                .padding(.horizontal)
+                .padding()
+                .background(Color.blue.opacity(0.1))
+                .cornerRadius(10)
                 
                 Spacer()
-                
-                Button(LocalizedStringKey("createMode")) {
-                    let customMode = AgitationMode.createCustomMode(
-                        agitationSeconds: agitationSeconds,
-                        restSeconds: restSeconds
-                    )
-                    onSelect(customMode)
-                }
-                .font(.headline)
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color.blue)
-                .cornerRadius(10)
-                .padding(.horizontal)
             }
+            .padding()
+            .navigationTitle("Custom Agitation")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button(LocalizedStringKey("cancel")) {
-                        onCancel()
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        onDismiss()
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Save") {
+                        agitationMode = AgitationMode.createCustomMode(agitationSeconds: agitationSeconds, restSeconds: restSeconds)
+                        onDismiss()
                     }
                 }
             }
@@ -130,8 +77,9 @@ struct CustomAgitationView: View {
 struct CustomAgitationView_Previews: PreviewProvider {
     static var previews: some View {
         CustomAgitationView(
-            onSelect: { _ in },
-            onCancel: {}
+            agitationMode: .constant(AgitationMode.presets[0]),
+            onDismiss: {}
         )
     }
 }
+

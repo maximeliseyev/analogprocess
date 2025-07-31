@@ -16,59 +16,71 @@ public struct TimerView: View {
     }
     
     public var body: some View {
-        NavigationView {
-            VStack(spacing: 40) {
-                TimerHeaderView(
-                    timerLabel: timerLabel,
-                    totalMinutes: totalMinutes,
-                    totalSeconds: totalSeconds,
-                    selectedAgitationMode: viewModel.selectedAgitationMode
-                )
+        NavigationStack {
+            ZStack {
+                Color.black
+                    .ignoresSafeArea()
                 
-                AgitationIndicatorView(
-                    shouldAgitate: viewModel.shouldAgitate,
-                    selectedAgitationMode: viewModel.selectedAgitationMode,
-                    isInAgitationPhase: viewModel.isInAgitationPhase,
-                    agitationTimeRemaining: viewModel.agitationTimeRemaining,
-                    currentMinute: viewModel.currentMinute,
-                    currentAgitationPhase: viewModel.currentAgitationPhase
-                )
-                
-                TimerProgressView(
-                    progress: viewModel.progress,
-                    displayMinutes: viewModel.displayMinutes,
-                    displaySeconds: viewModel.displaySeconds
-                )
-                
-                TimerControlsView(
-                    isRunning: viewModel.isRunning,
-                    onStartPause: viewModel.startPauseTimer,
-                    onReset: viewModel.resetTimer
-                )
-                
-                Spacer()
-            }
-            .padding()
-            .navigationBarTitleDisplayMode(.inline)
-            .onAppear {
-                viewModel.resetTimer()
-            }
-            .onDisappear {
-                viewModel.stopTimer()
-            }
-            .alert(LocalizedStringKey("timeUp"), isPresented: $viewModel.showingAlert) {
-                Button("OK") {
-                    viewModel.showingAlert = false
+                VStack(spacing: 30) {
+                    TimerHeaderView(
+                        timerLabel: timerLabel,
+                        totalMinutes: totalMinutes,
+                        totalSeconds: totalSeconds,
+                        selectedAgitationMode: viewModel.selectedAgitationMode
+                    )
+                    
+                    TimerProgressView(
+                        progress: viewModel.progress,
+                        displayMinutes: viewModel.displayMinutes,
+                        displaySeconds: viewModel.displaySeconds
+                    )
+                    
+                    AgitationIndicatorView(
+                        shouldAgitate: viewModel.shouldAgitate,
+                        selectedAgitationMode: viewModel.selectedAgitationMode,
+                        isInAgitationPhase: viewModel.isInAgitationPhase,
+                        agitationTimeRemaining: viewModel.agitationTimeRemaining,
+                        currentMinute: viewModel.currentMinute,
+                        currentAgitationPhase: viewModel.currentAgitationPhase
+                    )
+                    
+                    TimerControlsView(
+                        isRunning: viewModel.isRunning,
+                        onStartPause: viewModel.startPauseTimer,
+                        onReset: viewModel.resetTimer
+                    )
+                    
+                    Spacer()
                 }
-            } message: {
-                Text("\(LocalizedStringKey("developmentCompleteForProcess")) \(timerLabel)")
             }
-            .sheet(isPresented: $viewModel.showAgitationSelection) {
-                AgitationSelectionView { mode in
-                    if let mode = mode {
-                        viewModel.selectAgitationMode(mode)
+            .navigationTitle(LocalizedStringKey("timer"))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: AgitationSelectionView(
+                        selectedMode: Binding(
+                            get: { viewModel.selectedAgitationMode ?? AgitationMode.presets[0] },
+                            set: { newMode in
+                                viewModel.selectAgitationMode(newMode)
+                            }
+                        )
+                    )) {
+                        Image(systemName: "slider.horizontal.3")
                     }
                 }
+            }
+            .sheet(isPresented: $viewModel.showAgitationSelection) {
+                AgitationSelectionView(
+                    selectedMode: Binding(
+                        get: { viewModel.selectedAgitationMode ?? AgitationMode.presets[0] },
+                        set: { newMode in
+                            viewModel.selectAgitationMode(newMode)
+                        }
+                    )
+                )
+            }
+            .onAppear {
+                viewModel.setupTimer(totalMinutes: totalMinutes, totalSeconds: totalSeconds)
             }
         }
     }

@@ -15,32 +15,18 @@ struct DilutionPickerView: View {
     let onDilutionSelected: ((String) -> Void)?
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Group {
-                if isDisabled {
+                if dilutions.isEmpty {
                     VStack(spacing: 20) {
                         Image(systemName: "info.circle")
                             .infoIconStyle()
                         
-                        Text("Select Film and Developer First")
+                        Text("No Dilutions Available")
                             .font(.headline)
                             .foregroundColor(.primary)
                         
-                        Text("Please select a film and developer before choosing a dilution.")
-                            .disabledTextStyle()
-                            .multilineTextAlignment(.center)
-                    }
-                    .padding()
-                } else if dilutions.isEmpty {
-                    VStack(spacing: 20) {
-                        Image(systemName: "exclamationmark.triangle")
-                            .warningIconStyle()
-                        
-                        Text(LocalizedStringKey("noDilutionsAvailable"))
-                            .font(.headline)
-                            .foregroundColor(.primary)
-                        
-                        Text(LocalizedStringKey("noDilutionsDescription"))
+                        Text("Please select a film and developer first to see available dilutions.")
                             .disabledTextStyle()
                             .multilineTextAlignment(.center)
                     }
@@ -54,8 +40,7 @@ struct DilutionPickerView: View {
                         }) {
                             HStack {
                                 Text(dilution)
-                                    .font(.body)
-                                    .foregroundColor(.primary)
+                                    .primaryTextStyle()
                                 
                                 Spacer()
                                 
@@ -66,13 +51,14 @@ struct DilutionPickerView: View {
                             }
                         }
                         .buttonStyle(PlainButtonStyle())
+                        .disabled(isDisabled)
                     }
                 }
             }
-            .navigationTitle(LocalizedStringKey("selectDilution"))
             .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle(LocalizedStringKey("selectDilution"))
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .primaryAction) {
                     Button(LocalizedStringKey("cancel")) {
                         onDismiss()
                     }

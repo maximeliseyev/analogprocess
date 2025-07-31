@@ -11,10 +11,10 @@ struct TemperaturePickerView: View {
     @Binding var temperature: Double
     let onDismiss: () -> Void
     
-    private let temperatures = Array(stride(from: 14.0, through: 25.0, by: 0.5))
+    private let temperatures = Array(stride(from: 15.0, through: 30.0, by: 0.5))
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List(temperatures, id: \.self) { temp in
                 Button(action: {
                     temperature = temp
@@ -26,7 +26,7 @@ struct TemperaturePickerView: View {
                         
                         Spacer()
                         
-                        if temperature == temp {
+                        if abs(temperature - temp) < 0.1 {
                             Image(systemName: "checkmark")
                                 .checkmarkStyle()
                         }
@@ -34,8 +34,8 @@ struct TemperaturePickerView: View {
                 }
                 .buttonStyle(PlainButtonStyle())
             }
-            .navigationTitle(LocalizedStringKey("selectTemperature"))
             .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle(LocalizedStringKey("selectTemperature"))
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button(LocalizedStringKey("cancel")) {

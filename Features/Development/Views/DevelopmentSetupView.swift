@@ -5,7 +5,7 @@ struct DevelopmentSetupView: View {
     @StateObject private var viewModel = DevelopmentSetupViewModel()
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Color.black
                     .ignoresSafeArea()

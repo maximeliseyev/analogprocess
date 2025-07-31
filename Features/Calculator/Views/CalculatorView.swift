@@ -25,7 +25,7 @@ struct CalculatorView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 20) {
                 VStack(alignment: .leading, spacing: 15) {
                     VStack(alignment: .leading, spacing: 8) {

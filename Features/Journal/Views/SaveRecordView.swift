@@ -2,11 +2,10 @@
 //  SaveRecordView.swift
 //  Film Lab
 //
-//  Created by Maxim Eliseyev on 11.07.2025.
+//  Created by Maxim Eliseyev on 12.07.2025.
 //
 
 import SwiftUI
-
 
 struct SaveRecordView: View {
     @Binding var recordName: String
@@ -14,31 +13,35 @@ struct SaveRecordView: View {
     let onCancel: () -> Void
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 20) {
-                Text(LocalizedStringKey("saveCalculation"))
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .padding(.top)
+                Text(LocalizedStringKey("saveRecordDescription"))
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
                 
                 TextField(LocalizedStringKey("recordName"), text: $recordName)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
+                    .padding(.horizontal)
                 
                 Spacer()
             }
-
+            .padding(.top)
+            .navigationTitle(LocalizedStringKey("saveRecord"))
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .primaryAction) {
+                ToolbarItem(placement: .navigationBarLeading) {
                     Button(LocalizedStringKey("cancel")) {
                         onCancel()
                     }
                 }
-                ToolbarItem(placement: .primaryAction) {
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button(LocalizedStringKey("save")) {
                         onSave()
                     }
-                    .disabled(recordName.isEmpty)
+                    .disabled(recordName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }
             }
         }

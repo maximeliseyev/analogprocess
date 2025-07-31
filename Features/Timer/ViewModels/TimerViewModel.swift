@@ -51,6 +51,11 @@ class TimerViewModel: ObservableObject {
     
     // MARK: - Public Methods
     
+    func setupTimer(totalMinutes: Int, totalSeconds: Int) {
+        // Этот метод может быть использован для обновления таймера, если нужно
+        // В текущей реализации TimerViewModel уже инициализируется с правильными значениями
+    }
+    
     func startPauseTimer() {
         if isRunning {
             pauseTimer()

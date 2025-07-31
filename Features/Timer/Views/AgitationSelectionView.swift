@@ -1,79 +1,41 @@
 import SwiftUI
 
 struct AgitationSelectionView: View {
-    let onSelect: (AgitationMode?) -> Void
-    @State private var selectedMode: AgitationMode?
-    @State private var showCustomAgitation = false
+    @Binding var selectedMode: AgitationMode
     
     var body: some View {
-        NavigationView {
-            VStack(spacing: 20) {
-                Text(LocalizedStringKey("agitationSelection"))
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .padding(.top)
-                
-                Text(LocalizedStringKey("agitationDescription"))
-                    .font(.body)
-                    .foregroundColor(.secondary)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal)
-                
-                ScrollView {
-                    LazyVStack(spacing: 12) {
-                        AgitationModeRow(
-                            mode: nil,
-                            isSelected: selectedMode == nil,
-                            onTap: { selectedMode = nil }
-                        )
-                        
-                        ForEach(AgitationMode.presets, id: \.id) { mode in
-                            AgitationModeRow(
-                                mode: mode,
-                                isSelected: selectedMode?.id == mode.id,
-                                onTap: { selectedMode = mode }
-                            )
+        NavigationStack {
+            List {
+                Section {
+                    ForEach(AgitationMode.presets, id: \.id) { mode in
+                        Button(action: {
+                            selectedMode = mode
+                        }) {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(mode.name)
+                                        .font(.body)
+                                        .foregroundColor(.primary)
+                                    
+                                    Text(mode.description)
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                                
+                                Spacer()
+                                
+                                if selectedMode.id == mode.id {
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.blue)
+                                }
+                            }
                         }
-                        
-                        CustomAgitationModeRow(
-                            onTap: { showCustomAgitation = true }
-                        )
+                        .buttonStyle(PlainButtonStyle())
                     }
-                    .padding(.horizontal)
                 }
-                
-                Spacer()
-                
-                Button(LocalizedStringKey("continue")) {
-                    onSelect(selectedMode)
-                }
-                .font(.headline)
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color.blue)
-                .cornerRadius(10)
-                .padding(.horizontal)
             }
+            .navigationTitle("Agitation Mode")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button(LocalizedStringKey("skip")) {
-                        onSelect(nil)
-                    }
-                }
-            }
-            .sheet(isPresented: $showCustomAgitation) {
-                CustomAgitationView(
-                    onSelect: { mode in
-                        selectedMode = mode
-                        showCustomAgitation = false
-                    },
-                    onCancel: {
-                        showCustomAgitation = false
-                    }
-                )
-            }
         }
     }
 }
@@ -160,6 +122,6 @@ struct CustomAgitationModeRow: View {
 
 struct AgitationSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        AgitationSelectionView { _ in }
+        AgitationSelectionView(selectedMode: .constant(AgitationMode.presets[0]))
     }
 }

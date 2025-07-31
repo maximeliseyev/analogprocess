@@ -2,21 +2,19 @@
 //  TimerTabView.swift
 //  Film Lab
 //
-//  Created by Maxim Eliseyev on 26.07.2025.
+//  Created by Maxim Eliseyev on 12.07.2025.
 //
 
-
 import SwiftUI
-import CoreData
 
-public struct TimerTabView: View {
+struct TimerTabView: View {
     @State private var showTimer = false
     @State private var timerMinutes = 0
     @State private var timerSeconds = 0
     @State private var timerLabel = ""
     
-    public var body: some View {
-        NavigationView {
+    var body: some View {
+        NavigationStack {
             VStack(spacing: 30) {
                 Text(LocalizedStringKey("selectDevelopmentParameters"))
                     .foregroundColor(.gray)
@@ -54,6 +52,4 @@ public struct TimerTabView: View {
             }
         }
     }
-    
-    public init() {}
 }

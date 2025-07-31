@@ -2,64 +2,43 @@
 //  ManualView.swift
 //  Film Lab
 //
-//  Created by Maxim Eliseyev on 28.07.2025.
+//  Created by Maxim Eliseyev on 12.07.2025.
 //
 
 import SwiftUI
 
-public struct ManualView: View {
+struct ManualView: View {
     @StateObject private var viewModel = ManualViewModel()
-    @Environment(\.dismiss) private var dismiss
-    @State private var selectedArticle: Article?
     
-    public var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack(spacing: 20) {
-                    // Заголовок
-                    VStack(spacing: 8) {
-                        Text(LocalizedStringKey("manuals"))
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                            .foregroundColor(.primary)
-                        
-                        Text("Articles and guides for film development")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
-                    }
-                    .padding(.top, 20)
-                    
-                    // Карточки с мануалами
-                    LazyVGrid(columns: [
-                        GridItem(.flexible()),
-                        GridItem(.flexible())
-                    ], spacing: 16) {
-                        ForEach(viewModel.articles) { article in
-                            ManualCard(article: article) {
-                                selectedArticle = article
+    var body: some View {
+        NavigationStack {
+            List {
+                ForEach(ManualTypes.allCases, id: \.self) { manualType in
+                    NavigationLink(destination: ArticleView(manualType: manualType)) {
+                        HStack {
+                            Image(systemName: manualType.iconName)
+                                .font(.title2)
+                                .foregroundColor(manualType.color)
+                                .frame(width: 30)
+                            
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(manualType.title)
+                                    .font(.headline)
+                                    .foregroundColor(.primary)
+                                
+                                Text(manualType.description)
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
                             }
+                            
+                            Spacer()
                         }
-                    }
-                    .padding(.horizontal, 20)
-                    
-                    Spacer(minLength: 100)
-                }
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
-                        dismiss()
+                        .padding(.vertical, 4)
                     }
                 }
             }
-        }
-        .onAppear {
-            viewModel.loadArticles()
-        }
-        .sheet(item: $selectedArticle) { article in
-            ArticleView(article: article)
+            .navigationTitle(LocalizedStringKey("manuals"))
+            .navigationBarTitleDisplayMode(.large)
         }
     }
 }
@@ -80,28 +59,83 @@ struct ManualCard: View {
                 
                 VStack(spacing: 4) {
                     Text(article.title)
-                        .font(.headline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.primary)
+                        .pickerTitleStyle()
                         .multilineTextAlignment(.center)
                     
                     Text(article.subtitle)
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                        .pickerSubtitleStyle()
                         .multilineTextAlignment(.center)
                 }
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 20)
-            .background(Color(.systemGray6))
+            .background(Color.gray.opacity(0.1))
             .cornerRadius(16)
         }
         .buttonStyle(PlainButtonStyle())
     }
 }
 
-public struct ManualView_Previews: PreviewProvider {
-    public static var previews: some View {
-        ManualView()
+struct ManualCard_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            // Одиночная карточка
+            ManualCard(
+                article: Article(
+                    title: "Development Basics",
+                    subtitle: "Learn the fundamentals",
+                    category: .basics,
+                    filename: "basics.md",
+                    icon: "book.fill",
+                    color: .blue
+                ),
+                onTap: {}
+            )
+            .padding()
+            .previewDisplayName("Single Card")
+            
+            // Сетка карточек
+            LazyVGrid(columns: [
+                GridItem(.flexible()),
+                GridItem(.flexible())
+            ], spacing: 16) {
+                ManualCard(
+                    article: Article(
+                        title: "Push & Pull",
+                        subtitle: "Advanced techniques",
+                        category: .pushPull,
+                        filename: "push-pull.md",
+                        icon: "arrow.up.arrow.down",
+                        color: .orange
+                    ),
+                    onTap: {}
+                )
+                
+                ManualCard(
+                    article: Article(
+                        title: "Agitation",
+                        subtitle: "Different approaches",
+                        category: .agitation,
+                        filename: "agitation.md",
+                        icon: "hand.raised.fill",
+                        color: .green
+                    ),
+                    onTap: {}
+                )
+            }
+            .padding()
+            .previewDisplayName("Card Grid")
+        }
     }
 }
+
+public struct ManualView_Previews: PreviewProvider {
+    public static var previews: some View {
+        Group {
+            // Основной превью
+            ManualView()
+                .previewDisplayName("Manual View")
+        }
+    }
+}
+

@@ -33,7 +33,7 @@ struct DeveloperPickerView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 LazyVStack(spacing: 0) {
                     ForEach(filteredDevelopers) { developer in

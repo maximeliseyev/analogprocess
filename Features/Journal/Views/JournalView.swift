@@ -2,10 +2,11 @@
 //  JournalView.swift
 //  Film Lab
 //
-//  Created by Maxim Eliseyev on 11.07.2025.
+//  Created by Maxim Eliseyev on 12.07.2025.
 //
 
 import SwiftUI
+import CoreData
 
 struct JournalView: View {
     let records: [CalculationRecord]
@@ -14,28 +15,33 @@ struct JournalView: View {
     let onClose: () -> Void
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 if records.isEmpty {
                     VStack(spacing: 20) {
-                        Text(LocalizedStringKey("journalEmpty"))
-                            .font(.title3)
+                        Image(systemName: "book")
+                            .font(.system(size: 60))
                             .foregroundColor(.gray)
                         
-                        Text(LocalizedStringKey("journalEmptyDescription"))
-                            .disabledTextStyle()
-                            .foregroundColor(.gray)
+                        Text(LocalizedStringKey("noRecords"))
+                            .font(.headline)
+                            .foregroundColor(.primary)
+                        
+                        Text(LocalizedStringKey("noRecordsDescription"))
+                            .font(.body)
+                            .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
                     }
                     .padding()
-                    
-                    Spacer()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
                     List {
-                        ForEach(records, id: \.objectID) { record in
+                        ForEach(records, id: \.id) { record in
                             RecordRowView(
                                 record: record,
-                                onTap: { onLoadRecord(record) }
+                                onTap: {
+                                    onLoadRecord(record)
+                                }
                             )
                         }
                         .onDelete { indexSet in
@@ -46,7 +52,6 @@ struct JournalView: View {
                     }
                 }
             }
-            .padding()
             .navigationTitle(LocalizedStringKey("journal"))
             .navigationBarTitleDisplayMode(.inline)
         }

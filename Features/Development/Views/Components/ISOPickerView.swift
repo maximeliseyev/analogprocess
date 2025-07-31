@@ -15,7 +15,7 @@ struct ISOPickerView: View {
     private let allISOs = [50, 100, 125, 200, 250, 400, 500, 800, 1600, 3200, 6400]
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Group {
                 if availableISOs.isEmpty {
                     VStack(spacing: 20) {
