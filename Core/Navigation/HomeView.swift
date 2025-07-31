@@ -6,7 +6,7 @@ public struct HomeView: View {
     @State private var showSettings = false
     
     public var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 24) {
                 Spacer()
                 
@@ -18,7 +18,7 @@ public struct HomeView: View {
                     .padding(.horizontal, 20)
                     .padding(.bottom, 10)
                 
-                ForEach(0..<5, id: \.self) { idx in
+                ForEach(0..<4, id: \.self) { idx in
                     Button(action: {
                         onSelectTab(idx)
                     }) {

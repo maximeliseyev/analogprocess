@@ -11,7 +11,7 @@ public struct MainTabView: View {
     @State private var showManuals = false
     
     public var body: some View {
-        NavigationView {
+        NavigationStack {
             TabView(selection: $selectedTab) {
                 DevelopmentSetupView()
                     .tabItem {

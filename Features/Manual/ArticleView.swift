@@ -2,46 +2,26 @@
 //  ArticleView.swift
 //  Film Lab
 //
-//  Created by Maxim Eliseyev on 28.07.2025.
+//  Created by Maxim Eliseyev on 12.07.2025.
 //
 
 import SwiftUI
 
 struct ArticleView: View {
-    let article: Article
-    @StateObject private var viewModel = ManualViewModel()
-    @Environment(\.dismiss) private var dismiss
+    let manualType: ManualTypes
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    // Заголовок статьи
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(article.title)
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                            .foregroundColor(.primary)
-                        
-                        Text(article.subtitle)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }
-                    .padding(.bottom, 20)
-                    
-                    // Содержимое статьи
-                    MarkdownTextView(text: viewModel.articleContent)
-                        .padding(.horizontal, 20)
+                    Text(manualType.content)
+                        .font(.body)
+                        .lineSpacing(6)
+                        .padding()
                 }
-                .padding(.top, 20)
             }
+            .navigationTitle(manualType.title)
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(trailing: Button("Done") {
-                dismiss()
-            })
-        }
-        .onAppear {
-            viewModel.loadArticleContent(for: article)
         }
     }
 }
@@ -70,15 +50,13 @@ struct MarkdownTextView: View {
                         .foregroundColor(.primary)
                 case .paragraph:
                     Text(element.text)
-                        .font(.body)
-                        .foregroundColor(.primary)
+                        .primaryTextStyle()
                 case .listItem:
                     HStack(alignment: .top, spacing: 8) {
                         Text("•")
-                            .foregroundColor(.secondary)
+                            .captionTextStyle()
                         Text(element.text)
-                            .font(.body)
-                            .foregroundColor(.primary)
+                            .primaryTextStyle()
                     }
                 case .bold:
                     Text(element.text)
@@ -136,13 +114,12 @@ enum MarkdownElementType {
 
 struct ArticleView_Previews: PreviewProvider {
     static var previews: some View {
-        ArticleView(article: Article(
-            title: "Development Basics",
-            subtitle: "Learn the fundamentals",
-            category: .basics,
-            filename: "basics-article.md",
-            icon: "book.fill",
-            color: .blue
-        ))
+        Group {
+            ArticleView(manualType: .basics)
+                .previewDisplayName("Article View")
+            
+            ArticleView(manualType: .pushPull)
+                .previewDisplayName("Article View - Push Pull")
+        }
     }
 } 

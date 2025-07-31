@@ -33,7 +33,7 @@ struct FilmPickerView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 LazyVStack(spacing: 0) {
                     ForEach(filteredFilms) { film in
