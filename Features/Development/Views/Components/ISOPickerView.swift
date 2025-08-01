@@ -22,11 +22,11 @@ struct ISOPickerView: View {
                         Image(systemName: "info.circle")
                             .infoIconStyle()
                         
-                        Text("No ISO Options Available")
+                        Text(LocalizedStringKey("noISOOptionsAvailable"))
                             .font(.headline)
                             .foregroundColor(.primary)
                         
-                        Text("Please select a film, developer, and dilution first to see available ISO options.")
+                        Text(LocalizedStringKey("noISOOptionsDescription"))
                             .disabledTextStyle()
                             .multilineTextAlignment(.center)
                     }
@@ -42,7 +42,7 @@ struct ISOPickerView: View {
                             }
                         }) {
                             HStack {
-                                Text("ISO \(isoValue)")
+                                Text(String(format: String(localized: "isoLabel"), "\(isoValue)"))
                                     .primaryTextStyle()
                                     .foregroundColor(isAvailable ? .primary : .secondary)
                                 

@@ -30,7 +30,7 @@ struct AgitationIndicatorView: View {
                         .fontWeight(.bold)
                     
                     if agitationTimeRemaining > 0 {
-                        Text("(\(agitationTimeRemaining)с)")
+                        Text(String(format: String(localized: "agitationTimeRemaining"), "\(agitationTimeRemaining)"))
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
@@ -41,7 +41,7 @@ struct AgitationIndicatorView: View {
                 .cornerRadius(20)
                 
                 VStack(spacing: 4) {
-                    Text("Minute \(currentMinute)")
+                    Text(String(format: String(localized: "minuteLabel"), "\(currentMinute)"))
                         .font(.caption)
                         .foregroundColor(.secondary)
                     
@@ -59,11 +59,11 @@ struct AgitationIndicatorView: View {
     private func getPhaseDescription(_ phase: AgitationMode.PhaseAgitationType) -> String {
         switch phase {
         case .continuous:
-            return "Непрерывная ажитация"
+            return String(localized: "continuousAgitation")
         case .cycle(let agitation, let rest):
-            return "\(agitation)с ажитации / \(rest)с покоя"
+            return String(format: String(localized: "cycleAgitationFormat"), "\(agitation)", "\(rest)")
         case .periodic(let interval):
-            return "Каждые \(interval)с"
+            return String(format: String(localized: "periodicAgitationFormat"), "\(interval)")
         case .custom(let description):
             return description
         }

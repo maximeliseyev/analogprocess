@@ -34,18 +34,18 @@ struct AgitationMode {
     var description: String {
         switch type {
         case .continuous:
-            return NSLocalizedString("agitation_continuous", comment: "Continuous agitation description")
+            return String(localized: "agitation_continuous")
         case .cycle(let agitation, let rest):
-            return String(format: NSLocalizedString("agitation_cycle_format", comment: "Agitation cycle format"), "\(agitation)", "\(rest)")
+            return String(format: String(localized: "agitation_cycle_format"), "\(agitation)", "\(rest)")
         case .complex:
-            if name == NSLocalizedString("agitation_orwo_name", comment: "ORWO agitation name") {
-                return NSLocalizedString("agitation_orwo_description", comment: "ORWO agitation description")
+            if name == String(localized: "agitation_orwo_name") {
+                return String(localized: "agitation_orwo_description")
             }
-            else if name == NSLocalizedString("agitation_rae_name", comment: "RAE agitation name") {
-                return NSLocalizedString("agitation_rae_description", comment: "RAE agitation description")
+            else if name == String(localized: "agitation_rae_name") {
+                return String(localized: "agitation_rae_description")
             }
-            else if name == NSLocalizedString("agitation_fixer_name", comment: "Fixer agitation name") {
-                return NSLocalizedString("agitation_fixer_description", comment: "Fixer agitation description")
+            else if name == String(localized: "agitation_fixer_name") {
+                return String(localized: "agitation_fixer_description")
             }
             else {
                 return " "
@@ -55,7 +55,7 @@ struct AgitationMode {
     
     static let presets: [AgitationMode] = [
         AgitationMode(
-            name: NSLocalizedString("agitation_orwo_name", comment: "ORWO agitation name"),
+            name: String(localized: "agitation_orwo_name"),
             type: .complex(phases: [
                 AgitationPhase(minuteRange: 1...1, agitationType: .cycle(agitationSeconds: 45, restSeconds: 15)),
                 AgitationPhase(minuteRange: 2...Int.max, agitationType: .cycle(agitationSeconds: 15, restSeconds: 45))
@@ -64,27 +64,27 @@ struct AgitationMode {
         ),
         
         AgitationMode(
-            name: NSLocalizedString("agitation_xtol_name", comment: "XTOL agitation name"),
+            name: String(localized: "agitation_xtol_name"),
             type: .cycle(agitationSeconds: 5, restSeconds: 25),
             isCustom: false
         ),
         
         AgitationMode(
-            name: NSLocalizedString("agitation_rae_name", comment: "RAE agitation name"),
+            name: String(localized: "agitation_rae_name"),
             type: .complex(phases: [
                 AgitationPhase(minuteRange: 1...1, agitationType: .continuous),
                 AgitationPhase(minuteRange: 2...2, agitationType: .periodic(intervalSeconds: 10)),
-                AgitationPhase(minuteRange: 3...3, agitationType: .custom(description: NSLocalizedString("agitation_rae_phase_2_rotations", comment: "RAE phase 2 rotations"))),
-                AgitationPhase(minuteRange: 4...5, agitationType: .custom(description: NSLocalizedString("agitation_rae_phase_1_rotation_per_minute", comment: "RAE phase 1 rotation per minute"))),
-                AgitationPhase(minuteRange: 6...6, agitationType: .custom(description: NSLocalizedString("agitation_rae_phase_1_rotation_7th_minute", comment: "RAE phase 1 rotation on 7th minute"))),
-                AgitationPhase(minuteRange: 7...9, agitationType: .custom(description: NSLocalizedString("agitation_rae_phase_1_rotation_10th_minute", comment: "RAE phase 1 rotation on 10th minute"))),
-                AgitationPhase(minuteRange: 10...Int.max, agitationType: .custom(description: NSLocalizedString("agitation_rae_phase_1_rotation_every_5_minutes", comment: "RAE phase 1 rotation every 5 minutes")))
+                AgitationPhase(minuteRange: 3...3, agitationType: .custom(description: String(localized: "agitation_rae_phase_2_rotations"))),
+                AgitationPhase(minuteRange: 4...5, agitationType: .custom(description: String(localized: "agitation_rae_phase_1_rotation_per_minute"))),
+                AgitationPhase(minuteRange: 6...6, agitationType: .custom(description: String(localized: "agitation_rae_phase_1_rotation_7th_minute"))),
+                AgitationPhase(minuteRange: 7...9, agitationType: .custom(description: String(localized: "agitation_rae_phase_1_rotation_10th_minute"))),
+                AgitationPhase(minuteRange: 10...Int.max, agitationType: .custom(description: String(localized: "agitation_rae_phase_1_rotation_every_5_minutes")))
             ]),
             isCustom: false
         ),
         
         AgitationMode(
-            name: NSLocalizedString("agitation_fixer_name", comment: "Fixer agitation name"),
+            name: String(localized: "agitation_fixer_name"),
             type: .complex(phases: [
                 AgitationPhase(minuteRange: 1...1, agitationType: .continuous),
                 AgitationPhase(minuteRange: 2...Int.max, agitationType: .cycle(agitationSeconds: 0, restSeconds: 60))
@@ -93,7 +93,7 @@ struct AgitationMode {
         ),
         
         AgitationMode(
-            name: NSLocalizedString("agitation_continuous_name", comment: "Continuous agitation name"),
+            name: String(localized: "agitation_continuous_name"),
             type: .continuous,
             isCustom: false
         )
@@ -101,7 +101,7 @@ struct AgitationMode {
     
     static func createCustomMode(agitationSeconds: Int, restSeconds: Int) -> AgitationMode {
         return AgitationMode(
-            name: String(format: NSLocalizedString("agitation_custom_format", comment: "Custom agitation format"), "\(agitationSeconds)", "\(restSeconds)"),
+            name: String(format: String(localized: "agitation_custom_format"), "\(agitationSeconds)", "\(restSeconds)"),
             type: .cycle(agitationSeconds: agitationSeconds, restSeconds: restSeconds),
             isCustom: true
         )
@@ -127,7 +127,7 @@ struct AgitationMode {
         case .cycle(let agitation, let rest):
             return .cycle(agitationSeconds: agitation, restSeconds: rest)
         case .complex(let phases):
-            if name == NSLocalizedString("agitation_orwo_name", comment: "ORWO agitation name") {
+            if name == String(localized: "agitation_orwo_name") {
                 if minute == 1 {
                     return .cycle(agitationSeconds: 45, restSeconds: 15)
                 } else if minute == totalMinutes {

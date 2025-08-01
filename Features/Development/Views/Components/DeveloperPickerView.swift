@@ -68,7 +68,7 @@ struct DeveloperPickerView: View {
                     }
                 }
             }
-            .searchable(text: $searchText, prompt: "Search developers...")
+            .searchable(text: $searchText, prompt: String(localized: "searchDevelopers"))
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(LocalizedStringKey("selectDeveloper"))
             .toolbar {
