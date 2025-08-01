@@ -9,6 +9,9 @@ import SwiftUI
 
 struct CalculatedTimeSection: View {
     let time: Int
+    let temperature: Double
+    let filmName: String
+    let developerName: String
     let onCalculatorTap: () -> Void
     let onTimerTap: () -> Void
     
@@ -21,7 +24,7 @@ struct CalculatedTimeSection: View {
     }
     
     var body: some View {
-        VStack(spacing: 8) {
+        HStack(spacing: 8) {
             Button(action: onCalculatorTap) {
                 HStack {
                     Image(systemName: "plus.forwardslash.minus")
@@ -33,9 +36,8 @@ struct CalculatedTimeSection: View {
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 14)
                 .padding(.horizontal, 16)
-                .background(Color.blue)
+                .background(Color.orange)
                 .cornerRadius(12)
-                .buttonStyle(PlainButtonStyle())
             }
             .buttonStyle(PlainButtonStyle())
             
@@ -50,10 +52,10 @@ struct CalculatedTimeSection: View {
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 14)
                 .padding(.horizontal, 16)
-                .background(Color.green)
+                .background(Color.red)
                 .cornerRadius(12)
-                .buttonStyle(PlainButtonStyle())
             }
+            .buttonStyle(PlainButtonStyle())
                 
         }
         .padding(.horizontal, 16)
@@ -67,6 +69,9 @@ struct CalculatedTimeSection_Previews: PreviewProvider {
             Color.black.ignoresSafeArea()
             CalculatedTimeSection(
                 time: 450, // 7:30
+                temperature: 20.0,
+                filmName: "Kodak Tri-X 400",
+                developerName: "Kodak Xtol",
                 onCalculatorTap: {},
                 onTimerTap: {}
             )

@@ -16,8 +16,6 @@ class DevelopmentSetupViewModel: ObservableObject {
     @Published var temperature: Double = 20.0
     @Published var iso: Int = 400
     @Published var calculatedTime: Int?
-    @Published var showCalculator = false
-    @Published var showTimer = false
     
     @Published var showFilmPicker = false
     @Published var showDeveloperPicker = false
@@ -104,16 +102,6 @@ class DevelopmentSetupViewModel: ObservableObject {
     func reloadData() {
         dataService.reloadDataFromJSON()
         objectWillChange.send()
-    }
-    
-    func startTimer() {
-        guard calculatedTime != nil else { return }
-        navigateToTimer = true
-    }
-    
-    func openCalculator() {
-        guard calculatedTime != nil else { return }
-        navigateToCalculator = true
     }
     
     // MARK: - Private Methods
