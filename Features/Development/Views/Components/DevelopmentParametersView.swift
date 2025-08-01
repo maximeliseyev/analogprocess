@@ -45,7 +45,7 @@ struct DevelopmentParametersView: View {
     @ObservedObject var viewModel: DevelopmentSetupViewModel
     
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 12) {
             ParameterRow(
                 label: LocalizedStringKey("film"),
                 value: viewModel.selectedFilm?.name ?? "Select Film",

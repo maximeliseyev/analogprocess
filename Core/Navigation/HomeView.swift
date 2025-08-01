@@ -13,7 +13,7 @@ public struct HomeView: View {
                 Text(LocalizedStringKey("home_description"))
                     .font(.subheadline)
                     .foregroundColor(.secondary)
-                    .multilineTextAlignment(.center)
+                    .multilineTextAlignment(.leading)
                     .lineLimit(nil)
                     .padding(.horizontal, 20)
                     .padding(.bottom, 10)
