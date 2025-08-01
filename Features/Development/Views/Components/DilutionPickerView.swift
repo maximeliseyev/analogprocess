@@ -22,11 +22,11 @@ struct DilutionPickerView: View {
                         Image(systemName: "info.circle")
                             .infoIconStyle()
                         
-                        Text("No Dilutions Available")
+                        Text(LocalizedStringKey("noDilutionsAvailable"))
                             .font(.headline)
                             .foregroundColor(.primary)
                         
-                        Text("Please select a film and developer first to see available dilutions.")
+                        Text(LocalizedStringKey("noDilutionsDescription"))
                             .disabledTextStyle()
                             .multilineTextAlignment(.center)
                     }

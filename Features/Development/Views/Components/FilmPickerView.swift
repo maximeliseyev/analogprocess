@@ -48,7 +48,7 @@ struct FilmPickerView: View {
                                     Text(film.name ?? "")
                                         .pickerTitleStyle()
                                     
-                                    Text("\(film.manufacturer ?? "") • ISO \(film.defaultISO)")
+                                    Text("\(film.manufacturer ?? "") • \(String(format: String(localized: "isoLabel"), "\(film.defaultISO)"))")
                                         .pickerSubtitleStyle()
                                 }
                                 
@@ -68,7 +68,7 @@ struct FilmPickerView: View {
                     }
                 }
             }
-            .searchable(text: $searchText, prompt: "Search films...")
+            .searchable(text: $searchText, prompt: String(localized: "searchFilms"))
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(LocalizedStringKey("selectFilm"))
             .toolbar {

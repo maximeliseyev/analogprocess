@@ -23,12 +23,12 @@ struct RecordRowView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
-                Text("\(record.filmName ?? "Film") + \(record.developerName ?? "Developer")")
+                Text(String(format: String(localized: "filmPlusDeveloper"), record.filmName ?? String(localized: "unknownFilm"), record.developerName ?? String(localized: "unknownDeveloper")))
                     .font(.headline)
                 
                 Spacer()
                 
-                Text("ISO \(record.iso)")
+                Text(String(format: String(localized: "isoLabel"), "\(record.iso)"))
                     .font(.caption)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)
@@ -37,7 +37,7 @@ struct RecordRowView: View {
                     .cornerRadius(4)
             }
             
-            Text("\(minutes):\(String(format: "%02d", seconds)) • \(record.dilution ?? "") • \(String(format: "%.1f", record.temperature))°C")
+            Text(String(format: String(localized: "timeFormat"), "\(minutes)", String(format: "%02d", seconds), record.dilution ?? "", String(format: "%.1f", record.temperature), String(localized: "degreesCelsius")))
                 .font(.system(.body, design: .monospaced))
                 .foregroundColor(.secondary)
             

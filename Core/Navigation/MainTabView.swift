@@ -8,7 +8,7 @@ public struct MainTabView: View {
     @StateObject private var coreDataService = CoreDataService.shared
     @State private var savedRecords: [CalculationRecord] = []
     @Binding var colorScheme: ColorScheme?
-    @State private var showManuals = false
+
     
     public var body: some View {
         NavigationStack {
@@ -52,15 +52,7 @@ public struct MainTabView: View {
                 Image(systemName: "house")
                     .foregroundColor(.blue)
             })
-            .onChange(of: selectedTab) { newValue in
-                if newValue == 4 {
-                    showManuals = true
-                    selectedTab = 0 // Возвращаемся к первому табу
-                }
-            }
-            .sheet(isPresented: $showManuals) {
-                ManualView()
-            }
+
         }
     }
     

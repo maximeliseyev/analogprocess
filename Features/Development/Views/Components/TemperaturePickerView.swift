@@ -21,7 +21,7 @@ struct TemperaturePickerView: View {
                     onDismiss()
                 }) {
                     HStack {
-                        Text("\(temp, specifier: "%.1f")°C")
+                        Text("\(temp, specifier: "%.1f")\(String(localized: "degreesCelsius"))")
                             .primaryTextStyle()
                         
                         Spacer()

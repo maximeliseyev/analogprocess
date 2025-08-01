@@ -18,32 +18,32 @@ struct CustomAgitationView: View {
         NavigationStack {
             VStack(spacing: 20) {
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("Agitation Time")
+                    Text(LocalizedStringKey("agitationTime"))
                         .font(.headline)
                     
                     Stepper(value: $agitationSeconds, in: 1...60) {
-                        Text("\(agitationSeconds) seconds")
+                        Text("\(agitationSeconds) \(String(localized: "seconds"))")
                     }
                 }
                 
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("Rest Time")
+                    Text(LocalizedStringKey("restTime"))
                         .font(.headline)
                     
                     Stepper(value: $restSeconds, in: 0...180) {
-                        Text("\(restSeconds) seconds")
+                        Text("\(restSeconds) \(String(localized: "seconds"))")
                     }
                 }
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Preview")
+                    Text(LocalizedStringKey("preview"))
                         .font(.headline)
                     
-                    Text("Cycle: \(agitationSeconds)s agitation → \(restSeconds)s rest")
+                    Text(String(format: String(localized: "cycleFormat"), "\(agitationSeconds)", "\(restSeconds)"))
                         .font(.body)
                         .foregroundColor(.secondary)
                     
-                    Text("Total cycle duration: \(agitationSeconds + restSeconds)s")
+                    Text(String(format: String(localized: "totalCycleDuration"), "\(agitationSeconds + restSeconds)"))
                         .font(.body)
                         .foregroundColor(.secondary)
                 }
@@ -54,17 +54,17 @@ struct CustomAgitationView: View {
                 Spacer()
             }
             .padding()
-            .navigationTitle("Custom Agitation")
+            .navigationTitle(LocalizedStringKey("customAgitationTitle"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
+                    Button(LocalizedStringKey("cancel")) {
                         onDismiss()
                     }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Save") {
+                    Button(LocalizedStringKey("save")) {
                         agitationMode = AgitationMode.createCustomMode(agitationSeconds: agitationSeconds, restSeconds: restSeconds)
                         onDismiss()
                     }
