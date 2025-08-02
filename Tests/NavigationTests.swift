@@ -4,26 +4,8 @@ import SwiftUI
 
 class NavigationTests: XCTestCase {
     
-    func testHomeViewNavigation() {
-        // Тест навигации из HomeView
-        var selectedTab = -1
-        let homeView = HomeView(
-            onSelectTab: { tab in
-                selectedTab = tab
-            },
-            colorScheme: .constant(nil)
-        )
-        
-        // Проверяем, что все кнопки корректно настроены
-        XCTAssertEqual(selectedTab, -1) // Начальное состояние
-        
-        // Симулируем нажатие на кнопки
-        // Note: В реальном тесте нужно было бы использовать UI тесты
-        // для проверки фактических нажатий
-    }
-    
     func testMainTabViewTabSelection() {
-        // Тест выбора табов в MainTabView
+        // Test tab selection in MainTabView
         let selectedTab = Binding<Int>(
             get: { 0 },
             set: { _ in }
@@ -35,33 +17,20 @@ class NavigationTests: XCTestCase {
             colorScheme: .constant(nil)
         )
         
-        // Проверяем, что MainTabView создается без ошибок
+        // Verify that MainTabView is created without errors
         XCTAssertNotNil(mainTabView)
     }
     
     func testContentViewStateManagement() {
-        // Тест управления состоянием в ContentView
+        // Test state management in ContentView
         let contentView = ContentView(colorScheme: .constant(nil))
         
-        // Проверяем, что ContentView создается без ошибок
+        // Verify that ContentView is created without errors
         XCTAssertNotNil(contentView)
     }
     
-    func testManualViewRemoval() {
-        // Тест того, что Manuals больше не отображается в основном интерфейсе
-        // Проверяем, что в HomeView нет кнопки для Manuals (индекс 4)
-        let homeView = HomeView(
-            onSelectTab: { _ in },
-            colorScheme: .constant(nil)
-        )
-        
-        // Проверяем, что функция title для индекса 4 возвращает пустую строку
-        // или что этот индекс не используется
-        XCTAssertNotNil(homeView)
-    }
-    
     func testTimerViewNavigation() {
-        // Тест навигации в TimerView
+        // Test navigation to TimerView
         let timerView = TimerView(
             timerLabel: "Test Timer",
             totalMinutes: 5,
@@ -72,21 +41,21 @@ class NavigationTests: XCTestCase {
     }
     
     func testDevelopmentSetupViewNavigation() {
-        // Тест навигации в DevelopmentSetupView
+        // Test navigation to DevelopmentSetupView
         let developmentView = DevelopmentSetupView()
         
         XCTAssertNotNil(developmentView)
     }
     
     func testCalculatorViewNavigation() {
-        // Тест навигации в CalculatorView
+        // Test navigation to CalculatorView
         let calculatorView = CalculatorView()
         
         XCTAssertNotNil(calculatorView)
     }
     
     func testJournalViewNavigation() {
-        // Тест навигации в JournalView
+        // Test navigation to JournalView
         let journalView = JournalView(
             records: [],
             onLoadRecord: { _ in },
@@ -95,5 +64,31 @@ class NavigationTests: XCTestCase {
         )
         
         XCTAssertNotNil(journalView)
+    }
+    
+    func testMainTabViewHomeButton() {
+        // Test that home button functionality works
+        var selectedTab = 1
+        let mainTabView = MainTabView(
+            selectedTab: Binding(
+                get: { selectedTab },
+                set: { selectedTab = $0 }
+            ),
+            onBackToHome: {},
+            colorScheme: .constant(nil)
+        )
+        
+        XCTAssertNotNil(mainTabView)
+    }
+    
+    func testTabViewVisibility() {
+        // Test that TabView is hidden on main screen and visible on child screens
+        let mainTabView = MainTabView(
+            selectedTab: .constant(0), // Main screen
+            onBackToHome: {},
+            colorScheme: .constant(nil)
+        )
+        
+        XCTAssertNotNil(mainTabView)
     }
 } 

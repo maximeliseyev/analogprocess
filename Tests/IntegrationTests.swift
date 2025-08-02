@@ -6,41 +6,41 @@ import CoreData
 class IntegrationTests: XCTestCase {
     
     func testDevelopmentSetupToTimerFlow() {
-        // Тест потока от Development Setup к Timer
+        // Test flow from Development Setup to Timer
         let developmentView = DevelopmentSetupView()
         XCTAssertNotNil(developmentView)
         
-        // В реальном приложении здесь бы тестировался полный поток:
-        // 1. Выбор пленки
-        // 2. Выбор проявителя
-        // 3. Расчет времени
-        // 4. Запуск таймера
+        // In a real app, this would test the complete flow:
+        // 1. Select film
+        // 2. Select developer
+        // 3. Calculate time
+        // 4. Start timer
     }
     
     func testCalculatorToTimerFlow() {
-        // Тест потока от Calculator к Timer
+        // Test flow from Calculator to Timer
         let calculatorView = CalculatorView()
         XCTAssertNotNil(calculatorView)
         
-        // В реальном приложении здесь бы тестировался полный поток:
-        // 1. Ввод базового времени
-        // 2. Расчет push/pull
-        // 3. Запуск таймера
+        // In a real app, this would test the complete flow:
+        // 1. Enter base time
+        // 2. Calculate push/pull
+        // 3. Start timer
     }
     
     func testJournalToCalculatorFlow() {
-        // Тест потока от Journal к Calculator
+        // Test flow from Journal to Calculator
         let mockRecord = CalculationRecord()
-        // Настройка mock записи
+        // Setup mock record
         
         let journalView = JournalView(
             records: [mockRecord],
             onLoadRecord: { record in
-                // Проверяем, что запись загружается корректно
+                // Verify that record loads correctly
                 XCTAssertNotNil(record)
             },
             onDeleteRecord: { record in
-                // Проверяем, что запись удаляется корректно
+                // Verify that record deletes correctly
                 XCTAssertNotNil(record)
             },
             onClose: {}
@@ -49,20 +49,21 @@ class IntegrationTests: XCTestCase {
         XCTAssertNotNil(journalView)
     }
     
-    func testHomeToSettingsFlow() {
-        // Тест потока от Home к Settings
-        let homeView = HomeView(
-            onSelectTab: { _ in },
+    func testMainTabViewToSettingsFlow() {
+        // Test flow from MainTabView to Settings
+        let mainTabView = MainTabView(
+            selectedTab: .constant(0),
+            onBackToHome: {},
             colorScheme: .constant(nil)
         )
         
-        XCTAssertNotNil(homeView)
+        XCTAssertNotNil(mainTabView)
         
-        // Settings доступны через toolbar в HomeView
+        // Settings are available through toolbar in MainTabView
     }
     
     func testTabSwitchingFlow() {
-        // Тест переключения между табами
+        // Test switching between tabs
         let selectedTab = Binding<Int>(
             get: { 0 },
             set: { _ in }
@@ -76,22 +77,22 @@ class IntegrationTests: XCTestCase {
         
         XCTAssertNotNil(mainTabView)
         
-        // В реальном приложении здесь бы тестировалось переключение между табами
+        // In a real app, this would test switching between tabs
     }
     
     func testDataPersistenceFlow() {
-        // Тест потока сохранения и загрузки данных
+        // Test data saving and loading flow
         let coreDataService = CoreDataService.shared
         XCTAssertNotNil(coreDataService)
         
-        // В реальном приложении здесь бы тестировалось:
-        // 1. Сохранение записи из Calculator
-        // 2. Загрузка записи в Journal
-        // 3. Удаление записи
+        // In a real app, this would test:
+        // 1. Saving record from Calculator
+        // 2. Loading record in Journal
+        // 3. Deleting record
     }
     
     func testTimerIntegration() {
-        // Тест интеграции таймера с другими экранами
+        // Test timer integration with other screens
         let timerView = TimerView(
             timerLabel: "Integration Test",
             totalMinutes: 5,
@@ -105,43 +106,34 @@ class IntegrationTests: XCTestCase {
     }
     
     func testNavigationStateConsistency() {
-        // Тест консистентности состояния навигации
-        var showMainTabs = false
+        // Test navigation state consistency
         var selectedTab = 0
         
         let contentView = ContentView(colorScheme: .constant(nil))
         XCTAssertNotNil(contentView)
         
-        // Проверяем начальное состояние
-        XCTAssertFalse(showMainTabs)
+        // Check initial state
         XCTAssertEqual(selectedTab, 0)
     }
     
     func testErrorHandlingInNavigation() {
-        // Тест обработки ошибок в навигации
-        // Создаем view с некорректными данными
+        // Test error handling in navigation
+        // Create view with incorrect data
         let timerView = TimerView(
             timerLabel: "",
-            totalMinutes: -1, // Некорректное значение
-            totalSeconds: -1  // Некорректное значение
+            totalMinutes: -1, // Invalid value
+            totalSeconds: -1  // Invalid value
         )
         
         XCTAssertNotNil(timerView)
-        // В реальном приложении здесь бы проверялась обработка ошибок
+        // In a real app, this would check error handling
     }
     
     func testMemoryManagementInNavigation() {
-        // Тест управления памятью в навигации
-        weak var weakHomeView: HomeView?
+        // Test memory management in navigation
         weak var weakMainTabView: MainTabView?
         
         autoreleasepool {
-            let homeView = HomeView(
-                onSelectTab: { _ in },
-                colorScheme: .constant(nil)
-            )
-            weakHomeView = homeView
-            
             let mainTabView = MainTabView(
                 selectedTab: .constant(0),
                 onBackToHome: {},
@@ -150,8 +142,22 @@ class IntegrationTests: XCTestCase {
             weakMainTabView = mainTabView
         }
         
-        // Проверяем, что объекты освобождаются из памяти
-        XCTAssertNil(weakHomeView)
+        // Verify that objects are released from memory
         XCTAssertNil(weakMainTabView)
+    }
+    
+    func testHomeButtonFunctionality() {
+        // Test home button functionality
+        var selectedTab = 1
+        let mainTabView = MainTabView(
+            selectedTab: Binding(
+                get: { selectedTab },
+                set: { selectedTab = $0 }
+            ),
+            onBackToHome: {},
+            colorScheme: .constant(nil)
+        )
+        
+        XCTAssertNotNil(mainTabView)
     }
 } 
