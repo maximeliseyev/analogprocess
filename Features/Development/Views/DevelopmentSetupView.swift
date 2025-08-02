@@ -93,7 +93,7 @@ struct DevelopmentSetupView: View {
             if let calculatedTime = viewModel.calculatedTime {
                 let minutes = calculatedTime / 60
                 let seconds = calculatedTime % 60
-                let timerLabel = "\(viewModel.selectedFilm?.name ?? "") + \(viewModel.selectedDeveloper?.name ?? "")"
+                let timerLabel = "\(viewModel.selectedFilm?.name ?? "") / \(viewModel.selectedDeveloper?.name ?? "")"
                 
                 TimerView(
                     timerLabel: timerLabel,

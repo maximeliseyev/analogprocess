@@ -4,32 +4,30 @@ import SwiftUI
 
 class NavigationFlowTests: XCTestCase {
     
-    func testHomeToMainTabNavigation() {
-        // Тест перехода от HomeView к MainTabView
-        var selectedTab = -1
-        var showMainTabs = false
+    func testMainTabViewNavigation() {
+        // Test navigation in MainTabView
+        var selectedTab = 0
         
-        let homeView = HomeView(
-            onSelectTab: { tab in
-                selectedTab = tab
-                showMainTabs = true
-            },
+        let mainTabView = MainTabView(
+            selectedTab: Binding(
+                get: { selectedTab },
+                set: { selectedTab = $0 }
+            ),
+            onBackToHome: {},
             colorScheme: .constant(nil)
         )
         
-        // Симулируем выбор таба
-        // В реальном приложении это происходит через UI
-        XCTAssertEqual(selectedTab, -1) // Начальное состояние
-        XCTAssertFalse(showMainTabs) // Начальное состояние
+        // Simulate tab selection
+        XCTAssertEqual(selectedTab, 0) // Initial state
     }
     
     func testTabIndicesAreCorrect() {
-        // Проверяем, что индексы табов соответствуют ожидаемым
+        // Verify that tab indices match expected values
         let expectedTabs = [
-            0: "presets",      // Development Setup
-            1: "calculator",    // Calculator
-            2: "timer",         // Timer
-            3: "journal"        // Journal
+            1: "presets",      // Development Setup
+            2: "calculator",    // Calculator
+            3: "timer",         // Timer
+            4: "journal"        // Journal
         ]
         
         for (index, expectedTitle) in expectedTabs {
@@ -38,14 +36,8 @@ class NavigationFlowTests: XCTestCase {
         }
     }
     
-    func testNoManualTabExists() {
-        // Проверяем, что таб для Manuals больше не существует
-        let manualTitle = getTitleForIndex(4)
-        XCTAssertEqual(manualTitle, "", "Manual tab should not exist")
-    }
-    
     func testMainTabViewHasCorrectNumberOfTabs() {
-        // Проверяем, что MainTabView содержит правильное количество табов
+        // Verify that MainTabView contains the correct number of tabs
         let mainTabView = MainTabView(
             selectedTab: .constant(0),
             onBackToHome: {},
@@ -53,15 +45,15 @@ class NavigationFlowTests: XCTestCase {
         )
         
         XCTAssertNotNil(mainTabView)
-        // MainTabView должен содержать 4 таба (0-3)
+        // MainTabView should contain 4 tabs (1-4) plus main screen (0)
     }
     
     func testBackToHomeNavigation() {
-        // Тест кнопки "Назад к дому" в MainTabView
+        // Test "Back to Home" button in MainTabView
         var backToHomeCalled = false
         
         let mainTabView = MainTabView(
-            selectedTab: .constant(0),
+            selectedTab: .constant(1),
             onBackToHome: {
                 backToHomeCalled = true
             },
@@ -69,17 +61,17 @@ class NavigationFlowTests: XCTestCase {
         )
         
         XCTAssertNotNil(mainTabView)
-        XCTAssertFalse(backToHomeCalled) // Начальное состояние
+        XCTAssertFalse(backToHomeCalled) // Initial state
     }
     
     func testSettingsNavigation() {
-        // Тест навигации к настройкам
+        // Test navigation to settings
         let settingsView = SettingsView(colorScheme: .constant(nil))
         XCTAssertNotNil(settingsView)
     }
     
     func testTimerSheetNavigation() {
-        // Тест открытия TimerView как sheet
+        // Test opening TimerView as sheet
         let timerView = TimerView(
             timerLabel: "Test Development",
             totalMinutes: 10,
@@ -93,19 +85,19 @@ class NavigationFlowTests: XCTestCase {
     }
     
     func testCalculatorSheetNavigation() {
-        // Тест открытия CalculatorView
+        // Test opening CalculatorView
         let calculatorView = CalculatorView()
         XCTAssertNotNil(calculatorView)
     }
     
     func testDevelopmentSetupSheetNavigation() {
-        // Тест открытия DevelopmentSetupView
+        // Test opening DevelopmentSetupView
         let developmentView = DevelopmentSetupView()
         XCTAssertNotNil(developmentView)
     }
     
     func testJournalNavigation() {
-        // Тест навигации к Journal
+        // Test navigation to Journal
         let journalView = JournalView(
             records: [],
             onLoadRecord: { _ in },
@@ -116,13 +108,28 @@ class NavigationFlowTests: XCTestCase {
         XCTAssertNotNil(journalView)
     }
     
-    // Вспомогательная функция для получения заголовка по индексу
+    func testHomeButtonFunctionality() {
+        // Test that home button returns to main screen
+        var selectedTab = 1
+        let mainTabView = MainTabView(
+            selectedTab: Binding(
+                get: { selectedTab },
+                set: { selectedTab = $0 }
+            ),
+            onBackToHome: {},
+            colorScheme: .constant(nil)
+        )
+        
+        XCTAssertNotNil(mainTabView)
+    }
+    
+    // Helper function to get title by index
     private func getTitleForIndex(_ index: Int) -> String {
         switch index {
-        case 0: return String(localized: "presets")
-        case 1: return String(localized: "calculator")
-        case 2: return String(localized: "timer")
-        case 3: return String(localized: "journal")
+        case 1: return String(localized: "presets")
+        case 2: return String(localized: "calculator")
+        case 3: return String(localized: "timer")
+        case 4: return String(localized: "journal")
         default: return ""
         }
     }

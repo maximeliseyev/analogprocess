@@ -1,110 +1,160 @@
-# Навигация в FilmLab
+# Navigation in FilmLab
 
-## Обзор архитектуры навигации
+## Navigation Architecture Overview
 
-Приложение использует двухуровневую систему навигации:
+The application uses a modern SwiftUI navigation system with TabView and NavigationStack:
 
-1. **HomeView** - главный экран с кнопками для выбора функций
-2. **MainTabView** - контейнер с табами для основных функций
+1. **MainTabView** - Central navigation controller with conditional TabView
+2. **Home Screen** - Main screen with app description and quick access buttons
+3. **Child Screens** - TabView with 4 main functions
 
-## Структура навигации
+## Navigation Structure
 
 ### ContentView
-- Управляет переключением между HomeView и MainTabView
-- Содержит состояние `showMainTabs` для определения текущего экрана
-- Содержит состояние `selectedTab` для выбранного таба
-
-### HomeView
-- Отображает 4 основные функции:
-  - **Presets** (индекс 0) - настройка параметров проявки
-  - **Calculator** (индекс 1) - калькулятор времени
-  - **Timer** (индекс 2) - таймер проявки
-  - **Journal** (индекс 3) - журнал записей
+- Manages the main app state
+- Contains `selectedTab` state for current screen
+- Uses MainTabView as the primary navigation container
 
 ### MainTabView
-- Содержит TabView с 4 табами
-- Каждый таб соответствует функции из HomeView
-- Имеет кнопку "Назад к дому" для возврата к HomeView
+- **Main Screen (selectedTab == 0)**: Home screen without TabBar
+- **Child Screens (selectedTab == 1-4)**: TabView with 4 tabs
+- **Home Button**: Single home button in toolbar for all child screens
 
-## Потоки навигации
+### Navigation Flow
+- **Main Screen**: Clean interface with description and function buttons
+- **Child Screens**: TabView with bottom navigation bar
+- **Home Button**: Returns to main screen (selectedTab = 0)
 
-### 1. Home → MainTab
+## Screen Structure
+
+### Main Screen (selectedTab == 0)
+- **No TabBar**: Hidden for clean interface
+- **No Home Button**: Only settings button in toolbar
+- **Function Buttons**: Direct access to main features
+- **App Description**: Overview of FilmLab capabilities
+
+### Child Screens (selectedTab == 1-4)
+- **TabView**: Bottom navigation with 4 tabs
+- **Home Button**: Single button in top-left corner
+- **Settings Button**: Available in toolbar
+
+### Tab Structure
+1. **Presets** (Development Setup) - Film and developer configuration
+2. **Calculator** - Time calculation with push/pull processing
+3. **Timer** - Development timer with agitation patterns
+4. **Journal** - Saved records and development history
+
+## Navigation Implementation
+
+### MainTabView Structure
 ```swift
-HomeView.onSelectTab { tab in
-    selectedTab = tab
-    showMainTabs = true
+NavigationStack {
+    if selectedTab == 0 {
+        mainScreenView // Home screen without TabView
+    } else {
+        TabView(selection: $selectedTab) {
+            // Child screens with tabs
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: goToHome) {
+                    Image(systemName: "house")
+                }
+            }
+        }
+    }
 }
 ```
 
-### 2. MainTab → Home
+### Home Button Functionality
 ```swift
-MainTabView.onBackToHome {
-    showMainTabs = false
+private func goToHome() {
+    selectedTab = 0 // Return to main screen
 }
 ```
 
-### 3. Sheet навигация
-Многие экраны открываются как sheet:
-- **TimerView** - из DevelopmentSetupView и CalculatorView
-- **SettingsView** - из HomeView через toolbar
-- **Picker views** - из DevelopmentSetupView
+## Navigation Patterns
 
-## Состояние навигации
+### 1. Main Screen → Child Screen
+```swift
+Button(action: {
+    selectedTab = idx + 1 // Navigate to child screen
+}) {
+    // Function button content
+}
+```
+
+### 2. Child Screen → Main Screen
+```swift
+Button(action: goToHome) {
+    Image(systemName: "house")
+}
+```
+
+### 3. NavigationLink Usage
+- **Settings**: NavigationLink to SettingsView
+- **Timer**: NavigationLink from Calculator and Development screens
+- **Results**: Sheet presentation for calculation results
+
+## State Management
 
 ### ContentView
-- `@State private var showMainTabs = false`
 - `@State private var selectedTab = 0`
 
 ### MainTabView
 - `@Binding var selectedTab: Int`
 - `var onBackToHome: () -> Void`
 
-## Изменения после удаления Manuals
+## Testing Navigation
 
-### Удаленные элементы:
-1. Кнопка Manuals из HomeView (индекс 4)
-2. Логика показа ManualView в MainTabView
-3. Состояние `showManuals` в MainTabView
+### Created Tests:
+1. **NavigationTests.swift** - Basic navigation tests
+2. **NavigationFlowTests.swift** - Navigation flow tests
+3. **IntegrationTests.swift** - End-to-end integration tests
 
-### Оставшиеся элементы:
-- ManualView остается в коде для будущего использования
-- Файлы ManualView.swift и связанные компоненты сохранены
+### Key Test Scenarios:
+- Main screen to child screen navigation
+- Tab switching functionality
+- Home button functionality
+- Sheet presentation
+- Navigation error handling
 
-## Тестирование навигации
+## Development Guidelines
 
-### Созданные тесты:
-1. **NavigationTests.swift** - базовые тесты навигации
-2. **NavigationFlowTests.swift** - тесты потоков навигации
-3. **IntegrationTests.swift** - интеграционные тесты
+### Adding New Screens:
+1. Add button to main screen (update ForEach and functions)
+2. Add tab to MainTabView TabView
+3. Create corresponding tests
+4. Update navigation documentation
 
-### Ключевые тестируемые сценарии:
-- Переход от HomeView к MainTabView
-- Переключение между табами
-- Возврат к HomeView
-- Открытие sheet'ов
-- Обработка ошибок навигации
+### Modifying Navigation:
+1. Update MainTabView for new state management
+2. Update tests for new navigation flows
+3. Update documentation
 
-## Рекомендации по разработке
+## Potential Issues
 
-### Добавление новых экранов:
-1. Добавить кнопку в HomeView (обновить ForEach и функции)
-2. Добавить таб в MainTabView
-3. Создать соответствующие тесты
+### Known Issues:
+1. No tab index validation
+2. No error handling for invalid data
+3. No transition animations between screens
 
-### Изменение навигации:
-1. Обновить ContentView для управления новым состоянием
-2. Обновить тесты для проверки новых потоков
-3. Обновить документацию
+### Improvement Recommendations:
+1. Add tab index validation
+2. Add error handling
+3. Add transition animations
+4. Add UI tests for actual button presses
 
-## Потенциальные проблемы
+## Recent Changes
 
-### Известные проблемы:
-1. Нет проверки валидности индексов табов
-2. Нет обработки ошибок при некорректных данных
-3. Нет анимаций переходов между экранами
+### Navigation System Updates:
+1. **Removed HomeView**: Integrated into MainTabView
+2. **Single Home Button**: One button in toolbar for all child screens
+3. **TabBar Management**: Hidden on main screen, visible on child screens
+4. **Simplified State**: Removed complex navigation state management
 
-### Рекомендации по улучшению:
-1. Добавить валидацию индексов табов
-2. Добавить обработку ошибок
-3. Добавить анимации переходов
-4. Добавить UI тесты для проверки фактических нажатий 
+### Architecture Improvements:
+1. **Modern SwiftUI**: Using NavigationStack and NavigationLink
+2. **Clean Interface**: Single home button instead of multiple
+3. **Better UX**: TabBar only where needed
+4. **Simplified Code**: Removed unnecessary parameters and closures 
