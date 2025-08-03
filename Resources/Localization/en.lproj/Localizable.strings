@@ -267,3 +267,7 @@
 "saveRecord" = "Save Record";
 "saveRecordDescription" = "Enter a name to save this record";
 "recordDetails" = "Record Details";
+"set_time_manually" = "Set Time Manually";
+"apply" = "Apply";
+"tap_to_change_time" = "Tap to change time";
+"set_time_to_start_timer" = "Set time to start timer";

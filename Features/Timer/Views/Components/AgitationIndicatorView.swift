@@ -20,20 +20,10 @@ struct AgitationIndicatorView: View {
         if shouldAgitate && selectedAgitationMode != nil {
             VStack(spacing: 8) {
                 HStack {
-                    Image(systemName: "arrow.triangle.2.circlepath")
-                        .foregroundColor(isInAgitationPhase ? .orange : .blue)
-                        .font(.title2)
-                    
                     Text(isInAgitationPhase ? LocalizedStringKey("agitation") : LocalizedStringKey("rest"))
                         .font(.headline)
                         .foregroundColor(isInAgitationPhase ? .orange : .blue)
                         .fontWeight(.bold)
-                    
-                    if agitationTimeRemaining > 0 {
-                        Text(String(format: String(localized: "agitationTimeRemaining"), "\(agitationTimeRemaining)"))
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)

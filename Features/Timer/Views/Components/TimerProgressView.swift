@@ -11,6 +11,11 @@ struct TimerProgressView: View {
     let progress: Double
     let displayMinutes: Int
     let displaySeconds: Int
+    let isInAgitationPhase: Bool
+    let agitationTimeRemaining: Int
+    let isRunning: Bool
+    
+    @State private var rotationAngle: Double = 0
     
     var body: some View {
         ZStack {
@@ -22,9 +27,21 @@ struct TimerProgressView: View {
             Circle()
                 .trim(from: 0.0, to: CGFloat(progress))
                 .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round))
-                .foregroundColor(.blue)
+                .foregroundColor(isInAgitationPhase && isRunning ? .orange : .blue)
                 .rotationEffect(.degrees(-90))
                 .animation(.linear(duration: 1), value: progress)
+            
+            if isInAgitationPhase && isRunning {
+                AgitationArrowsView(rotationAngle: $rotationAngle)
+                    .onAppear {
+                        withAnimation(.linear(duration: 5).repeatForever(autoreverses: false)) {
+                            rotationAngle = 360
+                        }
+                    }
+                    .onDisappear {
+                        rotationAngle = 0
+                    }
+            }
             
             VStack(spacing: 8) {
                 Text("\(displayMinutes):\(String(format: "%02d", displaySeconds))")
@@ -36,19 +53,45 @@ struct TimerProgressView: View {
     }
 }
 
+// MARK: - Agitation Arrows View
+
+struct AgitationArrowsView: View {
+    @Binding var rotationAngle: Double
+    
+    var body: some View {
+        ZStack {
+            ForEach(0..<6, id: \.self) { index in
+                Image(systemName: "arrowtriangle.right.fill")
+                    .font(.system(size: 18, weight: .bold))
+                    .foregroundColor(.orange)
+                    .offset(y: -90)
+                    .rotationEffect(.degrees(Double(index) * 60 + rotationAngle))
+            }
+        }
+    }
+}
+
+
+
 struct TimerProgressView_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 20) {
             TimerProgressView(
                 progress: 0.3,
                 displayMinutes: 5,
-                displaySeconds: 45
+                displaySeconds: 45,
+                isInAgitationPhase: true,
+                agitationTimeRemaining: 30,
+                isRunning: true
             )
             
             TimerProgressView(
                 progress: 0.7,
                 displayMinutes: 2,
-                displaySeconds: 15
+                displaySeconds: 15,
+                isInAgitationPhase: false,
+                agitationTimeRemaining: 0,
+                isRunning: false
             )
         }
         .padding()

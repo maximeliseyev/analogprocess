@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF113D372E3FA8A5008B5578 /* ManualTimeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF113D362E3FA8A5008B5578 /* ManualTimeInputView.swift */; };
 		BF4109102E31052900BE2AD8 /* CalculationFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41090A2E31052900BE2AD8 /* CalculationFormView.swift */; };
 		BF4109112E31052900BE2AD8 /* RatioInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41090B2E31052900BE2AD8 /* RatioInputView.swift */; };
 		BF4109122E31052900BE2AD8 /* TimeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41090F2E31052900BE2AD8 /* TimeInputView.swift */; };
@@ -72,6 +73,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BF113D362E3FA8A5008B5578 /* ManualTimeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTimeInputView.swift; sourceTree = "<group>"; };
 		BF4109092E31052900BE2AD8 /* ActionButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtonsView.swift; sourceTree = "<group>"; };
 		BF41090A2E31052900BE2AD8 /* CalculationFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationFormView.swift; sourceTree = "<group>"; };
 		BF41090B2E31052900BE2AD8 /* RatioInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioInputView.swift; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 		BF41096F2E3166F400BE2AD8 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				BF113D362E3FA8A5008B5578 /* ManualTimeInputView.swift */,
 				BFE12EBE2E34EB960044A3A4 /* TimerTabView.swift */,
 				BF41096B2E3166F400BE2AD8 /* AgitationIndicatorView.swift */,
 				BF41096C2E3166F400BE2AD8 /* TimerControlsView.swift */,
@@ -636,6 +639,7 @@
 				BF4109402E31318D00BE2AD8 /* TimerViewModel.swift in Sources */,
 				BF4109302E31151800BE2AD8 /* DevelopmentSetupView.swift in Sources */,
 				BF4109662E31643100BE2AD8 /* ISOPickerView.swift in Sources */,
+				BF113D372E3FA8A5008B5578 /* ManualTimeInputView.swift in Sources */,
 				BF4109642E31641B00BE2AD8 /* TemperaturePickerView.swift in Sources */,
 				BFA0C7A92E2134BA00132936 /* DevelopmentCalculator.swift in Sources */,
 				BFDCB7612E382558000F6CE5 /* FilmLab.xcdatamodeld in Sources */,
