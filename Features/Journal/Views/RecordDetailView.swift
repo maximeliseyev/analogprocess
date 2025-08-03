@@ -13,6 +13,7 @@ struct RecordDetailView: View {
     let onEdit: () -> Void
     let onDelete: () -> Void
     @Environment(\.dismiss) private var dismiss
+    @State private var showingEditSheet = false
     
     private var minutes: Int {
         Int(record.time) / 60
@@ -48,7 +49,9 @@ struct RecordDetailView: View {
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {
-                        Button(action: onEdit) {
+                        Button(action: {
+                            showingEditSheet = true
+                        }) {
                             Label(LocalizedStringKey("edit"), systemImage: "pencil")
                         }
                         
@@ -60,6 +63,16 @@ struct RecordDetailView: View {
                     }
                 }
             }
+        }
+        .sheet(isPresented: $showingEditSheet) {
+            CreateRecordView(
+                prefillData: createJournalRecord(),
+                isEditing: true,
+                onUpdate: { updatedRecord in
+                    // Здесь можно добавить логику обновления записи
+                    print("Record updated: \(updatedRecord.name ?? "Unknown")")
+                }
+            )
         }
     }
     
@@ -135,5 +148,20 @@ struct RecordDetailView: View {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy HH:mm"
         return formatter.string(from: date)
+    }
+    
+    private func createJournalRecord() -> JournalRecord {
+        return JournalRecord(
+            date: record.date ?? Date(),
+            name: record.name,
+            filmName: record.filmName,
+            developerName: record.developerName,
+            iso: record.iso,
+            process: "Редактирование",
+            dilution: record.dilution,
+            temperature: record.temperature,
+            time: Int(record.time),
+            comment: record.comment
+        )
     }
 }

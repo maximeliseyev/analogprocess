@@ -13,9 +13,13 @@ struct CreateRecordView: View {
     
     // Параметры для предзаполнения из калькулятора
     let prefillData: JournalRecord?
+    let isEditing: Bool
+    let onUpdate: ((JournalRecord) -> Void)?
     
-    init(prefillData: JournalRecord? = nil) {
+    init(prefillData: JournalRecord? = nil, isEditing: Bool = false, onUpdate: ((JournalRecord) -> Void)? = nil) {
         self.prefillData = prefillData
+        self.isEditing = isEditing
+        self.onUpdate = onUpdate
     }
     
     var body: some View {
@@ -93,7 +97,7 @@ struct CreateRecordView: View {
                     )
                 }
             }
-            .navigationTitle(LocalizedStringKey("journal_create_record"))
+            .navigationTitle(isEditing ? LocalizedStringKey("edit_record") : LocalizedStringKey("journal_create_record"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -104,7 +108,12 @@ struct CreateRecordView: View {
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(LocalizedStringKey("save")) {
-                        viewModel.saveRecord()
+                        if isEditing {
+                            let updatedRecord = viewModel.createJournalRecord()
+                            onUpdate?(updatedRecord)
+                        } else {
+                            viewModel.saveRecord()
+                        }
                         dismiss()
                     }
                     .disabled(!viewModel.isValid)
@@ -176,6 +185,21 @@ class CreateRecordViewModel: ObservableObject {
             name: name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : name.trimmingCharacters(in: .whitespacesAndNewlines),
             comment: comment.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : comment.trimmingCharacters(in: .whitespacesAndNewlines),
             date: date
+        )
+    }
+    
+    func createJournalRecord() -> JournalRecord {
+        return JournalRecord(
+            date: date,
+            name: name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : name.trimmingCharacters(in: .whitespacesAndNewlines),
+            filmName: filmName.trimmingCharacters(in: .whitespacesAndNewlines),
+            developerName: developerName.trimmingCharacters(in: .whitespacesAndNewlines),
+            iso: iso,
+            process: process.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : process.trimmingCharacters(in: .whitespacesAndNewlines),
+            dilution: dilution.trimmingCharacters(in: .whitespacesAndNewlines),
+            temperature: temperature,
+            time: totalSeconds,
+            comment: comment.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : comment.trimmingCharacters(in: .whitespacesAndNewlines)
         )
     }
 }
