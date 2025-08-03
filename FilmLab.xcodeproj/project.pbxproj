@@ -37,19 +37,25 @@
 		BFA0C7A02E2133FC00132936 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7982E2133FC00132936 /* Persistence.swift */; };
 		BFA0C7A82E2134B400132936 /* CalculationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7A72E2134B300132936 /* CalculationResultView.swift */; };
 		BFA0C7A92E2134BA00132936 /* DevelopmentCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7A62E21349100132936 /* DevelopmentCalculator.swift */; };
-		BFA0C7AB2E2134D800132936 /* SaveRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AA2E2134D600132936 /* SaveRecordView.swift */; };
 		BFA0C7AD2E2134F800132936 /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AC2E2134F600132936 /* JournalView.swift */; };
 		BFA0C7AF2E21351300132936 /* RecordRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AE2E21351000132936 /* RecordRowView.swift */; };
+		BFB0C3D12E3E4E7D00296B97 /* GitHubDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB0C3D02E3E4E7D00296B97 /* GitHubDataService.swift */; };
+		BFB0C3EF2E3E510400296B97 /* GitHubSyncExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB0C3EA2E3E510400296B97 /* GitHubSyncExample.swift */; };
+		BFB0C3F02E3E510400296B97 /* NavigationAnalysisReport.md in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3EC2E3E510400296B97 /* NavigationAnalysisReport.md */; };
+		BFB0C3F12E3E510400296B97 /* GitHubSyncGuide.md in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3EB2E3E510400296B97 /* GitHubSyncGuide.md */; };
+		BFB0C3F22E3E510400296B97 /* NavigationGuide.md in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3ED2E3E510400296B97 /* NavigationGuide.md */; };
+		BFB0C3F62E3E511300296B97 /* FilmLab-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3F32E3E511300296B97 /* FilmLab-Info.plist */; };
+		BFB0C3F72E3E511300296B97 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3F52E3E511300296B97 /* README.md */; };
+		BFB0C3F82E3E511300296B97 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3F42E3E511300296B97 /* LICENSE */; };
+		BFB0C3FC2E3E58D900296B97 /* JournalRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB0C3F92E3E58D900296B97 /* JournalRecord.swift */; };
+		BFB0C3FE2E3E5AB400296B97 /* CreateRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB0C3FD2E3E5AB400296B97 /* CreateRecordView.swift */; };
 		BFDCB7512E382250000F6CE5 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDCB7502E382250000F6CE5 /* ArticleView.swift */; };
 		BFDCB75A2E38227C000F6CE5 /* basics-article.md in Resources */ = {isa = PBXBuildFile; fileRef = BFDCB7532E38227C000F6CE5 /* basics-article.md */; };
 		BFDCB75C2E38229E000F6CE5 /* Kodak Xtol.md in Resources */ = {isa = PBXBuildFile; fileRef = BFDCB75B2E38229E000F6CE5 /* Kodak Xtol.md */; };
 		BFDCB75E2E382372000F6CE5 /* FilmLabApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDCB75D2E382372000F6CE5 /* FilmLabApp.swift */; };
 		BFDCB7612E382558000F6CE5 /* FilmLab.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFDCB75F2E382558000F6CE5 /* FilmLab.xcdatamodeld */; };
+		BFDD23652E3F7EE30079688B /* RecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDD23642E3F7EE30079688B /* RecordDetailView.swift */; };
 		BFE12EB02E33C5120044A3A4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BFE12EAE2E33C5120044A3A4 /* Localizable.strings */; };
-		BFE12EB62E33C6800044A3A4 /* temperature-multipliers.json in Resources */ = {isa = PBXBuildFile; fileRef = BFE12EB42E33C6800044A3A4 /* temperature-multipliers.json */; };
-		BFE12EB72E33C6800044A3A4 /* development-times.json in Resources */ = {isa = PBXBuildFile; fileRef = BFE12EB22E33C6800044A3A4 /* development-times.json */; };
-		BFE12EB82E33C6800044A3A4 /* films.json in Resources */ = {isa = PBXBuildFile; fileRef = BFE12EB32E33C6800044A3A4 /* films.json */; };
-		BFE12EB92E33C6800044A3A4 /* developers.json in Resources */ = {isa = PBXBuildFile; fileRef = BFE12EB12E33C6800044A3A4 /* developers.json */; };
 		BFE12EBC2E34DBE10044A3A4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE12EBA2E34DBE10044A3A4 /* HomeView.swift */; };
 		BFE12EBD2E34DBE10044A3A4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE12EBB2E34DBE10044A3A4 /* SettingsView.swift */; };
 		BFE12EBF2E34EB960044A3A4 /* TimerTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE12EBE2E34EB960044A3A4 /* TimerTabView.swift */; };
@@ -98,20 +104,26 @@
 		BFA0C7982E2133FC00132936 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		BFA0C7A62E21349100132936 /* DevelopmentCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentCalculator.swift; sourceTree = "<group>"; };
 		BFA0C7A72E2134B300132936 /* CalculationResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationResultView.swift; sourceTree = "<group>"; };
-		BFA0C7AA2E2134D600132936 /* SaveRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveRecordView.swift; sourceTree = "<group>"; };
 		BFA0C7AC2E2134F600132936 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
 		BFA0C7AE2E21351000132936 /* RecordRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRowView.swift; sourceTree = "<group>"; };
+		BFB0C3D02E3E4E7D00296B97 /* GitHubDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubDataService.swift; sourceTree = "<group>"; };
+		BFB0C3EA2E3E510400296B97 /* GitHubSyncExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSyncExample.swift; sourceTree = "<group>"; };
+		BFB0C3EB2E3E510400296B97 /* GitHubSyncGuide.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = GitHubSyncGuide.md; sourceTree = "<group>"; };
+		BFB0C3EC2E3E510400296B97 /* NavigationAnalysisReport.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = NavigationAnalysisReport.md; sourceTree = "<group>"; };
+		BFB0C3ED2E3E510400296B97 /* NavigationGuide.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = NavigationGuide.md; sourceTree = "<group>"; };
+		BFB0C3F32E3E511300296B97 /* FilmLab-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FilmLab-Info.plist"; sourceTree = "<group>"; };
+		BFB0C3F42E3E511300296B97 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		BFB0C3F52E3E511300296B97 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		BFB0C3F92E3E58D900296B97 /* JournalRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalRecord.swift; sourceTree = "<group>"; };
+		BFB0C3FD2E3E5AB400296B97 /* CreateRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecordView.swift; sourceTree = "<group>"; };
 		BFDCB7502E382250000F6CE5 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
 		BFDCB7532E38227C000F6CE5 /* basics-article.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "basics-article.md"; sourceTree = "<group>"; };
 		BFDCB75B2E38229E000F6CE5 /* Kodak Xtol.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Kodak Xtol.md"; sourceTree = "<group>"; };
 		BFDCB75D2E382372000F6CE5 /* FilmLabApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmLabApp.swift; sourceTree = "<group>"; };
 		BFDCB7602E382558000F6CE5 /* FilmLab.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FilmLab.xcdatamodel; sourceTree = "<group>"; };
+		BFDD23642E3F7EE30079688B /* RecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailView.swift; sourceTree = "<group>"; };
 		BFE12EAC2E33C5120044A3A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BFE12EAD2E33C5120044A3A4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		BFE12EB12E33C6800044A3A4 /* developers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = developers.json; sourceTree = "<group>"; };
-		BFE12EB22E33C6800044A3A4 /* development-times.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "development-times.json"; sourceTree = "<group>"; };
-		BFE12EB32E33C6800044A3A4 /* films.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = films.json; sourceTree = "<group>"; };
-		BFE12EB42E33C6800044A3A4 /* temperature-multipliers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "temperature-multipliers.json"; sourceTree = "<group>"; };
 		BFE12EBA2E34DBE10044A3A4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		BFE12EBB2E34DBE10044A3A4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		BFE12EBE2E34EB960044A3A4 /* TimerTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTabView.swift; sourceTree = "<group>"; };
@@ -259,9 +271,10 @@
 		BF41094A2E3134F000BE2AD8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BFB0C3FD2E3E5AB400296B97 /* CreateRecordView.swift */,
 				BFA0C7AC2E2134F600132936 /* JournalView.swift */,
+				BFDD23642E3F7EE30079688B /* RecordDetailView.swift */,
 				BFA0C7AE2E21351000132936 /* RecordRowView.swift */,
-				BFA0C7AA2E2134D600132936 /* SaveRecordView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -358,6 +371,7 @@
 		BFA0C7A22E21341400132936 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				BFB0C3D02E3E4E7D00296B97 /* GitHubDataService.swift */,
 				BFF4DA002E21C2C90097BE82 /* AgitationMode.swift */,
 				BF4109342E311CA800BE2AD8 /* CoreDataService.swift */,
 				BFA0C7A62E21349100132936 /* DevelopmentCalculator.swift */,
@@ -368,6 +382,7 @@
 		BFA0C7A32E21341F00132936 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BFB0C3F92E3E58D900296B97 /* JournalRecord.swift */,
 				BF4109252E31148700BE2AD8 /* DevelopmentParameters.swift */,
 			);
 			path = Models;
@@ -377,12 +392,22 @@
 			isa = PBXGroup;
 			children = (
 				BFDCB7592E38227C000F6CE5 /* Articles */,
-				BFE12EB52E33C6800044A3A4 /* Data */,
 				BFE12EAF2E33C5120044A3A4 /* Localization */,
 				BFA0C7932E2133FC00132936 /* Assets.xcassets */,
 				BFDCB75F2E382558000F6CE5 /* FilmLab.xcdatamodeld */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		BFB0C3EE2E3E510400296B97 /* Docs */ = {
+			isa = PBXGroup;
+			children = (
+				BFB0C3EA2E3E510400296B97 /* GitHubSyncExample.swift */,
+				BFB0C3EB2E3E510400296B97 /* GitHubSyncGuide.md */,
+				BFB0C3EC2E3E510400296B97 /* NavigationAnalysisReport.md */,
+				BFB0C3ED2E3E510400296B97 /* NavigationGuide.md */,
+			);
+			path = Docs;
 			sourceTree = "<group>";
 		};
 		BFDCB7522E38227C000F6CE5 /* agitation */ = {
@@ -450,17 +475,6 @@
 			path = Localization;
 			sourceTree = "<group>";
 		};
-		BFE12EB52E33C6800044A3A4 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				BFE12EB12E33C6800044A3A4 /* developers.json */,
-				BFE12EB22E33C6800044A3A4 /* development-times.json */,
-				BFE12EB32E33C6800044A3A4 /* films.json */,
-				BFE12EB42E33C6800044A3A4 /* temperature-multipliers.json */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
 		BFE12EC42E36DFA40044A3A4 /* Manual */ = {
 			isa = PBXGroup;
 			children = (
@@ -481,6 +495,10 @@
 				BF41094F2E3135B700BE2AD8 /* Shared */,
 				BFA0C7B02E2136A500132936 /* Resources */,
 				BFE96A3A2E2061A0001CF98D /* Products */,
+				BFB0C3EE2E3E510400296B97 /* Docs */,
+				BFB0C3F32E3E511300296B97 /* FilmLab-Info.plist */,
+				BFB0C3F42E3E511300296B97 /* LICENSE */,
+				BFB0C3F52E3E511300296B97 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -555,13 +573,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFA0C79B2E2133FC00132936 /* Assets.xcassets in Resources */,
-				BFE12EB62E33C6800044A3A4 /* temperature-multipliers.json in Resources */,
-				BFE12EB72E33C6800044A3A4 /* development-times.json in Resources */,
-				BFE12EB82E33C6800044A3A4 /* films.json in Resources */,
-				BFE12EB92E33C6800044A3A4 /* developers.json in Resources */,
 				BFDCB75C2E38229E000F6CE5 /* Kodak Xtol.md in Resources */,
 				BFDCB75A2E38227C000F6CE5 /* basics-article.md in Resources */,
 				BFE12EB02E33C5120044A3A4 /* Localizable.strings in Resources */,
+				BFB0C3F62E3E511300296B97 /* FilmLab-Info.plist in Resources */,
+				BFB0C3F72E3E511300296B97 /* README.md in Resources */,
+				BFB0C3F82E3E511300296B97 /* LICENSE in Resources */,
+				BFB0C3F02E3E510400296B97 /* NavigationAnalysisReport.md in Resources */,
+				BFB0C3F12E3E510400296B97 /* GitHubSyncGuide.md in Resources */,
+				BFB0C3F22E3E510400296B97 /* NavigationGuide.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,7 +594,6 @@
 			files = (
 				BF4109382E31307100BE2AD8 /* MainTabView.swift in Sources */,
 				BF4109272E31148700BE2AD8 /* DevelopmentParameters.swift in Sources */,
-				BFA0C7AB2E2134D800132936 /* SaveRecordView.swift in Sources */,
 				BFA0C7AF2E21351300132936 /* RecordRowView.swift in Sources */,
 				BFDCB7512E382250000F6CE5 /* ArticleView.swift in Sources */,
 				BFA0C79D2E2133FC00132936 /* ContentView.swift in Sources */,
@@ -587,6 +606,8 @@
 				BF4109122E31052900BE2AD8 /* TimeInputView.swift in Sources */,
 				BF4109132E31052900BE2AD8 /* ProcessTypeView.swift in Sources */,
 				BFE12EBC2E34DBE10044A3A4 /* HomeView.swift in Sources */,
+				BFDD23652E3F7EE30079688B /* RecordDetailView.swift in Sources */,
+				BFB0C3FE2E3E5AB400296B97 /* CreateRecordView.swift in Sources */,
 				BFE12EBD2E34DBE10044A3A4 /* SettingsView.swift in Sources */,
 				BF4109142E31052900BE2AD8 /* StepsInputView.swift in Sources */,
 				BFE12EC82E36DFD60044A3A4 /* ManualViewModel.swift in Sources */,
@@ -595,6 +616,7 @@
 				BF4109712E3166F400BE2AD8 /* TimerHeaderView.swift in Sources */,
 				BF4109722E3166F400BE2AD8 /* AgitationIndicatorView.swift in Sources */,
 				BF4109732E3166F400BE2AD8 /* TimerProgressView.swift in Sources */,
+				BFB0C3FC2E3E58D900296B97 /* JournalRecord.swift in Sources */,
 				BF4109162E31052900BE2AD8 /* ActionButtonsView.swift in Sources */,
 				BFF4DA032E21C31E0097BE82 /* AgitationSelectionView.swift in Sources */,
 				BFE12EC62E36DFC00044A3A4 /* ManualView.swift in Sources */,
@@ -618,7 +640,9 @@
 				BFA0C7A92E2134BA00132936 /* DevelopmentCalculator.swift in Sources */,
 				BFDCB7612E382558000F6CE5 /* FilmLab.xcdatamodeld in Sources */,
 				BFE12EC12E360C010044A3A4 /* AppPreview.swift in Sources */,
+				BFB0C3D12E3E4E7D00296B97 /* GitHubDataService.swift in Sources */,
 				BFA0C7A02E2133FC00132936 /* Persistence.swift in Sources */,
+				BFB0C3EF2E3E510400296B97 /* GitHubSyncExample.swift in Sources */,
 				BFE31C0E2E3A071600310B19 /* ManualTypes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -777,7 +801,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -810,7 +834,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

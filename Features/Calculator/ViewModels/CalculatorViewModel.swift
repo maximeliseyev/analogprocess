@@ -21,16 +21,15 @@ class CalculatorViewModel: ObservableObject {
     @Published var pushResults: [(label: String, minutes: Int, seconds: Int)] = []
     @Published var showResult = false
     @Published var showSaveDialog = false
-    @Published var showJournal = false
     @Published var showTimer = false
     @Published var showTemperaturePicker = false
-    @Published var recordName = ""
     @Published var savedRecords: [CalculationRecord] = []
     
     // Timer properties
     @Published var selectedTimerLabel = ""
     @Published var selectedTimerMinutes = 0
     @Published var selectedTimerSeconds = 0
+    @Published var selectedResult: (label: String, minutes: Int, seconds: Int)?
     
     // MARK: - Dependencies
     private let coreDataService = CoreDataService.shared
@@ -81,23 +80,22 @@ class CalculatorViewModel: ObservableObject {
     // MARK: - Record Management Methods
     
     func saveRecord() {
-        guard !recordName.isEmpty && !pushResults.isEmpty else { return }
+        guard let selectedResult = selectedResult else { return }
         
-        // Сохраняем первый результат как основной (обычно это базовое время)
-        let firstResult = pushResults.first!
-        let totalSeconds = firstResult.minutes * 60 + firstResult.seconds
+        let totalSeconds = selectedResult.minutes * 60 + selectedResult.seconds
         
         // Сохраняем в Core Data с информацией о расчете
-        coreDataService.saveCalculationRecord(
+        coreDataService.saveRecord(
             filmName: "Расчетное время",
             developerName: "Пользовательский расчет",
             dilution: "Коэффициент: \(coefficient), Температура: \(String(format: "%.1f", temperature))°C",
             iso: 400,
             temperature: temperature,
-            time: totalSeconds
+            time: totalSeconds,
+            name: selectedResult.label,
+            comment: "Расчет: \(selectedResult.label) - \(selectedResult.minutes):\(String(format: "%02d", selectedResult.seconds))"
         )
         
-        recordName = ""
         showSaveDialog = false
         loadRecords() // Обновляем список записей
     }
@@ -117,13 +115,32 @@ class CalculatorViewModel: ObservableObject {
         isPushMode = true
         pushSteps = 3
         
-        showJournal = false
         calculateTime()
     }
     
     func deleteRecord(_ record: CalculationRecord) {
         coreDataService.deleteCalculationRecord(record)
         loadRecords() // Обновляем список записей
+    }
+    
+
+    
+    func createPrefillData() -> JournalRecord? {
+        guard let selectedResult = selectedResult else { return nil }
+        
+        let totalSeconds = selectedResult.minutes * 60 + selectedResult.seconds
+        
+        return JournalRecord(
+            date: Date(),
+            name: selectedResult.label,
+            filmName: "Расчетное время",
+            developerName: "Пользовательский расчет",
+            process: "Расчет",
+            dilution: "Коэффициент: \(coefficient), Температура: \(String(format: "%.1f", temperature))°C",
+            temperature: temperature,
+            time: totalSeconds,
+            comment: "Расчет: \(selectedResult.label) - \(selectedResult.minutes):\(String(format: "%02d", selectedResult.seconds))"
+        )
     }
     
     // MARK: - Utility Methods
@@ -135,6 +152,5 @@ class CalculatorViewModel: ObservableObject {
         pushSteps = 3
         isPushMode = true
         pushResults = []
-        recordName = ""
     }
 } 

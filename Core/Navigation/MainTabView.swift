@@ -8,6 +8,7 @@ public struct MainTabView: View {
     
     private let dataService = CoreDataService.shared
     @State private var savedRecords: [CalculationRecord] = []
+    @State private var showingCreateRecord = false
     
     public var body: some View {
         NavigationStack {
@@ -44,9 +45,12 @@ public struct MainTabView: View {
                     // Экран Journal
                     JournalView(
                         records: savedRecords,
-                        onLoadRecord: loadRecord,
+                        onEditRecord: loadRecord,
                         onDeleteRecord: deleteRecord,
-                        onClose: { }
+                        onClose: { },
+                        onCreateNew: {
+                            showingCreateRecord = true
+                        }
                     )
                     .tabItem {
                         Image(systemName: "book")
@@ -67,6 +71,12 @@ public struct MainTabView: View {
         }
         .onAppear {
             loadRecords()
+        }
+        .sheet(isPresented: $showingCreateRecord) {
+            CreateRecordView()
+                .onDisappear {
+                    loadRecords() // Обновляем список после создания записи
+                }
         }
     }
     

@@ -100,7 +100,7 @@ class NavigationFlowTests: XCTestCase {
         // Test navigation to Journal
         let journalView = JournalView(
             records: [],
-            onLoadRecord: { _ in },
+            onEditRecord: { _ in },
             onDeleteRecord: { _ in },
             onClose: {}
         )

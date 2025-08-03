@@ -20,7 +20,7 @@ struct CalculationResultView: View {
                 .font(.headline)
             
             VStack(spacing: 12) {
-                ForEach(results, id: \.label) { result in
+                ForEach(Array(results.enumerated()), id: \.offset) { index, result in
                     HStack {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(result.label)
@@ -45,7 +45,7 @@ struct CalculationResultView: View {
                             }
                             
                             Button(action: {
-                                viewModel.recordName = result.label
+                                viewModel.selectedResult = result
                                 viewModel.showSaveDialog = true
                             }) {
                                 HStack(spacing: 6) {
@@ -62,16 +62,7 @@ struct CalculationResultView: View {
         }
         .padding(.horizontal)
         .sheet(isPresented: $viewModel.showSaveDialog) {
-            SaveRecordView(
-                recordName: $viewModel.recordName,
-                onSave: {
-                    viewModel.saveRecord()
-                },
-                onCancel: {
-                    viewModel.showSaveDialog = false
-                    viewModel.recordName = ""
-                }
-            )
+            CreateRecordView(prefillData: viewModel.createPrefillData())
         }
     }
 }

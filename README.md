@@ -9,6 +9,7 @@ A comprehensive iOS application for film development, providing tools for calcul
 - **Time Calculator**: Calculate push/pull development times with custom coefficients
 - **Development Timer**: Professional timer with agitation patterns and progress tracking
 - **Journal**: Save and manage development records and calculations
+- **Data Sync**: Automatic synchronization with GitHub repository for latest film development data
 
 ### 🎨 User Interface
 - **Dark Theme**: Modern iOS-style dark interface
@@ -32,7 +33,8 @@ A comprehensive iOS application for film development, providing tools for calcul
 
 ### Data Management
 - **CoreData**: Persistent storage for development records
-- **JSON Import**: Film and developer data from JSON files
+- **GitHub Sync**: Automatic data synchronization with [filmdevelopmentdata](https://github.com/maximeliseyev/filmdevelopmentdata) repository
+- **JSON Import**: Film and developer data from JSON files (fallback)
 - **Calculation Engine**: Development time calculations with temperature compensation
 
 ### View Structure
@@ -44,6 +46,9 @@ FilmLab/
 │   ├── Navigation/
 │   ├── Persistence/
 │   └── Services/
+│       ├── CoreDataService.swift
+│       ├── GitHubDataService.swift
+│       └── DevelopmentCalculator.swift
 ├── Features/
 │   ├── Calculator/
 │   ├── Development/
@@ -70,6 +75,7 @@ FilmLab/
 - **NavigationTests**: Tests for navigation flow and tab switching
 - **NavigationFlowTests**: Integration tests for navigation state
 - **IntegrationTests**: End-to-end flow testing
+- **GitHubSyncTests**: Tests for GitHub data synchronization
 
 ## Localization
 
@@ -92,6 +98,12 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 5. Submit a pull request
 
 ## Version History
+
+### v1.1.0
+- Added GitHub data synchronization
+- Automatic film and developer data updates
+- Progress tracking for data downloads
+- Settings integration for sync management
 
 ### v1.0.0
 - Initial release with core functionality

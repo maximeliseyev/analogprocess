@@ -255,7 +255,18 @@ public class CoreDataService: ObservableObject {
     
     // MARK: - Calculation Records
     
-    public func saveCalculationRecord(filmName: String, developerName: String, dilution: String, iso: Int, temperature: Double, time: Int) {
+    // Унифицированный метод сохранения записи
+    public func saveRecord(
+        filmName: String,
+        developerName: String,
+        dilution: String,
+        iso: Int,
+        temperature: Double,
+        time: Int,
+        name: String? = nil,
+        comment: String? = nil,
+        date: Date = Date()
+    ) {
         let record = CalculationRecord(context: container.viewContext)
         record.filmName = filmName
         record.developerName = developerName
@@ -263,9 +274,41 @@ public class CoreDataService: ObservableObject {
         record.iso = Int32(iso)
         record.temperature = temperature
         record.time = Int32(time)
-        record.date = Date()
+        record.date = date
+        record.name = name
+        record.comment = comment
         
         saveContext()
+    }
+    
+    // Обратная совместимость для старых методов
+    @available(*, deprecated, message: "Use saveRecord instead")
+    public func saveCalculationRecord(filmName: String, developerName: String, dilution: String, iso: Int, temperature: Double, time: Int, name: String? = nil, comment: String? = nil) {
+        saveRecord(
+            filmName: filmName,
+            developerName: developerName,
+            dilution: dilution,
+            iso: iso,
+            temperature: temperature,
+            time: time,
+            name: name,
+            comment: comment
+        )
+    }
+    
+    @available(*, deprecated, message: "Use saveRecord instead")
+    public func saveJournalRecord(_ journalRecord: JournalRecord) {
+        saveRecord(
+            filmName: journalRecord.filmName ?? "",
+            developerName: journalRecord.developerName ?? "",
+            dilution: journalRecord.dilution ?? "",
+            iso: Int(journalRecord.iso ?? 100),
+            temperature: journalRecord.temperature ?? 20.0,
+            time: journalRecord.time ?? 0,
+            name: journalRecord.name,
+            comment: journalRecord.comment,
+            date: journalRecord.date
+        )
     }
     
     public func getCalculationRecords() -> [CalculationRecord] {
@@ -290,6 +333,98 @@ public class CoreDataService: ObservableObject {
         
         saveContext()
         refreshData()
+    }
+    
+    func syncDataFromGitHub() async throws {
+        let githubData = try await GitHubDataService.shared.downloadAllData()
+        
+        await MainActor.run {
+            // Добавляем новые фильмы
+            for (id, filmData) in githubData.films {
+                if getFilm(by: id) == nil {
+                    guard let name = filmData["name"] as? String,
+                          let manufacturer = filmData["manufacturer"] as? String,
+                          let type = filmData["type"] as? String,
+                          let defaultISO = filmData["defaultISO"] as? Int else {
+                        continue
+                    }
+                    
+                    let film = Film(context: container.viewContext)
+                    film.id = id
+                    film.name = name
+                    film.manufacturer = manufacturer
+                    film.type = type
+                    film.defaultISO = Int32(defaultISO)
+                }
+            }
+            
+            // Добавляем новых проявителей
+            for (id, developerData) in githubData.developers {
+                if getDeveloper(by: id) == nil {
+                    guard let name = developerData["name"] as? String,
+                          let manufacturer = developerData["manufacturer"] as? String,
+                          let type = developerData["type"] as? String,
+                          let defaultDilution = developerData["defaultDilution"] as? String else {
+                        continue
+                    }
+                    
+                    let developer = Developer(context: container.viewContext)
+                    developer.id = id
+                    developer.name = name
+                    developer.manufacturer = manufacturer
+                    developer.type = type
+                    developer.defaultDilution = defaultDilution
+                }
+            }
+            
+            // Добавляем новые времена проявки
+            for (filmId, developers) in githubData.developmentTimes {
+                guard let film = getFilm(by: filmId) else { continue }
+                
+                for (developerId, dilutions) in developers {
+                    guard let developer = getDeveloper(by: developerId) else { continue }
+                    
+                    for (dilution, isoTimes) in dilutions {
+                        for (isoString, time) in isoTimes {
+                            guard let iso = Int(isoString) else { continue }
+                            
+                            // Проверяем, существует ли уже такое время проявки
+                            let request: NSFetchRequest<DevelopmentTime> = DevelopmentTime.fetchRequest()
+                            request.predicate = NSPredicate(
+                                format: "film.id == %@ AND developer.id == %@ AND dilution == %@ AND iso == %d",
+                                filmId, developerId, dilution, iso
+                            )
+                            
+                            if ((try? container.viewContext.fetch(request).first == nil) != nil) {
+                                let developmentTime = DevelopmentTime(context: container.viewContext)
+                                developmentTime.dilution = dilution
+                                developmentTime.iso = Int32(iso)
+                                developmentTime.time = Int32(time)
+                                developmentTime.film = film
+                                developmentTime.developer = developer
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Добавляем новые температурные коэффициенты
+            for (tempString, multiplier) in githubData.temperatureMultipliers {
+                guard let temperature = Int(tempString) else { continue }
+                
+                let request: NSFetchRequest<TemperatureMultiplier> = TemperatureMultiplier.fetchRequest()
+                request.predicate = NSPredicate(format: "temperature == %d", temperature)
+                
+                if ((try? container.viewContext.fetch(request).first == nil) != nil) {
+                    let tempMultiplier = TemperatureMultiplier(context: container.viewContext)
+                    tempMultiplier.temperature = Int32(temperature)
+                    tempMultiplier.multiplier = multiplier
+                }
+            }
+            
+            saveContext()
+            refreshData()
+        }
     }
     
     func clearAllData() {
