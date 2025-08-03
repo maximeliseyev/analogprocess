@@ -53,6 +53,21 @@ struct JournalView: View {
                                     selectedRecord = record
                                 }
                             )
+                            .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                                Button {
+                                    onEditRecord(record)
+                                } label: {
+                                    Label(LocalizedStringKey("edit"), systemImage: "pencil")
+                                }
+                                .tint(.blue)
+                            }
+                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                Button(role: .destructive) {
+                                    onDeleteRecord(record)
+                                } label: {
+                                    Label(LocalizedStringKey("delete"), systemImage: "trash")
+                                }
+                            }
                         }
                     }
                     .padding(.horizontal)

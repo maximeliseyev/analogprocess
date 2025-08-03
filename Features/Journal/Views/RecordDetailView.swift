@@ -14,6 +14,7 @@ struct RecordDetailView: View {
     let onDelete: () -> Void
     @Environment(\.dismiss) private var dismiss
     @State private var showingEditSheet = false
+    @State private var showingDeleteAlert = false
     
     private var minutes: Int {
         Int(record.time) / 60
@@ -55,7 +56,9 @@ struct RecordDetailView: View {
                             Label(LocalizedStringKey("edit"), systemImage: "pencil")
                         }
                         
-                        Button(role: .destructive, action: onDelete) {
+                        Button(role: .destructive, action: {
+                            showingDeleteAlert = true
+                        }) {
                             Label(LocalizedStringKey("delete"), systemImage: "trash")
                         }
                     } label: {
@@ -73,6 +76,15 @@ struct RecordDetailView: View {
                     print("Record updated: \(updatedRecord.name ?? "Unknown")")
                 }
             )
+        }
+        .alert(LocalizedStringKey("deleteRecord"), isPresented: $showingDeleteAlert) {
+            Button(LocalizedStringKey("cancel"), role: .cancel) { }
+            Button(LocalizedStringKey("delete"), role: .destructive) {
+                onDelete()
+                dismiss()
+            }
+        } message: {
+            Text(LocalizedStringKey("deleteRecordConfirmation"))
         }
     }
     
