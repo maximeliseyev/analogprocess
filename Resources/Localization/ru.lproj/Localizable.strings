@@ -86,10 +86,10 @@
 "developmentComplete" = "Проявка завершена!";
 "presetsManagement" = "Управление пресетами";
 "films" = "Плёнки";
-"developers" = "Проявиели";
+"developers" = "Проявители";
 "developmentTimes" = "Время проявки";
 "addFilm" = "Добавить плёнку";
-"addDeveloper" = "Добавить прочвитель";
+"addDeveloper" = "Добавить проявитель";
 "addTime" = "Добавить время";
 "edit" = "Редактировать";
 "delete" = "Удалить";
@@ -154,7 +154,7 @@
 "journalEmptyDescription" = "Save your first calculation to see it here";
 "saveCalculation" = "Save calculation";
 "unknownFilm" = "Плёнка";
-"unknownDeveloper" = "Прооявитель";
+"unknownDeveloper" = "Проявитель";
 "degreesCelsius" = "°C";
 "filmPlusDeveloper" = "%@ + %@";
 "isoLabel" = "ISO %@";
@@ -257,4 +257,11 @@
 "journal_record_date" = "Дата и время";
 "journal_record_process" = "Процесс";
 "close" = "Закрыть";
-"edit_record" = "Реедактировать";
+"edit_record" = "Редактировать";
+"deleteRecord" = "Удалить запись";
+"deleteRecordConfirmation" = "Вы уверены, что хотите удалить эту запись?";
+"noRecords" = "Нет записей";
+"noRecordsDescription" = "Сохраните первую запись, чтобы увидеть её здесь";
+"saveRecord" = "Сохранить запись";
+"saveRecordDescription" = "Введите название для сохранения записи";
+"recordDetails" = "Детали записи";

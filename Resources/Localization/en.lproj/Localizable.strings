@@ -260,3 +260,10 @@
 "journal_record_process" = "Process";
 "close" = "Close";
 "edit_record" = "Edit";
+"deleteRecord" = "Delete Record";
+"deleteRecordConfirmation" = "Are you sure you want to delete this record?";
+"noRecords" = "No Records";
+"noRecordsDescription" = "Save your first record to see it here";
+"saveRecord" = "Save Record";
+"saveRecordDescription" = "Enter a name to save this record";
+"recordDetails" = "Record Details";
