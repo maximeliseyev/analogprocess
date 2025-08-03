@@ -1,4 +1,3 @@
-import XCTest
 import SwiftUI
 import CoreData
 @testable import FilmLab
@@ -35,7 +34,7 @@ class IntegrationTests: XCTestCase {
         
         let journalView = JournalView(
             records: [mockRecord],
-            onLoadRecord: { record in
+            onEditRecord: { record in
                 // Verify that record loads correctly
                 XCTAssertNotNil(record)
             },

@@ -102,11 +102,11 @@ struct DevelopmentSetupView: View {
                 )
             }
         }
-        .onChange(of: viewModel.iso) { _ in
-            viewModel.updateISO(viewModel.iso)
+        .onChange(of: viewModel.iso) { oldValue, newValue in
+            viewModel.updateISO(newValue)
         }
-        .onChange(of: viewModel.temperature) { _ in
-            viewModel.updateTemperature(viewModel.temperature)
+        .onChange(of: viewModel.temperature) { oldValue, newValue in
+            viewModel.updateTemperature(newValue)
         }
         .navigationTitle(LocalizedStringKey("presets"))
         .navigationBarTitleDisplayMode(.inline)
