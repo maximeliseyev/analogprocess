@@ -265,3 +265,7 @@
 "saveRecord" = "Сохранить запись";
 "saveRecordDescription" = "Введите название для сохранения записи";
 "recordDetails" = "Детали записи";
+"set_time_manually" = "Установить время вручную";
+"apply" = "Применить";
+"tap_to_change_time" = "Нажмите для изменения времени";
+"set_time_to_start_timer" = "Установите время для запуска таймера";

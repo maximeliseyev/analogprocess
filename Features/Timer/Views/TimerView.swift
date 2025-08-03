@@ -32,7 +32,10 @@ public struct TimerView: View {
                     TimerProgressView(
                         progress: viewModel.progress,
                         displayMinutes: viewModel.displayMinutes,
-                        displaySeconds: viewModel.displaySeconds
+                        displaySeconds: viewModel.displaySeconds,
+                        isInAgitationPhase: viewModel.isInAgitationPhase,
+                        agitationTimeRemaining: viewModel.agitationTimeRemaining,
+                        isRunning: viewModel.isRunning
                     )
                     
                     AgitationIndicatorView(
@@ -56,6 +59,16 @@ public struct TimerView: View {
             .navigationTitle(LocalizedStringKey("timer"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        viewModel.presentManualTimeInput()
+                    }) {
+                        Image(systemName: "clock.badge.plus")
+                            .foregroundColor(.white)
+                            .font(.title2)
+                    }
+                }
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: AgitationSelectionView(
                         selectedMode: Binding(
@@ -66,6 +79,8 @@ public struct TimerView: View {
                         )
                     )) {
                         Image(systemName: "slider.horizontal.3")
+                            .foregroundColor(.white)
+                            .font(.title2)
                     }
                 }
             }
@@ -79,9 +94,73 @@ public struct TimerView: View {
                     )
                 )
             }
+            .sheet(isPresented: $viewModel.showManualTimeInput) {
+                ManualTimeInputView(
+                    minutes: Binding(
+                        get: { viewModel.currentTotalMinutes },
+                        set: { viewModel.currentTotalMinutes = $0 }
+                    ),
+                    seconds: Binding(
+                        get: { viewModel.currentTotalSeconds },
+                        set: { viewModel.currentTotalSeconds = $0 }
+                    ),
+                    onApply: {
+                        viewModel.updateTimerTime(
+                            minutes: viewModel.currentTotalMinutes,
+                            seconds: viewModel.currentTotalSeconds
+                        )
+                    },
+                    onCancel: {
+                        viewModel.showManualTimeInput = false
+                    }
+                )
+                .presentationDetents([.medium])
+            }
             .onAppear {
                 viewModel.setupTimer(totalMinutes: totalMinutes, totalSeconds: totalSeconds)
             }
         }
+    }
+}
+
+// MARK: - Previews
+
+struct TimerView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            // Основной превью - таймер в состоянии покоя
+            TimerView(
+                timerLabel: "Kodak Tri-X 400 + XTOL 1+1",
+                totalMinutes: 8,
+                totalSeconds: 30
+            )
+            .previewDisplayName("Timer - Idle State")
+            
+            // Таймер во время работы
+            TimerView(
+                timerLabel: "Ilford HP5+ + HC-110 B",
+                totalMinutes: 6,
+                totalSeconds: 45
+            )
+            .previewDisplayName("Timer - Running State")
+            
+            // Длинный таймер
+            TimerView(
+                timerLabel: "Foma 400 + Rodinal 1+50",
+                totalMinutes: 15,
+                totalSeconds: 0
+            )
+            .previewDisplayName("Timer - Long Development")
+            
+            // Короткий таймер
+            TimerView(
+                timerLabel: "Kodak T-Max 100 + D-76",
+                totalMinutes: 2,
+                totalSeconds: 30
+            )
+            .previewDisplayName("Timer - Short Development")
+        }
+        .preferredColorScheme(.dark)
+        .previewLayout(.device)
     }
 }

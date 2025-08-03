@@ -15,6 +15,7 @@ class TimerViewModel: ObservableObject {
     @Published var showingAlert = false
     @Published var showAgitationSelection = true
     @Published var selectedAgitationMode: AgitationMode?
+    @Published var showManualTimeInput = false
     
     @Published var currentMinute: Int = 1
     @Published var shouldAgitate = false
@@ -23,11 +24,21 @@ class TimerViewModel: ObservableObject {
     @Published var currentAgitationPhase: AgitationMode.PhaseAgitationType?
     
     private var timer: Timer?
-    private let totalMinutes: Int
-    private let totalSeconds: Int
+    private var totalMinutes: Int
+    private var totalSeconds: Int
     
     var totalTime: Int {
         totalMinutes * 60 + totalSeconds
+    }
+    
+    var currentTotalMinutes: Int {
+        get { totalMinutes }
+        set { totalMinutes = newValue }
+    }
+    
+    var currentTotalSeconds: Int {
+        get { totalSeconds }
+        set { totalSeconds = newValue }
     }
     
     var progress: Double {
@@ -81,6 +92,20 @@ class TimerViewModel: ObservableObject {
         selectedAgitationMode = mode
         showAgitationSelection = false
         setupAgitation()
+    }
+    
+    func presentManualTimeInput() {
+        showManualTimeInput = true
+    }
+    
+    func updateTimerTime(minutes: Int, seconds: Int) {
+        stopTimer()
+        totalMinutes = minutes
+        totalSeconds = seconds
+        timeRemaining = totalTime
+        currentMinute = 1
+        setupAgitation()
+        showManualTimeInput = false
     }
     
     func getPhaseDescription(_ phase: AgitationMode.PhaseAgitationType) -> String {
