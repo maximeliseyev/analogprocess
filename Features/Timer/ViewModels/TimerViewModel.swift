@@ -165,7 +165,7 @@ class TimerViewModel: ObservableObject {
         }
         
         shouldAgitate = true
-        currentAgitationPhase = mode.getAgitationForMinute(currentMinute, totalMinutes: totalMinutes)
+        currentAgitationPhase = mode.getAgitationForMinuteWithTotal(currentMinute, totalMinutes: totalMinutes)
         
         if let phase = currentAgitationPhase {
             switch phase {
@@ -191,7 +191,7 @@ class TimerViewModel: ObservableObject {
     private func updateAgitation() {
         guard shouldAgitate, let mode = selectedAgitationMode else { return }
         
-        let newPhase = mode.getAgitationForMinute(currentMinute, totalMinutes: totalMinutes)
+        let newPhase = mode.getAgitationForMinuteWithTotal(currentMinute, totalMinutes: totalMinutes)
         if newPhase != currentAgitationPhase {
             currentAgitationPhase = newPhase
             setupAgitation()
@@ -207,9 +207,10 @@ class TimerViewModel: ObservableObject {
             break
             
         case .cycle(let agitation, let rest):
-            if agitationTimeRemaining > 0 {
-                agitationTimeRemaining -= 1
-            } else {
+            // Проверяем, нужно ли переключиться в этой секунде
+            if agitationTimeRemaining == 1 {
+                // Переключаем режим
+                let oldPhase = isInAgitationPhase ? "Agitation" : "Rest"
                 if isInAgitationPhase {
                     isInAgitationPhase = false
                     agitationTimeRemaining = rest
@@ -217,19 +218,26 @@ class TimerViewModel: ObservableObject {
                     isInAgitationPhase = true
                     agitationTimeRemaining = agitation
                 }
+                let newPhase = isInAgitationPhase ? "Agitation" : "Rest"
+                
+                print("🔄 [\(Date())] Переключение режима: \(oldPhase) → \(newPhase) (время: \(agitationTimeRemaining)s)")
                 
                 let impactFeedback = UIImpactFeedbackGenerator(style: .light)
                 impactFeedback.impactOccurred()
+            } else {
+                // Просто уменьшаем счетчик
+                agitationTimeRemaining -= 1
             }
             
         case .periodic(let interval):
-            if agitationTimeRemaining > 0 {
-                agitationTimeRemaining -= 1
-            } else {
+            // Проверяем, нужно ли переключиться в этой секунде
+            if agitationTimeRemaining == 1 {
                 agitationTimeRemaining = interval
                 
                 let impactFeedback = UIImpactFeedbackGenerator(style: .light)
                 impactFeedback.impactOccurred()
+            } else {
+                agitationTimeRemaining -= 1
             }
             
         case .custom:
@@ -266,5 +274,18 @@ class TimerViewModel: ObservableObject {
         setupAgitation()
         
         showFixingTimer = false
+    }
+    
+    // MARK: - Debug Methods
+    
+    func enableDebugMode() {
+        // Включаем подробное логирование для отладки
+        print("🔧 Режим отладки включен")
+        print("📊 Текущие настройки:")
+        print("   - Режим встряхивания: \(selectedAgitationMode?.name ?? "Не выбран")")
+        print("   - Общее время: \(totalMinutes) мин \(totalSeconds) сек")
+        print("   - Текущая минута: \(currentMinute)")
+        print("   - Время встряхивания: \(agitationTimeRemaining)")
+        print("   - В режиме встряхивания: \(isInAgitationPhase)")
     }
 } 
