@@ -48,7 +48,7 @@
 		BFB0C3FC2E3E58D900296B97 /* JournalRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB0C3F92E3E58D900296B97 /* JournalRecord.swift */; };
 		BFB0C3FE2E3E5AB400296B97 /* CreateRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB0C3FD2E3E5AB400296B97 /* CreateRecordView.swift */; };
 		BFDCB75E2E382372000F6CE5 /* FilmLabApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDCB75D2E382372000F6CE5 /* FilmLabApp.swift */; };
-		BFDCB7612E382558000F6CE5 /* FilmLab.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFDCB75F2E382558000F6CE5 /* FilmLab.xcdatamodeld */; };
+		BFDCB7612E382558000F6CE5 /* AnalogProcess.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFDCB75F2E382558000F6CE5 /* AnalogProcess.xcdatamodeld */; };
 		BFDD23652E3F7EE30079688B /* RecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDD23642E3F7EE30079688B /* RecordDetailView.swift */; };
 		BFE12EB02E33C5120044A3A4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BFE12EAE2E33C5120044A3A4 /* Localizable.strings */; };
 		BFE12EBC2E34DBE10044A3A4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE12EBA2E34DBE10044A3A4 /* HomeView.swift */; };
@@ -107,7 +107,7 @@
 		BFB0C3F92E3E58D900296B97 /* JournalRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalRecord.swift; sourceTree = "<group>"; };
 		BFB0C3FD2E3E5AB400296B97 /* CreateRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecordView.swift; sourceTree = "<group>"; };
 		BFDCB75D2E382372000F6CE5 /* FilmLabApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmLabApp.swift; sourceTree = "<group>"; };
-		BFDCB7602E382558000F6CE5 /* FilmLab.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FilmLab.xcdatamodel; sourceTree = "<group>"; };
+		BFDCB7602E382558000F6CE5 /* AnalogProcess.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AnalogProcess.xcdatamodel; sourceTree = "<group>"; };
 		BFDD23642E3F7EE30079688B /* RecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailView.swift; sourceTree = "<group>"; };
 		BFE12EAC2E33C5120044A3A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BFE12EAD2E33C5120044A3A4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 		BFE12EC02E360C010044A3A4 /* AppPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreview.swift; sourceTree = "<group>"; };
 		BFE12EC22E363AC00044A3A4 /* CalculatedTimeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedTimeSection.swift; sourceTree = "<group>"; };
 		BFE31C0A2E3A011100310B19 /* ViewStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStyles.swift; sourceTree = "<group>"; };
-		BFE96A392E2061A0001CF98D /* Film claculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Film claculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFE96A392E2061A0001CF98D /* Analog Process.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Analog Process.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFF4D9FE2E21BEC90097BE82 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		BFF4DA002E21C2C90097BE82 /* AgitationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgitationMode.swift; sourceTree = "<group>"; };
 		BFF4DA022E21C31E0097BE82 /* AgitationSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgitationSelectionView.swift; sourceTree = "<group>"; };
@@ -378,7 +378,7 @@
 			children = (
 				BFE12EAF2E33C5120044A3A4 /* Localization */,
 				BFA0C7932E2133FC00132936 /* Assets.xcassets */,
-				BFDCB75F2E382558000F6CE5 /* FilmLab.xcdatamodeld */,
+				BFDCB75F2E382558000F6CE5 /* AnalogProcess.xcdatamodeld */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -409,7 +409,7 @@
 		BFE96A3A2E2061A0001CF98D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BFE96A392E2061A0001CF98D /* Film claculator.app */,
+				BFE96A392E2061A0001CF98D /* Analog Process.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -417,9 +417,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BFE96A382E2061A0001CF98D /* Film claculator */ = {
+		BFE96A382E2061A0001CF98D /* Analog Process */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BFE96A492E2061A3001CF98D /* Build configuration list for PBXNativeTarget "Film claculator" */;
+			buildConfigurationList = BFE96A492E2061A3001CF98D /* Build configuration list for PBXNativeTarget "Analog Process" */;
 			buildPhases = (
 				BFE96A352E2061A0001CF98D /* Sources */,
 				BFE96A362E2061A0001CF98D /* Frameworks */,
@@ -429,11 +429,11 @@
 			);
 			dependencies = (
 			);
-			name = "Film claculator";
+			name = "Analog Process";
 			packageProductDependencies = (
 			);
 			productName = "Film claculator";
-			productReference = BFE96A392E2061A0001CF98D /* Film claculator.app */;
+			productReference = BFE96A392E2061A0001CF98D /* Analog Process.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -451,7 +451,7 @@
 					};
 				};
 			};
-			buildConfigurationList = BFE96A342E2061A0001CF98D /* Build configuration list for PBXProject "FilmLab" */;
+			buildConfigurationList = BFE96A342E2061A0001CF98D /* Build configuration list for PBXProject "AnalogProcess" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -466,7 +466,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BFE96A382E2061A0001CF98D /* Film claculator */,
+				BFE96A382E2061A0001CF98D /* Analog Process */,
 			);
 		};
 /* End PBXProject section */
@@ -536,7 +536,7 @@
 				BF113D372E3FA8A5008B5578 /* ManualTimeInputView.swift in Sources */,
 				BF4109642E31641B00BE2AD8 /* TemperaturePickerView.swift in Sources */,
 				BFA0C7A92E2134BA00132936 /* DevelopmentCalculator.swift in Sources */,
-				BFDCB7612E382558000F6CE5 /* FilmLab.xcdatamodeld in Sources */,
+				BFDCB7612E382558000F6CE5 /* AnalogProcess.xcdatamodeld in Sources */,
 				BFE12EC12E360C010044A3A4 /* AppPreview.swift in Sources */,
 				BFB0C3D12E3E4E7D00296B97 /* GitHubDataService.swift in Sources */,
 				BFA0C7A02E2133FC00132936 /* Persistence.swift in Sources */,
@@ -690,22 +690,30 @@
 				DEVELOPMENT_TEAM = PK2473XF3P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Film Lab";
+				INFOPLIST_KEY_CFBundleDisplayName = "Analog Process";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = (
+					UIInterfaceOrientationPortrait,
+					UIInterfaceOrientationLandscapeLeft,
+					UIInterfaceOrientationLandscapeRight,
+					UIInterfaceOrientationPortraitUpsideDown,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.filmlab;
+				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -723,22 +731,30 @@
 				DEVELOPMENT_TEAM = PK2473XF3P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Film Lab";
+				INFOPLIST_KEY_CFBundleDisplayName = "Analog Process";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = (
+					UIInterfaceOrientationPortrait,
+					UIInterfaceOrientationLandscapeLeft,
+					UIInterfaceOrientationLandscapeRight,
+					UIInterfaceOrientationPortraitUpsideDown,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.filmlab;
+				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -748,7 +764,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BFE96A342E2061A0001CF98D /* Build configuration list for PBXProject "FilmLab" */ = {
+		BFE96A342E2061A0001CF98D /* Build configuration list for PBXProject "AnalogProcess" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BFE96A472E2061A3001CF98D /* Debug */,
@@ -757,7 +773,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BFE96A492E2061A3001CF98D /* Build configuration list for PBXNativeTarget "Film claculator" */ = {
+		BFE96A492E2061A3001CF98D /* Build configuration list for PBXNativeTarget "Analog Process" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BFE96A4A2E2061A3001CF98D /* Debug */,
@@ -769,13 +785,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		BFDCB75F2E382558000F6CE5 /* FilmLab.xcdatamodeld */ = {
+		BFDCB75F2E382558000F6CE5 /* AnalogProcess.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				BFDCB7602E382558000F6CE5 /* FilmLab.xcdatamodel */,
+				BFDCB7602E382558000F6CE5 /* AnalogProcess.xcdatamodel */,
 			);
-			currentVersion = BFDCB7602E382558000F6CE5 /* FilmLab.xcdatamodel */;
-			path = FilmLab.xcdatamodeld;
+			currentVersion = BFDCB7602E382558000F6CE5 /* AnalogProcess.xcdatamodel */;
+			path = AnalogProcess.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
