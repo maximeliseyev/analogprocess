@@ -48,7 +48,7 @@ public struct MainTabView: View {
                         records: savedRecords,
                         onEditRecord: loadRecord,
                         onDeleteRecord: deleteRecord,
-                        onClose: { },
+                        onClose: goToHome,
                         onCreateNew: {
                             showingCreateRecord = true
                         }
@@ -65,6 +65,15 @@ public struct MainTabView: View {
                         Button(action: goToHome) {
                             Image(systemName: "house")
                                 .foregroundColor(.blue)
+                        }
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        if selectedTab == 4 {
+                            Button(action: {
+                                showingCreateRecord = true
+                            }) {
+                                Image(systemName: "plus")
+                            }
                         }
                     }
                 }
