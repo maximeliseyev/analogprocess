@@ -205,12 +205,14 @@
 "settings_theme_light" = "Light";
 "settings_theme_dark" = "Dark";
 "agitation_continuous" = "Continuous agitation";
+"agitation_still" = "No agitation";
 "agitation_cycle_format" = "%@ / %@";
 "agitation_orwo_description" = "45 / 15 + 15 / 45";
 "agitation_rae_description" = "For long developments";
 "agitation_fixer_description" = "Fixer mode";
 "agitation_custom_format" = "Custom (%@s/%@s)";
-"agitation_continuous_name" = "continuous";
+"agitation_continuous_name" = "Continuous";
+"agitation_still_name" = "Still";
 "agitation_orwo_name" = "ORWO";
 "agitation_xtol_name" = "XTOL";
 "agitation_rae_name" = "RAE";

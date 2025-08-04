@@ -50,6 +50,8 @@ struct AgitationIndicatorView: View {
         switch phase {
         case .continuous:
             return String(localized: "continuousAgitation")
+        case .still:
+            return String(localized: "agitation_still")
         case .cycle(let agitation, let rest):
             return String(format: String(localized: "cycleAgitationFormat"), "\(agitation)", "\(rest)")
         case .periodic(let interval):

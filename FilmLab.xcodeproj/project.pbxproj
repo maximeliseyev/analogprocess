@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BF113D372E3FA8A5008B5578 /* ManualTimeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF113D362E3FA8A5008B5578 /* ManualTimeInputView.swift */; };
+		BF113D412E40DB7D008B5578 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF113D402E40DB7D008B5578 /* ThemeManager.swift */; };
 		BF4109102E31052900BE2AD8 /* CalculationFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41090A2E31052900BE2AD8 /* CalculationFormView.swift */; };
 		BF4109112E31052900BE2AD8 /* RatioInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41090B2E31052900BE2AD8 /* RatioInputView.swift */; };
 		BF4109122E31052900BE2AD8 /* TimeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41090F2E31052900BE2AD8 /* TimeInputView.swift */; };
@@ -50,9 +51,6 @@
 		BFB0C3F82E3E511300296B97 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3F42E3E511300296B97 /* LICENSE */; };
 		BFB0C3FC2E3E58D900296B97 /* JournalRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB0C3F92E3E58D900296B97 /* JournalRecord.swift */; };
 		BFB0C3FE2E3E5AB400296B97 /* CreateRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB0C3FD2E3E5AB400296B97 /* CreateRecordView.swift */; };
-		BFDCB7512E382250000F6CE5 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDCB7502E382250000F6CE5 /* ArticleView.swift */; };
-		BFDCB75A2E38227C000F6CE5 /* basics-article.md in Resources */ = {isa = PBXBuildFile; fileRef = BFDCB7532E38227C000F6CE5 /* basics-article.md */; };
-		BFDCB75C2E38229E000F6CE5 /* Kodak Xtol.md in Resources */ = {isa = PBXBuildFile; fileRef = BFDCB75B2E38229E000F6CE5 /* Kodak Xtol.md */; };
 		BFDCB75E2E382372000F6CE5 /* FilmLabApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDCB75D2E382372000F6CE5 /* FilmLabApp.swift */; };
 		BFDCB7612E382558000F6CE5 /* FilmLab.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFDCB75F2E382558000F6CE5 /* FilmLab.xcdatamodeld */; };
 		BFDD23652E3F7EE30079688B /* RecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDD23642E3F7EE30079688B /* RecordDetailView.swift */; };
@@ -62,10 +60,7 @@
 		BFE12EBF2E34EB960044A3A4 /* TimerTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE12EBE2E34EB960044A3A4 /* TimerTabView.swift */; };
 		BFE12EC12E360C010044A3A4 /* AppPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE12EC02E360C010044A3A4 /* AppPreview.swift */; };
 		BFE12EC32E363AC00044A3A4 /* CalculatedTimeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE12EC22E363AC00044A3A4 /* CalculatedTimeSection.swift */; };
-		BFE12EC62E36DFC00044A3A4 /* ManualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE12EC52E36DFB10044A3A4 /* ManualView.swift */; };
-		BFE12EC82E36DFD60044A3A4 /* ManualViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE12EC72E36DFCD0044A3A4 /* ManualViewModel.swift */; };
 		BFE31C0C2E3A016300310B19 /* ViewStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE31C0A2E3A011100310B19 /* ViewStyles.swift */; };
-		BFE31C0E2E3A071600310B19 /* ManualTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE31C0D2E3A071600310B19 /* ManualTypes.swift */; };
 		BFF4D9FF2E21BECD0097BE82 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF4D9FE2E21BEC90097BE82 /* TimerView.swift */; };
 		BFF4DA012E21C2C90097BE82 /* AgitationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF4DA002E21C2C90097BE82 /* AgitationMode.swift */; };
 		BFF4DA032E21C31E0097BE82 /* AgitationSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF4DA022E21C31E0097BE82 /* AgitationSelectionView.swift */; };
@@ -74,6 +69,7 @@
 
 /* Begin PBXFileReference section */
 		BF113D362E3FA8A5008B5578 /* ManualTimeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTimeInputView.swift; sourceTree = "<group>"; };
+		BF113D402E40DB7D008B5578 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		BF4109092E31052900BE2AD8 /* ActionButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtonsView.swift; sourceTree = "<group>"; };
 		BF41090A2E31052900BE2AD8 /* CalculationFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationFormView.swift; sourceTree = "<group>"; };
 		BF41090B2E31052900BE2AD8 /* RatioInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioInputView.swift; sourceTree = "<group>"; };
@@ -118,9 +114,6 @@
 		BFB0C3F52E3E511300296B97 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BFB0C3F92E3E58D900296B97 /* JournalRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalRecord.swift; sourceTree = "<group>"; };
 		BFB0C3FD2E3E5AB400296B97 /* CreateRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecordView.swift; sourceTree = "<group>"; };
-		BFDCB7502E382250000F6CE5 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
-		BFDCB7532E38227C000F6CE5 /* basics-article.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "basics-article.md"; sourceTree = "<group>"; };
-		BFDCB75B2E38229E000F6CE5 /* Kodak Xtol.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Kodak Xtol.md"; sourceTree = "<group>"; };
 		BFDCB75D2E382372000F6CE5 /* FilmLabApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmLabApp.swift; sourceTree = "<group>"; };
 		BFDCB7602E382558000F6CE5 /* FilmLab.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FilmLab.xcdatamodel; sourceTree = "<group>"; };
 		BFDD23642E3F7EE30079688B /* RecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailView.swift; sourceTree = "<group>"; };
@@ -131,10 +124,7 @@
 		BFE12EBE2E34EB960044A3A4 /* TimerTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTabView.swift; sourceTree = "<group>"; };
 		BFE12EC02E360C010044A3A4 /* AppPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreview.swift; sourceTree = "<group>"; };
 		BFE12EC22E363AC00044A3A4 /* CalculatedTimeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedTimeSection.swift; sourceTree = "<group>"; };
-		BFE12EC52E36DFB10044A3A4 /* ManualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualView.swift; sourceTree = "<group>"; };
-		BFE12EC72E36DFCD0044A3A4 /* ManualViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualViewModel.swift; sourceTree = "<group>"; };
 		BFE31C0A2E3A011100310B19 /* ViewStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStyles.swift; sourceTree = "<group>"; };
-		BFE31C0D2E3A071600310B19 /* ManualTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTypes.swift; sourceTree = "<group>"; };
 		BFE96A392E2061A0001CF98D /* Film claculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Film claculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFF4D9FE2E21BEC90097BE82 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		BFF4DA002E21C2C90097BE82 /* AgitationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgitationMode.swift; sourceTree = "<group>"; };
@@ -186,7 +176,6 @@
 		BF4109412E3133B200BE2AD8 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				BFE12EC42E36DFA40044A3A4 /* Manual */,
 				BF4109432E3133D900BE2AD8 /* Calculator */,
 				BF4109442E31342500BE2AD8 /* Development */,
 				BF4109482E3134C800BE2AD8 /* Journal */,
@@ -342,6 +331,7 @@
 		BF4109682E3164A900BE2AD8 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				BF113D402E40DB7D008B5578 /* ThemeManager.swift */,
 				BFE31C0A2E3A011100310B19 /* ViewStyles.swift */,
 				BF4109672E3164A900BE2AD8 /* ParameterRow.swift */,
 			);
@@ -394,7 +384,6 @@
 		BFA0C7B02E2136A500132936 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				BFDCB7592E38227C000F6CE5 /* Articles */,
 				BFE12EAF2E33C5120044A3A4 /* Localization */,
 				BFA0C7932E2133FC00132936 /* Assets.xcassets */,
 				BFDCB75F2E382558000F6CE5 /* FilmLab.xcdatamodeld */,
@@ -413,80 +402,12 @@
 			path = Docs;
 			sourceTree = "<group>";
 		};
-		BFDCB7522E38227C000F6CE5 /* agitation */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = agitation;
-			sourceTree = "<group>";
-		};
-		BFDCB7542E38227C000F6CE5 /* basics */ = {
-			isa = PBXGroup;
-			children = (
-				BFDCB7532E38227C000F6CE5 /* basics-article.md */,
-			);
-			path = basics;
-			sourceTree = "<group>";
-		};
-		BFDCB7552E38227C000F6CE5 /* developers */ = {
-			isa = PBXGroup;
-			children = (
-				BFDCB75B2E38229E000F6CE5 /* Kodak Xtol.md */,
-			);
-			path = developers;
-			sourceTree = "<group>";
-		};
-		BFDCB7562E38227C000F6CE5 /* film-types */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "film-types";
-			sourceTree = "<group>";
-		};
-		BFDCB7572E38227C000F6CE5 /* push-pull */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "push-pull";
-			sourceTree = "<group>";
-		};
-		BFDCB7582E38227C000F6CE5 /* troubleshooting */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = troubleshooting;
-			sourceTree = "<group>";
-		};
-		BFDCB7592E38227C000F6CE5 /* Articles */ = {
-			isa = PBXGroup;
-			children = (
-				BFDCB7522E38227C000F6CE5 /* agitation */,
-				BFDCB7542E38227C000F6CE5 /* basics */,
-				BFDCB7552E38227C000F6CE5 /* developers */,
-				BFDCB7562E38227C000F6CE5 /* film-types */,
-				BFDCB7572E38227C000F6CE5 /* push-pull */,
-				BFDCB7582E38227C000F6CE5 /* troubleshooting */,
-			);
-			path = Articles;
-			sourceTree = "<group>";
-		};
 		BFE12EAF2E33C5120044A3A4 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
 				BFE12EAE2E33C5120044A3A4 /* Localizable.strings */,
 			);
 			path = Localization;
-			sourceTree = "<group>";
-		};
-		BFE12EC42E36DFA40044A3A4 /* Manual */ = {
-			isa = PBXGroup;
-			children = (
-				BFDCB7502E382250000F6CE5 /* ArticleView.swift */,
-				BFE12EC72E36DFCD0044A3A4 /* ManualViewModel.swift */,
-				BFE12EC52E36DFB10044A3A4 /* ManualView.swift */,
-				BFE31C0D2E3A071600310B19 /* ManualTypes.swift */,
-			);
-			path = Manual;
 			sourceTree = "<group>";
 		};
 		BFE96A302E2061A0001CF98D = {
@@ -576,8 +497,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFA0C79B2E2133FC00132936 /* Assets.xcassets in Resources */,
-				BFDCB75C2E38229E000F6CE5 /* Kodak Xtol.md in Resources */,
-				BFDCB75A2E38227C000F6CE5 /* basics-article.md in Resources */,
 				BFE12EB02E33C5120044A3A4 /* Localizable.strings in Resources */,
 				BFB0C3F62E3E511300296B97 /* FilmLab-Info.plist in Resources */,
 				BFB0C3F72E3E511300296B97 /* README.md in Resources */,
@@ -598,7 +517,6 @@
 				BF4109382E31307100BE2AD8 /* MainTabView.swift in Sources */,
 				BF4109272E31148700BE2AD8 /* DevelopmentParameters.swift in Sources */,
 				BFA0C7AF2E21351300132936 /* RecordRowView.swift in Sources */,
-				BFDCB7512E382250000F6CE5 /* ArticleView.swift in Sources */,
 				BFA0C79D2E2133FC00132936 /* ContentView.swift in Sources */,
 				BFE12EC32E363AC00044A3A4 /* CalculatedTimeSection.swift in Sources */,
 				BF41093A2E31308500BE2AD8 /* CalculatorView.swift in Sources */,
@@ -613,7 +531,6 @@
 				BFB0C3FE2E3E5AB400296B97 /* CreateRecordView.swift in Sources */,
 				BFE12EBD2E34DBE10044A3A4 /* SettingsView.swift in Sources */,
 				BF4109142E31052900BE2AD8 /* StepsInputView.swift in Sources */,
-				BFE12EC82E36DFD60044A3A4 /* ManualViewModel.swift in Sources */,
 				BF4109622E31641600BE2AD8 /* DilutionPickerView.swift in Sources */,
 				BF4109702E3166F400BE2AD8 /* TimerControlsView.swift in Sources */,
 				BF4109712E3166F400BE2AD8 /* TimerHeaderView.swift in Sources */,
@@ -622,7 +539,6 @@
 				BFB0C3FC2E3E58D900296B97 /* JournalRecord.swift in Sources */,
 				BF4109162E31052900BE2AD8 /* ActionButtonsView.swift in Sources */,
 				BFF4DA032E21C31E0097BE82 /* AgitationSelectionView.swift in Sources */,
-				BFE12EC62E36DFC00044A3A4 /* ManualView.swift in Sources */,
 				BFF4D9FF2E21BECD0097BE82 /* TimerView.swift in Sources */,
 				BF4109352E311CA800BE2AD8 /* CoreDataService.swift in Sources */,
 				BFE31C0C2E3A016300310B19 /* ViewStyles.swift in Sources */,
@@ -636,6 +552,7 @@
 				BF41096A2E31653800BE2AD8 /* DevelopmentSetupViewModel.swift in Sources */,
 				BFA0C7AD2E2134F800132936 /* JournalView.swift in Sources */,
 				BF41093F2E31318D00BE2AD8 /* JournalViewModel.swift in Sources */,
+				BF113D412E40DB7D008B5578 /* ThemeManager.swift in Sources */,
 				BF4109402E31318D00BE2AD8 /* TimerViewModel.swift in Sources */,
 				BF4109302E31151800BE2AD8 /* DevelopmentSetupView.swift in Sources */,
 				BF4109662E31643100BE2AD8 /* ISOPickerView.swift in Sources */,
@@ -647,7 +564,6 @@
 				BFB0C3D12E3E4E7D00296B97 /* GitHubDataService.swift in Sources */,
 				BFA0C7A02E2133FC00132936 /* Persistence.swift in Sources */,
 				BFB0C3EF2E3E510400296B97 /* GitHubSyncExample.swift in Sources */,
-				BFE31C0E2E3A071600310B19 /* ManualTypes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

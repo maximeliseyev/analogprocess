@@ -15,6 +15,7 @@ struct AgitationMode {
     
     enum AgitationType {
         case continuous
+        case still
         case cycle(agitationSeconds: Int, restSeconds: Int)
         case complex(phases: [AgitationPhase])
     }
@@ -26,6 +27,7 @@ struct AgitationMode {
     
     enum PhaseAgitationType: Equatable {
         case continuous
+        case still
         case cycle(agitationSeconds: Int, restSeconds: Int)
         case periodic(intervalSeconds: Int)
         case custom(description: String)
@@ -35,6 +37,8 @@ struct AgitationMode {
         switch type {
         case .continuous:
             return String(localized: "agitation_continuous")
+        case .still:
+            return String(localized: "agitation_still")
         case .cycle(let agitation, let rest):
             return String(format: String(localized: "agitation_cycle_format"), "\(agitation)", "\(rest)")
         case .complex:
@@ -96,6 +100,12 @@ struct AgitationMode {
             name: String(localized: "agitation_continuous_name"),
             type: .continuous,
             isCustom: false
+        ),
+        
+        AgitationMode(
+            name: String(localized: "agitation_still_name"),
+            type: .still,
+            isCustom: false
         )
     ]
     
@@ -111,6 +121,8 @@ struct AgitationMode {
         switch type {
         case .continuous:
             return .continuous
+        case .still:
+            return .still
         case .cycle(let agitation, let rest):
             return .cycle(agitationSeconds: agitation, restSeconds: rest)
         case .complex(let phases):
@@ -124,6 +136,8 @@ struct AgitationMode {
         switch type {
         case .continuous:
             return .continuous
+        case .still:
+            return .still
         case .cycle(let agitation, let rest):
             return .cycle(agitationSeconds: agitation, restSeconds: rest)
         case .complex(let phases):
