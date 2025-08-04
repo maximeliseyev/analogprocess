@@ -27,14 +27,6 @@ struct DevelopmentSetupView: View {
                     )
                 }
                 
-//                #if DEBUG
-//                Button("Force Reload Data") {
-//                    viewModel.reloadData()
-//                }
-//                .foregroundColor(.blue)
-//                .padding()
-//                #endif
-                
                 Spacer()
             }
         }

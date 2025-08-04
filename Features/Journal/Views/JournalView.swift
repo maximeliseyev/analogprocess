@@ -76,13 +76,6 @@ struct JournalView: View {
         }
         .navigationTitle(LocalizedStringKey("journal"))
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: onCreateNew) {
-                    Image(systemName: "plus")
-                }
-            }
-        }
         .sheet(item: $selectedRecord) { record in
             RecordDetailView(
                 record: record,
