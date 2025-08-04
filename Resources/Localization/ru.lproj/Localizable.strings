@@ -98,6 +98,13 @@
 "filmPresets" = "Пресеты плёнок";
 "developerPresets" = "Пресеты проявителей";
 "timePresets" = "Пресеты времени проявки";
+"development_completed" = "Проявка завершена!";
+"go_to_fixing" = "Перейти к фиксированию";
+"fixing_timer" = "Таймер фиксирования";
+"fixing_timer_setup" = "Настройка таймера фиксирования";
+"fixing_timer_description" = "Установите время для фиксирования плёнки после проявки";
+"fixing_time" = "Время фиксирования";
+"start_fixing" = "Начать фиксирование";
 "iso25" = "25";
 "iso50" = "50";
 "iso80" = "80";

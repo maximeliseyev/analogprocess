@@ -12,11 +12,14 @@ struct ISOPickerView: View {
     let onDismiss: () -> Void
     let availableISOs: [Int]
     
-    private let allISOs = [50, 100, 125, 200, 250, 400, 500, 800, 1600, 3200, 6400]
+    private let allISOs = [25, 50, 64, 80, 100, 125, 200, 250, 400, 500, 640, 800, 1000, 1600, 2000, 3200, 4000, 6400, 8000, 12800 ]
     
     var body: some View {
         NavigationStack {
-            Group {
+            ZStack {
+                Color.black.ignoresSafeArea()
+                
+                Group {
                 if availableISOs.isEmpty {
                     VStack(spacing: 20) {
                         Image(systemName: "info.circle")
@@ -57,6 +60,7 @@ struct ISOPickerView: View {
                         .buttonStyle(PlainButtonStyle())
                         .disabled(!isAvailable)
                     }
+                }
                 }
             }
             .navigationBarTitleDisplayMode(.inline)

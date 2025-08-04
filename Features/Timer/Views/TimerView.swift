@@ -47,28 +47,41 @@ public struct TimerView: View {
                         currentAgitationPhase: viewModel.currentAgitationPhase
                     )
                     
-                    TimerControlsView(
-                        isRunning: viewModel.isRunning,
-                        onStartPause: viewModel.startPauseTimer,
-                        onReset: viewModel.resetTimer
-                    )
+                    if viewModel.isTimerFinished {
+                        VStack(spacing: 16) {
+                            Text(LocalizedStringKey("development_completed"))
+                                .font(.headline)
+                                .foregroundColor(.green)
+                            
+                            Button(action: {
+                                viewModel.startFixingTimer()
+                            }) {
+                                HStack {
+                                    Image(systemName: "photo.fill")
+                                        .font(.title2)
+                                    Text(LocalizedStringKey("go_to_fixing"))
+                                        .font(.headline)
+                                }
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.orange)
+                                .cornerRadius(10)
+                            }
+                        }
+                    } else {
+                        TimerControlsView(
+                            isRunning: viewModel.isRunning,
+                            onStartPause: viewModel.startPauseTimer,
+                            onReset: viewModel.resetTimer
+                        )
+                    }
                     
                     Spacer()
                 }
             }
             .navigationTitle(LocalizedStringKey("timer"))
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        viewModel.presentManualTimeInput()
-                    }) {
-                        Image(systemName: "clock.badge.plus")
-                            .foregroundColor(.white)
-                            .font(.title2)
-                    }
-                }
-                
+            .toolbar(content: {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: AgitationSelectionView(
                         selectedMode: Binding(
@@ -83,7 +96,7 @@ public struct TimerView: View {
                             .font(.title2)
                     }
                 }
-            }
+            })
             .sheet(isPresented: $viewModel.showAgitationSelection) {
                 AgitationSelectionView(
                     selectedMode: Binding(
@@ -112,7 +125,31 @@ public struct TimerView: View {
                     },
                     onCancel: {
                         viewModel.showManualTimeInput = false
-                    }
+                    },
+                    title: "set_time_manually"
+                )
+                .presentationDetents([.medium])
+            }
+            .sheet(isPresented: $viewModel.showFixingTimer) {
+                ManualTimeInputView(
+                    minutes: Binding(
+                        get: { viewModel.fixingMinutes },
+                        set: { viewModel.fixingMinutes = $0 }
+                    ),
+                    seconds: Binding(
+                        get: { viewModel.fixingSeconds },
+                        set: { viewModel.fixingSeconds = $0 }
+                    ),
+                    onApply: {
+                        viewModel.startFixingTimerWithTime(
+                            minutes: viewModel.fixingMinutes,
+                            seconds: viewModel.fixingSeconds
+                        )
+                    },
+                    onCancel: {
+                        viewModel.showFixingTimer = false
+                    },
+                    title: "fixing_time"
                 )
                 .presentationDetents([.medium])
             }

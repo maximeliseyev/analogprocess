@@ -98,6 +98,13 @@
 "filmPresets" = "Film Presets";
 "developerPresets" = "Developer Presets";
 "timePresets" = "Development Time Presets";
+"development_completed" = "Development completed!";
+"go_to_fixing" = "Go to fixing";
+"fixing_timer" = "Fixing Timer";
+"fixing_timer_setup" = "Fixing Timer Setup";
+"fixing_timer_description" = "Set the time for fixing your film after development";
+"fixing_time" = "Fixing time";
+"start_fixing" = "Start fixing";
 "iso25" = "25";
 "iso50" = "50";
 "iso80" = "80";

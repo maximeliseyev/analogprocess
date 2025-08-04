@@ -34,7 +34,10 @@ struct DeveloperPickerView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
+            ZStack {
+                Color.black.ignoresSafeArea()
+                
+                ScrollView {
                 LazyVStack(spacing: 0) {
                     ForEach(filteredDevelopers) { developer in
                         Button(action: {
@@ -67,10 +70,12 @@ struct DeveloperPickerView: View {
                             .padding(.leading, 16)
                     }
                 }
+                }
             }
             .searchable(text: $searchText, prompt: String(localized: "searchDevelopers"))
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(LocalizedStringKey("selectDeveloper"))
+        }
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button(LocalizedStringKey("cancel")) {
@@ -80,7 +85,7 @@ struct DeveloperPickerView: View {
             }
         }
     }
-}
+
 
 struct DeveloperPickerView_Previews: PreviewProvider {
     static var previews: some View {

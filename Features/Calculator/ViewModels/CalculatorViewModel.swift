@@ -21,8 +21,8 @@ class CalculatorViewModel: ObservableObject {
     @Published var pushResults: [(label: String, minutes: Int, seconds: Int)] = []
     @Published var showResult = false
     @Published var showSaveDialog = false
-    @Published var showTimer = false
     @Published var showTemperaturePicker = false
+    @Published var showTimer = false
     @Published var savedRecords: [CalculationRecord] = []
     
     // Timer properties
@@ -74,7 +74,8 @@ class CalculatorViewModel: ObservableObject {
         selectedTimerLabel = label
         selectedTimerMinutes = minutes
         selectedTimerSeconds = seconds
-        showTimer = true
+        showResult = false // Закрываем sheet с результатами
+        showTimer = true // Активируем навигацию к таймеру
     }
     
     // MARK: - Record Management Methods

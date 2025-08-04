@@ -15,7 +15,10 @@ struct TemperaturePickerView: View {
     
     var body: some View {
         NavigationStack {
-            List(temperatures, id: \.self) { temp in
+            ZStack {
+                Color.black.ignoresSafeArea()
+                
+                List(temperatures, id: \.self) { temp in
                 Button(action: {
                     temperature = temp
                     onDismiss()
@@ -33,9 +36,11 @@ struct TemperaturePickerView: View {
                     }
                 }
                 .buttonStyle(PlainButtonStyle())
+                }
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(LocalizedStringKey("selectTemperature"))
+        }
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button(LocalizedStringKey("cancel")) {
@@ -45,7 +50,7 @@ struct TemperaturePickerView: View {
             }
         }
     }
-}
+
 
 struct TemperaturePickerView_Previews: PreviewProvider {
     static var previews: some View {

@@ -9,6 +9,7 @@ public struct MainTabView: View {
     private let dataService = CoreDataService.shared
     @State private var savedRecords: [CalculationRecord] = []
     @State private var showingCreateRecord = false
+
     
     public var body: some View {
         NavigationStack {
@@ -27,7 +28,7 @@ public struct MainTabView: View {
                         .tag(1)
                     
                     // Экран Calculator
-                    CalculatorView()
+                    CalculatorView(onStartTimer: { _, _, _ in })
                         .tabItem {
                             Image(systemName: "plus.forwardslash.minus")
                             Text(LocalizedStringKey("calculator"))
@@ -78,11 +79,14 @@ public struct MainTabView: View {
                     loadRecords() // Обновляем список после создания записи
                 }
         }
+
     }
     
     private func goToHome() {
         selectedTab = 0
     }
+    
+
     
     // Главный экран с описанием и кнопками
     private var mainScreenView: some View {

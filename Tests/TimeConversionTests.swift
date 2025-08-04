@@ -64,4 +64,62 @@ final class TimeConversionTests: XCTestCase {
         XCTAssertEqual(correctedNegativeSeconds, 0)
         XCTAssertEqual(correctedTooManySeconds, 59)
     }
+    
+    func testRoundToQuarterMinute() {
+        // Тестируем округление до 1/4 минуты (15 секунд)
+        
+        // 7 минут 23 секунды должно округлиться до 7:30
+        let time1 = 7 * 60 + 23 // 443 секунды
+        let rounded1 = roundToQuarterMinute(time1)
+        XCTAssertEqual(rounded1, 7 * 60 + 30) // 450 секунд
+        
+        // 5 минут 8 секунд должно округлиться до 5:00
+        let time2 = 5 * 60 + 8 // 308 секунд
+        let rounded2 = roundToQuarterMinute(time2)
+        XCTAssertEqual(rounded2, 5 * 60 + 0) // 300 секунд
+        
+        // 3 минуты 37 секунд должно округлиться до 3:45
+        let time3 = 3 * 60 + 37 // 217 секунд
+        let rounded3 = roundToQuarterMinute(time3)
+        XCTAssertEqual(rounded3, 3 * 60 + 45) // 225 секунд
+        
+        // 10 минут 52 секунды должно округлиться до 11:00
+        let time4 = 10 * 60 + 52 // 652 секунды
+        let rounded4 = roundToQuarterMinute(time4)
+        XCTAssertEqual(rounded4, 11 * 60 + 0) // 660 секунд
+    }
+    
+    func testCalculatorRounding() {
+        let calculator = DevelopmentCalculator()
+        
+        // Тестируем расчет push +1 с округлением
+        let results = calculator.calculateResults(
+            minutes: 7,
+            seconds: 23, // 7:23 должно округлиться до 7:30
+            coefficient: 1.33,
+            isPushMode: true,
+            steps: 1
+        )
+        
+        XCTAssertEqual(results.count, 2) // +0 и push +1
+        
+        // Проверяем базовое время (+0)
+        XCTAssertEqual(results[0].label, "+0")
+        XCTAssertEqual(results[0].minutes, 7)
+        XCTAssertEqual(results[0].seconds, 30) // Округлено с 23 до 30
+        
+        // Проверяем push +1
+        XCTAssertEqual(results[1].label, "push +1")
+        // Время должно быть округлено до ближайшей 1/4 минуты
+        let expectedSeconds = Int(round(Double(7 * 60 + 30) * 1.33 / 15.0)) * 15
+        let expectedMinutes = expectedSeconds / 60
+        let expectedRemainingSeconds = expectedSeconds % 60
+        XCTAssertEqual(results[1].minutes, expectedMinutes)
+        XCTAssertEqual(results[1].seconds, expectedRemainingSeconds)
+    }
+    
+    private func roundToQuarterMinute(_ totalSeconds: Int) -> Int {
+        let quarterMinuteSeconds = 15
+        return Int(round(Double(totalSeconds) / Double(quarterMinuteSeconds))) * quarterMinuteSeconds
+    }
 } 
