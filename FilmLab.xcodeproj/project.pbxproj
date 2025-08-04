@@ -42,10 +42,6 @@
 		BFA0C7AD2E2134F800132936 /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AC2E2134F600132936 /* JournalView.swift */; };
 		BFA0C7AF2E21351300132936 /* RecordRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AE2E21351000132936 /* RecordRowView.swift */; };
 		BFB0C3D12E3E4E7D00296B97 /* GitHubDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB0C3D02E3E4E7D00296B97 /* GitHubDataService.swift */; };
-		BFB0C3EF2E3E510400296B97 /* GitHubSyncExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB0C3EA2E3E510400296B97 /* GitHubSyncExample.swift */; };
-		BFB0C3F02E3E510400296B97 /* NavigationAnalysisReport.md in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3EC2E3E510400296B97 /* NavigationAnalysisReport.md */; };
-		BFB0C3F12E3E510400296B97 /* GitHubSyncGuide.md in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3EB2E3E510400296B97 /* GitHubSyncGuide.md */; };
-		BFB0C3F22E3E510400296B97 /* NavigationGuide.md in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3ED2E3E510400296B97 /* NavigationGuide.md */; };
 		BFB0C3F62E3E511300296B97 /* FilmLab-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3F32E3E511300296B97 /* FilmLab-Info.plist */; };
 		BFB0C3F72E3E511300296B97 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3F52E3E511300296B97 /* README.md */; };
 		BFB0C3F82E3E511300296B97 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3F42E3E511300296B97 /* LICENSE */; };
@@ -105,10 +101,6 @@
 		BFA0C7AC2E2134F600132936 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
 		BFA0C7AE2E21351000132936 /* RecordRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRowView.swift; sourceTree = "<group>"; };
 		BFB0C3D02E3E4E7D00296B97 /* GitHubDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubDataService.swift; sourceTree = "<group>"; };
-		BFB0C3EA2E3E510400296B97 /* GitHubSyncExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSyncExample.swift; sourceTree = "<group>"; };
-		BFB0C3EB2E3E510400296B97 /* GitHubSyncGuide.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = GitHubSyncGuide.md; sourceTree = "<group>"; };
-		BFB0C3EC2E3E510400296B97 /* NavigationAnalysisReport.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = NavigationAnalysisReport.md; sourceTree = "<group>"; };
-		BFB0C3ED2E3E510400296B97 /* NavigationGuide.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = NavigationGuide.md; sourceTree = "<group>"; };
 		BFB0C3F32E3E511300296B97 /* FilmLab-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FilmLab-Info.plist"; sourceTree = "<group>"; };
 		BFB0C3F42E3E511300296B97 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		BFB0C3F52E3E511300296B97 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -391,17 +383,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		BFB0C3EE2E3E510400296B97 /* Docs */ = {
-			isa = PBXGroup;
-			children = (
-				BFB0C3EA2E3E510400296B97 /* GitHubSyncExample.swift */,
-				BFB0C3EB2E3E510400296B97 /* GitHubSyncGuide.md */,
-				BFB0C3EC2E3E510400296B97 /* NavigationAnalysisReport.md */,
-				BFB0C3ED2E3E510400296B97 /* NavigationGuide.md */,
-			);
-			path = Docs;
-			sourceTree = "<group>";
-		};
 		BFE12EAF2E33C5120044A3A4 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
@@ -419,7 +400,6 @@
 				BF41094F2E3135B700BE2AD8 /* Shared */,
 				BFA0C7B02E2136A500132936 /* Resources */,
 				BFE96A3A2E2061A0001CF98D /* Products */,
-				BFB0C3EE2E3E510400296B97 /* Docs */,
 				BFB0C3F32E3E511300296B97 /* FilmLab-Info.plist */,
 				BFB0C3F42E3E511300296B97 /* LICENSE */,
 				BFB0C3F52E3E511300296B97 /* README.md */,
@@ -501,9 +481,6 @@
 				BFB0C3F62E3E511300296B97 /* FilmLab-Info.plist in Resources */,
 				BFB0C3F72E3E511300296B97 /* README.md in Resources */,
 				BFB0C3F82E3E511300296B97 /* LICENSE in Resources */,
-				BFB0C3F02E3E510400296B97 /* NavigationAnalysisReport.md in Resources */,
-				BFB0C3F12E3E510400296B97 /* GitHubSyncGuide.md in Resources */,
-				BFB0C3F22E3E510400296B97 /* NavigationGuide.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,7 +540,6 @@
 				BFE12EC12E360C010044A3A4 /* AppPreview.swift in Sources */,
 				BFB0C3D12E3E4E7D00296B97 /* GitHubDataService.swift in Sources */,
 				BFA0C7A02E2133FC00132936 /* Persistence.swift in Sources */,
-				BFB0C3EF2E3E510400296B97 /* GitHubSyncExample.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
