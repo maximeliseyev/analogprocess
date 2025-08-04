@@ -10,8 +10,9 @@ import CoreData
 
 struct CalculatorView: View {
     @StateObject private var viewModel: CalculatorViewModel
+    let onStartTimer: ((String, Int, Int) -> Void)?
     
-    init(initialTime: Int? = nil, initialTemperature: Double = 20.0) {
+    init(initialTime: Int? = nil, initialTemperature: Double = 20.0, onStartTimer: ((String, Int, Int) -> Void)? = nil) {
         let vm = CalculatorViewModel()
         if let time = initialTime {
             let minutes = time / 60
@@ -21,6 +22,7 @@ struct CalculatorView: View {
             vm.temperature = initialTemperature
         }
         _viewModel = StateObject(wrappedValue: vm)
+        self.onStartTimer = onStartTimer
     }
     
     var body: some View {
@@ -129,13 +131,7 @@ struct CalculatorView: View {
         .padding()
         .navigationTitle(LocalizedStringKey("calculator"))
         .navigationBarTitleDisplayMode(.inline)
-        .navigationDestination(isPresented: $viewModel.showTimer) {
-            TimerView(
-                timerLabel: viewModel.selectedTimerLabel,
-                totalMinutes: viewModel.selectedTimerMinutes,
-                totalSeconds: viewModel.selectedTimerSeconds
-            )
-        }
+
         .sheet(isPresented: $viewModel.showTemperaturePicker) {
             TemperaturePickerView(
                 temperature: $viewModel.temperature,
@@ -145,10 +141,21 @@ struct CalculatorView: View {
             CalculationResultView(
                 results: viewModel.pushResults,
                 isPushMode: viewModel.isPushMode,
-                onStartTimer: viewModel.startTimer,
+                onTimerTap: { label, minutes, seconds in
+                    viewModel.startTimer(label, minutes, seconds)
+                    onStartTimer?(label, minutes, seconds)
+                },
                 viewModel: viewModel
             )
         }
+        .navigationDestination(isPresented: $viewModel.showTimer) {
+            TimerView(
+                timerLabel: viewModel.selectedTimerLabel,
+                totalMinutes: viewModel.selectedTimerMinutes,
+                totalSeconds: viewModel.selectedTimerSeconds
+            )
+        }
+
         .onAppear {
             viewModel.loadRecords()
         }
@@ -160,7 +167,9 @@ struct CalculatorView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.ignoresSafeArea()
-            CalculatorView()
+            CalculatorView(onStartTimer: { label, minutes, seconds in
+                print("Start timer: \(label) \(minutes):\(seconds)")
+            })
         }
         .previewDisplayName("Calculator")
     }

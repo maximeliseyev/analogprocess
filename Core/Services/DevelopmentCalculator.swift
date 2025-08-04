@@ -8,6 +8,17 @@
 import SwiftUI
 
 class DevelopmentCalculator {
+    /// Округляет время до ближайшей 1/4 минуты (15 секунд)
+    private func roundToQuarterMinute(_ totalSeconds: Int) -> (minutes: Int, seconds: Int) {
+        let quarterMinuteSeconds = 15
+        let roundedSeconds = Int(round(Double(totalSeconds) / Double(quarterMinuteSeconds))) * quarterMinuteSeconds
+        
+        let minutes = roundedSeconds / 60
+        let seconds = roundedSeconds % 60
+        
+        return (minutes: minutes, seconds: seconds)
+    }
+    
     func calculateResults(
         minutes: Int,
         seconds: Int,
@@ -19,11 +30,12 @@ class DevelopmentCalculator {
         let baseSeconds = minutes * 60 + seconds
         var results: [(label: String, minutes: Int, seconds: Int)] = []
         
-        // Базовое время (+0)
+        // Базовое время (+0) - округляем
+        let baseRounded = roundToQuarterMinute(baseSeconds)
         results.append((
             label: "+0",
-            minutes: minutes,
-            seconds: seconds
+            minutes: baseRounded.minutes,
+            seconds: baseRounded.seconds
         ))
         
         if isPushMode {
@@ -42,13 +54,13 @@ class DevelopmentCalculator {
             let multiplier = pow(coefficient, Double(i))
             let adjustedSeconds = Int(Double(baseSeconds) * multiplier)
             
-            let resultMinutes = adjustedSeconds / 60
-            let resultSeconds = adjustedSeconds % 60
+            // Округляем результат до 1/4 минуты
+            let rounded = roundToQuarterMinute(adjustedSeconds)
             
             results.append((
                 label: "push +\(i)",
-                minutes: resultMinutes,
-                seconds: resultSeconds
+                minutes: rounded.minutes,
+                seconds: rounded.seconds
             ))
         }
         
@@ -62,13 +74,13 @@ class DevelopmentCalculator {
             let divisor = pow(coefficient, Double(i))
             let adjustedSeconds = Int(Double(baseSeconds) / divisor)
             
-            let resultMinutes = adjustedSeconds / 60
-            let resultSeconds = adjustedSeconds % 60
+            // Округляем результат до 1/4 минуты
+            let rounded = roundToQuarterMinute(adjustedSeconds)
             
             results.append((
                 label: "pull -\(i)",
-                minutes: resultMinutes,
-                seconds: resultSeconds
+                minutes: rounded.minutes,
+                seconds: rounded.seconds
             ))
         }
         

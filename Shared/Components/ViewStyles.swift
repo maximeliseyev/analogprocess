@@ -120,7 +120,7 @@ extension View {
     func pickerTitleStyle() -> some View {
         self
             .font(.headline)
-            .foregroundColor(.primary)
+            .foregroundColor(.white)
     }
     
     /// Стиль подписи для picker'ов
@@ -128,7 +128,7 @@ extension View {
     func pickerSubtitleStyle() -> some View {
         self
             .font(.caption)
-            .foregroundColor(.secondary)
+            .foregroundColor(.gray)
     }
 }
 
@@ -203,6 +203,6 @@ extension View {
     func primaryTextStyle() -> some View {
         self
             .font(.body)
-            .foregroundColor(.primary)
+            .foregroundColor(.white)
     }
 }

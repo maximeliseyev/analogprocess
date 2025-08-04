@@ -34,7 +34,10 @@ struct FilmPickerView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
+            ZStack {
+                Color.black.ignoresSafeArea()
+                
+                ScrollView {
                 LazyVStack(spacing: 0) {
                     ForEach(filteredFilms) { film in
                         Button(action: {
@@ -67,10 +70,12 @@ struct FilmPickerView: View {
                             .padding(.leading, 16)
                     }
                 }
+                }
             }
             .searchable(text: $searchText, prompt: String(localized: "searchFilms"))
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(LocalizedStringKey("selectFilm"))
+        }
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button(LocalizedStringKey("cancel")) {
@@ -80,7 +85,7 @@ struct FilmPickerView: View {
             }
         }
     }
-}
+
 
 struct FilmPickerView_Previews: PreviewProvider {
     static var previews: some View {

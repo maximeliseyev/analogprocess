@@ -16,7 +16,10 @@ struct DilutionPickerView: View {
     
     var body: some View {
         NavigationStack {
-            Group {
+            ZStack {
+                Color.black.ignoresSafeArea()
+                
+                Group {
                 if dilutions.isEmpty {
                     VStack(spacing: 20) {
                         Image(systemName: "info.circle")
@@ -54,9 +57,11 @@ struct DilutionPickerView: View {
                         .disabled(isDisabled)
                     }
                 }
+                }
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(LocalizedStringKey("selectDilution"))
+        }
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button(LocalizedStringKey("cancel")) {
@@ -66,7 +71,7 @@ struct DilutionPickerView: View {
             }
         }
     }
-}
+
 
 struct DilutionPickerView_Previews: PreviewProvider {
     static var previews: some View {

@@ -11,7 +11,7 @@ import CoreData
 struct CalculationResultView: View {
     let results: [(label: String, minutes: Int, seconds: Int)]
     let isPushMode: Bool
-    let onStartTimer: (String, Int, Int) -> Void
+    let onTimerTap: (String, Int, Int) -> Void
     @ObservedObject var viewModel: CalculatorViewModel
     
     var body: some View {
@@ -35,7 +35,7 @@ struct CalculationResultView: View {
                         
                         HStack(alignment: .center, spacing: 12) {
                             Button(action: {
-                                onStartTimer(result.label, result.minutes, result.seconds)
+                                onTimerTap(result.label, result.minutes, result.seconds)
                             }) {
                                 HStack(spacing: 6) {
                                     Image(systemName: "timer")

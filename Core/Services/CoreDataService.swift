@@ -209,6 +209,12 @@ public class CoreDataService: ObservableObject {
         return multiplier.multiplier
     }
     
+    /// Округляет время до ближайшей 1/4 минуты (15 секунд)
+    private func roundToQuarterMinute(_ totalSeconds: Int) -> Int {
+        let quarterMinuteSeconds = 15
+        return Int(round(Double(totalSeconds) / Double(quarterMinuteSeconds))) * quarterMinuteSeconds
+    }
+    
     func calculateDevelopmentTime(parameters: DevelopmentParameters) -> Int? {
         print("DEBUG: calculateDevelopmentTime called")
         guard let baseTime = getDevelopmentTime(
@@ -223,8 +229,9 @@ public class CoreDataService: ObservableObject {
         
         let temperatureMultiplier = getTemperatureMultiplier(for: parameters.temperature)
         let finalTime = Int(Double(baseTime) * temperatureMultiplier)
-        print("DEBUG: calculateDevelopmentTime - base time: \(baseTime), multiplier: \(temperatureMultiplier), final time: \(finalTime)")
-        return finalTime
+        let roundedTime = roundToQuarterMinute(finalTime)
+        print("DEBUG: calculateDevelopmentTime - base time: \(baseTime), multiplier: \(temperatureMultiplier), final time: \(finalTime), rounded time: \(roundedTime)")
+        return roundedTime
     }
     
     func getAvailableDilutions(for filmId: String, developerId: String) -> [String] {

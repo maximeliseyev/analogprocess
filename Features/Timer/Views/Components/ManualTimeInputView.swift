@@ -5,22 +5,24 @@ struct ManualTimeInputView: View {
     @Binding var seconds: Int
     let onApply: () -> Void
     let onCancel: () -> Void
+    let title: LocalizedStringKey
     
     @State private var tempMinutes: Int
     @State private var tempSeconds: Int
     
-    init(minutes: Binding<Int>, seconds: Binding<Int>, onApply: @escaping () -> Void, onCancel: @escaping () -> Void) {
+    init(minutes: Binding<Int>, seconds: Binding<Int>, onApply: @escaping () -> Void, onCancel: @escaping () -> Void, title: LocalizedStringKey = "set_time_manually") {
         self._minutes = minutes
         self._seconds = seconds
         self.onApply = onApply
         self.onCancel = onCancel
+        self.title = title
         self._tempMinutes = State(initialValue: minutes.wrappedValue)
         self._tempSeconds = State(initialValue: seconds.wrappedValue)
     }
     
     var body: some View {
         VStack(spacing: 30) {
-            Text(LocalizedStringKey("set_time_manually"))
+            Text(title)
                 .font(.title2)
                 .fontWeight(.semibold)
                 .foregroundColor(.white)
@@ -107,7 +109,8 @@ struct ManualTimeInputView_Previews: PreviewProvider {
                     minutes: .constant(5),
                     seconds: .constant(30),
                     onApply: {},
-                    onCancel: {}
+                    onCancel: {},
+                    title: "set_time_manually"
                 )
             }
             .previewDisplayName("Manual Time Input - Default")
@@ -120,7 +123,8 @@ struct ManualTimeInputView_Previews: PreviewProvider {
                     minutes: .constant(0),
                     seconds: .constant(0),
                     onApply: {},
-                    onCancel: {}
+                    onCancel: {},
+                    title: "set_time_manually"
                 )
             }
             .previewDisplayName("Manual Time Input - Zero Time")
@@ -133,7 +137,8 @@ struct ManualTimeInputView_Previews: PreviewProvider {
                     minutes: .constant(25),
                     seconds: .constant(45),
                     onApply: {},
-                    onCancel: {}
+                    onCancel: {},
+                    title: "set_time_manually"
                 )
             }
             .previewDisplayName("Manual Time Input - Long Time")

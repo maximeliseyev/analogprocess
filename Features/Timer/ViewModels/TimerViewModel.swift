@@ -16,6 +16,10 @@ class TimerViewModel: ObservableObject {
     @Published var showAgitationSelection = true
     @Published var selectedAgitationMode: AgitationMode?
     @Published var showManualTimeInput = false
+    @Published var showFixingTimer = false
+    @Published var isTimerFinished = false
+    @Published var fixingMinutes: Int = 5
+    @Published var fixingSeconds: Int = 0
     
     @Published var currentMinute: Int = 1
     @Published var shouldAgitate = false
@@ -227,9 +231,32 @@ class TimerViewModel: ObservableObject {
     
     private func timerFinished() {
         stopTimer()
-        showingAlert = true
+        isTimerFinished = true
         
         let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
         impactFeedback.impactOccurred()
+    }
+    
+    func startFixingTimer() {
+        // Устанавливаем значения по умолчанию для фиксирования
+        fixingMinutes = 5
+        fixingSeconds = 0
+        showFixingTimer = true
+    }
+    
+    func startFixingTimerWithTime(minutes: Int, seconds: Int) {
+        // Сбрасываем состояние таймера для фиксирования
+        timeRemaining = minutes * 60 + seconds
+        totalMinutes = minutes
+        totalSeconds = seconds
+        currentMinute = 1
+        isTimerFinished = false
+        
+        // Устанавливаем режим фиксирования
+        let fixerMode = AgitationMode.presets.first { $0.name == String(localized: "agitation_fixer_name") }
+        selectedAgitationMode = fixerMode
+        setupAgitation()
+        
+        showFixingTimer = false
     }
 } 
