@@ -116,6 +116,8 @@ class TimerViewModel: ObservableObject {
         switch phase {
         case .continuous:
             return "Непрерывная ажитация"
+        case .still:
+            return "Без ажитации"
         case .cycle(let agitation, let rest):
             return "\(agitation)с ажитации / \(rest)с покоя"
         case .periodic(let interval):
@@ -170,6 +172,9 @@ class TimerViewModel: ObservableObject {
             case .continuous:
                 isInAgitationPhase = true
                 agitationTimeRemaining = 0
+            case .still:
+                isInAgitationPhase = false
+                agitationTimeRemaining = 0
             case .cycle(let agitation, _):
                 isInAgitationPhase = true
                 agitationTimeRemaining = agitation
@@ -196,6 +201,9 @@ class TimerViewModel: ObservableObject {
         
         switch phase {
         case .continuous:
+            break
+            
+        case .still:
             break
             
         case .cycle(let agitation, let rest):
