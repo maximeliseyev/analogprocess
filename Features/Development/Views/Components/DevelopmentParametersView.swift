@@ -12,27 +12,28 @@ struct ParameterRow: View {
     let value: String
     let onTap: () -> Void
     let isDisabled: Bool
+    @Environment(\.theme) private var theme
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(label)
                 .font(.headline)
-                .foregroundColor(.white)
+                .foregroundColor(theme.primaryText)
             
             Button(action: onTap) {
                 HStack {
                     Text(value)
                         .font(.body)
-                        .foregroundColor(isDisabled ? .gray : .white)
+                        .foregroundColor(isDisabled ? theme.secondaryText : theme.primaryText)
                     
                     Spacer()
                     
                     Image(systemName: "chevron.down")
-                        .foregroundColor(isDisabled ? .gray.opacity(0.5) : .gray)
+                        .foregroundColor(isDisabled ? theme.secondaryText.opacity(0.5) : theme.secondaryText)
                         .font(.caption)
                 }
                 .padding()
-                .background(isDisabled ? Color.gray.opacity(0.1) : Color.gray.opacity(0.3))
+                .background(isDisabled ? theme.secondaryBackground : theme.parameterCardBackground)
                 .cornerRadius(8)
             }
             .buttonStyle(PlainButtonStyle())
@@ -43,6 +44,7 @@ struct ParameterRow: View {
 
 struct DevelopmentParametersView: View {
     @ObservedObject var viewModel: DevelopmentSetupViewModel
+    @Environment(\.theme) private var theme
     
     var body: some View {
         VStack(spacing: 12) {
@@ -88,7 +90,7 @@ struct DevelopmentParametersView: View {
 struct DevelopmentParametersView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
-            Color.black.ignoresSafeArea()
+            ThemeManager.shared.primaryBackground.ignoresSafeArea()
             DevelopmentParametersView(viewModel: DevelopmentSetupViewModel())
         }
     }

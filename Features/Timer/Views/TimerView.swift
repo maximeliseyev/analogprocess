@@ -7,6 +7,7 @@ public struct TimerView: View {
     
     @StateObject private var viewModel: TimerViewModel
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.theme) private var theme
     
     public init(timerLabel: String, totalMinutes: Int, totalSeconds: Int) {
         self.timerLabel = timerLabel
@@ -18,7 +19,7 @@ public struct TimerView: View {
     public var body: some View {
         NavigationStack {
             ZStack {
-                Color.black
+                theme.primaryBackground
                     .ignoresSafeArea()
                 
                 VStack(spacing: 30) {
@@ -51,7 +52,7 @@ public struct TimerView: View {
                         VStack(spacing: 16) {
                             Text(LocalizedStringKey("development_completed"))
                                 .font(.headline)
-                                .foregroundColor(.green)
+                                .foregroundColor(theme.successAccent)
                             
                             Button(action: {
                                 viewModel.startFixingTimer()
@@ -62,9 +63,9 @@ public struct TimerView: View {
                                     Text(LocalizedStringKey("go_to_fixing"))
                                         .font(.headline)
                                 }
-                                .foregroundColor(.white)
+                                .foregroundColor(theme.primaryButtonText)
                                 .padding()
-                                .background(Color.orange)
+                                .background(theme.agitationBackground)
                                 .cornerRadius(10)
                             }
                         }
@@ -92,7 +93,7 @@ public struct TimerView: View {
                         )
                     )) {
                         Image(systemName: "slider.horizontal.3")
-                            .foregroundColor(.white)
+                            .foregroundColor(theme.primaryText)
                             .font(.title2)
                     }
                 }

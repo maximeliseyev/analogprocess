@@ -11,6 +11,7 @@ struct TimerControlsView: View {
     let isRunning: Bool
     let onStartPause: () -> Void
     let onReset: () -> Void
+    @Environment(\.theme) private var theme
     
     var body: some View {
         HStack(spacing: 30) {
@@ -20,9 +21,9 @@ struct TimerControlsView: View {
                     Text(isRunning ? LocalizedStringKey("pause") : LocalizedStringKey("start"))
                 }
                 .font(.headline)
-                .foregroundColor(.white)
+                .foregroundColor(theme.primaryButtonText)
                 .frame(width: 120, height: 50)
-                .background(isRunning ? Color.orange : Color.green)
+                .background(isRunning ? theme.agitationBackground : theme.successAccent)
                 .cornerRadius(25)
             }
             
@@ -32,9 +33,9 @@ struct TimerControlsView: View {
                     Text(LocalizedStringKey("reset"))
                 }
                 .font(.headline)
-                .foregroundColor(.white)
+                .foregroundColor(theme.primaryButtonText)
                 .frame(width: 120, height: 50)
-                .background(Color.gray)
+                .background(theme.secondaryText)
                 .cornerRadius(25)
             }
         }

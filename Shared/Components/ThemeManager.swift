@@ -7,7 +7,335 @@
 
 import SwiftUI
 
-// MARK: - Theme Manager
+// MARK: - Theme Protocol for Environment
+protocol ThemeProvider {
+    var colorScheme: ColorScheme? { get }
+    
+    // MARK: - Background Colors
+    var primaryBackground: Color { get }
+    var secondaryBackground: Color { get }
+    var cardBackground: Color { get }
+    var parameterCardBackground: Color { get }
+    
+    // MARK: - Text Colors
+    var primaryText: Color { get }
+    var secondaryText: Color { get }
+    var captionText: Color { get }
+    
+    // MARK: - Accent Colors
+    var primaryAccent: Color { get }
+    var secondaryAccent: Color { get }
+    var successAccent: Color { get }
+    var warningAccent: Color { get }
+    var dangerAccent: Color { get }
+    var purpleAccent: Color { get }
+    
+    // MARK: - Button Colors
+    var primaryButtonBackground: Color { get }
+    var primaryButtonText: Color { get }
+    var secondaryButtonBackground: Color { get }
+    var secondaryButtonText: Color { get }
+    
+    // MARK: - Selection Colors
+    var selectionBackground: Color { get }
+    var selectionBorder: Color { get }
+    
+    // MARK: - Timer Colors
+    var timerActiveBackground: Color { get }
+    var timerInactiveBackground: Color { get }
+    var agitationBackground: Color { get }
+}
+
+// MARK: - Theme Implementation
+extension ThemeProvider {
+    var primaryBackground: Color {
+        switch colorScheme {
+        case .light:
+            return Color.white
+        case .dark:
+            return Color.black
+        case nil:
+            return Color.white
+        @unknown default:
+            return Color.white
+        }
+    }
+    
+    var secondaryBackground: Color {
+        switch colorScheme {
+        case .light:
+            return Color.gray.opacity(0.1)
+        case .dark:
+            return Color.gray.opacity(0.1)
+        case nil:
+            return Color.gray.opacity(0.1)
+        @unknown default:
+            return Color.gray.opacity(0.1)
+        }
+    }
+    
+    var cardBackground: Color {
+        switch colorScheme {
+        case .light:
+            return Color.gray.opacity(0.1)
+        case .dark:
+            return Color.gray.opacity(0.1)
+        case nil:
+            return Color.gray.opacity(0.1)
+        @unknown default:
+            return Color.gray.opacity(0.1)
+        }
+    }
+    
+    var parameterCardBackground: Color {
+        switch colorScheme {
+        case .light:
+            return Color.gray.opacity(0.2)
+        case .dark:
+            return Color.gray.opacity(0.3)
+        case nil:
+            return Color.gray.opacity(0.2)
+        @unknown default:
+            return Color.gray.opacity(0.2)
+        }
+    }
+    
+    var primaryText: Color {
+        switch colorScheme {
+        case .light:
+            return Color.black
+        case .dark:
+            return Color.white
+        case nil:
+            return Color.black
+        @unknown default:
+            return Color.black
+        }
+    }
+    
+    var secondaryText: Color {
+        switch colorScheme {
+        case .light:
+            return Color.gray
+        case .dark:
+            return Color.gray
+        case nil:
+            return Color.gray
+        @unknown default:
+            return Color.gray
+        }
+    }
+    
+    var captionText: Color {
+        switch colorScheme {
+        case .light:
+            return Color.gray.opacity(0.7)
+        case .dark:
+            return Color.gray
+        case nil:
+            return Color.gray.opacity(0.7)
+        @unknown default:
+            return Color.gray.opacity(0.7)
+        }
+    }
+    
+    var primaryAccent: Color {
+        switch colorScheme {
+        case .light:
+            return Color.blue
+        case .dark:
+            return Color.blue
+        case nil:
+            return Color.blue
+        @unknown default:
+            return Color.blue
+        }
+    }
+    
+    var secondaryAccent: Color {
+        switch colorScheme {
+        case .light:
+            return Color.orange
+        case .dark:
+            return Color.orange
+        case nil:
+            return Color.orange
+        @unknown default:
+            return Color.orange
+        }
+    }
+    
+    var successAccent: Color {
+        switch colorScheme {
+        case .light:
+            return Color.green
+        case .dark:
+            return Color.green
+        case nil:
+            return Color.green
+        @unknown default:
+            return Color.green
+        }
+    }
+    
+    var warningAccent: Color {
+        switch colorScheme {
+        case .light:
+            return Color.orange
+        case .dark:
+            return Color.orange
+        case nil:
+            return Color.orange
+        @unknown default:
+            return Color.orange
+        }
+    }
+    
+    var dangerAccent: Color {
+        switch colorScheme {
+        case .light:
+            return Color.red
+        case .dark:
+            return Color.red
+        case nil:
+            return Color.red
+        @unknown default:
+            return Color.red
+        }
+    }
+    
+    var purpleAccent: Color {
+        switch colorScheme {
+        case .light:
+            return Color.purple
+        case .dark:
+            return Color.purple
+        case nil:
+            return Color.purple
+        @unknown default:
+            return Color.purple
+        }
+    }
+    
+    var primaryButtonBackground: Color {
+        switch colorScheme {
+        case .light:
+            return Color.blue
+        case .dark:
+            return Color.blue
+        case nil:
+            return Color.blue
+        @unknown default:
+            return Color.blue
+        }
+    }
+    
+    var primaryButtonText: Color {
+        switch colorScheme {
+        case .light:
+            return Color.white
+        case .dark:
+            return Color.white
+        case nil:
+            return Color.white
+        @unknown default:
+            return Color.white
+        }
+    }
+    
+    var secondaryButtonBackground: Color {
+        switch colorScheme {
+        case .light:
+            return Color.green
+        case .dark:
+            return Color.green
+        case nil:
+            return Color.green
+        @unknown default:
+            return Color.green
+        }
+    }
+    
+    var secondaryButtonText: Color {
+        switch colorScheme {
+        case .light:
+            return Color.white
+        case .dark:
+            return Color.white
+        case nil:
+            return Color.white
+        @unknown default:
+            return Color.white
+        }
+    }
+    
+    var selectionBackground: Color {
+        switch colorScheme {
+        case .light:
+            return Color.blue.opacity(0.15)
+        case .dark:
+            return Color.blue.opacity(0.15)
+        case nil:
+            return Color.blue.opacity(0.15)
+        @unknown default:
+            return Color.blue.opacity(0.15)
+        }
+    }
+    
+    var selectionBorder: Color {
+        switch colorScheme {
+        case .light:
+            return Color.blue
+        case .dark:
+            return Color.blue
+        case nil:
+            return Color.blue
+        @unknown default:
+            return Color.blue
+        }
+    }
+    
+    var timerActiveBackground: Color {
+        switch colorScheme {
+        case .light:
+            return Color.blue
+        case .dark:
+            return Color.blue
+        case nil:
+            return Color.blue
+        @unknown default:
+            return Color.blue
+        }
+    }
+    
+    var timerInactiveBackground: Color {
+        switch colorScheme {
+        case .light:
+            return Color.gray.opacity(0.3)
+        case .dark:
+            return Color.gray.opacity(0.3)
+        case nil:
+            return Color.gray.opacity(0.3)
+        @unknown default:
+            return Color.gray.opacity(0.3)
+        }
+    }
+    
+    var agitationBackground: Color {
+        switch colorScheme {
+        case .light:
+            return Color.orange
+        case .dark:
+            return Color.orange
+        case nil:
+            return Color.orange
+        @unknown default:
+            return Color.orange
+        }
+    }
+}
+
+// MARK: - Main Theme Manager
 @MainActor
 class ThemeManager: ObservableObject {
     static let shared = ThemeManager()
@@ -309,300 +637,19 @@ class ThemeManager: ObservableObject {
     }
 }
 
+// MARK: - Non-Isolated Theme Manager for Environment
+class NonIsolatedThemeManager: ObservableObject, ThemeProvider {
+    @Published var colorScheme: ColorScheme? = nil
+    
+    init() {
+        // Инициализируем с темной темой по умолчанию
+        self.colorScheme = .dark
+    }
+}
+
 // MARK: - Theme Environment Key
 struct ThemeKey: EnvironmentKey {
     static let defaultValue = NonIsolatedThemeManager()
-}
-
-// MARK: - Non-Isolated Theme Manager for Environment
-class NonIsolatedThemeManager: ObservableObject {
-    @Published var colorScheme: ColorScheme? = nil
-    
-    var primaryBackground: Color {
-        switch colorScheme {
-        case .light:
-            return Color.white
-        case .dark:
-            return Color.black
-        case nil:
-            return Color.white
-        @unknown default:
-            return Color.white
-        }
-    }
-    
-    var secondaryBackground: Color {
-        switch colorScheme {
-        case .light:
-            return Color.gray.opacity(0.1)
-        case .dark:
-            return Color.gray.opacity(0.1)
-        case nil:
-            return Color.gray.opacity(0.1)
-        @unknown default:
-            return Color.gray.opacity(0.1)
-        }
-    }
-    
-    var cardBackground: Color {
-        switch colorScheme {
-        case .light:
-            return Color.gray.opacity(0.1)
-        case .dark:
-            return Color.gray.opacity(0.1)
-        case nil:
-            return Color.gray.opacity(0.1)
-        @unknown default:
-            return Color.gray.opacity(0.1)
-        }
-    }
-    
-    var parameterCardBackground: Color {
-        switch colorScheme {
-        case .light:
-            return Color.gray.opacity(0.2)
-        case .dark:
-            return Color.gray.opacity(0.3)
-        case nil:
-            return Color.gray.opacity(0.2)
-        @unknown default:
-            return Color.gray.opacity(0.2)
-        }
-    }
-    
-    var primaryText: Color {
-        switch colorScheme {
-        case .light:
-            return Color.black
-        case .dark:
-            return Color.white
-        case nil:
-            return Color.black
-        @unknown default:
-            return Color.black
-        }
-    }
-    
-    var secondaryText: Color {
-        switch colorScheme {
-        case .light:
-            return Color.gray
-        case .dark:
-            return Color.gray
-        case nil:
-            return Color.gray
-        @unknown default:
-            return Color.gray
-        }
-    }
-    
-    var captionText: Color {
-        switch colorScheme {
-        case .light:
-            return Color.gray.opacity(0.7)
-        case .dark:
-            return Color.gray
-        case nil:
-            return Color.gray.opacity(0.7)
-        @unknown default:
-            return Color.gray.opacity(0.7)
-        }
-    }
-    
-    var primaryAccent: Color {
-        switch colorScheme {
-        case .light:
-            return Color.blue
-        case .dark:
-            return Color.blue
-        case nil:
-            return Color.blue
-        @unknown default:
-            return Color.blue
-        }
-    }
-    
-    var secondaryAccent: Color {
-        switch colorScheme {
-        case .light:
-            return Color.orange
-        case .dark:
-            return Color.orange
-        case nil:
-            return Color.orange
-        @unknown default:
-            return Color.orange
-        }
-    }
-    
-    var successAccent: Color {
-        switch colorScheme {
-        case .light:
-            return Color.green
-        case .dark:
-            return Color.green
-        case nil:
-            return Color.green
-        @unknown default:
-            return Color.green
-        }
-    }
-    
-    var warningAccent: Color {
-        switch colorScheme {
-        case .light:
-            return Color.orange
-        case .dark:
-            return Color.orange
-        case nil:
-            return Color.orange
-        @unknown default:
-            return Color.orange
-        }
-    }
-    
-    var dangerAccent: Color {
-        switch colorScheme {
-        case .light:
-            return Color.red
-        case .dark:
-            return Color.red
-        case nil:
-            return Color.red
-        @unknown default:
-            return Color.red
-        }
-    }
-    
-    var purpleAccent: Color {
-        switch colorScheme {
-        case .light:
-            return Color.purple
-        case .dark:
-            return Color.purple
-        case nil:
-            return Color.purple
-        @unknown default:
-            return Color.purple
-        }
-    }
-    
-    var primaryButtonBackground: Color {
-        switch colorScheme {
-        case .light:
-            return Color.blue
-        case .dark:
-            return Color.blue
-        case nil:
-            return Color.blue
-        @unknown default:
-            return Color.blue
-        }
-    }
-    
-    var primaryButtonText: Color {
-        switch colorScheme {
-        case .light:
-            return Color.white
-        case .dark:
-            return Color.white
-        case nil:
-            return Color.white
-        @unknown default:
-            return Color.white
-        }
-    }
-    
-    var secondaryButtonBackground: Color {
-        switch colorScheme {
-        case .light:
-            return Color.green
-        case .dark:
-            return Color.green
-        case nil:
-            return Color.green
-        @unknown default:
-            return Color.green
-        }
-    }
-    
-    var secondaryButtonText: Color {
-        switch colorScheme {
-        case .light:
-            return Color.white
-        case .dark:
-            return Color.white
-        case nil:
-            return Color.white
-        @unknown default:
-            return Color.white
-        }
-    }
-    
-    var selectionBackground: Color {
-        switch colorScheme {
-        case .light:
-            return Color.blue.opacity(0.15)
-        case .dark:
-            return Color.blue.opacity(0.15)
-        case nil:
-            return Color.blue.opacity(0.15)
-        @unknown default:
-            return Color.blue.opacity(0.15)
-        }
-    }
-    
-    var selectionBorder: Color {
-        switch colorScheme {
-        case .light:
-            return Color.blue
-        case .dark:
-            return Color.blue
-        case nil:
-            return Color.blue
-        @unknown default:
-            return Color.blue
-        }
-    }
-    
-    var timerActiveBackground: Color {
-        switch colorScheme {
-        case .light:
-            return Color.blue
-        case .dark:
-            return Color.blue
-        case nil:
-            return Color.blue
-        @unknown default:
-            return Color.blue
-        }
-    }
-    
-    var timerInactiveBackground: Color {
-        switch colorScheme {
-        case .light:
-            return Color.gray.opacity(0.3)
-        case .dark:
-            return Color.gray.opacity(0.3)
-        case nil:
-            return Color.gray.opacity(0.3)
-        @unknown default:
-            return Color.gray.opacity(0.3)
-        }
-    }
-    
-    var agitationBackground: Color {
-        switch colorScheme {
-        case .light:
-            return Color.orange
-        case .dark:
-            return Color.orange
-        case nil:
-            return Color.orange
-        @unknown default:
-            return Color.orange
-        }
-    }
 }
 
 extension EnvironmentValues {
