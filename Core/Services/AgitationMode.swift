@@ -132,7 +132,7 @@ struct AgitationMode {
         }
     }
     
-    func getAgitationForMinute(_ minute: Int, totalMinutes: Int) -> PhaseAgitationType? {
+    func getAgitationForMinuteWithTotal(_ minute: Int, totalMinutes: Int) -> PhaseAgitationType? {
         switch type {
         case .continuous:
             return .continuous
