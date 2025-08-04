@@ -13,11 +13,12 @@ struct DilutionPickerView: View {
     let onDismiss: () -> Void
     let isDisabled: Bool
     let onDilutionSelected: ((String) -> Void)?
+    @Environment(\.theme) private var theme
     
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.black.ignoresSafeArea()
+                theme.primaryBackground.ignoresSafeArea()
                 
                 Group {
                 if dilutions.isEmpty {
@@ -27,7 +28,7 @@ struct DilutionPickerView: View {
                         
                         Text(LocalizedStringKey("noDilutionsAvailable"))
                             .font(.headline)
-                            .foregroundColor(.primary)
+                            .foregroundColor(theme.primaryText)
                         
                         Text(LocalizedStringKey("noDilutionsDescription"))
                             .disabledTextStyle()

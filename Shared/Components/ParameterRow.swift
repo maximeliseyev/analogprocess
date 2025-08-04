@@ -11,6 +11,7 @@ struct ParameterRow: View {
     let label: String
     let value: String
     let onTap: () -> Void
+    @Environment(\.theme) private var theme
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -37,7 +38,7 @@ struct ParameterRow: View {
 struct ParameterRow_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
-            Color.black.ignoresSafeArea()
+            ThemeManager.shared.primaryBackground.ignoresSafeArea()
             VStack(spacing: 20) {
                 ParameterRow(
                     label: "Film:",

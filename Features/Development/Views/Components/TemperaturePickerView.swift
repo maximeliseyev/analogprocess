@@ -10,13 +10,14 @@ import SwiftUI
 struct TemperaturePickerView: View {
     @Binding var temperature: Double
     let onDismiss: () -> Void
+    @Environment(\.theme) private var theme
     
     private let temperatures = Array(stride(from: 15.0, through: 30.0, by: 0.5))
     
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.black.ignoresSafeArea()
+                theme.primaryBackground.ignoresSafeArea()
                 
                 List(temperatures, id: \.self) { temp in
                 Button(action: {

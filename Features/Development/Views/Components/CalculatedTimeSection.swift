@@ -14,6 +14,7 @@ struct CalculatedTimeSection: View {
     let developerName: String
     let onCalculatorTap: () -> Void
     let onTimerTap: () -> Void
+    @Environment(\.theme) private var theme
     
     private var minutes: Int {
         time / 60
@@ -32,11 +33,11 @@ struct CalculatedTimeSection: View {
                     Text("\(minutes):\(String(format: "%02d", seconds))")
                         .font(.system(size: 18, design: .monospaced))
                 }
-                .foregroundColor(.white)
+                .foregroundColor(theme.primaryButtonText)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 14)
                 .padding(.horizontal, 16)
-                .background(Color.orange)
+                .background(theme.agitationBackground)
                 .cornerRadius(12)
             }
             .buttonStyle(PlainButtonStyle())
@@ -48,11 +49,11 @@ struct CalculatedTimeSection: View {
                     Text("\(minutes):\(String(format: "%02d", seconds))")
                         .font(.system(size: 18, design: .monospaced))
                 }
-                .foregroundColor(.white)
+                .foregroundColor(theme.primaryButtonText)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 14)
                 .padding(.horizontal, 16)
-                .background(Color.red)
+                .background(theme.dangerAccent)
                 .cornerRadius(12)
             }
             .buttonStyle(PlainButtonStyle())
@@ -66,7 +67,7 @@ struct CalculatedTimeSection: View {
 struct CalculatedTimeSection_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
-            Color.black.ignoresSafeArea()
+            ThemeManager.shared.primaryBackground.ignoresSafeArea()
             CalculatedTimeSection(
                 time: 450, // 7:30
                 temperature: 20.0,
