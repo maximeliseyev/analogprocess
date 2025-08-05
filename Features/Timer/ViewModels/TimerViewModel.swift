@@ -25,7 +25,7 @@ class TimerViewModel: ObservableObject {
     @Published var shouldAgitate = false
     @Published var agitationTimeRemaining = 0
     @Published var isInAgitationPhase = false
-    @Published var currentAgitationPhase: AgitationMode.PhaseAgitationType?
+    @Published var currentAgitationPhase: AgitationPhase.PhaseAgitationType?
     
     private var timer: Timer?
     private var totalMinutes: Int
@@ -112,7 +112,7 @@ class TimerViewModel: ObservableObject {
         showManualTimeInput = false
     }
     
-    func getPhaseDescription(_ phase: AgitationMode.PhaseAgitationType) -> String {
+    func getPhaseDescription(_ phase: AgitationPhase.PhaseAgitationType) -> String {
         switch phase {
         case .continuous:
             return "Непрерывная ажитация"
@@ -165,7 +165,7 @@ class TimerViewModel: ObservableObject {
         }
         
         shouldAgitate = true
-        currentAgitationPhase = mode.getAgitationForMinuteWithTotal(currentMinute, totalMinutes: totalMinutes)
+        currentAgitationPhase = mode.getAgitationForMinuteWithTotal(currentMinute, totalMinutes: totalMinutes)?.agitationType
         
         if let phase = currentAgitationPhase {
             switch phase {
@@ -191,7 +191,7 @@ class TimerViewModel: ObservableObject {
     private func updateAgitation() {
         guard shouldAgitate, let mode = selectedAgitationMode else { return }
         
-        let newPhase = mode.getAgitationForMinuteWithTotal(currentMinute, totalMinutes: totalMinutes)
+        let newPhase = mode.getAgitationForMinuteWithTotal(currentMinute, totalMinutes: totalMinutes)?.agitationType
         if newPhase != currentAgitationPhase {
             currentAgitationPhase = newPhase
             setupAgitation()

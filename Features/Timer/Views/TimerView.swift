@@ -58,8 +58,6 @@ public struct TimerView: View {
                                 viewModel.startFixingTimer()
                             }) {
                                 HStack {
-                                    Image(systemName: "photo.fill")
-                                        .font(.title2)
                                     Text(LocalizedStringKey("go_to_fixing"))
                                         .font(.headline)
                                 }

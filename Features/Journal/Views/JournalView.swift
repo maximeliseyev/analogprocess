@@ -9,7 +9,8 @@ import SwiftUI
 import CoreData
 
 struct JournalView: View {
-    let records: [CalculationRecord]
+    @StateObject private var viewModel = JournalViewModel()
+    
     let onEditRecord: (CalculationRecord) -> Void
     let onDeleteRecord: (CalculationRecord) -> Void
     let onClose: () -> Void
@@ -20,15 +21,13 @@ struct JournalView: View {
     
     @State private var selectedRecord: CalculationRecord?
     
-    init(records: [CalculationRecord], 
-         onEditRecord: @escaping (CalculationRecord) -> Void, 
+    init(onEditRecord: @escaping (CalculationRecord) -> Void, 
          onDeleteRecord: @escaping (CalculationRecord) -> Void, 
          onClose: @escaping () -> Void, 
          onCreateNew: @escaping () -> Void,
          syncStatus: CloudKitService.SyncStatus = .idle,
          isCloudAvailable: Bool = false,
          onSync: @escaping () -> Void = {}) {
-        self.records = records
         self.onEditRecord = onEditRecord
         self.onDeleteRecord = onDeleteRecord
         self.onClose = onClose
@@ -49,7 +48,7 @@ struct JournalView: View {
             .padding(.horizontal)
             .padding(.top, 8)
             
-            if records.isEmpty {
+            if viewModel.savedRecords.isEmpty {
                 VStack(spacing: 20) {
                     Image(systemName: "book")
                         .font(.system(size: 60))
@@ -69,7 +68,7 @@ struct JournalView: View {
             } else {
                 ScrollView {
                     LazyVStack(spacing: 12) {
-                        ForEach(records, id: \.id) { record in
+                        ForEach(viewModel.savedRecords, id: \.id) { record in
                             RecordRowView(
                                 record: record,
                                 onTap: {
@@ -112,6 +111,9 @@ struct JournalView: View {
                 }
             )
         }
+        .onAppear {
+            viewModel.loadRecords()
+        }
     }
 }
 
@@ -120,52 +122,6 @@ struct JournalView: View {
 #Preview {
     NavigationStack {
         JournalView(
-            records: [
-                // Моковая запись 1
-                {
-                    let record = CalculationRecord(context: PersistenceController.preview.container.viewContext)
-                    record.name = "Портрет в парке"
-                    record.filmName = "Kodak T-Max 400"
-                    record.developerName = "Kodak Xtol"
-                    record.dilution = "1+1"
-                    record.iso = 400
-                    record.temperature = 20.0
-                    record.time = 420 // 7 минут
-                    record.date = Date().addingTimeInterval(-86400) // Вчера
-                    record.comment = "Отличные результаты, хорошая детализация теней"
-                    return record
-                }(),
-                
-                // Моковая запись 2
-                {
-                    let record = CalculationRecord(context: PersistenceController.preview.container.viewContext)
-                    record.name = "Городской пейзаж"
-                    record.filmName = "Ilford HP5 Plus"
-                    record.developerName = "Ilford ID-11"
-                    record.dilution = "1+1"
-                    record.iso = 400
-                    record.temperature = 20.0
-                    record.time = 600 // 10 минут
-                    record.date = Date().addingTimeInterval(-172800) // 2 дня назад
-                    record.comment = "Классический ч/б, хороший контраст"
-                    return record
-                }(),
-                
-                // Моковая запись 3
-                {
-                    let record = CalculationRecord(context: PersistenceController.preview.container.viewContext)
-                    record.name = "Быстрый тест"
-                    record.filmName = "Test Film"
-                    record.developerName = "Test Developer"
-                    record.dilution = ""
-                    record.iso = 100
-                    record.temperature = 0.0
-                    record.time = 180 // 3 минуты
-                    record.date = Date()
-                    record.comment = nil
-                    return record
-                }()
-            ],
             onEditRecord: { record in
                 print("Edit record: \(record.name ?? "Unknown")")
             },
@@ -184,13 +140,13 @@ struct JournalView: View {
                 print("Sync with CloudKit")
             }
         )
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
 
 #Preview("Empty Journal") {
     NavigationStack {
         JournalView(
-            records: [],
             onEditRecord: { record in
                 print("Edit record: \(record.name ?? "Unknown")")
             },
@@ -209,5 +165,6 @@ struct JournalView: View {
                 print("Sync with CloudKit")
             }
         )
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

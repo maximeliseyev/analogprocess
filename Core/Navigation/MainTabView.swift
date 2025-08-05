@@ -10,7 +10,6 @@ public struct MainTabView: View {
     
     private let dataService = CoreDataService.shared
     private let cloudKitService = CloudKitService.shared
-    @State private var savedRecords: [CalculationRecord] = []
     @State private var showingCreateRecord = false
     @State private var syncStatus: CloudKitService.SyncStatus = .idle
     @State private var isCloudAvailable = false
@@ -50,7 +49,6 @@ public struct MainTabView: View {
                     
                     // Экран Journal
                     JournalView(
-                        records: savedRecords,
                         onEditRecord: loadRecord,
                         onDeleteRecord: deleteRecord,
                         onClose: goToHome,
@@ -92,14 +90,10 @@ public struct MainTabView: View {
             }
         }
         .onAppear {
-            loadRecords()
             setupCloudKitObservers()
         }
         .sheet(isPresented: $showingCreateRecord) {
             CreateRecordView()
-                .onDisappear {
-                    loadRecords() // Обновляем список после создания записи
-                }
         }
 
     }
@@ -172,7 +166,7 @@ public struct MainTabView: View {
                 Spacer()
             }
         }
-        .navigationTitle(LocalizedStringKey("filmLab"))
+        .navigationTitle(LocalizedStringKey("analogprocess"))
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -220,10 +214,6 @@ public struct MainTabView: View {
         default: return .secondary
         }
     }
-    
-    func loadRecords() {
-        savedRecords = dataService.getCalculationRecords()
-    }
         
     func loadRecord(_ record: CalculationRecord) {
         // Здесь можно добавить логику загрузки записи в калькулятор
@@ -232,7 +222,6 @@ public struct MainTabView: View {
     
     func deleteRecord(_ record: CalculationRecord) {
         dataService.deleteCalculationRecord(record)
-        loadRecords()
     }
     
     public init(selectedTab: Binding<Int>, onBackToHome: @escaping () -> Void, colorScheme: Binding<ColorScheme?>) {

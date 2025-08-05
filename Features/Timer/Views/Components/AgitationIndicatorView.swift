@@ -14,7 +14,7 @@ struct AgitationIndicatorView: View {
     let isInAgitationPhase: Bool
     let agitationTimeRemaining: Int
     let currentMinute: Int
-    let currentAgitationPhase: AgitationMode.PhaseAgitationType?
+    let currentAgitationPhase: AgitationPhase.PhaseAgitationType?
 
     
     var body: some View {
@@ -47,7 +47,7 @@ struct AgitationIndicatorView: View {
         }
     }
     
-    private func getPhaseDescription(_ phase: AgitationMode.PhaseAgitationType) -> String {
+    private func getPhaseDescription(_ phase: AgitationPhase.PhaseAgitationType) -> String {
         switch phase {
         case .continuous:
             return String(localized: "continuousAgitation")
@@ -72,7 +72,7 @@ struct AgitationIndicatorView_Previews: PreviewProvider {
                 isInAgitationPhase: true,
                 agitationTimeRemaining: 30,
                 currentMinute: 1,
-                currentAgitationPhase: .continuous
+                currentAgitationPhase: AgitationPhase.PhaseAgitationType.continuous
             )
             
             AgitationIndicatorView(
@@ -81,7 +81,7 @@ struct AgitationIndicatorView_Previews: PreviewProvider {
                 isInAgitationPhase: false,
                 agitationTimeRemaining: 15,
                 currentMinute: 2,
-                currentAgitationPhase: .cycle(agitationSeconds: 30, restSeconds: 15)
+                currentAgitationPhase: AgitationPhase.PhaseAgitationType.cycle(agitationSeconds: 30, restSeconds: 15)
             )
         }
         .padding()
