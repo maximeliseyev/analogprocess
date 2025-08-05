@@ -36,6 +36,7 @@
 		BF4109712E3166F400BE2AD8 /* TimerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41096D2E3166F400BE2AD8 /* TimerHeaderView.swift */; };
 		BF4109722E3166F400BE2AD8 /* AgitationIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41096B2E3166F400BE2AD8 /* AgitationIndicatorView.swift */; };
 		BF4109732E3166F400BE2AD8 /* TimerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41096E2E3166F400BE2AD8 /* TimerProgressView.swift */; };
+		BF553C622E420639009F1525 /* KeyboardAwareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C612E420639009F1525 /* KeyboardAwareView.swift */; };
 		BFA0C79B2E2133FC00132936 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFA0C7932E2133FC00132936 /* Assets.xcassets */; };
 		BFA0C79D2E2133FC00132936 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7952E2133FC00132936 /* ContentView.swift */; };
 		BFA0C7A02E2133FC00132936 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7982E2133FC00132936 /* Persistence.swift */; };
@@ -97,6 +98,7 @@
 		BF41096C2E3166F400BE2AD8 /* TimerControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlsView.swift; sourceTree = "<group>"; };
 		BF41096D2E3166F400BE2AD8 /* TimerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerHeaderView.swift; sourceTree = "<group>"; };
 		BF41096E2E3166F400BE2AD8 /* TimerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerProgressView.swift; sourceTree = "<group>"; };
+		BF553C612E420639009F1525 /* KeyboardAwareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAwareView.swift; sourceTree = "<group>"; };
 		BFA0C7932E2133FC00132936 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFA0C7952E2133FC00132936 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BFA0C7982E2133FC00132936 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 		BF4109682E3164A900BE2AD8 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				BF553C612E420639009F1525 /* KeyboardAwareView.swift */,
 				BF113D402E40DB7D008B5578 /* ThemeManager.swift */,
 				BFE31C0A2E3A011100310B19 /* ViewStyles.swift */,
 				BF4109672E3164A900BE2AD8 /* ParameterRow.swift */,
@@ -535,6 +538,7 @@
 				BF4109352E311CA800BE2AD8 /* CoreDataService.swift in Sources */,
 				BFE31C0C2E3A016300310B19 /* ViewStyles.swift in Sources */,
 				BFF4DA012E21C2C90097BE82 /* AgitationMode.swift in Sources */,
+				BF553C622E420639009F1525 /* KeyboardAwareView.swift in Sources */,
 				BF41095B2E3163E400BE2AD8 /* FilmPickerView.swift in Sources */,
 				BF41095C2E3163E400BE2AD8 /* DevelopmentParametersView.swift in Sources */,
 				BF41095D2E3163E400BE2AD8 /* DeveloperPickerView.swift in Sources */,
@@ -717,7 +721,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 0.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -753,7 +757,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 0.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

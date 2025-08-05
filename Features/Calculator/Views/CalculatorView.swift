@@ -26,109 +26,111 @@ struct CalculatorView: View {
     }
     
     var body: some View {
-        VStack(spacing: 20) {
-            VStack(alignment: .leading, spacing: 15) {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(LocalizedStringKey("baseTime"))
-                        .font(.headline)
-                    
-                    HStack {
-                        TextField(LocalizedStringKey("minutes"), text: $viewModel.minutes)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
+        KeyboardAwareView {
+            VStack(spacing: 20) {
+                VStack(alignment: .leading, spacing: 15) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(LocalizedStringKey("baseTime"))
+                            .font(.headline)
                         
-                        Text(LocalizedStringKey("min"))
-                        
-                        TextField(LocalizedStringKey("seconds"), text: $viewModel.seconds)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                        
-                        Text(LocalizedStringKey("sec"))
-                    }
-                }
-                
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(LocalizedStringKey("ratio"))
-                        .font(.headline)
-                    
-                    HStack {
-                        TextField("1.33", text: $viewModel.coefficient)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                        
-                        Text(LocalizedStringKey("standardRatio"))
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                    }
-                }
-                
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(LocalizedStringKey("processType"))
-                        .font(.headline)
-                    
-                    Picker(LocalizedStringKey("processType"), selection: $viewModel.isPushMode) {
-                        Text(LocalizedStringKey("pull")).tag(false)
-                        Text(LocalizedStringKey("push")).tag(true)
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
-                }
-                
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(LocalizedStringKey("numberOfSteps"))
-                        .font(.headline)
-                    
-                    HStack {
-                        Stepper(value: $viewModel.pushSteps, in: 1...5) {
-                            Text("\(viewModel.pushSteps)")
-                                .font(.title2)
-                                .fontWeight(.medium)
-                        }
-                        
-                        Spacer()
-                        
-                        Text(LocalizedStringKey("from1to5"))
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                    }
-                }
-                
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(LocalizedStringKey("temperature"))
-                        .font(.headline)
-                    
-                    Button(action: {
-                        viewModel.showTemperaturePicker = true
-                    }) {
                         HStack {
-                            Text(String(format: "%.1f°C", viewModel.temperature))
-                                .foregroundColor(.primary)
+                            TextField(LocalizedStringKey("minutes"), text: $viewModel.minutes)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                            
+                            Text(LocalizedStringKey("min"))
+                            
+                            TextField(LocalizedStringKey("seconds"), text: $viewModel.seconds)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                            
+                            Text(LocalizedStringKey("sec"))
+                        }
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(LocalizedStringKey("ratio"))
+                            .font(.headline)
+                        
+                        HStack {
+                            TextField("1.33", text: $viewModel.coefficient)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                            
+                            Text(LocalizedStringKey("standardRatio"))
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                        }
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(LocalizedStringKey("processType"))
+                            .font(.headline)
+                        
+                        Picker(LocalizedStringKey("processType"), selection: $viewModel.isPushMode) {
+                            Text(LocalizedStringKey("pull")).tag(false)
+                            Text(LocalizedStringKey("push")).tag(true)
+                        }
+                        .pickerStyle(SegmentedPickerStyle())
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(LocalizedStringKey("numberOfSteps"))
+                            .font(.headline)
+                        
+                        HStack {
+                            Stepper(value: $viewModel.pushSteps, in: 1...5) {
+                                Text("\(viewModel.pushSteps)")
+                                    .font(.title2)
+                                    .fontWeight(.medium)
+                            }
                             
                             Spacer()
                             
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
+                            Text(LocalizedStringKey("from1to5"))
                                 .font(.caption)
+                                .foregroundColor(.gray)
                         }
-                        .padding()
-                        .background(Color.gray.opacity(0.1))
-                        .cornerRadius(8)
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(LocalizedStringKey("temperature"))
+                            .font(.headline)
+                        
+                        Button(action: {
+                            viewModel.showTemperaturePicker = true
+                        }) {
+                            HStack {
+                                Text(String(format: "%.1f°C", viewModel.temperature))
+                                    .foregroundColor(.primary)
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                                    .font(.caption)
+                            }
+                            .padding()
+                            .background(Color.gray.opacity(0.1))
+                            .cornerRadius(8)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    }
                 }
+                
+                Spacer()
+                                
+                Button(action: viewModel.calculateTime) {
+                    Text(LocalizedStringKey("calculateButton"))
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(viewModel.isValidInput ? Color.blue : Color.gray)
+                        .cornerRadius(10)
+                }
+                .disabled(!viewModel.isValidInput)
+                
             }
-            
-            Spacer()
-                            
-            Button(action: viewModel.calculateTime) {
-                Text(LocalizedStringKey("calculateButton"))
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(viewModel.isValidInput ? Color.blue : Color.gray)
-                    .cornerRadius(10)
-            }
-            .disabled(!viewModel.isValidInput)
-            
+            .padding()
         }
-        .padding()
         .navigationTitle(LocalizedStringKey("calculator"))
         .navigationBarTitleDisplayMode(.inline)
 

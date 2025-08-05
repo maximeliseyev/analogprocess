@@ -24,122 +24,124 @@ struct CreateRecordView: View {
     
     var body: some View {
         NavigationStack {
-            ZStack {
-                Color.black.ignoresSafeArea()
-                
-                VStack(spacing: 20) {
-                    VStack(alignment: .leading, spacing: 16) {
-                        Text(LocalizedStringKey("journal_record_basic_info"))
-                            .font(.headline)
-                            .foregroundColor(.white)
-                        
-                        VStack(spacing: 12) {
-                            TextField(LocalizedStringKey("journal_record_name"), text: $viewModel.name)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
+            KeyboardAwareView {
+                ZStack {
+                    Color.black.ignoresSafeArea()
+                    
+                    VStack(spacing: 20) {
+                        VStack(alignment: .leading, spacing: 16) {
+                            Text(LocalizedStringKey("journal_record_basic_info"))
+                                .font(.headline)
+                                .foregroundColor(.white)
                             
-                            TextField(LocalizedStringKey("journal_record_film"), text: $viewModel.filmName)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                            
-                            TextField(LocalizedStringKey("journal_record_developer"), text: $viewModel.developerName)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                            
-                            HStack {
-                                TextField("", value: $viewModel.iso, format: .number)
+                            VStack(spacing: 12) {
+                                TextField(LocalizedStringKey("journal_record_name"), text: $viewModel.name)
                                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                                    .frame(width: 80)
-                                Text("ISO / EI")
-                                    .foregroundColor(.secondary)
-                            }
-                            
-                            TextField(LocalizedStringKey("journal_record_process"), text: $viewModel.process)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                            
-                            TextField(LocalizedStringKey("journal_record_dilution"), text: $viewModel.dilution)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                            
-                            HStack {
-                                TextField("", value: $viewModel.temperature, format: .number)
+                                
+                                TextField(LocalizedStringKey("journal_record_film"), text: $viewModel.filmName)
                                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                                    .frame(width: 80)
-                                Text("\(NSLocalizedString("journal_record_temperature", comment: "")) \(NSLocalizedString("degreesCelsius", comment: ""))")
-                                    .foregroundColor(.secondary)
-                            }
-                            
-                            HStack {
-                                TextField("", value: $viewModel.minutes, format: .number)
+                                
+                                TextField(LocalizedStringKey("journal_record_developer"), text: $viewModel.developerName)
                                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                                    .frame(width: 80)
-                                    .onChange(of: viewModel.minutes) { oldValue, newValue in
-                                        if newValue < 0 {
-                                            viewModel.minutes = 0
+                                
+                                HStack {
+                                    TextField("", value: $viewModel.iso, format: .number)
+                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                        .frame(width: 80)
+                                    Text("ISO / EI")
+                                        .foregroundColor(.secondary)
+                                }
+                                
+                                TextField(LocalizedStringKey("journal_record_process"), text: $viewModel.process)
+                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                                
+                                TextField(LocalizedStringKey("journal_record_dilution"), text: $viewModel.dilution)
+                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                                
+                                HStack {
+                                    TextField("", value: $viewModel.temperature, format: .number)
+                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                        .frame(width: 80)
+                                    Text("\(NSLocalizedString("journal_record_temperature", comment: "")) \(NSLocalizedString("degreesCelsius", comment: ""))")
+                                        .foregroundColor(.secondary)
+                                }
+                                
+                                HStack {
+                                    TextField("", value: $viewModel.minutes, format: .number)
+                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                        .frame(width: 80)
+                                        .onChange(of: viewModel.minutes) { oldValue, newValue in
+                                            if newValue < 0 {
+                                                viewModel.minutes = 0
+                                            }
                                         }
-                                    }
-                                Text(LocalizedStringKey("min"))
-                                    .foregroundColor(.secondary)
-                                TextField("", value: $viewModel.seconds, format: .number)
-                                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                                    .frame(width: 80)
-                                    .onChange(of: viewModel.seconds) { oldValue, newValue in
-                                        if newValue > 59 {
-                                            viewModel.seconds = 59
-                                        } else if newValue < 0 {
-                                            viewModel.seconds = 0
+                                    Text(LocalizedStringKey("min"))
+                                        .foregroundColor(.secondary)
+                                    TextField("", value: $viewModel.seconds, format: .number)
+                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                        .frame(width: 80)
+                                        .onChange(of: viewModel.seconds) { oldValue, newValue in
+                                            if newValue > 59 {
+                                                viewModel.seconds = 59
+                                            } else if newValue < 0 {
+                                                viewModel.seconds = 0
+                                            }
                                         }
-                                    }
-                                Text(LocalizedStringKey("sec"))
-                                    .foregroundColor(.secondary)
+                                    Text(LocalizedStringKey("sec"))
+                                        .foregroundColor(.secondary)
+                                }
                             }
                         }
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 16) {
-                        Text(LocalizedStringKey("journal_record_comment"))
-                            .font(.headline)
-                            .foregroundColor(.white)
                         
-                        TextField(LocalizedStringKey("journal_record_comment_placeholder"), text: $viewModel.comment, axis: .vertical)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .lineLimit(3...6)
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 16) {
-                        Text(LocalizedStringKey("journal_record_date"))
-                            .font(.headline)
-                            .foregroundColor(.white)
-                        
-                        DatePicker(
-                            LocalizedStringKey("journal_record_date"),
-                            selection: $viewModel.date,
-                            displayedComponents: [.date, .hourAndMinute]
-                        )
-                    }
-                    .padding()
-                }
-                .navigationTitle(isEditing ? LocalizedStringKey("edit_record") : LocalizedStringKey("journal_create_record"))
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button(LocalizedStringKey("cancel")) {
-                            dismiss()
+                        VStack(alignment: .leading, spacing: 16) {
+                            Text(LocalizedStringKey("journal_record_comment"))
+                                .font(.headline)
+                                .foregroundColor(.white)
+                            
+                            TextField(LocalizedStringKey("journal_record_comment_placeholder"), text: $viewModel.comment, axis: .vertical)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .lineLimit(3...6)
                         }
+                        
+                        VStack(alignment: .leading, spacing: 16) {
+                            Text(LocalizedStringKey("journal_record_date"))
+                                .font(.headline)
+                                .foregroundColor(.white)
+                            
+                            DatePicker(
+                                LocalizedStringKey("journal_record_date"),
+                                selection: $viewModel.date,
+                                displayedComponents: [.date, .hourAndMinute]
+                            )
+                        }
+                        .padding()
                     }
-                    
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(LocalizedStringKey("save")) {
-                            if isEditing {
-                                let updatedRecord = viewModel.createJournalRecord()
-                                onUpdate?(updatedRecord)
-                            } else {
-                                viewModel.saveRecord()
+                    .navigationTitle(isEditing ? LocalizedStringKey("edit_record") : LocalizedStringKey("journal_create_record"))
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button(LocalizedStringKey("cancel")) {
+                                dismiss()
                             }
-                            dismiss()
                         }
-                        .disabled(!viewModel.isValid)
+                        
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button(LocalizedStringKey("save")) {
+                                if isEditing {
+                                    let updatedRecord = viewModel.createJournalRecord()
+                                    onUpdate?(updatedRecord)
+                                } else {
+                                    viewModel.saveRecord()
+                                }
+                                dismiss()
+                            }
+                            .disabled(!viewModel.isValid)
+                        }
                     }
-                }
-                .onAppear {
-                    if let prefillData = prefillData {
-                        viewModel.prefill(with: prefillData)
+                    .onAppear {
+                        if let prefillData = prefillData {
+                            viewModel.prefill(with: prefillData)
+                        }
                     }
                 }
             }

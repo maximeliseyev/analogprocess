@@ -6,29 +6,31 @@ struct DevelopmentSetupView: View {
     @Environment(\.theme) private var theme
     
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            theme.primaryBackground
-                .ignoresSafeArea()
-            
-            VStack(spacing: 30) {
-                DevelopmentParametersView(viewModel: viewModel)
+        KeyboardAwareView {
+            ZStack(alignment: .topLeading) {
+                theme.primaryBackground
+                    .ignoresSafeArea()
                 
-                if let calculatedTime = viewModel.calculatedTime {
-                    CalculatedTimeSection(
-                        time: calculatedTime,
-                        temperature: viewModel.temperature,
-                        filmName: viewModel.selectedFilm?.name ?? "",
-                        developerName: viewModel.selectedDeveloper?.name ?? "",
-                        onCalculatorTap: {
-                            viewModel.navigateToCalculator = true
-                        },
-                        onTimerTap: {
-                            viewModel.navigateToTimer = true
-                        }
-                    )
+                VStack(spacing: 30) {
+                    DevelopmentParametersView(viewModel: viewModel)
+                    
+                    if let calculatedTime = viewModel.calculatedTime {
+                        CalculatedTimeSection(
+                            time: calculatedTime,
+                            temperature: viewModel.temperature,
+                            filmName: viewModel.selectedFilm?.name ?? "",
+                            developerName: viewModel.selectedDeveloper?.name ?? "",
+                            onCalculatorTap: {
+                                viewModel.navigateToCalculator = true
+                            },
+                            onTimerTap: {
+                                viewModel.navigateToTimer = true
+                            }
+                        )
+                    }
+                    
+                    Spacer()
                 }
-                
-                Spacer()
             }
         }
         .sheet(isPresented: $viewModel.showFilmPicker) {
