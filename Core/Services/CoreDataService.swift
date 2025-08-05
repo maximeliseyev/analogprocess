@@ -19,7 +19,7 @@ public class CoreDataService: ObservableObject {
     @Published var temperatureMultipliers: [TemperatureMultiplier] = []
     
     private init() {
-        container = NSPersistentContainer(name: "FilmLab")
+        container = NSPersistentContainer(name: "AnalogProcess")
         
         container.loadPersistentStores { description, error in
             if let error = error {
@@ -343,9 +343,10 @@ public class CoreDataService: ObservableObject {
     }
     
     func syncDataFromGitHub() async throws {
-        let githubData = try await GitHubDataService.shared.downloadAllData()
-        
-        await MainActor.run {
+        do {
+            let githubData = try await GitHubDataService.shared.downloadAllData()
+            
+            await MainActor.run {
             // Добавляем новые фильмы
             for (id, filmData) in githubData.films {
                 if getFilm(by: id) == nil {
@@ -429,8 +430,12 @@ public class CoreDataService: ObservableObject {
                 }
             }
             
-            saveContext()
-            refreshData()
+                saveContext()
+                refreshData()
+            }
+        } catch {
+            print("Error syncing data from GitHub: \(error)")
+            throw error
         }
     }
     
