@@ -13,11 +13,11 @@ extension View {
     /// Использование: Button("Текст") { }.primaryButtonStyle()
     func primaryButtonStyle() -> some View {
         self
-            .foregroundColor(ThemeManager.shared.primaryButtonText)
+            .foregroundColor(.white)
             .padding(.horizontal, 20)
             .padding(.vertical, 10)
             .frame(minWidth: 80)
-            .background(ThemeManager.shared.primaryButtonBackground)
+            .background(.blue)
             .cornerRadius(10)
     }
     
@@ -25,11 +25,11 @@ extension View {
     /// Использование: Button("Текст") { }.secondaryButtonStyle()
     func secondaryButtonStyle() -> some View {
         self
-            .foregroundColor(ThemeManager.shared.secondaryButtonText)
+            .foregroundColor(.white)
             .padding(.horizontal, 20)
             .padding(.vertical, 10)
             .frame(minWidth: 80)
-            .background(ThemeManager.shared.secondaryButtonBackground)
+            .background(.green)
             .cornerRadius(10)
     }
     
@@ -38,7 +38,7 @@ extension View {
     func iconButtonStyle() -> some View {
         self
             .font(.system(size: 16))
-            .foregroundColor(ThemeManager.shared.primaryButtonText)
+            .foregroundColor(.white)
     }
 }
 
@@ -50,7 +50,7 @@ extension View {
         self
             .padding(.vertical, 12)
             .padding(.horizontal, 16)
-            .background(ThemeManager.shared.cardBackground)
+            .background(.gray.opacity(0.1))
             .cornerRadius(12)
     }
     
@@ -59,7 +59,7 @@ extension View {
     func parameterCardStyle() -> some View {
         self
             .padding()
-            .background(ThemeManager.shared.parameterCardBackground)
+            .background(.gray.opacity(0.2))
             .cornerRadius(8)
     }
     
@@ -69,7 +69,7 @@ extension View {
         self
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
-            .background(ThemeManager.shared.secondaryBackground)
+            .background(.gray.opacity(0.1))
     }
 }
 
@@ -80,7 +80,7 @@ extension View {
     func headlineTextStyle() -> some View {
         self
             .font(.headline)
-            .foregroundColor(ThemeManager.shared.primaryText)
+            .foregroundColor(.primary)
     }
     
     /// Стиль основного текста с белым цветом (для темных фонов)
@@ -88,7 +88,7 @@ extension View {
     func bodyTextStyle() -> some View {
         self
             .font(.body)
-            .foregroundColor(ThemeManager.shared.primaryText)
+            .foregroundColor(.primary)
     }
     
     /// Стиль подписи с серым текстом
@@ -96,7 +96,7 @@ extension View {
     func captionTextStyle() -> some View {
         self
             .font(.caption)
-            .foregroundColor(ThemeManager.shared.captionText)
+            .foregroundColor(.secondary)
     }
     
     /// Стиль моноширинного текста для основного контента
@@ -120,7 +120,7 @@ extension View {
     func pickerTitleStyle() -> some View {
         self
             .font(.headline)
-            .foregroundColor(ThemeManager.shared.primaryText)
+            .foregroundColor(.primary)
     }
     
     /// Стиль подписи для picker'ов
@@ -128,7 +128,7 @@ extension View {
     func pickerSubtitleStyle() -> some View {
         self
             .font(.caption)
-            .foregroundColor(ThemeManager.shared.captionText)
+            .foregroundColor(.secondary)
     }
 }
 
@@ -162,7 +162,7 @@ extension View {
     /// Использование: Image(systemName: "checkmark").checkmarkStyle()
     func checkmarkStyle() -> some View {
         self
-            .foregroundColor(ThemeManager.shared.primaryAccent)
+            .foregroundColor(.blue)
             .font(.system(size: 16, weight: .medium))
     }
     
@@ -170,7 +170,7 @@ extension View {
     /// Использование: Image(systemName: "chevron.down").chevronStyle()
     func chevronStyle() -> some View {
         self
-            .foregroundColor(ThemeManager.shared.secondaryText)
+            .foregroundColor(.secondary)
             .font(.caption)
     }
     
@@ -179,7 +179,7 @@ extension View {
     func infoIconStyle() -> some View {
         self
             .font(.largeTitle)
-            .foregroundColor(ThemeManager.shared.primaryAccent)
+            .foregroundColor(.blue)
     }
     
     /// Стиль предупреждающей иконки
@@ -187,7 +187,7 @@ extension View {
     func warningIconStyle() -> some View {
         self
             .font(.largeTitle)
-            .foregroundColor(ThemeManager.shared.warningAccent)
+            .foregroundColor(.orange)
     }
     
     /// Стиль отключенного текста
@@ -195,7 +195,7 @@ extension View {
     func disabledTextStyle() -> some View {
         self
             .font(.body)
-            .foregroundColor(ThemeManager.shared.secondaryText)
+            .foregroundColor(.secondary)
     }
     
     /// Стиль основного текста
@@ -203,6 +203,6 @@ extension View {
     func primaryTextStyle() -> some View {
         self
             .font(.body)
-            .foregroundColor(ThemeManager.shared.primaryText)
+            .foregroundColor(.primary)
     }
 }

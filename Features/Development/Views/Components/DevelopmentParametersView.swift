@@ -12,28 +12,27 @@ struct ParameterRow: View {
     let value: String
     let onTap: () -> Void
     let isDisabled: Bool
-    @Environment(\.theme) private var theme
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(label)
                 .font(.headline)
-                .foregroundColor(theme.primaryText)
+                .foregroundColor(.primary)
             
             Button(action: onTap) {
                 HStack {
                     Text(value)
                         .font(.body)
-                        .foregroundColor(isDisabled ? theme.secondaryText : theme.primaryText)
+                        .foregroundColor(isDisabled ? .secondary : .primary)
                     
                     Spacer()
                     
                     Image(systemName: "chevron.down")
-                        .foregroundColor(isDisabled ? theme.secondaryText.opacity(0.5) : theme.secondaryText)
+                        .foregroundColor(isDisabled ? .secondary.opacity(0.5) : .secondary)
                         .font(.caption)
                 }
                 .padding()
-                .background(isDisabled ? theme.secondaryBackground : theme.parameterCardBackground)
+                .background(isDisabled ? Color(uiColor: .systemGray6) : Color(uiColor: .secondarySystemBackground))
                 .cornerRadius(8)
             }
             .buttonStyle(PlainButtonStyle())
@@ -44,7 +43,6 @@ struct ParameterRow: View {
 
 struct DevelopmentParametersView: View {
     @ObservedObject var viewModel: DevelopmentSetupViewModel
-    @Environment(\.theme) private var theme
     
     var body: some View {
         VStack(spacing: 12) {
@@ -90,7 +88,7 @@ struct DevelopmentParametersView: View {
 struct DevelopmentParametersView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
-            ThemeManager.shared.primaryBackground.ignoresSafeArea()
+            Color(.systemBackground).ignoresSafeArea()
             DevelopmentParametersView(viewModel: DevelopmentSetupViewModel())
         }
     }
