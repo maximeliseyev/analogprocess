@@ -14,18 +14,41 @@ struct JournalView: View {
     let onDeleteRecord: (CalculationRecord) -> Void
     let onClose: () -> Void
     let onCreateNew: () -> Void
+    let syncStatus: CloudKitService.SyncStatus
+    let isCloudAvailable: Bool
+    let onSync: () -> Void
+    
     @State private var selectedRecord: CalculationRecord?
     
-    init(records: [CalculationRecord], onEditRecord: @escaping (CalculationRecord) -> Void, onDeleteRecord: @escaping (CalculationRecord) -> Void, onClose: @escaping () -> Void, onCreateNew: @escaping () -> Void) {
+    init(records: [CalculationRecord], 
+         onEditRecord: @escaping (CalculationRecord) -> Void, 
+         onDeleteRecord: @escaping (CalculationRecord) -> Void, 
+         onClose: @escaping () -> Void, 
+         onCreateNew: @escaping () -> Void,
+         syncStatus: CloudKitService.SyncStatus = .idle,
+         isCloudAvailable: Bool = false,
+         onSync: @escaping () -> Void = {}) {
         self.records = records
         self.onEditRecord = onEditRecord
         self.onDeleteRecord = onDeleteRecord
         self.onClose = onClose
         self.onCreateNew = onCreateNew
+        self.syncStatus = syncStatus
+        self.isCloudAvailable = isCloudAvailable
+        self.onSync = onSync
     }
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
+            // Статус синхронизации
+            SyncStatusView(
+                syncStatus: syncStatus,
+                isCloudAvailable: isCloudAvailable,
+                onSync: onSync
+            )
+            .padding(.horizontal)
+            .padding(.top, 8)
+            
             if records.isEmpty {
                 VStack(spacing: 20) {
                     Image(systemName: "book")
@@ -154,6 +177,11 @@ struct JournalView: View {
             },
             onCreateNew: {
                 print("Create new record")
+            },
+            syncStatus: .completed,
+            isCloudAvailable: true,
+            onSync: {
+                print("Sync with CloudKit")
             }
         )
     }
@@ -174,6 +202,11 @@ struct JournalView: View {
             },
             onCreateNew: {
                 print("Create new record")
+            },
+            syncStatus: .idle,
+            isCloudAvailable: false,
+            onSync: {
+                print("Sync with CloudKit")
             }
         )
     }

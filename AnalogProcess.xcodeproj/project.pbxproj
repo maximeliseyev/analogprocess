@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		BF113D372E3FA8A5008B5578 /* ManualTimeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF113D362E3FA8A5008B5578 /* ManualTimeInputView.swift */; };
 		BF113D412E40DB7D008B5578 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF113D402E40DB7D008B5578 /* ThemeManager.swift */; };
+		BF28FA592E41F64600C2E34E /* CloudKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28FA582E41F64600C2E34E /* CloudKitService.swift */; };
+		BF28FA5E2E41F75200C2E34E /* SyncStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28FA5C2E41F75200C2E34E /* SyncStatusView.swift */; };
 		BF4109102E31052900BE2AD8 /* CalculationFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41090A2E31052900BE2AD8 /* CalculationFormView.swift */; };
 		BF4109112E31052900BE2AD8 /* RatioInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41090B2E31052900BE2AD8 /* RatioInputView.swift */; };
 		BF4109122E31052900BE2AD8 /* TimeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41090F2E31052900BE2AD8 /* TimeInputView.swift */; };
@@ -66,6 +68,8 @@
 /* Begin PBXFileReference section */
 		BF113D362E3FA8A5008B5578 /* ManualTimeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTimeInputView.swift; sourceTree = "<group>"; };
 		BF113D402E40DB7D008B5578 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		BF28FA582E41F64600C2E34E /* CloudKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitService.swift; sourceTree = "<group>"; };
+		BF28FA5C2E41F75200C2E34E /* SyncStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncStatusView.swift; sourceTree = "<group>"; };
 		BF4109092E31052900BE2AD8 /* ActionButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtonsView.swift; sourceTree = "<group>"; };
 		BF41090A2E31052900BE2AD8 /* CalculationFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationFormView.swift; sourceTree = "<group>"; };
 		BF41090B2E31052900BE2AD8 /* RatioInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioInputView.swift; sourceTree = "<group>"; };
@@ -135,6 +139,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF28FA5D2E41F75200C2E34E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				BF28FA5C2E41F75200C2E34E /* SyncStatusView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		BF4109082E3104FC00BE2AD8 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,6 +266,7 @@
 		BF41094A2E3134F000BE2AD8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BF28FA5D2E41F75200C2E34E /* Components */,
 				BFB0C3FD2E3E5AB400296B97 /* CreateRecordView.swift */,
 				BFA0C7AC2E2134F600132936 /* JournalView.swift */,
 				BFDD23642E3F7EE30079688B /* RecordDetailView.swift */,
@@ -356,6 +369,7 @@
 		BFA0C7A22E21341400132936 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				BF28FA582E41F64600C2E34E /* CloudKitService.swift */,
 				BFB0C3D02E3E4E7D00296B97 /* GitHubDataService.swift */,
 				BFF4DA002E21C2C90097BE82 /* AgitationMode.swift */,
 				BF4109342E311CA800BE2AD8 /* CoreDataService.swift */,
@@ -367,8 +381,8 @@
 		BFA0C7A32E21341F00132936 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				BFB0C3F92E3E58D900296B97 /* JournalRecord.swift */,
 				BF4109252E31148700BE2AD8 /* DevelopmentParameters.swift */,
+				BFB0C3F92E3E58D900296B97 /* JournalRecord.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -495,6 +509,7 @@
 				BF4109272E31148700BE2AD8 /* DevelopmentParameters.swift in Sources */,
 				BFA0C7AF2E21351300132936 /* RecordRowView.swift in Sources */,
 				BFA0C79D2E2133FC00132936 /* ContentView.swift in Sources */,
+				BF28FA5E2E41F75200C2E34E /* SyncStatusView.swift in Sources */,
 				BFE12EC32E363AC00044A3A4 /* CalculatedTimeSection.swift in Sources */,
 				BF41093A2E31308500BE2AD8 /* CalculatorView.swift in Sources */,
 				BFA0C7A82E2134B400132936 /* CalculationResultView.swift in Sources */,
@@ -529,6 +544,7 @@
 				BF41096A2E31653800BE2AD8 /* DevelopmentSetupViewModel.swift in Sources */,
 				BFA0C7AD2E2134F800132936 /* JournalView.swift in Sources */,
 				BF41093F2E31318D00BE2AD8 /* JournalViewModel.swift in Sources */,
+				BF28FA592E41F64600C2E34E /* CloudKitService.swift in Sources */,
 				BF113D412E40DB7D008B5578 /* ThemeManager.swift in Sources */,
 				BF4109402E31318D00BE2AD8 /* TimerViewModel.swift in Sources */,
 				BF4109302E31151800BE2AD8 /* DevelopmentSetupView.swift in Sources */,
@@ -695,18 +711,13 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = (
-					UIInterfaceOrientationPortrait,
-					UIInterfaceOrientationLandscapeLeft,
-					UIInterfaceOrientationLandscapeRight,
-					UIInterfaceOrientationPortraitUpsideDown,
-				);
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -736,18 +747,13 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = (
-					UIInterfaceOrientationPortrait,
-					UIInterfaceOrientationLandscapeLeft,
-					UIInterfaceOrientationLandscapeRight,
-					UIInterfaceOrientationPortraitUpsideDown,
-				);
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
