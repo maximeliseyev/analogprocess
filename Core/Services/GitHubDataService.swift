@@ -60,7 +60,13 @@ public class GitHubDataService: ObservableObject {
     
     private func downloadFilms() async throws -> [String: [String: Any]] {
         let url = URL(string: "\(baseURL)/films.json")!
-        let (data, _) = try await session.data(from: url)
+        let (data, response) = try await session.data(from: url)
+        
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 200 else {
+            throw URLError(.badServerResponse)
+        }
+        
         let json = try JSONSerialization.jsonObject(with: data) as? [String: [String: Any]] ?? [:]
         
         await MainActor.run {
@@ -72,7 +78,13 @@ public class GitHubDataService: ObservableObject {
     
     private func downloadDevelopers() async throws -> [String: [String: Any]] {
         let url = URL(string: "\(baseURL)/developers.json")!
-        let (data, _) = try await session.data(from: url)
+        let (data, response) = try await session.data(from: url)
+        
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 200 else {
+            throw URLError(.badServerResponse)
+        }
+        
         let json = try JSONSerialization.jsonObject(with: data) as? [String: [String: Any]] ?? [:]
         
         await MainActor.run {
@@ -84,7 +96,13 @@ public class GitHubDataService: ObservableObject {
     
     private func downloadDevelopmentTimes() async throws -> [String: [String: [String: [String: Int]]]] {
         let url = URL(string: "\(baseURL)/development-times.json")!
-        let (data, _) = try await session.data(from: url)
+        let (data, response) = try await session.data(from: url)
+        
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 200 else {
+            throw URLError(.badServerResponse)
+        }
+        
         let json = try JSONSerialization.jsonObject(with: data) as? [String: [String: [String: [String: Int]]]] ?? [:]
         
         await MainActor.run {
@@ -96,7 +114,13 @@ public class GitHubDataService: ObservableObject {
     
     private func downloadTemperatureMultipliers() async throws -> [String: Double] {
         let url = URL(string: "\(baseURL)/temperature-multipliers.json")!
-        let (data, _) = try await session.data(from: url)
+        let (data, response) = try await session.data(from: url)
+        
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 200 else {
+            throw URLError(.badServerResponse)
+        }
+        
         let json = try JSONSerialization.jsonObject(with: data) as? [String: Double] ?? [:]
         
         await MainActor.run {
