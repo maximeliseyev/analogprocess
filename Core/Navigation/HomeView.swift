@@ -47,7 +47,7 @@ public struct HomeView: View {
                 }
                 Spacer()
             }
-            .navigationTitle(LocalizedStringKey("filmLab"))
+            .navigationTitle(LocalizedStringKey("analogprocess"))
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
