@@ -50,9 +50,20 @@ struct PersistenceController {
 
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "AnalogProcess")
+        
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        } else {
+            // Настраиваем базовые опции Core Data
+            guard let description = container.persistentStoreDescriptions.first else {
+                fatalError("###\(#function): Failed to retrieve a persistent store description.")
+            }
+            
+            // Включаем базовые опции Core Data
+            description.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+            description.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
         }
+        
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 /*
@@ -63,9 +74,11 @@ struct PersistenceController {
                  * The store could not be migrated to the current model version.
                  Check the error message to determine what the actual problem was.
                  */
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+                print("Core Data error: \(error), \(error.userInfo)")
+                // Не вызываем fatalError, чтобы приложение не падало
             }
         })
+        
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
 }

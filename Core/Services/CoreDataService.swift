@@ -21,6 +21,15 @@ public class CoreDataService: ObservableObject {
     private init() {
         container = NSPersistentContainer(name: "AnalogProcess")
         
+        // Настраиваем базовые опции Core Data
+        guard let description = container.persistentStoreDescriptions.first else {
+            fatalError("###\(#function): Failed to retrieve a persistent store description.")
+        }
+        
+        // Включаем базовые опции Core Data
+        description.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+        description.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+        
         container.loadPersistentStores { description, error in
             if let error = error {
                 print("Core Data failed to load: \(error.localizedDescription)")
@@ -284,6 +293,11 @@ public class CoreDataService: ObservableObject {
         record.date = date
         record.name = name
         record.comment = comment
+        
+        // Устанавливаем атрибуты для CloudKit синхронизации
+        record.recordID = UUID().uuidString
+        record.lastModified = Date()
+        record.isSynced = false
         
         saveContext()
     }

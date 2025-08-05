@@ -1,5 +1,6 @@
 import SwiftUI
 import CoreData
+import Combine
 
 public struct MainTabView: View {
     @Binding var selectedTab: Int
@@ -8,8 +9,11 @@ public struct MainTabView: View {
     @Environment(\.theme) private var theme
     
     private let dataService = CoreDataService.shared
+    private let cloudKitService = CloudKitService.shared
     @State private var savedRecords: [CalculationRecord] = []
     @State private var showingCreateRecord = false
+    @State private var syncStatus: CloudKitService.SyncStatus = .idle
+    @State private var isCloudAvailable = false
 
     
     public var body: some View {
@@ -52,6 +56,13 @@ public struct MainTabView: View {
                         onClose: goToHome,
                         onCreateNew: {
                             showingCreateRecord = true
+                        },
+                        syncStatus: syncStatus,
+                        isCloudAvailable: isCloudAvailable,
+                        onSync: {
+                            Task {
+                                await cloudKitService.syncRecords()
+                            }
                         }
                     )
                     .tabItem {
@@ -82,6 +93,7 @@ public struct MainTabView: View {
         }
         .onAppear {
             loadRecords()
+            setupCloudKitObservers()
         }
         .sheet(isPresented: $showingCreateRecord) {
             CreateRecordView()
@@ -96,6 +108,20 @@ public struct MainTabView: View {
         selectedTab = 0
     }
     
+    private func setupCloudKitObservers() {
+        // Подписываемся на изменения статуса синхронизации
+        cloudKitService.$syncStatus
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.syncStatus, on: self)
+            .store(in: &cancellables)
+        
+        cloudKitService.$isCloudAvailable
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.isCloudAvailable, on: self)
+            .store(in: &cancellables)
+    }
+    
+    @State private var cancellables = Set<AnyCancellable>()
 
     
     // Главный экран с описанием и кнопками
