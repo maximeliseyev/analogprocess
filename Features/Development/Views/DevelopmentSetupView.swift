@@ -3,12 +3,12 @@ import CoreData
 
 struct DevelopmentSetupView: View {
     @StateObject private var viewModel = DevelopmentSetupViewModel()
-    @Environment(\.theme) private var theme
+
     
     var body: some View {
         KeyboardAwareView {
             ZStack(alignment: .topLeading) {
-                theme.primaryBackground
+                Color(.systemBackground)
                     .ignoresSafeArea()
                 
                 VStack(spacing: 30) {

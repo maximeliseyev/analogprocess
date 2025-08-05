@@ -11,14 +11,14 @@ struct ISOPickerView: View {
     @Binding var iso: Int
     let onDismiss: () -> Void
     let availableISOs: [Int]
-    @Environment(\.theme) private var theme
+
     
     private let allISOs = [25, 50, 64, 80, 100, 125, 200, 250, 400, 500, 640, 800, 1000, 1600, 2000, 3200, 4000, 6400, 8000, 12800 ]
     
     var body: some View {
         NavigationStack {
             ZStack {
-                theme.primaryBackground.ignoresSafeArea()
+                Color(.systemBackground).ignoresSafeArea()
                 
                 Group {
                 if availableISOs.isEmpty {
@@ -28,7 +28,7 @@ struct ISOPickerView: View {
                         
                         Text(LocalizedStringKey("noISOOptionsAvailable"))
                             .font(.headline)
-                            .foregroundColor(theme.primaryText)
+                            .foregroundColor(.primary)
                         
                         Text(LocalizedStringKey("noISOOptionsDescription"))
                             .disabledTextStyle()
@@ -48,7 +48,7 @@ struct ISOPickerView: View {
                             HStack {
                                 Text(String(format: String(localized: "isoLabel"), "\(isoValue)"))
                                     .primaryTextStyle()
-                                    .foregroundColor(isAvailable ? theme.primaryText : theme.secondaryText)
+                                    .foregroundColor(isAvailable ? .primary : .secondary)
                                 
                                 Spacer()
                                 

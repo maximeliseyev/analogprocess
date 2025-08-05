@@ -14,7 +14,7 @@ struct FilmPickerView: View {
     @Binding var iso: Int
     let onDismiss: () -> Void
     let onFilmSelected: ((Film) -> Void)?
-    @Environment(\.theme) private var theme
+
     
     @State private var searchText = ""
     
@@ -36,7 +36,7 @@ struct FilmPickerView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                theme.primaryBackground.ignoresSafeArea()
+                Color(.systemBackground).ignoresSafeArea()
                 
                 ScrollView {
                 LazyVStack(spacing: 0) {

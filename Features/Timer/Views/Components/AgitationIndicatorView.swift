@@ -15,7 +15,7 @@ struct AgitationIndicatorView: View {
     let agitationTimeRemaining: Int
     let currentMinute: Int
     let currentAgitationPhase: AgitationMode.PhaseAgitationType?
-    @Environment(\.theme) private var theme
+
     
     var body: some View {
         if shouldAgitate && selectedAgitationMode != nil {
@@ -23,23 +23,23 @@ struct AgitationIndicatorView: View {
                 HStack {
                     Text(isInAgitationPhase ? LocalizedStringKey("agitation") : LocalizedStringKey("rest"))
                         .font(.headline)
-                        .foregroundColor(isInAgitationPhase ? theme.agitationBackground : theme.primaryAccent)
+                        .foregroundColor(isInAgitationPhase ? .orange : .blue)
                         .fontWeight(.bold)
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
-                .background(isInAgitationPhase ? theme.agitationBackground.opacity(0.1) : theme.primaryAccent.opacity(0.1))
+                .background(isInAgitationPhase ? .orange.opacity(0.1) : .blue.opacity(0.1))
                 .cornerRadius(20)
                 
                 VStack(spacing: 4) {
                     Text(String(format: String(localized: "minuteLabel"), "\(currentMinute)"))
                         .font(.caption)
-                        .foregroundColor(theme.secondaryText)
+                        .foregroundColor(.secondary)
                     
                     if let phase = currentAgitationPhase {
                         Text(getPhaseDescription(phase))
                             .font(.caption2)
-                            .foregroundColor(theme.secondaryText)
+                            .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
                     }
                 }

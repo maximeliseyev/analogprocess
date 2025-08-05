@@ -6,7 +6,7 @@ public struct MainTabView: View {
     @Binding var selectedTab: Int
     var onBackToHome: () -> Void
     @Binding var colorScheme: ColorScheme?
-    @Environment(\.theme) private var theme
+
     
     private let dataService = CoreDataService.shared
     private let cloudKitService = CloudKitService.shared
@@ -71,12 +71,12 @@ public struct MainTabView: View {
                     }
                     .tag(4)
                 }
-                .accentColor(theme.primaryAccent)
+                .accentColor(.blue)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button(action: goToHome) {
                             Image(systemName: "house")
-                                .foregroundColor(theme.primaryAccent)
+                                .foregroundColor(.blue)
                         }
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
@@ -127,7 +127,7 @@ public struct MainTabView: View {
     // Главный экран с описанием и кнопками
     private var mainScreenView: some View {
         ZStack {
-            theme.primaryBackground
+            Color(.systemBackground)
                 .ignoresSafeArea()
             
             VStack(spacing: 24) {
@@ -135,7 +135,7 @@ public struct MainTabView: View {
                 
                 Text(LocalizedStringKey("home_description"))
                     .font(.subheadline)
-                    .foregroundColor(theme.secondaryText)
+                    .foregroundColor(.secondary)
                     .multilineTextAlignment(.leading)
                     .lineLimit(nil)
                     .padding(.horizontal, 20)
@@ -154,16 +154,16 @@ public struct MainTabView: View {
                                 Text(title(for: idx))
                                     .font(.headline)
                                     .fontWeight(.semibold)
-                                    .foregroundColor(theme.primaryText)
+                                    .foregroundColor(.primary)
                                 Text(subtitle(for: idx))
                                     .font(.subheadline)
-                                    .foregroundColor(theme.secondaryText)
+                                    .foregroundColor(.secondary)
                             }
                             Spacer()
                         }
                         .padding(.vertical, 18)
                         .padding(.horizontal, 20)
-                        .background(theme.cardBackground)
+                        .background(Color(.secondarySystemBackground))
                         .cornerRadius(16)
                         .padding(.horizontal, 20)
                     }
@@ -213,11 +213,11 @@ public struct MainTabView: View {
     
     func iconColor(for idx: Int) -> Color {
         switch idx {
-        case 0: return theme.primaryAccent
-        case 1: return theme.secondaryAccent
-        case 2: return theme.dangerAccent
-        case 3: return theme.purpleAccent
-        default: return theme.secondaryText
+        case 0: return .blue
+        case 1: return .orange
+        case 2: return .red
+        case 3: return .purple
+        default: return .secondary
         }
     }
     

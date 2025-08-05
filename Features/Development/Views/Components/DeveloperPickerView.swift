@@ -14,7 +14,7 @@ struct DeveloperPickerView: View {
     @Binding var selectedDilution: String
     let onDismiss: () -> Void
     let onDeveloperSelected: ((Developer) -> Void)?
-    @Environment(\.theme) private var theme
+
     
     @State private var searchText = ""
     
@@ -36,7 +36,7 @@ struct DeveloperPickerView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                theme.primaryBackground.ignoresSafeArea()
+                Color(.systemBackground).ignoresSafeArea()
                 
                 ScrollView {
                 LazyVStack(spacing: 0) {

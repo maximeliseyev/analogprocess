@@ -7,7 +7,7 @@ public struct TimerView: View {
     
     @StateObject private var viewModel: TimerViewModel
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.theme) private var theme
+
     
     public init(timerLabel: String, totalMinutes: Int, totalSeconds: Int) {
         self.timerLabel = timerLabel
@@ -19,7 +19,7 @@ public struct TimerView: View {
     public var body: some View {
         NavigationStack {
             ZStack {
-                theme.primaryBackground
+                Color(.systemBackground)
                     .ignoresSafeArea()
                 
                 VStack(spacing: 30) {
@@ -52,7 +52,7 @@ public struct TimerView: View {
                         VStack(spacing: 16) {
                             Text(LocalizedStringKey("development_completed"))
                                 .font(.headline)
-                                .foregroundColor(theme.successAccent)
+                                .foregroundColor(.green)
                             
                             Button(action: {
                                 viewModel.startFixingTimer()
@@ -63,9 +63,9 @@ public struct TimerView: View {
                                     Text(LocalizedStringKey("go_to_fixing"))
                                         .font(.headline)
                                 }
-                                .foregroundColor(theme.primaryButtonText)
+                                .foregroundColor(.white)
                                 .padding()
-                                .background(theme.agitationBackground)
+                                .background(.orange)
                                 .cornerRadius(10)
                             }
                         }
@@ -93,7 +93,7 @@ public struct TimerView: View {
                         )
                     )) {
                         Image(systemName: "slider.horizontal.3")
-                            .foregroundColor(theme.primaryText)
+                            .foregroundColor(.primary)
                             .font(.title2)
                     }
                 }
