@@ -83,38 +83,3 @@ struct SyncStatusView: View {
         }
     }
 }
-
-#Preview {
-    VStack(spacing: 16) {
-        SyncStatusView(
-            syncStatus: .idle,
-            isCloudAvailable: true,
-            onSync: {}
-        )
-        
-        SyncStatusView(
-            syncStatus: .syncing,
-            isCloudAvailable: true,
-            onSync: {}
-        )
-        
-        SyncStatusView(
-            syncStatus: .completed,
-            isCloudAvailable: true,
-            onSync: {}
-        )
-        
-        SyncStatusView(
-            syncStatus: .failed("Нет подключения к интернету"),
-            isCloudAvailable: true,
-            onSync: {}
-        )
-        
-        SyncStatusView(
-            syncStatus: .idle,
-            isCloudAvailable: false,
-            onSync: {}
-        )
-    }
-    .padding()
-} 

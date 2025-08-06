@@ -44,12 +44,27 @@ struct CreateRecordView: View {
                                 TextField(LocalizedStringKey("journal_record_developer"), text: $viewModel.developerName)
                                     .textFieldStyle(RoundedBorderTextFieldStyle())
                                 
-                                HStack {
-                                    TextField("", value: $viewModel.iso, format: .number)
-                                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                                        .frame(width: 80)
-                                    Text("ISO / EI")
-                                        .foregroundColor(.secondary)
+                                Button(action: {
+                                    viewModel.showISOPicker = true
+                                }) {
+                                    HStack {
+                                        Text("\(viewModel.iso)")
+                                            .foregroundColor(.primary)
+                                        Spacer()
+                                        Image(systemName: "chevron.down")
+                                            .foregroundColor(.secondary)
+                                            .font(.caption)
+                                    }
+                                    .padding()
+                                    .background(Color(.systemGray6))
+                                    .cornerRadius(8)
+                                }
+                                .sheet(isPresented: $viewModel.showISOPicker) {
+                                    ISOPickerView(
+                                        iso: $viewModel.iso,
+                                        onDismiss: { viewModel.showISOPicker = false },
+                                        availableISOs: viewModel.getAvailableISOs()
+                                    )
                                 }
                                 
                                 TextField(LocalizedStringKey("journal_record_process"), text: $viewModel.process)
@@ -104,10 +119,6 @@ struct CreateRecordView: View {
                         }
                         
                         VStack(alignment: .leading, spacing: 16) {
-                            Text(LocalizedStringKey("journal_record_date"))
-                                .font(.headline)
-                                .foregroundColor(.white)
-                            
                             DatePicker(
                                 LocalizedStringKey("journal_record_date"),
                                 selection: $viewModel.date,
@@ -146,83 +157,6 @@ struct CreateRecordView: View {
                 }
             }
         }
-    }
-}
-
-
-// MARK: - ViewModel
-
-@MainActor
-class CreateRecordViewModel: ObservableObject {
-    @Published var name: String = ""
-    @Published var filmName: String = ""
-    @Published var developerName: String = ""
-    @Published var iso: Int32 = 100
-    @Published var dilution: String = ""
-    @Published var temperature: Double = 20.0
-    @Published var process: String = ""
-    @Published var minutes: Int = 0
-    @Published var seconds: Int = 0
-    @Published var comment: String = ""
-    @Published var date: Date = Date()
-    
-    private let coreDataService = CoreDataService.shared
-    
-    var isValid: Bool {
-        !filmName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
-        !developerName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-    }
-    
-    // Конвертация времени в секунды
-    private var totalSeconds: Int {
-        return minutes * 60 + seconds
-    }
-    
-    func prefill(with record: JournalRecord) {
-        name = record.name ?? ""
-        filmName = record.filmName ?? ""
-        developerName = record.developerName ?? ""
-        iso = record.iso ?? 100
-        process = record.process ?? "push +1"
-        dilution = record.dilution ?? ""
-        temperature = record.temperature ?? 20.0
-        
-        // Конвертируем секунды обратно в минуты и секунды
-        let totalSeconds = record.time ?? 0
-        minutes = totalSeconds / 60
-        seconds = totalSeconds % 60
-        
-        comment = record.comment ?? ""
-        date = record.date
-    }
-    
-    func saveRecord() {
-        coreDataService.saveRecord(
-            filmName: filmName.trimmingCharacters(in: .whitespacesAndNewlines),
-            developerName: developerName.trimmingCharacters(in: .whitespacesAndNewlines),
-            dilution: dilution.trimmingCharacters(in: .whitespacesAndNewlines),
-            iso: Int(iso),
-            temperature: temperature,
-            time: totalSeconds,
-            name: name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : name.trimmingCharacters(in: .whitespacesAndNewlines),
-            comment: comment.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : comment.trimmingCharacters(in: .whitespacesAndNewlines),
-            date: date
-        )
-    }
-    
-    func createJournalRecord() -> JournalRecord {
-        return JournalRecord(
-            date: date,
-            name: name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : name.trimmingCharacters(in: .whitespacesAndNewlines),
-            filmName: filmName.trimmingCharacters(in: .whitespacesAndNewlines),
-            developerName: developerName.trimmingCharacters(in: .whitespacesAndNewlines),
-            iso: iso,
-            process: process.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : process.trimmingCharacters(in: .whitespacesAndNewlines),
-            dilution: dilution.trimmingCharacters(in: .whitespacesAndNewlines),
-            temperature: temperature,
-            time: totalSeconds,
-            comment: comment.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : comment.trimmingCharacters(in: .whitespacesAndNewlines)
-        )
     }
 }
 

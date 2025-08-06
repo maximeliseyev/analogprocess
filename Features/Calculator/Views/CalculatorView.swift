@@ -72,7 +72,7 @@ struct CalculatorView: View {
                     }
                     
                     VStack(alignment: .leading, spacing: 8) {
-                        Text(LocalizedStringKey("numberOfSteps"))
+                        Text(LocalizedStringKey("number_of_steps"))
                             .font(.headline)
                         
                         HStack {

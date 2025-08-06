@@ -20,7 +20,6 @@
 		BF4109272E31148700BE2AD8 /* DevelopmentParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109252E31148700BE2AD8 /* DevelopmentParameters.swift */; };
 		BF4109302E31151800BE2AD8 /* DevelopmentSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41092F2E31151800BE2AD8 /* DevelopmentSetupView.swift */; };
 		BF4109352E311CA800BE2AD8 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109342E311CA800BE2AD8 /* CoreDataService.swift */; };
-		BF4109382E31307100BE2AD8 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109372E31307100BE2AD8 /* MainTabView.swift */; };
 		BF41093A2E31308500BE2AD8 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109392E31308500BE2AD8 /* CalculatorView.swift */; };
 		BF41093C2E3130B000BE2AD8 /* CalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41093B2E3130B000BE2AD8 /* CalculatorViewModel.swift */; };
 		BF41093F2E31318D00BE2AD8 /* JournalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41093D2E31318D00BE2AD8 /* JournalViewModel.swift */; };
@@ -38,6 +37,12 @@
 		BF4109732E3166F400BE2AD8 /* TimerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41096E2E3166F400BE2AD8 /* TimerProgressView.swift */; };
 		BF553C622E420639009F1525 /* KeyboardAwareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C612E420639009F1525 /* KeyboardAwareView.swift */; };
 		BF553C682E424125009F1525 /* AgitationModeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C672E424125009F1525 /* AgitationModeBuilder.swift */; };
+		BF553C6A2E43268D009F1525 /* BasePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C692E43268D009F1525 /* BasePickerView.swift */; };
+		BF553C6C2E43297C009F1525 /* CreateRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C6B2E43297C009F1525 /* CreateRecordViewModel.swift */; };
+		BF8A59EF2E43809C00D689C5 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59EE2E43809C00D689C5 /* MainTabView.swift */; };
+		BF8A59F02E43809C00D689C5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59ED2E43809C00D689C5 /* HomeView.swift */; };
+		BF8A59F22E4380E600D689C5 /* NavigationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59F12E4380E600D689C5 /* NavigationConstants.swift */; };
+		BF8A59F42E43814200D689C5 /* NavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59F32E43814200D689C5 /* NavigationButton.swift */; };
 		BFA0C79B2E2133FC00132936 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFA0C7932E2133FC00132936 /* Assets.xcassets */; };
 		BFA0C79D2E2133FC00132936 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7952E2133FC00132936 /* ContentView.swift */; };
 		BFA0C7A02E2133FC00132936 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7982E2133FC00132936 /* Persistence.swift */; };
@@ -46,16 +51,15 @@
 		BFA0C7AD2E2134F800132936 /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AC2E2134F600132936 /* JournalView.swift */; };
 		BFA0C7AF2E21351300132936 /* RecordRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AE2E21351000132936 /* RecordRowView.swift */; };
 		BFB0C3D12E3E4E7D00296B97 /* GitHubDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB0C3D02E3E4E7D00296B97 /* GitHubDataService.swift */; };
-		BFB0C3F62E3E511300296B97 /* FilmLab-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3F32E3E511300296B97 /* FilmLab-Info.plist */; };
+		BFB0C3F62E3E511300296B97 /* AnalogProcess-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3F32E3E511300296B97 /* AnalogProcess-Info.plist */; };
 		BFB0C3F72E3E511300296B97 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3F52E3E511300296B97 /* README.md */; };
 		BFB0C3F82E3E511300296B97 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3F42E3E511300296B97 /* LICENSE */; };
 		BFB0C3FC2E3E58D900296B97 /* JournalRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB0C3F92E3E58D900296B97 /* JournalRecord.swift */; };
 		BFB0C3FE2E3E5AB400296B97 /* CreateRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB0C3FD2E3E5AB400296B97 /* CreateRecordView.swift */; };
-		BFDCB75E2E382372000F6CE5 /* FilmLabApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDCB75D2E382372000F6CE5 /* FilmLabApp.swift */; };
+		BFDCB75E2E382372000F6CE5 /* AnalogProcessApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDCB75D2E382372000F6CE5 /* AnalogProcessApp.swift */; };
 		BFDCB7612E382558000F6CE5 /* AnalogProcess.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFDCB75F2E382558000F6CE5 /* AnalogProcess.xcdatamodeld */; };
 		BFDD23652E3F7EE30079688B /* RecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDD23642E3F7EE30079688B /* RecordDetailView.swift */; };
 		BFE12EB02E33C5120044A3A4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BFE12EAE2E33C5120044A3A4 /* Localizable.strings */; };
-		BFE12EBC2E34DBE10044A3A4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE12EBA2E34DBE10044A3A4 /* HomeView.swift */; };
 		BFE12EBD2E34DBE10044A3A4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE12EBB2E34DBE10044A3A4 /* SettingsView.swift */; };
 		BFE12EBF2E34EB960044A3A4 /* TimerTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE12EBE2E34EB960044A3A4 /* TimerTabView.swift */; };
 		BFE12EC12E360C010044A3A4 /* AppPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE12EC02E360C010044A3A4 /* AppPreview.swift */; };
@@ -81,7 +85,6 @@
 		BF4109252E31148700BE2AD8 /* DevelopmentParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentParameters.swift; sourceTree = "<group>"; };
 		BF41092F2E31151800BE2AD8 /* DevelopmentSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentSetupView.swift; sourceTree = "<group>"; };
 		BF4109342E311CA800BE2AD8 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
-		BF4109372E31307100BE2AD8 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		BF4109392E31308500BE2AD8 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		BF41093B2E3130B000BE2AD8 /* CalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewModel.swift; sourceTree = "<group>"; };
 		BF41093D2E31318D00BE2AD8 /* JournalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewModel.swift; sourceTree = "<group>"; };
@@ -101,6 +104,12 @@
 		BF41096E2E3166F400BE2AD8 /* TimerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerProgressView.swift; sourceTree = "<group>"; };
 		BF553C612E420639009F1525 /* KeyboardAwareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAwareView.swift; sourceTree = "<group>"; };
 		BF553C672E424125009F1525 /* AgitationModeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgitationModeBuilder.swift; sourceTree = "<group>"; };
+		BF553C692E43268D009F1525 /* BasePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePickerView.swift; sourceTree = "<group>"; };
+		BF553C6B2E43297C009F1525 /* CreateRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecordViewModel.swift; sourceTree = "<group>"; };
+		BF8A59ED2E43809C00D689C5 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		BF8A59EE2E43809C00D689C5 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		BF8A59F12E4380E600D689C5 /* NavigationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConstants.swift; sourceTree = "<group>"; };
+		BF8A59F32E43814200D689C5 /* NavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButton.swift; sourceTree = "<group>"; };
 		BFA0C7932E2133FC00132936 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFA0C7952E2133FC00132936 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BFA0C7982E2133FC00132936 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -109,17 +118,16 @@
 		BFA0C7AC2E2134F600132936 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
 		BFA0C7AE2E21351000132936 /* RecordRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRowView.swift; sourceTree = "<group>"; };
 		BFB0C3D02E3E4E7D00296B97 /* GitHubDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubDataService.swift; sourceTree = "<group>"; };
-		BFB0C3F32E3E511300296B97 /* FilmLab-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FilmLab-Info.plist"; sourceTree = "<group>"; };
+		BFB0C3F32E3E511300296B97 /* AnalogProcess-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AnalogProcess-Info.plist"; sourceTree = "<group>"; };
 		BFB0C3F42E3E511300296B97 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		BFB0C3F52E3E511300296B97 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BFB0C3F92E3E58D900296B97 /* JournalRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalRecord.swift; sourceTree = "<group>"; };
 		BFB0C3FD2E3E5AB400296B97 /* CreateRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecordView.swift; sourceTree = "<group>"; };
-		BFDCB75D2E382372000F6CE5 /* FilmLabApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmLabApp.swift; sourceTree = "<group>"; };
+		BFDCB75D2E382372000F6CE5 /* AnalogProcessApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogProcessApp.swift; sourceTree = "<group>"; };
 		BFDCB7602E382558000F6CE5 /* AnalogProcess.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AnalogProcess.xcdatamodel; sourceTree = "<group>"; };
 		BFDD23642E3F7EE30079688B /* RecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailView.swift; sourceTree = "<group>"; };
 		BFE12EAC2E33C5120044A3A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BFE12EAD2E33C5120044A3A4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		BFE12EBA2E34DBE10044A3A4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		BFE12EBB2E34DBE10044A3A4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		BFE12EBE2E34EB960044A3A4 /* TimerTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTabView.swift; sourceTree = "<group>"; };
 		BFE12EC02E360C010044A3A4 /* AppPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreview.swift; sourceTree = "<group>"; };
@@ -176,7 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				BFE12EC02E360C010044A3A4 /* AppPreview.swift */,
-				BFDCB75D2E382372000F6CE5 /* FilmLabApp.swift */,
+				BFDCB75D2E382372000F6CE5 /* AnalogProcessApp.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -184,10 +192,10 @@
 		BF4109412E3133B200BE2AD8 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				BF4109432E3133D900BE2AD8 /* Calculator */,
 				BF4109442E31342500BE2AD8 /* Development */,
-				BF4109482E3134C800BE2AD8 /* Journal */,
+				BF4109432E3133D900BE2AD8 /* Calculator */,
 				BF4109492E3134DE00BE2AD8 /* Timer */,
+				BF4109482E3134C800BE2AD8 /* Journal */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -241,9 +249,11 @@
 		BF4109472E31348C00BE2AD8 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				BF4109372E31307100BE2AD8 /* MainTabView.swift */,
+				BF8A59F32E43814200D689C5 /* NavigationButton.swift */,
+				BF8A59F12E4380E600D689C5 /* NavigationConstants.swift */,
+				BF8A59ED2E43809C00D689C5 /* HomeView.swift */,
+				BF8A59EE2E43809C00D689C5 /* MainTabView.swift */,
 				BFA0C7952E2133FC00132936 /* ContentView.swift */,
-				BFE12EBA2E34DBE10044A3A4 /* HomeView.swift */,
 				BFE12EBB2E34DBE10044A3A4 /* SettingsView.swift */,
 			);
 			path = Navigation;
@@ -282,6 +292,7 @@
 		BF41094B2E3134F700BE2AD8 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				BF553C6B2E43297C009F1525 /* CreateRecordViewModel.swift */,
 				BF41093D2E31318D00BE2AD8 /* JournalViewModel.swift */,
 			);
 			path = ViewModels;
@@ -325,6 +336,7 @@
 		BF41095A2E3163E400BE2AD8 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				BF553C692E43268D009F1525 /* BasePickerView.swift */,
 				BFE12EC22E363AC00044A3A4 /* CalculatedTimeSection.swift */,
 				BF4109562E3163E400BE2AD8 /* DeveloperPickerView.swift */,
 				BF4109582E3163E400BE2AD8 /* DevelopmentParametersView.swift */,
@@ -420,7 +432,7 @@
 				BF41094F2E3135B700BE2AD8 /* Shared */,
 				BFA0C7B02E2136A500132936 /* Resources */,
 				BFE96A3A2E2061A0001CF98D /* Products */,
-				BFB0C3F32E3E511300296B97 /* FilmLab-Info.plist */,
+				BFB0C3F32E3E511300296B97 /* AnalogProcess-Info.plist */,
 				BFB0C3F42E3E511300296B97 /* LICENSE */,
 				BFB0C3F52E3E511300296B97 /* README.md */,
 			);
@@ -471,7 +483,7 @@
 					};
 				};
 			};
-			buildConfigurationList = BFE96A342E2061A0001CF98D /* Build configuration list for PBXProject "AnalogProcess" */;
+			buildConfigurationList = BFE96A342E2061A0001CF98D /* Build configuration list for PBXProject "Analog Process" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -498,7 +510,7 @@
 			files = (
 				BFA0C79B2E2133FC00132936 /* Assets.xcassets in Resources */,
 				BFE12EB02E33C5120044A3A4 /* Localizable.strings in Resources */,
-				BFB0C3F62E3E511300296B97 /* FilmLab-Info.plist in Resources */,
+				BFB0C3F62E3E511300296B97 /* AnalogProcess-Info.plist in Resources */,
 				BFB0C3F72E3E511300296B97 /* README.md in Resources */,
 				BFB0C3F82E3E511300296B97 /* LICENSE in Resources */,
 			);
@@ -511,20 +523,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF4109382E31307100BE2AD8 /* MainTabView.swift in Sources */,
 				BF4109272E31148700BE2AD8 /* DevelopmentParameters.swift in Sources */,
 				BFA0C7AF2E21351300132936 /* RecordRowView.swift in Sources */,
 				BFA0C79D2E2133FC00132936 /* ContentView.swift in Sources */,
 				BF28FA5E2E41F75200C2E34E /* SyncStatusView.swift in Sources */,
 				BFE12EC32E363AC00044A3A4 /* CalculatedTimeSection.swift in Sources */,
+				BF8A59F42E43814200D689C5 /* NavigationButton.swift in Sources */,
+				BF553C6C2E43297C009F1525 /* CreateRecordViewModel.swift in Sources */,
 				BF41093A2E31308500BE2AD8 /* CalculatorView.swift in Sources */,
 				BFA0C7A82E2134B400132936 /* CalculationResultView.swift in Sources */,
+				BF8A59EF2E43809C00D689C5 /* MainTabView.swift in Sources */,
+				BF8A59F02E43809C00D689C5 /* HomeView.swift in Sources */,
 				BFE12EBF2E34EB960044A3A4 /* TimerTabView.swift in Sources */,
 				BF4109102E31052900BE2AD8 /* CalculationFormView.swift in Sources */,
 				BF4109112E31052900BE2AD8 /* RatioInputView.swift in Sources */,
 				BF4109122E31052900BE2AD8 /* TimeInputView.swift in Sources */,
 				BF4109132E31052900BE2AD8 /* ProcessTypeView.swift in Sources */,
-				BFE12EBC2E34DBE10044A3A4 /* HomeView.swift in Sources */,
 				BFDD23652E3F7EE30079688B /* RecordDetailView.swift in Sources */,
 				BFB0C3FE2E3E5AB400296B97 /* CreateRecordView.swift in Sources */,
 				BF553C682E424125009F1525 /* AgitationModeBuilder.swift in Sources */,
@@ -538,6 +552,7 @@
 				BFB0C3FC2E3E58D900296B97 /* JournalRecord.swift in Sources */,
 				BF4109162E31052900BE2AD8 /* ActionButtonsView.swift in Sources */,
 				BFF4DA032E21C31E0097BE82 /* AgitationSelectionView.swift in Sources */,
+				BF553C6A2E43268D009F1525 /* BasePickerView.swift in Sources */,
 				BFF4D9FF2E21BECD0097BE82 /* TimerView.swift in Sources */,
 				BF4109352E311CA800BE2AD8 /* CoreDataService.swift in Sources */,
 				BFE31C0C2E3A016300310B19 /* ViewStyles.swift in Sources */,
@@ -546,7 +561,7 @@
 				BF41095B2E3163E400BE2AD8 /* FilmPickerView.swift in Sources */,
 				BF41095C2E3163E400BE2AD8 /* DevelopmentParametersView.swift in Sources */,
 				BF41095D2E3163E400BE2AD8 /* DeveloperPickerView.swift in Sources */,
-				BFDCB75E2E382372000F6CE5 /* FilmLabApp.swift in Sources */,
+				BFDCB75E2E382372000F6CE5 /* AnalogProcessApp.swift in Sources */,
 				BF41093C2E3130B000BE2AD8 /* CalculatorViewModel.swift in Sources */,
 				BFF4DA052E21C8C30097BE82 /* CustomAgitationView.swift in Sources */,
 				BF41096A2E31653800BE2AD8 /* DevelopmentSetupViewModel.swift in Sources */,
@@ -558,6 +573,7 @@
 				BF4109302E31151800BE2AD8 /* DevelopmentSetupView.swift in Sources */,
 				BF4109662E31643100BE2AD8 /* ISOPickerView.swift in Sources */,
 				BF113D372E3FA8A5008B5578 /* ManualTimeInputView.swift in Sources */,
+				BF8A59F22E4380E600D689C5 /* NavigationConstants.swift in Sources */,
 				BF4109642E31641B00BE2AD8 /* TemperaturePickerView.swift in Sources */,
 				BFA0C7A92E2134BA00132936 /* DevelopmentCalculator.swift in Sources */,
 				BFDCB7612E382558000F6CE5 /* AnalogProcess.xcdatamodeld in Sources */,
@@ -725,7 +741,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.3;
+				MARKETING_VERSION = 0.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -761,7 +777,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.3;
+				MARKETING_VERSION = 0.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -778,7 +794,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BFE96A342E2061A0001CF98D /* Build configuration list for PBXProject "AnalogProcess" */ = {
+		BFE96A342E2061A0001CF98D /* Build configuration list for PBXProject "Analog Process" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BFE96A472E2061A3001CF98D /* Debug */,

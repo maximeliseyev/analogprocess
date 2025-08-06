@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 @main
-struct FilmLabApp: App {
+struct AnalogProcessApp: App {
     let persistenceController = PersistenceController.shared
     @State private var colorScheme: ColorScheme? = nil
     @StateObject private var themeManager = ThemeManager.shared

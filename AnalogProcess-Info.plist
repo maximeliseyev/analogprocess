@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleGetInfoString</key>
-	<string>Film Lab - Complete toolkit for film development</string>
+	<string>Analog Process - Complete toolkit for film development</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict/>
 	</array>
 </dict>
-</plist> 
+</plist>
