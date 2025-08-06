@@ -11,7 +11,7 @@ import CoreData
 struct FilmPickerView: View {
     let films: [Film]
     @Binding var selectedFilm: Film?
-    @Binding var iso: Int
+    @Binding var iso: Int32
     let onDismiss: () -> Void
     let onFilmSelected: ((Film) -> Void)?
 
@@ -43,7 +43,7 @@ struct FilmPickerView: View {
                     ForEach(filteredFilms) { film in
                         Button(action: {
                             selectedFilm = film
-                            iso = Int(film.defaultISO)
+                            iso = Int32(film.defaultISO)
                             onFilmSelected?(film)
                             onDismiss()
                         }) {

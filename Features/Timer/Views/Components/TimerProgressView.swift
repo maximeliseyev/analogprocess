@@ -49,7 +49,7 @@ struct TimerProgressView: View {
                     .foregroundColor(.primary)
             }
         }
-        .frame(width: 250, height: 250)
+        .frame(width: 300, height: 300)
     }
 }
 
@@ -61,10 +61,10 @@ struct AgitationArrowsView: View {
     var body: some View {
         ZStack {
             ForEach(0..<6, id: \.self) { index in
-                Image(systemName: "arrowtriangle.right.fill")
-                    .font(.system(size: 18, weight: .bold))
+                Image(systemName: "fish.fill") // "arrowshape.forward.fill"
+                    .font(.system(size: 20, weight: .bold))
                     .foregroundColor(.orange)
-                    .offset(y: -90)
+                    .offset(y: -100)
                     .rotationEffect(.degrees(Double(index) * 60 + rotationAngle))
             }
         }

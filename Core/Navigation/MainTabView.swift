@@ -166,7 +166,7 @@ public struct MainTabView: View {
                 Spacer()
             }
         }
-        .navigationTitle(LocalizedStringKey("analogprocess"))
+        .navigationTitle(LocalizedStringKey("main_title"))
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

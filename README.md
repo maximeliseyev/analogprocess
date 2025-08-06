@@ -1,4 +1,4 @@
-# FilmLab
+# Analog Process App
 
 A comprehensive iOS application for film development, providing tools for calculating development times, managing timers, and tracking development sessions.
 
@@ -39,7 +39,7 @@ A comprehensive iOS application for film development, providing tools for calcul
 
 ### View Structure
 ```
-FilmLab/
+Analog Process/
 ├── App/
 ├── Core/
 │   ├── Models/

@@ -98,7 +98,7 @@ struct DevelopmentSetupView: View {
             }
         }
         .onChange(of: viewModel.iso) { oldValue, newValue in
-            viewModel.updateISO(newValue)
+            viewModel.updateISO(Int(newValue))
         }
         .onChange(of: viewModel.temperature) { oldValue, newValue in
             viewModel.updateTemperature(newValue)

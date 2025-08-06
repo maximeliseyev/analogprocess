@@ -1,4 +1,4 @@
-"title" = "Film develop calculator";
+"main_title" = "Analog Process Lab";
 "calculate" = "Calculate";
 "back" = "← Back";
 "start" = "Start";
@@ -153,7 +153,7 @@
 "standardRatio" = "(standard 1.33)";
 "processType" = "Process type:";
 "pushSteps" = "Number of PUSH steps:";
-"numberOfSteps" = "Number of steps:";
+"number_of_steps" = "Number of steps:";
 "calculateButton" = "Calculate";
 "saveButton" = "Save";
 "calculator" = "Calculator";
@@ -172,7 +172,7 @@
 "parameterRow" = "Parameter Row";
 "recordRow" = "Record Row";
 "calculatorComponents" = "Calculator Components";
-"analogprocess" = "Analog Process Lab";
+"home" = "Home";
 "home_description" = "Complete toolkit for film development: calculator, timer, journal, and guides";
 "journal" = "Journal";
 "recordName" = "Enter name";
@@ -280,3 +280,5 @@
 "apply" = "Apply";
 "tap_to_change_time" = "Tap to change time";
 "set_time_to_start_timer" = "Set time to start timer";
+"noOptionsAvailable" = "No options available";
+"noOptionsDescription" = "No options are currently available for selection.";

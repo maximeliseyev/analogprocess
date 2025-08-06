@@ -8,72 +8,32 @@
 import SwiftUI
 
 struct ISOPickerView: View {
-    @Binding var iso: Int
+    @Binding var iso: Int32
     let onDismiss: () -> Void
     let availableISOs: [Int]
-
     
-    private let allISOs = [25, 50, 64, 80, 100, 125, 200, 250, 400, 500, 640, 800, 1000, 1600, 2000, 3200, 4000, 6400, 8000, 12800 ]
+    private let allISOs = [25, 32, 40, 50, 64, 80, 100, 125, 200, 250, 320, 400, 500, 640, 800, 1000, 1250, 1600, 2000, 2500, 3200, 4000, 5000, 6400, 8000, 12800]
+    
+    private var items: [ISOItem] {
+        allISOs.map { isoValue in
+            ISOItem(value: isoValue, isAvailable: availableISOs.contains(isoValue))
+        }
+    }
+    
+    private var selectedItem: ISOItem {
+        ISOItem(value: Int(iso), isAvailable: true)
+    }
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color(.systemBackground).ignoresSafeArea()
-                
-                Group {
-                if availableISOs.isEmpty {
-                    VStack(spacing: 20) {
-                        Image(systemName: "info.circle")
-                            .infoIconStyle()
-                        
-                        Text(LocalizedStringKey("noISOOptionsAvailable"))
-                            .font(.headline)
-                            .foregroundColor(.primary)
-                        
-                        Text(LocalizedStringKey("noISOOptionsDescription"))
-                            .disabledTextStyle()
-                            .multilineTextAlignment(.center)
-                    }
-                    .padding()
-                } else {
-                    List(allISOs, id: \.self) { isoValue in
-                        let isAvailable = availableISOs.contains(isoValue)
-                        
-                        Button(action: {
-                            if isAvailable {
-                                iso = isoValue
-                                onDismiss()
-                            }
-                        }) {
-                            HStack {
-                                Text(String(format: String(localized: "isoLabel"), "\(isoValue)"))
-                                    .primaryTextStyle()
-                                    .foregroundColor(isAvailable ? .primary : .secondary)
-                                
-                                Spacer()
-                                
-                                if iso == isoValue {
-                                    Image(systemName: "checkmark")
-                                        .checkmarkStyle()
-                                }
-                            }
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                        .disabled(!isAvailable)
-                    }
-                }
-                }
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle(LocalizedStringKey("selectISO"))
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button(LocalizedStringKey("cancel")) {
-                        onDismiss()
-                    }
-                }
-            }
-        }
+        BasePickerView(
+            selectedValue: Binding(
+                get: { selectedItem },
+                set: { iso = Int32($0.value) }
+            ),
+            items: items,
+            title: LocalizedStringKey("selectISO"),
+            onDismiss: onDismiss
+        )
     }
 }
 

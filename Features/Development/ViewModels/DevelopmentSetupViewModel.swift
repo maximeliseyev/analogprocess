@@ -14,7 +14,7 @@ class DevelopmentSetupViewModel: ObservableObject {
     @Published var selectedDeveloper: Developer?
     @Published var selectedDilution: String = ""
     @Published var temperature: Double = 20.0
-    @Published var iso: Int = 400
+    @Published var iso: Int32 = 400
     @Published var calculatedTime: Int?
     
     @Published var showFilmPicker = false
@@ -42,7 +42,7 @@ class DevelopmentSetupViewModel: ObservableObject {
     func selectFilm(_ film: Film) {
         print("DEBUG: selectFilm called with film: \(film.name ?? "")")
         selectedFilm = film
-        iso = Int(film.defaultISO)
+        iso = Int32(film.defaultISO)
         calculateTimeAutomatically()
     }
     
@@ -59,7 +59,7 @@ class DevelopmentSetupViewModel: ObservableObject {
     }
     
     func updateISO(_ newISO: Int) {
-        iso = newISO
+        iso = Int32(newISO)
         calculateTimeAutomatically()
     }
     
@@ -122,7 +122,7 @@ class DevelopmentSetupViewModel: ObservableObject {
             developer: developer,
             dilution: dilutionToUse,
             temperature: temperature,
-            iso: iso
+            iso: Int(iso)
         )
         
         calculatedTime = dataService.calculateDevelopmentTime(parameters: parameters)
