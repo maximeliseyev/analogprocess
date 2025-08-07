@@ -39,13 +39,21 @@ public struct MainTabView: View {
                         }
                         .tag(2)
                     
+                    // Экран Staging
+                    StagingView()
+                        .tabItem {
+                            Image(systemName: "list.bullet.rectangle")
+                            Text("Стадии")
+                        }
+                        .tag(3)
+                    
                     // Экран Timer
                     TimerTabView()
                         .tabItem {
                             Image(systemName: "timer")
                             Text(LocalizedStringKey("timer"))
                         }
-                        .tag(3)
+                        .tag(4)
                     
                     // Экран Journal
                     JournalView(
@@ -67,7 +75,7 @@ public struct MainTabView: View {
                         Image(systemName: "book")
                         Text(LocalizedStringKey("journal"))
                     }
-                    .tag(4)
+                    .tag(5)
                 }
                 .accentColor(.blue)
                 .toolbar {
@@ -142,7 +150,7 @@ public struct MainTabView: View {
                     .padding(.horizontal, 20)
                     .padding(.bottom, 10)
                 
-                ForEach(0..<4, id: \.self) { idx in
+                ForEach(0..<5, id: \.self) { idx in
                     Button(action: {
                         selectedTab = idx + 1 // +1 потому что 0 - это главный экран
                     }) {
@@ -188,17 +196,19 @@ public struct MainTabView: View {
         switch idx {
         case 0: return String(localized: "presets")
         case 1: return String(localized: "calculator")
-        case 2: return String(localized: "timer")
-        case 3: return String(localized: "journal")
+        case 2: return "Стадии"
+        case 3: return String(localized: "timer")
+        case 4: return String(localized: "journal")
         default: return "" }
     }
     
     func subtitle(for idx: Int) -> String {
         switch idx {
-                    case 0: return String(localized: "homePresetsSubtitle")
+        case 0: return String(localized: "homePresetsSubtitle")
         case 1: return String(localized: "homeCalculatorSubtitle")
-        case 2: return String(localized: "homeTimerSubtitle")
-        case 3: return String(localized: "homeJournalSubtitle")
+        case 2: return "Настройка стадий обработки плёнки"
+        case 3: return String(localized: "homeTimerSubtitle")
+        case 4: return String(localized: "homeJournalSubtitle")
         default: return "" }
     }
     
@@ -206,8 +216,9 @@ public struct MainTabView: View {
         switch idx {
         case 0: return "slider.horizontal.3"
         case 1: return "plus.forwardslash.minus"
-        case 2: return "timer"
-        case 3: return "book"
+        case 2: return "list.bullet.rectangle"
+        case 3: return "timer"
+        case 4: return "book"
         default: return "square"
         }
     }
@@ -216,8 +227,9 @@ public struct MainTabView: View {
         switch idx {
         case 0: return .blue
         case 1: return .orange
-        case 2: return .red
-        case 3: return .purple
+        case 2: return .green
+        case 3: return .red
+        case 4: return .purple
         default: return .secondary
         }
     }

@@ -148,7 +148,7 @@ public struct TimerView: View {
                     onCancel: {
                         viewModel.showFixingTimer = false
                     },
-                    title: "fixing_time"
+                    title: "fixingTime"
                 )
                 .presentationDetents([.medium])
             }

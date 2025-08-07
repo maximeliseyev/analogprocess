@@ -44,6 +44,9 @@
 		BF8A59F22E4380E600D689C5 /* NavigationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59F12E4380E600D689C5 /* NavigationConstants.swift */; };
 		BF8A59F42E43814200D689C5 /* NavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59F32E43814200D689C5 /* NavigationButton.swift */; };
 		BF8A59FF2E4494A600D689C5 /* AutocompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59FE2E4494A600D689C5 /* AutocompleteView.swift */; };
+		BF8A5A012E44BA0E00D689C5 /* StagingStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A5A002E44BA0E00D689C5 /* StagingStage.swift */; };
+		BF8A5A072E44BA8200D689C5 /* StagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A5A042E44BA8200D689C5 /* StagingView.swift */; };
+		BF8A5A082E44BA8200D689C5 /* StagingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A5A022E44BA8200D689C5 /* StagingViewModel.swift */; };
 		BFA0C79B2E2133FC00132936 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFA0C7932E2133FC00132936 /* Assets.xcassets */; };
 		BFA0C79D2E2133FC00132936 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7952E2133FC00132936 /* ContentView.swift */; };
 		BFA0C7A02E2133FC00132936 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7982E2133FC00132936 /* Persistence.swift */; };
@@ -112,6 +115,9 @@
 		BF8A59F12E4380E600D689C5 /* NavigationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConstants.swift; sourceTree = "<group>"; };
 		BF8A59F32E43814200D689C5 /* NavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButton.swift; sourceTree = "<group>"; };
 		BF8A59FE2E4494A600D689C5 /* AutocompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteView.swift; sourceTree = "<group>"; };
+		BF8A5A002E44BA0E00D689C5 /* StagingStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingStage.swift; sourceTree = "<group>"; };
+		BF8A5A022E44BA8200D689C5 /* StagingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingViewModel.swift; sourceTree = "<group>"; };
+		BF8A5A042E44BA8200D689C5 /* StagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingView.swift; sourceTree = "<group>"; };
 		BFA0C7932E2133FC00132936 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFA0C7952E2133FC00132936 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BFA0C7982E2133FC00132936 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -196,6 +202,7 @@
 			children = (
 				BF4109442E31342500BE2AD8 /* Development */,
 				BF4109432E3133D900BE2AD8 /* Calculator */,
+				BF8A5A062E44BA8200D689C5 /* Staging */,
 				BF4109492E3134DE00BE2AD8 /* Timer */,
 				BF4109482E3134C800BE2AD8 /* Journal */,
 			);
@@ -376,6 +383,31 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		BF8A5A032E44BA8200D689C5 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				BF8A5A022E44BA8200D689C5 /* StagingViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		BF8A5A052E44BA8200D689C5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BF8A5A042E44BA8200D689C5 /* StagingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BF8A5A062E44BA8200D689C5 /* Staging */ = {
+			isa = PBXGroup;
+			children = (
+				BF8A5A032E44BA8200D689C5 /* ViewModels */,
+				BF8A5A052E44BA8200D689C5 /* Views */,
+			);
+			path = Staging;
+			sourceTree = "<group>";
+		};
 		BFA0C7992E2133FC00132936 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -402,6 +434,7 @@
 		BFA0C7A32E21341F00132936 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BF8A5A002E44BA0E00D689C5 /* StagingStage.swift */,
 				BF4109252E31148700BE2AD8 /* DevelopmentParameters.swift */,
 				BFB0C3F92E3E58D900296B97 /* JournalRecord.swift */,
 			);
@@ -551,10 +584,13 @@
 				BF4109622E31641600BE2AD8 /* DilutionPickerView.swift in Sources */,
 				BF4109702E3166F400BE2AD8 /* TimerControlsView.swift in Sources */,
 				BF4109712E3166F400BE2AD8 /* TimerHeaderView.swift in Sources */,
+				BF8A5A012E44BA0E00D689C5 /* StagingStage.swift in Sources */,
 				BF4109722E3166F400BE2AD8 /* AgitationIndicatorView.swift in Sources */,
 				BF4109732E3166F400BE2AD8 /* TimerProgressView.swift in Sources */,
 				BFB0C3FC2E3E58D900296B97 /* JournalRecord.swift in Sources */,
 				BF4109162E31052900BE2AD8 /* ActionButtonsView.swift in Sources */,
+				BF8A5A072E44BA8200D689C5 /* StagingView.swift in Sources */,
+				BF8A5A082E44BA8200D689C5 /* StagingViewModel.swift in Sources */,
 				BFF4DA032E21C31E0097BE82 /* AgitationSelectionView.swift in Sources */,
 				BF553C6A2E43268D009F1525 /* BasePickerView.swift in Sources */,
 				BFF4D9FF2E21BECD0097BE82 /* TimerView.swift in Sources */,

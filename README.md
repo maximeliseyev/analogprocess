@@ -66,17 +66,6 @@ Analog Process/
 - Xcode 14.0+
 - Swift 5.7+
 
-### Setup
-1. Clone the repository
-2. Open `FilmLab.xcodeproj` in Xcode
-3. Build and run on iOS Simulator or device
-
-### Testing
-- **NavigationTests**: Tests for navigation flow and tab switching
-- **NavigationFlowTests**: Integration tests for navigation state
-- **IntegrationTests**: End-to-end flow testing
-- **GitHubSyncTests**: Tests for GitHub data synchronization
-
 ## Localization
 
 The app supports multiple languages:
