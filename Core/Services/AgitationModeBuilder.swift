@@ -67,11 +67,11 @@ class AgitationModeBuilder {
                 phases: [
                     AgitationPhase(agitationType: .continuous, description: ""),
                     AgitationPhase(agitationType: .periodic(intervalSeconds: 10), description: ""),
-                    AgitationPhase(agitationType: .custom(description: String(localized: "agitation_rae_phase_2_rotations")), description: ""),
-                    AgitationPhase(agitationType: .custom(description: String(localized: "agitation_rae_phase_1_rotation_per_minute")), description: ""),
-                    AgitationPhase(agitationType: .custom(description: String(localized: "agitation_rae_phase_1_rotation_7th_minute")), description: ""),
-                    AgitationPhase(agitationType: .custom(description: String(localized: "agitation_rae_phase_1_rotation_10th_minute")), description: ""),
-                    AgitationPhase(agitationType: .custom(description: String(localized: "agitation_rae_phase_1_rotation_every_5_minutes")), description: "")
+                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase2Rotations")), description: ""),
+                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase1RotationPerMinute")), description: ""),
+                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase1Rotation7thMinute")), description: ""),
+                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase1Rotation10thMinute")), description: ""),
+                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase1RotationEvery5Minutes")), description: "")
                 ],
                 modeName: name
             )
@@ -97,7 +97,7 @@ extension AgitationModeBuilder {
     /// Создает стандартный режим ORWO
     static func createORWO() -> AgitationMode {
         return AgitationModeBuilder()
-            .setName(String(localized: "agitation_orwo_name"))
+            .setName(String(localized: "agitationOrwoName"))
             .setType(.orwo)
             .setCustom(false)
             .build()
@@ -106,7 +106,7 @@ extension AgitationModeBuilder {
     /// Создает стандартный режим XTOL
     static func createXTOL() -> AgitationMode {
         return AgitationModeBuilder()
-            .setName(String(localized: "agitation_xtol_name"))
+            .setName(String(localized: "agitationXtolName"))
             .setType(.xtol)
             .setCustom(false)
             .build()
@@ -115,7 +115,7 @@ extension AgitationModeBuilder {
     /// Создает стандартный режим RAE
     static func createRAE() -> AgitationMode {
         return AgitationModeBuilder()
-            .setName(String(localized: "agitation_rae_name"))
+            .setName(String(localized: "agitationRaeName"))
             .setType(.rae)
             .setCustom(false)
             .build()
@@ -124,7 +124,7 @@ extension AgitationModeBuilder {
     /// Создает стандартный режим Fixer
     static func createFixer() -> AgitationMode {
         return AgitationModeBuilder()
-            .setName(String(localized: "agitation_fixer_name"))
+            .setName(String(localized: "agitationFixerName"))
             .setType(.fixer)
             .setCustom(false)
             .build()
@@ -133,7 +133,7 @@ extension AgitationModeBuilder {
     /// Создает непрерывный режим
     static func createContinuous() -> AgitationMode {
         return AgitationModeBuilder()
-            .setName(String(localized: "agitation_continuous_name"))
+            .setName(String(localized: "agitationContinuousName"))
             .setType(.continuous)
             .setCustom(false)
             .build()
@@ -142,7 +142,7 @@ extension AgitationModeBuilder {
     /// Создает неподвижный режим
     static func createStill() -> AgitationMode {
         return AgitationModeBuilder()
-            .setName(String(localized: "agitation_still_name"))
+            .setName(String(localized: "agitationStillName"))
             .setType(.still)
             .setCustom(false)
             .build()
@@ -151,7 +151,7 @@ extension AgitationModeBuilder {
     /// Создает кастомный циклический режим
     static func createCustomCycle(agitationSeconds: Int, restSeconds: Int) -> AgitationMode {
         return AgitationModeBuilder()
-            .setName(String(format: String(localized: "agitation_custom_format"), "\(agitationSeconds)", "\(restSeconds)"))
+            .setName(String(format: String(localized: "agitationCustomFormat"), "\(agitationSeconds)", "\(restSeconds)"))
             .setType(.custom)
             .setCustom(true)
             .setCycleParameters(agitationSeconds: agitationSeconds, restSeconds: restSeconds)

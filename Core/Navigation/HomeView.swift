@@ -10,7 +10,7 @@ public struct HomeView: View {
             VStack(spacing: 24) {
                 Spacer()
                 
-                Text(LocalizedStringKey("home_description"))
+                Text(LocalizedStringKey("homeDescription"))
                     .font(.subheadline)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.leading)
@@ -28,7 +28,7 @@ public struct HomeView: View {
                 
                 Spacer()
             }
-            .navigationTitle(LocalizedStringKey("main_title"))
+            .navigationTitle(LocalizedStringKey("mainTitle"))
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

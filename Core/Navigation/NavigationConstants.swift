@@ -12,8 +12,8 @@ enum NavigationConstants {
     static let tabCount = 5
     
     // Localization keys
-    static let mainTitleKey = "main_title"
-    static let homeDescriptionKey = "home_description"
+    static let mainTitleKey = "mainTitle"
+    static let homeDescriptionKey = "homeDescription"
     
     // Navigation button indices
     static let presetsButtonIndex = 0
@@ -34,28 +34,28 @@ struct NavigationButtonData {
         NavigationButtonData(
             index: NavigationConstants.presetsButtonIndex,
             titleKey: "presets",
-            subtitleKey: "home_presets_subtitle",
+            subtitleKey: "homePresetsSubtitle",
             iconName: "slider.horizontal.3",
             iconColor: .blue
         ),
         NavigationButtonData(
             index: NavigationConstants.calculatorButtonIndex,
             titleKey: "calculator",
-            subtitleKey: "home_calculator_subtitle",
+            subtitleKey: "homeCalculatorSubtitle",
             iconName: "plus.forwardslash.minus",
             iconColor: .orange
         ),
         NavigationButtonData(
             index: NavigationConstants.timerButtonIndex,
             titleKey: "timer",
-            subtitleKey: "home_timer_subtitle",
+            subtitleKey: "homeTimerSubtitle",
             iconName: "timer",
             iconColor: .red
         ),
         NavigationButtonData(
             index: NavigationConstants.journalButtonIndex,
             titleKey: "journal",
-            subtitleKey: "home_journal_subtitle",
+            subtitleKey: "homeJournalSubtitle",
             iconName: "book",
             iconColor: .purple
         )

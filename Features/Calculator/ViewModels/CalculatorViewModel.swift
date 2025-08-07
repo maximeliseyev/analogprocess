@@ -25,6 +25,10 @@ class CalculatorViewModel: ObservableObject {
     @Published var showTimer = false
     @Published var savedRecords: [CalculationRecord] = []
     
+    // Автодополнение для coefficient
+    @Published var showCoefficientSuggestions = false
+    @Published var coefficientSuggestions: [String] = []
+    
     // Timer properties
     @Published var selectedTimerLabel = ""
     @Published var selectedTimerMinutes = 0
@@ -44,6 +48,37 @@ class CalculatorViewModel: ObservableObject {
             return false
         }
         return true
+    }
+    
+    // MARK: - Autocomplete Methods
+    
+    func updateCoefficientSuggestions() {
+        let searchText = coefficient.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        
+        if searchText.isEmpty {
+            coefficientSuggestions = []
+            showCoefficientSuggestions = false
+            return
+        }
+        
+        let standardCoefficients = ["1.33", "1.25", "1.5", "1.67", "2.0", "2.5", "3.0"]
+        let filteredCoefficients = standardCoefficients.filter { coeff in
+            coeff.lowercased().contains(searchText)
+        }
+        
+        coefficientSuggestions = filteredCoefficients
+        showCoefficientSuggestions = !coefficientSuggestions.isEmpty
+    }
+    
+    func selectCoefficientSuggestion(_ coefficient: String) {
+        self.coefficient = coefficient
+        showCoefficientSuggestions = false
+        coefficientSuggestions = []
+    }
+    
+    func hideCoefficientSuggestions() {
+        showCoefficientSuggestions = false
+        coefficientSuggestions = []
     }
     
     // MARK: - Calculation Methods
@@ -126,21 +161,21 @@ class CalculatorViewModel: ObservableObject {
     
 
     
-    func createPrefillData() -> JournalRecord? {
+    func createPrefillData() -> (name: String, temperature: Double, coefficient: String, time: Int, comment: String, process: String)? {
         guard let selectedResult = selectedResult else { return nil }
         
         let totalSeconds = selectedResult.minutes * 60 + selectedResult.seconds
         
-        return JournalRecord(
-            date: Date(),
+        // Формируем строку процесса на основе настроек
+        let processString = isPushMode ? "push +\(pushSteps)" : "pull -\(pushSteps)"
+        
+        return (
             name: selectedResult.label,
-            filmName: "Расчетное время",
-            developerName: "Пользовательский расчет",
-            process: "Расчет",
-            dilution: "Коэффициент: \(coefficient), Температура: \(String(format: "%.1f", temperature))°C",
             temperature: temperature,
+            coefficient: coefficient,
             time: totalSeconds,
-            comment: "Расчет: \(selectedResult.label) - \(selectedResult.minutes):\(String(format: "%02d", selectedResult.seconds))"
+            comment: "Расчет: \(selectedResult.label) - \(selectedResult.minutes):\(String(format: "%02d", selectedResult.seconds))",
+            process: processString
         )
     }
     

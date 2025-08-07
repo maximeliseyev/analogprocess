@@ -74,7 +74,10 @@ struct RecordDetailView: View {
                 onUpdate: { updatedRecord in
                     // Здесь можно добавить логику обновления записи
                     print("Record updated: \(updatedRecord.name ?? "Unknown")")
-                }
+                },
+                calculatorTemperature: nil,
+                calculatorCoefficient: nil,
+                calculatorProcess: nil
             )
         }
         .alert(LocalizedStringKey("deleteRecord"), isPresented: $showingDeleteAlert) {

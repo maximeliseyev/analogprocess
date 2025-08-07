@@ -1,12 +1,55 @@
-"main_title" = "Analog Process Lab";
-"calculate" = "Calculate";
+// MARK: - Navigation & Common
+"mainTitle" = "Analog Process Lab";
 "back" = "← Back";
+"close" = "Close";
+"edit" = "Edit";
+"delete" = "Delete";
+"save" = "Save";
+"cancel" = "Cancel";
+"apply" = "Apply";
+"continue" = "Continue";
+"skip" = "Skip";
+"done" = "Done!";
+"timeUp" = "Time's up!";
+
+// MARK: - Timer Controls
 "start" = "Start";
 "pause" = "Pause";
 "reset" = "Reset";
-"time" = "Time";
 "timer" = "Timer";
-"done" = "Done!";
+"time" = "Time";
+"minutes" = "Minutes";
+"seconds" = "Seconds";
+"min" = "min.";
+"sec" = "sec.";
+"minute" = "Minute %@";
+"minuteLabel" = "Minute %@";
+
+// MARK: - Calculator
+"calculate" = "Calculate";
+"calculator" = "Calculator";
+"calculatorTitle" = "Time Calculator";
+"calculateButton" = "Calculate";
+"results" = "Results:";
+"resultsProcess" = "Results %@ process:";
+"coefficient" = "Coefficient:";
+"standardRatio" = "(standard 1.33)";
+"processType" = "Process type:";
+"pushSteps" = "Number of PUSH steps:";
+"numberOfSteps" = "Number of steps:";
+"from1to5" = "(from 1 to 5)";
+
+// MARK: - Development Parameters
+"developmentSetup" = "Development Setup";
+"developmentSetupDescription" = "Select parameters for development time calculation";
+"developmentTime" = "Development time";
+"developmentComplete" = "Development complete!";
+"developmentCompleted" = "Development completed!";
+"developmentCompleteForProcess" = "Development complete for process: %@";
+"selectDevelopmentParameters" = "Select development parameters to start timer";
+"startTimer" = "Start Timer";
+
+// MARK: - Film & Developer
 "film" = "Film:";
 "developer" = "Developer:";
 "dilution" = "Dilution:";
@@ -14,6 +57,8 @@
 "temperature" = "Temperature (°C):";
 "customTime" = "Custom time:";
 "baseTime" = "Base time:";
+"basicTime" = "Basic time:";
+"basicTimeLabel" = "Basic time:";
 "manualInput" = "Manual input";
 "fromDatabase" = "From database:";
 "defaultTime" = "Default time (no data available)";
@@ -22,15 +67,12 @@
 "push" = "Push";
 "pull" = "Pull";
 "steps" = "Steps:";
-"minutes" = "Minutes";
-"seconds" = "Seconds";
-"min" = "min.";
-"sec" = "sec.";
 "current" = "Current:";
-"basicTime" = "Basic time:";
 "data" = "Data:";
 "available" = "✓ Available";
 "noData" = "✗ No data";
+
+// MARK: - Temperature Options
 "temp14" = "14°C (+80%)";
 "temp15" = "15°C (+60%)";
 "temp16" = "16°C (+40%)";
@@ -43,6 +85,8 @@
 "temp23" = "23°C (-25%)";
 "temp24" = "24°C (-35%)";
 "temp25" = "25°C (-45%)";
+
+// MARK: - Dilution Options
 "stock" = "Stock";
 "dilution1+1" = "1+1";
 "dilution1+2" = "1+2";
@@ -58,9 +102,13 @@
 "dilution1+47" = "1+47";
 "dilution1+50" = "1+50";
 "dilution1+100" = "1+100";
+
+// MARK: - Developer Variants
 "hc110A" = "A 1+15 (HC-110)";
 "hc110B" = "B 1+31 (HC-110)";
 "hc110E" = "E 1+47 (HC-110)";
+
+// MARK: - Groups
 "groupIlford" = "Ilford";
 "groupKodak" = "Kodak";
 "groupFoma" = "Foma";
@@ -72,7 +120,8 @@
 "groupDevelopersOther" = "Other";
 "groupDevelopersCustom" = "Custom";
 "custom" = "Custom";
-"basicTimeLabel" = "Basic time";
+
+// MARK: - Steps
 "step1" = "+1 step";
 "step2" = "+2 steps";
 "step3" = "+3 steps";
@@ -83,28 +132,8 @@
 "pullStep3" = "-3 steps";
 "pullStep4" = "-4 steps";
 "pullStep5" = "-5 steps";
-"developmentComplete" = "Development complete!";
-"presetsManagement" = "Presets Management";
-"films" = "Films";
-"developers" = "Developers";
-"developmentTimes" = "Development Times";
-"addFilm" = "Add Film";
-"addDeveloper" = "Add Developer";
-"addTime" = "Add Time";
-"edit" = "Edit";
-"delete" = "Delete";
-"save" = "Save";
-"cancel" = "Cancel";
-"filmPresets" = "Film Presets";
-"developerPresets" = "Developer Presets";
-"timePresets" = "Development Time Presets";
-"development_completed" = "Development completed!";
-"go_to_fixing" = "Go to fixing";
-"fixing_timer" = "Fixing Timer";
-"fixing_timer_setup" = "Fixing Timer Setup";
-"fixing_timer_description" = "Set the time for fixing your film after development";
-"fixing_time" = "Fixing time";
-"start_fixing" = "Start fixing";
+
+// MARK: - ISO Options
 "iso25" = "25";
 "iso50" = "50";
 "iso80" = "80";
@@ -120,9 +149,29 @@
 "iso3200" = "3200";
 "iso6400" = "6400";
 "iso12500" = "12500";
-"version" = "Version";
-"developmentSetup" = "Development Setup";
-"developmentSetupDescription" = "Select parameters for development time calculation";
+
+// MARK: - Presets Management
+"presetsManagement" = "Presets Management";
+"films" = "Films";
+"developers" = "Developers";
+"developmentTimes" = "Development Times";
+"addFilm" = "Add Film";
+"addDeveloper" = "Add Developer";
+"addTime" = "Add Time";
+"filmPresets" = "Film Presets";
+"developerPresets" = "Developer Presets";
+"timePresets" = "Development Time Presets";
+"presets" = "Presets";
+
+// MARK: - Fixing Timer
+"goToFixing" = "Go to fixing";
+"fixingTimer" = "Fixing Timer";
+"fixingTimerSetup" = "Fixing Timer Setup";
+"fixingTimerDescription" = "Set the time for fixing your film after development";
+"fixingTime" = "Fixing time";
+"startFixing" = "Start fixing";
+
+// MARK: - Agitation
 "agitationSelection" = "Select Agitation Mode";
 "agitationDescription" = "Agitation is the process of stirring the developer for uniform film development";
 "noAgitation" = "No agitation";
@@ -131,144 +180,67 @@
 "customAgitationDescription" = "Create your own agitation mode";
 "customAgitationSetup" = "Custom mode setup";
 "customAgitationSetupDescription" = "Create your own agitation mode";
+"customAgitationTitle" = "Custom Agitation";
 "agitationTime" = "Agitation time";
-"seconds" = "seconds";
+"agitationTimeRemaining" = "(%@с)";
 "restTime" = "Rest time";
 "preview" = "Preview:";
 "cycle" = "Cycle: %@ agitation → %@ rest";
 "totalCycleDuration" = "Total cycle duration: %@";
 "agitation" = "AGITATION";
 "rest" = "REST";
-"minute" = "Minute %@";
 "phaseDescription" = "%@";
-"developmentTime" = "Development time";
+"continuousAgitation" = "Continuous agitation";
+"cycleAgitationFormat" = "%@s agitation / %@s rest";
+"periodicAgitationFormat" = "Every %@s";
+"agitationContinuous" = "Continuous agitation";
+"agitationStill" = "No agitation";
+"agitationCycleFormat" = "%@ / %@";
+"agitationOrwoDescription" = "45 / 15 + 15 / 45";
+"agitationRaeDescription" = "For long developments";
+"agitationFixerDescription" = "Fixer mode";
+"agitationCustomFormat" = "Custom (%@s/%@s)";
+"agitationContinuousName" = "Continuous";
+"agitationStillName" = "Still";
+"agitationOrwoName" = "ORWO";
+"agitationXtolName" = "XTOL";
+"agitationRaeName" = "RAE";
+"agitationFixerName" = "Fixer";
+"agitationRaePhase2Rotations" = "2 rotations";
+"agitationRaePhase1RotationPerMinute" = "1 rotation per minute";
+"agitationRaePhase1Rotation7thMinute" = "1 rotation on 7th minute";
+"agitationRaePhase1Rotation10thMinute" = "1 rotation on 10th minute";
+"agitationRaePhase1RotationEvery5Minutes" = "1 rotation every 5 minutes";
+
+// MARK: - Calculator Results
 "tapToCalculator" = "Tap to go to calculator";
 "calculatedTime" = "Calculated Time";
 "noDilutionsAvailable" = "No dilutions available";
 "noDilutionsDescription" = "No development data available for selected film and developer combination";
-"developmentCompleteForProcess" = "Development complete for process: %@";
-"calculatorTitle" = "Time Calculator";
-"basicTimeLabel" = "Basic time:";
-"coefficient" = "Coefficient:";
-"standardRatio" = "(standard 1.33)";
-"processType" = "Process type:";
-"pushSteps" = "Number of PUSH steps:";
-"number_of_steps" = "Number of steps:";
-"calculateButton" = "Calculate";
-"saveButton" = "Save";
-"calculator" = "Calculator";
-"results" = "Results:";
-"resultsProcess" = "Results %@ process:";
+"noISOOptionsAvailable" = "No ISO options available";
+"noISOOptionsDescription" = "Please select a film, developer, and dilution first to see available ISO options.";
+"noOptionsAvailable" = "No options available";
+"noOptionsDescription" = "No options are currently available for selection.";
+
+// MARK: - Journal
 "journalEmpty" = "Journal is empty";
 "journalEmptyDescription" = "Save your first calculation to see it here";
 "saveCalculation" = "Save calculation";
-"unknownFilm" = "Film";
-"unknownDeveloper" = "Developer";
-"degreesCelsius" = "°C";
-"filmPlusDeveloper" = "%@ + %@";
-"isoLabel" = "ISO %@";
-"timeFormat" = "%@:%@ • %@ • %@%@";
-"selectScreenForTesting" = "Select screen for testing:";
-"parameterRow" = "Parameter Row";
-"recordRow" = "Record Row";
-"calculatorComponents" = "Calculator Components";
-"home" = "Home";
-"home_description" = "Complete toolkit for film development: calculator, timer, journal, and guides";
 "journal" = "Journal";
-"recordName" = "Enter name";
-"selectFilm" = "Select film";
-"selectDeveloper" = "Select developer";
-"selectDilution" = "Select dilution";
-"selectDeveloperFirst" = "Select developer first";
-"from1to5" = "(from 1 to 5)";
-"continue" = "Continue";
-"skip" = "Skip";
-"createMode" = "Create Mode";
-"timeUp" = "Time's up!";
-"development" = "Development";
-"selectISO" = "Select ISO";
-"selectTemperature" = "Select Temperature";
-"selectDeveloper" = "Select Developer";
-"selectFilm" = "Select Film";
-"selectDilution" = "Select Dilution";
-"presets" = "Presets";
-"selectDevelopmentParameters" = "Select development parameters to start timer";
-"startTimer" = "Start Timer";
-"settings" = "Settings";
-"home_presets_subtitle" = "Development parameters";
-"home_calculator_subtitle" = "Time calculation";
-"home_timer_subtitle" = "Development timer";
-"home_journal_subtitle" = "Saved records";
-"settings_theme" = "Theme";
-"settings_theme_mode" = "Theme mode";
-"settings_theme_system" = "System";
-"settings_theme_light" = "Light";
-"settings_theme_dark" = "Dark";
-"agitation_continuous" = "Continuous agitation";
-"agitation_still" = "No agitation";
-"agitation_cycle_format" = "%@ / %@";
-"agitation_orwo_description" = "45 / 15 + 15 / 45";
-"agitation_rae_description" = "For long developments";
-"agitation_fixer_description" = "Fixer mode";
-"agitation_custom_format" = "Custom (%@s/%@s)";
-"agitation_continuous_name" = "Continuous";
-"agitation_still_name" = "Still";
-"agitation_orwo_name" = "ORWO";
-"agitation_xtol_name" = "XTOL";
-"agitation_rae_name" = "RAE";
-"agitation_fixer_name" = "Fixer";
-"agitation_rae_phase_2_rotations" = "2 rotations";
-"agitation_rae_phase_1_rotation_per_minute" = "1 rotation per minute";
-"agitation_rae_phase_1_rotation_7th_minute" = "1 rotation on 7th minute";
-"agitation_rae_phase_1_rotation_10th_minute" = "1 rotation on 10th minute";
-"agitation_rae_phase_1_rotation_every_5_minutes" = "1 rotation every 5 minutes";
-"manuals" = "Manuals";
-"home_manuals_subtitle" = "Articles and guides";
-"customAgitationTitle" = "Custom Agitation";
-"agitationTime" = "Agitation Time";
-"restTime" = "Rest Time";
-"preview" = "Preview";
-"cycleFormat" = "Cycle: %@s agitation → %@s rest";
-"totalCycleDuration" = "Total cycle duration: %@s";
-"noDilutionsAvailable" = "No dilutions available";
-"noDilutionsDescription" = "Please select a film and developer first to see available dilutions.";
-"noISOOptionsAvailable" = "No ISO options available";
-"noISOOptionsDescription" = "Please select a film, developer, and dilution first to see available ISO options.";
-"isoLabel" = "ISO %@";
-"degreesCelsius" = "°C";
-"filmPlusDeveloper" = "%@ + %@";
-"unknownFilm" = "Film";
-"unknownDeveloper" = "Developer";
-"timeFormat" = "%@:%@ • %@ • %@%@";
-"minuteLabel" = "Minute %@";
-"agitationTimeRemaining" = "(%@с)";
-"searchFilms" = "Search films...";
-"searchDevelopers" = "Search developers...";
-"continuousAgitation" = "Continuous agitation";
-"cycleAgitationFormat" = "%@s agitation / %@s rest";
-"periodicAgitationFormat" = "Every %@s";
-"settings_data" = "Data";
-"settings_sync_data" = "Sync Data";
-"settings_last_sync" = "Last sync:";
-"settings_sync_now" = "Sync Now";
-"settings_sync_result" = "Sync Result";
-"settings_sync_success" = "Data synchronized successfully!";
-"settings_sync_error" = "Sync failed";
-"journal_create_record" = "Create Record";
-"journal_record_basic_info" = "Basic Information";
-"journal_record_name" = "Name (optional)";
-"journal_record_film" = "Film";
-"journal_record_developer" = "Developer";
-"journal_record_parameters" = "Development Parameters";
-"journal_record_dilution" = "Dilution";
-"journal_record_temperature" = "Temperature";
-"journal_record_time" = "Time";
-"journal_record_comment" = "Comment";
-"journal_record_comment_placeholder" = "Add notes about this development...";
-"journal_record_date" = "Date & Time";
-"journal_record_process" = "Process";
-"close" = "Close";
-"edit_record" = "Edit";
+"journalCreateRecord" = "Create Record";
+"journalRecordBasicInfo" = "Basic Information";
+"journalRecordName" = "Name (optional)";
+"journalRecordFilm" = "Film";
+"journalRecordDeveloper" = "Developer";
+"journalRecordParameters" = "Development Parameters";
+"journalRecordDilution" = "Dilution";
+"journalRecordTemperature" = "Temperature";
+"journalRecordTime" = "Time";
+"journalRecordComment" = "Comment";
+"journalRecordCommentPlaceholder" = "Add notes about this development...";
+"journalRecordDate" = "Date & Time";
+"journalRecordProcess" = "Process";
+"editRecord" = "Edit";
 "deleteRecord" = "Delete Record";
 "deleteRecordConfirmation" = "Are you sure you want to delete this record?";
 "noRecords" = "No Records";
@@ -276,9 +248,71 @@
 "saveRecord" = "Save Record";
 "saveRecordDescription" = "Enter a name to save this record";
 "recordDetails" = "Record Details";
-"set_time_manually" = "Set Time Manually";
-"apply" = "Apply";
-"tap_to_change_time" = "Tap to change time";
-"set_time_to_start_timer" = "Set time to start timer";
-"noOptionsAvailable" = "No options available";
-"noOptionsDescription" = "No options are currently available for selection.";
+
+// MARK: - Selection
+"selectFilm" = "Select film";
+"selectDeveloper" = "Select developer";
+"selectDilution" = "Select dilution";
+"selectDeveloperFirst" = "Select developer first";
+"selectISO" = "Select ISO";
+"selectTemperature" = "Select Temperature";
+"selectScreenForTesting" = "Select screen for testing:";
+"recordName" = "Enter name";
+"searchFilms" = "Search films...";
+"searchDevelopers" = "Search developers...";
+
+// MARK: - Home
+"home" = "Home";
+"homeDescription" = "Complete toolkit for film development: calculator, timer, journal, and guides";
+"homePresetsSubtitle" = "Development parameters";
+"homeCalculatorSubtitle" = "Time calculation";
+"homeTimerSubtitle" = "Development timer";
+"homeJournalSubtitle" = "Saved records";
+"homeManualsSubtitle" = "Articles and guides";
+
+// MARK: - Settings
+"settings" = "Settings";
+"settingsTheme" = "Theme";
+"settingsThemeMode" = "Theme mode";
+"settingsThemeSystem" = "System";
+"settingsThemeLight" = "Light";
+"settingsThemeDark" = "Dark";
+"settingsData" = "Data";
+"settingsSyncData" = "Sync Data";
+"settingsLastSync" = "Last sync:";
+"settingsSyncNow" = "Sync Now";
+"settingsSyncResult" = "Sync Result";
+"settingsSyncSuccess" = "Data synchronized successfully!";
+"settingsSyncError" = "Sync failed";
+
+// MARK: - Manual Time Input
+"setTimeManually" = "Set Time Manually";
+"tapToChangeTime" = "Tap to change time";
+"setTimeToStartTimer" = "Set time to start timer";
+
+// MARK: - Create Mode
+"createMode" = "Create Mode";
+
+// MARK: - Development
+"development" = "Development";
+
+// MARK: - Manuals
+"manuals" = "Manuals";
+
+// MARK: - Version
+"version" = "Version";
+
+// MARK: - Formatting
+"unknownFilm" = "Film";
+"unknownDeveloper" = "Developer";
+"degreesCelsius" = "°C";
+"filmPlusDeveloper" = "%@ + %@";
+"isoLabel" = "ISO %@";
+"timeFormat" = "%@:%@ • %@ • %@%@";
+"cycleFormat" = "Cycle: %@s agitation → %@s rest";
+"totalCycleDuration" = "Total cycle duration: %@s";
+
+// MARK: - Testing
+"parameterRow" = "Parameter Row";
+"recordRow" = "Record Row";
+"calculatorComponents" = "Calculator Components";

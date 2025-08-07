@@ -32,6 +32,22 @@ struct KeyboardAwareView<Content: View>: View {
                 }
                 .frame(minHeight: geometry.size.height)
             }
+            // Добавляем обработчик жестов для скрытия клавиатуры при прокрутке
+            .simultaneousGesture(
+                DragGesture()
+                    .onChanged { _ in
+                        // Скрываем клавиатуру при начале прокрутки
+                        if isKeyboardVisible {
+                            hideKeyboard()
+                        }
+                    }
+            )
+            // Добавляем обработчик нажатия вне текстовых полей
+            .onTapGesture {
+                if isKeyboardVisible {
+                    hideKeyboard()
+                }
+            }
         }
         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { notification in
             if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
@@ -43,6 +59,10 @@ struct KeyboardAwareView<Content: View>: View {
             keyboardHeight = 0
             isKeyboardVisible = false
         }
+    }
+    
+    private func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 
