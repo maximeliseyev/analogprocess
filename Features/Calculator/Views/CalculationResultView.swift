@@ -62,7 +62,30 @@ struct CalculationResultView: View {
         }
         .padding(.horizontal)
         .sheet(isPresented: $viewModel.showSaveDialog) {
-            CreateRecordView(prefillData: viewModel.createPrefillData())
+            if let prefillData = viewModel.createPrefillData() {
+                // Создаем простую структуру данных для передачи в CreateRecordView
+                let recordData = (
+                    date: Date(),
+                    name: prefillData.name,
+                    filmName: nil as String?,
+                    developerName: nil as String?,
+                    process: "Расчет",
+                    dilution: "Коэффициент: \(prefillData.coefficient), Температура: \(String(format: "%.1f", prefillData.temperature))°C",
+                    temperature: prefillData.temperature,
+                    time: prefillData.time,
+                    comment: prefillData.comment
+                )
+                
+                // Передаем данные через параметры CreateRecordView
+                CreateRecordView(
+                    prefillData: nil, // Передаем nil, чтобы поля film и developer были пустыми
+                    isEditing: false,
+                    onUpdate: nil,
+                    calculatorTemperature: prefillData.temperature,
+                    calculatorCoefficient: prefillData.coefficient,
+                    calculatorProcess: prefillData.process
+                )
+            }
         }
     }
 }

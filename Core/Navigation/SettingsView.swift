@@ -15,11 +15,11 @@ public struct SettingsView: View {
     
     public var body: some View {
         Form {
-            Section(header: Text(LocalizedStringKey("settings_theme"))) {
-                Picker(selection: $selectedTheme, label: Text(LocalizedStringKey("settings_theme_mode"))) {
-                    Text(LocalizedStringKey("settings_theme_system")).tag(0)
-                    Text(LocalizedStringKey("settings_theme_light")).tag(1)
-                    Text(LocalizedStringKey("settings_theme_dark")).tag(2)
+            Section(header: Text(LocalizedStringKey("settingsTheme"))) {
+                Picker(selection: $selectedTheme, label: Text(LocalizedStringKey("settingsThemeMode"))) {
+                    Text(LocalizedStringKey("settingsThemeSystem")).tag(0)
+                    Text(LocalizedStringKey("settingsThemeLight")).tag(1)
+                    Text(LocalizedStringKey("settingsThemeDark")).tag(2)
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .onChange(of: selectedTheme) { oldValue, newValue in
@@ -31,10 +31,10 @@ public struct SettingsView: View {
                 }
             }
             
-            Section(header: Text(LocalizedStringKey("settings_data"))) {
+            Section(header: Text(LocalizedStringKey("settingsData"))) {
                 VStack(alignment: .leading, spacing: 8) {
                     HStack {
-                        Text(LocalizedStringKey("settings_sync_data"))
+                        Text(LocalizedStringKey("settingsSyncData"))
                         Spacer()
                         if isSyncing {
                             ProgressView()
@@ -48,7 +48,7 @@ public struct SettingsView: View {
                     }
                     
                     if let lastSync = githubService.lastSyncDate {
-                        Text(LocalizedStringKey("settings_last_sync"))
+                        Text(LocalizedStringKey("settingsLastSync"))
                             .font(.caption)
                             .foregroundColor(.secondary)
                         Text(lastSync, style: .relative)
@@ -60,7 +60,7 @@ public struct SettingsView: View {
                 Button(action: syncData) {
                     HStack {
                         Image(systemName: "arrow.clockwise")
-                        Text(LocalizedStringKey("settings_sync_now"))
+                        Text(LocalizedStringKey("settingsSyncNow"))
                     }
                 }
                 .disabled(isSyncing || githubService.isDownloading)
@@ -72,7 +72,7 @@ public struct SettingsView: View {
             else if colorScheme == .dark { selectedTheme = 2 }
             else { selectedTheme = 0 }
         }
-        .alert(LocalizedStringKey("settings_sync_result"), isPresented: $showingDataAlert) {
+                        .alert(LocalizedStringKey("settingsSyncResult"), isPresented: $showingDataAlert) {
             Button("OK") { }
         } message: {
             Text(alertMessage)
@@ -86,13 +86,13 @@ public struct SettingsView: View {
             do {
                 try await CoreDataService.shared.syncDataFromGitHub()
                 await MainActor.run {
-                    alertMessage = NSLocalizedString("settings_sync_success", comment: "")
+                    alertMessage = NSLocalizedString("settingsSyncSuccess", comment: "")
                     showingDataAlert = true
                     isSyncing = false
                 }
             } catch {
                 await MainActor.run {
-                    alertMessage = NSLocalizedString("settings_sync_error", comment: "") + ": \(error.localizedDescription)"
+                    alertMessage = NSLocalizedString("settingsSyncError", comment: "") + ": \(error.localizedDescription)"
                     showingDataAlert = true
                     isSyncing = false
                 }

@@ -10,7 +10,7 @@ struct ManualTimeInputView: View {
     @State private var tempMinutes: Int
     @State private var tempSeconds: Int
     
-    init(minutes: Binding<Int>, seconds: Binding<Int>, onApply: @escaping () -> Void, onCancel: @escaping () -> Void, title: LocalizedStringKey = "set_time_manually") {
+    init(minutes: Binding<Int>, seconds: Binding<Int>, onApply: @escaping () -> Void, onCancel: @escaping () -> Void, title: LocalizedStringKey = "setTimeManually") {
         self._minutes = minutes
         self._seconds = seconds
         self.onApply = onApply
@@ -110,7 +110,7 @@ struct ManualTimeInputView_Previews: PreviewProvider {
                     seconds: .constant(30),
                     onApply: {},
                     onCancel: {},
-                    title: "set_time_manually"
+                    title: "setTimeManually"
                 )
             }
             .previewDisplayName("Manual Time Input - Default")
@@ -124,7 +124,7 @@ struct ManualTimeInputView_Previews: PreviewProvider {
                     seconds: .constant(0),
                     onApply: {},
                     onCancel: {},
-                    title: "set_time_manually"
+                    title: "setTimeManually"
                 )
             }
             .previewDisplayName("Manual Time Input - Zero Time")
@@ -138,7 +138,7 @@ struct ManualTimeInputView_Previews: PreviewProvider {
                     seconds: .constant(45),
                     onApply: {},
                     onCancel: {},
-                    title: "set_time_manually"
+                    title: "setTimeManually"
                 )
             }
             .previewDisplayName("Manual Time Input - Long Time")

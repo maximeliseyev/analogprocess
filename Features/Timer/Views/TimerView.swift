@@ -50,7 +50,7 @@ public struct TimerView: View {
                     
                     if viewModel.isTimerFinished {
                         VStack(spacing: 16) {
-                            Text(LocalizedStringKey("development_completed"))
+                            Text(LocalizedStringKey("developmentCompleted"))
                                 .font(.headline)
                                 .foregroundColor(.green)
                             
@@ -58,7 +58,7 @@ public struct TimerView: View {
                                 viewModel.startFixingTimer()
                             }) {
                                 HStack {
-                                    Text(LocalizedStringKey("go_to_fixing"))
+                                    Text(LocalizedStringKey("goToFixing"))
                                         .font(.headline)
                                 }
                                 .foregroundColor(.white)
@@ -125,7 +125,7 @@ public struct TimerView: View {
                     onCancel: {
                         viewModel.showManualTimeInput = false
                     },
-                    title: "set_time_manually"
+                    title: "setTimeManually"
                 )
                 .presentationDetents([.medium])
             }

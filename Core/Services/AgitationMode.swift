@@ -89,12 +89,12 @@ struct ContinuousAgitationStrategy: AgitationStrategy {
     func getAgitationForMinute(_ minute: Int, totalMinutes: Int) -> AgitationPhase {
         return AgitationPhase(
             agitationType: .continuous,
-            description: String(localized: "agitation_continuous")
+            description: String(localized: "agitationContinuous")
         )
     }
     
     var description: String {
-        return String(localized: "agitation_continuous")
+        return String(localized: "agitationContinuous")
     }
 }
 
@@ -103,12 +103,12 @@ struct StillAgitationStrategy: AgitationStrategy {
     func getAgitationForMinute(_ minute: Int, totalMinutes: Int) -> AgitationPhase {
         return AgitationPhase(
             agitationType: .still,
-            description: String(localized: "agitation_still")
+            description: String(localized: "agitationStill")
         )
     }
     
     var description: String {
-        return String(localized: "agitation_still")
+        return String(localized: "agitationStill")
     }
 }
 
@@ -120,12 +120,12 @@ struct CycleAgitationStrategy: AgitationStrategy {
     func getAgitationForMinute(_ minute: Int, totalMinutes: Int) -> AgitationPhase {
         return AgitationPhase(
             agitationType: .cycle(agitationSeconds: agitationSeconds, restSeconds: restSeconds),
-            description: String(format: String(localized: "agitation_cycle_format"), "\(agitationSeconds)", "\(restSeconds)")
+            description: String(format: String(localized: "agitationCycleFormat"), "\(agitationSeconds)", "\(restSeconds)")
         )
     }
     
     var description: String {
-        return String(format: String(localized: "agitation_cycle_format"), "\(agitationSeconds)", "\(restSeconds)")
+        return String(format: String(localized: "agitationCycleFormat"), "\(agitationSeconds)", "\(restSeconds)")
     }
 }
 
@@ -136,16 +136,16 @@ struct ComplexAgitationStrategy: AgitationStrategy {
     
     func getAgitationForMinute(_ minute: Int, totalMinutes: Int) -> AgitationPhase {
         // Специальная логика для ORWO
-        if modeName == String(localized: "agitation_orwo_name") {
+        if modeName == String(localized: "agitationOrwoName") {
             if minute == 1 || minute == totalMinutes {
                 return AgitationPhase(
                     agitationType: .cycle(agitationSeconds: 45, restSeconds: 15),
-                    description: String(format: String(localized: "agitation_cycle_format"), "45", "15")
+                    description: String(format: String(localized: "agitationCycleFormat"), "45", "15")
                 )
             } else {
                 return AgitationPhase(
                     agitationType: .cycle(agitationSeconds: 15, restSeconds: 45),
-                    description: String(format: String(localized: "agitation_cycle_format"), "15", "45")
+                    description: String(format: String(localized: "agitationCycleFormat"), "15", "45")
                 )
             }
         }
@@ -157,18 +157,18 @@ struct ComplexAgitationStrategy: AgitationStrategy {
             return true
         } ?? phases.first ?? AgitationPhase(
             agitationType: .still,
-            description: String(localized: "agitation_still")
+            description: String(localized: "agitationStill")
         )
     }
     
     var description: String {
         switch modeName {
-        case String(localized: "agitation_orwo_name"):
-            return String(localized: "agitation_orwo_description")
-        case String(localized: "agitation_rae_name"):
-            return String(localized: "agitation_rae_description")
-        case String(localized: "agitation_fixer_name"):
-            return String(localized: "agitation_fixer_description")
+        case String(localized: "agitationOrwoName"):
+            return String(localized: "agitationOrwoDescription")
+        case String(localized: "agitationRaeName"):
+            return String(localized: "agitationRaeDescription")
+        case String(localized: "agitationFixerName"):
+            return String(localized: "agitationFixerDescription")
         default:
             return " "
         }
@@ -192,20 +192,20 @@ struct AgitationStrategyFactoryImpl: AgitationStrategyFactory {
                     AgitationPhase(agitationType: .cycle(agitationSeconds: 45, restSeconds: 15), description: ""),
                     AgitationPhase(agitationType: .cycle(agitationSeconds: 15, restSeconds: 45), description: "")
                 ],
-                modeName: String(localized: "agitation_orwo_name")
+                modeName: String(localized: "agitationOrwoName")
             )
         case .rae:
             return ComplexAgitationStrategy(
                 phases: [
                     AgitationPhase(agitationType: .continuous, description: ""),
                     AgitationPhase(agitationType: .periodic(intervalSeconds: 10), description: ""),
-                    AgitationPhase(agitationType: .custom(description: String(localized: "agitation_rae_phase_2_rotations")), description: ""),
-                    AgitationPhase(agitationType: .custom(description: String(localized: "agitation_rae_phase_1_rotation_per_minute")), description: ""),
-                    AgitationPhase(agitationType: .custom(description: String(localized: "agitation_rae_phase_1_rotation_7th_minute")), description: ""),
-                    AgitationPhase(agitationType: .custom(description: String(localized: "agitation_rae_phase_1_rotation_10th_minute")), description: ""),
-                    AgitationPhase(agitationType: .custom(description: String(localized: "agitation_rae_phase_1_rotation_every_5_minutes")), description: "")
+                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase2Rotations")), description: ""),
+                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase1RotationPerMinute")), description: ""),
+                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase1Rotation7thMinute")), description: ""),
+                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase1Rotation10thMinute")), description: ""),
+                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase1RotationEvery5Minutes")), description: "")
                 ],
-                modeName: String(localized: "agitation_rae_name")
+                modeName: String(localized: "agitationRaeName")
             )
         case .fixer:
             return ComplexAgitationStrategy(
@@ -213,7 +213,7 @@ struct AgitationStrategyFactoryImpl: AgitationStrategyFactory {
                     AgitationPhase(agitationType: .continuous, description: ""),
                     AgitationPhase(agitationType: .cycle(agitationSeconds: 0, restSeconds: 60), description: "")
                 ],
-                modeName: String(localized: "agitation_fixer_name")
+                modeName: String(localized: "agitationFixerName")
             )
         case .custom:
             return CycleAgitationStrategy(agitationSeconds: 30, restSeconds: 30)
@@ -233,37 +233,37 @@ struct AgitationModeRepositoryImpl: AgitationModeRepository {
     func getAllPresets() -> [AgitationMode] {
         return [
             AgitationMode(
-                name: String(localized: "agitation_orwo_name"),
+                name: String(localized: "agitationOrwoName"),
                 type: .orwo,
                 isCustom: false,
                 strategy: factory.createStrategy(for: .orwo)
             ),
             AgitationMode(
-                name: String(localized: "agitation_xtol_name"),
+                name: String(localized: "agitationXtolName"),
                 type: .xtol,
                 isCustom: false,
                 strategy: factory.createStrategy(for: .xtol)
             ),
             AgitationMode(
-                name: String(localized: "agitation_rae_name"),
+                name: String(localized: "agitationRaeName"),
                 type: .rae,
                 isCustom: false,
                 strategy: factory.createStrategy(for: .rae)
             ),
             AgitationMode(
-                name: String(localized: "agitation_fixer_name"),
+                name: String(localized: "agitationFixerName"),
                 type: .fixer,
                 isCustom: false,
                 strategy: factory.createStrategy(for: .fixer)
             ),
             AgitationMode(
-                name: String(localized: "agitation_continuous_name"),
+                name: String(localized: "agitationContinuousName"),
                 type: .continuous,
                 isCustom: false,
                 strategy: factory.createStrategy(for: .continuous)
             ),
             AgitationMode(
-                name: String(localized: "agitation_still_name"),
+                name: String(localized: "agitationStillName"),
                 type: .still,
                 isCustom: false,
                 strategy: factory.createStrategy(for: .still)
@@ -278,7 +278,7 @@ struct AgitationModeRepositoryImpl: AgitationModeRepository {
     func createCustomMode(agitationSeconds: Int, restSeconds: Int) -> AgitationMode {
         let strategy = CycleAgitationStrategy(agitationSeconds: agitationSeconds, restSeconds: restSeconds)
         return AgitationMode(
-            name: String(format: String(localized: "agitation_custom_format"), "\(agitationSeconds)", "\(restSeconds)"),
+            name: String(format: String(localized: "agitationCustomFormat"), "\(agitationSeconds)", "\(restSeconds)"),
             type: .custom,
             isCustom: true,
             strategy: strategy

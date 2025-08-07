@@ -16,10 +16,33 @@ struct CreateRecordView: View {
     let isEditing: Bool
     let onUpdate: ((JournalRecord) -> Void)?
     
-    init(prefillData: JournalRecord? = nil, isEditing: Bool = false, onUpdate: ((JournalRecord) -> Void)? = nil) {
+    // Дополнительные параметры для передачи данных из калькулятора
+    let calculatorTemperature: Double?
+    let calculatorCoefficient: String?
+    let calculatorProcess: String?
+    
+    // Управление фокусом для клавиатуры
+    @FocusState private var focusedField: FocusedField?
+    
+    enum FocusedField: Hashable {
+        case name
+        case filmName
+        case developerName
+        case process
+        case dilution
+        case temperature
+        case minutes
+        case seconds
+        case comment
+    }
+    
+    init(prefillData: JournalRecord? = nil, isEditing: Bool = false, onUpdate: ((JournalRecord) -> Void)? = nil, calculatorTemperature: Double? = nil, calculatorCoefficient: String? = nil, calculatorProcess: String? = nil) {
         self.prefillData = prefillData
         self.isEditing = isEditing
         self.onUpdate = onUpdate
+        self.calculatorTemperature = calculatorTemperature
+        self.calculatorCoefficient = calculatorCoefficient
+        self.calculatorProcess = calculatorProcess
     }
     
     var body: some View {
@@ -30,21 +53,94 @@ struct CreateRecordView: View {
                     
                     VStack(spacing: 20) {
                         VStack(alignment: .leading, spacing: 16) {
-                            Text(LocalizedStringKey("journal_record_basic_info"))
+                            Text(LocalizedStringKey("journalRecordBasicInfo"))
                                 .font(.headline)
                                 .foregroundColor(.white)
                             
                             VStack(spacing: 12) {
-                                TextField(LocalizedStringKey("journal_record_name"), text: $viewModel.name)
+                                TextField(LocalizedStringKey("journalRecordName"), text: $viewModel.name)
                                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                                    .focused($focusedField, equals: .name)
+                                    .submitLabel(.next)
+                                    .onSubmit {
+                                        focusedField = .filmName
+                                    }
                                 
-                                TextField(LocalizedStringKey("journal_record_film"), text: $viewModel.filmName)
-                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                                // Поле Film с автодополнением
+                                VStack(alignment: .leading, spacing: 0) {
+                                    TextField(LocalizedStringKey("journalRecordFilm"), text: $viewModel.filmName)
+                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                        .focused($focusedField, equals: .filmName)
+                                        .submitLabel(.next)
+                                        .onSubmit {
+                                            focusedField = .developerName
+                                        }
+                                        .onChange(of: viewModel.filmName) { _, _ in
+                                            viewModel.updateFilmSuggestions()
+                                        }
+                                        .onTapGesture {
+                                            viewModel.updateFilmSuggestions()
+                                        }
+                                        .onChange(of: focusedField) { _, newValue in
+                                            if newValue != .filmName {
+                                                viewModel.hideFilmSuggestions()
+                                            }
+                                        }
+                                    
+                                    if viewModel.showFilmSuggestions {
+                                        AutocompleteView(
+                                            suggestions: viewModel.filmSuggestions,
+                                            onSelect: { suggestion in
+                                                viewModel.selectFilmSuggestion(suggestion)
+                                                focusedField = .developerName
+                                            },
+                                            onDismiss: {
+                                                viewModel.hideFilmSuggestions()
+                                            }
+                                        )
+                                        .zIndex(1)
+                                    }
+                                }
                                 
-                                TextField(LocalizedStringKey("journal_record_developer"), text: $viewModel.developerName)
-                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                                // Поле Developer с автодополнением
+                                VStack(alignment: .leading, spacing: 0) {
+                                    TextField(LocalizedStringKey("journalRecordDeveloper"), text: $viewModel.developerName)
+                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                        .focused($focusedField, equals: .developerName)
+                                        .submitLabel(.next)
+                                        .onSubmit {
+                                            focusedField = .process
+                                        }
+                                        .onChange(of: viewModel.developerName) { _, _ in
+                                            viewModel.updateDeveloperSuggestions()
+                                        }
+                                        .onTapGesture {
+                                            viewModel.updateDeveloperSuggestions()
+                                        }
+                                        .onChange(of: focusedField) { _, newValue in
+                                            if newValue != .developerName {
+                                                viewModel.hideDeveloperSuggestions()
+                                            }
+                                        }
+                                    
+                                    if viewModel.showDeveloperSuggestions {
+                                        AutocompleteView(
+                                            suggestions: viewModel.developerSuggestions,
+                                            onSelect: { suggestion in
+                                                viewModel.selectDeveloperSuggestion(suggestion)
+                                                focusedField = .process
+                                            },
+                                            onDismiss: {
+                                                viewModel.hideDeveloperSuggestions()
+                                            }
+                                        )
+                                        .zIndex(1)
+                                    }
+                                }
                                 
                                 Button(action: {
+                                    // Скрываем клавиатуру перед открытием пикера
+                                    focusedField = nil
                                     viewModel.showISOPicker = true
                                 }) {
                                     HStack {
@@ -67,17 +163,33 @@ struct CreateRecordView: View {
                                     )
                                 }
                                 
-                                TextField(LocalizedStringKey("journal_record_process"), text: $viewModel.process)
+                                TextField(LocalizedStringKey("journalRecordProcess"), text: $viewModel.process)
                                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                                    .focused($focusedField, equals: .process)
+                                    .submitLabel(.next)
+                                    .onSubmit {
+                                        focusedField = .dilution
+                                    }
                                 
-                                TextField(LocalizedStringKey("journal_record_dilution"), text: $viewModel.dilution)
+                                TextField(LocalizedStringKey("journalRecordDilution"), text: $viewModel.dilution)
                                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                                    .focused($focusedField, equals: .dilution)
+                                    .submitLabel(.next)
+                                    .onSubmit {
+                                        focusedField = .temperature
+                                    }
                                 
                                 HStack {
                                     TextField("", value: $viewModel.temperature, format: .number)
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
                                         .frame(width: 80)
-                                    Text("\(NSLocalizedString("journal_record_temperature", comment: "")) \(NSLocalizedString("degreesCelsius", comment: ""))")
+                                        .focused($focusedField, equals: .temperature)
+                                        .keyboardType(.decimalPad)
+                                        .submitLabel(.next)
+                                        .onSubmit {
+                                            focusedField = .minutes
+                                        }
+                                    Text("\(NSLocalizedString("journalRecordTemperature", comment: "")) \(NSLocalizedString("degreesCelsius", comment: ""))")
                                         .foregroundColor(.secondary)
                                 }
                                 
@@ -85,6 +197,12 @@ struct CreateRecordView: View {
                                     TextField("", value: $viewModel.minutes, format: .number)
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
                                         .frame(width: 80)
+                                        .focused($focusedField, equals: .minutes)
+                                        .keyboardType(.numberPad)
+                                        .submitLabel(.next)
+                                        .onSubmit {
+                                            focusedField = .seconds
+                                        }
                                         .onChange(of: viewModel.minutes) { oldValue, newValue in
                                             if newValue < 0 {
                                                 viewModel.minutes = 0
@@ -94,7 +212,13 @@ struct CreateRecordView: View {
                                         .foregroundColor(.secondary)
                                     TextField("", value: $viewModel.seconds, format: .number)
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                                        .frame(width: 80)
+                                        .frame(maxWidth: .infinity)
+                                        .focused($focusedField, equals: .seconds)
+                                        .keyboardType(.numberPad)
+                                        .submitLabel(.next)
+                                        .onSubmit {
+                                            focusedField = .comment
+                                        }
                                         .onChange(of: viewModel.seconds) { oldValue, newValue in
                                             if newValue > 59 {
                                                 viewModel.seconds = 59
@@ -109,25 +233,30 @@ struct CreateRecordView: View {
                         }
                         
                         VStack(alignment: .leading, spacing: 16) {
-                            Text(LocalizedStringKey("journal_record_comment"))
+                            Text(LocalizedStringKey("journalRecordComment"))
                                 .font(.headline)
                                 .foregroundColor(.white)
                             
-                            TextField(LocalizedStringKey("journal_record_comment_placeholder"), text: $viewModel.comment, axis: .vertical)
+                            TextField(LocalizedStringKey("journalRecordCommentPlaceholder"), text: $viewModel.comment, axis: .vertical)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .lineLimit(3...6)
+                                .focused($focusedField, equals: .comment)
+                                .submitLabel(.done)
+                                .onSubmit {
+                                    focusedField = nil
+                                }
                         }
                         
                         VStack(alignment: .leading, spacing: 16) {
                             DatePicker(
-                                LocalizedStringKey("journal_record_date"),
+                                LocalizedStringKey("journalRecordDate"),
                                 selection: $viewModel.date,
                                 displayedComponents: [.date, .hourAndMinute]
                             )
                         }
                         .padding()
                     }
-                    .navigationTitle(isEditing ? LocalizedStringKey("edit_record") : LocalizedStringKey("journal_create_record"))
+                    .navigationTitle(isEditing ? LocalizedStringKey("editRecord") : LocalizedStringKey("journalCreateRecord"))
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
@@ -138,6 +267,8 @@ struct CreateRecordView: View {
                         
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button(LocalizedStringKey("save")) {
+                                // Скрываем клавиатуру перед сохранением
+                                focusedField = nil
                                 if isEditing {
                                     let updatedRecord = viewModel.createJournalRecord()
                                     onUpdate?(updatedRecord)
@@ -148,10 +279,34 @@ struct CreateRecordView: View {
                             }
                             .disabled(!viewModel.isValid)
                         }
+                        
+                        // Добавляем кнопку "Готово" на клавиатуру
+                        ToolbarItemGroup(placement: .keyboard) {
+                            Spacer()
+                            Button(LocalizedStringKey("done")) {
+                                focusedField = nil
+                            }
+                        }
+                    }
+                    // Добавляем обработчик нажатия вне текстовых полей для скрытия клавиатуры и автодополнения
+                    .onTapGesture {
+                        focusedField = nil
+                        viewModel.hideFilmSuggestions()
+                        viewModel.hideDeveloperSuggestions()
                     }
                     .onAppear {
                         if let prefillData = prefillData {
                             viewModel.prefill(with: prefillData)
+                        } else if let calculatorTemperature = calculatorTemperature {
+                            // Если переданы данные из калькулятора, заполняем только температуру и процесс
+                            viewModel.temperature = calculatorTemperature
+                            if let calculatorProcess = calculatorProcess {
+                                viewModel.process = calculatorProcess
+                            }
+                            if let calculatorCoefficient = calculatorCoefficient {
+                                // Можно добавить поле для коэффициента в CreateRecordViewModel, если нужно
+                                // viewModel.coefficient = calculatorCoefficient
+                            }
                         }
                     }
                 }
@@ -163,5 +318,12 @@ struct CreateRecordView: View {
 // MARK: - Preview
 
 #Preview {
-    CreateRecordView()
+    CreateRecordView(
+        prefillData: nil,
+        isEditing: false,
+        onUpdate: nil,
+        calculatorTemperature: nil,
+        calculatorCoefficient: nil,
+        calculatorProcess: nil
+    )
 } 

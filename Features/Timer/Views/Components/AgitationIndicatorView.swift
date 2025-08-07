@@ -52,7 +52,7 @@ struct AgitationIndicatorView: View {
         case .continuous:
             return String(localized: "continuousAgitation")
         case .still:
-            return String(localized: "agitation_still")
+            return String(localized: "agitationStill")
         case .cycle(let agitation, let rest):
             return String(format: String(localized: "cycleAgitationFormat"), "\(agitation)", "\(rest)")
         case .periodic(let interval):

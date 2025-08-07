@@ -32,7 +32,7 @@ struct TimerTabView: View {
                             .foregroundColor(.white)
                             .padding(.vertical, 10)
                         
-                        Text(LocalizedStringKey("tap_to_change_time"))
+                        Text(LocalizedStringKey("tapToChangeTime"))
                             .font(.caption)
                             .foregroundColor(.gray)
                     }

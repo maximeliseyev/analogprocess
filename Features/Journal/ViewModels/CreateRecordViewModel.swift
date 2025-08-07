@@ -23,6 +23,12 @@ class CreateRecordViewModel: ObservableObject {
     
     @Published var showISOPicker = false
     
+    // Автодополнение
+    @Published var showFilmSuggestions = false
+    @Published var showDeveloperSuggestions = false
+    @Published var filmSuggestions: [String] = []
+    @Published var developerSuggestions: [String] = []
+    
     private let coreDataService = CoreDataService.shared
     
     var isValid: Bool {
@@ -33,6 +39,68 @@ class CreateRecordViewModel: ObservableObject {
     // Конвертация времени в секунды
     private var totalSeconds: Int {
         return minutes * 60 + seconds
+    }
+    
+    // MARK: - Autocomplete Methods
+    
+    func updateFilmSuggestions() {
+        let searchText = filmName.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        
+        if searchText.isEmpty {
+            filmSuggestions = []
+            showFilmSuggestions = false
+            return
+        }
+        
+        let allFilms = coreDataService.films
+        let filteredFilms = allFilms.filter { film in
+            guard let name = film.name else { return false }
+            return name.lowercased().contains(searchText)
+        }
+        
+        filmSuggestions = filteredFilms.compactMap { $0.name }.prefix(5).map { $0 }
+        showFilmSuggestions = !filmSuggestions.isEmpty
+    }
+    
+    func updateDeveloperSuggestions() {
+        let searchText = developerName.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        
+        if searchText.isEmpty {
+            developerSuggestions = []
+            showDeveloperSuggestions = false
+            return
+        }
+        
+        let allDevelopers = coreDataService.developers
+        let filteredDevelopers = allDevelopers.filter { developer in
+            guard let name = developer.name else { return false }
+            return name.lowercased().contains(searchText)
+        }
+        
+        developerSuggestions = filteredDevelopers.compactMap { $0.name }.prefix(5).map { $0 }
+        showDeveloperSuggestions = !developerSuggestions.isEmpty
+    }
+    
+    func selectFilmSuggestion(_ filmName: String) {
+        self.filmName = filmName
+        showFilmSuggestions = false
+        filmSuggestions = []
+    }
+    
+    func selectDeveloperSuggestion(_ developerName: String) {
+        self.developerName = developerName
+        showDeveloperSuggestions = false
+        developerSuggestions = []
+    }
+    
+    func hideFilmSuggestions() {
+        showFilmSuggestions = false
+        filmSuggestions = []
+    }
+    
+    func hideDeveloperSuggestions() {
+        showDeveloperSuggestions = false
+        developerSuggestions = []
     }
     
     func prefill(with record: JournalRecord) {

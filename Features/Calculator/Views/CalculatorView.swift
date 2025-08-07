@@ -12,6 +12,15 @@ struct CalculatorView: View {
     @StateObject private var viewModel: CalculatorViewModel
     let onStartTimer: ((String, Int, Int) -> Void)?
     
+    // Управление фокусом для клавиатуры
+    @FocusState private var focusedField: FocusedField?
+    
+    enum FocusedField: Hashable {
+        case minutes
+        case seconds
+        case coefficient
+    }
+    
     init(initialTime: Int? = nil, initialTemperature: Double = 20.0, onStartTimer: ((String, Int, Int) -> Void)? = nil) {
         let vm = CalculatorViewModel()
         if let time = initialTime {
@@ -36,11 +45,31 @@ struct CalculatorView: View {
                         HStack {
                             TextField(LocalizedStringKey("minutes"), text: $viewModel.minutes)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .keyboardType(.numberPad)
+                                .focused($focusedField, equals: .minutes)
+                                .submitLabel(.next)
+                                .onSubmit {
+                                    focusedField = .seconds
+                                }
+                                .toolbar {
+                                    ToolbarItemGroup(placement: .keyboard) {
+                                        Spacer()
+                                        Button(LocalizedStringKey("done")) {
+                                            focusedField = nil
+                                        }
+                                    }
+                                }
                             
                             Text(LocalizedStringKey("min"))
                             
                             TextField(LocalizedStringKey("seconds"), text: $viewModel.seconds)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .keyboardType(.numberPad)
+                                .focused($focusedField, equals: .seconds)
+                                .submitLabel(.next)
+                                .onSubmit {
+                                    focusedField = .coefficient
+                                }
                             
                             Text(LocalizedStringKey("sec"))
                         }
@@ -50,13 +79,46 @@ struct CalculatorView: View {
                         Text(LocalizedStringKey("ratio"))
                             .font(.headline)
                         
-                        HStack {
-                            TextField("1.33", text: $viewModel.coefficient)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                        VStack(alignment: .leading, spacing: 0) {
+                            HStack {
+                                TextField("1.33", text: $viewModel.coefficient)
+                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                                    .keyboardType(.decimalPad)
+                                    .focused($focusedField, equals: .coefficient)
+                                    .submitLabel(.done)
+                                    .onSubmit {
+                                        focusedField = nil
+                                    }
+                                    .onChange(of: viewModel.coefficient) { _, _ in
+                                        viewModel.updateCoefficientSuggestions()
+                                    }
+                                    .onTapGesture {
+                                        viewModel.updateCoefficientSuggestions()
+                                    }
+                                    .onChange(of: focusedField) { _, newValue in
+                                        if newValue != .coefficient {
+                                            viewModel.hideCoefficientSuggestions()
+                                        }
+                                    }
+                                
+                                Text(LocalizedStringKey("standardRatio"))
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
+                            }
                             
-                            Text(LocalizedStringKey("standardRatio"))
-                                .font(.caption)
-                                .foregroundColor(.gray)
+                            if viewModel.showCoefficientSuggestions {
+                                AutocompleteView(
+                                    suggestions: viewModel.coefficientSuggestions,
+                                    onSelect: { suggestion in
+                                        viewModel.selectCoefficientSuggestion(suggestion)
+                                        focusedField = nil
+                                    },
+                                    onDismiss: {
+                                        viewModel.hideCoefficientSuggestions()
+                                    }
+                                )
+                                .zIndex(1)
+                            }
                         }
                     }
                     
@@ -72,7 +134,7 @@ struct CalculatorView: View {
                     }
                     
                     VStack(alignment: .leading, spacing: 8) {
-                        Text(LocalizedStringKey("number_of_steps"))
+                        Text(LocalizedStringKey("numberOfSteps"))
                             .font(.headline)
                         
                         HStack {
@@ -95,6 +157,8 @@ struct CalculatorView: View {
                             .font(.headline)
                         
                         Button(action: {
+                            // Скрываем клавиатуру перед открытием пикера
+                            focusedField = nil
                             viewModel.showTemperaturePicker = true
                         }) {
                             HStack {
@@ -117,7 +181,11 @@ struct CalculatorView: View {
                 
                 Spacer()
                                 
-                Button(action: viewModel.calculateTime) {
+                Button(action: {
+                    // Скрываем клавиатуру перед расчетом
+                    focusedField = nil
+                    viewModel.calculateTime()
+                }) {
                     Text(LocalizedStringKey("calculateButton"))
                         .font(.headline)
                         .foregroundColor(.white)
@@ -133,6 +201,11 @@ struct CalculatorView: View {
         }
         .navigationTitle(LocalizedStringKey("calculator"))
         .navigationBarTitleDisplayMode(.inline)
+        // Добавляем обработчик нажатия вне текстовых полей для скрытия клавиатуры и автодополнения
+        .onTapGesture {
+            focusedField = nil
+            viewModel.hideCoefficientSuggestions()
+        }
 
         .sheet(isPresented: $viewModel.showTemperaturePicker) {
             TemperaturePickerView(

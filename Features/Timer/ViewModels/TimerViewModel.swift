@@ -269,7 +269,7 @@ class TimerViewModel: ObservableObject {
         isTimerFinished = false
         
         // Устанавливаем режим фиксирования
-        let fixerMode = AgitationMode.presets.first { $0.name == String(localized: "agitation_fixer_name") }
+        let fixerMode = AgitationMode.presets.first { $0.name == String(localized: "agitationFixerName") }
         selectedAgitationMode = fixerMode
         setupAgitation()
         

@@ -93,7 +93,14 @@ public struct MainTabView: View {
             setupCloudKitObservers()
         }
         .sheet(isPresented: $showingCreateRecord) {
-            CreateRecordView()
+            CreateRecordView(
+                prefillData: nil,
+                isEditing: false,
+                onUpdate: nil,
+                calculatorTemperature: nil,
+                calculatorCoefficient: nil,
+                calculatorProcess: nil
+            )
         }
 
     }
@@ -127,7 +134,7 @@ public struct MainTabView: View {
             VStack(spacing: 24) {
                 Spacer()
                 
-                Text(LocalizedStringKey("home_description"))
+                Text(LocalizedStringKey("homeDescription"))
                     .font(.subheadline)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.leading)
@@ -166,7 +173,7 @@ public struct MainTabView: View {
                 Spacer()
             }
         }
-        .navigationTitle(LocalizedStringKey("main_title"))
+        .navigationTitle(LocalizedStringKey("mainTitle"))
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -188,10 +195,10 @@ public struct MainTabView: View {
     
     func subtitle(for idx: Int) -> String {
         switch idx {
-        case 0: return String(localized: "home_presets_subtitle")
-        case 1: return String(localized: "home_calculator_subtitle")
-        case 2: return String(localized: "home_timer_subtitle")
-        case 3: return String(localized: "home_journal_subtitle")
+                    case 0: return String(localized: "homePresetsSubtitle")
+        case 1: return String(localized: "homeCalculatorSubtitle")
+        case 2: return String(localized: "homeTimerSubtitle")
+        case 3: return String(localized: "homeJournalSubtitle")
         default: return "" }
     }
     
