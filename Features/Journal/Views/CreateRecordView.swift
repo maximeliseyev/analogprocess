@@ -303,10 +303,6 @@ struct CreateRecordView: View {
                             if let calculatorProcess = calculatorProcess {
                                 viewModel.process = calculatorProcess
                             }
-                            if let calculatorCoefficient = calculatorCoefficient {
-                                // Можно добавить поле для коэффициента в CreateRecordViewModel, если нужно
-                                // viewModel.coefficient = calculatorCoefficient
-                            }
                         }
                     }
                 }
