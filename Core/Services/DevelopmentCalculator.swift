@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import CoreData
 
 class DevelopmentCalculator {
+    private let coreDataService = CoreDataService.shared
+    
     /// Округляет время до ближайшей 1/4 минуты (15 секунд)
     private func roundToQuarterMinute(_ totalSeconds: Int) -> (minutes: Int, seconds: Int) {
         let quarterMinuteSeconds = 15
@@ -23,15 +26,23 @@ class DevelopmentCalculator {
         minutes: Int,
         seconds: Int,
         coefficient: Double,
+        temperature: Double,
         isPushMode: Bool,
         steps: Int
     ) -> [(label: String, minutes: Int, seconds: Int)] {
         
         let baseSeconds = minutes * 60 + seconds
+        
+        // Применяем температурный коэффициент к базовому времени
+        let temperatureMultiplier = coreDataService.getTemperatureMultiplier(for: temperature)
+        let adjustedBaseSeconds = Int(Double(baseSeconds) * temperatureMultiplier)
+        
+        print("DEBUG: Calculator - Base time: \(baseSeconds)s, Temperature: \(temperature)°C, Multiplier: \(temperatureMultiplier), Adjusted time: \(adjustedBaseSeconds)s")
+        
         var results: [(label: String, minutes: Int, seconds: Int)] = []
         
         // Базовое время (+0) - округляем
-        let baseRounded = roundToQuarterMinute(baseSeconds)
+        let baseRounded = roundToQuarterMinute(adjustedBaseSeconds)
         results.append((
             label: "+0",
             minutes: baseRounded.minutes,
@@ -39,9 +50,9 @@ class DevelopmentCalculator {
         ))
         
         if isPushMode {
-            results.append(contentsOf: calculatePushProcess(baseSeconds: baseSeconds, coefficient: coefficient, steps: steps))
+            results.append(contentsOf: calculatePushProcess(baseSeconds: adjustedBaseSeconds, coefficient: coefficient, steps: steps))
         } else {
-            results.append(contentsOf: calculatePullProcess(baseSeconds: baseSeconds, coefficient: coefficient, steps: steps))
+            results.append(contentsOf: calculatePullProcess(baseSeconds: adjustedBaseSeconds, coefficient: coefficient, steps: steps))
         }
         
         return results

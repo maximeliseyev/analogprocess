@@ -157,7 +157,6 @@ struct CalculatorView: View {
                             .font(.headline)
                         
                         Button(action: {
-                            // Скрываем клавиатуру перед открытием пикера
                             focusedField = nil
                             viewModel.showTemperaturePicker = true
                         }) {

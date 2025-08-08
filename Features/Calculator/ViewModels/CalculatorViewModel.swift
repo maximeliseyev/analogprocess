@@ -96,6 +96,7 @@ class CalculatorViewModel: ObservableObject {
             minutes: min,
             seconds: sec,
             coefficient: coeff,
+            temperature: temperature,
             isPushMode: isPushMode,
             steps: pushSteps
         )
