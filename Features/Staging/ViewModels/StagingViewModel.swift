@@ -34,6 +34,19 @@ class StagingViewModel: ObservableObject {
         selectedStages.append(newStage)
     }
     
+    func duplicateStage(_ stage: StagingStage) {
+        var duplicatedStage = stage
+        duplicatedStage.id = UUID()
+        
+        // Проверяем, сколько раз эта стадия уже была добавлена
+        let stageCount = selectedStages.filter { $0.name.hasPrefix(stage.name) }.count
+        
+        // Добавляем номер к названию
+        duplicatedStage.name = "\(stage.name) \(stageCount + 1)"
+        
+        selectedStages.append(duplicatedStage)
+    }
+    
     func removeStage(at index: Int) {
         guard index >= 0 && index < selectedStages.count else { return }
         selectedStages.remove(at: index)

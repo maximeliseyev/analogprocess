@@ -27,6 +27,11 @@ struct StagingView: View {
                                     withAnimation(.easeInOut(duration: 0.3)) {
                                         viewModel.removeStage(at: index)
                                     }
+                                },
+                                onDuplicate: {
+                                    withAnimation(.easeInOut(duration: 0.3)) {
+                                        viewModel.duplicateStage(stage)
+                                    }
                                 }
                             )
                             .onDrag {
@@ -105,6 +110,7 @@ struct StagingView: View {
 struct StageRowView: View {
     let stage: StagingStage
     let onDelete: () -> Void
+    let onDuplicate: () -> Void
     
     var body: some View {
         HStack(spacing: 12) {
@@ -138,10 +144,23 @@ struct StageRowView: View {
         .cornerRadius(12)
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             Button(role: .destructive) {
-                onDelete()
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    onDelete()
+                }
             } label: {
-                Label("Удалить", systemImage: "trash")
+                Label("Удалить", systemImage: "trash.fill")
             }
+            .tint(.red)
+        }
+        .swipeActions(edge: .leading, allowsFullSwipe: false) {
+            Button {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    onDuplicate()
+                }
+            } label: {
+                Label("Дублировать", systemImage: "plus.square.on.square")
+            }
+            .tint(.blue)
         }
     }
 }
