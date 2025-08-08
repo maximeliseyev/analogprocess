@@ -1,8 +1,8 @@
 import Foundation
 
 struct StagingStage: Identifiable, Hashable {
-    let id = UUID()
-    let name: String
+    var id = UUID()
+    var name: String
     let description: String
     let iconName: String
     let color: String
@@ -18,7 +18,7 @@ struct StagingStage: Identifiable, Hashable {
             color: "blue"
         ),
         StagingStage(
-            name: "Developer",
+            name: "Develop",
             description: "Проявление плёнки",
             iconName: "flask.fill",
             color: "orange"
@@ -28,6 +28,12 @@ struct StagingStage: Identifiable, Hashable {
             description: "Остановка проявления",
             iconName: "stop.fill",
             color: "red"
+        ),
+        StagingStage(
+            name: "Bleach",
+            description: "Отбелка",
+            iconName: "flask",
+            color: "yellow"
         ),
         StagingStage(
             name: "Fixer",
@@ -42,7 +48,7 @@ struct StagingStage: Identifiable, Hashable {
             color: "cyan"
         ),
         StagingStage(
-            name: "Stabilizer",
+            name: "Stabilize",
             description: "Стабилизация для долгосрочного хранения",
             iconName: "leaf.fill",
             color: "green"
