@@ -19,7 +19,19 @@ class StagingViewModel: ObservableObject {
     }
     
     func addStage(_ stage: StagingStage) {
-        selectedStages.append(stage)
+        // Создаем копию стадии с уникальным ID
+        var newStage = stage
+        newStage.id = UUID()
+        
+        // Проверяем, сколько раз эта стадия уже была добавлена
+        let stageCount = selectedStages.filter { $0.name == stage.name }.count
+        
+        // Если стадия уже была добавлена, добавляем номер к названию
+        if stageCount > 0 {
+            newStage.name = "\(stage.name) \(stageCount + 1)"
+        }
+        
+        selectedStages.append(newStage)
     }
     
     func removeStage(at index: Int) {
@@ -27,19 +39,9 @@ class StagingViewModel: ObservableObject {
         selectedStages.remove(at: index)
     }
     
-    func moveStage(from fromIndex: Int, to toIndex: Int) {
-        guard fromIndex >= 0 && fromIndex < selectedStages.count,
-              toIndex >= 0 && toIndex < selectedStages.count else { return }
-        
-        let stage = selectedStages.remove(at: fromIndex)
-        selectedStages.insert(stage, at: toIndex)
-    }
-    
     func getAvailableStages() -> [StagingStage] {
-        // Возвращаем все стадии, которые еще не выбраны
-        return allStages.filter { stage in
-            !selectedStages.contains { $0.id == stage.id }
-        }
+        // Возвращаем все стадии - они больше не исчезают из списка
+        return allStages
     }
     
     func updateStageDuration(_ stage: StagingStage, duration: TimeInterval) {

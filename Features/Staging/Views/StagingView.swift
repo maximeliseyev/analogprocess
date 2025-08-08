@@ -3,16 +3,12 @@ import SwiftUI
 struct StagingView: View {
     @StateObject private var viewModel = StagingViewModel()
     @State private var showingStagePicker = false
+    @State private var draggedStage: StagingStage?
     
     var body: some View {
         NavigationView {
             VStack(spacing: 16) {
-                // Заголовок
                 VStack(spacing: 8) {
-                    Text("Стадии обработки")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                    
                     Text("Добавьте стадии обработки плёнки в нужном порядке")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
@@ -28,15 +24,20 @@ struct StagingView: View {
                             StageRowView(
                                 stage: stage,
                                 onDelete: {
-                                    viewModel.removeStage(at: index)
-                                },
-                                onMoveUp: index > 0 ? {
-                                    viewModel.moveStage(from: index, to: index - 1)
-                                } : nil,
-                                onMoveDown: index < viewModel.selectedStages.count - 1 ? {
-                                    viewModel.moveStage(from: index, to: index + 1)
-                                } : nil
+                                    withAnimation(.easeInOut(duration: 0.3)) {
+                                        viewModel.removeStage(at: index)
+                                    }
+                                }
                             )
+                            .onDrag {
+                                self.draggedStage = stage
+                                return NSItemProvider(object: stage.id.uuidString as NSString)
+                            }
+                            .onDrop(of: [.text], delegate: DropViewDelegate(
+                                draggedStage: $draggedStage,
+                                stages: $viewModel.selectedStages,
+                                currentIndex: index
+                            ))
                         }
                         
                         // Блок добавления новой стадии
@@ -84,9 +85,12 @@ struct StagingView: View {
             StagePickerView(
                 availableStages: viewModel.getAvailableStages(),
                 onSelectStage: { stage in
-                    viewModel.addStage(stage)
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        viewModel.addStage(stage)
+                    }
                     showingStagePicker = false
-                }
+                },
+                viewModel: viewModel
             )
         }
     }
@@ -101,8 +105,6 @@ struct StagingView: View {
 struct StageRowView: View {
     let stage: StagingStage
     let onDelete: () -> Void
-    let onMoveUp: (() -> Void)?
-    let onMoveDown: (() -> Void)?
     
     var body: some View {
         HStack(spacing: 12) {
@@ -126,34 +128,21 @@ struct StageRowView: View {
             
             Spacer()
             
-            // Кнопки управления
-            HStack(spacing: 8) {
-                if let onMoveUp = onMoveUp {
-                    Button(action: onMoveUp) {
-                        Image(systemName: "chevron.up")
-                            .font(.caption)
-                            .foregroundColor(.blue)
-                    }
-                }
-                
-                if let onMoveDown = onMoveDown {
-                    Button(action: onMoveDown) {
-                        Image(systemName: "chevron.down")
-                            .font(.caption)
-                            .foregroundColor(.blue)
-                    }
-                }
-                
-                Button(action: onDelete) {
-                    Image(systemName: "trash")
-                        .font(.caption)
-                        .foregroundColor(.red)
-                }
-            }
+            // Индикатор drag
+            Image(systemName: "line.3.horizontal")
+                .font(.caption)
+                .foregroundColor(.secondary)
         }
         .padding()
         .background(Color(.secondarySystemBackground))
         .cornerRadius(12)
+        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+            Button(role: .destructive) {
+                onDelete()
+            } label: {
+                Label("Удалить", systemImage: "trash")
+            }
+        }
     }
 }
 
@@ -163,25 +152,29 @@ struct AddStageButton: View {
     var body: some View {
         Button(action: onTap) {
             HStack(spacing: 12) {
-                Image(systemName: "plus.circle")
-                    .font(.title2)
-                    .foregroundColor(.blue)
+                Rectangle()
+                    .fill(Color.clear)
                     .frame(width: 32, height: 32)
                 
-                Text("Добавить стадию")
-                    .font(.headline)
-                    .fontWeight(.medium)
-                    .foregroundColor(.blue)
+                HStack {
+                    Spacer()
+                    Image(systemName: "plus")
+                        .font(.title2)
+                        .foregroundColor(.blue)
+                    Spacer()
+                }
                 
-                Spacer()
+                Rectangle()
+                    .fill(Color.clear)
+                    .frame(width: 32, height: 32)
             }
             .padding()
-            .background(
+            .background(Color(.secondarySystemBackground))
+            .cornerRadius(12)
+            .overlay(
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(Color.blue, style: StrokeStyle(lineWidth: 2, dash: [5]))
-                    .background(Color(.secondarySystemBackground))
             )
-            .cornerRadius(12)
         }
     }
 }
@@ -190,6 +183,7 @@ struct StagePickerView: View {
     let availableStages: [StagingStage]
     let onSelectStage: (StagingStage) -> Void
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject var viewModel: StagingViewModel
     
     var body: some View {
         NavigationView {
@@ -204,22 +198,26 @@ struct StagePickerView: View {
                             .frame(width: 32, height: 32)
                         
                         VStack(alignment: .leading, spacing: 4) {
-                            Text(stage.name)
-                                .font(.headline)
-                                .fontWeight(.medium)
-                                .foregroundColor(.primary)
+                            HStack {
+                                Text(stage.name)
+                                    .font(.headline)
+                                    .fontWeight(.medium)
+                                    .foregroundColor(.primary)
+                                
+                                // Показываем количество уже добавленных стадий этого типа
+                                let count = viewModel.selectedStages.filter { $0.name.hasPrefix(stage.name) }.count
+                                if count > 0 {
+                                    Text("(\(count))")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                            }
                             
                             Text(stage.description)
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                                 .lineLimit(2)
                         }
-                        
-                        Spacer()
-                        
-                        Image(systemName: "plus")
-                            .font(.caption)
-                            .foregroundColor(.blue)
                     }
                     .padding(.vertical, 4)
                 }
@@ -234,6 +232,38 @@ struct StagePickerView: View {
                 }
             }
         }
+    }
+}
+
+struct DropViewDelegate: DropDelegate {
+    @Binding var draggedStage: StagingStage?
+    @Binding var stages: [StagingStage]
+    let currentIndex: Int
+    
+    func performDrop(info: DropInfo) -> Bool {
+        guard let draggedStage = draggedStage,
+              let draggedIndex = stages.firstIndex(where: { $0.id == draggedStage.id }) else {
+            return false
+        }
+        
+        if draggedIndex != currentIndex {
+            withAnimation(.easeInOut(duration: 0.3)) {
+                let stage = stages.remove(at: draggedIndex)
+                let newIndex = draggedIndex < currentIndex ? currentIndex - 1 : currentIndex
+                stages.insert(stage, at: newIndex)
+            }
+        }
+        
+        self.draggedStage = nil
+        return true
+    }
+    
+    func dropEntered(info: DropInfo) {
+        // Можно добавить визуальную обратную связь при перетаскивании
+    }
+    
+    func dropExited(info: DropInfo) {
+        // Можно добавить визуальную обратную связь при перетаскивании
     }
 }
 
