@@ -379,9 +379,9 @@
 		BFA0C7992E2133FC00132936 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BF4109082E3104FC00BE2AD8 /* Components */,
 				BFA0C7A72E2134B300132936 /* CalculationResultView.swift */,
 				BF4109392E31308500BE2AD8 /* CalculatorView.swift */,
-				BF4109082E3104FC00BE2AD8 /* Components */,
 			);
 			path = Views;
 			sourceTree = "<group>";

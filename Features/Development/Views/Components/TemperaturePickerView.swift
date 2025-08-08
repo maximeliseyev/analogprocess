@@ -12,7 +12,7 @@ struct TemperaturePickerView: View {
     let onDismiss: () -> Void
 
     
-    private let temperatures = Array(stride(from: 15.0, through: 30.0, by: 0.5))
+    private let temperatures = Array(stride(from: 13.0, through: 25.0, by: 0.5))
     
     var body: some View {
         NavigationStack {
