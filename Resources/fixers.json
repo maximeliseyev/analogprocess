@@ -1,0 +1,26 @@
+{
+  "ilford_rapid_fixer": {
+    "name": "Ilford Rapid Fixer",
+    "type": "rapid",
+    "time": 300,
+    "warning": null
+  },
+  "ilford_acid_fixer": {
+    "name": "Ilford Acid Fixer",
+    "type": "acid",
+    "time": 600,
+    "warning": null
+  },
+  "ilford_neutral_fixer": {
+    "name": "Ilford Neutral Fixer",
+    "type": "neutral",
+    "time": 600,
+    "warning": "Обязательно используйте стоп-ванну перед фиксажем"
+  },
+  "kodak_rapid_fixer": {
+    "name": "Kodak Rapid Fixer",
+    "type": "rapid",
+    "time": 300,
+    "warning": null
+  }
+}

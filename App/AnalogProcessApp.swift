@@ -7,10 +7,12 @@
 
 import SwiftUI
 import CoreData
+import SwiftData
 
 @main
 struct AnalogProcessApp: App {
     let persistenceController = PersistenceController.shared
+    let swiftDataPersistence = SwiftDataPersistence.shared
     @State private var colorScheme: ColorScheme? = nil
     @StateObject private var themeManager = ThemeManager.shared
 
@@ -18,6 +20,7 @@ struct AnalogProcessApp: App {
         WindowGroup {
             ContentView(colorScheme: $colorScheme)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .modelContainer(swiftDataPersistence.modelContainer)
                 .environment(\.theme, NonIsolatedThemeManager())
                 .preferredColorScheme(colorScheme)
                 .onAppear {
