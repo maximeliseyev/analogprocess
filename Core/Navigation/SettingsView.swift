@@ -80,6 +80,22 @@ public struct SettingsView: View {
                         .foregroundColor(.secondary)
                 }
             }
+            
+            Section(header: Text("SwiftData Migration")) {
+                NavigationLink("SwiftData Integration Test") {
+                    SwiftDataIntegrationTestView()
+                }
+                
+                Toggle("Use SwiftData Development View", isOn: .constant(false))
+                    .onChange(of: false) { oldValue, newValue in
+                        // TODO: Добавить переключение между версиями
+                        print("SwiftData Development View toggle: \(newValue)")
+                    }
+                
+                // NavigationLink("SwiftData UI Components Test") {
+                //     SwiftDataUIComponentsTestView()
+                // }
+            }
         }
         .navigationTitle(LocalizedStringKey("settings"))
         .onAppear {

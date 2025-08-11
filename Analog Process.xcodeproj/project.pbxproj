@@ -78,6 +78,19 @@
 		BFFA1C562E4A19F7005C24F4 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C552E4A19F7005C24F4 /* NetworkSession.swift */; };
 		BFFA1C5D2E4A415E005C24F4 /* FixerPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C5B2E4A415E005C24F4 /* FixerPickerView.swift */; };
 		BFFA1C5E2E4A415E005C24F4 /* FixerSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C5C2E4A415E005C24F4 /* FixerSelectionView.swift */; };
+		BFFA1C602E4A6236005C24F4 /* SwiftDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C5F2E4A6236005C24F4 /* SwiftDataModels.swift */; };
+		BFFA1C642E4A67A9005C24F4 /* SwiftDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C632E4A67A9005C24F4 /* SwiftDataService.swift */; };
+		BFFA1C662E4A67CC005C24F4 /* SwiftDataDevelopmentParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C652E4A67CC005C24F4 /* SwiftDataDevelopmentParameters.swift */; };
+		BFFA1C682E4A69E3005C24F4 /* SwiftDataPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C672E4A69E3005C24F4 /* SwiftDataPersistence.swift */; };
+		BFFA1C722E4A6E23005C24F4 /* SwiftDataCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C712E4A6E23005C24F4 /* SwiftDataCalculatorViewModel.swift */; };
+		BFFA1C742E4A6E3E005C24F4 /* SwiftDataJournalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C732E4A6E3E005C24F4 /* SwiftDataJournalViewModel.swift */; };
+		BFFA1C762E4A6FE6005C24F4 /* SwiftDataFilmPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C752E4A6FE6005C24F4 /* SwiftDataFilmPickerView.swift */; };
+		BFFA1C782E4A7000005C24F4 /* SwiftDataDeveloperPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C772E4A7000005C24F4 /* SwiftDataDeveloperPickerView.swift */; };
+		BFFA1C7A2E4A7047005C24F4 /* SwiftDataFixerPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C792E4A7047005C24F4 /* SwiftDataFixerPickerView.swift */; };
+		BFFA1C822E4A73EF005C24F4 /* CloudKitTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C7D2E4A73EF005C24F4 /* CloudKitTestView.swift */; };
+		BFFA1C832E4A73EF005C24F4 /* SwiftDataTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C7F2E4A73EF005C24F4 /* SwiftDataTestView.swift */; };
+		BFFA1C842E4A73EF005C24F4 /* SwiftDataUIComponentsTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C802E4A73EF005C24F4 /* SwiftDataUIComponentsTestView.swift */; };
+		BFFA1C852E4A73EF005C24F4 /* SwiftDataIntegrationTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C7E2E4A73EF005C24F4 /* SwiftDataIntegrationTestView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -156,6 +169,19 @@
 		BFFA1C552E4A19F7005C24F4 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
 		BFFA1C5B2E4A415E005C24F4 /* FixerPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerPickerView.swift; sourceTree = "<group>"; };
 		BFFA1C5C2E4A415E005C24F4 /* FixerSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerSelectionView.swift; sourceTree = "<group>"; };
+		BFFA1C5F2E4A6236005C24F4 /* SwiftDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataModels.swift; sourceTree = "<group>"; };
+		BFFA1C632E4A67A9005C24F4 /* SwiftDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataService.swift; sourceTree = "<group>"; };
+		BFFA1C652E4A67CC005C24F4 /* SwiftDataDevelopmentParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataDevelopmentParameters.swift; sourceTree = "<group>"; };
+		BFFA1C672E4A69E3005C24F4 /* SwiftDataPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataPersistence.swift; sourceTree = "<group>"; };
+		BFFA1C712E4A6E23005C24F4 /* SwiftDataCalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataCalculatorViewModel.swift; sourceTree = "<group>"; };
+		BFFA1C732E4A6E3E005C24F4 /* SwiftDataJournalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataJournalViewModel.swift; sourceTree = "<group>"; };
+		BFFA1C752E4A6FE6005C24F4 /* SwiftDataFilmPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataFilmPickerView.swift; sourceTree = "<group>"; };
+		BFFA1C772E4A7000005C24F4 /* SwiftDataDeveloperPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataDeveloperPickerView.swift; sourceTree = "<group>"; };
+		BFFA1C792E4A7047005C24F4 /* SwiftDataFixerPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataFixerPickerView.swift; sourceTree = "<group>"; };
+		BFFA1C7D2E4A73EF005C24F4 /* CloudKitTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitTestView.swift; sourceTree = "<group>"; };
+		BFFA1C7E2E4A73EF005C24F4 /* SwiftDataIntegrationTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataIntegrationTestView.swift; sourceTree = "<group>"; };
+		BFFA1C7F2E4A73EF005C24F4 /* SwiftDataTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataTestView.swift; sourceTree = "<group>"; };
+		BFFA1C802E4A73EF005C24F4 /* SwiftDataUIComponentsTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataUIComponentsTestView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +219,7 @@
 		BF41092C2E3114BA00BE2AD8 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				BFFA1C712E4A6E23005C24F4 /* SwiftDataCalculatorViewModel.swift */,
 				BF41093B2E3130B000BE2AD8 /* CalculatorViewModel.swift */,
 			);
 			path = ViewModels;
@@ -311,6 +338,7 @@
 		BF41094B2E3134F700BE2AD8 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				BFFA1C732E4A6E3E005C24F4 /* SwiftDataJournalViewModel.swift */,
 				BF553C6B2E43297C009F1525 /* CreateRecordViewModel.swift */,
 				BF41093D2E31318D00BE2AD8 /* JournalViewModel.swift */,
 			);
@@ -339,6 +367,7 @@
 		BF41094E2E31355F00BE2AD8 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				BFFA1C672E4A69E3005C24F4 /* SwiftDataPersistence.swift */,
 				BFA0C7982E2133FC00132936 /* Persistence.swift */,
 			);
 			path = Persistence;
@@ -366,6 +395,9 @@
 				BF4109612E31641600BE2AD8 /* DilutionPickerView.swift */,
 				BF4109632E31641B00BE2AD8 /* TemperaturePickerView.swift */,
 				BF4109652E31643100BE2AD8 /* ISOPickerView.swift */,
+				BFFA1C792E4A7047005C24F4 /* SwiftDataFixerPickerView.swift */,
+				BFFA1C772E4A7000005C24F4 /* SwiftDataDeveloperPickerView.swift */,
+				BFFA1C752E4A6FE6005C24F4 /* SwiftDataFilmPickerView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -440,6 +472,7 @@
 				BF4109342E311CA800BE2AD8 /* CoreDataService.swift */,
 				BFA0C7A62E21349100132936 /* DevelopmentCalculator.swift */,
 				BFFA1C552E4A19F7005C24F4 /* NetworkSession.swift */,
+				BFFA1C632E4A67A9005C24F4 /* SwiftDataService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -447,10 +480,12 @@
 		BFA0C7A32E21341F00132936 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BFFA1C5F2E4A6236005C24F4 /* SwiftDataModels.swift */,
 				BFFA1C512E4A19D4005C24F4 /* CodableModels.swift */,
 				BFFA1C522E4A19D4005C24F4 /* Constants.swift */,
 				BF8A5A002E44BA0E00D689C5 /* StagingStage.swift */,
 				BF4109252E31148700BE2AD8 /* DevelopmentParameters.swift */,
+				BFFA1C652E4A67CC005C24F4 /* SwiftDataDevelopmentParameters.swift */,
 				BFB0C3F92E3E58D900296B97 /* JournalRecord.swift */,
 			);
 			path = Models;
@@ -483,6 +518,7 @@
 				BF41094F2E3135B700BE2AD8 /* Shared */,
 				BFA0C7B02E2136A500132936 /* Resources */,
 				BFE96A3A2E2061A0001CF98D /* Products */,
+				BFFA1C812E4A73EF005C24F4 /* Tests */,
 				BFB0C3F32E3E511300296B97 /* AnalogProcess-Info.plist */,
 				BFB0C3F42E3E511300296B97 /* LICENSE */,
 				BFB0C3F52E3E511300296B97 /* README.md */,
@@ -495,6 +531,17 @@
 				BFE96A392E2061A0001CF98D /* Analog Process.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		BFFA1C812E4A73EF005C24F4 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				BFFA1C7D2E4A73EF005C24F4 /* CloudKitTestView.swift */,
+				BFFA1C7E2E4A73EF005C24F4 /* SwiftDataIntegrationTestView.swift */,
+				BFFA1C7F2E4A73EF005C24F4 /* SwiftDataTestView.swift */,
+				BFFA1C802E4A73EF005C24F4 /* SwiftDataUIComponentsTestView.swift */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -581,16 +628,24 @@
 				BFE12EC32E363AC00044A3A4 /* CalculatedTimeSection.swift in Sources */,
 				BF8A59F42E43814200D689C5 /* NavigationButton.swift in Sources */,
 				BF553C6C2E43297C009F1525 /* CreateRecordViewModel.swift in Sources */,
+				BFFA1C722E4A6E23005C24F4 /* SwiftDataCalculatorViewModel.swift in Sources */,
 				BF41093A2E31308500BE2AD8 /* CalculatorView.swift in Sources */,
 				BFA0C7A82E2134B400132936 /* CalculationResultView.swift in Sources */,
+				BFFA1C822E4A73EF005C24F4 /* CloudKitTestView.swift in Sources */,
+				BFFA1C832E4A73EF005C24F4 /* SwiftDataTestView.swift in Sources */,
+				BFFA1C842E4A73EF005C24F4 /* SwiftDataUIComponentsTestView.swift in Sources */,
+				BFFA1C852E4A73EF005C24F4 /* SwiftDataIntegrationTestView.swift in Sources */,
 				BF8A59EF2E43809C00D689C5 /* MainTabView.swift in Sources */,
 				BF8A59FF2E4494A600D689C5 /* AutocompleteView.swift in Sources */,
+				BFFA1C682E4A69E3005C24F4 /* SwiftDataPersistence.swift in Sources */,
 				BF8A59F02E43809C00D689C5 /* HomeView.swift in Sources */,
+				BFFA1C782E4A7000005C24F4 /* SwiftDataDeveloperPickerView.swift in Sources */,
 				BFE12EBF2E34EB960044A3A4 /* TimerTabView.swift in Sources */,
 				BF4109102E31052900BE2AD8 /* CalculationFormView.swift in Sources */,
 				BF4109112E31052900BE2AD8 /* RatioInputView.swift in Sources */,
 				BF4109122E31052900BE2AD8 /* TimeInputView.swift in Sources */,
 				BF4109132E31052900BE2AD8 /* ProcessTypeView.swift in Sources */,
+				BFFA1C642E4A67A9005C24F4 /* SwiftDataService.swift in Sources */,
 				BFDD23652E3F7EE30079688B /* RecordDetailView.swift in Sources */,
 				BFB0C3FE2E3E5AB400296B97 /* CreateRecordView.swift in Sources */,
 				BF553C682E424125009F1525 /* AgitationModeBuilder.swift in Sources */,
@@ -604,6 +659,7 @@
 				BFFA1C532E4A19D4005C24F4 /* CodableModels.swift in Sources */,
 				BFFA1C542E4A19D4005C24F4 /* Constants.swift in Sources */,
 				BF4109732E3166F400BE2AD8 /* TimerProgressView.swift in Sources */,
+				BFFA1C762E4A6FE6005C24F4 /* SwiftDataFilmPickerView.swift in Sources */,
 				BFB0C3FC2E3E58D900296B97 /* JournalRecord.swift in Sources */,
 				BF4109162E31052900BE2AD8 /* ActionButtonsView.swift in Sources */,
 				BF8A5A072E44BA8200D689C5 /* StagingView.swift in Sources */,
@@ -611,9 +667,11 @@
 				BFF4DA032E21C31E0097BE82 /* AgitationSelectionView.swift in Sources */,
 				BF553C6A2E43268D009F1525 /* BasePickerView.swift in Sources */,
 				BFF4D9FF2E21BECD0097BE82 /* TimerView.swift in Sources */,
+				BFFA1C662E4A67CC005C24F4 /* SwiftDataDevelopmentParameters.swift in Sources */,
 				BF4109352E311CA800BE2AD8 /* CoreDataService.swift in Sources */,
 				BFE31C0C2E3A016300310B19 /* ViewStyles.swift in Sources */,
 				BFF4DA012E21C2C90097BE82 /* AgitationMode.swift in Sources */,
+				BFFA1C602E4A6236005C24F4 /* SwiftDataModels.swift in Sources */,
 				BF553C622E420639009F1525 /* KeyboardAwareView.swift in Sources */,
 				BF41095B2E3163E400BE2AD8 /* FilmPickerView.swift in Sources */,
 				BF41095C2E3163E400BE2AD8 /* DevelopmentParametersView.swift in Sources */,
@@ -622,6 +680,7 @@
 				BF41093C2E3130B000BE2AD8 /* CalculatorViewModel.swift in Sources */,
 				BFF4DA052E21C8C30097BE82 /* CustomAgitationView.swift in Sources */,
 				BF41096A2E31653800BE2AD8 /* DevelopmentSetupViewModel.swift in Sources */,
+				BFFA1C7A2E4A7047005C24F4 /* SwiftDataFixerPickerView.swift in Sources */,
 				BFA0C7AD2E2134F800132936 /* JournalView.swift in Sources */,
 				BF41093F2E31318D00BE2AD8 /* JournalViewModel.swift in Sources */,
 				BF28FA592E41F64600C2E34E /* CloudKitService.swift in Sources */,
@@ -632,6 +691,7 @@
 				BF113D372E3FA8A5008B5578 /* ManualTimeInputView.swift in Sources */,
 				BF8A59F22E4380E600D689C5 /* NavigationConstants.swift in Sources */,
 				BF4109642E31641B00BE2AD8 /* TemperaturePickerView.swift in Sources */,
+				BFFA1C742E4A6E3E005C24F4 /* SwiftDataJournalViewModel.swift in Sources */,
 				BFA0C7A92E2134BA00132936 /* DevelopmentCalculator.swift in Sources */,
 				BFDCB7612E382558000F6CE5 /* AnalogProcess.xcdatamodeld in Sources */,
 				BFFA1C5D2E4A415E005C24F4 /* FixerPickerView.swift in Sources */,

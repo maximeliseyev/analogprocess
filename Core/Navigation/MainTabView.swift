@@ -13,6 +13,7 @@ public struct MainTabView: View {
     @State private var showingCreateRecord = false
     @State private var syncStatus: CloudKitService.SyncStatus = .idle
     @State private var isCloudAvailable = false
+    @State private var useSwiftDataDevelopmentView = false
 
     
     public var body: some View {
