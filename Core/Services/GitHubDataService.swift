@@ -1,40 +1,60 @@
 //
 //  GitHubDataService.swift
-//  Film Lab
+//  AnalogProcess
 //
 //  Created by Maxim Eliseyev on 12.07.2025.
 //
 
 import Foundation
-import Combine
 
+// MARK: - GitHub Data Service Errors
+public enum GitHubDataServiceError: LocalizedError {
+    case invalidURL
+    case networkError(NetworkError)
+    case decodingError
+    case noData
+    
+    public var errorDescription: String? {
+        switch self {
+        case .invalidURL:
+            return "Invalid URL for data download"
+        case .networkError(let error):
+            return error.errorDescription
+        case .decodingError:
+            return "Failed to decode data from server"
+        case .noData:
+            return "No data received from server"
+        }
+    }
+}
+
+// MARK: - GitHub Data Service
+@MainActor
 public class GitHubDataService: ObservableObject {
     public static let shared = GitHubDataService()
     
-    private let baseURL = "https://raw.githubusercontent.com/maximeliseyev/filmdevelopmentdata/main"
-    private let session = URLSession.shared
+    private let networkSession: NetworkSession
+    private let jsonDecoder: JSONDecoder
     
     @Published var isDownloading = false
-    @Published var downloadProgress: Double = 0.0
+    @Published var downloadProgress: Double = Constants.Progress.initialProgress
     @Published var lastSyncDate: Date?
     
-    private init() {
+    public init(networkSession: NetworkSession = URLSession.shared) {
+        self.networkSession = networkSession
+        self.jsonDecoder = JSONDecoder()
         loadLastSyncDate()
     }
     
     // MARK: - Data Download
     
-    func downloadAllData() async throws -> GitHubData {
-        await MainActor.run {
-            isDownloading = true
-            downloadProgress = 0.0
-        }
+    public func downloadAllData() async throws -> GitHubDataResponse {
+        isDownloading = true
+        downloadProgress = Constants.Progress.initialProgress
         
         defer {
-            Task { @MainActor in
-                isDownloading = false
-                downloadProgress = 0.0
-            }
+            isDownloading = false
+            downloadProgress = Constants.Progress.initialProgress
         }
         
         async let filmsData = downloadFilms()
@@ -44,13 +64,11 @@ public class GitHubDataService: ObservableObject {
         
         let (films, developers, developmentTimes, temperatureMultipliers) = try await (filmsData, developersData, developmentTimesData, temperatureMultipliersData)
         
-        await MainActor.run {
-            downloadProgress = 1.0
-            lastSyncDate = Date()
-            saveLastSyncDate()
-        }
+        downloadProgress = Constants.Progress.maxProgress
+        lastSyncDate = Date()
+        saveLastSyncDate()
         
-        return GitHubData(
+        return GitHubDataResponse(
             films: films,
             developers: developers,
             developmentTimes: developmentTimes,
@@ -58,96 +76,99 @@ public class GitHubDataService: ObservableObject {
         )
     }
     
-    private func downloadFilms() async throws -> [String: [String: Any]] {
-        let url = URL(string: "\(baseURL)/films.json")!
-        let (data, response) = try await session.data(from: url)
+    private func downloadFilms() async throws -> [String: FilmData] {
+        let url = URL(string: Constants.Network.baseURL + Constants.Network.filmsEndpoint)!
+        let (data, response) = try await networkSession.data(from: url)
         
-        guard let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200 else {
-            throw URLError(.badServerResponse)
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw GitHubDataServiceError.networkError(.invalidResponse)
         }
         
-        let json = try JSONSerialization.jsonObject(with: data) as? [String: [String: Any]] ?? [:]
-        
-        await MainActor.run {
-            downloadProgress += 0.25
+        guard httpResponse.statusCode == 200 else {
+            throw GitHubDataServiceError.networkError(.serverError(httpResponse.statusCode))
         }
         
-        return json
+        do {
+            let films = try jsonDecoder.decode([String: FilmData].self, from: data)
+            downloadProgress += Constants.Progress.downloadStepIncrement
+            return films
+        } catch {
+            throw GitHubDataServiceError.decodingError
+        }
     }
     
-    private func downloadDevelopers() async throws -> [String: [String: Any]] {
-        let url = URL(string: "\(baseURL)/developers.json")!
-        let (data, response) = try await session.data(from: url)
+    private func downloadDevelopers() async throws -> [String: DeveloperData] {
+        let url = URL(string: Constants.Network.baseURL + Constants.Network.developersEndpoint)!
+        let (data, response) = try await networkSession.data(from: url)
         
-        guard let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200 else {
-            throw URLError(.badServerResponse)
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw GitHubDataServiceError.networkError(.invalidResponse)
         }
         
-        let json = try JSONSerialization.jsonObject(with: data) as? [String: [String: Any]] ?? [:]
-        
-        await MainActor.run {
-            downloadProgress += 0.25
+        guard httpResponse.statusCode == 200 else {
+            throw GitHubDataServiceError.networkError(.serverError(httpResponse.statusCode))
         }
         
-        return json
+        do {
+            let developers = try jsonDecoder.decode([String: DeveloperData].self, from: data)
+            downloadProgress += Constants.Progress.downloadStepIncrement
+            return developers
+        } catch {
+            throw GitHubDataServiceError.decodingError
+        }
     }
     
     private func downloadDevelopmentTimes() async throws -> [String: [String: [String: [String: Int]]]] {
-        let url = URL(string: "\(baseURL)/development-times.json")!
-        let (data, response) = try await session.data(from: url)
+        let url = URL(string: Constants.Network.baseURL + Constants.Network.developmentTimesEndpoint)!
+        let (data, response) = try await networkSession.data(from: url)
         
-        guard let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200 else {
-            throw URLError(.badServerResponse)
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw GitHubDataServiceError.networkError(.invalidResponse)
         }
         
-        let json = try JSONSerialization.jsonObject(with: data) as? [String: [String: [String: [String: Int]]]] ?? [:]
-        
-        await MainActor.run {
-            downloadProgress += 0.25
+        guard httpResponse.statusCode == 200 else {
+            throw GitHubDataServiceError.networkError(.serverError(httpResponse.statusCode))
         }
         
-        return json
+        do {
+            let developmentTimes = try jsonDecoder.decode([String: [String: [String: [String: Int]]]].self, from: data)
+            downloadProgress += Constants.Progress.downloadStepIncrement
+            return developmentTimes
+        } catch {
+            throw GitHubDataServiceError.decodingError
+        }
     }
     
     private func downloadTemperatureMultipliers() async throws -> [String: Double] {
-        let url = URL(string: "\(baseURL)/temperature-multipliers.json")!
-        let (data, response) = try await session.data(from: url)
+        let url = URL(string: Constants.Network.baseURL + Constants.Network.temperatureMultipliersEndpoint)!
+        let (data, response) = try await networkSession.data(from: url)
         
-        guard let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200 else {
-            throw URLError(.badServerResponse)
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw GitHubDataServiceError.networkError(.invalidResponse)
         }
         
-        let json = try JSONSerialization.jsonObject(with: data) as? [String: Double] ?? [:]
-        
-        await MainActor.run {
-            downloadProgress += 0.25
+        guard httpResponse.statusCode == 200 else {
+            throw GitHubDataServiceError.networkError(.serverError(httpResponse.statusCode))
         }
         
-        return json
+        do {
+            let temperatureMultipliers = try jsonDecoder.decode([String: Double].self, from: data)
+            downloadProgress += Constants.Progress.downloadStepIncrement
+            return temperatureMultipliers
+        } catch {
+            throw GitHubDataServiceError.decodingError
+        }
     }
     
     // MARK: - Sync Date Management
     
     private func loadLastSyncDate() {
-        if let date = UserDefaults.standard.object(forKey: "lastSyncDate") as? Date {
+        if let date = UserDefaults.standard.object(forKey: Constants.UserDefaultsKeys.lastSyncDate) as? Date {
             lastSyncDate = date
         }
     }
     
     private func saveLastSyncDate() {
-        UserDefaults.standard.set(lastSyncDate, forKey: "lastSyncDate")
+        UserDefaults.standard.set(lastSyncDate, forKey: Constants.UserDefaultsKeys.lastSyncDate)
     }
-}
-
-// MARK: - Data Models
-
-public struct GitHubData {
-    let films: [String: [String: Any]]
-    let developers: [String: [String: Any]]
-    let developmentTimes: [String: [String: [String: [String: Int]]]]
-    let temperatureMultipliers: [String: Double]
 } 

@@ -364,38 +364,24 @@ public class CoreDataService: ObservableObject {
             // Добавляем новые фильмы
             for (id, filmData) in githubData.films {
                 if getFilm(by: id) == nil {
-                    guard let name = filmData["name"] as? String,
-                          let manufacturer = filmData["manufacturer"] as? String,
-                          let type = filmData["type"] as? String,
-                          let defaultISO = filmData["defaultISO"] as? Int else {
-                        continue
-                    }
-                    
                     let film = Film(context: container.viewContext)
                     film.id = id
-                    film.name = name
-                    film.manufacturer = manufacturer
-                    film.type = type
-                    film.defaultISO = Int32(defaultISO)
+                    film.name = filmData.name
+                    film.manufacturer = filmData.brand
+                    film.type = filmData.type
+                    film.defaultISO = Int32(filmData.iso)
                 }
             }
             
             // Добавляем новых проявителей
             for (id, developerData) in githubData.developers {
                 if getDeveloper(by: id) == nil {
-                    guard let name = developerData["name"] as? String,
-                          let manufacturer = developerData["manufacturer"] as? String,
-                          let type = developerData["type"] as? String,
-                          let defaultDilution = developerData["defaultDilution"] as? String else {
-                        continue
-                    }
-                    
                     let developer = Developer(context: container.viewContext)
                     developer.id = id
-                    developer.name = name
-                    developer.manufacturer = manufacturer
-                    developer.type = type
-                    developer.defaultDilution = defaultDilution
+                    developer.name = developerData.name
+                    developer.manufacturer = developerData.brand
+                    developer.type = developerData.type
+                    developer.defaultDilution = developerData.dilution ?? ""
                 }
             }
             

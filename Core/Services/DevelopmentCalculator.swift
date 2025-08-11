@@ -1,38 +1,50 @@
 //
 //  DevelopmentCalculator.swift
-//  Film Lab
+//  AnalogProcess
 //
 //  Created by Maxim Eliseyev on 11.07.2025.
 //
 
-import SwiftUI
+import Foundation
 
-class DevelopmentCalculator {
-    /// Округляет время до ближайшей 1/4 минуты (15 секунд)
-    private func roundToQuarterMinute(_ totalSeconds: Int) -> (minutes: Int, seconds: Int) {
-        let quarterMinuteSeconds = 15
-        let roundedSeconds = Int(round(Double(totalSeconds) / Double(quarterMinuteSeconds))) * quarterMinuteSeconds
-        
-        let minutes = roundedSeconds / 60
-        let seconds = roundedSeconds % 60
-        
-        return (minutes: minutes, seconds: seconds)
-    }
-    
+// MARK: - Development Calculator Protocol
+public protocol DevelopmentCalculating {
     func calculateResults(
         minutes: Int,
         seconds: Int,
         coefficient: Double,
         isPushMode: Bool,
         steps: Int
-    ) -> [(label: String, minutes: Int, seconds: Int)] {
+    ) -> [ProcessStep]
+}
+
+// MARK: - Development Calculator Implementation
+public class DevelopmentCalculator: DevelopmentCalculating {
+    
+    /// Округляет время до ближайшей 1/4 минуты (15 секунд)
+    private func roundToQuarterMinute(_ totalSeconds: Int) -> (minutes: Int, seconds: Int) {
+        let roundedSeconds = Int(round(Double(totalSeconds) / Double(Constants.Time.quarterMinuteSeconds))) * Constants.Time.quarterMinuteSeconds
         
-        let baseSeconds = minutes * 60 + seconds
-        var results: [(label: String, minutes: Int, seconds: Int)] = []
+        let minutes = roundedSeconds / Constants.Time.secondsPerMinute
+        let seconds = roundedSeconds % Constants.Time.secondsPerMinute
+        
+        return (minutes: minutes, seconds: seconds)
+    }
+    
+    public func calculateResults(
+        minutes: Int,
+        seconds: Int,
+        coefficient: Double,
+        isPushMode: Bool,
+        steps: Int
+    ) -> [ProcessStep] {
+        
+        let baseSeconds = minutes * Constants.Time.secondsPerMinute + seconds
+        var results: [ProcessStep] = []
         
         // Базовое время (+0) - округляем
         let baseRounded = roundToQuarterMinute(baseSeconds)
-        results.append((
+        results.append(ProcessStep(
             label: "+0",
             minutes: baseRounded.minutes,
             seconds: baseRounded.seconds
@@ -47,8 +59,8 @@ class DevelopmentCalculator {
         return results
     }
     
-    private func calculatePushProcess(baseSeconds: Int, coefficient: Double, steps: Int) -> [(label: String, minutes: Int, seconds: Int)] {
-        var results: [(label: String, minutes: Int, seconds: Int)] = []
+    private func calculatePushProcess(baseSeconds: Int, coefficient: Double, steps: Int) -> [ProcessStep] {
+        var results: [ProcessStep] = []
         
         for i in 1...steps {
             let multiplier = pow(coefficient, Double(i))
@@ -57,7 +69,7 @@ class DevelopmentCalculator {
             // Округляем результат до 1/4 минуты
             let rounded = roundToQuarterMinute(adjustedSeconds)
             
-            results.append((
+            results.append(ProcessStep(
                 label: "push +\(i)",
                 minutes: rounded.minutes,
                 seconds: rounded.seconds
@@ -67,8 +79,8 @@ class DevelopmentCalculator {
         return results
     }
     
-    private func calculatePullProcess(baseSeconds: Int, coefficient: Double, steps: Int) -> [(label: String, minutes: Int, seconds: Int)] {
-        var results: [(label: String, minutes: Int, seconds: Int)] = []
+    private func calculatePullProcess(baseSeconds: Int, coefficient: Double, steps: Int) -> [ProcessStep] {
+        var results: [ProcessStep] = []
         
         for i in 1...steps {
             let divisor = pow(coefficient, Double(i))
@@ -77,7 +89,7 @@ class DevelopmentCalculator {
             // Округляем результат до 1/4 минуты
             let rounded = roundToQuarterMinute(adjustedSeconds)
             
-            results.append((
+            results.append(ProcessStep(
                 label: "pull -\(i)",
                 minutes: rounded.minutes,
                 seconds: rounded.seconds

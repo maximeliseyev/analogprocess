@@ -193,45 +193,31 @@ public struct MainTabView: View {
     }
     
     func title(for idx: Int) -> String {
-        switch idx {
-        case 0: return String(localized: "presets")
-        case 1: return String(localized: "calculator")
-        case 2: return "Стадии"
-        case 3: return String(localized: "timer")
-        case 4: return String(localized: "journal")
-        default: return "" }
+        guard let tabInfo = TabInfo.allTabs.first(where: { $0.index == idx }) else {
+            return ""
+        }
+        return String(localized: String.LocalizationValue(tabInfo.titleKey))
     }
     
     func subtitle(for idx: Int) -> String {
-        switch idx {
-        case 0: return String(localized: "homePresetsSubtitle")
-        case 1: return String(localized: "homeCalculatorSubtitle")
-        case 2: return "Настройка стадий обработки плёнки"
-        case 3: return String(localized: "homeTimerSubtitle")
-        case 4: return String(localized: "homeJournalSubtitle")
-        default: return "" }
+        guard let tabInfo = TabInfo.allTabs.first(where: { $0.index == idx }) else {
+            return ""
+        }
+        return String(localized: String.LocalizationValue(tabInfo.subtitleKey))
     }
     
     func iconName(for idx: Int) -> String {
-        switch idx {
-        case 0: return "slider.horizontal.3"
-        case 1: return "plus.forwardslash.minus"
-        case 2: return "list.bullet.rectangle"
-        case 3: return "timer"
-        case 4: return "book"
-        default: return "square"
+        guard let tabInfo = TabInfo.allTabs.first(where: { $0.index == idx }) else {
+            return "square"
         }
+        return tabInfo.iconName
     }
     
     func iconColor(for idx: Int) -> Color {
-        switch idx {
-        case 0: return .blue
-        case 1: return .orange
-        case 2: return .green
-        case 3: return .red
-        case 4: return .purple
-        default: return .secondary
+        guard let tabInfo = TabInfo.allTabs.first(where: { $0.index == idx }) else {
+            return .secondary
         }
+        return tabInfo.iconColor
     }
         
     func loadRecord(_ record: CalculationRecord) {

@@ -14,7 +14,7 @@ class DevelopmentSetupViewModel: ObservableObject {
     @Published var selectedDeveloper: Developer?
     @Published var selectedDilution: String = ""
     @Published var temperature: Double = 20.0
-    @Published var iso: Int32 = 400
+    @Published var iso: Int32 = Int32(Constants.ISO.defaultISO)
     @Published var calculatedTime: Int?
     
     @Published var showFilmPicker = false

@@ -9,6 +9,12 @@ public struct SettingsView: View {
     @State private var isSyncing = false
     @StateObject private var githubService = GitHubDataService.shared
     
+    private var appVersion: String {
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
+        return "\(version) (\(build))"
+    }
+    
     public init(colorScheme: Binding<ColorScheme?>) {
         self._colorScheme = colorScheme
     }
@@ -64,6 +70,15 @@ public struct SettingsView: View {
                     }
                 }
                 .disabled(isSyncing || githubService.isDownloading)
+            }
+            
+            Section(header: Text(LocalizedStringKey("settingsAbout"))) {
+                HStack {
+                    Text(LocalizedStringKey("settingsVersion"))
+                    Spacer()
+                    Text(appVersion)
+                        .foregroundColor(.secondary)
+                }
             }
         }
         .navigationTitle(LocalizedStringKey("settings"))

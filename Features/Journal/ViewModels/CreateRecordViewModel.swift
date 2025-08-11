@@ -12,7 +12,7 @@ class CreateRecordViewModel: ObservableObject {
     @Published var name: String = ""
     @Published var filmName: String = ""
     @Published var developerName: String = ""
-    @Published var iso: Int32 = 400
+    @Published var iso: Int32 = Int32(Constants.ISO.defaultISO)
     @Published var dilution: String = ""
     @Published var temperature: Double = 20.0
     @Published var process: String = ""
@@ -107,7 +107,7 @@ class CreateRecordViewModel: ObservableObject {
         name = record.name ?? ""
         filmName = record.filmName ?? ""
         developerName = record.developerName ?? ""
-        iso = record.iso ?? 100
+        iso = record.iso ?? Int32(Constants.ISO.defaultFilmISO)
         process = record.process ?? "push +1"
         dilution = record.dilution ?? ""
         temperature = record.temperature ?? 20.0
@@ -152,6 +152,6 @@ class CreateRecordViewModel: ObservableObject {
     
     func getAvailableISOs() -> [Int] {
         // Для журнала возвращаем все стандартные ISO значения
-        return [25, 32, 40, 50, 64, 80, 100, 125, 200, 250, 320, 400, 500, 640, 800, 1000, 1250, 1600, 2000, 2500, 3200, 4000, 5000, 6400, 8000, 12800]
+        return Constants.ISO.allValues
     }
 }
