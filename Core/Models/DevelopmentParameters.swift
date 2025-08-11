@@ -6,16 +6,16 @@
 //
 
 import Foundation
-import CoreData
+import SwiftData
 
 struct DevelopmentParameters {
-    let film: Film
-    let developer: Developer
+    let film: SwiftDataFilm
+    let developer: SwiftDataDeveloper
     let dilution: String
     let temperature: Double
     let iso: Int
     
-    init(film: Film, developer: Developer, dilution: String, temperature: Double, iso: Int) {
+    init(film: SwiftDataFilm, developer: SwiftDataDeveloper, dilution: String, temperature: Double, iso: Int) {
         self.film = film
         self.developer = developer
         self.dilution = dilution

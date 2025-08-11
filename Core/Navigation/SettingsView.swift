@@ -1,5 +1,5 @@
 import SwiftUI
-import CoreData
+
 
 public struct SettingsView: View {
     @Binding var colorScheme: ColorScheme?
@@ -115,7 +115,7 @@ public struct SettingsView: View {
         
         Task {
             do {
-                try await CoreDataService.shared.syncDataFromGitHub()
+                try await SwiftDataService.shared.syncDataFromGitHub()
                 await MainActor.run {
                     alertMessage = NSLocalizedString("settingsSyncSuccess", comment: "")
                     showingDataAlert = true

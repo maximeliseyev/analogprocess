@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
-import CoreData
+import SwiftData
 
 struct RecordRowView: View {
-    let record: CalculationRecord
+    let record: SwiftDataCalculationRecord
     let onTap: () -> Void
     
     private var minutes: Int {

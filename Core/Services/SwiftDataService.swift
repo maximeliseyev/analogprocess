@@ -451,6 +451,38 @@ public class SwiftDataService: ObservableObject {
         return temperatureMultipliers
     }
     
+    // MARK: - Calculation Records Management
+    func saveRecord(filmName: String, developerName: String, dilution: String, temperature: Double, iso: Int, calculatedTime: Int, notes: String = "") {
+        let record = SwiftDataCalculationRecord(
+            comment: notes,
+            date: Date(),
+            developerName: developerName,
+            dilution: dilution,
+            filmName: filmName,
+            iso: Int32(iso),
+            name: "\(filmName) + \(developerName)",
+            temperature: temperature,
+            time: Int32(calculatedTime)
+        )
+        modelContext.insert(record)
+        saveContext()
+    }
+    
+    func getCalculationRecords() -> [SwiftDataCalculationRecord] {
+        do {
+            let descriptor = FetchDescriptor<SwiftDataCalculationRecord>(sortBy: [SortDescriptor(\.date, order: .reverse)])
+            return try modelContext.fetch(descriptor)
+        } catch {
+            print("Error fetching calculation records: \(error)")
+            return []
+        }
+    }
+    
+    func deleteCalculationRecord(_ record: SwiftDataCalculationRecord) {
+        modelContext.delete(record)
+        saveContext()
+    }
+    
     // MARK: - Save Context
     func saveContext() {
         do {

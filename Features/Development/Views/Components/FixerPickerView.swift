@@ -1,68 +1,75 @@
 //
-//  FixerPickerView.swift
-//  Film Lab
+//  SwiftDataFixerPickerView.swift
+//  AnalogProcess
 //
-//  Created by Maxim Eliseyev on 12.07.2025.
+//  Created by Maxim Eliseyev on 11.08.2025.
 //
 
 import SwiftUI
+import SwiftData
 
 struct FixerPickerView: View {
-    let fixers: [Fixer]
-    @Binding var selectedFixer: Fixer?
+    // MARK: - SwiftData Properties
+    let swiftDataFixers: [SwiftDataFixer]
+    @Binding var selectedSwiftDataFixer: SwiftDataFixer?
+    
+    // MARK: - Shared Properties
     let onDismiss: () -> Void
-    let onFixerSelected: (Fixer) -> Void
+    let onSwiftDataFixerSelected: (SwiftDataFixer) -> Void
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(fixers, id: \.id) { fixer in
-                    Button(action: {
-                        selectedFixer = fixer
-                        onFixerSelected(fixer)
-                        onDismiss()
-                    }) {
-                        HStack {
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(fixer.name ?? "")
-                                    .font(.headline)
-                                    .foregroundColor(.primary)
-                                
-                                Text(getFixerTypeDisplayName(fixer.type ?? ""))
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
-                                
-                                HStack {
-                                    Text("\(fixer.time / 60) мин")
-                                        .font(.caption)
-                                        .foregroundColor(.blue)
-                                        .padding(.horizontal, 8)
-                                        .padding(.vertical, 2)
-                                        .background(Color.blue.opacity(0.1))
-                                        .cornerRadius(4)
+            VStack(spacing: 0) {
+                // SwiftData Fixers
+                List {
+                    ForEach(swiftDataFixers, id: \.id) { fixer in
+                        Button(action: {
+                            selectedSwiftDataFixer = fixer
+                            onSwiftDataFixerSelected(fixer)
+                            onDismiss()
+                        }) {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(fixer.name)
+                                        .font(.headline)
+                                        .foregroundColor(.primary)
                                     
-                                    if let warning = fixer.warning {
-                                        Text(warning)
+                                    Text(getFixerTypeDisplayName(fixer.type))
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                    
+                                    HStack {
+                                        Text("\(fixer.time / 60) мин")
                                             .font(.caption)
-                                            .foregroundColor(.orange)
+                                            .foregroundColor(.blue)
                                             .padding(.horizontal, 8)
                                             .padding(.vertical, 2)
-                                            .background(Color.orange.opacity(0.1))
+                                            .background(Color.blue.opacity(0.1))
                                             .cornerRadius(4)
+                                        
+                                        if let warning = fixer.warning {
+                                            Text(warning)
+                                                .font(.caption)
+                                                .foregroundColor(.orange)
+                                                .padding(.horizontal, 8)
+                                                .padding(.vertical, 2)
+                                                .background(Color.orange.opacity(0.1))
+                                                .cornerRadius(4)
+                                        }
                                     }
                                 }
+                                
+                                Spacer()
+                                
+                                if selectedSwiftDataFixer?.id == fixer.id {
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.blue)
+                                }
                             }
-                            
-                            Spacer()
-                            
-                            if selectedFixer?.id == fixer.id {
-                                Image(systemName: "checkmark")
-                                    .foregroundColor(.blue)
-                            }
+                            .padding(.vertical, 4)
                         }
-                        .padding(.vertical, 4)
+                        .buttonStyle(PlainButtonStyle())
                     }
-                    .buttonStyle(PlainButtonStyle())
                 }
             }
             .navigationTitle(LocalizedStringKey("fixerSelection"))
@@ -95,10 +102,10 @@ struct FixerPickerView: View {
 struct FixerPickerView_Previews: PreviewProvider {
     static var previews: some View {
         FixerPickerView(
-            fixers: [],
-            selectedFixer: .constant(nil),
+            swiftDataFixers: [],
+            selectedSwiftDataFixer: .constant(nil as SwiftDataFixer?),
             onDismiss: {},
-            onFixerSelected: { _ in }
+            onSwiftDataFixerSelected: { _ in }
         )
     }
 }

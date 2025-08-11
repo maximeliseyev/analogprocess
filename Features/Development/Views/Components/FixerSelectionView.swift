@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct FixerSelectionView: View {
-    let fixers: [Fixer]
-    @Binding var selectedFixer: Fixer?
+    let fixers: [SwiftDataFixer]
+    @Binding var selectedFixer: SwiftDataFixer?
     let onFixerPickerTap: () -> Void
     
     var body: some View {
@@ -37,7 +37,7 @@ struct FixerSelectionView: View {
             if let selectedFixer = selectedFixer {
                 VStack(alignment: .leading, spacing: 8) {
                     HStack {
-                        Text(getFixerTypeDisplayName(selectedFixer.type ?? ""))
+                        Text(getFixerTypeDisplayName(selectedFixer.type))
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                         

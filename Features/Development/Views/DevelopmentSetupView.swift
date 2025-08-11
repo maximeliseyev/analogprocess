@@ -1,15 +1,20 @@
+//
+//  SwiftDataDevelopmentSetupView.swift
+//  AnalogProcess
+//
+//  Created by Maxim Eliseyev on 11.08.2025.
+//
+
 import SwiftUI
-import CoreData
+import SwiftData
 
 struct DevelopmentSetupView: View {
     @StateObject private var viewModel = DevelopmentSetupViewModel()
-
     
     var body: some View {
-        KeyboardAwareView {
-            ZStack(alignment: .topLeading) {
-                Color(.systemBackground)
-                    .ignoresSafeArea()
+        NavigationStack {
+            ZStack {
+                Color(.systemBackground).ignoresSafeArea()
                 
                 VStack(spacing: 30) {
                     DevelopmentParametersView(viewModel: viewModel)
@@ -18,8 +23,8 @@ struct DevelopmentSetupView: View {
                         CalculatedTimeSection(
                             time: calculatedTime,
                             temperature: viewModel.temperature,
-                            filmName: viewModel.selectedFilm?.name ?? "",
-                            developerName: viewModel.selectedDeveloper?.name ?? "",
+                            filmName: viewModel.selectedFilmName,
+                            developerName: viewModel.selectedDeveloperName,
                             onCalculatorTap: {
                                 viewModel.navigateToCalculator = true
                             },
@@ -66,25 +71,12 @@ struct DevelopmentSetupView: View {
                 }
             )
         }
-        .sheet(isPresented: $viewModel.showISOPicker) {
-            ISOPickerView(
-                iso: $viewModel.iso,
-                onDismiss: { viewModel.showISOPicker = false },
-                availableISOs: viewModel.getAvailableISOs()
-            )
-        }
-        .sheet(isPresented: $viewModel.showTemperaturePicker) {
-            TemperaturePickerView(
-                temperature: $viewModel.temperature,
-                onDismiss: { viewModel.showTemperaturePicker = false }
-            )
-        }
         .sheet(isPresented: $viewModel.showFixerPicker) {
             FixerPickerView(
-                fixers: viewModel.fixers,
-                selectedFixer: $viewModel.selectedFixer,
+                swiftDataFixers: viewModel.fixers,
+                selectedSwiftDataFixer: $viewModel.selectedFixer,
                 onDismiss: { viewModel.showFixerPicker = false },
-                onFixerSelected: { fixer in
+                onSwiftDataFixerSelected: { fixer in
                     viewModel.selectFixer(fixer)
                 }
             )
@@ -98,7 +90,7 @@ struct DevelopmentSetupView: View {
             if let calculatedTime = viewModel.calculatedTime {
                 let minutes = calculatedTime / 60
                 let seconds = calculatedTime % 60
-                let timerLabel = "\(viewModel.selectedFilm?.name ?? "") / \(viewModel.selectedDeveloper?.name ?? "")"
+                let timerLabel = "\(viewModel.selectedFilmName) / \(viewModel.selectedDeveloperName)"
                 
                 TimerView(
                     timerLabel: timerLabel,
@@ -107,21 +99,14 @@ struct DevelopmentSetupView: View {
                 )
             }
         }
-        .onChange(of: viewModel.iso) { oldValue, newValue in
-            viewModel.updateISO(Int(newValue))
+        .onAppear {
+            viewModel.reloadData()
         }
-        .onChange(of: viewModel.temperature) { oldValue, newValue in
-            viewModel.updateTemperature(newValue)
-        }
-        .navigationTitle(LocalizedStringKey("presets"))
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
-// MARK: - Preview
 struct DevelopmentSetupView_Previews: PreviewProvider {
     static var previews: some View {
         DevelopmentSetupView()
-            .previewDisplayName("Development setup")
     }
 }

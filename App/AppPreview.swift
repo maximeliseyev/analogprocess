@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-import CoreData
+import SwiftData
+
 
 // MARK: - Main App Preview
 struct AppPreview: View {
@@ -14,7 +15,7 @@ struct AppPreview: View {
     
     var body: some View {
         ContentView(colorScheme: $colorScheme)
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .modelContainer(SwiftDataPersistence.preview.modelContainer)
     }
 }
 

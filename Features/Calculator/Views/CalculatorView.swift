@@ -159,7 +159,6 @@ struct CalculatorView: View {
                         Button(action: {
                             // Скрываем клавиатуру перед открытием пикера
                             focusedField = nil
-                            viewModel.showTemperaturePicker = true
                         }) {
                             HStack {
                                 Text(String(format: "%.1f°C", viewModel.temperature))
@@ -207,12 +206,7 @@ struct CalculatorView: View {
             viewModel.hideCoefficientSuggestions()
         }
 
-        .sheet(isPresented: $viewModel.showTemperaturePicker) {
-            TemperaturePickerView(
-                temperature: $viewModel.temperature,
-                onDismiss: { viewModel.showTemperaturePicker = false }
-            )
-        }.sheet(isPresented: $viewModel.showResult) {
+.sheet(isPresented: $viewModel.showResult) {
             CalculationResultView(
                 results: viewModel.pushResults,
                 isPushMode: viewModel.isPushMode,
@@ -231,9 +225,7 @@ struct CalculatorView: View {
             )
         }
 
-        .onAppear {
-            viewModel.loadRecords()
-        }
+
     }
 }
 
