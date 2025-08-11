@@ -6,25 +6,18 @@
 //
 
 import SwiftUI
-import CoreData
 import SwiftData
 
 @MainActor
 class SwiftDataDevelopmentSetupViewModel: ObservableObject {
-    // MARK: - Core Data Properties (для обратной совместимости)
-    @Published var selectedFilm: Film?
-    @Published var selectedDeveloper: Developer?
+    // MARK: - SwiftData Properties
+    @Published var selectedFilm: SwiftDataFilm?
+    @Published var selectedDeveloper: SwiftDataDeveloper?
+    @Published var selectedFixer: SwiftDataFixer?
     @Published var selectedDilution: String = ""
-    @Published var selectedFixer: Fixer?
     @Published var temperature: Double = 20.0
     @Published var iso: Int32 = Int32(Constants.ISO.defaultISO)
     @Published var calculatedTime: Int?
-    
-    // MARK: - SwiftData Properties (новые)
-    @Published var selectedSwiftDataFilm: SwiftDataFilm?
-    @Published var selectedSwiftDataDeveloper: SwiftDataDeveloper?
-    @Published var selectedSwiftDataFixer: SwiftDataFixer?
-    @Published var calculatedSwiftDataTime: Int?
     
     // MARK: - UI States
     @Published var showFilmPicker = false
@@ -39,54 +32,30 @@ class SwiftDataDevelopmentSetupViewModel: ObservableObject {
     @Published var navigateToTimer = false
     
     // MARK: - Services
-    private let coreDataService = CoreDataService.shared
     private let swiftDataService = SwiftDataService.shared
-    
-    // MARK: - Data Mode
-    @Published var useSwiftData: Bool = false // Переключатель между Core Data и SwiftData
     
     // MARK: - Computed Properties
     
-    var films: [Film] {
-        coreDataService.films
-    }
-    
-    var developers: [Developer] {
-        coreDataService.developers
-    }
-    
-    var fixers: [Fixer] {
-        coreDataService.fixers
-    }
-    
-    var swiftDataFilms: [SwiftDataFilm] {
+    var films: [SwiftDataFilm] {
         swiftDataService.films
     }
     
-    var swiftDataDevelopers: [SwiftDataDeveloper] {
+    var developers: [SwiftDataDeveloper] {
         swiftDataService.developers
     }
     
-    var swiftDataFixers: [SwiftDataFixer] {
+    var fixers: [SwiftDataFixer] {
         swiftDataService.fixers
     }
     
     // MARK: - Computed Properties for UI
     
     var selectedFilmName: String {
-        if useSwiftData {
-            return selectedSwiftDataFilm?.name ?? ""
-        } else {
-            return selectedFilm?.name ?? ""
-        }
+        return selectedFilm?.name ?? ""
     }
     
     var selectedDeveloperName: String {
-        if useSwiftData {
-            return selectedSwiftDataDeveloper?.name ?? ""
-        } else {
-            return selectedDeveloper?.name ?? ""
-        }
+        return selectedDeveloper?.name ?? ""
     }
     
     // MARK: - Public Methods

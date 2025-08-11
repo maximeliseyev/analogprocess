@@ -29,7 +29,7 @@ class CreateRecordViewModel: ObservableObject {
     @Published var filmSuggestions: [String] = []
     @Published var developerSuggestions: [String] = []
     
-    private let coreDataService = CoreDataService.shared
+    private let swiftDataService = SwiftDataService.shared
     
     var isValid: Bool {
         !filmName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
@@ -52,9 +52,9 @@ class CreateRecordViewModel: ObservableObject {
             return
         }
         
-        let allFilms = coreDataService.films
+        let allFilms = swiftDataService.films
         let filteredFilms = allFilms.filter { film in
-            guard let name = film.name else { return false }
+            let name = film.name
             return name.lowercased().contains(searchText)
         }
         
@@ -71,9 +71,9 @@ class CreateRecordViewModel: ObservableObject {
             return
         }
         
-        let allDevelopers = coreDataService.developers
+        let allDevelopers = swiftDataService.developers
         let filteredDevelopers = allDevelopers.filter { developer in
-            guard let name = developer.name else { return false }
+            let name = developer.name
             return name.lowercased().contains(searchText)
         }
         
@@ -122,16 +122,14 @@ class CreateRecordViewModel: ObservableObject {
     }
     
     func saveRecord() {
-        coreDataService.saveRecord(
+        swiftDataService.saveRecord(
             filmName: filmName.trimmingCharacters(in: .whitespacesAndNewlines),
             developerName: developerName.trimmingCharacters(in: .whitespacesAndNewlines),
             dilution: dilution.trimmingCharacters(in: .whitespacesAndNewlines),
-            iso: Int(iso),
             temperature: temperature,
-            time: totalSeconds,
-            name: name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : name.trimmingCharacters(in: .whitespacesAndNewlines),
-            comment: comment.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : comment.trimmingCharacters(in: .whitespacesAndNewlines),
-            date: date
+            iso: Int(iso),
+            calculatedTime: totalSeconds,
+            notes: comment.trimmingCharacters(in: .whitespacesAndNewlines)
         )
     }
     

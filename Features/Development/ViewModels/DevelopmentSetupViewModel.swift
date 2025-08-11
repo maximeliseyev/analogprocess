@@ -1,23 +1,26 @@
 //
-//  DevelopmentSetupViewModel.swift
-//  Film Lab
+//  SwiftDataDevelopmentSetupViewModel.swift
+//  AnalogProcess
 //
-//  Created by Maxim Eliseyev on 12.07.2025.
+//  Created by Maxim Eliseyev on 11.08.2025.
 //
 
 import SwiftUI
-import CoreData
+import SwiftData
+import Foundation
 
 @MainActor
 class DevelopmentSetupViewModel: ObservableObject {
-    @Published var selectedFilm: Film?
-    @Published var selectedDeveloper: Developer?
+    // MARK: - SwiftData Properties
+    @Published var selectedFilm: SwiftDataFilm?
+    @Published var selectedDeveloper: SwiftDataDeveloper?
+    @Published var selectedFixer: SwiftDataFixer?
     @Published var selectedDilution: String = ""
-    @Published var selectedFixer: Fixer?
     @Published var temperature: Double = 20.0
     @Published var iso: Int32 = Int32(Constants.ISO.defaultISO)
     @Published var calculatedTime: Int?
     
+    // MARK: - UI States
     @Published var showFilmPicker = false
     @Published var showDeveloperPicker = false
     @Published var showDilutionPicker = false
@@ -29,31 +32,44 @@ class DevelopmentSetupViewModel: ObservableObject {
     @Published var navigateToCalculator = false
     @Published var navigateToTimer = false
     
-    private let dataService = CoreDataService.shared
+    // MARK: - Services
+    private let swiftDataService = SwiftDataService.shared
     
-    var films: [Film] {
-        dataService.films
+    // MARK: - Computed Properties
+    
+    var films: [SwiftDataFilm] {
+        swiftDataService.films
     }
     
-    var developers: [Developer] {
-        dataService.developers
+    var developers: [SwiftDataDeveloper] {
+        swiftDataService.developers
     }
     
-    var fixers: [Fixer] {
-        dataService.fixers
+    var fixers: [SwiftDataFixer] {
+        swiftDataService.fixers
+    }
+    
+    // MARK: - Computed Properties for UI
+    
+    var selectedFilmName: String {
+        return selectedFilm?.name ?? ""
+    }
+    
+    var selectedDeveloperName: String {
+        return selectedDeveloper?.name ?? ""
     }
     
     // MARK: - Public Methods
     
-    func selectFilm(_ film: Film) {
-        print("DEBUG: selectFilm called with film: \(film.name ?? "")")
+    func selectFilm(_ film: SwiftDataFilm) {
+        print("DEBUG: selectFilm called with film: \(film.name)")
         selectedFilm = film
         iso = Int32(film.defaultISO)
         calculateTimeAutomatically()
     }
     
-    func selectDeveloper(_ developer: Developer) {
-        print("DEBUG: selectDeveloper called with developer: \(developer.name ?? "")")
+    func selectDeveloper(_ developer: SwiftDataDeveloper) {
+        print("DEBUG: selectDeveloper called with developer: \(developer.name)")
         selectedDeveloper = developer
         selectedDilution = developer.defaultDilution ?? ""
         calculateTimeAutomatically()
@@ -64,7 +80,7 @@ class DevelopmentSetupViewModel: ObservableObject {
         calculateTimeAutomatically()
     }
     
-    func selectFixer(_ fixer: Fixer) {
+    func selectFixer(_ fixer: SwiftDataFixer) {
         selectedFixer = fixer
     }
     
@@ -79,38 +95,15 @@ class DevelopmentSetupViewModel: ObservableObject {
     }
     
     func getAvailableDilutions() -> [String] {
-        guard let film = selectedFilm,
-              let developer = selectedDeveloper,
-              let filmId = film.id,
-              let developerId = developer.id else {
-            return []
-        }
-        
-        let availableDilutions = dataService.getAvailableDilutions(for: filmId, developerId: developerId)
-        
-        if availableDilutions.isEmpty {
-            return [developer.defaultDilution ?? ""]
-        }
-        
-        return Array(Set(availableDilutions)).sorted()
+        return getAvailableDilutionsForSwiftData()
     }
     
     func getAvailableISOs() -> [Int] {
-        guard let film = selectedFilm,
-              let developer = selectedDeveloper,
-              let filmId = film.id,
-              let developerId = developer.id,
-              !selectedDilution.isEmpty else {
-            return []
-        }
-        
-        let availableISOs = dataService.getAvailableISOs(for: filmId, developerId: developerId, dilution: selectedDilution)
-        
-        return availableISOs
+        return getAvailableISOsForSwiftData()
     }
     
     func reloadData() {
-        dataService.reloadDataFromJSON()
+        swiftDataService.refreshData()
         objectWillChange.send()
     }
     
@@ -125,9 +118,9 @@ class DevelopmentSetupViewModel: ObservableObject {
         }
         
         let dilutionToUse = selectedDilution.isEmpty ? (developer.defaultDilution ?? "") : selectedDilution
-        print("DEBUG: calculateTimeAutomatically - film: \(film.name ?? ""), developer: \(developer.name ?? ""), dilution: \(dilutionToUse), iso: \(iso), temperature: \(temperature)")
+        print("DEBUG: calculateTimeAutomatically - film: \(film.name), developer: \(developer.name), dilution: \(dilutionToUse), iso: \(iso), temperature: \(temperature)")
         
-        let parameters = DevelopmentParameters(
+        let parameters = SwiftDataDevelopmentParameters(
             film: film,
             developer: developer,
             dilution: dilutionToUse,
@@ -135,7 +128,30 @@ class DevelopmentSetupViewModel: ObservableObject {
             iso: Int(iso)
         )
         
-        calculatedTime = dataService.calculateDevelopmentTime(parameters: parameters)
+        calculatedTime = swiftDataService.calculateDevelopmentTime(parameters: parameters)
         print("DEBUG: calculateTimeAutomatically - calculated time: \(calculatedTime ?? -1)")
     }
-} 
+    
+    private func getAvailableDilutionsForSwiftData() -> [String] {
+        guard let _ = selectedFilm,
+              let developer = selectedDeveloper else {
+            return []
+        }
+        
+        // TODO: Реализовать получение доступных разведений для SwiftData
+        // Пока возвращаем разведение по умолчанию
+        return [developer.defaultDilution ?? ""]
+    }
+    
+    private func getAvailableISOsForSwiftData() -> [Int] {
+        guard let film = selectedFilm,
+              let _ = selectedDeveloper,
+              !selectedDilution.isEmpty else {
+            return []
+        }
+        
+        // TODO: Реализовать получение доступных ISO для SwiftData
+        // Пока возвращаем ISO по умолчанию
+        return [Int(film.defaultISO)]
+    }
+}

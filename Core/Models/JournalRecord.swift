@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import CoreData
+import SwiftData
 
 public struct JournalRecord {
     public let id = UUID()
@@ -47,8 +47,8 @@ public struct JournalRecord {
     
     // MARK: - Conversion Methods
     
-    public func toCalculationRecord(context: NSManagedObjectContext) -> CalculationRecord {
-        let record = CalculationRecord(context: context)
+    public func toCalculationRecord(context: ModelContext) -> SwiftDataCalculationRecord {
+        let record = SwiftDataCalculationRecord()
         record.date = date
         record.name = name
         record.filmName = filmName
@@ -62,7 +62,7 @@ public struct JournalRecord {
         return record
     }
     
-    public static func fromCalculationRecord(_ record: CalculationRecord) -> JournalRecord {
+    public static func fromCalculationRecord(_ record: SwiftDataCalculationRecord) -> JournalRecord {
         return JournalRecord(
             date: record.date ?? Date(),
             name: record.name,

@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
-import CoreData
+import SwiftData
 
 struct RecordDetailView: View {
-    let record: CalculationRecord
+    let record: SwiftDataCalculationRecord
     let onEdit: () -> Void
     let onDelete: () -> Void
     @Environment(\.dismiss) private var dismiss

@@ -1,32 +1,31 @@
 //
-//  JournalViewModel.swift
-//  Film Lab
+//  SwiftDataJournalViewModel.swift
+//  AnalogProcess
 //
-//  Created by Maxim Eliseyev on 12.07.2025.
+//  Created by Maxim Eliseyev on 11.08.2025.
 //
 
 import SwiftUI
-import CoreData
+import SwiftData
 import Combine
 
 @MainActor
 class JournalViewModel: ObservableObject {
     // MARK: - Published Properties
-    @Published var savedRecords: [CalculationRecord] = []
+    @Published var savedRecords: [SwiftDataCalculationRecord] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
     @Published var syncStatus: CloudKitService.SyncStatus = .idle
     @Published var isCloudAvailable = false
     
     // MARK: - Dependencies
-    private let coreDataService = CoreDataService.shared
+    private let swiftDataService = SwiftDataService.shared
     private let cloudKitService = CloudKitService.shared
     private var cancellables = Set<AnyCancellable>()
     private var notificationCenter = NotificationCenter.default
     
     init() {
         setupCloudKitObservers()
-        setupCoreDataObservers()
         loadRecords()
     }
     
@@ -48,53 +47,24 @@ class JournalViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    private func setupCoreDataObservers() {
-        // Наблюдаем за изменениями в Core Data
-        notificationCenter.addObserver(
-            self,
-            selector: #selector(managedObjectContextObjectsDidChange),
-            name: .NSManagedObjectContextObjectsDidChange,
-            object: coreDataService.container.viewContext
-        )
-        
-        // Наблюдаем за сохранением контекста
-        notificationCenter.addObserver(
-            self,
-            selector: #selector(managedObjectContextDidSave),
-            name: .NSManagedObjectContextDidSave,
-            object: coreDataService.container.viewContext
-        )
-    }
-    
-    // MARK: - Notification Handlers
-    
-    @objc private func managedObjectContextObjectsDidChange(_ notification: Notification) {
-        // Обновляем записи при любых изменениях в контексте
-        DispatchQueue.main.async {
-            self.loadRecords()
-        }
-    }
-    
-    @objc private func managedObjectContextDidSave(_ notification: Notification) {
-        // Обновляем записи после сохранения контекста
-        DispatchQueue.main.async {
-            self.loadRecords()
-        }
-    }
-    
     // MARK: - Methods
     
     func loadRecords() {
         isLoading = true
         errorMessage = nil
         
-        savedRecords = coreDataService.getCalculationRecords()
+        loadSwiftDataRecords()
+        
         isLoading = false
     }
     
-    func deleteRecord(_ record: CalculationRecord) {
-        coreDataService.deleteCalculationRecord(record)
-        // loadRecords() вызывается автоматически через notification
+    private func loadSwiftDataRecords() {
+        savedRecords = swiftDataService.getCalculationRecords()
+    }
+    
+    func deleteRecord(_ record: SwiftDataCalculationRecord) {
+        swiftDataService.deleteCalculationRecord(record)
+        loadRecords()
     }
     
     func clearError() {
@@ -114,4 +84,4 @@ class JournalViewModel: ObservableObject {
     func forceSync() async {
         await cloudKitService.forceSync()
     }
-} 
+}

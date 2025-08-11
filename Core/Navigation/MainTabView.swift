@@ -1,6 +1,6 @@
 import SwiftUI
-import CoreData
 import Combine
+import SwiftData
 
 public struct MainTabView: View {
     @Binding var selectedTab: Int
@@ -8,7 +8,6 @@ public struct MainTabView: View {
     @Binding var colorScheme: ColorScheme?
 
     
-    private let dataService = CoreDataService.shared
     private let cloudKitService = CloudKitService.shared
     @State private var showingCreateRecord = false
     @State private var syncStatus: CloudKitService.SyncStatus = .idle
@@ -221,13 +220,15 @@ public struct MainTabView: View {
         return tabInfo.iconColor
     }
         
-    func loadRecord(_ record: CalculationRecord) {
+    func loadRecord(_ record: SwiftDataCalculationRecord) {
         // Здесь можно добавить логику загрузки записи в калькулятор
         print("Loading record: \(record)")
     }
     
-    func deleteRecord(_ record: CalculationRecord) {
-        dataService.deleteCalculationRecord(record)
+    func deleteRecord(_ record: SwiftDataCalculationRecord) {
+        // Delete the record from SwiftData context
+        let swiftDataService = SwiftDataService.shared
+        swiftDataService.deleteCalculationRecord(record)
     }
     
     public init(selectedTab: Binding<Int>, onBackToHome: @escaping () -> Void, colorScheme: Binding<ColorScheme?>) {
