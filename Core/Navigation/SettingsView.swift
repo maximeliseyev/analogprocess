@@ -11,8 +11,7 @@ public struct SettingsView: View {
     
     private var appVersion: String {
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
-        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
-        return "\(version) (\(build))"
+        return "v\(version)"
     }
     
     public init(colorScheme: Binding<ColorScheme?>) {
@@ -72,32 +71,31 @@ public struct SettingsView: View {
                 .disabled(isSyncing || githubService.isDownloading)
             }
             
-            Section(header: Text(LocalizedStringKey("settingsAbout"))) {
-                HStack {
-                    Text(LocalizedStringKey("settingsVersion"))
-                    Spacer()
-                    Text(appVersion)
-                        .foregroundColor(.secondary)
+            Section(header: Text("Support")) {
+                Button(action: contactDeveloper) {
+                    HStack {
+                        Image(systemName: "envelope")
+                        Text("Contact Developer")
+                        Spacer()
+                        Image(systemName: "arrow.up.right")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
                 }
+                .foregroundColor(.primary)
             }
             
-            Section(header: Text("SwiftData Migration")) {
-                NavigationLink("SwiftData Integration Test") {
-                    SwiftDataIntegrationTestView()
-                }
-                
-                Toggle("Use SwiftData Development View", isOn: .constant(false))
-                    .onChange(of: false) { oldValue, newValue in
-                        // TODO: Добавить переключение между версиями
-                        print("SwiftData Development View toggle: \(newValue)")
-                    }
-                
-                // NavigationLink("SwiftData UI Components Test") {
-                //     SwiftDataUIComponentsTestView()
-                // }
-            }
         }
         .navigationTitle(LocalizedStringKey("settings"))
+        .overlay(
+            VStack {
+                Spacer()
+                Text(appVersion)
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+                    .padding(.bottom, 20)
+            }
+        )
         .onAppear {
             if colorScheme == .light { selectedTheme = 1 }
             else if colorScheme == .dark { selectedTheme = 2 }
@@ -128,6 +126,16 @@ public struct SettingsView: View {
                     isSyncing = false
                 }
             }
+        }
+    }
+    
+    private func contactDeveloper() {
+        let email = Constants.Developer.email
+        let subject = "Analog Process App Feedback"
+        let body = "Hello,\n\nI would like to provide feedback about the Analog Process app.\n\n"
+        
+        if let url = URL(string: "mailto:\(email)?subject=\(subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")&body=\(body.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")") {
+            UIApplication.shared.open(url)
         }
     }
 } 

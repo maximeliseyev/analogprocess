@@ -38,6 +38,11 @@ enum Constants {
         static let initialProgress = 0.0
     }
     
+    // MARK: - Developer Contact
+    enum Developer {
+        static let email = "maxim.elis@icloud.com"
+    }
+    
     // MARK: - ISO Values
     enum ISO {
         // Полный список всех ISO значений (включая промежуточные)
