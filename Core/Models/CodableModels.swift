@@ -45,6 +45,52 @@ public struct DeveloperData: Codable, Identifiable {
     }
 }
 
+// MARK: - Fixer Model
+public struct FixerData: Codable, Identifiable {
+    public let id: String
+    public let name: String
+    public let type: FixerType
+    public let time: Int
+    public let warning: String?
+    
+    public init(id: String, name: String, type: FixerType, time: Int, warning: String? = nil) {
+        self.id = id
+        self.name = name
+        self.type = type
+        self.time = time
+        self.warning = warning
+    }
+}
+
+// MARK: - Fixer Type Enum
+public enum FixerType: String, Codable, CaseIterable {
+    case rapid = "rapid"
+    case acid = "acid"
+    case neutral = "neutral"
+    
+    public var displayName: String {
+        switch self {
+        case .rapid:
+            return "Быстрый фиксаж"
+        case .acid:
+            return "Кислый фиксаж"
+        case .neutral:
+            return "Нейтральный фиксаж"
+        }
+    }
+    
+    public var localizedName: String {
+        switch self {
+        case .rapid:
+            return "rapidFixer"
+        case .acid:
+            return "acidFixer"
+        case .neutral:
+            return "neutralFixer"
+        }
+    }
+}
+
 // MARK: - Development Time Model
 public struct DevelopmentTimeData: Codable {
     public let filmId: String
@@ -102,12 +148,14 @@ public struct ProcessStep: Codable, Identifiable {
 public struct GitHubDataResponse: Codable {
     public let films: [String: FilmData]
     public let developers: [String: DeveloperData]
+    public let fixers: [String: FixerData]
     public let developmentTimes: [String: [String: [String: [String: Int]]]]
     public let temperatureMultipliers: [String: Double]
     
-    public init(films: [String: FilmData], developers: [String: DeveloperData], developmentTimes: [String: [String: [String: [String: Int]]]], temperatureMultipliers: [String: Double]) {
+    public init(films: [String: FilmData], developers: [String: DeveloperData], fixers: [String: FixerData], developmentTimes: [String: [String: [String: [String: Int]]]], temperatureMultipliers: [String: Double]) {
         self.films = films
         self.developers = developers
+        self.fixers = fixers
         self.developmentTimes = developmentTimes
         self.temperatureMultipliers = temperatureMultipliers
     }

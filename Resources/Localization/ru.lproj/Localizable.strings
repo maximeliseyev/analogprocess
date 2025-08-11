@@ -171,6 +171,14 @@
 "fixingTime" = "Время фиксирования";
 "startFixing" = "Начать фиксирование";
 
+// MARK: - Fixer Selection
+"fixer" = "Фиксаж";
+"selectFixer" = "Выбрать фиксаж";
+"fixerSelection" = "Выбор фиксажа";
+"rapidFixer" = "Быстрый фиксаж";
+"acidFixer" = "Кислый фиксаж";
+"neutralFixer" = "Нейтральный фиксаж";
+
 // MARK: - Agitation
 "agitationSelection" = "Select Agitation Mode";
 "agitationDescription" = "Agitation is the process of stirring the developer for uniform film development";

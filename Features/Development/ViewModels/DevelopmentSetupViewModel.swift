@@ -13,6 +13,7 @@ class DevelopmentSetupViewModel: ObservableObject {
     @Published var selectedFilm: Film?
     @Published var selectedDeveloper: Developer?
     @Published var selectedDilution: String = ""
+    @Published var selectedFixer: Fixer?
     @Published var temperature: Double = 20.0
     @Published var iso: Int32 = Int32(Constants.ISO.defaultISO)
     @Published var calculatedTime: Int?
@@ -20,6 +21,7 @@ class DevelopmentSetupViewModel: ObservableObject {
     @Published var showFilmPicker = false
     @Published var showDeveloperPicker = false
     @Published var showDilutionPicker = false
+    @Published var showFixerPicker = false
     @Published var showISOPicker = false
     @Published var showTemperaturePicker = false
     
@@ -35,6 +37,10 @@ class DevelopmentSetupViewModel: ObservableObject {
     
     var developers: [Developer] {
         dataService.developers
+    }
+    
+    var fixers: [Fixer] {
+        dataService.fixers
     }
     
     // MARK: - Public Methods
@@ -56,6 +62,10 @@ class DevelopmentSetupViewModel: ObservableObject {
     func selectDilution(_ dilution: String) {
         selectedDilution = dilution
         calculateTimeAutomatically()
+    }
+    
+    func selectFixer(_ fixer: Fixer) {
+        selectedFixer = fixer
     }
     
     func updateISO(_ newISO: Int) {

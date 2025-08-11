@@ -79,6 +79,16 @@ struct DevelopmentSetupView: View {
                 onDismiss: { viewModel.showTemperaturePicker = false }
             )
         }
+        .sheet(isPresented: $viewModel.showFixerPicker) {
+            FixerPickerView(
+                fixers: viewModel.fixers,
+                selectedFixer: $viewModel.selectedFixer,
+                onDismiss: { viewModel.showFixerPicker = false },
+                onFixerSelected: { fixer in
+                    viewModel.selectFixer(fixer)
+                }
+            )
+        }
         .navigationDestination(isPresented: $viewModel.navigateToCalculator) {
             if let calculatedTime = viewModel.calculatedTime {
                 CalculatorView(initialTime: calculatedTime, initialTemperature: viewModel.temperature)

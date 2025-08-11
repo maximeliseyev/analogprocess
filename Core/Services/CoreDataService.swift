@@ -16,6 +16,7 @@ public class CoreDataService: ObservableObject {
     
     @Published var films: [Film] = []
     @Published var developers: [Developer] = []
+    @Published var fixers: [Fixer] = []
     @Published var temperatureMultipliers: [TemperatureMultiplier] = []
     
     private init() {
@@ -53,6 +54,7 @@ public class CoreDataService: ObservableObject {
             print("DEBUG: loadInitialData - loading data from JSON")
             loadFilmsFromJSON()
             loadDevelopersFromJSON()
+            loadFixersFromJSON()
             loadDevelopmentTimesFromJSON()
             loadTemperatureMultipliersFromJSON()
             saveContext()
@@ -110,6 +112,29 @@ public class CoreDataService: ObservableObject {
             developer.manufacturer = manufacturer
             developer.type = type
             developer.defaultDilution = defaultDilution
+        }
+    }
+    
+    private func loadFixersFromJSON() {
+        guard let url = Bundle.main.url(forResource: "fixers", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let json = try? JSONSerialization.jsonObject(with: data) as? [String: [String: Any]] else {
+            return
+        }
+        
+        for (id, fixerData) in json {
+            guard let name = fixerData["name"] as? String,
+                  let typeString = fixerData["type"] as? String,
+                  let time = fixerData["time"] as? Int else {
+                continue
+            }
+            
+            let fixer = Fixer(context: container.viewContext)
+            fixer.id = id
+            fixer.name = name
+            fixer.type = typeString
+            fixer.time = Int32(time)
+            fixer.warning = fixerData["warning"] as? String
         }
     }
     
@@ -172,6 +197,12 @@ public class CoreDataService: ObservableObject {
         return try? container.viewContext.fetch(request).first
     }
     
+    private func getFixer(by id: String) -> Fixer? {
+        let request: NSFetchRequest<Fixer> = Fixer.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", id)
+        return try? container.viewContext.fetch(request).first
+    }
+    
     func refreshData() {
         let filmsRequest: NSFetchRequest<Film> = Film.fetchRequest()
         filmsRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Film.name, ascending: true)]
@@ -180,6 +211,10 @@ public class CoreDataService: ObservableObject {
         let developersRequest: NSFetchRequest<Developer> = Developer.fetchRequest()
         developersRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Developer.name, ascending: true)]
         developers = (try? container.viewContext.fetch(developersRequest)) ?? []
+        
+        let fixersRequest: NSFetchRequest<Fixer> = Fixer.fetchRequest()
+        fixersRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Fixer.name, ascending: true)]
+        fixers = (try? container.viewContext.fetch(fixersRequest)) ?? []
         
         let tempRequest: NSFetchRequest<TemperatureMultiplier> = TemperatureMultiplier.fetchRequest()
         tempRequest.sortDescriptors = [NSSortDescriptor(keyPath: \TemperatureMultiplier.temperature, ascending: true)]

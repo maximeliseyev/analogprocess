@@ -59,10 +59,11 @@ public class GitHubDataService: ObservableObject {
         
         async let filmsData = downloadFilms()
         async let developersData = downloadDevelopers()
+        async let fixersData = downloadFixers()
         async let developmentTimesData = downloadDevelopmentTimes()
         async let temperatureMultipliersData = downloadTemperatureMultipliers()
         
-        let (films, developers, developmentTimes, temperatureMultipliers) = try await (filmsData, developersData, developmentTimesData, temperatureMultipliersData)
+        let (films, developers, fixers, developmentTimes, temperatureMultipliers) = try await (filmsData, developersData, fixersData, developmentTimesData, temperatureMultipliersData)
         
         downloadProgress = Constants.Progress.maxProgress
         lastSyncDate = Date()
@@ -71,6 +72,7 @@ public class GitHubDataService: ObservableObject {
         return GitHubDataResponse(
             films: films,
             developers: developers,
+            fixers: fixers,
             developmentTimes: developmentTimes,
             temperatureMultipliers: temperatureMultipliers
         )
@@ -113,6 +115,27 @@ public class GitHubDataService: ObservableObject {
             let developers = try jsonDecoder.decode([String: DeveloperData].self, from: data)
             downloadProgress += Constants.Progress.downloadStepIncrement
             return developers
+        } catch {
+            throw GitHubDataServiceError.decodingError
+        }
+    }
+    
+    private func downloadFixers() async throws -> [String: FixerData] {
+        let url = URL(string: Constants.Network.baseURL + Constants.Network.fixersEndpoint)!
+        let (data, response) = try await networkSession.data(from: url)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw GitHubDataServiceError.networkError(.invalidResponse)
+        }
+        
+        guard httpResponse.statusCode == 200 else {
+            throw GitHubDataServiceError.networkError(.serverError(httpResponse.statusCode))
+        }
+        
+        do {
+            let fixers = try jsonDecoder.decode([String: FixerData].self, from: data)
+            downloadProgress += Constants.Progress.downloadStepIncrement
+            return fixers
         } catch {
             throw GitHubDataServiceError.decodingError
         }
