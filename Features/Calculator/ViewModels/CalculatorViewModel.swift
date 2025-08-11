@@ -18,7 +18,7 @@ class CalculatorViewModel: ObservableObject {
     @Published var pushSteps = 2
     @Published var isPushMode = true
     @Published var temperature: Double = 20.0
-    @Published var pushResults: [(label: String, minutes: Int, seconds: Int)] = []
+    @Published var pushResults: [ProcessStep] = []
     @Published var showResult = false
     @Published var showSaveDialog = false
     @Published var showTemperaturePicker = false
@@ -33,7 +33,7 @@ class CalculatorViewModel: ObservableObject {
     @Published var selectedTimerLabel = ""
     @Published var selectedTimerMinutes = 0
     @Published var selectedTimerSeconds = 0
-    @Published var selectedResult: (label: String, minutes: Int, seconds: Int)?
+    @Published var selectedResult: ProcessStep?
     
     // MARK: - Dependencies
     private let coreDataService = CoreDataService.shared
@@ -118,18 +118,18 @@ class CalculatorViewModel: ObservableObject {
     func saveRecord() {
         guard let selectedResult = selectedResult else { return }
         
-        let totalSeconds = selectedResult.minutes * 60 + selectedResult.seconds
+        let totalSeconds = selectedResult.totalSeconds
         
         // Сохраняем в Core Data с информацией о расчете
         coreDataService.saveRecord(
             filmName: "Расчетное время",
             developerName: "Пользовательский расчет",
             dilution: "Коэффициент: \(coefficient), Температура: \(String(format: "%.1f", temperature))°C",
-            iso: 400,
+            iso: Constants.ISO.defaultISO,
             temperature: temperature,
             time: totalSeconds,
             name: selectedResult.label,
-            comment: "Расчет: \(selectedResult.label) - \(selectedResult.minutes):\(String(format: "%02d", selectedResult.seconds))"
+            comment: "Расчет: \(selectedResult.label) - \(selectedResult.formattedTime)"
         )
         
         showSaveDialog = false
@@ -164,7 +164,7 @@ class CalculatorViewModel: ObservableObject {
     func createPrefillData() -> (name: String, temperature: Double, coefficient: String, time: Int, comment: String, process: String)? {
         guard let selectedResult = selectedResult else { return nil }
         
-        let totalSeconds = selectedResult.minutes * 60 + selectedResult.seconds
+        let totalSeconds = selectedResult.totalSeconds
         
         // Формируем строку процесса на основе настроек
         let processString = isPushMode ? "push +\(pushSteps)" : "pull -\(pushSteps)"
@@ -174,7 +174,7 @@ class CalculatorViewModel: ObservableObject {
             temperature: temperature,
             coefficient: coefficient,
             time: totalSeconds,
-            comment: "Расчет: \(selectedResult.label) - \(selectedResult.minutes):\(String(format: "%02d", selectedResult.seconds))",
+            comment: "Расчет: \(selectedResult.label) - \(selectedResult.formattedTime)",
             process: processString
         )
     }

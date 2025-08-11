@@ -73,6 +73,9 @@
 		BFF4DA012E21C2C90097BE82 /* AgitationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF4DA002E21C2C90097BE82 /* AgitationMode.swift */; };
 		BFF4DA032E21C31E0097BE82 /* AgitationSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF4DA022E21C31E0097BE82 /* AgitationSelectionView.swift */; };
 		BFF4DA052E21C8C30097BE82 /* CustomAgitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF4DA042E21C8C30097BE82 /* CustomAgitationView.swift */; };
+		BFFA1C532E4A19D4005C24F4 /* CodableModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C512E4A19D4005C24F4 /* CodableModels.swift */; };
+		BFFA1C542E4A19D4005C24F4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C522E4A19D4005C24F4 /* Constants.swift */; };
+		BFFA1C562E4A19F7005C24F4 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C552E4A19F7005C24F4 /* NetworkSession.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +149,9 @@
 		BFF4DA002E21C2C90097BE82 /* AgitationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgitationMode.swift; sourceTree = "<group>"; };
 		BFF4DA022E21C31E0097BE82 /* AgitationSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgitationSelectionView.swift; sourceTree = "<group>"; };
 		BFF4DA042E21C8C30097BE82 /* CustomAgitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAgitationView.swift; sourceTree = "<group>"; };
+		BFFA1C512E4A19D4005C24F4 /* CodableModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableModels.swift; sourceTree = "<group>"; };
+		BFFA1C522E4A19D4005C24F4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BFFA1C552E4A19F7005C24F4 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -427,6 +433,7 @@
 				BFB0C3D02E3E4E7D00296B97 /* GitHubDataService.swift */,
 				BF4109342E311CA800BE2AD8 /* CoreDataService.swift */,
 				BFA0C7A62E21349100132936 /* DevelopmentCalculator.swift */,
+				BFFA1C552E4A19F7005C24F4 /* NetworkSession.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -434,6 +441,8 @@
 		BFA0C7A32E21341F00132936 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BFFA1C512E4A19D4005C24F4 /* CodableModels.swift */,
+				BFFA1C522E4A19D4005C24F4 /* Constants.swift */,
 				BF8A5A002E44BA0E00D689C5 /* StagingStage.swift */,
 				BF4109252E31148700BE2AD8 /* DevelopmentParameters.swift */,
 				BFB0C3F92E3E58D900296B97 /* JournalRecord.swift */,
@@ -586,6 +595,8 @@
 				BF4109712E3166F400BE2AD8 /* TimerHeaderView.swift in Sources */,
 				BF8A5A012E44BA0E00D689C5 /* StagingStage.swift in Sources */,
 				BF4109722E3166F400BE2AD8 /* AgitationIndicatorView.swift in Sources */,
+				BFFA1C532E4A19D4005C24F4 /* CodableModels.swift in Sources */,
+				BFFA1C542E4A19D4005C24F4 /* Constants.swift in Sources */,
 				BF4109732E3166F400BE2AD8 /* TimerProgressView.swift in Sources */,
 				BFB0C3FC2E3E58D900296B97 /* JournalRecord.swift in Sources */,
 				BF4109162E31052900BE2AD8 /* ActionButtonsView.swift in Sources */,
@@ -618,6 +629,7 @@
 				BFA0C7A92E2134BA00132936 /* DevelopmentCalculator.swift in Sources */,
 				BFDCB7612E382558000F6CE5 /* AnalogProcess.xcdatamodeld in Sources */,
 				BFE12EC12E360C010044A3A4 /* AppPreview.swift in Sources */,
+				BFFA1C562E4A19F7005C24F4 /* NetworkSession.swift in Sources */,
 				BFB0C3D12E3E4E7D00296B97 /* GitHubDataService.swift in Sources */,
 				BFA0C7A02E2133FC00132936 /* Persistence.swift in Sources */,
 			);
