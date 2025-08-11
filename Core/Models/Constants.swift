@@ -15,6 +15,7 @@ enum Constants {
         static let baseURL = "https://raw.githubusercontent.com/maximeliseyev/filmdevelopmentdata/main"
         static let filmsEndpoint = "/films.json"
         static let developersEndpoint = "/developers.json"
+        static let fixersEndpoint = "/fixers.json"
         static let developmentTimesEndpoint = "/development-times.json"
         static let temperatureMultipliersEndpoint = "/temperature-multipliers.json"
     }

@@ -50,7 +50,7 @@ extension View {
         self
             .padding(.vertical, 12)
             .padding(.horizontal, 16)
-            .background(.gray.opacity(0.1))
+            .background(Color.gray.opacity(0.1))
             .cornerRadius(12)
     }
     
@@ -59,7 +59,7 @@ extension View {
     func parameterCardStyle() -> some View {
         self
             .padding()
-            .background(.gray.opacity(0.2))
+            .background(Color.gray.opacity(0.2))
             .cornerRadius(8)
     }
     
@@ -69,13 +69,13 @@ extension View {
         self
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
-            .background(.gray.opacity(0.1))
+            .background(Color.gray.opacity(0.1))
     }
 }
 
 // MARK: - Text Styles
 extension View {
-    /// Стиль заголовка с белым текстом (для темных фонов)
+    /// Стиль заголовка с адаптивным цветом текста
     /// Использование: Text("Заголовок").headlineTextStyle()
     func headlineTextStyle() -> some View {
         self
@@ -83,7 +83,7 @@ extension View {
             .foregroundColor(.primary)
     }
     
-    /// Стиль основного текста с белым цветом (для темных фонов)
+    /// Стиль основного текста с адаптивным цветом
     /// Использование: Text("Текст").bodyTextStyle()
     func bodyTextStyle() -> some View {
         self
@@ -105,6 +105,7 @@ extension View {
         self
             .font(.system(.body, design: .monospaced))
             .fontWeight(.medium)
+            .foregroundColor(.primary)
     }
     
     /// Стиль моноширинного заголовка
@@ -113,6 +114,7 @@ extension View {
         self
             .font(.system(.title3, design: .monospaced))
             .fontWeight(.bold)
+            .foregroundColor(.primary)
     }
     
     /// Стиль заголовка для picker'ов
@@ -204,5 +206,67 @@ extension View {
         self
             .font(.body)
             .foregroundColor(.primary)
+    }
+}
+
+// MARK: - Background Styles
+extension View {
+    /// Основной фон приложения
+    /// Использование: VStack { }.primaryBackground()
+    func primaryBackground() -> some View {
+        self
+            .background(Color.gray.opacity(0.05))
+    }
+    
+    /// Вторичный фон
+    /// Использование: VStack { }.secondaryBackground()
+    func secondaryBackground() -> some View {
+        self
+            .background(Color.gray.opacity(0.1))
+    }
+}
+
+// MARK: - Selection Styles
+extension View {
+    /// Стиль для выбранных элементов
+    /// Использование: HStack { }.selectionStyle()
+    func selectionStyle() -> some View {
+        self
+            .background(Color.blue.opacity(0.15))
+            .cornerRadius(8)
+    }
+    
+    /// Стиль границы для выбранных элементов
+    /// Использование: HStack { }.selectionBorderStyle()
+    func selectionBorderStyle() -> some View {
+        self
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color.blue, lineWidth: 2)
+            )
+    }
+}
+
+// MARK: - Timer Styles
+extension Shape {
+    /// Стиль активного таймера
+    /// Использование: Circle().timerActiveStyle()
+    func timerActiveStyle() -> some View {
+        self
+            .fill(Color.blue)
+    }
+    
+    /// Стиль неактивного таймера
+    /// Использование: Circle().timerInactiveStyle()
+    func timerInactiveStyle() -> some View {
+        self
+            .fill(Color.gray.opacity(0.3))
+    }
+    
+    /// Стиль для агитации
+    /// Использование: Circle().agitationStyle()
+    func agitationStyle() -> some View {
+        self
+            .fill(Color.orange)
     }
 }

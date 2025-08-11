@@ -76,6 +76,8 @@
 		BFFA1C532E4A19D4005C24F4 /* CodableModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C512E4A19D4005C24F4 /* CodableModels.swift */; };
 		BFFA1C542E4A19D4005C24F4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C522E4A19D4005C24F4 /* Constants.swift */; };
 		BFFA1C562E4A19F7005C24F4 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C552E4A19F7005C24F4 /* NetworkSession.swift */; };
+		BFFA1C5D2E4A415E005C24F4 /* FixerPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C5B2E4A415E005C24F4 /* FixerPickerView.swift */; };
+		BFFA1C5E2E4A415E005C24F4 /* FixerSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C5C2E4A415E005C24F4 /* FixerSelectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -152,6 +154,8 @@
 		BFFA1C512E4A19D4005C24F4 /* CodableModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableModels.swift; sourceTree = "<group>"; };
 		BFFA1C522E4A19D4005C24F4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BFFA1C552E4A19F7005C24F4 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
+		BFFA1C5B2E4A415E005C24F4 /* FixerPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerPickerView.swift; sourceTree = "<group>"; };
+		BFFA1C5C2E4A415E005C24F4 /* FixerSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -351,6 +355,8 @@
 		BF41095A2E3163E400BE2AD8 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				BFFA1C5B2E4A415E005C24F4 /* FixerPickerView.swift */,
+				BFFA1C5C2E4A415E005C24F4 /* FixerSelectionView.swift */,
 				BF553C692E43268D009F1525 /* BasePickerView.swift */,
 				BFE12EC22E363AC00044A3A4 /* CalculatedTimeSection.swift */,
 				BF4109562E3163E400BE2AD8 /* DeveloperPickerView.swift */,
@@ -628,6 +634,8 @@
 				BF4109642E31641B00BE2AD8 /* TemperaturePickerView.swift in Sources */,
 				BFA0C7A92E2134BA00132936 /* DevelopmentCalculator.swift in Sources */,
 				BFDCB7612E382558000F6CE5 /* AnalogProcess.xcdatamodeld in Sources */,
+				BFFA1C5D2E4A415E005C24F4 /* FixerPickerView.swift in Sources */,
+				BFFA1C5E2E4A415E005C24F4 /* FixerSelectionView.swift in Sources */,
 				BFE12EC12E360C010044A3A4 /* AppPreview.swift in Sources */,
 				BFFA1C562E4A19F7005C24F4 /* NetworkSession.swift in Sources */,
 				BFB0C3D12E3E4E7D00296B97 /* GitHubDataService.swift in Sources */,
@@ -793,7 +801,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.6;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -829,7 +837,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.6;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

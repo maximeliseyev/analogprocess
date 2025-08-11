@@ -80,6 +80,12 @@ struct DevelopmentParametersView: View {
                 onTap: { viewModel.showTemperaturePicker = true },
                 isDisabled: false
             )
+            
+            FixerSelectionView(
+                fixers: viewModel.fixers,
+                selectedFixer: $viewModel.selectedFixer,
+                onFixerPickerTap: { viewModel.showFixerPicker = true }
+            )
         }
         .padding(.horizontal, 20)
     }

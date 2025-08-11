@@ -171,6 +171,14 @@
 "fixingTime" = "Fixing time";
 "startFixing" = "Start fixing";
 
+// MARK: - Fixer Selection
+"fixer" = "Fixer";
+"selectFixer" = "Select fixer";
+"fixerSelection" = "Fixer Selection";
+"rapidFixer" = "Rapid Fixer";
+"acidFixer" = "Acid Fixer";
+"neutralFixer" = "Neutral Fixer";
+
 // MARK: - Agitation
 "agitationSelection" = "Select Agitation Mode";
 "agitationDescription" = "Agitation is the process of stirring the developer for uniform film development";

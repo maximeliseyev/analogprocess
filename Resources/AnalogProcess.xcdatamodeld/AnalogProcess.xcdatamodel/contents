@@ -38,6 +38,13 @@
         <attribute name="type" optional="YES" attributeType="String"/>
         <relationship name="developmentTimes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DevelopmentTime" inverseName="film" inverseEntity="DevelopmentTime"/>
     </entity>
+    <entity name="Fixer" representedClassName="Fixer" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="time" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="warning" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="TemperatureMultiplier" representedClassName="TemperatureMultiplier" syncable="YES" codeGenerationType="class">
         <attribute name="multiplier" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="temperature" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
