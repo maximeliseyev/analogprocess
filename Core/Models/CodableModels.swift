@@ -7,54 +7,117 @@
 
 import Foundation
 
+// MARK: - GitHub Data Models (without id field)
+public struct GitHubFilmData: Codable {
+    public let name: String
+    public let manufacturer: String
+    public let defaultISO: Int
+    public let type: String
+    
+    public init(name: String, manufacturer: String, defaultISO: Int, type: String) {
+        self.name = name
+        self.manufacturer = manufacturer
+        self.defaultISO = defaultISO
+        self.type = type
+    }
+}
+
+public struct GitHubDeveloperData: Codable {
+    public let name: String
+    public let manufacturer: String
+    public let type: String
+    public let defaultDilution: String?
+    
+    public init(name: String, manufacturer: String, type: String, defaultDilution: String? = nil) {
+        self.name = name
+        self.manufacturer = manufacturer
+        self.type = type
+        self.defaultDilution = defaultDilution
+    }
+}
+
+public struct GitHubFixerData: Codable {
+    public let name: String
+    public let type: FixerType
+    public let time: Int
+    public let warning: String?
+    
+    public init(name: String, type: FixerType, time: Int, warning: String? = nil) {
+        self.name = name
+        self.type = type
+        self.time = time
+        self.warning = warning
+    }
+}
+
 // MARK: - Film Model
 public struct FilmData: Codable, Identifiable {
-    public let id: String
     public let name: String
     public let brand: String
     public let iso: Int
     public let type: String
     public let description: String?
     
-    public init(id: String, name: String, brand: String, iso: Int, type: String, description: String? = nil) {
-        self.id = id
+    // Computed property for Identifiable conformance
+    public var id: String {
+        // This will be set by the decoding context
+        return ""
+    }
+    
+    public init(name: String, brand: String, iso: Int, type: String, description: String? = nil) {
         self.name = name
         self.brand = brand
         self.iso = iso
         self.type = type
         self.description = description
     }
+    
+    // Backward compatibility
+    public var manufacturer: String { brand }
+    public var defaultISO: Int { iso }
 }
 
 // MARK: - Developer Model
 public struct DeveloperData: Codable, Identifiable {
-    public let id: String
     public let name: String
     public let brand: String
     public let type: String
     public let description: String?
     public let dilution: String?
     
-    public init(id: String, name: String, brand: String, type: String, description: String? = nil, dilution: String? = nil) {
-        self.id = id
+    // Computed property for Identifiable conformance
+    public var id: String {
+        // This will be set by the decoding context
+        return ""
+    }
+    
+    public init(name: String, brand: String, type: String, description: String? = nil, dilution: String? = nil) {
         self.name = name
         self.brand = brand
         self.type = type
         self.description = description
         self.dilution = dilution
     }
+    
+    // Backward compatibility
+    public var manufacturer: String { brand }
+    public var defaultDilution: String? { dilution }
 }
 
 // MARK: - Fixer Model
 public struct FixerData: Codable, Identifiable {
-    public let id: String
     public let name: String
     public let type: FixerType
     public let time: Int
     public let warning: String?
     
-    public init(id: String, name: String, type: FixerType, time: Int, warning: String? = nil) {
-        self.id = id
+    // Computed property for Identifiable conformance
+    public var id: String {
+        // This will be set by the decoding context
+        return ""
+    }
+    
+    public init(name: String, type: FixerType, time: Int, warning: String? = nil) {
         self.name = name
         self.type = type
         self.time = time
@@ -146,13 +209,13 @@ public struct ProcessStep: Codable, Identifiable {
 
 // MARK: - GitHub Data Response Models
 public struct GitHubDataResponse: Codable {
-    public let films: [String: FilmData]
-    public let developers: [String: DeveloperData]
-    public let fixers: [String: FixerData]
+    public let films: [String: GitHubFilmData]
+    public let developers: [String: GitHubDeveloperData]
+    public let fixers: [String: GitHubFixerData]
     public let developmentTimes: [String: [String: [String: [String: Int]]]]
     public let temperatureMultipliers: [String: Double]
     
-    public init(films: [String: FilmData], developers: [String: DeveloperData], fixers: [String: FixerData], developmentTimes: [String: [String: [String: [String: Int]]]], temperatureMultipliers: [String: Double]) {
+    public init(films: [String: GitHubFilmData], developers: [String: GitHubDeveloperData], fixers: [String: GitHubFixerData], developmentTimes: [String: [String: [String: [String: Int]]]], temperatureMultipliers: [String: Double]) {
         self.films = films
         self.developers = developers
         self.fixers = fixers

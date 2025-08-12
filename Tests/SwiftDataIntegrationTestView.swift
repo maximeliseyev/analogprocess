@@ -9,96 +9,119 @@ import SwiftUI
 import SwiftData
 
 struct SwiftDataIntegrationTestView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var swiftDataFilms: [SwiftDataFilm]
-    @Query private var swiftDataDevelopers: [SwiftDataDeveloper]
-    @Query private var swiftDataFixers: [SwiftDataFixer]
-    @Query private var swiftDataTemperatureMultipliers: [SwiftDataTemperatureMultiplier]
+    @State private var isLoading = false
+    @State private var errorMessage: String?
+    @State private var successMessage: String?
+    @State private var filmsCount = 0
+    @State private var developersCount = 0
+    @State private var fixersCount = 0
     
-    @StateObject private var swiftDataService = SwiftDataService.shared
+    private let swiftDataService = SwiftDataService.shared
     
     var body: some View {
         NavigationView {
-            List {
-                Section("SwiftData Films (\(swiftDataFilms.count))") {
-                    ForEach(swiftDataFilms) { film in
-                        VStack(alignment: .leading) {
-                            Text(film.name)
-                                .font(.headline)
-                            Text("\(film.manufacturer) - ISO \(film.defaultISO)")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
-                    }
+            VStack(spacing: 20) {
+                Text("SwiftData Integration Test")
+                    .font(.title)
+                    .padding()
+                
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Current Data Count:")
+                        .font(.headline)
+                    Text("Films: \(filmsCount)")
+                    Text("Developers: \(developersCount)")
+                    Text("Fixers: \(fixersCount)")
+                }
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
+                
+                if isLoading {
+                    ProgressView("Syncing with GitHub...")
+                        .padding()
                 }
                 
-                Section("SwiftData Developers (\(swiftDataDevelopers.count))") {
-                    ForEach(swiftDataDevelopers) { developer in
-                        VStack(alignment: .leading) {
-                            Text(developer.name)
-                                .font(.headline)
-                            Text("\(developer.manufacturer) - \(developer.defaultDilution ?? "N/A")")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
-                    }
+                if let errorMessage = errorMessage {
+                    Text("Error: \(errorMessage)")
+                        .foregroundColor(.red)
+                        .padding()
+                        .background(Color.red.opacity(0.1))
+                        .cornerRadius(10)
                 }
                 
-                Section("SwiftData Fixers (\(swiftDataFixers.count))") {
-                    ForEach(swiftDataFixers) { fixer in
-                        VStack(alignment: .leading) {
-                            Text(fixer.name)
-                                .font(.headline)
-                            Text("\(fixer.type) - \(fixer.time / 60) min")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
-                    }
+                if let successMessage = successMessage {
+                    Text(successMessage)
+                        .foregroundColor(.green)
+                        .padding()
+                        .background(Color.green.opacity(0.1))
+                        .cornerRadius(10)
                 }
                 
-                Section("SwiftData Temperature Multipliers (\(swiftDataTemperatureMultipliers.count))") {
-                    ForEach(swiftDataTemperatureMultipliers) { multiplier in
-                        VStack(alignment: .leading) {
-                            Text("\(multiplier.temperature)°C")
-                                .font(.headline)
-                            Text("Multiplier: \(multiplier.multiplier, specifier: "%.2f")")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
+                VStack(spacing: 15) {
+                    Button("Sync with GitHub") {
+                        syncWithGitHub()
                     }
+                    .buttonStyle(.borderedProminent)
+                    .disabled(isLoading)
+                    
+                    Button("Refresh Counts") {
+                        refreshCounts()
+                    }
+                    .buttonStyle(.bordered)
+                    .disabled(isLoading)
+                    
+                    Button("Clear All Data") {
+                        clearAllData()
+                    }
+                    .buttonStyle(.bordered)
+                    .foregroundColor(.red)
+                    .disabled(isLoading)
                 }
+                
+                Spacer()
             }
-            .navigationTitle("SwiftData Integration Test")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Load Data") {
-                        Task {
-                            await loadTestData()
-                        }
-                    }
+            .padding()
+            .onAppear {
+                refreshCounts()
+            }
+        }
+    }
+    
+    private func syncWithGitHub() {
+        isLoading = true
+        errorMessage = nil
+        successMessage = nil
+        
+        Task {
+            do {
+                try await swiftDataService.syncDataFromGitHub()
+                await MainActor.run {
+                    successMessage = "Successfully synced with GitHub!"
+                    refreshCounts()
+                    isLoading = false
                 }
-                
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Clear") {
-                        clearData()
-                    }
+            } catch {
+                await MainActor.run {
+                    errorMessage = "Error: \(error.localizedDescription)"
+                    isLoading = false
                 }
             }
         }
     }
     
-    private func loadTestData() async {
-        await MainActor.run {
-            swiftDataService.loadInitialData()
-        }
+    private func refreshCounts() {
+        filmsCount = swiftDataService.getFilms().count
+        developersCount = swiftDataService.getDevelopers().count
+        fixersCount = swiftDataService.getFixers().count
     }
     
-    private func clearData() {
+    private func clearAllData() {
         swiftDataService.clearAllData()
+        refreshCounts()
+        successMessage = "All data cleared"
     }
 }
 
 #Preview {
     SwiftDataIntegrationTestView()
-        .modelContainer(for: [SwiftDataFilm.self, SwiftDataDeveloper.self, SwiftDataFixer.self, SwiftDataTemperatureMultiplier.self], inMemory: true)
 }

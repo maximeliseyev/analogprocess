@@ -46,46 +46,67 @@ struct DevelopmentParametersView: View {
     
     var body: some View {
         VStack(spacing: 12) {
-            ParameterRow(
-                label: LocalizedStringKey("film"),
-                value: viewModel.selectedFilm?.name ?? "Select Film",
-                onTap: { viewModel.showFilmPicker = true },
-                isDisabled: false
-            )
-            
-            ParameterRow(
-                label: LocalizedStringKey("developer"),
-                value: viewModel.selectedDeveloper?.name ?? "Select Developer",
-                onTap: { viewModel.showDeveloperPicker = true },
-                isDisabled: false
-            )
-            
-            ParameterRow(
-                label: LocalizedStringKey("dilution"),
-                value: viewModel.selectedDilution.isEmpty ? "Select Dilution" : viewModel.selectedDilution,
-                onTap: { viewModel.showDilutionPicker = true },
-                isDisabled: viewModel.selectedFilm == nil || viewModel.selectedDeveloper == nil
-            )
-            
-            ParameterRow(
-                label: LocalizedStringKey("iso"),
-                value: "\(viewModel.iso)",
-                onTap: { viewModel.showISOPicker = true },
-                isDisabled: viewModel.selectedFilm == nil || viewModel.selectedDeveloper == nil || viewModel.selectedDilution.isEmpty
-            )
-            
-            ParameterRow(
-                label: LocalizedStringKey("temperature"),
-                value: "\(Int(viewModel.temperature))°C (Standard)",
-                onTap: { viewModel.showTemperaturePicker = true },
-                isDisabled: false
-            )
-            
-            FixerSelectionView(
-                fixers: viewModel.fixers,
-                selectedFixer: $viewModel.selectedFixer,
-                onFixerPickerTap: { viewModel.showFixerPicker = true }
-            )
+            if viewModel.selectedMode == .developing {
+                // Development parameters
+                ParameterRow(
+                    label: LocalizedStringKey("film"),
+                    value: viewModel.selectedFilm?.name ?? "Select Film",
+                    onTap: { viewModel.showFilmPicker = true },
+                    isDisabled: false
+                )
+                
+                ParameterRow(
+                    label: LocalizedStringKey("developer"),
+                    value: viewModel.selectedDeveloper?.name ?? "Select Developer",
+                    onTap: { viewModel.showDeveloperPicker = true },
+                    isDisabled: false
+                )
+                
+                ParameterRow(
+                    label: LocalizedStringKey("dilution"),
+                    value: viewModel.selectedDilution.isEmpty ? "Select Dilution" : viewModel.selectedDilution,
+                    onTap: { viewModel.showDilutionPicker = true },
+                    isDisabled: viewModel.selectedFilm == nil || viewModel.selectedDeveloper == nil
+                )
+                
+                ParameterRow(
+                    label: LocalizedStringKey("iso"),
+                    value: "\(viewModel.iso)",
+                    onTap: { viewModel.showISOPicker = true },
+                    isDisabled: viewModel.selectedFilm == nil || viewModel.selectedDeveloper == nil || viewModel.selectedDilution.isEmpty
+                )
+                
+                ParameterRow(
+                    label: LocalizedStringKey("temperature"),
+                    value: "\(Int(viewModel.temperature))°C (Standard)",
+                    onTap: { viewModel.showTemperaturePicker = true },
+                    isDisabled: false
+                )
+            } else {
+                // Fixer parameters
+                ParameterRow(
+                    label: LocalizedStringKey("film"),
+                    value: viewModel.selectedFilm?.name ?? "Select Film",
+                    onTap: { viewModel.showFilmPicker = true },
+                    isDisabled: false
+                )
+                
+                ParameterRow(
+                    label: LocalizedStringKey("fixer"),
+                    value: viewModel.selectedFixer?.name ?? "Select Fixer",
+                    onTap: { viewModel.showFixerPicker = true },
+                    isDisabled: false
+                )
+                
+                ParameterRow(
+                    label: LocalizedStringKey("temperature"),
+                    value: "\(Int(viewModel.temperature))°C (Standard)",
+                    onTap: { viewModel.showTemperaturePicker = true },
+                    isDisabled: false
+                )
+                
+               
+            }
         }
         .padding(.horizontal, 20)
     }

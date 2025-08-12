@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 // MARK: - GitHub Data Service Errors
 public enum GitHubDataServiceError: LocalizedError {
@@ -49,6 +50,7 @@ public class GitHubDataService: ObservableObject {
     // MARK: - Data Download
     
     public func downloadAllData() async throws -> GitHubDataResponse {
+        print("DEBUG: Starting downloadAllData")
         isDownloading = true
         downloadProgress = Constants.Progress.initialProgress
         
@@ -57,28 +59,40 @@ public class GitHubDataService: ObservableObject {
             downloadProgress = Constants.Progress.initialProgress
         }
         
-        async let filmsData = downloadFilms()
-        async let developersData = downloadDevelopers()
-        async let fixersData = downloadFixers()
-        async let developmentTimesData = downloadDevelopmentTimes()
-        async let temperatureMultipliersData = downloadTemperatureMultipliers()
-        
-        let (films, developers, fixers, developmentTimes, temperatureMultipliers) = try await (filmsData, developersData, fixersData, developmentTimesData, temperatureMultipliersData)
-        
-        downloadProgress = Constants.Progress.maxProgress
-        lastSyncDate = Date()
-        saveLastSyncDate()
-        
-        return GitHubDataResponse(
-            films: films,
-            developers: developers,
-            fixers: fixers,
-            developmentTimes: developmentTimes,
-            temperatureMultipliers: temperatureMultipliers
-        )
+        do {
+            async let filmsData = downloadFilms()
+            async let developersData = downloadDevelopers()
+            async let fixersData = downloadFixers()
+            async let developmentTimesData = downloadDevelopmentTimes()
+            async let temperatureMultipliersData = downloadTemperatureMultipliers()
+            
+            let (films, developers, fixers, developmentTimes, temperatureMultipliers) = try await (filmsData, developersData, fixersData, developmentTimesData, temperatureMultipliersData)
+            
+            print("DEBUG: All data downloaded successfully")
+            print("DEBUG: Films count: \(films.count)")
+            print("DEBUG: Developers count: \(developers.count)")
+            print("DEBUG: Fixers count: \(fixers.count)")
+            print("DEBUG: Development times count: \(developmentTimes.count)")
+            print("DEBUG: Temperature multipliers count: \(temperatureMultipliers.count)")
+            
+            downloadProgress = Constants.Progress.maxProgress
+            lastSyncDate = Date()
+            saveLastSyncDate()
+            
+            return GitHubDataResponse(
+                films: films,
+                developers: developers,
+                fixers: fixers,
+                developmentTimes: developmentTimes,
+                temperatureMultipliers: temperatureMultipliers
+            )
+        } catch {
+            print("DEBUG: Error in downloadAllData: \(error)")
+            throw error
+        }
     }
     
-    private func downloadFilms() async throws -> [String: FilmData] {
+    private func downloadFilms() async throws -> [String: GitHubFilmData] {
         let url = URL(string: Constants.Network.baseURL + Constants.Network.filmsEndpoint)!
         let (data, response) = try await networkSession.data(from: url)
         
@@ -91,15 +105,16 @@ public class GitHubDataService: ObservableObject {
         }
         
         do {
-            let films = try jsonDecoder.decode([String: FilmData].self, from: data)
+            let films = try jsonDecoder.decode([String: GitHubFilmData].self, from: data)
             downloadProgress += Constants.Progress.downloadStepIncrement
             return films
         } catch {
+            print("DEBUG: Films decoding error: \(error)")
             throw GitHubDataServiceError.decodingError
         }
     }
     
-    private func downloadDevelopers() async throws -> [String: DeveloperData] {
+    private func downloadDevelopers() async throws -> [String: GitHubDeveloperData] {
         let url = URL(string: Constants.Network.baseURL + Constants.Network.developersEndpoint)!
         let (data, response) = try await networkSession.data(from: url)
         
@@ -112,15 +127,16 @@ public class GitHubDataService: ObservableObject {
         }
         
         do {
-            let developers = try jsonDecoder.decode([String: DeveloperData].self, from: data)
+            let developers = try jsonDecoder.decode([String: GitHubDeveloperData].self, from: data)
             downloadProgress += Constants.Progress.downloadStepIncrement
             return developers
         } catch {
+            print("DEBUG: Developers decoding error: \(error)")
             throw GitHubDataServiceError.decodingError
         }
     }
     
-    private func downloadFixers() async throws -> [String: FixerData] {
+    private func downloadFixers() async throws -> [String: GitHubFixerData] {
         let url = URL(string: Constants.Network.baseURL + Constants.Network.fixersEndpoint)!
         let (data, response) = try await networkSession.data(from: url)
         
@@ -133,10 +149,11 @@ public class GitHubDataService: ObservableObject {
         }
         
         do {
-            let fixers = try jsonDecoder.decode([String: FixerData].self, from: data)
+            let fixers = try jsonDecoder.decode([String: GitHubFixerData].self, from: data)
             downloadProgress += Constants.Progress.downloadStepIncrement
             return fixers
         } catch {
+            print("DEBUG: Fixer decoding error: \(error)")
             throw GitHubDataServiceError.decodingError
         }
     }
@@ -158,6 +175,7 @@ public class GitHubDataService: ObservableObject {
             downloadProgress += Constants.Progress.downloadStepIncrement
             return developmentTimes
         } catch {
+            print("DEBUG: Development times decoding error: \(error)")
             throw GitHubDataServiceError.decodingError
         }
     }
@@ -179,6 +197,7 @@ public class GitHubDataService: ObservableObject {
             downloadProgress += Constants.Progress.downloadStepIncrement
             return temperatureMultipliers
         } catch {
+            print("DEBUG: Temperature multipliers decoding error: \(error)")
             throw GitHubDataServiceError.decodingError
         }
     }
