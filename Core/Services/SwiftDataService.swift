@@ -330,30 +330,30 @@ public class SwiftDataService: ObservableObject {
         }
     }
     
-    private func syncFilmsFromGitHub(_ films: [String: FilmData]) {
+    private func syncFilmsFromGitHub(_ films: [String: GitHubFilmData]) {
         for (id, filmData) in films {
             if getFilm(by: id) == nil {
                 let film = SwiftDataFilm(
                     id: id,
                     name: filmData.name,
-                    manufacturer: filmData.brand,
+                    manufacturer: filmData.manufacturer,
                     type: filmData.type,
-                    defaultISO: Int32(filmData.iso)
+                    defaultISO: Int32(filmData.defaultISO)
                 )
                 modelContext.insert(film)
             }
         }
     }
     
-    private func syncDevelopersFromGitHub(_ developers: [String: DeveloperData]) {
+    private func syncDevelopersFromGitHub(_ developers: [String: GitHubDeveloperData]) {
         for (id, developerData) in developers {
             if getDeveloper(by: id) == nil {
                 let developer = SwiftDataDeveloper(
                     id: id,
                     name: developerData.name,
-                    manufacturer: developerData.brand,
+                    manufacturer: developerData.manufacturer,
                     type: developerData.type,
-                    defaultDilution: developerData.dilution
+                    defaultDilution: developerData.defaultDilution
                 )
                 modelContext.insert(developer)
             }
@@ -402,7 +402,7 @@ public class SwiftDataService: ObservableObject {
         }
     }
     
-    private func syncFixersFromGitHub(_ fixers: [String: FixerData]) {
+    private func syncFixersFromGitHub(_ fixers: [String: GitHubFixerData]) {
         for (id, fixerData) in fixers {
             if getFixer(by: id) == nil {
                 let fixer = SwiftDataFixer(

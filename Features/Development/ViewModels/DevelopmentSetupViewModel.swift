@@ -9,6 +9,11 @@ import SwiftUI
 import SwiftData
 import Foundation
 
+enum ProcessMode: String, CaseIterable {
+    case developing = "Developing"
+    case fixer = "Fixer"
+}
+
 @MainActor
 class DevelopmentSetupViewModel: ObservableObject {
     // MARK: - SwiftData Properties
@@ -19,6 +24,9 @@ class DevelopmentSetupViewModel: ObservableObject {
     @Published var temperature: Double = 20.0
     @Published var iso: Int32 = Int32(Constants.ISO.defaultISO)
     @Published var calculatedTime: Int?
+    
+    // MARK: - Mode Selection
+    @Published var selectedMode: ProcessMode = .developing
     
     // MARK: - UI States
     @Published var showFilmPicker = false
@@ -82,6 +90,7 @@ class DevelopmentSetupViewModel: ObservableObject {
     
     func selectFixer(_ fixer: SwiftDataFixer) {
         selectedFixer = fixer
+        calculateTimeAutomatically()
     }
     
     func updateISO(_ newISO: Int) {
@@ -91,6 +100,11 @@ class DevelopmentSetupViewModel: ObservableObject {
     
     func updateTemperature(_ newTemperature: Double) {
         temperature = newTemperature
+        calculateTimeAutomatically()
+    }
+    
+    func updateMode(_ newMode: ProcessMode) {
+        selectedMode = newMode
         calculateTimeAutomatically()
     }
     
@@ -110,26 +124,41 @@ class DevelopmentSetupViewModel: ObservableObject {
     // MARK: - Private Methods
     
     private func calculateTimeAutomatically() {
-        guard let film = selectedFilm,
-              let developer = selectedDeveloper else {
-            calculatedTime = nil
-            print("DEBUG: calculateTimeAutomatically - film or developer is nil")
-            return
+        switch selectedMode {
+        case .developing:
+            guard let film = selectedFilm,
+                  let developer = selectedDeveloper else {
+                calculatedTime = nil
+                print("DEBUG: calculateTimeAutomatically - film or developer is nil")
+                return
+            }
+            
+            let dilutionToUse = selectedDilution.isEmpty ? (developer.defaultDilution ?? "") : selectedDilution
+            print("DEBUG: calculateTimeAutomatically - film: \(film.name), developer: \(developer.name), dilution: \(dilutionToUse), iso: \(iso), temperature: \(temperature)")
+            
+            let parameters = SwiftDataDevelopmentParameters(
+                film: film,
+                developer: developer,
+                dilution: dilutionToUse,
+                temperature: temperature,
+                iso: Int(iso)
+            )
+            
+            calculatedTime = swiftDataService.calculateDevelopmentTime(parameters: parameters)
+            print("DEBUG: calculateTimeAutomatically - calculated time: \(calculatedTime ?? -1)")
+            
+        case .fixer:
+            guard let _ = selectedFilm,
+                  let fixer = selectedFixer else {
+                calculatedTime = nil
+                print("DEBUG: calculateTimeAutomatically - film or fixer is nil")
+                return
+            }
+            
+            // For fixer mode, we use the fixer time directly
+            calculatedTime = Int(fixer.time)
+            print("DEBUG: calculateTimeAutomatically - fixer time: \(calculatedTime ?? -1)")
         }
-        
-        let dilutionToUse = selectedDilution.isEmpty ? (developer.defaultDilution ?? "") : selectedDilution
-        print("DEBUG: calculateTimeAutomatically - film: \(film.name), developer: \(developer.name), dilution: \(dilutionToUse), iso: \(iso), temperature: \(temperature)")
-        
-        let parameters = SwiftDataDevelopmentParameters(
-            film: film,
-            developer: developer,
-            dilution: dilutionToUse,
-            temperature: temperature,
-            iso: Int(iso)
-        )
-        
-        calculatedTime = swiftDataService.calculateDevelopmentTime(parameters: parameters)
-        print("DEBUG: calculateTimeAutomatically - calculated time: \(calculatedTime ?? -1)")
     }
     
     private func getAvailableDilutionsForSwiftData() -> [String] {

@@ -17,6 +17,18 @@ struct DevelopmentSetupView: View {
                 Color(.systemBackground).ignoresSafeArea()
                 
                 VStack(spacing: 30) {
+                    // Mode Selection Picker
+                    Picker("Process Mode", selection: $viewModel.selectedMode) {
+                        ForEach(ProcessMode.allCases, id: \.self) { mode in
+                            Text(mode.rawValue).tag(mode)
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .padding(.horizontal, 20)
+                    .onChange(of: viewModel.selectedMode) { _, newMode in
+                        viewModel.updateMode(newMode)
+                    }
+                    
                     DevelopmentParametersView(viewModel: viewModel)
                     
                     if let calculatedTime = viewModel.calculatedTime {
@@ -24,7 +36,7 @@ struct DevelopmentSetupView: View {
                             time: calculatedTime,
                             temperature: viewModel.temperature,
                             filmName: viewModel.selectedFilmName,
-                            developerName: viewModel.selectedDeveloperName,
+                            developerName: viewModel.selectedMode == .developing ? viewModel.selectedDeveloperName : "Fixer",
                             onCalculatorTap: {
                                 viewModel.navigateToCalculator = true
                             },
