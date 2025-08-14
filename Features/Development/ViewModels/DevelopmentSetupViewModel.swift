@@ -162,25 +162,29 @@ class DevelopmentSetupViewModel: ObservableObject {
     }
     
     private func getAvailableDilutionsForSwiftData() -> [String] {
-        guard let _ = selectedFilm,
+        guard let film = selectedFilm,
               let developer = selectedDeveloper else {
             return []
         }
-        
-        // TODO: Реализовать получение доступных разведений для SwiftData
-        // Пока возвращаем разведение по умолчанию
-        return [developer.defaultDilution ?? ""]
+
+        let dilutions = swiftDataService.getAvailableDilutions(filmId: film.id, developerId: developer.id)
+        if dilutions.isEmpty {
+            return [developer.defaultDilution ?? ""]
+        }
+        return dilutions
     }
     
     private func getAvailableISOsForSwiftData() -> [Int] {
         guard let film = selectedFilm,
-              let _ = selectedDeveloper,
+              let developer = selectedDeveloper,
               !selectedDilution.isEmpty else {
             return []
         }
-        
-        // TODO: Реализовать получение доступных ISO для SwiftData
-        // Пока возвращаем ISO по умолчанию
-        return [Int(film.defaultISO)]
+
+        let isos = swiftDataService.getAvailableISOs(filmId: film.id, developerId: developer.id, dilution: selectedDilution)
+        if isos.isEmpty {
+            return [Int(film.defaultISO)]
+        }
+        return isos
     }
 }
