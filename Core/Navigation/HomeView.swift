@@ -29,24 +29,6 @@ public struct HomeView: View {
                 Spacer()
             }
             .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                // Кастомный заголовок с поддержкой многострочности
-                ToolbarItem(placement: .principal) {
-                    Text(LocalizedStringKey("mainTitle"))
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .lineLimit(2)
-                        .multilineTextAlignment(.center)
-                        .minimumScaleFactor(0.8)
-                }
-                
-                // Кнопка настроек справа
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: SettingsView(colorScheme: $colorScheme)) {
-                        Image(systemName: "gearshape")
-                    }
-                }
-            }
         }
     }
     
