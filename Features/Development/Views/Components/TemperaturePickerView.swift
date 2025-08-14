@@ -17,31 +17,31 @@ struct TemperaturePickerView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(.systemBackground).ignoresSafeArea()
+                Color.clear.ignoresSafeArea()
                 
                 List(temperatures, id: \.self) { temp in
-                Button(action: {
-                    temperature = temp
-                    onDismiss()
-                }) {
-                    HStack {
-                        Text("\(temp, specifier: "%.1f")\(String(localized: "degreesCelsius"))")
-                            .primaryTextStyle()
-                        
-                        Spacer()
-                        
-                        if abs(temperature - temp) < 0.1 {
-                            Image(systemName: "checkmark")
-                                .checkmarkStyle()
+                    Button(action: {
+                        temperature = temp
+                        onDismiss()
+                    }) {
+                        HStack {
+                            Text("\(temp, specifier: "%.1f")\(String(localized: "degreesCelsius"))")
+                                .font(.body)
+                                .foregroundColor(.primary)
+                            
+                            Spacer()
+                            
+                            if abs(temperature - temp) < 0.1 {
+                                Image(systemName: "checkmark")
+                                    .checkmarkStyle()
+                            }
                         }
                     }
-                }
-                .buttonStyle(PlainButtonStyle())
+                    .buttonStyle(PlainButtonStyle())
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(LocalizedStringKey("selectTemperature"))
-        }
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button(LocalizedStringKey("cancel")) {
@@ -50,6 +50,15 @@ struct TemperaturePickerView: View {
                 }
             }
         }
+        .overlay(
+            Group {
+                // если выбора нет (только одна температура в данных) — блокируем взаимодействие прозрачной маской
+                if temperatures.count <= 1 {
+                    Color.black.opacity(0.0001)
+                }
+            }
+        )
+    }
     }
 
 

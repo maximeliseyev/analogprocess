@@ -93,6 +93,13 @@ struct DevelopmentSetupView: View {
                 }
             )
         }
+        .sheet(isPresented: $viewModel.showISOPicker) {
+            ISOPickerView(
+                iso: $viewModel.iso,
+                onDismiss: { viewModel.showISOPicker = false },
+                availableISOs: viewModel.getAvailableISOs()
+            )
+        }
         .navigationDestination(isPresented: $viewModel.navigateToCalculator) {
             if let calculatedTime = viewModel.calculatedTime {
                 CalculatorView(initialTime: calculatedTime, initialTemperature: viewModel.temperature)

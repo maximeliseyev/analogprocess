@@ -48,6 +48,7 @@
 "developmentCompleteForProcess" = "Проявка завершена для процесса: %@";
 "selectDevelopmentParameters" = "Выберите параметры проявки для запуска таймера";
 "startTimer" = "Запустить таймер";
+"saveToJournal" = "Сохранить в журнал";
 
 // MARK: - Film & Developer
 "film" = "Плёнка:";
@@ -326,6 +327,7 @@
 
 // MARK: - Development
 "development" = "Проявка";
+"noAlternativeOptions" = "Доступен только один вариант";
 
 // MARK: - Manuals
 "manuals" = "Мануалы";

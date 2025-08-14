@@ -67,6 +67,34 @@ class DevelopmentSetupViewModel: ObservableObject {
         return selectedDeveloper?.name ?? ""
     }
     
+    // When only a single option exists, corresponding pickers should be disabled
+    var dilutionOptions: [String] {
+        getAvailableDilutions()
+    }
+    
+    var isoOptions: [Int] {
+        getAvailableISOs()
+    }
+    
+    var isDilutionSelectionLocked: Bool {
+        dilutionOptions.count <= 1
+    }
+    
+    var isISOSelectionLocked: Bool {
+        isoOptions.count <= 1
+    }
+    
+    private var temperatureOptionsCount: Int {
+        let unique = Set(swiftDataService.temperatureMultipliers.map { Int($0.temperature) })
+        return unique.isEmpty ? 1 : unique.count
+    }
+
+    var isTemperatureSelectionLocked: Bool {
+        // If either only one ISO option exists for the current context OR only one temperature overall
+        // show the temperature row as locked (non-interactive)
+        isoOptions.count <= 1 || temperatureOptionsCount <= 1
+    }
+    
     // MARK: - Public Methods
     
     func selectFilm(_ film: SwiftDataFilm) {
@@ -133,7 +161,16 @@ class DevelopmentSetupViewModel: ObservableObject {
                 return
             }
             
+            // Auto-select single available dilution/ISO when only one option exists
+            let availableDilutions = getAvailableDilutionsForSwiftData()
+            if availableDilutions.count == 1 {
+                selectedDilution = availableDilutions[0]
+            }
             let dilutionToUse = selectedDilution.isEmpty ? (developer.defaultDilution ?? "") : selectedDilution
+            let availableISOs = getAvailableISOsForSwiftData()
+            if availableISOs.count == 1 {
+                iso = Int32(availableISOs[0])
+            }
             print("DEBUG: calculateTimeAutomatically - film: \(film.name), developer: \(developer.name), dilution: \(dilutionToUse), iso: \(iso), temperature: \(temperature)")
             
             let parameters = SwiftDataDevelopmentParameters(
