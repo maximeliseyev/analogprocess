@@ -43,6 +43,11 @@
 		BF8A5A012E44BA0E00D689C5 /* StagingStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A5A002E44BA0E00D689C5 /* StagingStage.swift */; };
 		BF8A5A072E44BA8200D689C5 /* StagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A5A042E44BA8200D689C5 /* StagingView.swift */; };
 		BF8A5A082E44BA8200D689C5 /* StagingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A5A022E44BA8200D689C5 /* StagingViewModel.swift */; };
+		BF99E9A82E4E814300BB7F0C /* DropViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9A32E4E814300BB7F0C /* DropViewDelegate.swift */; };
+		BF99E9A92E4E814300BB7F0C /* StagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9A52E4E814300BB7F0C /* StagePickerView.swift */; };
+		BF99E9AA2E4E814300BB7F0C /* AddStageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9A22E4E814300BB7F0C /* AddStageButton.swift */; };
+		BF99E9AB2E4E814300BB7F0C /* StageRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9A62E4E814300BB7F0C /* StageRowView.swift */; };
+		BF99E9AC2E4E814300BB7F0C /* StageEditorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9A42E4E814300BB7F0C /* StageEditorSheet.swift */; };
 		BFA0C79B2E2133FC00132936 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFA0C7932E2133FC00132936 /* Assets.xcassets */; };
 		BFA0C79D2E2133FC00132936 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7952E2133FC00132936 /* ContentView.swift */; };
 		BFA0C7A82E2134B400132936 /* CalculationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7A72E2134B300132936 /* CalculationResultView.swift */; };
@@ -124,6 +129,11 @@
 		BF8A5A002E44BA0E00D689C5 /* StagingStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingStage.swift; sourceTree = "<group>"; };
 		BF8A5A022E44BA8200D689C5 /* StagingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingViewModel.swift; sourceTree = "<group>"; };
 		BF8A5A042E44BA8200D689C5 /* StagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingView.swift; sourceTree = "<group>"; };
+		BF99E9A22E4E814300BB7F0C /* AddStageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStageButton.swift; sourceTree = "<group>"; };
+		BF99E9A32E4E814300BB7F0C /* DropViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropViewDelegate.swift; sourceTree = "<group>"; };
+		BF99E9A42E4E814300BB7F0C /* StageEditorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageEditorSheet.swift; sourceTree = "<group>"; };
+		BF99E9A52E4E814300BB7F0C /* StagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagePickerView.swift; sourceTree = "<group>"; };
+		BF99E9A62E4E814300BB7F0C /* StageRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageRowView.swift; sourceTree = "<group>"; };
 		BFA0C7932E2133FC00132936 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFA0C7952E2133FC00132936 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BFA0C7A62E21349100132936 /* DevelopmentCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentCalculator.swift; sourceTree = "<group>"; };
@@ -416,6 +426,7 @@
 		BF8A5A052E44BA8200D689C5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BF99E9A72E4E814300BB7F0C /* Components */,
 				BF8A5A042E44BA8200D689C5 /* StagingView.swift */,
 			);
 			path = Views;
@@ -428,6 +439,18 @@
 				BF8A5A052E44BA8200D689C5 /* Views */,
 			);
 			path = Staging;
+			sourceTree = "<group>";
+		};
+		BF99E9A72E4E814300BB7F0C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				BF99E9A22E4E814300BB7F0C /* AddStageButton.swift */,
+				BF99E9A32E4E814300BB7F0C /* DropViewDelegate.swift */,
+				BF99E9A42E4E814300BB7F0C /* StageEditorSheet.swift */,
+				BF99E9A52E4E814300BB7F0C /* StagePickerView.swift */,
+				BF99E9A62E4E814300BB7F0C /* StageRowView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		BFA0C7992E2133FC00132936 /* Views */ = {
@@ -655,6 +678,11 @@
 				BFF4DA052E21C8C30097BE82 /* CustomAgitationView.swift in Sources */,
 				BFA0C7AD2E2134F800132936 /* JournalView.swift in Sources */,
 				BF28FA592E41F64600C2E34E /* CloudKitService.swift in Sources */,
+				BF99E9A82E4E814300BB7F0C /* DropViewDelegate.swift in Sources */,
+				BF99E9A92E4E814300BB7F0C /* StagePickerView.swift in Sources */,
+				BF99E9AA2E4E814300BB7F0C /* AddStageButton.swift in Sources */,
+				BF99E9AB2E4E814300BB7F0C /* StageRowView.swift in Sources */,
+				BF99E9AC2E4E814300BB7F0C /* StageEditorSheet.swift in Sources */,
 				BF113D412E40DB7D008B5578 /* ThemeManager.swift in Sources */,
 				BF4109402E31318D00BE2AD8 /* TimerViewModel.swift in Sources */,
 				BF4109302E31151800BE2AD8 /* DevelopmentSetupView.swift in Sources */,
@@ -829,7 +857,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.5;
+				MARKETING_VERSION = 0.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -865,7 +893,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.5;
+				MARKETING_VERSION = 0.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
