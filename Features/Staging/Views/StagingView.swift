@@ -9,7 +9,7 @@ struct StagingView: View {
         NavigationView {
             VStack(spacing: 16) {
                 VStack(spacing: 8) {
-                    Text("Добавьте стадии обработки плёнки в нужном порядке")
+                    Text(LocalizedStringKey("stagingIntro"))
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
@@ -57,7 +57,7 @@ struct StagingView: View {
                 if !viewModel.selectedStages.isEmpty {
                     VStack(spacing: 8) {
                         HStack {
-                            Text("Общее время:")
+                            Text(LocalizedStringKey("totalTime"))
                                 .font(.headline)
                             Spacer()
                             Text(formatDuration(viewModel.getTotalDuration()))
@@ -66,7 +66,7 @@ struct StagingView: View {
                         }
                         
                         HStack {
-                            Text("Стадий в процессе:")
+                            Text(LocalizedStringKey("stagesInProcess"))
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                             Spacer()
@@ -83,7 +83,7 @@ struct StagingView: View {
                 
                 Spacer()
             }
-            .navigationTitle("Стадии")
+            .navigationTitle(LocalizedStringKey("staging"))
             .navigationBarTitleDisplayMode(.inline)
         }
         .sheet(isPresented: $showingStagePicker) {
@@ -122,11 +122,11 @@ struct StageRowView: View {
             
             // Информация о стадии
             VStack(alignment: .leading, spacing: 4) {
-                Text(stage.name)
+                Text(LocalizedStringKey(stage.name))
                     .font(.headline)
                     .fontWeight(.medium)
                 
-                Text(stage.description)
+                Text(LocalizedStringKey(stage.description))
                     .font(.caption)
                     .foregroundColor(.secondary)
                     .lineLimit(2)
@@ -148,7 +148,7 @@ struct StageRowView: View {
                     onDelete()
                 }
             } label: {
-                Label("Удалить", systemImage: "trash.fill")
+                Label(LocalizedStringKey("delete"), systemImage: "trash.fill")
             }
             .tint(.red)
         }
@@ -158,7 +158,7 @@ struct StageRowView: View {
                     onDuplicate()
                 }
             } label: {
-                Label("Дублировать", systemImage: "plus.square.on.square")
+                Label(LocalizedStringKey("duplicate"), systemImage: "plus.square.on.square")
             }
             .tint(.blue)
         }
@@ -241,11 +241,11 @@ struct StagePickerView: View {
                     .padding(.vertical, 4)
                 }
             }
-            .navigationTitle("Выберите стадию")
+            .navigationTitle(LocalizedStringKey("chooseStage"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Отмена") {
+                    Button(LocalizedStringKey("cancel")) {
                         dismiss()
                     }
                 }
