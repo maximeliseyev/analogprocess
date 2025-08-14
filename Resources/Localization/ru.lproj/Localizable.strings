@@ -278,6 +278,29 @@
 "homeJournalSubtitle" = "Сохраненные записи";
 "homeManualsSubtitle" = "Статьи и руководства";
 
+// MARK: - Staging
+"staging" = "Стадии";
+"stagingIntro" = "Добавьте стадии обработки плёнки в нужном порядке";
+"totalTime" = "Общее время:";
+"stagesInProcess" = "Стадий в процессе:";
+"chooseStage" = "Выберите стадию";
+"duplicate" = "Дублировать";
+"homeStagingSubtitle" = "Стадии процесса";
+"stagingPrebathName" = "Предварительная ванна";
+"stagingPrebathDescription" = "Предварительная ванна для стабилизации температуры";
+"stagingDevelopName" = "Проявка";
+"stagingDevelopDescription" = "Проявление плёнки";
+"stagingStopBathName" = "Стоп-ванна";
+"stagingStopBathDescription" = "Остановка проявления";
+"stagingBleachName" = "Отбелка";
+"stagingBleachDescription" = "Процесс отбелки";
+"stagingFixerName" = "Фиксаж";
+"stagingFixerDescription" = "Фиксирование изображения";
+"stagingWashName" = "Промывка";
+"stagingWashDescription" = "Промывка плёнки";
+"stagingStabilizeName" = "Стабилизация";
+"stagingStabilizeDescription" = "Стабилизация для долгосрочного хранения";
+
 // MARK: - Settings
 "settings" = "Настройки";
 "settingsTheme" = "Тема";

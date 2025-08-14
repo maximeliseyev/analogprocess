@@ -43,7 +43,7 @@ public struct MainTabView: View {
                     StagingView()
                         .tabItem {
                             Image(systemName: "list.bullet.rectangle")
-                            Text("Стадии")
+                            Text(LocalizedStringKey("staging"))
                         }
                         .tag(3)
                     

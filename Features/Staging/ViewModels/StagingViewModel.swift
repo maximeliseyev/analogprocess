@@ -19,31 +19,14 @@ class StagingViewModel: ObservableObject {
     }
     
     func addStage(_ stage: StagingStage) {
-        // Создаем копию стадии с уникальным ID
         var newStage = stage
         newStage.id = UUID()
-        
-        // Проверяем, сколько раз эта стадия уже была добавлена
-        let stageCount = selectedStages.filter { $0.name == stage.name }.count
-        
-        // Если стадия уже была добавлена, добавляем номер к названию
-        if stageCount > 0 {
-            newStage.name = "\(stage.name) \(stageCount + 1)"
-        }
-        
         selectedStages.append(newStage)
     }
     
     func duplicateStage(_ stage: StagingStage) {
         var duplicatedStage = stage
         duplicatedStage.id = UUID()
-        
-        // Проверяем, сколько раз эта стадия уже была добавлена
-        let stageCount = selectedStages.filter { $0.name.hasPrefix(stage.name) }.count
-        
-        // Добавляем номер к названию
-        duplicatedStage.name = "\(stage.name) \(stageCount + 1)"
-        
         selectedStages.append(duplicatedStage)
     }
     

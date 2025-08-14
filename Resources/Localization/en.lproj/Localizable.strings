@@ -278,6 +278,29 @@
 "homeJournalSubtitle" = "Saved records";
 "homeManualsSubtitle" = "Articles and guides";
 
+// MARK: - Staging
+"staging" = "Stages";
+"stagingIntro" = "Add film processing stages in the desired order";
+"totalTime" = "Total time:";
+"stagesInProcess" = "Stages in process:";
+"chooseStage" = "Choose stage";
+"duplicate" = "Duplicate";
+"homeStagingSubtitle" = "Process stages";
+"stagingPrebathName" = "Prebath";
+"stagingPrebathDescription" = "Pre-soak to stabilize temperature";
+"stagingDevelopName" = "Develop";
+"stagingDevelopDescription" = "Film development";
+"stagingStopBathName" = "Stop Bath";
+"stagingStopBathDescription" = "Stop the development";
+"stagingBleachName" = "Bleach";
+"stagingBleachDescription" = "Bleaching";
+"stagingFixerName" = "Fixer";
+"stagingFixerDescription" = "Fixing the image";
+"stagingWashName" = "Wash";
+"stagingWashDescription" = "Rinsing the film";
+"stagingStabilizeName" = "Stabilize";
+"stagingStabilizeDescription" = "Stabilization for long-term storage";
+
 // MARK: - Settings
 "settings" = "Settings";
 "settingsTheme" = "Theme";

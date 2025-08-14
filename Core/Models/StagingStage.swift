@@ -12,46 +12,46 @@ struct StagingStage: Identifiable, Hashable {
     
     static let defaultStages: [StagingStage] = [
         StagingStage(
-            name: "Prebath",
-            description: "Предварительная ванна для стабилизации температуры",
+            name: "stagingPrebathName",
+            description: "stagingPrebathDescription",
             iconName: "drop.fill",
             color: "blue"
         ),
         StagingStage(
-            name: "Develop",
-            description: "Проявление плёнки",
+            name: "stagingDevelopName",
+            description: "stagingDevelopDescription",
             iconName: "flask.fill",
             color: "orange"
         ),
         StagingStage(
-            name: "Stop Bath",
-            description: "Остановка проявления",
+            name: "stagingStopBathName",
+            description: "stagingStopBathDescription",
             iconName: "stop.fill",
             color: "red"
         ),
         StagingStage(
-            name: "Bleach",
-            description: "Отбелка",
+            name: "stagingBleachName",
+            description: "stagingBleachDescription",
             iconName: "flask",
             color: "yellow"
         ),
         StagingStage(
-            name: "Fixer",
-            description: "Фиксирование изображения",
+            name: "stagingFixerName",
+            description: "stagingFixerDescription",
             iconName: "shield.fill",
             color: "purple"
         ),
         StagingStage(
-            name: "Wash",
-            description: "Промывка плёнки",
+            name: "stagingWashName",
+            description: "stagingWashDescription",
             iconName: "drop",
             color: "cyan"
         ),
         StagingStage(
-            name: "Stabilize",
-            description: "Стабилизация для долгосрочного хранения",
+            name: "stagingStabilizeName",
+            description: "stagingStabilizeDescription",
             iconName: "leaf.fill",
             color: "green"
         )
     ]
-} 
+}
