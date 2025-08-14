@@ -10,6 +10,16 @@ import SwiftData
 
 struct DevelopmentSetupView: View {
     @StateObject private var viewModel = DevelopmentSetupViewModel()
+    @Environment(\.dismiss) private var dismiss
+    
+    // Параметры для определения режима открытия
+    let isFromStageEditor: Bool
+    let stageType: StageType?
+    
+    init(isFromStageEditor: Bool = false, stageType: StageType? = nil) {
+        self.isFromStageEditor = isFromStageEditor
+        self.stageType = stageType
+    }
     
     var body: some View {
         NavigationStack {
@@ -17,33 +27,76 @@ struct DevelopmentSetupView: View {
                 Color(.systemBackground).ignoresSafeArea()
                 
                 VStack(spacing: 30) {
-                    // Mode Selection Picker
-                    Picker("Process Mode", selection: $viewModel.selectedMode) {
-                        ForEach(ProcessMode.allCases, id: \.self) { mode in
-                            Text(mode.rawValue).tag(mode)
+                    // Mode Selection Picker - скрываем в режиме редактора стадии
+                    if !isFromStageEditor {
+                        Picker("Process Mode", selection: $viewModel.selectedMode) {
+                            ForEach(ProcessMode.allCases, id: \.self) { mode in
+                                Text(mode.rawValue).tag(mode)
+                            }
                         }
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
-                    .padding(.horizontal, 20)
-                    .onChange(of: viewModel.selectedMode) { _, newMode in
-                        viewModel.updateMode(newMode)
+                        .pickerStyle(SegmentedPickerStyle())
+                        .padding(.horizontal, 20)
+                        .onChange(of: viewModel.selectedMode) { _, newMode in
+                            viewModel.updateMode(newMode)
+                        }
                     }
                     
                     DevelopmentParametersView(viewModel: viewModel)
                     
                     if let calculatedTime = viewModel.calculatedTime {
-                        CalculatedTimeSection(
-                            time: calculatedTime,
-                            temperature: viewModel.temperature,
-                            filmName: viewModel.selectedFilmName,
-                            developerName: viewModel.selectedMode == .developing ? viewModel.selectedDeveloperName : "Fixer",
-                            onCalculatorTap: {
-                                viewModel.navigateToCalculator = true
-                            },
-                            onTimerTap: {
-                                viewModel.navigateToTimer = true
+                        if isFromStageEditor {
+                            // В режиме редактора стадии показываем только кнопку калькулятора
+                            VStack(spacing: 16) {
+                                Button(action: {
+                                    NotificationCenter.default.post(
+                                        name: Notification.Name("DevelopmentCalculatedTime"),
+                                        object: nil,
+                                        userInfo: ["seconds": calculatedTime]
+                                    )
+                                    viewModel.navigateToCalculator = true
+                                }) {
+                                    HStack {
+                                        Image(systemName: "plus.forwardslash.minus")
+                                            .font(.system(size: 18, design: .monospaced))
+                                        Text("\(calculatedTime / 60):\(String(format: "%02d", calculatedTime % 60))")
+                                            .font(.system(size: 18, design: .monospaced))
+                                    }
+                                    .foregroundColor(.white)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 14)
+                                    .padding(.horizontal, 16)
+                                    .background(.orange)
+                                    .cornerRadius(12)
+                                }
+                                .buttonStyle(PlainButtonStyle())
                             }
-                        )
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                        } else {
+                            // Обычный режим - показываем обе кнопки
+                            CalculatedTimeSection(
+                                time: calculatedTime,
+                                temperature: viewModel.temperature,
+                                filmName: viewModel.selectedFilmName,
+                                developerName: viewModel.selectedMode == .developing ? viewModel.selectedDeveloperName : "Fixer",
+                                onCalculatorTap: {
+                                    NotificationCenter.default.post(
+                                        name: Notification.Name("DevelopmentCalculatedTime"),
+                                        object: nil,
+                                        userInfo: ["seconds": calculatedTime]
+                                    )
+                                    viewModel.navigateToCalculator = true
+                                },
+                                onTimerTap: {
+                                    NotificationCenter.default.post(
+                                        name: Notification.Name("DevelopmentCalculatedTime"),
+                                        object: nil,
+                                        userInfo: ["seconds": calculatedTime]
+                                    )
+                                    viewModel.navigateToTimer = true
+                                }
+                            )
+                        }
                     }
                     
                     Spacer()
@@ -118,8 +171,39 @@ struct DevelopmentSetupView: View {
                 )
             }
         }
+        .navigationTitle(LocalizedStringKey("developmentSetup"))
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            if isFromStageEditor {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(LocalizedStringKey("save")) {
+                        if let calculatedTime = viewModel.calculatedTime {
+                            NotificationCenter.default.post(
+                                name: Notification.Name("DevelopmentCalculatedTime"),
+                                object: nil,
+                                userInfo: ["seconds": calculatedTime]
+                            )
+                        }
+                        dismiss()
+                    }
+                    .disabled(viewModel.calculatedTime == nil)
+                }
+            }
+        }
         .onAppear {
             viewModel.reloadData()
+            
+            // Устанавливаем правильный режим при открытии из редактора стадии
+            if isFromStageEditor, let stageType = stageType {
+                switch stageType {
+                case .fixer:
+                    viewModel.selectedMode = .fixer
+                case .develop:
+                    viewModel.selectedMode = .developing
+                default:
+                    break
+                }
+            }
         }
     }
 }

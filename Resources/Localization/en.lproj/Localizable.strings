@@ -302,6 +302,14 @@
 "stagingStabilizeName" = "Stabilize";
 "stagingStabilizeDescription" = "Stabilization for long-term storage";
 
+// MARK: - Stage Editor
+"stageTime" = "STAGE TIME";
+"duration" = "Duration";
+"agitationMode" = "Agitation Mode";
+"advancedSetup" = "ADVANCED SETUP";
+"openDevelopmentSetup" = "Open Development Setup";
+"openFixerSetup" = "Open Fixer Setup";
+
 // MARK: - Settings
 "settings" = "Settings";
 "settingsTheme" = "Theme";

@@ -302,6 +302,14 @@
 "stagingStabilizeName" = "Стабилизация";
 "stagingStabilizeDescription" = "Стабилизация для долгосрочного хранения";
 
+// MARK: - Stage Editor
+"stageTime" = "ВРЕМЯ СТАДИИ";
+"duration" = "Длительность";
+"agitationMode" = "Режим агитации";
+"advancedSetup" = "РАСШИРЕННЫЕ НАСТРОЙКИ";
+"openDevelopmentSetup" = "Открыть настройки проявки";
+"openFixerSetup" = "Открыть настройки фиксажа";
+
 // MARK: - Settings
 "settings" = "Настройки";
 "settingsTheme" = "Тема";
