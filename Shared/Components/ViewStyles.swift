@@ -40,6 +40,28 @@ extension View {
             .font(.system(size: 16))
             .foregroundColor(.white)
     }
+    
+    /// Заполненная прямоугольная кнопка с иконкой (основная)
+    /// Использование: Image(systemName: "timer").primaryIconButtonStyle()
+    func primaryIconButtonStyle() -> some View {
+        self
+            .font(.system(size: 16, weight: .semibold))
+            .foregroundColor(.white)
+            .frame(width: 60, height: 40)
+            .background(Color.blue)
+            .cornerRadius(10)
+    }
+    
+    /// Заполненная прямоугольная кнопка с иконкой (вторичная)
+    /// Использование: Image(systemName: "square.and.arrow.down").secondaryIconButtonStyle()
+    func secondaryIconButtonStyle() -> some View {
+        self
+            .font(.system(size: 16, weight: .semibold))
+            .foregroundColor(.white)
+            .frame(width: 60, height: 40)
+            .background(Color.green)
+            .cornerRadius(10)
+    }
 }
 
 // MARK: - Card Styles

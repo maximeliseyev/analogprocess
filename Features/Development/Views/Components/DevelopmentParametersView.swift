@@ -27,9 +27,11 @@ struct ParameterRow: View {
                     
                     Spacer()
                     
-                    Image(systemName: "chevron.down")
-                        .foregroundColor(isDisabled ? .secondary.opacity(0.5) : .secondary)
-                        .font(.caption)
+                    if !isDisabled {
+                        Image(systemName: "chevron.down")
+                            .foregroundColor(.secondary)
+                            .font(.caption)
+                    }
                 }
                 .padding()
                 .background(isDisabled ? Color(uiColor: .systemGray6) : Color(uiColor: .secondarySystemBackground))
@@ -37,6 +39,7 @@ struct ParameterRow: View {
             }
             .buttonStyle(PlainButtonStyle())
             .disabled(isDisabled)
+            .opacity(isDisabled ? 0.6 : 1.0)
         }
     }
 }
@@ -66,22 +69,34 @@ struct DevelopmentParametersView: View {
                     label: LocalizedStringKey("dilution"),
                     value: viewModel.selectedDilution.isEmpty ? "Select Dilution" : viewModel.selectedDilution,
                     onTap: { viewModel.showDilutionPicker = true },
-                    isDisabled: viewModel.selectedFilm == nil || viewModel.selectedDeveloper == nil
+                    isDisabled: viewModel.selectedFilm == nil || viewModel.selectedDeveloper == nil || viewModel.isDilutionSelectionLocked
                 )
                 
                 ParameterRow(
                     label: LocalizedStringKey("iso"),
                     value: "\(viewModel.iso)",
-                    onTap: { viewModel.showISOPicker = true },
-                    isDisabled: viewModel.selectedFilm == nil || viewModel.selectedDeveloper == nil || viewModel.selectedDilution.isEmpty
+                    onTap: {
+                        if !viewModel.isISOSelectionLocked {
+                            viewModel.showISOPicker = true
+                        }
+                    },
+                    isDisabled: viewModel.selectedFilm == nil || viewModel.selectedDeveloper == nil || viewModel.selectedDilution.isEmpty || viewModel.isISOSelectionLocked
                 )
+                if viewModel.isISOSelectionLocked {
+                    Text(LocalizedStringKey("noAlternativeOptions"))
+                        .captionTextStyle()
+                }
                 
                 ParameterRow(
                     label: LocalizedStringKey("temperature"),
                     value: "\(Int(viewModel.temperature))°C (Standard)",
                     onTap: { viewModel.showTemperaturePicker = true },
-                    isDisabled: false
+                    isDisabled: viewModel.isTemperatureSelectionLocked
                 )
+                if viewModel.isTemperatureSelectionLocked {
+                    Text(LocalizedStringKey("noAlternativeOptions"))
+                        .captionTextStyle()
+                }
             } else {
                 // Fixer parameters
                 ParameterRow(

@@ -48,6 +48,7 @@
 "developmentCompleteForProcess" = "Development complete for process: %@";
 "selectDevelopmentParameters" = "Select development parameters to start timer";
 "startTimer" = "Start Timer";
+"saveToJournal" = "Save to Journal";
 
 // MARK: - Film & Developer
 "film" = "Film:";
@@ -326,6 +327,7 @@
 
 // MARK: - Development
 "development" = "Development";
+"noAlternativeOptions" = "Only one option available";
 
 // MARK: - Manuals
 "manuals" = "Manuals";

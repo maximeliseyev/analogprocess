@@ -195,6 +195,8 @@ struct CalculatorView: View {
                 }
                 .disabled(!viewModel.isValidInput)
                 
+                
+                
             }
             .padding()
         }
@@ -205,17 +207,103 @@ struct CalculatorView: View {
             focusedField = nil
             viewModel.hideCoefficientSuggestions()
         }
-
-.sheet(isPresented: $viewModel.showResult) {
-            CalculationResultView(
-                results: viewModel.pushResults,
-                isPushMode: viewModel.isPushMode,
-                onTimerTap: { label, minutes, seconds in
-                    viewModel.startTimer(label, minutes, seconds)
-                    onStartTimer?(label, minutes, seconds)
-                },
-                viewModel: viewModel
-            )
+        .sheet(isPresented: $viewModel.showSaveDialog) {
+            if let prefillData = viewModel.createPrefillData() {
+                CreateRecordView(
+                    prefillData: nil,
+                    isEditing: false,
+                    onUpdate: nil,
+                    calculatorTemperature: prefillData.temperature,
+                    calculatorCoefficient: prefillData.coefficient,
+                    calculatorProcess: prefillData.process
+                )
+            }
+        }
+        .sheet(isPresented: $viewModel.showResult) {
+            let base = viewModel.pushResults.first
+            let calculated = viewModel.pushResults.last
+            VStack(spacing: 16) {
+                // Отступ от верхнего индикатора перетаскивания шита
+                Spacer().frame(height: 8)
+                Text(LocalizedStringKey("results"))
+                    .font(.headline)
+                    .padding(.top, 4)
+                
+                ScrollView {
+                    LazyVStack(spacing: 12) {
+                        if let base = base {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("+0")
+                                        .monospacedBodyStyle()
+                                    Text(base.formattedTime)
+                                        .monospacedTitleStyle()
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                                HStack(spacing: 12) {
+                                    Button(action: {
+                                        viewModel.startTimer(base.label, base.minutes, base.seconds)
+                                        onStartTimer?(base.label, base.minutes, base.seconds)
+                                    }) {
+                                        Image(systemName: "timer")
+                                            .primaryIconButtonStyle()
+                                    }
+                                    
+                                    Button(action: {
+                                        viewModel.selectedResult = base
+                                        viewModel.showResult = false
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                                            viewModel.showSaveDialog = true
+                                        }
+                                    }) {
+                                        Image(systemName: "square.and.arrow.down")
+                                            .secondaryIconButtonStyle()
+                                    }
+                                }
+                            }
+                            .cardStyle()
+                        }
+                        
+                        if let calculated = calculated, base?.id != calculated.id {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(calculated.label)
+                                        .monospacedBodyStyle()
+                                    Text(calculated.formattedTime)
+                                        .monospacedTitleStyle()
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                                HStack(spacing: 12) {
+                                    Button(action: {
+                                        viewModel.startTimer(calculated.label, calculated.minutes, calculated.seconds)
+                                        onStartTimer?(calculated.label, calculated.minutes, calculated.seconds)
+                                    }) {
+                                        Image(systemName: "timer")
+                                            .primaryIconButtonStyle()
+                                    }
+                                    
+                                    Button(action: {
+                                        viewModel.selectedResult = calculated
+                                        viewModel.showResult = false
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                                            viewModel.showSaveDialog = true
+                                        }
+                                    }) {
+                                        Image(systemName: "square.and.arrow.down")
+                                            .secondaryIconButtonStyle()
+                                    }
+                                }
+                            }
+                            .cardStyle()
+                        }
+                    }
+                    .padding(.horizontal)
+                }
+            }
+            .presentationDetents([.fraction(0.33)])
+            .presentationDragIndicator(.visible)
         }
         .navigationDestination(isPresented: $viewModel.showTimer) {
             TimerView(

@@ -34,6 +34,17 @@ class CalculatorViewModel: ObservableObject {
     @Published var selectedTimerSeconds = 0
     @Published var selectedResult: ProcessStep?
     
+    /// Results to display in UI: base time (+0) and only the selected step (last), according to `pushSteps`.
+    var displayResults: [ProcessStep] {
+        guard !pushResults.isEmpty else { return [] }
+        let base = pushResults.first!
+        guard let last = pushResults.last else { return [base] }
+        if base.id == last.id {
+            return [base]
+        }
+        return [base, last]
+    }
+    
     // MARK: - Dependencies
     private let swiftDataService = SwiftDataService.shared
     private let calculator = DevelopmentCalculator()
