@@ -252,20 +252,52 @@ public class SwiftDataService: ObservableObject {
     // MARK: - Development Time Calculation
     func getDevelopmentTime(filmId: String, developerId: String, dilution: String, iso: Int) -> Int? {
         print("DEBUG: getDevelopmentTime - filmId: \(filmId), developerId: \(developerId), dilution: \(dilution), iso: \(iso)")
-        
-        // Упрощенная версия без сложных предикатов
-        for film in films {
-            if film.id == filmId {
-                for developer in developers {
-                    if developer.id == developerId {
-                        // Здесь нужно будет добавить логику поиска времени проявления
-                        // Пока возвращаем nil
-                        return nil
+
+        // Helper that tries to fetch a development time with optional dilution criteria
+        func fetchTime(filmId: String, developerId: String, iso: Int, dilution: String?) -> SwiftDataDevelopmentTime? {
+            let iso32: Int32 = Int32(iso)
+            if let dilution = dilution, !dilution.isEmpty {
+                let dilutionOpt: String? = dilution
+                let descriptor = FetchDescriptor<SwiftDataDevelopmentTime>(
+                    predicate: #Predicate<SwiftDataDevelopmentTime> { item in
+                        item.film?.id == filmId &&
+                        item.developer?.id == developerId &&
+                        item.iso == iso32 &&
+                        item.dilution == dilutionOpt
                     }
-                }
+                )
+                return try? modelContext.fetch(descriptor).first
+            } else {
+                // No dilution specified: try to find any record that matches film+developer+iso
+                let descriptor = FetchDescriptor<SwiftDataDevelopmentTime>(
+                    predicate: #Predicate<SwiftDataDevelopmentTime> { item in
+                        item.film?.id == filmId &&
+                        item.developer?.id == developerId &&
+                        item.iso == iso32
+                    }
+                )
+                return try? modelContext.fetch(descriptor).first
             }
         }
-        
+
+        // Try exact match first (normalized)
+        let normalizedDilution = dilution.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let found = fetchTime(filmId: filmId, developerId: developerId, iso: iso, dilution: normalizedDilution) {
+            return Int(found.time)
+        }
+
+        // Try case-insensitive match if different
+        let lowercasedDilution = normalizedDilution.lowercased()
+        if lowercasedDilution != normalizedDilution,
+           let found = fetchTime(filmId: filmId, developerId: developerId, iso: iso, dilution: lowercasedDilution) {
+            return Int(found.time)
+        }
+
+        // Try without dilution constraint
+        if let found = fetchTime(filmId: filmId, developerId: developerId, iso: iso, dilution: nil) {
+            return Int(found.time)
+        }
+
         print("DEBUG: getDevelopmentTime - no development time found")
         return nil
     }
@@ -282,6 +314,34 @@ public class SwiftDataService: ObservableObject {
         }
         
         return 1.0 // Возвращаем 1.0 если нет коэффициента
+    }
+    
+    // MARK: - Availability Queries (SwiftData)
+    func getAvailableDilutions(filmId: String, developerId: String) -> [String] {
+        let descriptor = FetchDescriptor<SwiftDataDevelopmentTime>(
+            predicate: #Predicate<SwiftDataDevelopmentTime> { item in
+                item.film?.id == filmId &&
+                item.developer?.id == developerId
+            }
+        )
+        let items = (try? modelContext.fetch(descriptor)) ?? []
+        let dilutions = items.compactMap { ($0.dilution ?? "").trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+        return Array(Set(dilutions)).sorted()
+    }
+    
+    func getAvailableISOs(filmId: String, developerId: String, dilution: String) -> [Int] {
+        let normalizedDilution = dilution.trimmingCharacters(in: .whitespacesAndNewlines)
+        let descriptor = FetchDescriptor<SwiftDataDevelopmentTime>(
+            predicate: #Predicate<SwiftDataDevelopmentTime> { item in
+                item.film?.id == filmId &&
+                item.developer?.id == developerId &&
+                (item.dilution ?? "") == normalizedDilution
+            }
+        )
+        let items = (try? modelContext.fetch(descriptor)) ?? []
+        let isos = items.map { Int($0.iso) }
+        return Array(Set(isos)).sorted()
     }
     
     /// Округляет время до ближайшей 1/4 минуты (15 секунд)
@@ -363,22 +423,40 @@ public class SwiftDataService: ObservableObject {
     private func syncDevelopmentTimesFromGitHub(_ developmentTimes: [String: [String: [String: [String: Int]]]]) {
         for (filmId, developers) in developmentTimes {
             guard let film = getFilm(by: filmId) else { continue }
-            
+
             for (developerId, dilutions) in developers {
                 guard let developer = getDeveloper(by: developerId) else { continue }
-                
+
                 for (dilution, isoTimes) in dilutions {
                     for (isoString, time) in isoTimes {
                         guard let iso = Int(isoString) else { continue }
-                        
-                        let developmentTime = SwiftDataDevelopmentTime(
-                            dilution: dilution,
-                            iso: Int32(iso),
-                            time: Int32(time),
-                            developer: developer,
-                            film: film
+
+                        // Check for existing record to avoid duplicates; update if needed
+                        let iso32: Int32 = Int32(iso)
+                        let dilutionOpt: String? = dilution
+                        let descriptor = FetchDescriptor<SwiftDataDevelopmentTime>(
+                            predicate: #Predicate<SwiftDataDevelopmentTime> { item in
+                                item.film?.id == filmId &&
+                                item.developer?.id == developerId &&
+                                item.iso == iso32 &&
+                                item.dilution == dilutionOpt
+                            }
                         )
-                        modelContext.insert(developmentTime)
+
+                        if let existing = try? modelContext.fetch(descriptor).first {
+                            if existing.time != Int32(time) {
+                                existing.time = Int32(time)
+                            }
+                        } else {
+                            let developmentTime = SwiftDataDevelopmentTime(
+                                dilution: dilution,
+                                iso: Int32(iso),
+                                time: Int32(time),
+                                developer: developer,
+                                film: film
+                            )
+                            modelContext.insert(developmentTime)
+                        }
                     }
                 }
             }

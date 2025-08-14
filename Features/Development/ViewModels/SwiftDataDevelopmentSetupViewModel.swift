@@ -237,9 +237,11 @@ class SwiftDataDevelopmentSetupViewModel: ObservableObject {
             return []
         }
         
-        // TODO: Реализовать получение доступных разведений для SwiftData
-        // Пока возвращаем разведение по умолчанию
-        return [developer.defaultDilution ?? ""]
+        let dilutions = swiftDataService.getAvailableDilutions(filmId: film.id, developerId: developer.id)
+        if dilutions.isEmpty {
+            return [developer.defaultDilution ?? ""]
+        }
+        return dilutions
     }
     
     private func getCoreDataAvailableISOs() -> [Int] {
@@ -263,8 +265,10 @@ class SwiftDataDevelopmentSetupViewModel: ObservableObject {
             return []
         }
         
-        // TODO: Реализовать получение доступных ISO для SwiftData
-        // Пока возвращаем ISO по умолчанию
-        return [Int(film.defaultISO)]
+        let isos = swiftDataService.getAvailableISOs(filmId: film.id, developerId: developer.id, dilution: selectedDilution)
+        if isos.isEmpty {
+            return [Int(film.defaultISO)]
+        }
+        return isos
     }
 }
