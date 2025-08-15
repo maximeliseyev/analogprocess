@@ -324,6 +324,24 @@
 "settingsSyncResult" = "Sync Result";
 "settingsSyncSuccess" = "Data synchronized successfully!";
 "settingsSyncError" = "Sync failed";
+"settingsAutoSyncReady" = "Auto-sync ready";
+"settingsAutoSyncChecking" = "Checking connection...";
+"settingsAutoSyncInProgress" = "Auto-sync in progress...";
+"settingsAutoSyncCompleted" = "Auto-sync completed";
+"settingsAutoSyncFailed" = "Auto-sync failed: %@";
+"settingsAutoSyncNoInternet" = "No internet connection";
+"settingsAutoSyncTooSoon" = "Sync performed recently";
+"settingsLastAutoSync" = "Last auto-sync:";
+"settingsAutoSyncEnabled" = "Auto-sync on app launch";
+"settingsAutoSyncDescription" = "Automatically sync data when the app starts if internet is available";
+"settingsAutoSyncDisabled" = "Auto-sync disabled";
+"stagingStartSequential" = "Start Sequential Stages";
+"stagingStageComplete" = "Stage Complete!";
+"stagingGoToNextStage" = "Go to Next Stage";
+"stagingAllStagesComplete" = "All Stages Complete!";
+"stagingFinish" = "Finish";
+"stagingSequentialStages" = "Sequential Stages";
+"stagingStageXofY" = "Stage %@ of %@";
 
 // MARK: - Manual Time Input
 "setTimeManually" = "Set Time Manually";

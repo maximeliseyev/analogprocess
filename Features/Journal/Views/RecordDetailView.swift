@@ -112,7 +112,7 @@ struct RecordDetailView: View {
                         .foregroundColor(.primary)
                 }
                 
-                Text("\(String(format: "%.1f", record.temperature))\(String(localized: "degreesCelsius"))")
+                Text("\(record.temperature)\(String(localized: "degreesCelsius"))")
                     .font(.body)
                     .foregroundColor(.primary)
                 

@@ -31,6 +31,8 @@
 		BF4109712E3166F400BE2AD8 /* TimerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41096D2E3166F400BE2AD8 /* TimerHeaderView.swift */; };
 		BF4109722E3166F400BE2AD8 /* AgitationIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41096B2E3166F400BE2AD8 /* AgitationIndicatorView.swift */; };
 		BF4109732E3166F400BE2AD8 /* TimerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41096E2E3166F400BE2AD8 /* TimerProgressView.swift */; };
+		BF47CA3C2E4F14D70026DEB0 /* StagingTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF47CA3B2E4F14D70026DEB0 /* StagingTimerView.swift */; };
+		BF47CA3E2E4F15150026DEB0 /* StagingTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF47CA3D2E4F15150026DEB0 /* StagingTimerViewModel.swift */; };
 		BF553C622E420639009F1525 /* KeyboardAwareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C612E420639009F1525 /* KeyboardAwareView.swift */; };
 		BF553C682E424125009F1525 /* AgitationModeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C672E424125009F1525 /* AgitationModeBuilder.swift */; };
 		BF553C6A2E43268D009F1525 /* BasePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C692E43268D009F1525 /* BasePickerView.swift */; };
@@ -48,6 +50,8 @@
 		BF99E9AA2E4E814300BB7F0C /* AddStageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9A22E4E814300BB7F0C /* AddStageButton.swift */; };
 		BF99E9AB2E4E814300BB7F0C /* StageRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9A62E4E814300BB7F0C /* StageRowView.swift */; };
 		BF99E9AC2E4E814300BB7F0C /* StageEditorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9A42E4E814300BB7F0C /* StageEditorSheet.swift */; };
+		BF99E9AE2E4E8DFD00BB7F0C /* AutoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9AD2E4E8DFD00BB7F0C /* AutoSyncService.swift */; };
+		BF99E9B02E4E8E6800BB7F0C /* AutoSyncStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9AF2E4E8E6800BB7F0C /* AutoSyncStatusView.swift */; };
 		BFA0C79B2E2133FC00132936 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFA0C7932E2133FC00132936 /* Assets.xcassets */; };
 		BFA0C79D2E2133FC00132936 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7952E2133FC00132936 /* ContentView.swift */; };
 		BFA0C7A82E2134B400132936 /* CalculationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7A72E2134B300132936 /* CalculationResultView.swift */; };
@@ -117,6 +121,8 @@
 		BF41096C2E3166F400BE2AD8 /* TimerControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlsView.swift; sourceTree = "<group>"; };
 		BF41096D2E3166F400BE2AD8 /* TimerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerHeaderView.swift; sourceTree = "<group>"; };
 		BF41096E2E3166F400BE2AD8 /* TimerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerProgressView.swift; sourceTree = "<group>"; };
+		BF47CA3B2E4F14D70026DEB0 /* StagingTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingTimerView.swift; sourceTree = "<group>"; };
+		BF47CA3D2E4F15150026DEB0 /* StagingTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingTimerViewModel.swift; sourceTree = "<group>"; };
 		BF553C612E420639009F1525 /* KeyboardAwareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAwareView.swift; sourceTree = "<group>"; };
 		BF553C672E424125009F1525 /* AgitationModeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgitationModeBuilder.swift; sourceTree = "<group>"; };
 		BF553C692E43268D009F1525 /* BasePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePickerView.swift; sourceTree = "<group>"; };
@@ -134,6 +140,8 @@
 		BF99E9A42E4E814300BB7F0C /* StageEditorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageEditorSheet.swift; sourceTree = "<group>"; };
 		BF99E9A52E4E814300BB7F0C /* StagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagePickerView.swift; sourceTree = "<group>"; };
 		BF99E9A62E4E814300BB7F0C /* StageRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageRowView.swift; sourceTree = "<group>"; };
+		BF99E9AD2E4E8DFD00BB7F0C /* AutoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncService.swift; sourceTree = "<group>"; };
+		BF99E9AF2E4E8E6800BB7F0C /* AutoSyncStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncStatusView.swift; sourceTree = "<group>"; };
 		BFA0C7932E2133FC00132936 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFA0C7952E2133FC00132936 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BFA0C7A62E21349100132936 /* DevelopmentCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentCalculator.swift; sourceTree = "<group>"; };
@@ -344,6 +352,7 @@
 				BFF4D9FE2E21BEC90097BE82 /* TimerView.swift */,
 				BFF4DA022E21C31E0097BE82 /* AgitationSelectionView.swift */,
 				BFF4DA042E21C8C30097BE82 /* CustomAgitationView.swift */,
+				BF47CA3B2E4F14D70026DEB0 /* StagingTimerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -351,6 +360,7 @@
 		BF41094D2E31352B00BE2AD8 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				BF47CA3D2E4F15150026DEB0 /* StagingTimerViewModel.swift */,
 				BF41093E2E31318D00BE2AD8 /* TimerViewModel.swift */,
 			);
 			path = ViewModels;
@@ -393,6 +403,7 @@
 		BF4109682E3164A900BE2AD8 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				BF99E9AF2E4E8E6800BB7F0C /* AutoSyncStatusView.swift */,
 				BF8A59FE2E4494A600D689C5 /* AutocompleteView.swift */,
 				BF553C612E420639009F1525 /* KeyboardAwareView.swift */,
 				BF113D402E40DB7D008B5578 /* ThemeManager.swift */,
@@ -470,6 +481,7 @@
 				BF553C672E424125009F1525 /* AgitationModeBuilder.swift */,
 				BF28FA582E41F64600C2E34E /* CloudKitService.swift */,
 				BFB0C3D02E3E4E7D00296B97 /* GitHubDataService.swift */,
+				BF99E9AD2E4E8DFD00BB7F0C /* AutoSyncService.swift */,
 				BFA0C7A62E21349100132936 /* DevelopmentCalculator.swift */,
 				BFFA1C552E4A19F7005C24F4 /* NetworkSession.swift */,
 				BFFA1C632E4A67A9005C24F4 /* SwiftDataService.swift */,
@@ -652,6 +664,7 @@
 				BF4109142E31052900BE2AD8 /* StepsInputView.swift in Sources */,
 				BF4109622E31641600BE2AD8 /* DilutionPickerView.swift in Sources */,
 				BF4109702E3166F400BE2AD8 /* TimerControlsView.swift in Sources */,
+				BF47CA3E2E4F15150026DEB0 /* StagingTimerViewModel.swift in Sources */,
 				BF4109712E3166F400BE2AD8 /* TimerHeaderView.swift in Sources */,
 				BF8A5A012E44BA0E00D689C5 /* StagingStage.swift in Sources */,
 				BF4109722E3166F400BE2AD8 /* AgitationIndicatorView.swift in Sources */,
@@ -672,6 +685,7 @@
 				BFFA1C602E4A6236005C24F4 /* SwiftDataModels.swift in Sources */,
 				BF553C622E420639009F1525 /* KeyboardAwareView.swift in Sources */,
 				BF41095B2E3163E400BE2AD8 /* FilmPickerView.swift in Sources */,
+				BF99E9AE2E4E8DFD00BB7F0C /* AutoSyncService.swift in Sources */,
 				BF41095C2E3163E400BE2AD8 /* DevelopmentParametersView.swift in Sources */,
 				BF41095D2E3163E400BE2AD8 /* DeveloperPickerView.swift in Sources */,
 				BFDCB75E2E382372000F6CE5 /* AnalogProcessApp.swift in Sources */,
@@ -689,7 +703,9 @@
 				BF4109662E31643100BE2AD8 /* ISOPickerView.swift in Sources */,
 				BF113D372E3FA8A5008B5578 /* ManualTimeInputView.swift in Sources */,
 				BF8A59F22E4380E600D689C5 /* NavigationConstants.swift in Sources */,
+				BF99E9B02E4E8E6800BB7F0C /* AutoSyncStatusView.swift in Sources */,
 				BF4109642E31641B00BE2AD8 /* TemperaturePickerView.swift in Sources */,
+				BF47CA3C2E4F14D70026DEB0 /* StagingTimerView.swift in Sources */,
 				BFA0C7A92E2134BA00132936 /* DevelopmentCalculator.swift in Sources */,
 				BFFA1C5D2E4A415E005C24F4 /* FixerPickerView.swift in Sources */,
 				BFFA1C5E2E4A415E005C24F4 /* FixerSelectionView.swift in Sources */,
@@ -842,7 +858,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = PK2473XF3P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -857,7 +873,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.6;
+				MARKETING_VERSION = 0.2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -878,7 +894,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = PK2473XF3P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -893,7 +909,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.6;
+				MARKETING_VERSION = 0.2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

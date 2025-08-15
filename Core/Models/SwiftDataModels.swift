@@ -93,10 +93,10 @@ public final class SwiftDataFixer {
 // MARK: - SwiftData TemperatureMultiplier Model
 @Model
 public final class SwiftDataTemperatureMultiplier {
-    public var temperature: Int32
+    public var temperature: Int
     public var multiplier: Double
     
-    public init(temperature: Int32, multiplier: Double) {
+    public init(temperature: Int, multiplier: Double) {
         self.temperature = temperature
         self.multiplier = multiplier
     }
@@ -116,7 +116,7 @@ public final class SwiftDataCalculationRecord {
     public var name: String?
     public var process: String?
     public var recordID: String?
-    public var temperature: Double
+    public var temperature: Int
     public var time: Int32
     
     public init(
@@ -131,7 +131,7 @@ public final class SwiftDataCalculationRecord {
         name: String? = nil,
         process: String? = nil,
         recordID: String? = nil,
-        temperature: Double = 0.0,
+        temperature: Int = 20,
         time: Int32 = 0
     ) {
         self.comment = comment

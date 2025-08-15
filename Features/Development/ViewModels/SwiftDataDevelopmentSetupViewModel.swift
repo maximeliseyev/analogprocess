@@ -15,7 +15,7 @@ class SwiftDataDevelopmentSetupViewModel: ObservableObject {
     @Published var selectedDeveloper: SwiftDataDeveloper?
     @Published var selectedFixer: SwiftDataFixer?
     @Published var selectedDilution: String = ""
-    @Published var temperature: Double = 20.0
+    @Published var temperature: Int = 20
     @Published var iso: Int32 = Int32(Constants.ISO.defaultISO)
     @Published var calculatedTime: Int?
     
@@ -114,7 +114,7 @@ class SwiftDataDevelopmentSetupViewModel: ObservableObject {
         }
     }
     
-    func updateTemperature(_ newTemperature: Double) {
+    func updateTemperature(_ newTemperature: Int) {
         temperature = newTemperature
         if useSwiftData {
             calculateSwiftDataTimeAutomatically()

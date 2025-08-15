@@ -89,7 +89,7 @@ struct DevelopmentParametersView: View {
                 
                 ParameterRow(
                     label: LocalizedStringKey("temperature"),
-                    value: "\(Int(viewModel.temperature))°C (Standard)",
+                    value: "\(viewModel.temperature)°C (Standard)",
                     onTap: { viewModel.showTemperaturePicker = true },
                     isDisabled: viewModel.isTemperatureSelectionLocked
                 )
@@ -115,7 +115,7 @@ struct DevelopmentParametersView: View {
                 
                 ParameterRow(
                     label: LocalizedStringKey("temperature"),
-                    value: "\(Int(viewModel.temperature))°C (Standard)",
+                    value: "\(viewModel.temperature)°C (Standard)",
                     onTap: { viewModel.showTemperaturePicker = true },
                     isDisabled: false
                 )

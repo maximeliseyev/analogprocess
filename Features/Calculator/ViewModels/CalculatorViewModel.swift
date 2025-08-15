@@ -13,12 +13,40 @@ class CalculatorViewModel: ObservableObject {
     // MARK: - Input Properties
     @Published var minutes = ""
     @Published var seconds = ""
-    @Published var coefficient = "1.33"
-    @Published var temperature: Double = 20.0
+    @Published var coefficient = "1.33" {
+        didSet {
+            // Автоматически пересчитываем при изменении коэффициента
+            if isValidInput {
+                calculateTime()
+            }
+        }
+    }
+    @Published var temperature: Int = 20 {
+        didSet {
+            // Автоматически пересчитываем при изменении температуры
+            if isValidInput {
+                calculateTime()
+            }
+        }
+    }
     
     // MARK: - Push Mode Properties
-    @Published var isPushMode = true
-    @Published var pushSteps = 3
+    @Published var isPushMode = true {
+        didSet {
+            // Автоматически пересчитываем при изменении режима
+            if isValidInput {
+                calculateTime()
+            }
+        }
+    }
+    @Published var pushSteps = 3 {
+        didSet {
+            // Автоматически пересчитываем при изменении количества шагов
+            if isValidInput {
+                calculateTime()
+            }
+        }
+    }
     
     // MARK: - UI States
     @Published var showCoefficientSuggestions = false
@@ -48,6 +76,12 @@ class CalculatorViewModel: ObservableObject {
     // MARK: - Dependencies
     private let swiftDataService = SwiftDataService.shared
     private let calculator = DevelopmentCalculator()
+    
+    // MARK: - Public Methods
+    
+    func getTemperatureMultiplier() -> Double {
+        return swiftDataService.getTemperatureMultiplier(for: temperature)
+    }
     
     // MARK: - Computed Properties
     
@@ -102,9 +136,19 @@ class CalculatorViewModel: ObservableObject {
             return
         }
         
+        // Применяем температурный коэффициент
+        let temperatureMultiplier = swiftDataService.getTemperatureMultiplier(for: temperature)
+        let adjustedMinutes = Int(Double(min) * temperatureMultiplier)
+        let adjustedSeconds = Int(Double(sec) * temperatureMultiplier)
+        
+        // Нормализуем время (секунды не должны превышать 59)
+        let totalAdjustedSeconds = adjustedMinutes * 60 + adjustedSeconds
+        let normalizedMinutes = totalAdjustedSeconds / 60
+        let normalizedSeconds = totalAdjustedSeconds % 60
+        
         pushResults = calculator.calculateResults(
-            minutes: min,
-            seconds: sec,
+            minutes: normalizedMinutes,
+            seconds: normalizedSeconds,
             coefficient: coeff,
             isPushMode: isPushMode,
             steps: pushSteps
@@ -133,7 +177,7 @@ class CalculatorViewModel: ObservableObject {
         swiftDataService.saveRecord(
             filmName: "Расчетное время",
             developerName: "Пользовательский расчет",
-            dilution: "Коэффициент: \(coefficient), Температура: \(String(format: "%.1f", temperature))°C",
+            dilution: "Коэффициент: \(coefficient), Температура: \(temperature)°C",
             temperature: temperature,
             iso: Constants.ISO.defaultISO,
             calculatedTime: totalSeconds,
@@ -148,6 +192,7 @@ class CalculatorViewModel: ObservableObject {
         
         self.minutes = "\(totalSeconds / 60)"
         self.seconds = "\(totalSeconds % 60)"
+        self.temperature = record.temperature
         coefficient = "1.33" // Используем стандартный коэффициент
         isPushMode = true
         pushSteps = 3
@@ -159,7 +204,7 @@ class CalculatorViewModel: ObservableObject {
         swiftDataService.deleteCalculationRecord(record)
     }
     
-    func createPrefillData() -> (name: String, temperature: Double, coefficient: String, time: Int, comment: String, process: String)? {
+    func createPrefillData() -> (name: String, temperature: Int, coefficient: String, time: Int, comment: String, process: String)? {
         guard let selectedResult = selectedResult else { return nil }
         
         let totalSeconds = selectedResult.totalSeconds

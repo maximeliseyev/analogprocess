@@ -46,7 +46,7 @@ class StagingViewModel: ObservableObject {
         }
     }
     
-    func updateStageTemperature(_ stage: StagingStage, temperature: Double) {
+    func updateStageTemperature(_ stage: StagingStage, temperature: Int) {
         if let index = selectedStages.firstIndex(where: { $0.id == stage.id }) {
             selectedStages[index].temperature = temperature
         }
@@ -62,5 +62,10 @@ class StagingViewModel: ObservableObject {
     
     func getEnabledStages() -> [StagingStage] {
         return selectedStages.filter { $0.isEnabled }
+    }
+    
+    func startStagingTimer() {
+        // Этот метод будет вызываться из StagingView
+        // Логика показа StagingTimerView находится в StagingView
     }
 } 

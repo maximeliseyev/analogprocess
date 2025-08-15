@@ -17,7 +17,7 @@ struct CreateRecordView: View {
     let onUpdate: ((JournalRecord) -> Void)?
     
     // Дополнительные параметры для передачи данных из калькулятора
-    let calculatorTemperature: Double?
+    let calculatorTemperature: Int?
     let calculatorCoefficient: String?
     let calculatorProcess: String?
     
@@ -36,7 +36,7 @@ struct CreateRecordView: View {
         case comment
     }
     
-    init(prefillData: JournalRecord? = nil, isEditing: Bool = false, onUpdate: ((JournalRecord) -> Void)? = nil, calculatorTemperature: Double? = nil, calculatorCoefficient: String? = nil, calculatorProcess: String? = nil) {
+    init(prefillData: JournalRecord? = nil, isEditing: Bool = false, onUpdate: ((JournalRecord) -> Void)? = nil, calculatorTemperature: Int? = nil, calculatorCoefficient: String? = nil, calculatorProcess: String? = nil) {
         self.prefillData = prefillData
         self.isEditing = isEditing
         self.onUpdate = onUpdate

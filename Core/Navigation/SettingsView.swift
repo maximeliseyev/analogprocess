@@ -8,6 +8,7 @@ public struct SettingsView: View {
     @State private var alertMessage = ""
     @State private var isSyncing = false
     @StateObject private var githubService = GitHubDataService.shared
+    @StateObject private var autoSyncService = AutoSyncService.shared
     
     private var appVersion: String {
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
@@ -37,15 +38,35 @@ public struct SettingsView: View {
             }
             
             Section(header: Text(LocalizedStringKey("settingsData"))) {
+                // Переключатель автоматической синхронизации
+                VStack(alignment: .leading, spacing: 8) {
+                    Toggle(isOn: Binding(
+                        get: { autoSyncService.isAutoSyncEnabled },
+                        set: { autoSyncService.setAutoSyncEnabled($0) }
+                    )) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(LocalizedStringKey("settingsAutoSyncEnabled"))
+                                .font(.body)
+                            Text(LocalizedStringKey("settingsAutoSyncDescription"))
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+                .padding(.vertical, 4)
+                
                 VStack(alignment: .leading, spacing: 8) {
                     HStack {
                         Text(LocalizedStringKey("settingsSyncData"))
                         Spacer()
-                        if isSyncing {
+                        if isSyncing || autoSyncService.isAutoSyncing {
                             ProgressView()
                                 .scaleEffect(0.8)
                         }
                     }
+                    
+                    // Статус автоматической синхронизации
+                    AutoSyncStatusView(autoSyncService: autoSyncService)
                     
                     if githubService.isDownloading {
                         ProgressView(value: githubService.downloadProgress)
@@ -60,6 +81,15 @@ public struct SettingsView: View {
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
+                    
+                    if let lastAutoSync = autoSyncService.lastAutoSyncDate {
+                        Text(LocalizedStringKey("settingsLastAutoSync"))
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        Text(lastAutoSync, style: .relative)
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
                 }
                 
                 Button(action: syncData) {
@@ -68,7 +98,21 @@ public struct SettingsView: View {
                         Text(LocalizedStringKey("settingsSyncNow"))
                     }
                 }
-                .disabled(isSyncing || githubService.isDownloading)
+                .disabled(isSyncing || githubService.isDownloading || autoSyncService.isAutoSyncing)
+                
+                // Тестовая кнопка для автосинхронизации (только для разработки)
+                #if DEBUG
+                Button(action: {
+                    autoSyncService.performAutoSyncOnAppLaunch()
+                }) {
+                    HStack {
+                        Image(systemName: "play.circle")
+                        Text("Test Auto Sync")
+                    }
+                }
+                .disabled(autoSyncService.isAutoSyncing)
+                .foregroundColor(.orange)
+                #endif
             }
             
             Section(header: Text("Support")) {
@@ -138,4 +182,6 @@ public struct SettingsView: View {
             UIApplication.shared.open(url)
         }
     }
+    
+
 } 

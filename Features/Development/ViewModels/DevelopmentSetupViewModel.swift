@@ -21,7 +21,7 @@ class DevelopmentSetupViewModel: ObservableObject {
     @Published var selectedDeveloper: SwiftDataDeveloper?
     @Published var selectedFixer: SwiftDataFixer?
     @Published var selectedDilution: String = ""
-    @Published var temperature: Double = 20.0
+    @Published var temperature: Int = 20
     @Published var iso: Int32 = Int32(Constants.ISO.defaultISO)
     @Published var calculatedTime: Int?
     
@@ -85,7 +85,7 @@ class DevelopmentSetupViewModel: ObservableObject {
     }
     
     private var temperatureOptionsCount: Int {
-        let unique = Set(swiftDataService.temperatureMultipliers.map { Int($0.temperature) })
+        let unique = Set(swiftDataService.temperatureMultipliers.map { $0.temperature })
         return unique.isEmpty ? 1 : unique.count
     }
 
@@ -126,7 +126,7 @@ class DevelopmentSetupViewModel: ObservableObject {
         calculateTimeAutomatically()
     }
     
-    func updateTemperature(_ newTemperature: Double) {
+    func updateTemperature(_ newTemperature: Int) {
         temperature = newTemperature
         calculateTimeAutomatically()
     }

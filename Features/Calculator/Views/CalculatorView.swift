@@ -14,6 +14,7 @@ struct CalculatorView: View {
     
     // Управление фокусом для клавиатуры
     @FocusState private var focusedField: FocusedField?
+    @State private var showTemperaturePicker = false
     
     enum FocusedField: Hashable {
         case minutes
@@ -21,7 +22,7 @@ struct CalculatorView: View {
         case coefficient
     }
     
-    init(initialTime: Int? = nil, initialTemperature: Double = 20.0, onStartTimer: ((String, Int, Int) -> Void)? = nil) {
+    init(initialTime: Int? = nil, initialTemperature: Int = 20, onStartTimer: ((String, Int, Int) -> Void)? = nil) {
         let vm = CalculatorViewModel()
         if let time = initialTime {
             let minutes = time / 60
@@ -50,14 +51,6 @@ struct CalculatorView: View {
                                 .submitLabel(.next)
                                 .onSubmit {
                                     focusedField = .seconds
-                                }
-                                .toolbar {
-                                    ToolbarItemGroup(placement: .keyboard) {
-                                        Spacer()
-                                        Button(LocalizedStringKey("done")) {
-                                            focusedField = nil
-                                        }
-                                    }
                                 }
                             
                             Text(LocalizedStringKey("min"))
@@ -159,9 +152,10 @@ struct CalculatorView: View {
                         Button(action: {
                             // Скрываем клавиатуру перед открытием пикера
                             focusedField = nil
+                            showTemperaturePicker = true
                         }) {
                             HStack {
-                                Text(String(format: "%.1f°C", viewModel.temperature))
+                                Text("\(viewModel.temperature)°C")
                                     .foregroundColor(.primary)
                                 
                                 Spacer()
@@ -202,6 +196,14 @@ struct CalculatorView: View {
         }
         .navigationTitle(LocalizedStringKey("calculator"))
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button(LocalizedStringKey("done")) {
+                    focusedField = nil
+                }
+            }
+        }
         // Добавляем обработчик нажатия вне текстовых полей для скрытия клавиатуры и автодополнения
         .onTapGesture {
             focusedField = nil
@@ -222,12 +224,21 @@ struct CalculatorView: View {
         .sheet(isPresented: $viewModel.showResult) {
             let base = viewModel.pushResults.first
             let calculated = viewModel.pushResults.last
-            VStack(spacing: 16) {
-                // Отступ от верхнего индикатора перетаскивания шита
-                Spacer().frame(height: 8)
-                Text(LocalizedStringKey("results"))
-                    .font(.headline)
-                    .padding(.top, 4)
+                            VStack(spacing: 16) {
+                    // Отступ от верхнего индикатора перетаскивания шита
+                    Spacer().frame(height: 8)
+                    Text(LocalizedStringKey("results"))
+                        .font(.headline)
+                        .padding(.top, 4)
+                    
+                    // Информация о температурном коэффициенте
+                    let temperatureMultiplier = viewModel.getTemperatureMultiplier()
+                    if temperatureMultiplier != 1.0 {
+                        Text("Температурный коэффициент: ×\(String(format: "%.2f", temperatureMultiplier))")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .padding(.horizontal)
+                    }
                 
                 ScrollView {
                     LazyVStack(spacing: 12) {
@@ -310,6 +321,12 @@ struct CalculatorView: View {
                 timerLabel: viewModel.selectedTimerLabel,
                 totalMinutes: viewModel.selectedTimerMinutes,
                 totalSeconds: viewModel.selectedTimerSeconds
+            )
+        }
+        .sheet(isPresented: $showTemperaturePicker) {
+            TemperaturePickerView(
+                temperature: $viewModel.temperature,
+                onDismiss: { showTemperaturePicker = false }
             )
         }
 

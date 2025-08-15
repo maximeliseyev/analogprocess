@@ -14,7 +14,7 @@ class CreateRecordViewModel: ObservableObject {
     @Published var developerName: String = ""
     @Published var iso: Int32 = Int32(Constants.ISO.defaultISO)
     @Published var dilution: String = ""
-    @Published var temperature: Double = 20.0
+    @Published var temperature: Int = 20
     @Published var process: String = ""
     @Published var minutes: Int = 0
     @Published var seconds: Int = 0
@@ -110,7 +110,7 @@ class CreateRecordViewModel: ObservableObject {
         iso = record.iso ?? Int32(Constants.ISO.defaultFilmISO)
         process = record.process ?? "push +1"
         dilution = record.dilution ?? ""
-        temperature = record.temperature ?? 20.0
+                    temperature = record.temperature ?? 20
         
         // Конвертируем секунды обратно в минуты и секунды
         let totalSeconds = record.time ?? 0

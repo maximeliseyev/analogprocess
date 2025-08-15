@@ -324,6 +324,24 @@
 "settingsSyncResult" = "Результат синхронизации";
 "settingsSyncSuccess" = "Данные успешно синхронизированы!";
 "settingsSyncError" = "Ошибка синхронизации";
+"settingsAutoSyncReady" = "Автосинхронизация готова";
+"settingsAutoSyncChecking" = "Проверка подключения...";
+"settingsAutoSyncInProgress" = "Автосинхронизация...";
+"settingsAutoSyncCompleted" = "Автосинхронизация завершена";
+"settingsAutoSyncFailed" = "Ошибка автосинхронизации: %@";
+"settingsAutoSyncNoInternet" = "Нет подключения к интернету";
+"settingsAutoSyncTooSoon" = "Синхронизация недавно выполнена";
+"settingsLastAutoSync" = "Последняя автосинхронизация:";
+"settingsAutoSyncEnabled" = "Автосинхронизация при запуске";
+"settingsAutoSyncDescription" = "Автоматически синхронизировать данные при запуске приложения при наличии интернета";
+"settingsAutoSyncDisabled" = "Автосинхронизация отключена";
+"stagingStartSequential" = "Начать последовательные стадии";
+"stagingStageComplete" = "Стадия завершена!";
+"stagingGoToNextStage" = "Перейти к следующей стадии";
+"stagingAllStagesComplete" = "Все стадии завершены!";
+"stagingFinish" = "Завершить";
+"stagingSequentialStages" = "Последовательные стадии";
+"stagingStageXofY" = "Стадия %@ из %@";
 
 // MARK: - Manual Time Input
 "setTimeManually" = "Установить время вручную";

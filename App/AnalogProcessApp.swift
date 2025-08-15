@@ -13,6 +13,7 @@ struct AnalogProcessApp: App {
     let swiftDataPersistence = SwiftDataPersistence.shared
     @State private var colorScheme: ColorScheme? = nil
     @StateObject private var themeManager = ThemeManager.shared
+    @StateObject private var autoSyncService = AutoSyncService.shared
 
     var body: some Scene {
         WindowGroup {
@@ -30,6 +31,9 @@ struct AnalogProcessApp: App {
                     Task { @MainActor in
                         themeManager.colorScheme = colorScheme
                     }
+                    
+                    // Запускаем автоматическую синхронизацию данных
+                    autoSyncService.performAutoSyncOnAppLaunch()
                 }
                 .onChange(of: colorScheme) { _, newValue in
                     Task { @MainActor in
