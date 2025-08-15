@@ -190,7 +190,7 @@ public class SwiftDataService: ObservableObject {
             guard let temperature = Int(temperatureString) else { continue }
             
             let tempMultiplier = SwiftDataTemperatureMultiplier(
-                temperature: Int32(temperature),
+                temperature: temperature,
                 multiplier: multiplier
             )
             modelContext.insert(tempMultiplier)
@@ -302,13 +302,12 @@ public class SwiftDataService: ObservableObject {
         return nil
     }
     
-    func getTemperatureMultiplier(for temperature: Double) -> Double {
+    func getTemperatureMultiplier(for temperature: Int) -> Double {
         // TODO: Re-implement with proper predicate when SwiftData supports round() function
         // For now, we'll search through the array manually
-        let roundedTemperature = Int(round(temperature))
         
         for multiplier in temperatureMultipliers {
-            if multiplier.temperature == Int32(roundedTemperature) {
+            if multiplier.temperature == temperature {
                 return multiplier.multiplier
             }
         }
@@ -468,11 +467,11 @@ public class SwiftDataService: ObservableObject {
             guard let temperature = Int(tempString) else { continue }
             
             // Проверяем, существует ли уже такой температурный коэффициент
-            let exists = temperatureMultipliers.contains { $0.temperature == Int32(temperature) }
+            let exists = temperatureMultipliers.contains { $0.temperature == temperature }
             
             if !exists {
                 let tempMultiplier = SwiftDataTemperatureMultiplier(
-                    temperature: Int32(temperature),
+                    temperature: temperature,
                     multiplier: multiplier
                 )
                 modelContext.insert(tempMultiplier)
@@ -530,7 +529,7 @@ public class SwiftDataService: ObservableObject {
     }
     
     // MARK: - Calculation Records Management
-    func saveRecord(filmName: String, developerName: String, dilution: String, temperature: Double, iso: Int, calculatedTime: Int, notes: String = "") {
+    func saveRecord(filmName: String, developerName: String, dilution: String, temperature: Int, iso: Int, calculatedTime: Int, notes: String = "") {
         let record = SwiftDataCalculationRecord(
             comment: notes,
             date: Date(),

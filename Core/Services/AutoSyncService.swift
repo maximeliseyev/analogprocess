@@ -1,0 +1,193 @@
+//
+//  AutoSyncService.swift
+//  AnalogProcess
+//
+//  Created by Maxim Eliseyev on 12.07.2025.
+//
+
+import Foundation
+import Network
+import SwiftUI
+
+@MainActor
+public class AutoSyncService: ObservableObject {
+    public static let shared = AutoSyncService()
+    
+    @Published var isAutoSyncing = false
+    @Published var lastAutoSyncDate: Date?
+    @Published var autoSyncStatus: AutoSyncStatus = .idle
+    @Published var isAutoSyncEnabled: Bool = true
+    
+    private let networkMonitor = NWPathMonitor()
+    private let queue = DispatchQueue(label: "AutoSyncService")
+    private let swiftDataService = SwiftDataService.shared
+    private let githubDataService = GitHubDataService.shared
+    
+    // Минимальный интервал между автоматическими синхронизациями (24 часа)
+    private let minSyncInterval: TimeInterval = 24 * 60 * 60
+    
+    public enum AutoSyncStatus: Equatable {
+        case idle
+        case checking
+        case syncing
+        case completed
+        case failed(String)
+        case noInternet
+        case tooSoon
+        
+        public static func == (lhs: AutoSyncStatus, rhs: AutoSyncStatus) -> Bool {
+            switch (lhs, rhs) {
+            case (.idle, .idle):
+                return true
+            case (.checking, .checking):
+                return true
+            case (.syncing, .syncing):
+                return true
+            case (.completed, .completed):
+                return true
+            case (.noInternet, .noInternet):
+                return true
+            case (.tooSoon, .tooSoon):
+                return true
+            case (.failed(let lhsError), .failed(let rhsError)):
+                return lhsError == rhsError
+            default:
+                return false
+            }
+        }
+    }
+    
+    private init() {
+        loadLastAutoSyncDate()
+        loadAutoSyncEnabled()
+        setupNetworkMonitoring()
+    }
+    
+    deinit {
+        networkMonitor.cancel()
+    }
+    
+    // MARK: - Public Methods
+    
+    /// Запускает автоматическую синхронизацию при запуске приложения
+    public func performAutoSyncOnAppLaunch() {
+        guard isAutoSyncEnabled else {
+            print("AutoSync: Auto-sync is disabled")
+            return
+        }
+        
+        Task {
+            await checkAndSyncIfNeeded()
+        }
+    }
+    
+    /// Принудительная синхронизация (игнорирует ограничения по времени)
+    public func forceAutoSync() async {
+        await performSync()
+    }
+    
+    // MARK: - Private Methods
+    
+    private func checkAndSyncIfNeeded() async {
+        autoSyncStatus = .checking
+        
+        // Проверяем подключение к интернету
+        guard isInternetAvailable() else {
+            autoSyncStatus = .noInternet
+            return
+        }
+        
+        // Проверяем, не слишком ли рано для следующей синхронизации
+        if let lastSync = lastAutoSyncDate {
+            let timeSinceLastSync = Date().timeIntervalSince(lastSync)
+            if timeSinceLastSync < minSyncInterval {
+                autoSyncStatus = .tooSoon
+                return
+            }
+        }
+        
+        // Выполняем синхронизацию
+        await performSync()
+    }
+    
+    private func performSync() async {
+        autoSyncStatus = .syncing
+        isAutoSyncing = true
+        
+        do {
+            try await swiftDataService.syncDataFromGitHub()
+            
+            lastAutoSyncDate = Date()
+            saveLastAutoSyncDate()
+            autoSyncStatus = .completed
+            
+            print("AutoSync: Data synchronized successfully")
+        } catch {
+            autoSyncStatus = .failed(error.localizedDescription)
+            print("AutoSync: Failed to sync data - \(error.localizedDescription)")
+        }
+        
+        isAutoSyncing = false
+    }
+    
+    // MARK: - Network Monitoring
+    
+    private func setupNetworkMonitoring() {
+        networkMonitor.pathUpdateHandler = { path in
+            DispatchQueue.main.async {
+                // Можно добавить логику для повторной синхронизации при восстановлении соединения
+                if path.status == .satisfied {
+                    print("AutoSync: Internet connection restored")
+                } else {
+                    print("AutoSync: Internet connection lost")
+                }
+            }
+        }
+        networkMonitor.start(queue: queue)
+    }
+    
+    private func isInternetAvailable() -> Bool {
+        let monitor = NWPathMonitor()
+        let semaphore = DispatchSemaphore(value: 0)
+        var isAvailable = false
+        
+        monitor.pathUpdateHandler = { path in
+            DispatchQueue.main.sync {
+                isAvailable = path.status == .satisfied
+            }
+            semaphore.signal()
+        }
+        
+        monitor.start(queue: queue)
+        _ = semaphore.wait(timeout: .now() + 1.0)
+        monitor.cancel()
+        
+        return isAvailable
+    }
+    
+    // MARK: - Persistence
+    
+    private func loadLastAutoSyncDate() {
+        if let date = UserDefaults.standard.object(forKey: "LastAutoSyncDate") as? Date {
+            lastAutoSyncDate = date
+        }
+    }
+    
+    private func saveLastAutoSyncDate() {
+        UserDefaults.standard.set(lastAutoSyncDate, forKey: "LastAutoSyncDate")
+    }
+    
+    private func loadAutoSyncEnabled() {
+        // По умолчанию включено, если значение не было сохранено
+        if UserDefaults.standard.object(forKey: "AutoSyncEnabled") == nil {
+            isAutoSyncEnabled = true
+        } else {
+            isAutoSyncEnabled = UserDefaults.standard.bool(forKey: "AutoSyncEnabled")
+        }
+    }
+    
+    public func setAutoSyncEnabled(_ enabled: Bool) {
+        isAutoSyncEnabled = enabled
+        UserDefaults.standard.set(enabled, forKey: "AutoSyncEnabled")
+    }
+}

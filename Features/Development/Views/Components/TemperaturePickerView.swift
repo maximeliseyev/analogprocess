@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct TemperaturePickerView: View {
-    @Binding var temperature: Double
+    @Binding var temperature: Int
     let onDismiss: () -> Void
 
     
-    private let temperatures = Array(stride(from: 15.0, through: 30.0, by: 0.5))
+    private let temperatures = Array(15...30)
     
     var body: some View {
         NavigationStack {
@@ -25,13 +25,13 @@ struct TemperaturePickerView: View {
                         onDismiss()
                     }) {
                         HStack {
-                            Text("\(temp, specifier: "%.1f")\(String(localized: "degreesCelsius"))")
+                            Text("\(temp)\(String(localized: "degreesCelsius"))")
                                 .font(.body)
                                 .foregroundColor(.primary)
                             
                             Spacer()
                             
-                            if abs(temperature - temp) < 0.1 {
+                            if temperature == temp {
                                 Image(systemName: "checkmark")
                                     .checkmarkStyle()
                             }
@@ -65,7 +65,7 @@ struct TemperaturePickerView: View {
 struct TemperaturePickerView_Previews: PreviewProvider {
     static var previews: some View {
         TemperaturePickerView(
-            temperature: .constant(20.0),
+            temperature: .constant(20),
             onDismiss: {}
         )
     }

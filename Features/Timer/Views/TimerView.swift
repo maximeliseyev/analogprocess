@@ -24,7 +24,7 @@ public struct TimerView: View {
                 
                 VStack(spacing: 30) {
                     TimerHeaderView(
-                        timerLabel: timerLabel,
+                        timerLabel: LocalizedStringKey(timerLabel),
                         totalMinutes: totalMinutes,
                         totalSeconds: totalSeconds,
                         selectedAgitationMode: viewModel.selectedAgitationMode
@@ -55,15 +55,15 @@ public struct TimerView: View {
                                 .foregroundColor(.green)
                             
                             Button(action: {
-                                viewModel.startFixingTimer()
+                                dismiss()
                             }) {
                                 HStack {
-                                    Text(LocalizedStringKey("goToFixing"))
+                                    Text(LocalizedStringKey("stagingFinish"))
                                         .font(.headline)
                                 }
                                 .foregroundColor(.white)
                                 .padding()
-                                .background(.orange)
+                                .background(.green)
                                 .cornerRadius(10)
                             }
                         }

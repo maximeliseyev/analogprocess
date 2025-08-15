@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TimerHeaderView: View {
-    let timerLabel: String
+    let timerLabel: LocalizedStringKey
     let totalMinutes: Int
     let totalSeconds: Int
     let selectedAgitationMode: AgitationMode?

@@ -20,7 +20,7 @@ struct StagingStage: Identifiable, Hashable {
     let color: String
     var isEnabled: Bool = true
     var duration: TimeInterval = 0
-    var temperature: Double = 20.0
+    var temperature: Int = 20
     // Store selected agitation preset as localization key to avoid cross-feature dependency
     var agitationPresetKey: String? = nil
     

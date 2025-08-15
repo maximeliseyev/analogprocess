@@ -29,6 +29,7 @@ struct StagingView: View {
     @StateObject private var viewModel = StagingViewModel()
     @State private var showingStagePicker = false
     @State private var draggedStage: StagingStage?
+    @State private var showingStagingTimer = false
     
     var body: some View {
         NavigationView {
@@ -87,24 +88,42 @@ struct StagingView: View {
                 
                 // Summary section
                 if !viewModel.selectedStages.isEmpty {
-                    VStack(spacing: 8) {
-                        HStack {
-                            Text(LocalizedStringKey("totalTime"))
-                                .font(.headline)
-                            Spacer()
-                            Text(formatDuration(viewModel.getTotalDuration()))
-                                .font(.headline)
-                                .foregroundColor(.blue)
+                    VStack(spacing: 12) {
+                        VStack(spacing: 8) {
+                            HStack {
+                                Text(LocalizedStringKey("totalTime"))
+                                    .font(.headline)
+                                Spacer()
+                                Text(formatDuration(viewModel.getTotalDuration()))
+                                    .font(.headline)
+                                    .foregroundColor(.blue)
+                            }
+                            
+                            HStack {
+                                Text(LocalizedStringKey("stagesInProcess"))
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                Spacer()
+                                Text("\(viewModel.selectedStages.count)")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                            }
                         }
                         
-                        HStack {
-                            Text(LocalizedStringKey("stagesInProcess"))
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                            Spacer()
-                            Text("\(viewModel.selectedStages.count)")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
+                        // Кнопка Start
+                        Button(action: {
+                            showingStagingTimer = true
+                        }) {
+                            HStack {
+                                Image(systemName: "play.fill")
+                                Text(LocalizedStringKey("stagingStartSequential"))
+                                    .font(.headline)
+                            }
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(.blue)
+                            .cornerRadius(10)
                         }
                     }
                     .padding(.horizontal, 16)
@@ -130,6 +149,9 @@ struct StagingView: View {
                 },
                 viewModel: viewModel
             )
+        }
+        .sheet(isPresented: $showingStagingTimer) {
+            StagingTimerView(stages: viewModel.selectedStages)
         }
     }
     
