@@ -45,6 +45,7 @@
 		BF8A5A012E44BA0E00D689C5 /* StagingStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A5A002E44BA0E00D689C5 /* StagingStage.swift */; };
 		BF8A5A072E44BA8200D689C5 /* StagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A5A042E44BA8200D689C5 /* StagingView.swift */; };
 		BF8A5A082E44BA8200D689C5 /* StagingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A5A022E44BA8200D689C5 /* StagingViewModel.swift */; };
+		BF8EDB3F2E4FC1CE0040E898 /* StagingCalculationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8EDB3E2E4FC1CE0040E898 /* StagingCalculationResultView.swift */; };
 		BF99E9A82E4E814300BB7F0C /* DropViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9A32E4E814300BB7F0C /* DropViewDelegate.swift */; };
 		BF99E9A92E4E814300BB7F0C /* StagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9A52E4E814300BB7F0C /* StagePickerView.swift */; };
 		BF99E9AA2E4E814300BB7F0C /* AddStageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9A22E4E814300BB7F0C /* AddStageButton.swift */; };
@@ -135,6 +136,7 @@
 		BF8A5A002E44BA0E00D689C5 /* StagingStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingStage.swift; sourceTree = "<group>"; };
 		BF8A5A022E44BA8200D689C5 /* StagingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingViewModel.swift; sourceTree = "<group>"; };
 		BF8A5A042E44BA8200D689C5 /* StagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingView.swift; sourceTree = "<group>"; };
+		BF8EDB3E2E4FC1CE0040E898 /* StagingCalculationResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingCalculationResultView.swift; sourceTree = "<group>"; };
 		BF99E9A22E4E814300BB7F0C /* AddStageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStageButton.swift; sourceTree = "<group>"; };
 		BF99E9A32E4E814300BB7F0C /* DropViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropViewDelegate.swift; sourceTree = "<group>"; };
 		BF99E9A42E4E814300BB7F0C /* StageEditorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageEditorSheet.swift; sourceTree = "<group>"; };
@@ -154,6 +156,9 @@
 		BFB0C3F52E3E511300296B97 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BFB0C3F92E3E58D900296B97 /* JournalRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalRecord.swift; sourceTree = "<group>"; };
 		BFB0C3FD2E3E5AB400296B97 /* CreateRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecordView.swift; sourceTree = "<group>"; };
+		BFBD39FA2E51E2F900107244 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BFBD39FB2E51E34000107244 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BFBD39FD2E51E35600107244 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		BFDCB75D2E382372000F6CE5 /* AnalogProcessApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogProcessApp.swift; sourceTree = "<group>"; };
 		BFDD23642E3F7EE30079688B /* RecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailView.swift; sourceTree = "<group>"; };
 		BFE12EAC2E33C5120044A3A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -469,6 +474,7 @@
 			children = (
 				BFA0C7A72E2134B300132936 /* CalculationResultView.swift */,
 				BF4109392E31308500BE2AD8 /* CalculatorView.swift */,
+				BF8EDB3E2E4FC1CE0040E898 /* StagingCalculationResultView.swift */,
 				BF4109082E3104FC00BE2AD8 /* Components */,
 			);
 			path = Views;
@@ -599,6 +605,9 @@
 				en,
 				Base,
 				ru,
+				ja,
+				ko,
+				"zh-Hans",
 			);
 			mainGroup = BFE96A302E2061A0001CF98D;
 			minimizedProjectReferenceProxies = 1;
@@ -639,6 +648,7 @@
 				BFE12EC32E363AC00044A3A4 /* CalculatedTimeSection.swift in Sources */,
 				BF8A59F42E43814200D689C5 /* NavigationButton.swift in Sources */,
 				BF553C6C2E43297C009F1525 /* CreateRecordViewModel.swift in Sources */,
+				BF8EDB3F2E4FC1CE0040E898 /* StagingCalculationResultView.swift in Sources */,
 				BF41093A2E31308500BE2AD8 /* CalculatorView.swift in Sources */,
 				BFA0C7A82E2134B400132936 /* CalculationResultView.swift in Sources */,
 				BFFA1C822E4A73EF005C24F4 /* CloudKitTestView.swift in Sources */,
@@ -723,6 +733,9 @@
 			children = (
 				BFE12EAC2E33C5120044A3A4 /* en */,
 				BFE12EAD2E33C5120044A3A4 /* ru */,
+				BFBD39FA2E51E2F900107244 /* ja */,
+				BFBD39FB2E51E34000107244 /* ko */,
+				BFBD39FD2E51E35600107244 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

@@ -12,6 +12,10 @@ struct CalculatorView: View {
     @StateObject private var viewModel: CalculatorViewModel
     let onStartTimer: ((String, Int, Int) -> Void)?
     
+    // Параметры для режима редактора стадии
+    let isFromStageEditor: Bool
+    @Environment(\.dismiss) private var dismiss
+    
     // Управление фокусом для клавиатуры
     @FocusState private var focusedField: FocusedField?
     @State private var showTemperaturePicker = false
@@ -22,7 +26,7 @@ struct CalculatorView: View {
         case coefficient
     }
     
-    init(initialTime: Int? = nil, initialTemperature: Int = 20, onStartTimer: ((String, Int, Int) -> Void)? = nil) {
+    init(initialTime: Int? = nil, initialTemperature: Int = 20, isFromStageEditor: Bool = false, onStartTimer: ((String, Int, Int) -> Void)? = nil) {
         let vm = CalculatorViewModel()
         if let time = initialTime {
             let minutes = time / 60
@@ -32,6 +36,7 @@ struct CalculatorView: View {
             vm.temperature = initialTemperature
         }
         _viewModel = StateObject(wrappedValue: vm)
+        self.isFromStageEditor = isFromStageEditor
         self.onStartTimer = onStartTimer
     }
     
@@ -203,6 +208,8 @@ struct CalculatorView: View {
                     focusedField = nil
                 }
             }
+            
+
         }
         // Добавляем обработчик нажатия вне текстовых полей для скрытия клавиатуры и автодополнения
         .onTapGesture {
@@ -222,99 +229,108 @@ struct CalculatorView: View {
             }
         }
         .sheet(isPresented: $viewModel.showResult) {
-            let base = viewModel.pushResults.first
-            let calculated = viewModel.pushResults.last
-                            VStack(spacing: 16) {
-                    // Отступ от верхнего индикатора перетаскивания шита
-                    Spacer().frame(height: 8)
-                    Text(LocalizedStringKey("results"))
-                        .font(.headline)
-                        .padding(.top, 4)
-                    
-                    // Информация о температурном коэффициенте
-                    let temperatureMultiplier = viewModel.getTemperatureMultiplier()
-                    if temperatureMultiplier != 1.0 {
-                        Text("Температурный коэффициент: ×\(String(format: "%.2f", temperatureMultiplier))")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                            .padding(.horizontal)
-                    }
-                
-                ScrollView {
-                    LazyVStack(spacing: 12) {
-                        if let base = base {
-                            HStack {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text("+0")
-                                        .monospacedBodyStyle()
-                                    Text(base.formattedTime)
-                                        .monospacedTitleStyle()
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                
-                                HStack(spacing: 12) {
-                                    Button(action: {
-                                        viewModel.startTimer(base.label, base.minutes, base.seconds)
-                                        onStartTimer?(base.label, base.minutes, base.seconds)
-                                    }) {
-                                        Image(systemName: "timer")
-                                            .primaryIconButtonStyle()
-                                    }
-                                    
-                                    Button(action: {
-                                        viewModel.selectedResult = base
-                                        viewModel.showResult = false
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                                            viewModel.showSaveDialog = true
-                                        }
-                                    }) {
-                                        Image(systemName: "square.and.arrow.down")
-                                            .secondaryIconButtonStyle()
-                                    }
-                                }
-                            }
-                            .cardStyle()
-                        }
+            if isFromStageEditor {
+                // Используем специальный view для режима Staging
+                StagingCalculationResultView(
+                    results: viewModel.pushResults,
+                    viewModel: viewModel
+                )
+            } else {
+                // Обычный режим - показываем стандартный результат
+                let base = viewModel.pushResults.first
+                let calculated = viewModel.pushResults.last
+                                VStack(spacing: 16) {
+                        // Отступ от верхнего индикатора перетаскивания шита
+                        Spacer().frame(height: 8)
+                        Text(LocalizedStringKey("results"))
+                            .font(.headline)
+                            .padding(.top, 4)
                         
-                        if let calculated = calculated, base?.id != calculated.id {
-                            HStack {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(calculated.label)
-                                        .monospacedBodyStyle()
-                                    Text(calculated.formattedTime)
-                                        .monospacedTitleStyle()
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                
-                                HStack(spacing: 12) {
-                                    Button(action: {
-                                        viewModel.startTimer(calculated.label, calculated.minutes, calculated.seconds)
-                                        onStartTimer?(calculated.label, calculated.minutes, calculated.seconds)
-                                    }) {
-                                        Image(systemName: "timer")
-                                            .primaryIconButtonStyle()
-                                    }
-                                    
-                                    Button(action: {
-                                        viewModel.selectedResult = calculated
-                                        viewModel.showResult = false
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                                            viewModel.showSaveDialog = true
-                                        }
-                                    }) {
-                                        Image(systemName: "square.and.arrow.down")
-                                            .secondaryIconButtonStyle()
-                                    }
-                                }
-                            }
-                            .cardStyle()
+                        // Информация о температурном коэффициенте
+                        let temperatureMultiplier = viewModel.getTemperatureMultiplier()
+                        if temperatureMultiplier != 1.0 {
+                            Text("Температурный коэффициент: ×\(String(format: "%.2f", temperatureMultiplier))")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                                .padding(.horizontal)
                         }
+                    
+                    ScrollView {
+                        LazyVStack(spacing: 12) {
+                            if let base = base {
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text("+0")
+                                            .monospacedBodyStyle()
+                                        Text(base.formattedTime)
+                                            .monospacedTitleStyle()
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    
+                                    HStack(spacing: 12) {
+                                        Button(action: {
+                                            viewModel.startTimer(base.label, base.minutes, base.seconds)
+                                            onStartTimer?(base.label, base.minutes, base.seconds)
+                                        }) {
+                                            Image(systemName: "timer")
+                                                .primaryIconButtonStyle()
+                                        }
+                                        
+                                        Button(action: {
+                                            viewModel.selectedResult = base
+                                            viewModel.showResult = false
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                                                viewModel.showSaveDialog = true
+                                            }
+                                        }) {
+                                            Image(systemName: "square.and.arrow.down")
+                                                .secondaryIconButtonStyle()
+                                        }
+                                    }
+                                }
+                                .cardStyle()
+                            }
+                            
+                            if let calculated = calculated, base?.id != calculated.id {
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text(calculated.label)
+                                            .monospacedBodyStyle()
+                                        Text(calculated.formattedTime)
+                                            .monospacedTitleStyle()
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    
+                                    HStack(spacing: 12) {
+                                        Button(action: {
+                                            viewModel.startTimer(calculated.label, calculated.minutes, calculated.seconds)
+                                            onStartTimer?(calculated.label, calculated.minutes, calculated.seconds)
+                                        }) {
+                                            Image(systemName: "timer")
+                                                .primaryIconButtonStyle()
+                                        }
+                                        
+                                        Button(action: {
+                                            viewModel.selectedResult = calculated
+                                            viewModel.showResult = false
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                                                viewModel.showSaveDialog = true
+                                            }
+                                        }) {
+                                            Image(systemName: "square.and.arrow.down")
+                                                .secondaryIconButtonStyle()
+                                        }
+                                    }
+                                }
+                                .cardStyle()
+                            }
+                        }
+                        .padding(.horizontal)
                     }
-                    .padding(.horizontal)
                 }
+                .presentationDetents([.fraction(0.33)])
+                .presentationDragIndicator(.visible)
             }
-            .presentationDetents([.fraction(0.33)])
-            .presentationDragIndicator(.visible)
         }
         .navigationDestination(isPresented: $viewModel.showTimer) {
             TimerView(
@@ -331,6 +347,25 @@ struct CalculatorView: View {
         }
 
 
+    }
+    
+    // MARK: - Private Methods
+    
+    private func saveCalculatedTime() {
+        // Берем первый результат (базовое время)
+        if let firstResult = viewModel.pushResults.first {
+            let totalSeconds = firstResult.minutes * 60 + firstResult.seconds
+            
+            // Отправляем уведомление с рассчитанным временем
+            NotificationCenter.default.post(
+                name: Notification.Name("DevelopmentCalculatedTime"),
+                object: nil,
+                userInfo: ["seconds": totalSeconds]
+            )
+            
+            // Закрываем калькулятор
+            dismiss()
+        }
     }
 }
 
