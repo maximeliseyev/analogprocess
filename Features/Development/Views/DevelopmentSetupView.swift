@@ -9,16 +9,23 @@ import SwiftUI
 import SwiftData
 
 struct DevelopmentSetupView: View {
-    @StateObject private var viewModel = DevelopmentSetupViewModel()
+    @StateObject private var viewModel: DevelopmentSetupViewModel
     @Environment(\.dismiss) private var dismiss
     
     // Параметры для определения режима открытия
     let isFromStageEditor: Bool
     let stageType: StageType?
     
-    init(isFromStageEditor: Bool = false, stageType: StageType? = nil) {
+    init(isFromStageEditor: Bool = false, stageType: StageType? = nil, viewModel: DevelopmentSetupViewModel? = nil) {
         self.isFromStageEditor = isFromStageEditor
         self.stageType = stageType
+        
+        // Используем переданный ViewModel или создаем новый
+        if let existingViewModel = viewModel {
+            self._viewModel = StateObject(wrappedValue: existingViewModel)
+        } else {
+            self._viewModel = StateObject(wrappedValue: DevelopmentSetupViewModel())
+        }
     }
     
     var body: some View {
@@ -155,7 +162,11 @@ struct DevelopmentSetupView: View {
         }
         .navigationDestination(isPresented: $viewModel.navigateToCalculator) {
             if let calculatedTime = viewModel.calculatedTime {
-                CalculatorView(initialTime: calculatedTime, initialTemperature: viewModel.temperature)
+                CalculatorView(
+                    initialTime: calculatedTime, 
+                    initialTemperature: viewModel.temperature,
+                    isFromStageEditor: isFromStageEditor
+                )
             }
         }
         .navigationDestination(isPresented: $viewModel.navigateToTimer) {
@@ -203,6 +214,16 @@ struct DevelopmentSetupView: View {
                 default:
                     break
                 }
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("DismissCalculatorView"))) { _ in
+            // Закрываем калькулятор и возвращаемся к DevelopmentSetupView
+            viewModel.navigateToCalculator = false
+        }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("DismissDevelopmentSetupView"))) { _ in
+            // Закрываем DevelopmentSetupView и возвращаемся к StageEditorSheet
+            if isFromStageEditor {
+                dismiss()
             }
         }
     }

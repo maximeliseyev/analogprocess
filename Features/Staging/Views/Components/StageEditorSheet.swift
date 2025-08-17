@@ -9,6 +9,9 @@ struct StageEditorSheet: View {
     @State private var seconds: Int
     @State private var selectedAgitationKey: String
     
+    // Сохраняем ViewModel для DevelopmentSetup
+    @State private var developmentSetupViewModel: DevelopmentSetupViewModel?
+    
     init(stage: StagingStage, onSave: @escaping (StagingStage) -> Void) {
         self._localStage = State(initialValue: stage)
         self.onSave = onSave
@@ -57,8 +60,18 @@ struct StageEditorSheet: View {
                 }
                 if localStage.type == .develop || localStage.type == .fixer {
                     Section(header: Text(LocalizedStringKey("advancedSetup"))) {
-                        NavigationLink(destination: DevelopmentSetupView(isFromStageEditor: true, stageType: localStage.type)) {
+                        NavigationLink(destination: DevelopmentSetupView(
+                            isFromStageEditor: true, 
+                            stageType: localStage.type,
+                            viewModel: developmentSetupViewModel
+                        )) {
                             Text(LocalizedStringKey(localStage.type == .develop ? "openDevelopmentSetup" : "openFixerSetup"))
+                        }
+                        .onAppear {
+                            // Создаем ViewModel при первом открытии
+                            if developmentSetupViewModel == nil {
+                                developmentSetupViewModel = DevelopmentSetupViewModel()
+                            }
                         }
                     }
                 }
@@ -77,12 +90,21 @@ struct StageEditorSheet: View {
                     }
                 }
             }
-            .onReceive(NotificationCenter.default.publisher(for: Notification.Name("DevelopmentCalculatedTime"))) { output in
-                if let secondsVal = output.userInfo?["seconds"] as? Int {
-                    minutes = secondsVal / 60
-                    seconds = secondsVal % 60
-                }
+                    .onReceive(NotificationCenter.default.publisher(for: Notification.Name("DevelopmentCalculatedTime"))) { output in
+            if let secondsVal = output.userInfo?["seconds"] as? Int {
+                minutes = secondsVal / 60
+                seconds = secondsVal % 60
             }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("DismissCalculatorView"))) { _ in
+            // Дополнительно закрываем DevelopmentSetupView, чтобы вернуться к StageEditorSheet
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                NotificationCenter.default.post(
+                    name: Notification.Name("DismissDevelopmentSetupView"),
+                    object: nil
+                )
+            }
+        }
         }
     }
 }
