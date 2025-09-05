@@ -85,7 +85,7 @@ struct DevelopmentSetupView: View {
                                 time: calculatedTime,
                                 temperature: viewModel.temperature,
                                 filmName: viewModel.selectedFilmName,
-                                developerName: viewModel.selectedMode == .developing ? viewModel.selectedDeveloperName : "Fixer",
+                                developerName: viewModel.selectedMode == .developing ? viewModel.selectedDeveloperName : "Fixing",
                                 onCalculatorTap: {
                                     NotificationCenter.default.post(
                                         name: Notification.Name("DevelopmentCalculatedTime"),
