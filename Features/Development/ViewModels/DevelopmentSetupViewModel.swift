@@ -173,7 +173,7 @@ class DevelopmentSetupViewModel: ObservableObject {
             }
             print("DEBUG: calculateTimeAutomatically - film: \(film.name), developer: \(developer.name), dilution: \(dilutionToUse), iso: \(iso), temperature: \(temperature)")
             
-            let parameters = SwiftDataDevelopmentParameters(
+            let parameters = DevelopmentParameters(
                 film: film,
                 developer: developer,
                 dilution: dilutionToUse,

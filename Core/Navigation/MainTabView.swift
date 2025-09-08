@@ -140,6 +140,15 @@ public struct MainTabView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 24) {
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(LocalizedStringKey("mainTitle"))
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(.primary)
+                        .lineLimit(nil)
+                }
+                    
                 Spacer()
                 
                 Text(LocalizedStringKey("homeDescription"))
@@ -183,15 +192,6 @@ public struct MainTabView: View {
         }
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
-            ToolbarItem(placement: .principal) {
-                Text(LocalizedStringKey("mainTitle"))
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .lineLimit(2)
-                    .multilineTextAlignment(.leading)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-            
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink(destination: SettingsView(colorScheme: $colorScheme)) {
                     Image(systemName: "gearshape")

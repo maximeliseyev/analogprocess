@@ -349,7 +349,7 @@ public class SwiftDataService: ObservableObject {
         return Int(round(Double(totalSeconds) / Double(quarterMinuteSeconds))) * quarterMinuteSeconds
     }
     
-    func calculateDevelopmentTime(parameters: SwiftDataDevelopmentParameters) -> Int? {
+    func calculateDevelopmentTime(parameters: DevelopmentParameters) -> Int? {
         print("DEBUG: calculateDevelopmentTime called")
         guard let baseTime = getDevelopmentTime(
             filmId: parameters.film.id,

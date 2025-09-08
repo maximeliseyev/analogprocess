@@ -84,7 +84,6 @@
 		BFFA1C5E2E4A415E005C24F4 /* FixerSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C5C2E4A415E005C24F4 /* FixerSelectionView.swift */; };
 		BFFA1C602E4A6236005C24F4 /* SwiftDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C5F2E4A6236005C24F4 /* SwiftDataModels.swift */; };
 		BFFA1C642E4A67A9005C24F4 /* SwiftDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C632E4A67A9005C24F4 /* SwiftDataService.swift */; };
-		BFFA1C662E4A67CC005C24F4 /* SwiftDataDevelopmentParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C652E4A67CC005C24F4 /* SwiftDataDevelopmentParameters.swift */; };
 		BFFA1C682E4A69E3005C24F4 /* SwiftDataPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C672E4A69E3005C24F4 /* SwiftDataPersistence.swift */; };
 		BFFA1C822E4A73EF005C24F4 /* CloudKitTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C7D2E4A73EF005C24F4 /* CloudKitTestView.swift */; };
 		BFFA1C832E4A73EF005C24F4 /* SwiftDataTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C7F2E4A73EF005C24F4 /* SwiftDataTestView.swift */; };
@@ -180,7 +179,6 @@
 		BFFA1C5C2E4A415E005C24F4 /* FixerSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerSelectionView.swift; sourceTree = "<group>"; };
 		BFFA1C5F2E4A6236005C24F4 /* SwiftDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataModels.swift; sourceTree = "<group>"; };
 		BFFA1C632E4A67A9005C24F4 /* SwiftDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataService.swift; sourceTree = "<group>"; };
-		BFFA1C652E4A67CC005C24F4 /* SwiftDataDevelopmentParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataDevelopmentParameters.swift; sourceTree = "<group>"; };
 		BFFA1C672E4A69E3005C24F4 /* SwiftDataPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataPersistence.swift; sourceTree = "<group>"; };
 		BFFA1C7D2E4A73EF005C24F4 /* CloudKitTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitTestView.swift; sourceTree = "<group>"; };
 		BFFA1C7E2E4A73EF005C24F4 /* SwiftDataIntegrationTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataIntegrationTestView.swift; sourceTree = "<group>"; };
@@ -503,7 +501,6 @@
 				BFFA1C522E4A19D4005C24F4 /* Constants.swift */,
 				BF8A5A002E44BA0E00D689C5 /* StagingStage.swift */,
 				BF4109252E31148700BE2AD8 /* DevelopmentParameters.swift */,
-				BFFA1C652E4A67CC005C24F4 /* SwiftDataDevelopmentParameters.swift */,
 				BFB0C3F92E3E58D900296B97 /* JournalRecord.swift */,
 			);
 			path = Models;
@@ -689,7 +686,6 @@
 				BFFA1C8B2E4A8C32005C24F4 /* JournalViewModel.swift in Sources */,
 				BF553C6A2E43268D009F1525 /* BasePickerView.swift in Sources */,
 				BFF4D9FF2E21BECD0097BE82 /* TimerView.swift in Sources */,
-				BFFA1C662E4A67CC005C24F4 /* SwiftDataDevelopmentParameters.swift in Sources */,
 				BFE31C0C2E3A016300310B19 /* ViewStyles.swift in Sources */,
 				BFF4DA012E21C2C90097BE82 /* AgitationMode.swift in Sources */,
 				BFFA1C602E4A6236005C24F4 /* SwiftDataModels.swift in Sources */,

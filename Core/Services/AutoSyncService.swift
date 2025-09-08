@@ -17,6 +17,7 @@ public class AutoSyncService: ObservableObject {
     @Published var lastAutoSyncDate: Date?
     @Published var autoSyncStatus: AutoSyncStatus = .idle
     @Published var isAutoSyncEnabled: Bool = true
+    @Published private(set) var isNetworkAvailable = false
     
     private let networkMonitor = NWPathMonitor()
     private let queue = DispatchQueue(label: "AutoSyncService")
@@ -92,7 +93,7 @@ public class AutoSyncService: ObservableObject {
         autoSyncStatus = .checking
         
         // Проверяем подключение к интернету
-        guard isInternetAvailable() else {
+        guard isNetworkAvailable else {
             autoSyncStatus = .noInternet
             return
         }
@@ -133,36 +134,23 @@ public class AutoSyncService: ObservableObject {
     // MARK: - Network Monitoring
     
     private func setupNetworkMonitoring() {
-        networkMonitor.pathUpdateHandler = { path in
+        networkMonitor.pathUpdateHandler = { [weak self] path in
             DispatchQueue.main.async {
-                // Можно добавить логику для повторной синхронизации при восстановлении соединения
-                if path.status == .satisfied {
-                    print("AutoSync: Internet connection restored")
+                let isAvailable = path.status == .satisfied
+                self?.isNetworkAvailable = isAvailable
+
+                if isAvailable {
+                    print("AutoSync: Internet connection is available.")
+                    if self?.autoSyncStatus == .noInternet {
+                        self?.autoSyncStatus = .idle
+                    }
                 } else {
-                    print("AutoSync: Internet connection lost")
+                    print("AutoSync: Internet connection lost.")
+                    self?.autoSyncStatus = .noInternet
                 }
             }
         }
         networkMonitor.start(queue: queue)
-    }
-    
-    private func isInternetAvailable() -> Bool {
-        let monitor = NWPathMonitor()
-        let semaphore = DispatchSemaphore(value: 0)
-        var isAvailable = false
-        
-        monitor.pathUpdateHandler = { path in
-            DispatchQueue.main.sync {
-                isAvailable = path.status == .satisfied
-            }
-            semaphore.signal()
-        }
-        
-        monitor.start(queue: queue)
-        _ = semaphore.wait(timeout: .now() + 1.0)
-        monitor.cancel()
-        
-        return isAvailable
     }
     
     // MARK: - Persistence
