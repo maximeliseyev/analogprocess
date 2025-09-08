@@ -390,36 +390,113 @@ public class SwiftDataService: ObservableObject {
     }
     
     private func syncFilmsFromGitHub(_ films: [String: GitHubFilmData]) {
+        let allFilmsDescriptor = FetchDescriptor<SwiftDataFilm>()
+        guard let existingFilms = try? modelContext.fetch(allFilmsDescriptor) else {
+            // Handle error or return
+            return
+        }
+        
+        let existingFilmsById = Dictionary(existingFilms.map { ($0.id, $0) }, uniquingKeysWith: { (first, _) in first })
+        let incomingFilmIds = Set(films.keys)
+        
+        // --- Delete films that are no longer present ---
+        let filmsToDelete = existingFilms.filter { !incomingFilmIds.contains($0.id) }
+        for film in filmsToDelete {
+            modelContext.delete(film)
+        }
+        
+        // --- Insert or Update films ---
         for (id, filmData) in films {
-            if getFilm(by: id) == nil {
-                let film = SwiftDataFilm(
+            if let existingFilm = existingFilmsById[id] {
+                // Update existing film if data has changed
+                if existingFilm.name != filmData.name ||
+                   existingFilm.manufacturer != filmData.manufacturer ||
+                   existingFilm.type != filmData.type ||
+                   existingFilm.defaultISO != Int32(filmData.defaultISO) {
+                    
+                    existingFilm.name = filmData.name
+                    existingFilm.manufacturer = filmData.manufacturer
+                    existingFilm.type = filmData.type
+                    existingFilm.defaultISO = Int32(filmData.defaultISO)
+                }
+            } else {
+                // Insert new film
+                let newFilm = SwiftDataFilm(
                     id: id,
                     name: filmData.name,
                     manufacturer: filmData.manufacturer,
                     type: filmData.type,
                     defaultISO: Int32(filmData.defaultISO)
                 )
-                modelContext.insert(film)
+                modelContext.insert(newFilm)
             }
         }
     }
     
     private func syncDevelopersFromGitHub(_ developers: [String: GitHubDeveloperData]) {
+        let allDevelopersDescriptor = FetchDescriptor<SwiftDataDeveloper>()
+        guard let existingDevelopers = try? modelContext.fetch(allDevelopersDescriptor) else {
+            return
+        }
+        
+        let existingDevelopersById = Dictionary(existingDevelopers.map { ($0.id, $0) }, uniquingKeysWith: { (first, _) in first })
+        let incomingDeveloperIds = Set(developers.keys)
+        
+        // --- Delete developers that are no longer present ---
+        let developersToDelete = existingDevelopers.filter { !incomingDeveloperIds.contains($0.id) }
+        for developer in developersToDelete {
+            modelContext.delete(developer)
+        }
+        
+        // --- Insert or Update developers ---
         for (id, developerData) in developers {
-            if getDeveloper(by: id) == nil {
-                let developer = SwiftDataDeveloper(
+            if let existingDeveloper = existingDevelopersById[id] {
+                // Update existing developer if data has changed
+                if existingDeveloper.name != developerData.name ||
+                   existingDeveloper.manufacturer != developerData.manufacturer ||
+                   existingDeveloper.type != developerData.type ||
+                   existingDeveloper.defaultDilution != developerData.defaultDilution {
+                    
+                    existingDeveloper.name = developerData.name
+                    existingDeveloper.manufacturer = developerData.manufacturer
+                    existingDeveloper.type = developerData.type
+                    existingDeveloper.defaultDilution = developerData.defaultDilution
+                }
+            } else {
+                // Insert new developer
+                let newDeveloper = SwiftDataDeveloper(
                     id: id,
                     name: developerData.name,
                     manufacturer: developerData.manufacturer,
                     type: developerData.type,
                     defaultDilution: developerData.defaultDilution
                 )
-                modelContext.insert(developer)
+                modelContext.insert(newDeveloper)
             }
         }
     }
     
     private func syncDevelopmentTimesFromGitHub(_ developmentTimes: [String: [String: [String: [String: Int]]]]) {
+        // Helper to create a unique key for a development time record
+        func makeKey(filmId: String, developerId: String, dilution: String, iso: String) -> String {
+            return "\(filmId)|\(developerId)|\(dilution)|\(iso)"
+        }
+
+        // 1. Fetch all existing development times and map them by a composite key
+        let allTimesDescriptor = FetchDescriptor<SwiftDataDevelopmentTime>()
+        guard let existingTimes = try? modelContext.fetch(allTimesDescriptor) else { return }
+        
+        let existingTimesByKey = Dictionary(uniqueKeysWithValues: existingTimes.compactMap { time -> (String, SwiftDataDevelopmentTime)? in
+            guard let filmId = time.film?.id, let devId = time.developer?.id, let dilution = time.dilution else {
+                return nil
+            }
+            let key = makeKey(filmId: filmId, developerId: devId, dilution: dilution, iso: String(time.iso))
+            return (key, time)
+        })
+
+        var incomingKeys = Set<String>()
+
+        // 2. Iterate through incoming data to perform inserts/updates and collect all incoming keys
         for (filmId, developers) in developmentTimes {
             guard let film = getFilm(by: filmId) else { continue }
 
@@ -428,68 +505,115 @@ public class SwiftDataService: ObservableObject {
 
                 for (dilution, isoTimes) in dilutions {
                     for (isoString, time) in isoTimes {
-                        guard let iso = Int(isoString) else { continue }
+                        guard let iso = Int32(isoString) else { continue }
+                        
+                        let key = makeKey(filmId: filmId, developerId: developerId, dilution: dilution, iso: isoString)
+                        incomingKeys.insert(key)
 
-                        // Check for existing record to avoid duplicates; update if needed
-                        let iso32: Int32 = Int32(iso)
-                        let dilutionOpt: String? = dilution
-                        let descriptor = FetchDescriptor<SwiftDataDevelopmentTime>(
-                            predicate: #Predicate<SwiftDataDevelopmentTime> { item in
-                                item.film?.id == filmId &&
-                                item.developer?.id == developerId &&
-                                item.iso == iso32 &&
-                                item.dilution == dilutionOpt
-                            }
-                        )
-
-                        if let existing = try? modelContext.fetch(descriptor).first {
-                            if existing.time != Int32(time) {
-                                existing.time = Int32(time)
+                        if let existingTime = existingTimesByKey[key] {
+                            // Update if needed
+                            if existingTime.time != Int32(time) {
+                                existingTime.time = Int32(time)
                             }
                         } else {
-                            let developmentTime = SwiftDataDevelopmentTime(
+                            // Insert new record
+                            let newTime = SwiftDataDevelopmentTime(
                                 dilution: dilution,
-                                iso: Int32(iso),
+                                iso: iso,
                                 time: Int32(time),
                                 developer: developer,
                                 film: film
                             )
-                            modelContext.insert(developmentTime)
+                            modelContext.insert(newTime)
                         }
                     }
                 }
             }
         }
+        
+        // 3. Delete records that are no longer present in the incoming data
+        let keysToDelete = Set(existingTimesByKey.keys).subtracting(incomingKeys)
+        for key in keysToDelete {
+            if let timeToDelete = existingTimesByKey[key] {
+                modelContext.delete(timeToDelete)
+            }
+        }
     }
     
     private func syncTemperatureMultipliersFromGitHub(_ multipliers: [String: Double]) {
-        for (tempString, multiplier) in multipliers {
+        let allMultipliersDescriptor = FetchDescriptor<SwiftDataTemperatureMultiplier>()
+        guard let existingMultipliers = try? modelContext.fetch(allMultipliersDescriptor) else {
+            return
+        }
+        
+        let existingMultipliersByTemp = Dictionary(existingMultipliers.map { ($0.temperature, $0) }, uniquingKeysWith: { (first, _) in first })
+        let incomingTemps = Set(multipliers.keys.compactMap { Int($0) })
+        
+        // --- Delete multipliers that are no longer present ---
+        let multipliersToDelete = existingMultipliers.filter { !incomingTemps.contains($0.temperature) }
+        for multiplier in multipliersToDelete {
+            modelContext.delete(multiplier)
+        }
+        
+        // --- Insert or Update multipliers ---
+        for (tempString, multiplierValue) in multipliers {
             guard let temperature = Int(tempString) else { continue }
             
-            // Проверяем, существует ли уже такой температурный коэффициент
-            let exists = temperatureMultipliers.contains { $0.temperature == temperature }
-            
-            if !exists {
-                let tempMultiplier = SwiftDataTemperatureMultiplier(
+            if let existingMultiplier = existingMultipliersByTemp[temperature] {
+                // Update existing multiplier if value has changed
+                if existingMultiplier.multiplier != multiplierValue {
+                    existingMultiplier.multiplier = multiplierValue
+                }
+            } else {
+                // Insert new multiplier
+                let newMultiplier = SwiftDataTemperatureMultiplier(
                     temperature: temperature,
-                    multiplier: multiplier
+                    multiplier: multiplierValue
                 )
-                modelContext.insert(tempMultiplier)
+                modelContext.insert(newMultiplier)
             }
         }
     }
     
     private func syncFixersFromGitHub(_ fixers: [String: GitHubFixerData]) {
+        let allFixersDescriptor = FetchDescriptor<SwiftDataFixer>()
+        guard let existingFixers = try? modelContext.fetch(allFixersDescriptor) else {
+            return
+        }
+        
+        let existingFixersById = Dictionary(existingFixers.map { ($0.id, $0) }, uniquingKeysWith: { (first, _) in first })
+        let incomingFixerIds = Set(fixers.keys)
+        
+        // --- Delete fixers that are no longer present ---
+        let fixersToDelete = existingFixers.filter { !incomingFixerIds.contains($0.id) }
+        for fixer in fixersToDelete {
+            modelContext.delete(fixer)
+        }
+        
+        // --- Insert or Update fixers ---
         for (id, fixerData) in fixers {
-            if getFixer(by: id) == nil {
-                let fixer = SwiftDataFixer(
+            if let existingFixer = existingFixersById[id] {
+                // Update existing fixer if data has changed
+                if existingFixer.name != fixerData.name ||
+                   existingFixer.type != fixerData.type.rawValue ||
+                   existingFixer.time != Int32(fixerData.time) ||
+                   existingFixer.warning != fixerData.warning {
+                    
+                    existingFixer.name = fixerData.name
+                    existingFixer.type = fixerData.type.rawValue
+                    existingFixer.time = Int32(fixerData.time)
+                    existingFixer.warning = fixerData.warning
+                }
+            } else {
+                // Insert new fixer
+                let newFixer = SwiftDataFixer(
                     id: id,
                     name: fixerData.name,
                     type: fixerData.type.rawValue,
                     time: Int32(fixerData.time),
                     warning: fixerData.warning
                 )
-                modelContext.insert(fixer)
+                modelContext.insert(newFixer)
             }
         }
     }
