@@ -10,7 +10,14 @@ import SwiftData
 
 struct SwiftDataUIComponentsTestView: View {
     // MARK: - Services
-    private let swiftDataService = SwiftDataService.shared
+    @StateObject private var swiftDataService: SwiftDataService
+    
+    init() {
+        let container = SwiftDataPersistence.preview.modelContainer
+        let githubService = GitHubDataService()
+        let service = SwiftDataService(githubDataService: githubService, modelContainer: container)
+        self._swiftDataService = StateObject(wrappedValue: service)
+    }
     
     // MARK: - SwiftData State
     @State private var selectedFilm: SwiftDataFilm?
@@ -111,7 +118,7 @@ struct SwiftDataUIComponentsTestView: View {
                 onDismiss: { showFilmPicker = false },
                 onFilmSelected: { film in
                     selectedFilm = film
-                    iso = Int32(film.defaultISO)
+                    iso = film.defaultISO
                 }
             )
         }

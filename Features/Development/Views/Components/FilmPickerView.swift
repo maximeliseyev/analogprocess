@@ -46,7 +46,7 @@ struct FilmPickerView: View {
                             ForEach(filteredFilms) { film in
                                 Button(action: {
                                     selectedFilm = film
-                                    iso = Int32(film.defaultISO)
+                                    iso = film.defaultISO
                                     onFilmSelected?(film)
                                     onDismiss()
                                 }) {

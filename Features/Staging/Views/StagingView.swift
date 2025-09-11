@@ -26,6 +26,7 @@ struct Haptics {
 
 // MARK: - Main Staging View
 struct StagingView: View {
+    @EnvironmentObject var swiftDataService: SwiftDataService
     @StateObject private var viewModel = StagingViewModel()
     @State private var showingStagePicker = false
     @State private var draggedStage: StagingStage?
@@ -50,6 +51,7 @@ struct StagingView: View {
                             let stage = viewModel.selectedStages[index]
                             StageRowView(
                                 stage: stage,
+                                swiftDataService: swiftDataService,
                                 onDelete: {
                                     withAnimation(.easeInOut(duration: 0.3)) {
                                         viewModel.removeStage(at: index)

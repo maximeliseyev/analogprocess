@@ -11,6 +11,7 @@ import CoreData
 struct CalculationResultView: View {
     let results: [ProcessStep]
     let isPushMode: Bool
+    let swiftDataService: SwiftDataService
     let onTimerTap: (String, Int, Int) -> Void
     @ObservedObject var viewModel: CalculatorViewModel
     
@@ -64,6 +65,7 @@ struct CalculationResultView: View {
         .sheet(isPresented: $viewModel.showSaveDialog) {
             if let prefillData = viewModel.createPrefillData() {
                 CreateRecordView(
+                    swiftDataService: swiftDataService,
                     prefillData: nil,
                     isEditing: false,
                     onUpdate: nil,

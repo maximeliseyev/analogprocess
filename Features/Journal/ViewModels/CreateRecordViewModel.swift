@@ -29,7 +29,11 @@ class CreateRecordViewModel: ObservableObject {
     @Published var filmSuggestions: [String] = []
     @Published var developerSuggestions: [String] = []
     
-    private let swiftDataService = SwiftDataService.shared
+    private let swiftDataService: SwiftDataService
+    
+    init(swiftDataService: SwiftDataService) {
+        self.swiftDataService = swiftDataService
+    }
     
     var isValid: Bool {
         !filmName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&

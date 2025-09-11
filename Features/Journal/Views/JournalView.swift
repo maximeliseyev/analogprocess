@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct JournalView: View {
-    @StateObject private var viewModel = JournalViewModel()
+    @StateObject private var viewModel: JournalViewModel
     
     let onEditRecord: (SwiftDataCalculationRecord) -> Void
     let onDeleteRecord: (SwiftDataCalculationRecord) -> Void
@@ -21,13 +21,16 @@ struct JournalView: View {
     
     @State private var selectedRecord: SwiftDataCalculationRecord?
     
-    init(onEditRecord: @escaping (SwiftDataCalculationRecord) -> Void, 
+    init(swiftDataService: SwiftDataService,
+         cloudKitService: CloudKitService,
+         onEditRecord: @escaping (SwiftDataCalculationRecord) -> Void, 
          onDeleteRecord: @escaping (SwiftDataCalculationRecord) -> Void,
          onClose: @escaping () -> Void, 
          onCreateNew: @escaping () -> Void,
          syncStatus: CloudKitService.SyncStatus = .idle,
          isCloudAvailable: Bool = false,
          onSync: @escaping () -> Void = {}) {
+        self._viewModel = StateObject(wrappedValue: JournalViewModel(swiftDataService: swiftDataService, cloudKitService: cloudKitService))
         self.onEditRecord = onEditRecord
         self.onDeleteRecord = onDeleteRecord
         self.onClose = onClose
@@ -101,6 +104,7 @@ struct JournalView: View {
         .sheet(item: $selectedRecord) { record in
             RecordDetailView(
                 record: record,
+                swiftDataService: viewModel.swiftDataService,
                 onEdit: {
                     selectedRecord = nil
                     onEditRecord(record)

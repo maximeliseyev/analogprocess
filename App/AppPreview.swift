@@ -14,8 +14,16 @@ struct AppPreview: View {
     @State private var colorScheme: ColorScheme? = nil
     
     var body: some View {
+        let modelContainer = SwiftDataPersistence.preview.modelContainer
+        let githubService = GitHubDataService()
+        let swiftDataService = SwiftDataService(githubDataService: githubService, modelContainer: modelContainer)
+        let autoSyncService = AutoSyncService(swiftDataService: swiftDataService, githubDataService: githubService)
+        
         ContentView(colorScheme: $colorScheme)
-            .modelContainer(SwiftDataPersistence.preview.modelContainer)
+            .modelContainer(modelContainer)
+            .environmentObject(githubService)
+            .environmentObject(swiftDataService)
+            .environmentObject(autoSyncService)
     }
 }
 

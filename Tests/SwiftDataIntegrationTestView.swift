@@ -16,7 +16,14 @@ struct SwiftDataIntegrationTestView: View {
     @State private var developersCount = 0
     @State private var fixersCount = 0
     
-    private let swiftDataService = SwiftDataService.shared
+    @StateObject private var swiftDataService: SwiftDataService
+    
+    init() {
+        let container = SwiftDataPersistence.preview.modelContainer
+        let githubService = GitHubDataService()
+        let service = SwiftDataService(githubDataService: githubService, modelContainer: container)
+        self._swiftDataService = StateObject(wrappedValue: service)
+    }
     
     var body: some View {
         NavigationView {

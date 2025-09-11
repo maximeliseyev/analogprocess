@@ -8,7 +8,14 @@
 import SwiftUI
 
 struct SwiftDataTestView: View {
-    @StateObject private var swiftDataService = SwiftDataService.shared
+    @StateObject private var swiftDataService: SwiftDataService
+    
+    init() {
+        let container = SwiftDataPersistence.preview.modelContainer
+        let githubService = GitHubDataService()
+        let service = SwiftDataService(githubDataService: githubService, modelContainer: container)
+        self._swiftDataService = StateObject(wrappedValue: service)
+    }
     
     var body: some View {
         NavigationView {

@@ -10,15 +10,35 @@ import SwiftData
 
 @main
 struct AnalogProcessApp: App {
-    let swiftDataPersistence = SwiftDataPersistence.shared
+    @StateObject private var githubDataService: GitHubDataService
+    @StateObject private var swiftDataService: SwiftDataService
+    @StateObject private var autoSyncService: AutoSyncService
+    
+    private let modelContainer: ModelContainer
+
     @State private var colorScheme: ColorScheme? = nil
     @StateObject private var themeManager = ThemeManager.shared
-    @StateObject private var autoSyncService = AutoSyncService.shared
+
+    init() {
+        let persistence = SwiftDataPersistence()
+        self.modelContainer = persistence.modelContainer
+        
+        let githubService = GitHubDataService()
+        let swiftDataService = SwiftDataService(githubDataService: githubService, modelContainer: self.modelContainer)
+        let autoSyncService = AutoSyncService(swiftDataService: swiftDataService, githubDataService: githubService)
+        
+        _githubDataService = StateObject(wrappedValue: githubService)
+        _swiftDataService = StateObject(wrappedValue: swiftDataService)
+        _autoSyncService = StateObject(wrappedValue: autoSyncService)
+    }
 
     var body: some Scene {
         WindowGroup {
             ContentView(colorScheme: $colorScheme)
-                .modelContainer(swiftDataPersistence.modelContainer)
+                .modelContainer(modelContainer)
+                .environmentObject(githubDataService)
+                .environmentObject(swiftDataService)
+                .environmentObject(autoSyncService)
                 .environment(\.theme, NonIsolatedThemeManager())
                 .preferredColorScheme(colorScheme)
                 .onAppear {

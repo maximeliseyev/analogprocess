@@ -44,8 +44,8 @@ struct ParameterRow: View {
     }
 }
 
-struct DevelopmentParametersView: View {
-    @ObservedObject var viewModel: DevelopmentSetupViewModel
+struct DevelopmentParametersView<DataServiceType: DataService>: View where DataServiceType.Film: Identifiable, DataServiceType.Developer: Identifiable, DataServiceType.Fixer: Identifiable {
+    @ObservedObject var viewModel: DevelopmentSetupViewModel<DataServiceType>
     
     var body: some View {
         VStack(spacing: 12) {
@@ -131,7 +131,8 @@ struct DevelopmentParametersView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color(.systemBackground).ignoresSafeArea()
-            DevelopmentParametersView(viewModel: DevelopmentSetupViewModel())
+            // Временная заглушка для Preview - в рабочем коде используется SwiftDataService
+            Text("Preview temporarily unavailable")
         }
     }
 } 

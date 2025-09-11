@@ -3,6 +3,8 @@ import Combine
 import SwiftData
 
 public struct MainTabView: View {
+    let swiftDataService: SwiftDataService
+    
     @Binding var selectedTab: Int
     var onBackToHome: () -> Void
     @Binding var colorScheme: ColorScheme?
@@ -24,7 +26,7 @@ public struct MainTabView: View {
                 // Остальные экраны с TabView
                 TabView(selection: $selectedTab) {
                     // Экран Development
-                    DevelopmentSetupView()
+                    DevelopmentSetupView<SwiftDataService>(viewModel: DevelopmentSetupViewModel<SwiftDataService>(dataService: swiftDataService))
                         .tabItem {
                             Image(systemName: "slider.horizontal.3")
                             Text(LocalizedStringKey("presets"))
@@ -32,7 +34,7 @@ public struct MainTabView: View {
                         .tag(1)
                     
                     // Экран Calculator
-                    CalculatorView(onStartTimer: { _, _, _ in })
+                    CalculatorView(swiftDataService: swiftDataService, onStartTimer: { _, _, _ in })
                         .tabItem {
                             Image(systemName: "plus.forwardslash.minus")
                             Text(LocalizedStringKey("calculator"))
@@ -57,6 +59,8 @@ public struct MainTabView: View {
                     
                     // Экран Journal
                     JournalView(
+                        swiftDataService: swiftDataService,
+                        cloudKitService: cloudKitService,
                         onEditRecord: loadRecord,
                         onDeleteRecord: deleteRecord,
                         onClose: goToHome,
@@ -102,6 +106,7 @@ public struct MainTabView: View {
         }
         .sheet(isPresented: $showingCreateRecord) {
             CreateRecordView(
+                swiftDataService: swiftDataService,
                 prefillData: nil,
                 isEditing: false,
                 onUpdate: nil,
@@ -235,11 +240,11 @@ public struct MainTabView: View {
     
     func deleteRecord(_ record: SwiftDataCalculationRecord) {
         // Delete the record from SwiftData context
-        let swiftDataService = SwiftDataService.shared
         swiftDataService.deleteCalculationRecord(record)
     }
     
-    public init(selectedTab: Binding<Int>, onBackToHome: @escaping () -> Void, colorScheme: Binding<ColorScheme?>) {
+    public init(swiftDataService: SwiftDataService, selectedTab: Binding<Int>, onBackToHome: @escaping () -> Void, colorScheme: Binding<ColorScheme?>) {
+        self.swiftDataService = swiftDataService
         self._selectedTab = selectedTab
         self.onBackToHome = onBackToHome
         self._colorScheme = colorScheme

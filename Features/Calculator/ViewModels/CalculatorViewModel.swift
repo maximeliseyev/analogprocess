@@ -64,8 +64,7 @@ class CalculatorViewModel: ObservableObject {
     
     /// Results to display in UI: base time (+0) and only the selected step (last), according to `pushSteps`.
     var displayResults: [ProcessStep] {
-        guard !pushResults.isEmpty else { return [] }
-        let base = pushResults.first!
+        guard !pushResults.isEmpty, let base = pushResults.first else { return [] }
         guard let last = pushResults.last else { return [base] }
         if base.id == last.id {
             return [base]
@@ -74,7 +73,10 @@ class CalculatorViewModel: ObservableObject {
     }
     
     // MARK: - Dependencies
-    private let swiftDataService = SwiftDataService.shared
+    private let swiftDataService: SwiftDataService
+        init(swiftDataService: SwiftDataService) {
+            self.swiftDataService = swiftDataService
+        }
     private let calculator = DevelopmentCalculator()
     
     // MARK: - Public Methods

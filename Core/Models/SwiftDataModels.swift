@@ -10,7 +10,8 @@ import SwiftData
 
 // MARK: - SwiftData Film Model
 @Model
-public final class SwiftDataFilm {
+public final class SwiftDataFilm: FilmProtocol, HasStringId {
+    public var stringId: String { id }
     @Attribute(.unique) public var id: String
     public var name: String
     public var manufacturer: String
@@ -32,7 +33,8 @@ public final class SwiftDataFilm {
 
 // MARK: - SwiftData Developer Model
 @Model
-public final class SwiftDataDeveloper {
+public final class SwiftDataDeveloper: DeveloperProtocol, HasStringId {
+    public var stringId: String { id }
     @Attribute(.unique) public var id: String
     public var name: String
     public var manufacturer: String
@@ -74,7 +76,8 @@ public final class SwiftDataDevelopmentTime {
 
 // MARK: - SwiftData Fixer Model
 @Model
-public final class SwiftDataFixer {
+public final class SwiftDataFixer: FixerProtocol, HasStringId {
+    public var stringId: String { id }
     @Attribute(.unique) public var id: String
     public var name: String
     public var type: String

@@ -11,8 +11,6 @@ import SwiftUI
 
 @MainActor
 public class AutoSyncService: ObservableObject {
-    public static let shared = AutoSyncService()
-    
     @Published var isAutoSyncing = false
     @Published var lastAutoSyncDate: Date?
     @Published var autoSyncStatus: AutoSyncStatus = .idle
@@ -21,8 +19,8 @@ public class AutoSyncService: ObservableObject {
     
     private let networkMonitor = NWPathMonitor()
     private let queue = DispatchQueue(label: "AutoSyncService")
-    private let swiftDataService = SwiftDataService.shared
-    private let githubDataService = GitHubDataService.shared
+    private let swiftDataService: SwiftDataService
+    private let githubDataService: GitHubDataService
     
     // Минимальный интервал между автоматическими синхронизациями (24 часа)
     private let minSyncInterval: TimeInterval = 24 * 60 * 60
@@ -58,7 +56,9 @@ public class AutoSyncService: ObservableObject {
         }
     }
     
-    private init() {
+    public init(swiftDataService: SwiftDataService, githubDataService: GitHubDataService) {
+        self.swiftDataService = swiftDataService
+        self.githubDataService = githubDataService
         loadLastAutoSyncDate()
         loadAutoSyncEnabled()
         setupNetworkMonitoring()

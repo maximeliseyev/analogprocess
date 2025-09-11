@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct AutoSyncTestView: View {
-    @StateObject private var autoSyncService = AutoSyncService.shared
+    @EnvironmentObject var autoSyncService: AutoSyncService
+    
     @State private var showingAlert = false
     @State private var alertMessage = ""
     
@@ -93,5 +94,11 @@ struct AutoSyncTestView: View {
 }
 
 #Preview {
-    AutoSyncTestView()
+    let container = SwiftDataPersistence.preview.modelContainer
+    let githubService = GitHubDataService()
+    let swiftDataService = SwiftDataService(githubDataService: githubService, modelContainer: container)
+    let autoSyncService = AutoSyncService(swiftDataService: swiftDataService, githubDataService: githubService)
+    
+    return AutoSyncTestView()
+        .environmentObject(autoSyncService)
 }

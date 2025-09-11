@@ -10,6 +10,7 @@ import CoreData
 
 struct CalculatorView: View {
     @StateObject private var viewModel: CalculatorViewModel
+    let swiftDataService: SwiftDataService
     let onStartTimer: ((String, Int, Int) -> Void)?
     
     // Параметры для режима редактора стадии
@@ -26,8 +27,8 @@ struct CalculatorView: View {
         case coefficient
     }
     
-    init(initialTime: Int? = nil, initialTemperature: Int = 20, isFromStageEditor: Bool = false, onStartTimer: ((String, Int, Int) -> Void)? = nil) {
-        let vm = CalculatorViewModel()
+    init(swiftDataService: SwiftDataService, initialTime: Int? = nil, initialTemperature: Int = 20, isFromStageEditor: Bool = false, onStartTimer: ((String, Int, Int) -> Void)? = nil) {
+        let vm = CalculatorViewModel(swiftDataService: swiftDataService)
         if let time = initialTime {
             let minutes = time / 60
             let seconds = time % 60
@@ -36,6 +37,7 @@ struct CalculatorView: View {
             vm.temperature = initialTemperature
         }
         _viewModel = StateObject(wrappedValue: vm)
+        self.swiftDataService = swiftDataService
         self.isFromStageEditor = isFromStageEditor
         self.onStartTimer = onStartTimer
     }
@@ -219,6 +221,7 @@ struct CalculatorView: View {
         .sheet(isPresented: $viewModel.showSaveDialog) {
             if let prefillData = viewModel.createPrefillData() {
                 CreateRecordView(
+                    swiftDataService: swiftDataService,
                     prefillData: nil,
                     isEditing: false,
                     onUpdate: nil,
@@ -372,9 +375,13 @@ struct CalculatorView: View {
 // MARK: - Preview
 struct CalculatorView_Previews: PreviewProvider {
     static var previews: some View {
+        let container = SwiftDataPersistence.preview.modelContainer
+        let githubService = GitHubDataService()
+        let swiftDataService = SwiftDataService(githubDataService: githubService, modelContainer: container)
+        
         ZStack {
             Color.black.ignoresSafeArea()
-            CalculatorView(onStartTimer: { label, minutes, seconds in
+            CalculatorView(swiftDataService: swiftDataService, onStartTimer: { label, minutes, seconds in
                 print("Start timer: \(label) \(minutes):\(seconds)")
             })
         }

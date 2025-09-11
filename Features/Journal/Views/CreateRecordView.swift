@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CreateRecordView: View {
     @Environment(\.dismiss) private var dismiss
-    @StateObject private var viewModel = CreateRecordViewModel()
+    @StateObject private var viewModel: CreateRecordViewModel
     
     // Параметры для предзаполнения из калькулятора
     let prefillData: JournalRecord?
@@ -36,7 +36,8 @@ struct CreateRecordView: View {
         case comment
     }
     
-    init(prefillData: JournalRecord? = nil, isEditing: Bool = false, onUpdate: ((JournalRecord) -> Void)? = nil, calculatorTemperature: Int? = nil, calculatorCoefficient: String? = nil, calculatorProcess: String? = nil) {
+    init(swiftDataService: SwiftDataService, prefillData: JournalRecord? = nil, isEditing: Bool = false, onUpdate: ((JournalRecord) -> Void)? = nil, calculatorTemperature: Int? = nil, calculatorCoefficient: String? = nil, calculatorProcess: String? = nil) {
+        self._viewModel = StateObject(wrappedValue: CreateRecordViewModel(swiftDataService: swiftDataService))
         self.prefillData = prefillData
         self.isEditing = isEditing
         self.onUpdate = onUpdate
@@ -314,7 +315,12 @@ struct CreateRecordView: View {
 // MARK: - Preview
 
 #Preview {
-    CreateRecordView(
+    let container = SwiftDataPersistence.preview.modelContainer
+    let githubService = GitHubDataService()
+    let swiftDataService = SwiftDataService(githubDataService: githubService, modelContainer: container)
+    
+    return CreateRecordView(
+        swiftDataService: swiftDataService,
         prefillData: nil,
         isEditing: false,
         onUpdate: nil,
