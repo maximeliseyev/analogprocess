@@ -2,6 +2,7 @@ import SwiftUI
 
 struct StageRowView: View {
     let stage: StagingStage
+    let swiftDataService: SwiftDataService
     let onDelete: () -> Void
     let onDuplicate: () -> Void
     let onUpdate: (StagingStage) -> Void
@@ -106,7 +107,7 @@ struct StageRowView: View {
             }
         }
         .sheet(isPresented: $isEditingStage) {
-            StageEditorSheet(stage: stage) { updatedStage in
+            StageEditorSheet(swiftDataService: swiftDataService, stage: stage) { updatedStage in
                 onUpdate(updatedStage)
             }
         }

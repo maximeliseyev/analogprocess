@@ -12,7 +12,13 @@ enum Constants {
     
     // MARK: - Network
     enum Network {
-        static let baseURL = "https://raw.githubusercontent.com/maximeliseyev/filmdevelopmentdata/main"
+        static let baseURL: String = {
+            guard let url = Bundle.main.object(forInfoDictionaryKey: "GitHubDataRepoURL") as? String else {
+                return "https://raw.githubusercontent.com/maximeliseyev/filmdevelopmentdata/main"
+            }
+            return url
+        }()
+        
         static let filmsEndpoint = "/films.json"
         static let developersEndpoint = "/developers.json"
         static let fixersEndpoint = "/fixers.json"

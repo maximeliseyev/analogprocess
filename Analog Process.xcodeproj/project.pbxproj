@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		BF113D372E3FA8A5008B5578 /* ManualTimeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF113D362E3FA8A5008B5578 /* ManualTimeInputView.swift */; };
 		BF113D412E40DB7D008B5578 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF113D402E40DB7D008B5578 /* ThemeManager.swift */; };
-		BF28FA592E41F64600C2E34E /* CloudKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28FA582E41F64600C2E34E /* CloudKitService.swift */; };
 		BF28FA5E2E41F75200C2E34E /* SyncStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28FA5C2E41F75200C2E34E /* SyncStatusView.swift */; };
 		BF4109102E31052900BE2AD8 /* CalculationFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41090A2E31052900BE2AD8 /* CalculationFormView.swift */; };
 		BF4109112E31052900BE2AD8 /* RatioInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41090B2E31052900BE2AD8 /* RatioInputView.swift */; };
@@ -34,9 +33,13 @@
 		BF47CA3C2E4F14D70026DEB0 /* StagingTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF47CA3B2E4F14D70026DEB0 /* StagingTimerView.swift */; };
 		BF47CA3E2E4F15150026DEB0 /* StagingTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF47CA3D2E4F15150026DEB0 /* StagingTimerViewModel.swift */; };
 		BF553C622E420639009F1525 /* KeyboardAwareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C612E420639009F1525 /* KeyboardAwareView.swift */; };
-		BF553C682E424125009F1525 /* AgitationModeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C672E424125009F1525 /* AgitationModeBuilder.swift */; };
 		BF553C6A2E43268D009F1525 /* BasePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C692E43268D009F1525 /* BasePickerView.swift */; };
 		BF553C6C2E43297C009F1525 /* CreateRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C6B2E43297C009F1525 /* CreateRecordViewModel.swift */; };
+		BF6031EA2E70D33000A90890 /* FixerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6031E92E70D33000A90890 /* FixerProtocol.swift */; };
+		BF6031EB2E70D33000A90890 /* FilmProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6031E82E70D33000A90890 /* FilmProtocol.swift */; };
+		BF7886DC2E702F15008C4EFE /* DevelopmentParametersProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7886DB2E702F15008C4EFE /* DevelopmentParametersProtocol.swift */; };
+		BF7886DD2E702F15008C4EFE /* DeveloperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7886DA2E702F15008C4EFE /* DeveloperProtocol.swift */; };
+		BF7FF43E2E71ACC800BE5EA0 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7FF43D2E71ACC800BE5EA0 /* DataService.swift */; };
 		BF8A59EF2E43809C00D689C5 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59EE2E43809C00D689C5 /* MainTabView.swift */; };
 		BF8A59F02E43809C00D689C5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59ED2E43809C00D689C5 /* HomeView.swift */; };
 		BF8A59F22E4380E600D689C5 /* NavigationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59F12E4380E600D689C5 /* NavigationConstants.swift */; };
@@ -46,20 +49,28 @@
 		BF8A5A072E44BA8200D689C5 /* StagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A5A042E44BA8200D689C5 /* StagingView.swift */; };
 		BF8A5A082E44BA8200D689C5 /* StagingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A5A022E44BA8200D689C5 /* StagingViewModel.swift */; };
 		BF8EDB3F2E4FC1CE0040E898 /* StagingCalculationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8EDB3E2E4FC1CE0040E898 /* StagingCalculationResultView.swift */; };
+		BF949EB32E72CFC2005F9831 /* DevelopmentCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EA82E72CFC2005F9831 /* DevelopmentCalculator.swift */; };
+		BF949EB42E72CFC2005F9831 /* GitHubDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EB02E72CFC2005F9831 /* GitHubDataService.swift */; };
+		BF949EB52E72CFC2005F9831 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EB12E72CFC2005F9831 /* NetworkSession.swift */; };
+		BF949EB62E72CFC2005F9831 /* SwiftDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EAC2E72CFC2005F9831 /* SwiftDataRepository.swift */; };
+		BF949EB72E72CFC2005F9831 /* CloudKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EAF2E72CFC2005F9831 /* CloudKitService.swift */; };
+		BF949EB82E72CFC2005F9831 /* AgitationModeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EA72E72CFC2005F9831 /* AgitationModeBuilder.swift */; };
+		BF949EB92E72CFC2005F9831 /* DataInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EAA2E72CFC2005F9831 /* DataInitializer.swift */; };
+		BF949EBA2E72CFC2005F9831 /* AgitationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EA62E72CFC2005F9831 /* AgitationMode.swift */; };
+		BF949EBB2E72CFC2005F9831 /* DataSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EAB2E72CFC2005F9831 /* DataSyncService.swift */; };
+		BF949EBC2E72CFC2005F9831 /* AutoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EAE2E72CFC2005F9831 /* AutoSyncService.swift */; };
+		BF949EBE2E72D6A3005F9831 /* ProcessMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EBD2E72D6A3005F9831 /* ProcessMode.swift */; };
 		BF99E9A82E4E814300BB7F0C /* DropViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9A32E4E814300BB7F0C /* DropViewDelegate.swift */; };
 		BF99E9A92E4E814300BB7F0C /* StagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9A52E4E814300BB7F0C /* StagePickerView.swift */; };
 		BF99E9AA2E4E814300BB7F0C /* AddStageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9A22E4E814300BB7F0C /* AddStageButton.swift */; };
 		BF99E9AB2E4E814300BB7F0C /* StageRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9A62E4E814300BB7F0C /* StageRowView.swift */; };
 		BF99E9AC2E4E814300BB7F0C /* StageEditorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9A42E4E814300BB7F0C /* StageEditorSheet.swift */; };
-		BF99E9AE2E4E8DFD00BB7F0C /* AutoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9AD2E4E8DFD00BB7F0C /* AutoSyncService.swift */; };
 		BF99E9B02E4E8E6800BB7F0C /* AutoSyncStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9AF2E4E8E6800BB7F0C /* AutoSyncStatusView.swift */; };
 		BFA0C79B2E2133FC00132936 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFA0C7932E2133FC00132936 /* Assets.xcassets */; };
 		BFA0C79D2E2133FC00132936 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7952E2133FC00132936 /* ContentView.swift */; };
 		BFA0C7A82E2134B400132936 /* CalculationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7A72E2134B300132936 /* CalculationResultView.swift */; };
-		BFA0C7A92E2134BA00132936 /* DevelopmentCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7A62E21349100132936 /* DevelopmentCalculator.swift */; };
 		BFA0C7AD2E2134F800132936 /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AC2E2134F600132936 /* JournalView.swift */; };
 		BFA0C7AF2E21351300132936 /* RecordRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AE2E21351000132936 /* RecordRowView.swift */; };
-		BFB0C3D12E3E4E7D00296B97 /* GitHubDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB0C3D02E3E4E7D00296B97 /* GitHubDataService.swift */; };
 		BFB0C3F62E3E511300296B97 /* AnalogProcess-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3F32E3E511300296B97 /* AnalogProcess-Info.plist */; };
 		BFB0C3F72E3E511300296B97 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3F52E3E511300296B97 /* README.md */; };
 		BFB0C3F82E3E511300296B97 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3F42E3E511300296B97 /* LICENSE */; };
@@ -74,12 +85,10 @@
 		BFE12EC32E363AC00044A3A4 /* CalculatedTimeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE12EC22E363AC00044A3A4 /* CalculatedTimeSection.swift */; };
 		BFE31C0C2E3A016300310B19 /* ViewStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE31C0A2E3A011100310B19 /* ViewStyles.swift */; };
 		BFF4D9FF2E21BECD0097BE82 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF4D9FE2E21BEC90097BE82 /* TimerView.swift */; };
-		BFF4DA012E21C2C90097BE82 /* AgitationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF4DA002E21C2C90097BE82 /* AgitationMode.swift */; };
 		BFF4DA032E21C31E0097BE82 /* AgitationSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF4DA022E21C31E0097BE82 /* AgitationSelectionView.swift */; };
 		BFF4DA052E21C8C30097BE82 /* CustomAgitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF4DA042E21C8C30097BE82 /* CustomAgitationView.swift */; };
 		BFFA1C532E4A19D4005C24F4 /* CodableModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C512E4A19D4005C24F4 /* CodableModels.swift */; };
 		BFFA1C542E4A19D4005C24F4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C522E4A19D4005C24F4 /* Constants.swift */; };
-		BFFA1C562E4A19F7005C24F4 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C552E4A19F7005C24F4 /* NetworkSession.swift */; };
 		BFFA1C5D2E4A415E005C24F4 /* FixerPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C5B2E4A415E005C24F4 /* FixerPickerView.swift */; };
 		BFFA1C5E2E4A415E005C24F4 /* FixerSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C5C2E4A415E005C24F4 /* FixerSelectionView.swift */; };
 		BFFA1C602E4A6236005C24F4 /* SwiftDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C5F2E4A6236005C24F4 /* SwiftDataModels.swift */; };
@@ -97,7 +106,6 @@
 /* Begin PBXFileReference section */
 		BF113D362E3FA8A5008B5578 /* ManualTimeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTimeInputView.swift; sourceTree = "<group>"; };
 		BF113D402E40DB7D008B5578 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
-		BF28FA582E41F64600C2E34E /* CloudKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitService.swift; sourceTree = "<group>"; };
 		BF28FA5C2E41F75200C2E34E /* SyncStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncStatusView.swift; sourceTree = "<group>"; };
 		BF4109092E31052900BE2AD8 /* ActionButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtonsView.swift; sourceTree = "<group>"; };
 		BF41090A2E31052900BE2AD8 /* CalculationFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationFormView.swift; sourceTree = "<group>"; };
@@ -124,9 +132,13 @@
 		BF47CA3B2E4F14D70026DEB0 /* StagingTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingTimerView.swift; sourceTree = "<group>"; };
 		BF47CA3D2E4F15150026DEB0 /* StagingTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingTimerViewModel.swift; sourceTree = "<group>"; };
 		BF553C612E420639009F1525 /* KeyboardAwareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAwareView.swift; sourceTree = "<group>"; };
-		BF553C672E424125009F1525 /* AgitationModeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgitationModeBuilder.swift; sourceTree = "<group>"; };
 		BF553C692E43268D009F1525 /* BasePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePickerView.swift; sourceTree = "<group>"; };
 		BF553C6B2E43297C009F1525 /* CreateRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecordViewModel.swift; sourceTree = "<group>"; };
+		BF6031E82E70D33000A90890 /* FilmProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmProtocol.swift; sourceTree = "<group>"; };
+		BF6031E92E70D33000A90890 /* FixerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerProtocol.swift; sourceTree = "<group>"; };
+		BF7886DA2E702F15008C4EFE /* DeveloperProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperProtocol.swift; sourceTree = "<group>"; };
+		BF7886DB2E702F15008C4EFE /* DevelopmentParametersProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentParametersProtocol.swift; sourceTree = "<group>"; };
+		BF7FF43D2E71ACC800BE5EA0 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		BF8A59ED2E43809C00D689C5 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		BF8A59EE2E43809C00D689C5 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		BF8A59F12E4380E600D689C5 /* NavigationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConstants.swift; sourceTree = "<group>"; };
@@ -136,20 +148,28 @@
 		BF8A5A022E44BA8200D689C5 /* StagingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingViewModel.swift; sourceTree = "<group>"; };
 		BF8A5A042E44BA8200D689C5 /* StagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingView.swift; sourceTree = "<group>"; };
 		BF8EDB3E2E4FC1CE0040E898 /* StagingCalculationResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingCalculationResultView.swift; sourceTree = "<group>"; };
+		BF949EA62E72CFC2005F9831 /* AgitationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgitationMode.swift; sourceTree = "<group>"; };
+		BF949EA72E72CFC2005F9831 /* AgitationModeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgitationModeBuilder.swift; sourceTree = "<group>"; };
+		BF949EA82E72CFC2005F9831 /* DevelopmentCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentCalculator.swift; sourceTree = "<group>"; };
+		BF949EAA2E72CFC2005F9831 /* DataInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataInitializer.swift; sourceTree = "<group>"; };
+		BF949EAB2E72CFC2005F9831 /* DataSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSyncService.swift; sourceTree = "<group>"; };
+		BF949EAC2E72CFC2005F9831 /* SwiftDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataRepository.swift; sourceTree = "<group>"; };
+		BF949EAE2E72CFC2005F9831 /* AutoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncService.swift; sourceTree = "<group>"; };
+		BF949EAF2E72CFC2005F9831 /* CloudKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitService.swift; sourceTree = "<group>"; };
+		BF949EB02E72CFC2005F9831 /* GitHubDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubDataService.swift; sourceTree = "<group>"; };
+		BF949EB12E72CFC2005F9831 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
+		BF949EBD2E72D6A3005F9831 /* ProcessMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessMode.swift; sourceTree = "<group>"; };
 		BF99E9A22E4E814300BB7F0C /* AddStageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStageButton.swift; sourceTree = "<group>"; };
 		BF99E9A32E4E814300BB7F0C /* DropViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropViewDelegate.swift; sourceTree = "<group>"; };
 		BF99E9A42E4E814300BB7F0C /* StageEditorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageEditorSheet.swift; sourceTree = "<group>"; };
 		BF99E9A52E4E814300BB7F0C /* StagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagePickerView.swift; sourceTree = "<group>"; };
 		BF99E9A62E4E814300BB7F0C /* StageRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageRowView.swift; sourceTree = "<group>"; };
-		BF99E9AD2E4E8DFD00BB7F0C /* AutoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncService.swift; sourceTree = "<group>"; };
 		BF99E9AF2E4E8E6800BB7F0C /* AutoSyncStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncStatusView.swift; sourceTree = "<group>"; };
 		BFA0C7932E2133FC00132936 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFA0C7952E2133FC00132936 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		BFA0C7A62E21349100132936 /* DevelopmentCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentCalculator.swift; sourceTree = "<group>"; };
 		BFA0C7A72E2134B300132936 /* CalculationResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationResultView.swift; sourceTree = "<group>"; };
 		BFA0C7AC2E2134F600132936 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
 		BFA0C7AE2E21351000132936 /* RecordRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRowView.swift; sourceTree = "<group>"; };
-		BFB0C3D02E3E4E7D00296B97 /* GitHubDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubDataService.swift; sourceTree = "<group>"; };
 		BFB0C3F32E3E511300296B97 /* AnalogProcess-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AnalogProcess-Info.plist"; sourceTree = "<group>"; };
 		BFB0C3F42E3E511300296B97 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		BFB0C3F52E3E511300296B97 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -169,12 +189,10 @@
 		BFE31C0A2E3A011100310B19 /* ViewStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStyles.swift; sourceTree = "<group>"; };
 		BFE96A392E2061A0001CF98D /* Analog Process.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Analog Process.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFF4D9FE2E21BEC90097BE82 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
-		BFF4DA002E21C2C90097BE82 /* AgitationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgitationMode.swift; sourceTree = "<group>"; };
 		BFF4DA022E21C31E0097BE82 /* AgitationSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgitationSelectionView.swift; sourceTree = "<group>"; };
 		BFF4DA042E21C8C30097BE82 /* CustomAgitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAgitationView.swift; sourceTree = "<group>"; };
 		BFFA1C512E4A19D4005C24F4 /* CodableModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableModels.swift; sourceTree = "<group>"; };
 		BFFA1C522E4A19D4005C24F4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		BFFA1C552E4A19F7005C24F4 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
 		BFFA1C5B2E4A415E005C24F4 /* FixerPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerPickerView.swift; sourceTree = "<group>"; };
 		BFFA1C5C2E4A415E005C24F4 /* FixerSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerSelectionView.swift; sourceTree = "<group>"; };
 		BFFA1C5F2E4A6236005C24F4 /* SwiftDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataModels.swift; sourceTree = "<group>"; };
@@ -455,6 +473,37 @@
 			path = Staging;
 			sourceTree = "<group>";
 		};
+		BF949EA92E72CFC2005F9831 /* Business */ = {
+			isa = PBXGroup;
+			children = (
+				BF949EA62E72CFC2005F9831 /* AgitationMode.swift */,
+				BF949EA72E72CFC2005F9831 /* AgitationModeBuilder.swift */,
+				BF949EA82E72CFC2005F9831 /* DevelopmentCalculator.swift */,
+			);
+			path = Business;
+			sourceTree = "<group>";
+		};
+		BF949EAD2E72CFC2005F9831 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				BF949EAA2E72CFC2005F9831 /* DataInitializer.swift */,
+				BF949EAB2E72CFC2005F9831 /* DataSyncService.swift */,
+				BF949EAC2E72CFC2005F9831 /* SwiftDataRepository.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		BF949EB22E72CFC2005F9831 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				BF949EAE2E72CFC2005F9831 /* AutoSyncService.swift */,
+				BF949EAF2E72CFC2005F9831 /* CloudKitService.swift */,
+				BF949EB02E72CFC2005F9831 /* GitHubDataService.swift */,
+				BF949EB12E72CFC2005F9831 /* NetworkSession.swift */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
 		BF99E9A72E4E814300BB7F0C /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -481,14 +530,11 @@
 		BFA0C7A22E21341400132936 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				BFF4DA002E21C2C90097BE82 /* AgitationMode.swift */,
-				BF553C672E424125009F1525 /* AgitationModeBuilder.swift */,
-				BF28FA582E41F64600C2E34E /* CloudKitService.swift */,
-				BFB0C3D02E3E4E7D00296B97 /* GitHubDataService.swift */,
-				BF99E9AD2E4E8DFD00BB7F0C /* AutoSyncService.swift */,
-				BFA0C7A62E21349100132936 /* DevelopmentCalculator.swift */,
-				BFFA1C552E4A19F7005C24F4 /* NetworkSession.swift */,
+				BF7FF43D2E71ACC800BE5EA0 /* DataService.swift */,
 				BFFA1C632E4A67A9005C24F4 /* SwiftDataService.swift */,
+				BF949EA92E72CFC2005F9831 /* Business */,
+				BF949EAD2E72CFC2005F9831 /* Data */,
+				BF949EB22E72CFC2005F9831 /* Infrastructure */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -496,12 +542,17 @@
 		BFA0C7A32E21341F00132936 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BFFA1C522E4A19D4005C24F4 /* Constants.swift */,
+				BF7886DA2E702F15008C4EFE /* DeveloperProtocol.swift */,
+				BF7886DB2E702F15008C4EFE /* DevelopmentParametersProtocol.swift */,
+				BF6031E82E70D33000A90890 /* FilmProtocol.swift */,
+				BF6031E92E70D33000A90890 /* FixerProtocol.swift */,
 				BFFA1C5F2E4A6236005C24F4 /* SwiftDataModels.swift */,
 				BFFA1C512E4A19D4005C24F4 /* CodableModels.swift */,
-				BFFA1C522E4A19D4005C24F4 /* Constants.swift */,
 				BF8A5A002E44BA0E00D689C5 /* StagingStage.swift */,
 				BF4109252E31148700BE2AD8 /* DevelopmentParameters.swift */,
 				BFB0C3F92E3E58D900296B97 /* JournalRecord.swift */,
+				BF949EBD2E72D6A3005F9831 /* ProcessMode.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -654,8 +705,21 @@
 				BFFA1C852E4A73EF005C24F4 /* SwiftDataIntegrationTestView.swift in Sources */,
 				BF8A59EF2E43809C00D689C5 /* MainTabView.swift in Sources */,
 				BFFA1C892E4A7A0F005C24F4 /* CalculatorViewModel.swift in Sources */,
+				BF6031EA2E70D33000A90890 /* FixerProtocol.swift in Sources */,
+				BF949EB32E72CFC2005F9831 /* DevelopmentCalculator.swift in Sources */,
+				BF949EB42E72CFC2005F9831 /* GitHubDataService.swift in Sources */,
+				BF949EB52E72CFC2005F9831 /* NetworkSession.swift in Sources */,
+				BF949EB62E72CFC2005F9831 /* SwiftDataRepository.swift in Sources */,
+				BF949EB72E72CFC2005F9831 /* CloudKitService.swift in Sources */,
+				BF949EB82E72CFC2005F9831 /* AgitationModeBuilder.swift in Sources */,
+				BF949EB92E72CFC2005F9831 /* DataInitializer.swift in Sources */,
+				BF949EBA2E72CFC2005F9831 /* AgitationMode.swift in Sources */,
+				BF949EBB2E72CFC2005F9831 /* DataSyncService.swift in Sources */,
+				BF949EBC2E72CFC2005F9831 /* AutoSyncService.swift in Sources */,
+				BF6031EB2E70D33000A90890 /* FilmProtocol.swift in Sources */,
 				BF8A59FF2E4494A600D689C5 /* AutocompleteView.swift in Sources */,
 				BFFA1C682E4A69E3005C24F4 /* SwiftDataPersistence.swift in Sources */,
+				BF7FF43E2E71ACC800BE5EA0 /* DataService.swift in Sources */,
 				BF8A59F02E43809C00D689C5 /* HomeView.swift in Sources */,
 				BFE12EBF2E34EB960044A3A4 /* TimerTabView.swift in Sources */,
 				BF4109102E31052900BE2AD8 /* CalculationFormView.swift in Sources */,
@@ -665,7 +729,8 @@
 				BFFA1C642E4A67A9005C24F4 /* SwiftDataService.swift in Sources */,
 				BFDD23652E3F7EE30079688B /* RecordDetailView.swift in Sources */,
 				BFB0C3FE2E3E5AB400296B97 /* CreateRecordView.swift in Sources */,
-				BF553C682E424125009F1525 /* AgitationModeBuilder.swift in Sources */,
+				BF7886DC2E702F15008C4EFE /* DevelopmentParametersProtocol.swift in Sources */,
+				BF7886DD2E702F15008C4EFE /* DeveloperProtocol.swift in Sources */,
 				BFFA1C872E4A7A02005C24F4 /* DevelopmentSetupViewModel.swift in Sources */,
 				BFE12EBD2E34DBE10044A3A4 /* SettingsView.swift in Sources */,
 				BF4109142E31052900BE2AD8 /* StepsInputView.swift in Sources */,
@@ -675,6 +740,7 @@
 				BF4109712E3166F400BE2AD8 /* TimerHeaderView.swift in Sources */,
 				BF8A5A012E44BA0E00D689C5 /* StagingStage.swift in Sources */,
 				BF4109722E3166F400BE2AD8 /* AgitationIndicatorView.swift in Sources */,
+				BF949EBE2E72D6A3005F9831 /* ProcessMode.swift in Sources */,
 				BFFA1C532E4A19D4005C24F4 /* CodableModels.swift in Sources */,
 				BFFA1C542E4A19D4005C24F4 /* Constants.swift in Sources */,
 				BF4109732E3166F400BE2AD8 /* TimerProgressView.swift in Sources */,
@@ -687,17 +753,14 @@
 				BF553C6A2E43268D009F1525 /* BasePickerView.swift in Sources */,
 				BFF4D9FF2E21BECD0097BE82 /* TimerView.swift in Sources */,
 				BFE31C0C2E3A016300310B19 /* ViewStyles.swift in Sources */,
-				BFF4DA012E21C2C90097BE82 /* AgitationMode.swift in Sources */,
 				BFFA1C602E4A6236005C24F4 /* SwiftDataModels.swift in Sources */,
 				BF553C622E420639009F1525 /* KeyboardAwareView.swift in Sources */,
 				BF41095B2E3163E400BE2AD8 /* FilmPickerView.swift in Sources */,
-				BF99E9AE2E4E8DFD00BB7F0C /* AutoSyncService.swift in Sources */,
 				BF41095C2E3163E400BE2AD8 /* DevelopmentParametersView.swift in Sources */,
 				BF41095D2E3163E400BE2AD8 /* DeveloperPickerView.swift in Sources */,
 				BFDCB75E2E382372000F6CE5 /* AnalogProcessApp.swift in Sources */,
 				BFF4DA052E21C8C30097BE82 /* CustomAgitationView.swift in Sources */,
 				BFA0C7AD2E2134F800132936 /* JournalView.swift in Sources */,
-				BF28FA592E41F64600C2E34E /* CloudKitService.swift in Sources */,
 				BF99E9A82E4E814300BB7F0C /* DropViewDelegate.swift in Sources */,
 				BF99E9A92E4E814300BB7F0C /* StagePickerView.swift in Sources */,
 				BF99E9AA2E4E814300BB7F0C /* AddStageButton.swift in Sources */,
@@ -712,12 +775,9 @@
 				BF99E9B02E4E8E6800BB7F0C /* AutoSyncStatusView.swift in Sources */,
 				BF4109642E31641B00BE2AD8 /* TemperaturePickerView.swift in Sources */,
 				BF47CA3C2E4F14D70026DEB0 /* StagingTimerView.swift in Sources */,
-				BFA0C7A92E2134BA00132936 /* DevelopmentCalculator.swift in Sources */,
 				BFFA1C5D2E4A415E005C24F4 /* FixerPickerView.swift in Sources */,
 				BFFA1C5E2E4A415E005C24F4 /* FixerSelectionView.swift in Sources */,
 				BFE12EC12E360C010044A3A4 /* AppPreview.swift in Sources */,
-				BFFA1C562E4A19F7005C24F4 /* NetworkSession.swift in Sources */,
-				BFB0C3D12E3E4E7D00296B97 /* GitHubDataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

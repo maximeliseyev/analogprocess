@@ -8,161 +8,201 @@
 import SwiftUI
 import SwiftData
 
-struct DevelopmentSetupView: View {
-    @StateObject private var viewModel: DevelopmentSetupViewModel
+struct DevelopmentSetupView<DataServiceType: DataService>: View where DataServiceType.Film: Identifiable, DataServiceType.Developer: Identifiable, DataServiceType.Fixer: Identifiable {
+    @StateObject var viewModel: DevelopmentSetupViewModel<DataServiceType>
     @Environment(\.dismiss) private var dismiss
     
-    // Параметры для определения режима открытия
     let isFromStageEditor: Bool
     let stageType: StageType?
     
-    init(isFromStageEditor: Bool = false, stageType: StageType? = nil, viewModel: DevelopmentSetupViewModel? = nil) {
+    init(viewModel: DevelopmentSetupViewModel<DataServiceType>, isFromStageEditor: Bool = false, stageType: StageType? = nil) {
+        self._viewModel = StateObject(wrappedValue: viewModel)
         self.isFromStageEditor = isFromStageEditor
         self.stageType = stageType
-        
-        // Используем переданный ViewModel или создаем новый
-        if let existingViewModel = viewModel {
-            self._viewModel = StateObject(wrappedValue: existingViewModel)
-        } else {
-            self._viewModel = StateObject(wrappedValue: DevelopmentSetupViewModel())
+    }
+    
+    // MARK: - Computed Views
+    private var mainContentView: some View {
+        VStack(spacing: 30) {
+            modeSelectionPicker
+            DevelopmentParametersView<DataServiceType>(viewModel: viewModel)
+            calculatedTimeSection
+            Spacer()
         }
+    }
+    
+    @ViewBuilder
+    private var modeSelectionPicker: some View {
+        if !isFromStageEditor {
+            Picker("Process Mode", selection: $viewModel.selectedMode) {
+                ForEach(ProcessMode.allCases, id: \.self) { mode in
+                    Text(mode.rawValue).tag(mode)
+                }
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            .padding(.horizontal, 20)
+            .onChange(of: viewModel.selectedMode) { _, newMode in
+                viewModel.updateMode(newMode)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private var calculatedTimeSection: some View {
+        if let calculatedTime = viewModel.calculatedTime {
+            if isFromStageEditor {
+                stageEditorCalculatorButton(calculatedTime: calculatedTime)
+            } else {
+                CalculatedTimeSection(
+                    time: calculatedTime,
+                    temperature: viewModel.temperature,
+                    filmName: viewModel.selectedFilmName,
+                    developerName: viewModel.selectedMode == .developing ? viewModel.selectedDeveloperName : "Fixing",
+                    onCalculatorTap: { handleCalculatorTap(calculatedTime: calculatedTime) },
+                    onTimerTap: { handleTimerTap(calculatedTime: calculatedTime) }
+                )
+            }
+        }
+    }
+    
+    private func stageEditorCalculatorButton(calculatedTime: Int) -> some View {
+        VStack(spacing: 16) {
+            Button(action: { handleCalculatorTap(calculatedTime: calculatedTime) }) {
+                HStack {
+                    Image(systemName: "plus.forwardslash.minus")
+                        .font(.system(size: 18, design: .monospaced))
+                    Text("\(calculatedTime / 60):\(String(format: "%02d", calculatedTime % 60))")
+                        .font(.system(size: 18, design: .monospaced))
+                }
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 14)
+                .padding(.horizontal, 16)
+                .background(.orange)
+                .cornerRadius(12)
+            }
+            .buttonStyle(PlainButtonStyle())
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
+    }
+    
+    // MARK: - Helper Methods
+    private func handleCalculatorTap(calculatedTime: Int) {
+        NotificationCenter.default.post(
+            name: Notification.Name("DevelopmentCalculatedTime"),
+            object: nil,
+            userInfo: ["seconds": calculatedTime]
+        )
+        viewModel.navigateToCalculator = true
+    }
+    
+    private func handleTimerTap(calculatedTime: Int) {
+        NotificationCenter.default.post(
+            name: Notification.Name("DevelopmentCalculatedTime"),
+            object: nil,
+            userInfo: ["seconds": calculatedTime]
+        )
+        viewModel.navigateToTimer = true
+    }
+    
+    // MARK: - Sheet Views
+    private var filmPickerSheet: some View {
+        FilmPickerView(
+            films: viewModel.films as! [SwiftDataFilm],
+            selectedFilm: Binding(
+                get: { viewModel.selectedFilm as? SwiftDataFilm },
+                set: { viewModel.selectedFilm = $0 as? DataServiceType.Film }
+            ),
+            iso: Binding(
+                get: { Int32(viewModel.iso) },
+                set: { viewModel.iso = Int($0) }
+            ),
+            onDismiss: { viewModel.showFilmPicker = false },
+            onFilmSelected: { film in
+                viewModel.selectFilm(film as! DataServiceType.Film)
+            }
+        )
+    }
+    
+    private var developerPickerSheet: some View {
+        DeveloperPickerView(
+            developers: viewModel.developers as! [SwiftDataDeveloper],
+            selectedDeveloper: Binding(
+                get: { viewModel.selectedDeveloper as? SwiftDataDeveloper },
+                set: { viewModel.selectedDeveloper = $0 as? DataServiceType.Developer }
+            ),
+            selectedDilution: $viewModel.selectedDilution,
+            onDismiss: { viewModel.showDeveloperPicker = false },
+            onDeveloperSelected: { developer in
+                viewModel.selectDeveloper(developer as! DataServiceType.Developer)
+            }
+        )
+    }
+    
+    private var dilutionPickerSheet: some View {
+        DilutionPickerView(
+            dilutions: viewModel.dilutionOptions,
+            selectedDilution: $viewModel.selectedDilution,
+            onDismiss: { viewModel.showDilutionPicker = false },
+            isDisabled: viewModel.selectedFilm == nil || viewModel.selectedDeveloper == nil,
+            onDilutionSelected: { dilution in
+                viewModel.selectDilution(dilution)
+            }
+        )
+    }
+    
+    private var fixerPickerSheet: some View {
+        FixerPickerView(
+            swiftDataFixers: viewModel.fixers as! [SwiftDataFixer],
+            selectedSwiftDataFixer: Binding(
+                get: { viewModel.selectedFixer as? SwiftDataFixer },
+                set: { viewModel.selectedFixer = $0 as? DataServiceType.Fixer }
+            ),
+            onDismiss: { viewModel.showFixerPicker = false },
+            onSwiftDataFixerSelected: { fixer in
+                viewModel.selectFixer(fixer as! DataServiceType.Fixer)
+            }
+        )
+    }
+    
+    private var isoPickerSheet: some View {
+        ISOPickerView(
+            iso: Binding(
+                get: { Int32(viewModel.iso) },
+                set: { viewModel.iso = Int($0) }
+            ),
+            onDismiss: { viewModel.showISOPicker = false },
+            availableISOs: viewModel.isoOptions
+        )
     }
     
     var body: some View {
         NavigationStack {
             ZStack {
                 Color(.systemBackground).ignoresSafeArea()
-                
-                VStack(spacing: 30) {
-                    // Mode Selection Picker - скрываем в режиме редактора стадии
-                    if !isFromStageEditor {
-                        Picker("Process Mode", selection: $viewModel.selectedMode) {
-                            ForEach(ProcessMode.allCases, id: \.self) { mode in
-                                Text(mode.rawValue).tag(mode)
-                            }
-                        }
-                        .pickerStyle(SegmentedPickerStyle())
-                        .padding(.horizontal, 20)
-                        .onChange(of: viewModel.selectedMode) { _, newMode in
-                            viewModel.updateMode(newMode)
-                        }
-                    }
-                    
-                    DevelopmentParametersView(viewModel: viewModel)
-                    
-                    if let calculatedTime = viewModel.calculatedTime {
-                        if isFromStageEditor {
-                            // В режиме редактора стадии показываем только кнопку калькулятора
-                            VStack(spacing: 16) {
-                                Button(action: {
-                                    NotificationCenter.default.post(
-                                        name: Notification.Name("DevelopmentCalculatedTime"),
-                                        object: nil,
-                                        userInfo: ["seconds": calculatedTime]
-                                    )
-                                    viewModel.navigateToCalculator = true
-                                }) {
-                                    HStack {
-                                        Image(systemName: "plus.forwardslash.minus")
-                                            .font(.system(size: 18, design: .monospaced))
-                                        Text("\(calculatedTime / 60):\(String(format: "%02d", calculatedTime % 60))")
-                                            .font(.system(size: 18, design: .monospaced))
-                                    }
-                                    .foregroundColor(.white)
-                                    .frame(maxWidth: .infinity)
-                                    .padding(.vertical, 14)
-                                    .padding(.horizontal, 16)
-                                    .background(.orange)
-                                    .cornerRadius(12)
-                                }
-                                .buttonStyle(PlainButtonStyle())
-                            }
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 8)
-                        } else {
-                            // Обычный режим - показываем обе кнопки
-                            CalculatedTimeSection(
-                                time: calculatedTime,
-                                temperature: viewModel.temperature,
-                                filmName: viewModel.selectedFilmName,
-                                developerName: viewModel.selectedMode == .developing ? viewModel.selectedDeveloperName : "Fixing",
-                                onCalculatorTap: {
-                                    NotificationCenter.default.post(
-                                        name: Notification.Name("DevelopmentCalculatedTime"),
-                                        object: nil,
-                                        userInfo: ["seconds": calculatedTime]
-                                    )
-                                    viewModel.navigateToCalculator = true
-                                },
-                                onTimerTap: {
-                                    NotificationCenter.default.post(
-                                        name: Notification.Name("DevelopmentCalculatedTime"),
-                                        object: nil,
-                                        userInfo: ["seconds": calculatedTime]
-                                    )
-                                    viewModel.navigateToTimer = true
-                                }
-                            )
-                        }
-                    }
-                    
-                    Spacer()
-                }
+                mainContentView
             }
         }
         .sheet(isPresented: $viewModel.showFilmPicker) {
-            FilmPickerView(
-                films: viewModel.films,
-                selectedFilm: $viewModel.selectedFilm,
-                iso: $viewModel.iso,
-                onDismiss: { viewModel.showFilmPicker = false },
-                onFilmSelected: { film in
-                    viewModel.selectFilm(film)
-                }
-            )
+            filmPickerSheet
         }
         .sheet(isPresented: $viewModel.showDeveloperPicker) {
-            DeveloperPickerView(
-                developers: viewModel.developers,
-                selectedDeveloper: $viewModel.selectedDeveloper,
-                selectedDilution: $viewModel.selectedDilution,
-                onDismiss: { viewModel.showDeveloperPicker = false },
-                onDeveloperSelected: { developer in
-                    viewModel.selectDeveloper(developer)
-                }
-            )
+            developerPickerSheet
         }
         .sheet(isPresented: $viewModel.showDilutionPicker) {
-            DilutionPickerView(
-                dilutions: viewModel.getAvailableDilutions(),
-                selectedDilution: $viewModel.selectedDilution,
-                onDismiss: { viewModel.showDilutionPicker = false },
-                isDisabled: viewModel.selectedFilm == nil || viewModel.selectedDeveloper == nil,
-                onDilutionSelected: { dilution in
-                    viewModel.selectDilution(dilution)
-                }
-            )
+            dilutionPickerSheet
         }
         .sheet(isPresented: $viewModel.showFixerPicker) {
-            FixerPickerView(
-                swiftDataFixers: viewModel.fixers,
-                selectedSwiftDataFixer: $viewModel.selectedFixer,
-                onDismiss: { viewModel.showFixerPicker = false },
-                onSwiftDataFixerSelected: { fixer in
-                    viewModel.selectFixer(fixer)
-                }
-            )
+            fixerPickerSheet
         }
         .sheet(isPresented: $viewModel.showISOPicker) {
-            ISOPickerView(
-                iso: $viewModel.iso,
-                onDismiss: { viewModel.showISOPicker = false },
-                availableISOs: viewModel.getAvailableISOs()
-            )
+            isoPickerSheet
         }
         .navigationDestination(isPresented: $viewModel.navigateToCalculator) {
             if let calculatedTime = viewModel.calculatedTime {
                 CalculatorView(
+                    swiftDataService: viewModel.dataService as! SwiftDataService,
                     initialTime: calculatedTime, 
                     initialTemperature: viewModel.temperature,
                     isFromStageEditor: isFromStageEditor
@@ -230,7 +270,12 @@ struct DevelopmentSetupView: View {
 }
 
 struct DevelopmentSetupView_Previews: PreviewProvider {
-    static var previews: some View {
-        DevelopmentSetupView()
+    @MainActor static var previews: some View {
+        let container = SwiftDataPersistence.preview.modelContainer
+        let githubService = GitHubDataService()
+        let swiftDataService = SwiftDataService(githubDataService: githubService, modelContainer: container)
+        let viewModel = DevelopmentSetupViewModel<SwiftDataService>(dataService: swiftDataService)
+        
+        return DevelopmentSetupView<SwiftDataService>(viewModel: viewModel)
     }
 }

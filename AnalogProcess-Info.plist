@@ -10,5 +10,7 @@
 	</array>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>GitHubDataRepoURL</key>
+	<string>https://raw.githubusercontent.com/maximeliseyev/filmdevelopmentdata/main</string>
 </dict>
 </plist>

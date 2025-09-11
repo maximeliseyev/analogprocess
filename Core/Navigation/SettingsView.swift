@@ -1,14 +1,15 @@
 import SwiftUI
 
-
 public struct SettingsView: View {
+    @EnvironmentObject var githubService: GitHubDataService
+    @EnvironmentObject var autoSyncService: AutoSyncService
+    @EnvironmentObject var swiftDataService: SwiftDataService
+    
     @Binding var colorScheme: ColorScheme?
     @State private var selectedTheme: Int = 0
     @State private var showingDataAlert = false
     @State private var alertMessage = ""
     @State private var isSyncing = false
-    @StateObject private var githubService = GitHubDataService.shared
-    @StateObject private var autoSyncService = AutoSyncService.shared
     
     private var appVersion: String {
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
@@ -103,7 +104,7 @@ public struct SettingsView: View {
                 // Тестовая кнопка для автосинхронизации (только для разработки)
                 #if DEBUG
                 Button(action: {
-                    autoSyncService.performAutoSyncOnAppLaunch()
+                    Task { await autoSyncService.forceAutoSync() }
                 }) {
                     HStack {
                         Image(systemName: "play.circle")
@@ -157,7 +158,7 @@ public struct SettingsView: View {
         
         Task {
             do {
-                try await SwiftDataService.shared.syncDataFromGitHub()
+                try await swiftDataService.syncDataFromGitHub()
                 await MainActor.run {
                     alertMessage = NSLocalizedString("settingsSyncSuccess", comment: "")
                     showingDataAlert = true
@@ -182,6 +183,4 @@ public struct SettingsView: View {
             UIApplication.shared.open(url)
         }
     }
-    
-
 } 

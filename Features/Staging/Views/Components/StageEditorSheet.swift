@@ -2,6 +2,8 @@ import SwiftUI
 
 struct StageEditorSheet: View {
     @Environment(\.dismiss) private var dismiss
+    let swiftDataService: SwiftDataService
+    
     @State private var localStage: StagingStage
     let onSave: (StagingStage) -> Void
     
@@ -9,10 +11,8 @@ struct StageEditorSheet: View {
     @State private var seconds: Int
     @State private var selectedAgitationKey: String
     
-    // Сохраняем ViewModel для DevelopmentSetup
-    @State private var developmentSetupViewModel: DevelopmentSetupViewModel?
-    
-    init(stage: StagingStage, onSave: @escaping (StagingStage) -> Void) {
+    init(swiftDataService: SwiftDataService, stage: StagingStage, onSave: @escaping (StagingStage) -> Void) {
+        self.swiftDataService = swiftDataService
         self._localStage = State(initialValue: stage)
         self.onSave = onSave
         let totalSeconds = Int(stage.duration)
@@ -60,18 +60,12 @@ struct StageEditorSheet: View {
                 }
                 if localStage.type == .develop || localStage.type == .fixer {
                     Section(header: Text(LocalizedStringKey("advancedSetup"))) {
-                        NavigationLink(destination: DevelopmentSetupView(
+                        NavigationLink(destination: DevelopmentSetupView<SwiftDataService>(
+                            viewModel: DevelopmentSetupViewModel<SwiftDataService>(dataService: swiftDataService),
                             isFromStageEditor: true, 
-                            stageType: localStage.type,
-                            viewModel: developmentSetupViewModel
+                            stageType: localStage.type
                         )) {
                             Text(LocalizedStringKey(localStage.type == .develop ? "openDevelopmentSetup" : "openFixerSetup"))
-                        }
-                        .onAppear {
-                            // Создаем ViewModel при первом открытии
-                            if developmentSetupViewModel == nil {
-                                developmentSetupViewModel = DevelopmentSetupViewModel()
-                            }
                         }
                     }
                 }

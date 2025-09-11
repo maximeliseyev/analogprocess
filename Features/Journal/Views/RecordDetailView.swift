@@ -10,6 +10,7 @@ import SwiftData
 
 struct RecordDetailView: View {
     let record: SwiftDataCalculationRecord
+    let swiftDataService: SwiftDataService
     let onEdit: () -> Void
     let onDelete: () -> Void
     @Environment(\.dismiss) private var dismiss
@@ -69,6 +70,7 @@ struct RecordDetailView: View {
         }
         .sheet(isPresented: $showingEditSheet) {
             CreateRecordView(
+                swiftDataService: swiftDataService,
                 prefillData: createJournalRecord(),
                 isEditing: true,
                 onUpdate: { updatedRecord in

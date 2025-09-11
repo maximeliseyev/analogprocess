@@ -141,7 +141,7 @@ struct StagingCalculationResultView_Previews: PreviewProvider {
         
         StagingCalculationResultView(
             results: mockResults,
-            viewModel: CalculatorViewModel()
+            viewModel: CalculatorViewModel(swiftDataService: SwiftDataService(githubDataService: GitHubDataService(), modelContainer: SwiftDataPersistence.preview.modelContainer))
         )
         .previewDisplayName("Staging Calculation Result")
     }

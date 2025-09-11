@@ -22,7 +22,13 @@ public protocol DevelopmentCalculating {
 public class DevelopmentCalculator: DevelopmentCalculating {
     
     /// Округляет время до ближайшей 1/4 минуты (15 секунд)
-    private func roundToQuarterMinute(_ totalSeconds: Int) -> (minutes: Int, seconds: Int) {
+    public func roundToQuarterMinute(_ totalSeconds: Int) -> Int {
+        let quarterMinuteSeconds = 15
+        return Int(round(Double(totalSeconds) / Double(quarterMinuteSeconds))) * quarterMinuteSeconds
+    }
+    
+    /// Округляет время до ближайшей 1/4 минуты (15 секунд) и возвращает кортеж
+    private func roundToQuarterMinuteComponents(_ totalSeconds: Int) -> (minutes: Int, seconds: Int) {
         let roundedSeconds = Int(round(Double(totalSeconds) / Double(Constants.Time.quarterMinuteSeconds))) * Constants.Time.quarterMinuteSeconds
         
         let minutes = roundedSeconds / Constants.Time.secondsPerMinute
@@ -43,7 +49,7 @@ public class DevelopmentCalculator: DevelopmentCalculating {
         var results: [ProcessStep] = []
         
         // Базовое время (+0) - округляем
-        let baseRounded = roundToQuarterMinute(baseSeconds)
+        let baseRounded = roundToQuarterMinuteComponents(baseSeconds)
         results.append(ProcessStep(
             label: "+0",
             minutes: baseRounded.minutes,
@@ -67,7 +73,7 @@ public class DevelopmentCalculator: DevelopmentCalculating {
             let adjustedSeconds = Int(Double(baseSeconds) * multiplier)
             
             // Округляем результат до 1/4 минуты
-            let rounded = roundToQuarterMinute(adjustedSeconds)
+            let rounded = roundToQuarterMinuteComponents(adjustedSeconds)
             
             results.append(ProcessStep(
                 label: "push +\(i)",
@@ -87,7 +93,7 @@ public class DevelopmentCalculator: DevelopmentCalculating {
             let adjustedSeconds = Int(Double(baseSeconds) / divisor)
             
             // Округляем результат до 1/4 минуты
-            let rounded = roundToQuarterMinute(adjustedSeconds)
+            let rounded = roundToQuarterMinuteComponents(adjustedSeconds)
             
             results.append(ProcessStep(
                 label: "pull -\(i)",

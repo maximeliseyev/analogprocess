@@ -39,10 +39,10 @@ public struct GitHubDeveloperData: Codable {
 public struct GitHubFixerData: Codable {
     public let name: String
     public let type: FixerType
-    public let time: Int
+    public let time: Int32
     public let warning: String?
     
-    public init(name: String, type: FixerType, time: Int, warning: String? = nil) {
+    public init(name: String, type: FixerType, time: Int32, warning: String? = nil) {
         self.name = name
         self.type = type
         self.time = time

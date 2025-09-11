@@ -1,28 +1,16 @@
-//
-//  SwiftDataDevelopmentSetupViewModel.swift
-//  AnalogProcess
-//
-//  Created by Maxim Eliseyev on 11.08.2025.
-//
-
 import SwiftUI
-import SwiftData
-import Foundation
-
-enum ProcessMode: String, CaseIterable {
-    case developing = "Developing"
-    case fixer = "Fixer"
-}
+import Combine
 
 @MainActor
-class DevelopmentSetupViewModel: ObservableObject {
-    // MARK: - SwiftData Properties
-    @Published var selectedFilm: SwiftDataFilm?
-    @Published var selectedDeveloper: SwiftDataDeveloper?
-    @Published var selectedFixer: SwiftDataFixer?
+class DevelopmentSetupViewModel<DataServiceType: DataService>: ObservableObject where DataServiceType.Film: Identifiable, DataServiceType.Developer: Identifiable, DataServiceType.Fixer: Identifiable {
+    
+    // MARK: - Properties
+    @Published var selectedFilm: DataServiceType.Film?
+    @Published var selectedDeveloper: DataServiceType.Developer?
+    @Published var selectedFixer: DataServiceType.Fixer?
     @Published var selectedDilution: String = ""
     @Published var temperature: Int = 20
-    @Published var iso: Int32 = Int32(Constants.ISO.defaultISO)
+    @Published var iso: Int = Constants.ISO.defaultISO
     @Published var calculatedTime: Int?
     
     // MARK: - Mode Selection
@@ -36,44 +24,46 @@ class DevelopmentSetupViewModel: ObservableObject {
     @Published var showISOPicker = false
     @Published var showTemperaturePicker = false
     
-    // Навигационные состояния
+    // MARK: - Navigation
     @Published var navigateToCalculator = false
     @Published var navigateToTimer = false
     
     // MARK: - Services
-    private let swiftDataService = SwiftDataService.shared
+    let dataService: DataServiceType
+    
+    init(dataService: DataServiceType) {
+        self.dataService = dataService
+    }
     
     // MARK: - Computed Properties
-    
-    var films: [SwiftDataFilm] {
-        swiftDataService.films
+    var films: [DataServiceType.Film] {
+        dataService.films
     }
     
-    var developers: [SwiftDataDeveloper] {
-        swiftDataService.developers
+    var developers: [DataServiceType.Developer] {
+        dataService.developers
     }
     
-    var fixers: [SwiftDataFixer] {
-        swiftDataService.fixers
+    var fixers: [DataServiceType.Fixer] {
+        dataService.fixers
     }
-    
-    // MARK: - Computed Properties for UI
     
     var selectedFilmName: String {
-        return selectedFilm?.name ?? ""
+        selectedFilm?.name ?? ""
     }
     
     var selectedDeveloperName: String {
-        return selectedDeveloper?.name ?? ""
+        selectedDeveloper?.name ?? ""
     }
     
-    // When only a single option exists, corresponding pickers should be disabled
     var dilutionOptions: [String] {
-        getAvailableDilutions()
+        guard let film = selectedFilm, let developer = selectedDeveloper else { return [] }
+        return dataService.getAvailableDilutions(filmId: film.id, developerId: developer.id)
     }
     
     var isoOptions: [Int] {
-        getAvailableISOs()
+        guard let film = selectedFilm, let developer = selectedDeveloper, !selectedDilution.isEmpty else { return [] }
+        return dataService.getAvailableISOs(filmId: film.id, developerId: developer.id, dilution: selectedDilution)
     }
     
     var isDilutionSelectionLocked: Bool {
@@ -84,28 +74,18 @@ class DevelopmentSetupViewModel: ObservableObject {
         isoOptions.count <= 1
     }
     
-    private var temperatureOptionsCount: Int {
-        let unique = Set(swiftDataService.temperatureMultipliers.map { $0.temperature })
-        return unique.isEmpty ? 1 : unique.count
-    }
-
     var isTemperatureSelectionLocked: Bool {
-        // If either only one ISO option exists for the current context OR only one temperature overall
-        // show the temperature row as locked (non-interactive)
-        isoOptions.count <= 1 || temperatureOptionsCount <= 1
+        false  // Temperature selection is always available
     }
     
     // MARK: - Public Methods
-    
-    func selectFilm(_ film: SwiftDataFilm) {
-        print("DEBUG: selectFilm called with film: \(film.name)")
+    func selectFilm(_ film: DataServiceType.Film) {
         selectedFilm = film
-        iso = Int32(film.defaultISO)
+        iso = Int(film.defaultISO)
         calculateTimeAutomatically()
     }
     
-    func selectDeveloper(_ developer: SwiftDataDeveloper) {
-        print("DEBUG: selectDeveloper called with developer: \(developer.name)")
+    func selectDeveloper(_ developer: DataServiceType.Developer) {
         selectedDeveloper = developer
         selectedDilution = developer.defaultDilution ?? ""
         calculateTimeAutomatically()
@@ -116,13 +96,13 @@ class DevelopmentSetupViewModel: ObservableObject {
         calculateTimeAutomatically()
     }
     
-    func selectFixer(_ fixer: SwiftDataFixer) {
+    func selectFixer(_ fixer: DataServiceType.Fixer) {
         selectedFixer = fixer
         calculateTimeAutomatically()
     }
     
     func updateISO(_ newISO: Int) {
-        iso = Int32(newISO)
+        iso = newISO
         calculateTimeAutomatically()
     }
     
@@ -136,92 +116,29 @@ class DevelopmentSetupViewModel: ObservableObject {
         calculateTimeAutomatically()
     }
     
-    func getAvailableDilutions() -> [String] {
-        return getAvailableDilutionsForSwiftData()
-    }
-    
-    func getAvailableISOs() -> [Int] {
-        return getAvailableISOsForSwiftData()
-    }
-    
     func reloadData() {
-        swiftDataService.refreshData()
+        dataService.refreshData()
         objectWillChange.send()
     }
     
     // MARK: - Private Methods
-    
     private func calculateTimeAutomatically() {
         switch selectedMode {
         case .developing:
-            guard let film = selectedFilm,
-                  let developer = selectedDeveloper else {
+            guard let film = selectedFilm, let developer = selectedDeveloper else {
                 calculatedTime = nil
-                print("DEBUG: calculateTimeAutomatically - film or developer is nil")
                 return
             }
             
-            // Auto-select single available dilution/ISO when only one option exists
-            let availableDilutions = getAvailableDilutionsForSwiftData()
-            if availableDilutions.count == 1 {
-                selectedDilution = availableDilutions[0]
-            }
-            let dilutionToUse = selectedDilution.isEmpty ? (developer.defaultDilution ?? "") : selectedDilution
-            let availableISOs = getAvailableISOsForSwiftData()
-            if availableISOs.count == 1 {
-                iso = Int32(availableISOs[0])
-            }
-            print("DEBUG: calculateTimeAutomatically - film: \(film.name), developer: \(developer.name), dilution: \(dilutionToUse), iso: \(iso), temperature: \(temperature)")
-            
-            let parameters = DevelopmentParameters(
-                film: film,
-                developer: developer,
-                dilution: dilutionToUse,
-                temperature: temperature,
-                iso: Int(iso)
-            )
-            
-            calculatedTime = swiftDataService.calculateDevelopmentTime(parameters: parameters)
-            print("DEBUG: calculateTimeAutomatically - calculated time: \(calculatedTime ?? -1)")
+            let parameters = DevelopmentParameters(film: film, developer: developer, dilution: selectedDilution, temperature: temperature, iso: iso, time: 0)
+            calculatedTime = dataService.calculateDevelopmentTime(parameters: parameters)
             
         case .fixer:
-            guard let _ = selectedFilm,
-                  let fixer = selectedFixer else {
+            guard let fixer = selectedFixer else {
                 calculatedTime = nil
-                print("DEBUG: calculateTimeAutomatically - film or fixer is nil")
                 return
             }
-            
-            // For fixer mode, we use the fixer time directly
             calculatedTime = Int(fixer.time)
-            print("DEBUG: calculateTimeAutomatically - fixer time: \(calculatedTime ?? -1)")
         }
-    }
-    
-    private func getAvailableDilutionsForSwiftData() -> [String] {
-        guard let film = selectedFilm,
-              let developer = selectedDeveloper else {
-            return []
-        }
-
-        let dilutions = swiftDataService.getAvailableDilutions(filmId: film.id, developerId: developer.id)
-        if dilutions.isEmpty {
-            return [developer.defaultDilution ?? ""]
-        }
-        return dilutions
-    }
-    
-    private func getAvailableISOsForSwiftData() -> [Int] {
-        guard let film = selectedFilm,
-              let developer = selectedDeveloper,
-              !selectedDilution.isEmpty else {
-            return []
-        }
-
-        let isos = swiftDataService.getAvailableISOs(filmId: film.id, developerId: developer.id, dilution: selectedDilution)
-        if isos.isEmpty {
-            return [Int(film.defaultISO)]
-        }
-        return isos
     }
 }

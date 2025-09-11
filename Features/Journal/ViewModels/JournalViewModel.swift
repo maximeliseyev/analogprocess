@@ -19,12 +19,14 @@ class JournalViewModel: ObservableObject {
     @Published var isCloudAvailable = false
     
     // MARK: - Dependencies
-    private let swiftDataService = SwiftDataService.shared
-    private let cloudKitService = CloudKitService.shared
+    let swiftDataService: SwiftDataService
+    private let cloudKitService: CloudKitService
     private var cancellables = Set<AnyCancellable>()
     private var notificationCenter = NotificationCenter.default
     
-    init() {
+    init(swiftDataService: SwiftDataService, cloudKitService: CloudKitService) {
+        self.swiftDataService = swiftDataService
+        self.cloudKitService = cloudKitService
         setupCloudKitObservers()
         loadRecords()
     }

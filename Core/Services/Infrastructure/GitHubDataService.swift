@@ -93,7 +93,9 @@ public class GitHubDataService: ObservableObject {
     }
     
     private func downloadFilms() async throws -> [String: GitHubFilmData] {
-        let url = URL(string: Constants.Network.baseURL + Constants.Network.filmsEndpoint)!
+        guard let url = URL(string: Constants.Network.baseURL + Constants.Network.filmsEndpoint) else {
+            throw GitHubDataServiceError.networkError(.invalidURL)
+        }
         let (data, response) = try await networkSession.data(from: url)
         
         guard let httpResponse = response as? HTTPURLResponse else {
@@ -115,7 +117,9 @@ public class GitHubDataService: ObservableObject {
     }
     
     private func downloadDevelopers() async throws -> [String: GitHubDeveloperData] {
-        let url = URL(string: Constants.Network.baseURL + Constants.Network.developersEndpoint)!
+        guard let url = URL(string: Constants.Network.baseURL + Constants.Network.developersEndpoint) else {
+            throw GitHubDataServiceError.networkError(.invalidURL)
+        }
         let (data, response) = try await networkSession.data(from: url)
         
         guard let httpResponse = response as? HTTPURLResponse else {
@@ -137,7 +141,9 @@ public class GitHubDataService: ObservableObject {
     }
     
     private func downloadFixers() async throws -> [String: GitHubFixerData] {
-        let url = URL(string: Constants.Network.baseURL + Constants.Network.fixersEndpoint)!
+        guard let url = URL(string: Constants.Network.baseURL + Constants.Network.fixersEndpoint) else {
+            throw GitHubDataServiceError.networkError(.invalidURL)
+        }
         let (data, response) = try await networkSession.data(from: url)
         
         guard let httpResponse = response as? HTTPURLResponse else {
@@ -159,7 +165,9 @@ public class GitHubDataService: ObservableObject {
     }
     
     private func downloadDevelopmentTimes() async throws -> [String: [String: [String: [String: Int]]]] {
-        let url = URL(string: Constants.Network.baseURL + Constants.Network.developmentTimesEndpoint)!
+        guard let url = URL(string: Constants.Network.baseURL + Constants.Network.developmentTimesEndpoint) else {
+            throw GitHubDataServiceError.networkError(.invalidURL)
+        }
         let (data, response) = try await networkSession.data(from: url)
         
         guard let httpResponse = response as? HTTPURLResponse else {
@@ -181,7 +189,9 @@ public class GitHubDataService: ObservableObject {
     }
     
     private func downloadTemperatureMultipliers() async throws -> [String: Double] {
-        let url = URL(string: Constants.Network.baseURL + Constants.Network.temperatureMultipliersEndpoint)!
+        guard let url = URL(string: Constants.Network.baseURL + Constants.Network.temperatureMultipliersEndpoint) else {
+            throw GitHubDataServiceError.networkError(.invalidURL)
+        }
         let (data, response) = try await networkSession.data(from: url)
         
         guard let httpResponse = response as? HTTPURLResponse else {

@@ -22,7 +22,7 @@ struct SwiftDataPersistence {
             name: "Ilford HP5+",
             manufacturer: "Ilford",
             type: "Black & White",
-            defaultISO: 400
+            defaultISO: Int32(400)
         )
         
         let developer = SwiftDataDeveloper(
@@ -35,8 +35,8 @@ struct SwiftDataPersistence {
         
         let developmentTime = SwiftDataDevelopmentTime(
             dilution: "1+1",
-            iso: 400,
-            time: 540,
+            iso: Int32(400),
+            time: Int32(540),
             developer: developer,
             film: film
         )
