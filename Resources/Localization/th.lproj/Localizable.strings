@@ -343,6 +343,8 @@
 "stagingFinish" = "เสร็จสิ้น";
 "stagingSequentialStages" = "ขั้นตอนตามลำดับ";
 "stagingStageXofY" = "ขั้นตอน %@ จาก %@";
+"stagingResetConfirmation" = "คุณต้องการรีเซ็ตทุกขั้นตอนจริงหรือไม่？";
+"tapToSetTime" = "แตะเพื่อตั้งเวลา";
 
 // MARK: - Manual Time Input
 "setTimeManually" = "ตั้งเวลาด้วยตนเอง";

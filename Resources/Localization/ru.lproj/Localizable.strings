@@ -343,6 +343,8 @@
 "stagingFinish" = "Завершить";
 "stagingSequentialStages" = "Последовательные стадии";
 "stagingStageXofY" = "Стадия %@ из %@";
+"stagingResetConfirmation" = "Вы действительно хотите сбросить все стадии?";
+"tapToSetTime" = "Нажмите для установки времени";
 
 // MARK: - Manual Time Input
 "setTimeManually" = "Установить время вручную";

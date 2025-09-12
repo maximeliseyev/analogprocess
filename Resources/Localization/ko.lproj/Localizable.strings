@@ -343,6 +343,8 @@
 "stagingFinish" = "완료";
 "stagingSequentialStages" = "순차 단계";
 "stagingStageXofY" = "단계 %@ / %@";
+"stagingResetConfirmation" = "정말로 모든 단계를 재설정하시겠습니까?";
+"tapToSetTime" = "탭하여 시간 설정";
 
 // MARK: - Manual Time Input
 "setTimeManually" = "시간 수동 설정";

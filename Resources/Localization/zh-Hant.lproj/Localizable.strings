@@ -343,6 +343,8 @@
 "stagingFinish" = "完成";
 "stagingSequentialStages" = "順序階段";
 "stagingStageXofY" = "階段 %@ / %@";
+"stagingResetConfirmation" = "您真的要重置所有階段嗎？";
+"tapToSetTime" = "點擊設定時間";
 
 // MARK: - Manual Time Input
 "setTimeManually" = "手動設定時間";

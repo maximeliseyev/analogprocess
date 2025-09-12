@@ -343,6 +343,8 @@
 "stagingFinish" = "終了";
 "stagingSequentialStages" = "連続ステージ";
 "stagingStageXofY" = "ステージ %@ / %@";
+"stagingResetConfirmation" = "本当にすべてのステージをリセットしますか？";
+"tapToSetTime" = "タップして時間を設定";
 
 // MARK: - Manual Time Input
 "setTimeManually" = "時間を手動設定";
