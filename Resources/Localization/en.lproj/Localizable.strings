@@ -343,6 +343,8 @@
 "stagingFinish" = "Finish";
 "stagingSequentialStages" = "Sequential Stages";
 "stagingStageXofY" = "Stage %@ of %@";
+"stagingResetConfirmation" = "Do you really want to reset all stages?";
+"tapToSetTime" = "Tap to set time";
 
 // MARK: - Manual Time Input
 "setTimeManually" = "Set Time Manually";

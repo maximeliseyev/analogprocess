@@ -12,7 +12,7 @@ enum StageType: String, Codable {
     case unknown
 }
 
-struct StagingStage: Identifiable, Hashable {
+struct StagingStage: Identifiable, Hashable, Codable {
     var id = UUID()
     var name: String
     let description: String

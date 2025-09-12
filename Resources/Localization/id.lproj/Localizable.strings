@@ -343,6 +343,8 @@
 "stagingFinish" = "Selesai";
 "stagingSequentialStages" = "Tahapan Berurutan";
 "stagingStageXofY" = "Tahapan %@ dari %@";
+"stagingResetConfirmation" = "Apakah Anda benar-benar ingin mereset semua tahap?";
+"tapToSetTime" = "Ketuk untuk mengatur waktu";
 
 // MARK: - Manual Time Input
 "setTimeManually" = "Atur Waktu Manual";

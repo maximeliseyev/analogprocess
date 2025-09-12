@@ -12,6 +12,7 @@ public enum AppConstants {
     // MARK: - UserDefaults Keys
     enum UserDefaultsKeys {
         static let lastSyncDate = "lastSyncDate"
+        static let selectedStages = "selectedStages"
     }
     
     // MARK: - Time Constants

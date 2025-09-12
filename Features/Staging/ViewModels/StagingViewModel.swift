@@ -12,11 +12,30 @@ class StagingViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     init() {
+        loadSelectedStages()
         setupBindings()
     }
     
     private func setupBindings() {
-        // Здесь можно добавить привязки для обновления данных
+        // Автоматически сохраняем состояние при изменении selectedStages
+        $selectedStages
+            .sink { [weak self] stages in
+                self?.saveSelectedStages()
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func loadSelectedStages() {
+        guard let data = UserDefaults.standard.data(forKey: AppConstants.UserDefaultsKeys.selectedStages),
+              let stages = try? JSONDecoder().decode([StagingStage].self, from: data) else {
+            return
+        }
+        selectedStages = stages
+    }
+    
+    private func saveSelectedStages() {
+        guard let data = try? JSONEncoder().encode(selectedStages) else { return }
+        UserDefaults.standard.set(data, forKey: AppConstants.UserDefaultsKeys.selectedStages)
     }
     
     func addStage(_ stage: StagingStage) {
@@ -68,5 +87,9 @@ class StagingViewModel: ObservableObject {
     func startStagingTimer() {
         // Этот метод будет вызываться из StagingView
         // Логика показа StagingTimerView находится в StagingView
+    }
+    
+    func resetStages() {
+        selectedStages = []
     }
 } 

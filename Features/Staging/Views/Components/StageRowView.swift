@@ -52,16 +52,37 @@ struct StageRowView: View {
                     Text(LocalizedStringKey(stage.name))
                         .headlineTextStyle()
                     
-                    Text(LocalizedStringKey(stage.description))
-                        .captionTextStyle()
-                        .lineLimit(2)
+                    HStack {
+                        Text(LocalizedStringKey(stage.description))
+                            .captionTextStyle()
+                            .lineLimit(1)
+                        
+                        if stage.duration > 0 {
+                            Text("• \(formatDuration(stage.duration))")
+                                .captionTextStyle()
+                                .foregroundColor(.blue)
+                        }
+                    }
                 }
                 
                 Spacer()
                 
-                // Индикатор drag
-                Image(systemName: "line.3.horizontal")
-                    .chevronStyle()
+                // Время и индикатор редактирования
+                VStack(alignment: .trailing, spacing: 4) {
+                    if stage.duration > 0 {
+                        Text(formatDuration(stage.duration))
+                            .font(.title3)
+                            .fontWeight(.medium)
+                            .foregroundColor(.blue)
+                    } else {
+                        Text(LocalizedStringKey("tapToSetTime"))
+                            .captionTextStyle()
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    Image(systemName: "chevron.right")
+                        .chevronStyle()
+                }
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
@@ -69,6 +90,9 @@ struct StageRowView: View {
             .cornerRadius(8)
             .offset(x: swipeOffsetX)
             .contentShape(Rectangle())
+            .onTapGesture {
+                isEditingStage = true
+            }
             .gesture(
                 DragGesture(minimumDistance: 10)
                     .onChanged { value in
@@ -110,6 +134,18 @@ struct StageRowView: View {
             StageEditorSheet(swiftDataService: swiftDataService, stage: stage) { updatedStage in
                 onUpdate(updatedStage)
             }
+        }
+    }
+    
+    private func formatDuration(_ duration: TimeInterval) -> String {
+        let totalSeconds = Int(duration)
+        let minutes = totalSeconds / 60
+        let seconds = totalSeconds % 60
+        
+        if minutes > 0 {
+            return seconds > 0 ? "\(minutes):\(String(format: "%02d", seconds))" : "\(minutes) мин"
+        } else {
+            return "\(seconds) сек"
         }
     }
 }

@@ -32,6 +32,7 @@ struct StagingView: View {
     @State private var showingStagePicker = false
     @State private var draggedStage: StagingStage?
     @State private var showingStagingTimer = false
+    @State private var showingResetConfirmation = false
     
     var body: some View {
         NavigationView {
@@ -140,6 +141,18 @@ struct StagingView: View {
             }
             .navigationTitle(LocalizedStringKey("staging"))
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    if !viewModel.selectedStages.isEmpty {
+                        Button(action: {
+                            showingResetConfirmation = true
+                        }) {
+                            Image(systemName: "trash")
+                                .foregroundColor(.red)
+                        }
+                    }
+                }
+            }
         }
         .sheet(isPresented: $showingStagePicker) {
             StagePickerView(
@@ -156,6 +169,14 @@ struct StagingView: View {
         .sheet(isPresented: $showingStagingTimer) {
             StagingTimerView(stages: viewModel.selectedStages)
         }
+        .alert(LocalizedStringKey("stagingResetConfirmation"), isPresented: $showingResetConfirmation) {
+            Button(LocalizedStringKey("cancel"), role: .cancel) { }
+            Button(LocalizedStringKey("reset"), role: .destructive) {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    viewModel.resetStages()
+                }
+            }
+        }
     }
     
     private func formatDuration(_ duration: TimeInterval) -> String {
@@ -163,8 +184,4 @@ struct StagingView: View {
         let seconds = Int(duration) % 60
         return String(format: "%02d:%02d", minutes, seconds)
     }
-}
-
-#Preview {
-    StagingView()
 }

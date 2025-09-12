@@ -343,6 +343,8 @@
 "stagingFinish" = "Hoàn thành";
 "stagingSequentialStages" = "Giai đoạn tuần tự";
 "stagingStageXofY" = "Giai đoạn %@ trong %@";
+"stagingResetConfirmation" = "Bạn có thực sự muốn đặt lại tất cả các giai đoạn?";
+"tapToSetTime" = "Nhấn để đặt thời gian";
 
 // MARK: - Manual Time Input
 "setTimeManually" = "Đặt thời gian thủ công";
