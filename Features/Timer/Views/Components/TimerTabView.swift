@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct TimerTabView: View {
-    @State private var navigateToTimer = false
     @State private var timerMinutes = 0
     @State private var timerSeconds = 0
-    @State private var timerLabel = ""
     @State private var showManualTimeInput = false
+    
+    var onStartTimer: (Int, Int) -> Void
     
     var body: some View {
         VStack(spacing: 30) {
@@ -41,7 +41,7 @@ struct TimerTabView: View {
             }
             
             Button(action: {
-                navigateToTimer = true
+                onStartTimer(timerMinutes, timerSeconds)
             }) {
                 HStack {
                     Image(systemName: "timer")
@@ -70,13 +70,6 @@ struct TimerTabView: View {
         .padding()
         .navigationTitle(LocalizedStringKey("timer"))
         .navigationBarTitleDisplayMode(.inline)
-        .navigationDestination(isPresented: $navigateToTimer) {
-            TimerView(
-                timerLabel: timerLabel.isEmpty ? "Development Timer" : timerLabel,
-                totalMinutes: timerMinutes,
-                totalSeconds: timerSeconds
-            )
-        }
         .sheet(isPresented: $showManualTimeInput) {
             ManualTimeInputView(
                 minutes: $timerMinutes,
@@ -98,7 +91,7 @@ struct TimerTabView: View {
 struct TimerTabView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            TimerTabView()
+            TimerTabView(onStartTimer: { _, _ in })
         }
         .preferredColorScheme(.dark)
     }

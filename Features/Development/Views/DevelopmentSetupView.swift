@@ -9,14 +9,14 @@ import SwiftUI
 import SwiftData
 
 
-struct DevelopmentSetupView<DataServiceType: DataService>: View where DataServiceType.Film: Identifiable, DataServiceType.Developer: Identifiable, DataServiceType.Fixer: Identifiable {
-    @StateObject var viewModel: DevelopmentSetupViewModel<DataServiceType>
+struct DevelopmentSetupView: View {
+    @StateObject var viewModel: DevelopmentSetupViewModel<SwiftDataService>
     @Environment(\.dismiss) private var dismiss
     
     let isFromStageEditor: Bool
     let stageType: StageType?
     
-    init(viewModel: DevelopmentSetupViewModel<DataServiceType>, isFromStageEditor: Bool = false, stageType: StageType? = nil) {
+    init(viewModel: DevelopmentSetupViewModel<SwiftDataService>, isFromStageEditor: Bool = false, stageType: StageType? = nil) {
         self._viewModel = StateObject(wrappedValue: viewModel)
         self.isFromStageEditor = isFromStageEditor
         self.stageType = stageType
@@ -26,7 +26,7 @@ struct DevelopmentSetupView<DataServiceType: DataService>: View where DataServic
     private var mainContentView: some View {
         VStack(spacing: 30) {
             modeSelectionPicker
-            DevelopmentParametersView<DataServiceType>(viewModel: viewModel)
+            DevelopmentParametersView(viewModel: viewModel)
             calculatedTimeSection
             Spacer()
         }
@@ -110,10 +110,10 @@ struct DevelopmentSetupView<DataServiceType: DataService>: View where DataServic
     // MARK: - Sheet Views
     private var filmPickerSheet: some View {
         FilmPickerView(
-            films: viewModel.films as! [SwiftDataFilm],
+            films: viewModel.films,
             selectedFilm: Binding(
-                get: { viewModel.selectedFilm as? SwiftDataFilm },
-                set: { viewModel.selectedFilm = $0 as? DataServiceType.Film }
+                get: { viewModel.selectedFilm },
+                set: { viewModel.selectedFilm = $0 }
             ),
             iso: Binding(
                 get: { Int32(viewModel.iso) },
@@ -121,22 +121,22 @@ struct DevelopmentSetupView<DataServiceType: DataService>: View where DataServic
             ),
             onDismiss: { viewModel.showFilmPicker = false },
             onFilmSelected: { film in
-                viewModel.selectFilm(film as! DataServiceType.Film)
+                viewModel.selectFilm(film)
             }
         )
     }
     
     private var developerPickerSheet: some View {
         DeveloperPickerView(
-            developers: viewModel.developers as! [SwiftDataDeveloper],
+            developers: viewModel.developers,
             selectedDeveloper: Binding(
-                get: { viewModel.selectedDeveloper as? SwiftDataDeveloper },
-                set: { viewModel.selectedDeveloper = $0 as? DataServiceType.Developer }
+                get: { viewModel.selectedDeveloper },
+                set: { viewModel.selectedDeveloper = $0 }
             ),
             selectedDilution: $viewModel.selectedDilution,
             onDismiss: { viewModel.showDeveloperPicker = false },
             onDeveloperSelected: { developer in
-                viewModel.selectDeveloper(developer as! DataServiceType.Developer)
+                viewModel.selectDeveloper(developer)
             }
         )
     }
@@ -146,7 +146,7 @@ struct DevelopmentSetupView<DataServiceType: DataService>: View where DataServic
             dilutions: viewModel.dilutionOptions,
             selectedDilution: $viewModel.selectedDilution,
             onDismiss: { viewModel.showDilutionPicker = false },
-            isDisabled: viewModel.selectedFilm == nil || viewModel.selectedDeveloper == nil,
+            isDisabled: viewModel.selectedFilm == nil || viewModel.selectedDeveloper == nil || viewModel.isDilutionSelectionLocked,
             onDilutionSelected: { dilution in
                 viewModel.selectDilution(dilution)
             }
@@ -155,14 +155,14 @@ struct DevelopmentSetupView<DataServiceType: DataService>: View where DataServic
     
     private var fixerPickerSheet: some View {
         FixerPickerView(
-            swiftDataFixers: viewModel.fixers as! [SwiftDataFixer],
+            swiftDataFixers: viewModel.fixers,
             selectedSwiftDataFixer: Binding(
-                get: { viewModel.selectedFixer as? SwiftDataFixer },
-                set: { viewModel.selectedFixer = $0 as? DataServiceType.Fixer }
+                get: { viewModel.selectedFixer },
+                set: { viewModel.selectedFixer = $0 }
             ),
             onDismiss: { viewModel.showFixerPicker = false },
             onSwiftDataFixerSelected: { fixer in
-                viewModel.selectFixer(fixer as! DataServiceType.Fixer)
+                viewModel.selectFixer(fixer)
             }
         )
     }
@@ -203,7 +203,7 @@ struct DevelopmentSetupView<DataServiceType: DataService>: View where DataServic
         .navigationDestination(isPresented: $viewModel.navigateToCalculator) {
             if let calculatedTime = viewModel.calculatedTime {
                 CalculatorView(
-                    swiftDataService: viewModel.dataService as! SwiftDataService,
+                    swiftDataService: viewModel.dataService,
                     initialTime: calculatedTime, 
                     initialTemperature: viewModel.temperature,
                     isFromStageEditor: isFromStageEditor
@@ -277,6 +277,6 @@ struct DevelopmentSetupView_Previews: PreviewProvider {
         let swiftDataService = SwiftDataService(githubDataService: githubService, modelContainer: container)
         let viewModel = DevelopmentSetupViewModel<SwiftDataService>(dataService: swiftDataService)
         
-        return DevelopmentSetupView<SwiftDataService>(viewModel: viewModel)
+        return DevelopmentSetupView(viewModel: viewModel)
     }
 }

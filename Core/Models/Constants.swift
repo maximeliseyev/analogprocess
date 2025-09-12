@@ -29,6 +29,8 @@ enum Constants {
     // MARK: - UserDefaults Keys
     enum UserDefaultsKeys {
         static let lastSyncDate = "lastSyncDate"
+        static let lastAutoSyncDate = "LastAutoSyncDate"
+        static let autoSyncEnabled = "AutoSyncEnabled"
     }
     
     // MARK: - Time Constants
