@@ -86,6 +86,7 @@
 "temp23" = "23°C (-25%)";
 "temp24" = "24°C (-35%)";
 "temp25" = "25°C (-45%)";
+"StandardC" = "°C (표준)";
 
 // MARK: - Dilution Options
 "stock" = "원액";
@@ -375,3 +376,10 @@
 "parameterRow" = "매개변수 행";
 "recordRow" = "기록 행";
 "calculatorComponents" = "계산기 구성 요소";
+
+// MARK: - iCloud Sync Status
+"iCloudSyncStatusIdleAvailable" = "iCloud 동기화 준비됨";
+"iCloudSyncStatusIdleUnavailable" = "iCloud를 사용할 수 없음";
+"iCloudSyncStatusSyncing" = "동기화 중...";
+"iCloudSyncStatusCompleted" = "동기화 완료";
+"iCloudSyncCtatusFailed" = "오류: %@";
