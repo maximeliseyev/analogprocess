@@ -101,10 +101,6 @@
 		BFFA1C5E2E4A415E005C24F4 /* FixerSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C5C2E4A415E005C24F4 /* FixerSelectionView.swift */; };
 		BFFA1C642E4A67A9005C24F4 /* SwiftDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C632E4A67A9005C24F4 /* SwiftDataService.swift */; };
 		BFFA1C682E4A69E3005C24F4 /* SwiftDataPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C672E4A69E3005C24F4 /* SwiftDataPersistence.swift */; };
-		BFFA1C822E4A73EF005C24F4 /* CloudKitTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C7D2E4A73EF005C24F4 /* CloudKitTestView.swift */; };
-		BFFA1C832E4A73EF005C24F4 /* SwiftDataTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C7F2E4A73EF005C24F4 /* SwiftDataTestView.swift */; };
-		BFFA1C842E4A73EF005C24F4 /* SwiftDataUIComponentsTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C802E4A73EF005C24F4 /* SwiftDataUIComponentsTestView.swift */; };
-		BFFA1C852E4A73EF005C24F4 /* SwiftDataIntegrationTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C7E2E4A73EF005C24F4 /* SwiftDataIntegrationTestView.swift */; };
 		BFFA1C872E4A7A02005C24F4 /* DevelopmentSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C862E4A7A02005C24F4 /* DevelopmentSetupViewModel.swift */; };
 		BFFA1C892E4A7A0F005C24F4 /* CalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C882E4A7A0F005C24F4 /* CalculatorViewModel.swift */; };
 		BFFA1C8B2E4A8C32005C24F4 /* JournalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C8A2E4A8C32005C24F4 /* JournalViewModel.swift */; };
@@ -831,10 +827,6 @@
 				BF8EDB3F2E4FC1CE0040E898 /* StagingCalculationResultView.swift in Sources */,
 				BF41093A2E31308500BE2AD8 /* CalculatorView.swift in Sources */,
 				BFA0C7A82E2134B400132936 /* CalculationResultView.swift in Sources */,
-				BFFA1C822E4A73EF005C24F4 /* CloudKitTestView.swift in Sources */,
-				BFFA1C832E4A73EF005C24F4 /* SwiftDataTestView.swift in Sources */,
-				BFFA1C842E4A73EF005C24F4 /* SwiftDataUIComponentsTestView.swift in Sources */,
-				BFFA1C852E4A73EF005C24F4 /* SwiftDataIntegrationTestView.swift in Sources */,
 				BF8A59EF2E43809C00D689C5 /* MainTabView.swift in Sources */,
 				BFFA1C892E4A7A0F005C24F4 /* CalculatorViewModel.swift in Sources */,
 				BF949EB32E72CFC2005F9831 /* DevelopmentCalculator.swift in Sources */,
