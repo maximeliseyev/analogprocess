@@ -41,6 +41,7 @@ public class DevelopmentCalculator: DevelopmentCalculating {
         minutes: Int,
         seconds: Int,
         coefficient: Double,
+        temperature: Double,
         isPushMode: Bool,
         steps: Int
     ) -> [ProcessStep] {
@@ -57,9 +58,9 @@ public class DevelopmentCalculator: DevelopmentCalculating {
         ))
         
         if isPushMode {
-            results.append(contentsOf: calculatePushProcess(baseSeconds: adjustedBaseSeconds, coefficient: coefficient, steps: steps))
+            results.append(contentsOf: calculatePushProcess(baseSeconds: baseSeconds, coefficient: coefficient, steps: steps))
         } else {
-            results.append(contentsOf: calculatePullProcess(baseSeconds: adjustedBaseSeconds, coefficient: coefficient, steps: steps))
+            results.append(contentsOf: calculatePullProcess(baseSeconds: baseSeconds, coefficient: coefficient, steps: steps))
         }
         
         return results
