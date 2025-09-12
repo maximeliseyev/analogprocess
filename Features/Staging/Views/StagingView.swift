@@ -3,6 +3,7 @@ import SwiftUI
 import UIKit
 #endif
 
+
 // MARK: - Haptics Helper
 struct Haptics {
     static func impact(_ intensity: CGFloat = 1.0) {

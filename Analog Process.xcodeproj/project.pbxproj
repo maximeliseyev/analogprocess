@@ -16,7 +16,6 @@
 		BF4109132E31052900BE2AD8 /* ProcessTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41090D2E31052900BE2AD8 /* ProcessTypeView.swift */; };
 		BF4109142E31052900BE2AD8 /* StepsInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41090E2E31052900BE2AD8 /* StepsInputView.swift */; };
 		BF4109162E31052900BE2AD8 /* ActionButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109092E31052900BE2AD8 /* ActionButtonsView.swift */; };
-		BF4109272E31148700BE2AD8 /* DevelopmentParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109252E31148700BE2AD8 /* DevelopmentParameters.swift */; };
 		BF4109302E31151800BE2AD8 /* DevelopmentSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41092F2E31151800BE2AD8 /* DevelopmentSetupView.swift */; };
 		BF41093A2E31308500BE2AD8 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109392E31308500BE2AD8 /* CalculatorView.swift */; };
 		BF4109402E31318D00BE2AD8 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41093E2E31318D00BE2AD8 /* TimerViewModel.swift */; };
@@ -35,17 +34,12 @@
 		BF553C622E420639009F1525 /* KeyboardAwareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C612E420639009F1525 /* KeyboardAwareView.swift */; };
 		BF553C6A2E43268D009F1525 /* BasePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C692E43268D009F1525 /* BasePickerView.swift */; };
 		BF553C6C2E43297C009F1525 /* CreateRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C6B2E43297C009F1525 /* CreateRecordViewModel.swift */; };
-		BF6031EA2E70D33000A90890 /* FixerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6031E92E70D33000A90890 /* FixerProtocol.swift */; };
-		BF6031EB2E70D33000A90890 /* FilmProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6031E82E70D33000A90890 /* FilmProtocol.swift */; };
-		BF7886DC2E702F15008C4EFE /* DevelopmentParametersProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7886DB2E702F15008C4EFE /* DevelopmentParametersProtocol.swift */; };
-		BF7886DD2E702F15008C4EFE /* DeveloperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7886DA2E702F15008C4EFE /* DeveloperProtocol.swift */; };
 		BF7FF43E2E71ACC800BE5EA0 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7FF43D2E71ACC800BE5EA0 /* DataService.swift */; };
 		BF8A59EF2E43809C00D689C5 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59EE2E43809C00D689C5 /* MainTabView.swift */; };
 		BF8A59F02E43809C00D689C5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59ED2E43809C00D689C5 /* HomeView.swift */; };
 		BF8A59F22E4380E600D689C5 /* NavigationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59F12E4380E600D689C5 /* NavigationConstants.swift */; };
 		BF8A59F42E43814200D689C5 /* NavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59F32E43814200D689C5 /* NavigationButton.swift */; };
 		BF8A59FF2E4494A600D689C5 /* AutocompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59FE2E4494A600D689C5 /* AutocompleteView.swift */; };
-		BF8A5A012E44BA0E00D689C5 /* StagingStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A5A002E44BA0E00D689C5 /* StagingStage.swift */; };
 		BF8A5A072E44BA8200D689C5 /* StagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A5A042E44BA8200D689C5 /* StagingView.swift */; };
 		BF8A5A082E44BA8200D689C5 /* StagingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A5A022E44BA8200D689C5 /* StagingViewModel.swift */; };
 		BF8EDB3F2E4FC1CE0040E898 /* StagingCalculationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8EDB3E2E4FC1CE0040E898 /* StagingCalculationResultView.swift */; };
@@ -59,7 +53,21 @@
 		BF949EBA2E72CFC2005F9831 /* AgitationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EA62E72CFC2005F9831 /* AgitationMode.swift */; };
 		BF949EBB2E72CFC2005F9831 /* DataSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EAB2E72CFC2005F9831 /* DataSyncService.swift */; };
 		BF949EBC2E72CFC2005F9831 /* AutoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EAE2E72CFC2005F9831 /* AutoSyncService.swift */; };
-		BF949EBE2E72D6A3005F9831 /* ProcessMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EBD2E72D6A3005F9831 /* ProcessMode.swift */; };
+		BF949EDC2E73799B005F9831 /* StagingStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949ED42E73799B005F9831 /* StagingStage.swift */; };
+		BF949EDD2E73799B005F9831 /* SwiftDataTemperatureMultiplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EC62E73799B005F9831 /* SwiftDataTemperatureMultiplier.swift */; };
+		BF949EDE2E73799B005F9831 /* FilmProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949ECD2E73799B005F9831 /* FilmProtocol.swift */; };
+		BF949EDF2E73799B005F9831 /* SwiftDataDevelopmentTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EC32E73799B005F9831 /* SwiftDataDevelopmentTime.swift */; };
+		BF949EE02E73799B005F9831 /* DeveloperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949ECB2E73799B005F9831 /* DeveloperProtocol.swift */; };
+		BF949EE12E73799B005F9831 /* DevelopmentParametersProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949ECC2E73799B005F9831 /* DevelopmentParametersProtocol.swift */; };
+		BF949EE22E73799B005F9831 /* DevelopmentParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949ED02E73799B005F9831 /* DevelopmentParameters.swift */; };
+		BF949EE32E73799B005F9831 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949ED72E73799B005F9831 /* AppConstants.swift */; };
+		BF949EE42E73799B005F9831 /* FixerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949ECE2E73799B005F9831 /* FixerProtocol.swift */; };
+		BF949EE52E73799B005F9831 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949ED82E73799B005F9831 /* NetworkConstants.swift */; };
+		BF949EE62E73799B005F9831 /* SwiftDataCalculationRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EC12E73799B005F9831 /* SwiftDataCalculationRecord.swift */; };
+		BF949EE72E73799B005F9831 /* SwiftDataFixer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EC52E73799B005F9831 /* SwiftDataFixer.swift */; };
+		BF949EE82E73799B005F9831 /* SwiftDataDeveloper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EC22E73799B005F9831 /* SwiftDataDeveloper.swift */; };
+		BF949EE92E73799B005F9831 /* SwiftDataFilm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EC42E73799B005F9831 /* SwiftDataFilm.swift */; };
+		BF949EEA2E73799B005F9831 /* ProcessMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949ED12E73799B005F9831 /* ProcessMode.swift */; };
 		BF99E9A82E4E814300BB7F0C /* DropViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9A32E4E814300BB7F0C /* DropViewDelegate.swift */; };
 		BF99E9A92E4E814300BB7F0C /* StagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9A52E4E814300BB7F0C /* StagePickerView.swift */; };
 		BF99E9AA2E4E814300BB7F0C /* AddStageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9A22E4E814300BB7F0C /* AddStageButton.swift */; };
@@ -91,7 +99,6 @@
 		BFFA1C542E4A19D4005C24F4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C522E4A19D4005C24F4 /* Constants.swift */; };
 		BFFA1C5D2E4A415E005C24F4 /* FixerPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C5B2E4A415E005C24F4 /* FixerPickerView.swift */; };
 		BFFA1C5E2E4A415E005C24F4 /* FixerSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C5C2E4A415E005C24F4 /* FixerSelectionView.swift */; };
-		BFFA1C602E4A6236005C24F4 /* SwiftDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C5F2E4A6236005C24F4 /* SwiftDataModels.swift */; };
 		BFFA1C642E4A67A9005C24F4 /* SwiftDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C632E4A67A9005C24F4 /* SwiftDataService.swift */; };
 		BFFA1C682E4A69E3005C24F4 /* SwiftDataPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C672E4A69E3005C24F4 /* SwiftDataPersistence.swift */; };
 		BFFA1C822E4A73EF005C24F4 /* CloudKitTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA1C7D2E4A73EF005C24F4 /* CloudKitTestView.swift */; };
@@ -113,7 +120,6 @@
 		BF41090D2E31052900BE2AD8 /* ProcessTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessTypeView.swift; sourceTree = "<group>"; };
 		BF41090E2E31052900BE2AD8 /* StepsInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsInputView.swift; sourceTree = "<group>"; };
 		BF41090F2E31052900BE2AD8 /* TimeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInputView.swift; sourceTree = "<group>"; };
-		BF4109252E31148700BE2AD8 /* DevelopmentParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentParameters.swift; sourceTree = "<group>"; };
 		BF41092F2E31151800BE2AD8 /* DevelopmentSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentSetupView.swift; sourceTree = "<group>"; };
 		BF4109392E31308500BE2AD8 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		BF41093E2E31318D00BE2AD8 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
@@ -134,17 +140,12 @@
 		BF553C612E420639009F1525 /* KeyboardAwareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAwareView.swift; sourceTree = "<group>"; };
 		BF553C692E43268D009F1525 /* BasePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePickerView.swift; sourceTree = "<group>"; };
 		BF553C6B2E43297C009F1525 /* CreateRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecordViewModel.swift; sourceTree = "<group>"; };
-		BF6031E82E70D33000A90890 /* FilmProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmProtocol.swift; sourceTree = "<group>"; };
-		BF6031E92E70D33000A90890 /* FixerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerProtocol.swift; sourceTree = "<group>"; };
-		BF7886DA2E702F15008C4EFE /* DeveloperProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperProtocol.swift; sourceTree = "<group>"; };
-		BF7886DB2E702F15008C4EFE /* DevelopmentParametersProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentParametersProtocol.swift; sourceTree = "<group>"; };
 		BF7FF43D2E71ACC800BE5EA0 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		BF8A59ED2E43809C00D689C5 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		BF8A59EE2E43809C00D689C5 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		BF8A59F12E4380E600D689C5 /* NavigationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConstants.swift; sourceTree = "<group>"; };
 		BF8A59F32E43814200D689C5 /* NavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButton.swift; sourceTree = "<group>"; };
 		BF8A59FE2E4494A600D689C5 /* AutocompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteView.swift; sourceTree = "<group>"; };
-		BF8A5A002E44BA0E00D689C5 /* StagingStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingStage.swift; sourceTree = "<group>"; };
 		BF8A5A022E44BA8200D689C5 /* StagingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingViewModel.swift; sourceTree = "<group>"; };
 		BF8A5A042E44BA8200D689C5 /* StagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingView.swift; sourceTree = "<group>"; };
 		BF8EDB3E2E4FC1CE0040E898 /* StagingCalculationResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingCalculationResultView.swift; sourceTree = "<group>"; };
@@ -158,7 +159,21 @@
 		BF949EAF2E72CFC2005F9831 /* CloudKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitService.swift; sourceTree = "<group>"; };
 		BF949EB02E72CFC2005F9831 /* GitHubDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubDataService.swift; sourceTree = "<group>"; };
 		BF949EB12E72CFC2005F9831 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
-		BF949EBD2E72D6A3005F9831 /* ProcessMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessMode.swift; sourceTree = "<group>"; };
+		BF949EC12E73799B005F9831 /* SwiftDataCalculationRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataCalculationRecord.swift; sourceTree = "<group>"; };
+		BF949EC22E73799B005F9831 /* SwiftDataDeveloper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataDeveloper.swift; sourceTree = "<group>"; };
+		BF949EC32E73799B005F9831 /* SwiftDataDevelopmentTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataDevelopmentTime.swift; sourceTree = "<group>"; };
+		BF949EC42E73799B005F9831 /* SwiftDataFilm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataFilm.swift; sourceTree = "<group>"; };
+		BF949EC52E73799B005F9831 /* SwiftDataFixer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataFixer.swift; sourceTree = "<group>"; };
+		BF949EC62E73799B005F9831 /* SwiftDataTemperatureMultiplier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataTemperatureMultiplier.swift; sourceTree = "<group>"; };
+		BF949ECB2E73799B005F9831 /* DeveloperProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperProtocol.swift; sourceTree = "<group>"; };
+		BF949ECC2E73799B005F9831 /* DevelopmentParametersProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentParametersProtocol.swift; sourceTree = "<group>"; };
+		BF949ECD2E73799B005F9831 /* FilmProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmProtocol.swift; sourceTree = "<group>"; };
+		BF949ECE2E73799B005F9831 /* FixerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerProtocol.swift; sourceTree = "<group>"; };
+		BF949ED02E73799B005F9831 /* DevelopmentParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentParameters.swift; sourceTree = "<group>"; };
+		BF949ED12E73799B005F9831 /* ProcessMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessMode.swift; sourceTree = "<group>"; };
+		BF949ED42E73799B005F9831 /* StagingStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingStage.swift; sourceTree = "<group>"; };
+		BF949ED72E73799B005F9831 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		BF949ED82E73799B005F9831 /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		BF99E9A22E4E814300BB7F0C /* AddStageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStageButton.swift; sourceTree = "<group>"; };
 		BF99E9A32E4E814300BB7F0C /* DropViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropViewDelegate.swift; sourceTree = "<group>"; };
 		BF99E9A42E4E814300BB7F0C /* StageEditorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageEditorSheet.swift; sourceTree = "<group>"; };
@@ -195,7 +210,6 @@
 		BFFA1C522E4A19D4005C24F4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BFFA1C5B2E4A415E005C24F4 /* FixerPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerPickerView.swift; sourceTree = "<group>"; };
 		BFFA1C5C2E4A415E005C24F4 /* FixerSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerSelectionView.swift; sourceTree = "<group>"; };
-		BFFA1C5F2E4A6236005C24F4 /* SwiftDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataModels.swift; sourceTree = "<group>"; };
 		BFFA1C632E4A67A9005C24F4 /* SwiftDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataService.swift; sourceTree = "<group>"; };
 		BFFA1C672E4A69E3005C24F4 /* SwiftDataPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataPersistence.swift; sourceTree = "<group>"; };
 		BFFA1C7D2E4A73EF005C24F4 /* CloudKitTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitTestView.swift; sourceTree = "<group>"; };
@@ -271,6 +285,10 @@
 		BF4109422E3133BA00BE2AD8 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				BF949EC92E73799B005F9831 /* Data */,
+				BF949ED32E73799B005F9831 /* Domain */,
+				BF949ED62E73799B005F9831 /* Presentation */,
+				BF949EDB2E73799B005F9831 /* Shared */,
 				BF4109472E31348C00BE2AD8 /* Navigation */,
 				BFA0C7A22E21341400132936 /* Services */,
 				BFA0C7A32E21341F00132936 /* Models */,
@@ -504,6 +522,129 @@
 			path = Infrastructure;
 			sourceTree = "<group>";
 		};
+		BF949EBF2E73799B005F9831 /* DTOs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DTOs;
+			sourceTree = "<group>";
+		};
+		BF949EC02E73799B005F9831 /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Remote;
+			sourceTree = "<group>";
+		};
+		BF949EC72E73799B005F9831 /* SwiftData */ = {
+			isa = PBXGroup;
+			children = (
+				BF949EC12E73799B005F9831 /* SwiftDataCalculationRecord.swift */,
+				BF949EC22E73799B005F9831 /* SwiftDataDeveloper.swift */,
+				BF949EC32E73799B005F9831 /* SwiftDataDevelopmentTime.swift */,
+				BF949EC42E73799B005F9831 /* SwiftDataFilm.swift */,
+				BF949EC52E73799B005F9831 /* SwiftDataFixer.swift */,
+				BF949EC62E73799B005F9831 /* SwiftDataTemperatureMultiplier.swift */,
+			);
+			path = SwiftData;
+			sourceTree = "<group>";
+		};
+		BF949EC82E73799B005F9831 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BF949EC02E73799B005F9831 /* Remote */,
+				BF949EC72E73799B005F9831 /* SwiftData */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BF949EC92E73799B005F9831 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				BF949EBF2E73799B005F9831 /* DTOs */,
+				BF949EC82E73799B005F9831 /* Models */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		BF949ECA2E73799B005F9831 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		BF949ECF2E73799B005F9831 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				BF949ECB2E73799B005F9831 /* DeveloperProtocol.swift */,
+				BF949ECC2E73799B005F9831 /* DevelopmentParametersProtocol.swift */,
+				BF949ECD2E73799B005F9831 /* FilmProtocol.swift */,
+				BF949ECE2E73799B005F9831 /* FixerProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		BF949ED22E73799B005F9831 /* ValueObjects */ = {
+			isa = PBXGroup;
+			children = (
+				BF949ED02E73799B005F9831 /* DevelopmentParameters.swift */,
+				BF949ED12E73799B005F9831 /* ProcessMode.swift */,
+			);
+			path = ValueObjects;
+			sourceTree = "<group>";
+		};
+		BF949ED32E73799B005F9831 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				BF949ECA2E73799B005F9831 /* Entities */,
+				BF949ECF2E73799B005F9831 /* Protocols */,
+				BF949ED22E73799B005F9831 /* ValueObjects */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		BF949ED52E73799B005F9831 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BF949ED42E73799B005F9831 /* StagingStage.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BF949ED62E73799B005F9831 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				BF949ED52E73799B005F9831 /* Models */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		BF949ED92E73799B005F9831 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				BF949ED72E73799B005F9831 /* AppConstants.swift */,
+				BF949ED82E73799B005F9831 /* NetworkConstants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		BF949EDA2E73799B005F9831 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		BF949EDB2E73799B005F9831 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				BF949ED92E73799B005F9831 /* Constants */,
+				BF949EDA2E73799B005F9831 /* Extensions */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		BF99E9A72E4E814300BB7F0C /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -543,16 +684,8 @@
 			isa = PBXGroup;
 			children = (
 				BFFA1C522E4A19D4005C24F4 /* Constants.swift */,
-				BF7886DA2E702F15008C4EFE /* DeveloperProtocol.swift */,
-				BF7886DB2E702F15008C4EFE /* DevelopmentParametersProtocol.swift */,
-				BF6031E82E70D33000A90890 /* FilmProtocol.swift */,
-				BF6031E92E70D33000A90890 /* FixerProtocol.swift */,
-				BFFA1C5F2E4A6236005C24F4 /* SwiftDataModels.swift */,
 				BFFA1C512E4A19D4005C24F4 /* CodableModels.swift */,
-				BF8A5A002E44BA0E00D689C5 /* StagingStage.swift */,
-				BF4109252E31148700BE2AD8 /* DevelopmentParameters.swift */,
 				BFB0C3F92E3E58D900296B97 /* JournalRecord.swift */,
-				BF949EBD2E72D6A3005F9831 /* ProcessMode.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -689,7 +822,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF4109272E31148700BE2AD8 /* DevelopmentParameters.swift in Sources */,
 				BFA0C7AF2E21351300132936 /* RecordRowView.swift in Sources */,
 				BFA0C79D2E2133FC00132936 /* ContentView.swift in Sources */,
 				BF28FA5E2E41F75200C2E34E /* SyncStatusView.swift in Sources */,
@@ -705,7 +837,6 @@
 				BFFA1C852E4A73EF005C24F4 /* SwiftDataIntegrationTestView.swift in Sources */,
 				BF8A59EF2E43809C00D689C5 /* MainTabView.swift in Sources */,
 				BFFA1C892E4A7A0F005C24F4 /* CalculatorViewModel.swift in Sources */,
-				BF6031EA2E70D33000A90890 /* FixerProtocol.swift in Sources */,
 				BF949EB32E72CFC2005F9831 /* DevelopmentCalculator.swift in Sources */,
 				BF949EB42E72CFC2005F9831 /* GitHubDataService.swift in Sources */,
 				BF949EB52E72CFC2005F9831 /* NetworkSession.swift in Sources */,
@@ -716,7 +847,6 @@
 				BF949EBA2E72CFC2005F9831 /* AgitationMode.swift in Sources */,
 				BF949EBB2E72CFC2005F9831 /* DataSyncService.swift in Sources */,
 				BF949EBC2E72CFC2005F9831 /* AutoSyncService.swift in Sources */,
-				BF6031EB2E70D33000A90890 /* FilmProtocol.swift in Sources */,
 				BF8A59FF2E4494A600D689C5 /* AutocompleteView.swift in Sources */,
 				BFFA1C682E4A69E3005C24F4 /* SwiftDataPersistence.swift in Sources */,
 				BF7FF43E2E71ACC800BE5EA0 /* DataService.swift in Sources */,
@@ -729,8 +859,6 @@
 				BFFA1C642E4A67A9005C24F4 /* SwiftDataService.swift in Sources */,
 				BFDD23652E3F7EE30079688B /* RecordDetailView.swift in Sources */,
 				BFB0C3FE2E3E5AB400296B97 /* CreateRecordView.swift in Sources */,
-				BF7886DC2E702F15008C4EFE /* DevelopmentParametersProtocol.swift in Sources */,
-				BF7886DD2E702F15008C4EFE /* DeveloperProtocol.swift in Sources */,
 				BFFA1C872E4A7A02005C24F4 /* DevelopmentSetupViewModel.swift in Sources */,
 				BFE12EBD2E34DBE10044A3A4 /* SettingsView.swift in Sources */,
 				BF4109142E31052900BE2AD8 /* StepsInputView.swift in Sources */,
@@ -738,9 +866,7 @@
 				BF4109702E3166F400BE2AD8 /* TimerControlsView.swift in Sources */,
 				BF47CA3E2E4F15150026DEB0 /* StagingTimerViewModel.swift in Sources */,
 				BF4109712E3166F400BE2AD8 /* TimerHeaderView.swift in Sources */,
-				BF8A5A012E44BA0E00D689C5 /* StagingStage.swift in Sources */,
 				BF4109722E3166F400BE2AD8 /* AgitationIndicatorView.swift in Sources */,
-				BF949EBE2E72D6A3005F9831 /* ProcessMode.swift in Sources */,
 				BFFA1C532E4A19D4005C24F4 /* CodableModels.swift in Sources */,
 				BFFA1C542E4A19D4005C24F4 /* Constants.swift in Sources */,
 				BF4109732E3166F400BE2AD8 /* TimerProgressView.swift in Sources */,
@@ -753,7 +879,6 @@
 				BF553C6A2E43268D009F1525 /* BasePickerView.swift in Sources */,
 				BFF4D9FF2E21BECD0097BE82 /* TimerView.swift in Sources */,
 				BFE31C0C2E3A016300310B19 /* ViewStyles.swift in Sources */,
-				BFFA1C602E4A6236005C24F4 /* SwiftDataModels.swift in Sources */,
 				BF553C622E420639009F1525 /* KeyboardAwareView.swift in Sources */,
 				BF41095B2E3163E400BE2AD8 /* FilmPickerView.swift in Sources */,
 				BF41095C2E3163E400BE2AD8 /* DevelopmentParametersView.swift in Sources */,
@@ -778,6 +903,21 @@
 				BFFA1C5D2E4A415E005C24F4 /* FixerPickerView.swift in Sources */,
 				BFFA1C5E2E4A415E005C24F4 /* FixerSelectionView.swift in Sources */,
 				BFE12EC12E360C010044A3A4 /* AppPreview.swift in Sources */,
+				BF949EDC2E73799B005F9831 /* StagingStage.swift in Sources */,
+				BF949EDD2E73799B005F9831 /* SwiftDataTemperatureMultiplier.swift in Sources */,
+				BF949EDE2E73799B005F9831 /* FilmProtocol.swift in Sources */,
+				BF949EDF2E73799B005F9831 /* SwiftDataDevelopmentTime.swift in Sources */,
+				BF949EE02E73799B005F9831 /* DeveloperProtocol.swift in Sources */,
+				BF949EE12E73799B005F9831 /* DevelopmentParametersProtocol.swift in Sources */,
+				BF949EE22E73799B005F9831 /* DevelopmentParameters.swift in Sources */,
+				BF949EE32E73799B005F9831 /* AppConstants.swift in Sources */,
+				BF949EE42E73799B005F9831 /* FixerProtocol.swift in Sources */,
+				BF949EE52E73799B005F9831 /* NetworkConstants.swift in Sources */,
+				BF949EE62E73799B005F9831 /* SwiftDataCalculationRecord.swift in Sources */,
+				BF949EE72E73799B005F9831 /* SwiftDataFixer.swift in Sources */,
+				BF949EE82E73799B005F9831 /* SwiftDataDeveloper.swift in Sources */,
+				BF949EE92E73799B005F9831 /* SwiftDataFilm.swift in Sources */,
+				BF949EEA2E73799B005F9831 /* ProcessMode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

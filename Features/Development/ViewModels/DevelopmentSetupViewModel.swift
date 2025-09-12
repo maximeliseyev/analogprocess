@@ -1,6 +1,7 @@
 import SwiftUI
 import Combine
 
+
 @MainActor
 class DevelopmentSetupViewModel<DataServiceType: DataService>: ObservableObject where DataServiceType.Film: Identifiable, DataServiceType.Developer: Identifiable, DataServiceType.Fixer: Identifiable {
     
@@ -10,7 +11,7 @@ class DevelopmentSetupViewModel<DataServiceType: DataService>: ObservableObject 
     @Published var selectedFixer: DataServiceType.Fixer?
     @Published var selectedDilution: String = ""
     @Published var temperature: Int = 20
-    @Published var iso: Int = Constants.ISO.defaultISO
+    @Published var iso: Int = AppConstants.ISO.defaultISO
     @Published var calculatedTime: Int?
     
     // MARK: - Mode Selection
