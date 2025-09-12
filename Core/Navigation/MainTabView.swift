@@ -144,7 +144,7 @@ public struct MainTabView: View {
             Color(.systemBackground)
                 .ignoresSafeArea()
             
-            VStack(spacing: 24) {
+            VStack(spacing: 20) {
                 
                 VStack(alignment: .leading, spacing: 8) {
                     Text(LocalizedStringKey("mainTitle"))
@@ -195,7 +195,7 @@ public struct MainTabView: View {
                 Spacer()
             }
         }
-        .navigationBarTitleDisplayMode(.large)
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink(destination: SettingsView(colorScheme: $colorScheme)) {
@@ -250,3 +250,49 @@ public struct MainTabView: View {
         self._colorScheme = colorScheme
     }
 }
+
+#if DEBUG
+
+struct MainTabView_PreviewWrapper: View {
+    @State private var selectedTab = 0
+    @State private var colorScheme: ColorScheme? = .light
+    
+    let swiftDataService: SwiftDataService
+    let container: ModelContainer
+    
+    init() {
+        let container: ModelContainer = {
+            let schema = Schema([
+                SwiftDataFilm.self,
+                SwiftDataDeveloper.self,
+                SwiftDataFixer.self,
+                SwiftDataDevelopmentTime.self,
+                SwiftDataCalculationRecord.self,
+                SwiftDataTemperatureMultiplier.self
+            ])
+            let config = ModelConfiguration(isStoredInMemoryOnly: true)
+            return try! ModelContainer(for: schema, configurations: [config])
+        }()
+        
+        self.container = container
+        let githubDataService = GitHubDataService()
+        self.swiftDataService = SwiftDataService(githubDataService: githubDataService, modelContainer: container)
+    }
+    
+    var body: some View {
+        MainTabView(
+            swiftDataService: swiftDataService,
+            selectedTab: $selectedTab,
+            onBackToHome: { selectedTab = 0 },
+            colorScheme: $colorScheme
+        )
+        .modelContainer(container)
+    }
+}
+
+struct MainTabView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainTabView_PreviewWrapper()
+    }
+}
+#endif
