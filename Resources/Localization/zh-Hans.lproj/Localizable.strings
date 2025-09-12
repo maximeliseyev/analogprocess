@@ -86,6 +86,7 @@
 "temp23" = "23°C (-25%)";
 "temp24" = "24°C (-35%)";
 "temp25" = "25°C (-45%)";
+"StandardC" = "°C (标准)";
 
 // MARK: - Dilution Options
 "stock" = "原液";
@@ -375,3 +376,10 @@
 "parameterRow" = "参数行";
 "recordRow" = "记录行";
 "calculatorComponents" = "计算器组件";
+
+// MARK: - iCloud Sync Status
+"iCloudSyncStatusIdleAvailable" = "iCloud准备就绪可同步";
+"iCloudSyncStatusIdleUnavailable" = "iCloud不可用";
+"iCloudSyncStatusSyncing" = "同步中...";
+"iCloudSyncStatusCompleted" = "同步完成";
+"iCloudSyncCtatusFailed" = "错误：%@";

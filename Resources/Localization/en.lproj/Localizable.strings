@@ -86,6 +86,7 @@
 "temp23" = "23°C (-25%)";
 "temp24" = "24°C (-35%)";
 "temp25" = "25°C (-45%)";
+"StandardC" = "°C (Standard)";
 
 // MARK: - Dilution Options
 "stock" = "Stock";
@@ -375,3 +376,10 @@
 "parameterRow" = "Parameter Row";
 "recordRow" = "Record Row";
 "calculatorComponents" = "Calculator Components";
+
+// MARK: - iCloud Sync Status
+"iCloudSyncStatusIdleAvailable" = "iCloud is ready to sync";
+"iCloudSyncStatusIdleUnavailable" = "iCloud is unavailable";
+"iCloudSyncStatusSyncing" = "Syncing...";
+"iCloudSyncStatusCompleted" = "Sync complete";
+"iCloudSyncCtatusFailed" = "Error: %@";

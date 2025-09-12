@@ -53,21 +53,21 @@ struct DevelopmentParametersView: View {
                 // Development parameters
                 ParameterRow(
                     label: LocalizedStringKey("film"),
-                    value: viewModel.selectedFilm?.name ?? "Select Film",
+                    value: viewModel.selectedFilm?.name ?? String(localized: "selectFilm"),
                     onTap: { viewModel.showFilmPicker = true },
                     isDisabled: false
                 )
                 
                 ParameterRow(
                     label: LocalizedStringKey("developer"),
-                    value: viewModel.selectedDeveloper?.name ?? "Select Developer",
+                    value: viewModel.selectedDeveloper?.name ?? String(localized: "selectDeveloper"),
                     onTap: { viewModel.showDeveloperPicker = true },
                     isDisabled: false
                 )
                 
                 ParameterRow(
                     label: LocalizedStringKey("dilution"),
-                    value: viewModel.selectedDilution.isEmpty ? "Select Dilution" : viewModel.selectedDilution,
+                    value: viewModel.selectedDilution.isEmpty ? String(localized: "selectDilution") : viewModel.selectedDilution,
                     onTap: { viewModel.showDilutionPicker = true },
                     isDisabled: viewModel.selectedFilm == nil || viewModel.selectedDeveloper == nil || viewModel.isDilutionSelectionLocked
                 )
@@ -89,7 +89,7 @@ struct DevelopmentParametersView: View {
                 
                 ParameterRow(
                     label: LocalizedStringKey("temperature"),
-                    value: "\(viewModel.temperature)°C (Standard)",
+                    value: "\(viewModel.temperature)\(LocalizedStringKey("StandardC"))",
                     onTap: { viewModel.showTemperaturePicker = true },
                     isDisabled: viewModel.isTemperatureSelectionLocked
                 )
@@ -101,21 +101,21 @@ struct DevelopmentParametersView: View {
                 // Fixer parameters
                 ParameterRow(
                     label: LocalizedStringKey("film"),
-                    value: viewModel.selectedFilm?.name ?? "Select Film",
+                    value: viewModel.selectedFilm?.name ?? String(localized: "selectFilm"),
                     onTap: { viewModel.showFilmPicker = true },
                     isDisabled: false
                 )
                 
                 ParameterRow(
                     label: LocalizedStringKey("fixer"),
-                    value: viewModel.selectedFixer?.name ?? "Select Fixer",
+                    value: viewModel.selectedFixer?.name ?? String(localized: "selectFixer"),
                     onTap: { viewModel.showFixerPicker = true },
                     isDisabled: false
                 )
                 
                 ParameterRow(
                     label: LocalizedStringKey("temperature"),
-                    value: "\(viewModel.temperature)°C (Standard)",
+                    value: "\(viewModel.temperature)\(LocalizedStringKey("StandardC"))",
                     onTap: { viewModel.showTemperaturePicker = true },
                     isDisabled: false
                 )
@@ -126,13 +126,3 @@ struct DevelopmentParametersView: View {
         .padding(.horizontal, 20)
     }
 }
-
-struct DevelopmentParametersView_Previews: PreviewProvider {
-    static var previews: some View {
-        ZStack {
-            Color(.systemBackground).ignoresSafeArea()
-            // Временная заглушка для Preview - в рабочем коде используется SwiftDataService
-            Text("Preview temporarily unavailable")
-        }
-    }
-} 

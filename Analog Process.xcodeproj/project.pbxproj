@@ -208,10 +208,6 @@
 		BFFA1C5C2E4A415E005C24F4 /* FixerSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerSelectionView.swift; sourceTree = "<group>"; };
 		BFFA1C632E4A67A9005C24F4 /* SwiftDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataService.swift; sourceTree = "<group>"; };
 		BFFA1C672E4A69E3005C24F4 /* SwiftDataPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataPersistence.swift; sourceTree = "<group>"; };
-		BFFA1C7D2E4A73EF005C24F4 /* CloudKitTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitTestView.swift; sourceTree = "<group>"; };
-		BFFA1C7E2E4A73EF005C24F4 /* SwiftDataIntegrationTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataIntegrationTestView.swift; sourceTree = "<group>"; };
-		BFFA1C7F2E4A73EF005C24F4 /* SwiftDataTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataTestView.swift; sourceTree = "<group>"; };
-		BFFA1C802E4A73EF005C24F4 /* SwiftDataUIComponentsTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataUIComponentsTestView.swift; sourceTree = "<group>"; };
 		BFFA1C862E4A7A02005C24F4 /* DevelopmentSetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentSetupViewModel.swift; sourceTree = "<group>"; };
 		BFFA1C882E4A7A0F005C24F4 /* CalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewModel.swift; sourceTree = "<group>"; };
 		BFFA1C8A2E4A8C32005C24F4 /* JournalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewModel.swift; sourceTree = "<group>"; };
@@ -712,7 +708,6 @@
 				BF41094F2E3135B700BE2AD8 /* Shared */,
 				BFA0C7B02E2136A500132936 /* Resources */,
 				BFE96A3A2E2061A0001CF98D /* Products */,
-				BFFA1C812E4A73EF005C24F4 /* Tests */,
 				BFB0C3F32E3E511300296B97 /* AnalogProcess-Info.plist */,
 				BFB0C3F42E3E511300296B97 /* LICENSE */,
 				BFB0C3F52E3E511300296B97 /* README.md */,
@@ -725,17 +720,6 @@
 				BFE96A392E2061A0001CF98D /* Analog Process.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		BFFA1C812E4A73EF005C24F4 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				BFFA1C7D2E4A73EF005C24F4 /* CloudKitTestView.swift */,
-				BFFA1C7E2E4A73EF005C24F4 /* SwiftDataIntegrationTestView.swift */,
-				BFFA1C7F2E4A73EF005C24F4 /* SwiftDataTestView.swift */,
-				BFFA1C802E4A73EF005C24F4 /* SwiftDataUIComponentsTestView.swift */,
-			);
-			path = Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1074,7 +1058,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.10;
+				MARKETING_VERSION = 0.2.11;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1110,7 +1094,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.10;
+				MARKETING_VERSION = 0.2.11;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

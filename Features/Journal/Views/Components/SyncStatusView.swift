@@ -73,13 +73,13 @@ struct SyncStatusView: View {
     private var statusText: String {
         switch syncStatus {
         case .idle:
-            return isCloudAvailable ? "iCloud готов к синхронизации" : "iCloud недоступен"
+            return isCloudAvailable ? NSLocalizedString("iCloudSyncStatusIdleAvailable", comment: "") : NSLocalizedString("iCloudSyncStatusIdleUnavailable", comment: "")
         case .syncing:
-            return "Синхронизация..."
+            return NSLocalizedString("iCloudSyncStatusSyncing", comment: "")
         case .completed:
-            return "Синхронизация завершена"
+            return NSLocalizedString("iCloudSyncStatusCompleted", comment: "")
         case .failed(let error):
-            return "Ошибка: \(error)"
+            return String(format: NSLocalizedString("iCloudSyncCtatusFailed", comment: ""), error)
         }
     }
 }
