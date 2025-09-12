@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 
+
 struct DevelopmentSetupView<DataServiceType: DataService>: View where DataServiceType.Film: Identifiable, DataServiceType.Developer: Identifiable, DataServiceType.Fixer: Identifiable {
     @StateObject var viewModel: DevelopmentSetupViewModel<DataServiceType>
     @Environment(\.dismiss) private var dismiss

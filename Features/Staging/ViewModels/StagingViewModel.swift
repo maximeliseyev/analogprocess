@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 import Combine
 
+
 class StagingViewModel: ObservableObject {
     @Published var allStages: [StagingStage] = StagingStage.defaultStages
     @Published var selectedStages: [StagingStage] = []
