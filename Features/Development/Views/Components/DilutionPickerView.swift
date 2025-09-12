@@ -55,7 +55,7 @@ struct DilutionPickerView: View {
                             }
                         }
                         .buttonStyle(PlainButtonStyle())
-                        .disabled(isDisabled)
+                        .disabled(isDisabled || dilutions.count <= 1)
                     }
                 }
                 }

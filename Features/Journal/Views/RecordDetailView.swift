@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
-import CoreData
+import SwiftData
 
 struct RecordDetailView: View {
-    let record: CalculationRecord
+    let record: SwiftDataCalculationRecord
+    let swiftDataService: SwiftDataService
     let onEdit: () -> Void
     let onDelete: () -> Void
     @Environment(\.dismiss) private var dismiss
@@ -69,6 +70,7 @@ struct RecordDetailView: View {
         }
         .sheet(isPresented: $showingEditSheet) {
             CreateRecordView(
+                swiftDataService: swiftDataService,
                 prefillData: createJournalRecord(),
                 isEditing: true,
                 onUpdate: { updatedRecord in
@@ -112,7 +114,7 @@ struct RecordDetailView: View {
                         .foregroundColor(.primary)
                 }
                 
-                Text("\(String(format: "%.1f", record.temperature))\(String(localized: "degreesCelsius"))")
+                Text("\(record.temperature)\(String(localized: "degreesCelsius"))")
                     .font(.body)
                     .foregroundColor(.primary)
                 

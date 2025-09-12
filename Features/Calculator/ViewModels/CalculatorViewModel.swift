@@ -1,43 +1,89 @@
 //
-//  CalculatorViewModel.swift
-//  Film Lab
+//  SwiftDataCalculatorViewModel.swift
+//  AnalogProcess
 //
-//  Created by Maxim Eliseyev on 12.07.2025.
+//  Created by Maxim Eliseyev on 11.08.2025.
 //
 
 import SwiftUI
-import CoreData
-import Combine
+import SwiftData
 
 @MainActor
 class CalculatorViewModel: ObservableObject {
-    // MARK: - Published Properties
+    // MARK: - Input Properties
     @Published var minutes = ""
     @Published var seconds = ""
-    @Published var coefficient = "1.33"
-    @Published var pushSteps = 2
-    @Published var isPushMode = true
-    @Published var temperature: Double = 20.0
-    @Published var pushResults: [(label: String, minutes: Int, seconds: Int)] = []
-    @Published var showResult = false
-    @Published var showSaveDialog = false
-    @Published var showTemperaturePicker = false
-    @Published var showTimer = false
-    @Published var savedRecords: [CalculationRecord] = []
+    @Published var coefficient = "1.33" {
+        didSet {
+            // Автоматически пересчитываем при изменении коэффициента
+            if isValidInput {
+                calculateTime()
+            }
+        }
+    }
+    @Published var temperature: Int = 20 {
+        didSet {
+            // Автоматически пересчитываем при изменении температуры
+            if isValidInput {
+                calculateTime()
+            }
+        }
+    }
     
-    // Автодополнение для coefficient
+    // MARK: - Push Mode Properties
+    @Published var isPushMode = true {
+        didSet {
+            // Автоматически пересчитываем при изменении режима
+            if isValidInput {
+                calculateTime()
+            }
+        }
+    }
+    @Published var pushSteps = 3 {
+        didSet {
+            // Автоматически пересчитываем при изменении количества шагов
+            if isValidInput {
+                calculateTime()
+            }
+        }
+    }
+    
+    // MARK: - UI States
     @Published var showCoefficientSuggestions = false
     @Published var coefficientSuggestions: [String] = []
+    @Published var showResult = false
+    @Published var showTimer = false
+    @Published var showSaveDialog = false
     
-    // Timer properties
+    // MARK: - Results
+    @Published var pushResults: [ProcessStep] = []
     @Published var selectedTimerLabel = ""
     @Published var selectedTimerMinutes = 0
     @Published var selectedTimerSeconds = 0
-    @Published var selectedResult: (label: String, minutes: Int, seconds: Int)?
+    @Published var selectedResult: ProcessStep?
+    
+    /// Results to display in UI: base time (+0) and only the selected step (last), according to `pushSteps`.
+    var displayResults: [ProcessStep] {
+        guard !pushResults.isEmpty, let base = pushResults.first else { return [] }
+        guard let last = pushResults.last else { return [base] }
+        if base.id == last.id {
+            return [base]
+        }
+        return [base, last]
+    }
     
     // MARK: - Dependencies
-    private let coreDataService = CoreDataService.shared
+    private let swiftDataService: SwiftDataService
+        init(swiftDataService: SwiftDataService) {
+            self.swiftDataService = swiftDataService
+        }
     private let calculator = DevelopmentCalculator()
+    
+    // MARK: - Public Methods
+    
+    func getTemperatureMultiplier() -> Double {
+        return swiftDataService.getTemperatureMultiplier(for: temperature)
+    }
     
     // MARK: - Computed Properties
     
@@ -92,9 +138,19 @@ class CalculatorViewModel: ObservableObject {
             return
         }
         
+        // Применяем температурный коэффициент
+        let temperatureMultiplier = swiftDataService.getTemperatureMultiplier(for: temperature)
+        let adjustedMinutes = Int(Double(min) * temperatureMultiplier)
+        let adjustedSeconds = Int(Double(sec) * temperatureMultiplier)
+        
+        // Нормализуем время (секунды не должны превышать 59)
+        let totalAdjustedSeconds = adjustedMinutes * 60 + adjustedSeconds
+        let normalizedMinutes = totalAdjustedSeconds / 60
+        let normalizedSeconds = totalAdjustedSeconds % 60
+        
         pushResults = calculator.calculateResults(
-            minutes: min,
-            seconds: sec,
+            minutes: normalizedMinutes,
+            seconds: normalizedSeconds,
             coefficient: coeff,
             temperature: temperature,
             isPushMode: isPushMode,
@@ -119,35 +175,27 @@ class CalculatorViewModel: ObservableObject {
     func saveRecord() {
         guard let selectedResult = selectedResult else { return }
         
-        let totalSeconds = selectedResult.minutes * 60 + selectedResult.seconds
+        let totalSeconds = selectedResult.totalSeconds
         
-        // Сохраняем в Core Data с информацией о расчете
-        coreDataService.saveRecord(
+        swiftDataService.saveRecord(
             filmName: "Расчетное время",
             developerName: "Пользовательский расчет",
-            dilution: "Коэффициент: \(coefficient), Температура: \(String(format: "%.1f", temperature))°C",
-            iso: 400,
+            dilution: "Коэффициент: \(coefficient), Температура: \(temperature)°C",
             temperature: temperature,
-            time: totalSeconds,
-            name: selectedResult.label,
-            comment: "Расчет: \(selectedResult.label) - \(selectedResult.minutes):\(String(format: "%02d", selectedResult.seconds))"
+            iso: Constants.ISO.defaultISO,
+            calculatedTime: totalSeconds,
+            notes: "Расчет: \(selectedResult.label) - \(selectedResult.formattedTime)"
         )
         
         showSaveDialog = false
-        loadRecords() // Обновляем список записей
     }
     
-    func loadRecords() {
-        savedRecords = coreDataService.getCalculationRecords()
-    }
-    
-    func loadRecord(_ record: CalculationRecord) {
+    func loadRecord(_ record: SwiftDataCalculationRecord) {
         let totalSeconds = Int(record.time)
-        let minutes = totalSeconds / 60
-        let seconds = totalSeconds % 60
         
-        self.minutes = "\(minutes)"
-        self.seconds = "\(seconds)"
+        self.minutes = "\(totalSeconds / 60)"
+        self.seconds = "\(totalSeconds % 60)"
+        self.temperature = record.temperature
         coefficient = "1.33" // Используем стандартный коэффициент
         isPushMode = true
         pushSteps = 3
@@ -155,39 +203,22 @@ class CalculatorViewModel: ObservableObject {
         calculateTime()
     }
     
-    func deleteRecord(_ record: CalculationRecord) {
-        coreDataService.deleteCalculationRecord(record)
-        loadRecords() // Обновляем список записей
+    func deleteRecord(_ record: SwiftDataCalculationRecord) {
+        swiftDataService.deleteCalculationRecord(record)
     }
     
-
-    
-    func createPrefillData() -> (name: String, temperature: Double, coefficient: String, time: Int, comment: String, process: String)? {
+    func createPrefillData() -> (name: String, temperature: Int, coefficient: String, time: Int, comment: String, process: String)? {
         guard let selectedResult = selectedResult else { return nil }
         
-        let totalSeconds = selectedResult.minutes * 60 + selectedResult.seconds
+        let totalSeconds = selectedResult.totalSeconds
         
-        // Формируем строку процесса на основе настроек
-        let processString = isPushMode ? "push +\(pushSteps)" : "pull -\(pushSteps)"
+        let name = "Расчетное время"
+        let temperature = self.temperature
+        let coefficient = self.coefficient
+        let time = totalSeconds
+        let comment = "Расчет: \(selectedResult.label) - \(selectedResult.formattedTime)"
+        let process = "Пользовательский расчет"
         
-        return (
-            name: selectedResult.label,
-            temperature: temperature,
-            coefficient: coefficient,
-            time: totalSeconds,
-            comment: "Расчет: \(selectedResult.label) - \(selectedResult.minutes):\(String(format: "%02d", selectedResult.seconds))",
-            process: processString
-        )
+        return (name, temperature, coefficient, time, comment, process)
     }
-    
-    // MARK: - Utility Methods
-    
-    func resetForm() {
-        minutes = ""
-        seconds = ""
-        coefficient = "1.33"
-        pushSteps = 3
-        isPushMode = true
-        pushResults = []
-    }
-} 
+}

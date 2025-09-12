@@ -57,7 +57,7 @@ struct TimerTabView: View {
             .disabled(timerMinutes == 0 && timerSeconds == 0)
             
             if timerMinutes == 0 && timerSeconds == 0 {
-                Text(LocalizedStringKey("set_time_to_start_timer"))
+                Text(LocalizedStringKey("setTimeToStartTimer"))
                     .font(.caption)
                     .foregroundColor(.gray)
                     .padding(.top, 5)
