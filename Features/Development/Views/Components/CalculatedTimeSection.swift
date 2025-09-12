@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CalculatedTimeSection: View {
     let time: Int
-    let temperature: Double
+    let temperature: Int
     let filmName: String
     let developerName: String
     let onCalculatorTap: () -> Void
@@ -70,7 +70,7 @@ struct CalculatedTimeSection_Previews: PreviewProvider {
             Color(.systemBackground).ignoresSafeArea()
             CalculatedTimeSection(
                 time: 450, // 7:30
-                temperature: 20.0,
+                temperature: 20,
                 filmName: "Kodak Tri-X 400",
                 developerName: "Kodak Xtol",
                 onCalculatorTap: {},

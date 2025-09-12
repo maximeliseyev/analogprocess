@@ -6,28 +6,31 @@
 //
 
 import SwiftUI
-import CoreData
+import SwiftData
 
 struct JournalView: View {
-    @StateObject private var viewModel = JournalViewModel()
+    @StateObject private var viewModel: JournalViewModel
     
-    let onEditRecord: (CalculationRecord) -> Void
-    let onDeleteRecord: (CalculationRecord) -> Void
+    let onEditRecord: (SwiftDataCalculationRecord) -> Void
+    let onDeleteRecord: (SwiftDataCalculationRecord) -> Void
     let onClose: () -> Void
     let onCreateNew: () -> Void
     let syncStatus: CloudKitService.SyncStatus
     let isCloudAvailable: Bool
     let onSync: () -> Void
     
-    @State private var selectedRecord: CalculationRecord?
+    @State private var selectedRecord: SwiftDataCalculationRecord?
     
-    init(onEditRecord: @escaping (CalculationRecord) -> Void, 
-         onDeleteRecord: @escaping (CalculationRecord) -> Void, 
+    init(swiftDataService: SwiftDataService,
+         cloudKitService: CloudKitService,
+         onEditRecord: @escaping (SwiftDataCalculationRecord) -> Void, 
+         onDeleteRecord: @escaping (SwiftDataCalculationRecord) -> Void,
          onClose: @escaping () -> Void, 
          onCreateNew: @escaping () -> Void,
          syncStatus: CloudKitService.SyncStatus = .idle,
          isCloudAvailable: Bool = false,
          onSync: @escaping () -> Void = {}) {
+        self._viewModel = StateObject(wrappedValue: JournalViewModel(swiftDataService: swiftDataService, cloudKitService: cloudKitService))
         self.onEditRecord = onEditRecord
         self.onDeleteRecord = onDeleteRecord
         self.onClose = onClose
@@ -48,7 +51,7 @@ struct JournalView: View {
             .padding(.horizontal)
             .padding(.top, 8)
             
-            if viewModel.savedRecords.isEmpty {
+            if $viewModel.savedRecords.isEmpty {
                 VStack(spacing: 20) {
                     Image(systemName: "book")
                         .font(.system(size: 60))
@@ -101,6 +104,7 @@ struct JournalView: View {
         .sheet(item: $selectedRecord) { record in
             RecordDetailView(
                 record: record,
+                swiftDataService: viewModel.swiftDataService,
                 onEdit: {
                     selectedRecord = nil
                     onEditRecord(record)
@@ -117,54 +121,4 @@ struct JournalView: View {
     }
 }
 
-// MARK: - Preview
 
-#Preview {
-    NavigationStack {
-        JournalView(
-            onEditRecord: { record in
-                print("Edit record: \(record.name ?? "Unknown")")
-            },
-            onDeleteRecord: { record in
-                print("Delete record: \(record.name ?? "Unknown")")
-            },
-            onClose: {
-                print("Close journal")
-            },
-            onCreateNew: {
-                print("Create new record")
-            },
-            syncStatus: .completed,
-            isCloudAvailable: true,
-            onSync: {
-                print("Sync with CloudKit")
-            }
-        )
-        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-    }
-}
-
-#Preview("Empty Journal") {
-    NavigationStack {
-        JournalView(
-            onEditRecord: { record in
-                print("Edit record: \(record.name ?? "Unknown")")
-            },
-            onDeleteRecord: { record in
-                print("Delete record: \(record.name ?? "Unknown")")
-            },
-            onClose: {
-                print("Close journal")
-            },
-            onCreateNew: {
-                print("Create new record")
-            },
-            syncStatus: .idle,
-            isCloudAvailable: false,
-            onSync: {
-                print("Sync with CloudKit")
-            }
-        )
-        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-    }
-}

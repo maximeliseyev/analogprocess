@@ -9,8 +9,9 @@ import SwiftUI
 import CoreData
 
 struct CalculationResultView: View {
-    let results: [(label: String, minutes: Int, seconds: Int)]
+    let results: [ProcessStep]
     let isPushMode: Bool
+    let swiftDataService: SwiftDataService
     let onTimerTap: (String, Int, Int) -> Void
     @ObservedObject var viewModel: CalculatorViewModel
     
@@ -20,13 +21,13 @@ struct CalculationResultView: View {
                 .font(.headline)
             
             VStack(spacing: 12) {
-                ForEach(Array(results.enumerated()), id: \.offset) { index, result in
+                ForEach(results) { result in
                     HStack {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(result.label)
                                 .monospacedBodyStyle()
                             
-                            Text(String(format: "%d:%02d", result.minutes, result.seconds))
+                            Text(result.formattedTime)
                                 .monospacedTitleStyle()
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -63,8 +64,8 @@ struct CalculationResultView: View {
         .padding(.horizontal)
         .sheet(isPresented: $viewModel.showSaveDialog) {
             if let prefillData = viewModel.createPrefillData() {
-
                 CreateRecordView(
+                    swiftDataService: swiftDataService,
                     prefillData: nil,
                     isEditing: false,
                     onUpdate: nil,

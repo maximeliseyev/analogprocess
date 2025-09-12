@@ -10,10 +10,16 @@ import CoreData
 
 struct CalculatorView: View {
     @StateObject private var viewModel: CalculatorViewModel
+    let swiftDataService: SwiftDataService
     let onStartTimer: ((String, Int, Int) -> Void)?
+    
+    // Параметры для режима редактора стадии
+    let isFromStageEditor: Bool
+    @Environment(\.dismiss) private var dismiss
     
     // Управление фокусом для клавиатуры
     @FocusState private var focusedField: FocusedField?
+    @State private var showTemperaturePicker = false
     
     enum FocusedField: Hashable {
         case minutes
@@ -21,8 +27,8 @@ struct CalculatorView: View {
         case coefficient
     }
     
-    init(initialTime: Int? = nil, initialTemperature: Double = 20.0, onStartTimer: ((String, Int, Int) -> Void)? = nil) {
-        let vm = CalculatorViewModel()
+    init(swiftDataService: SwiftDataService, initialTime: Int? = nil, initialTemperature: Int = 20, isFromStageEditor: Bool = false, onStartTimer: ((String, Int, Int) -> Void)? = nil) {
+        let vm = CalculatorViewModel(swiftDataService: swiftDataService)
         if let time = initialTime {
             let minutes = time / 60
             let seconds = time % 60
@@ -31,6 +37,8 @@ struct CalculatorView: View {
             vm.temperature = initialTemperature
         }
         _viewModel = StateObject(wrappedValue: vm)
+        self.swiftDataService = swiftDataService
+        self.isFromStageEditor = isFromStageEditor
         self.onStartTimer = onStartTimer
     }
     
@@ -50,14 +58,6 @@ struct CalculatorView: View {
                                 .submitLabel(.next)
                                 .onSubmit {
                                     focusedField = .seconds
-                                }
-                                .toolbar {
-                                    ToolbarItemGroup(placement: .keyboard) {
-                                        Spacer()
-                                        Button(LocalizedStringKey("done")) {
-                                            focusedField = nil
-                                        }
-                                    }
                                 }
                             
                             Text(LocalizedStringKey("min"))
@@ -158,10 +158,10 @@ struct CalculatorView: View {
                         
                         Button(action: {
                             focusedField = nil
-                            viewModel.showTemperaturePicker = true
+                            showTemperaturePicker = true
                         }) {
                             HStack {
-                                Text(String(format: "%.1f°C", viewModel.temperature))
+                                Text("\(viewModel.temperature)°C")
                                     .foregroundColor(.primary)
                                 
                                 Spacer()
@@ -195,32 +195,144 @@ struct CalculatorView: View {
                 }
                 .disabled(!viewModel.isValidInput)
                 
+                
+                
             }
             .padding()
         }
         .navigationTitle(LocalizedStringKey("calculator"))
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button(LocalizedStringKey("done")) {
+                    focusedField = nil
+                }
+            }
+            
+
+        }
         // Добавляем обработчик нажатия вне текстовых полей для скрытия клавиатуры и автодополнения
         .onTapGesture {
             focusedField = nil
             viewModel.hideCoefficientSuggestions()
         }
-
-        .sheet(isPresented: $viewModel.showTemperaturePicker) {
-            TemperaturePickerView(
-                temperature: $viewModel.temperature,
-                onDismiss: { viewModel.showTemperaturePicker = false }
-            )
-        }.sheet(isPresented: $viewModel.showResult) {
-            CalculationResultView(
-                results: viewModel.pushResults,
-                isPushMode: viewModel.isPushMode,
-                onTimerTap: { label, minutes, seconds in
-                    viewModel.startTimer(label, minutes, seconds)
-                    onStartTimer?(label, minutes, seconds)
-                },
-                viewModel: viewModel
-            )
+        .sheet(isPresented: $viewModel.showSaveDialog) {
+            if let prefillData = viewModel.createPrefillData() {
+                CreateRecordView(
+                    swiftDataService: swiftDataService,
+                    prefillData: nil,
+                    isEditing: false,
+                    onUpdate: nil,
+                    calculatorTemperature: prefillData.temperature,
+                    calculatorCoefficient: prefillData.coefficient,
+                    calculatorProcess: prefillData.process
+                )
+            }
+        }
+        .sheet(isPresented: $viewModel.showResult) {
+            if isFromStageEditor {
+                // Используем специальный view для режима Staging
+                StagingCalculationResultView(
+                    results: viewModel.pushResults,
+                    viewModel: viewModel
+                )
+            } else {
+                // Обычный режим - показываем стандартный результат
+                let base = viewModel.pushResults.first
+                let calculated = viewModel.pushResults.last
+                                VStack(spacing: 16) {
+                        // Отступ от верхнего индикатора перетаскивания шита
+                        Spacer().frame(height: 8)
+                        Text(LocalizedStringKey("results"))
+                            .font(.headline)
+                            .padding(.top, 4)
+                        
+                        // Информация о температурном коэффициенте
+                        let temperatureMultiplier = viewModel.getTemperatureMultiplier()
+                        if temperatureMultiplier != 1.0 {
+                            Text("Температурный коэффициент: ×\(String(format: "%.2f", temperatureMultiplier))")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                                .padding(.horizontal)
+                        }
+                    
+                    ScrollView {
+                        LazyVStack(spacing: 12) {
+                            if let base = base {
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text("+0")
+                                            .monospacedBodyStyle()
+                                        Text(base.formattedTime)
+                                            .monospacedTitleStyle()
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    
+                                    HStack(spacing: 12) {
+                                        Button(action: {
+                                            viewModel.startTimer(base.label, base.minutes, base.seconds)
+                                            onStartTimer?(base.label, base.minutes, base.seconds)
+                                        }) {
+                                            Image(systemName: "timer")
+                                                .primaryIconButtonStyle()
+                                        }
+                                        
+                                        Button(action: {
+                                            viewModel.selectedResult = base
+                                            viewModel.showResult = false
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                                                viewModel.showSaveDialog = true
+                                            }
+                                        }) {
+                                            Image(systemName: "square.and.arrow.down")
+                                                .secondaryIconButtonStyle()
+                                        }
+                                    }
+                                }
+                                .cardStyle()
+                            }
+                            
+                            if let calculated = calculated, base?.id != calculated.id {
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text(calculated.label)
+                                            .monospacedBodyStyle()
+                                        Text(calculated.formattedTime)
+                                            .monospacedTitleStyle()
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    
+                                    HStack(spacing: 12) {
+                                        Button(action: {
+                                            viewModel.startTimer(calculated.label, calculated.minutes, calculated.seconds)
+                                            onStartTimer?(calculated.label, calculated.minutes, calculated.seconds)
+                                        }) {
+                                            Image(systemName: "timer")
+                                                .primaryIconButtonStyle()
+                                        }
+                                        
+                                        Button(action: {
+                                            viewModel.selectedResult = calculated
+                                            viewModel.showResult = false
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                                                viewModel.showSaveDialog = true
+                                            }
+                                        }) {
+                                            Image(systemName: "square.and.arrow.down")
+                                                .secondaryIconButtonStyle()
+                                        }
+                                    }
+                                }
+                                .cardStyle()
+                            }
+                        }
+                        .padding(.horizontal)
+                    }
+                }
+                .presentationDetents([.fraction(0.33)])
+                .presentationDragIndicator(.visible)
+            }
         }
         .navigationDestination(isPresented: $viewModel.showTimer) {
             TimerView(
@@ -229,9 +341,32 @@ struct CalculatorView: View {
                 totalSeconds: viewModel.selectedTimerSeconds
             )
         }
+        .sheet(isPresented: $showTemperaturePicker) {
+            TemperaturePickerView(
+                temperature: $viewModel.temperature,
+                onDismiss: { showTemperaturePicker = false }
+            )
+        }
 
-        .onAppear {
-            viewModel.loadRecords()
+
+    }
+    
+    // MARK: - Private Methods
+    
+    private func saveCalculatedTime() {
+        // Берем первый результат (базовое время)
+        if let firstResult = viewModel.pushResults.first {
+            let totalSeconds = firstResult.minutes * 60 + firstResult.seconds
+            
+            // Отправляем уведомление с рассчитанным временем
+            NotificationCenter.default.post(
+                name: Notification.Name("DevelopmentCalculatedTime"),
+                object: nil,
+                userInfo: ["seconds": totalSeconds]
+            )
+            
+            // Закрываем калькулятор
+            dismiss()
         }
     }
 }
@@ -239,9 +374,13 @@ struct CalculatorView: View {
 // MARK: - Preview
 struct CalculatorView_Previews: PreviewProvider {
     static var previews: some View {
+        let container = SwiftDataPersistence.preview.modelContainer
+        let githubService = GitHubDataService()
+        let swiftDataService = SwiftDataService(githubDataService: githubService, modelContainer: container)
+        
         ZStack {
             Color.black.ignoresSafeArea()
-            CalculatorView(onStartTimer: { label, minutes, seconds in
+            CalculatorView(swiftDataService: swiftDataService, onStartTimer: { label, minutes, seconds in
                 print("Start timer: \(label) \(minutes):\(seconds)")
             })
         }

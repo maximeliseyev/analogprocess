@@ -12,9 +12,9 @@ class CreateRecordViewModel: ObservableObject {
     @Published var name: String = ""
     @Published var filmName: String = ""
     @Published var developerName: String = ""
-    @Published var iso: Int32 = 400
+    @Published var iso: Int32 = Int32(Constants.ISO.defaultISO)
     @Published var dilution: String = ""
-    @Published var temperature: Double = 20.0
+    @Published var temperature: Int = 20
     @Published var process: String = ""
     @Published var minutes: Int = 0
     @Published var seconds: Int = 0
@@ -29,7 +29,11 @@ class CreateRecordViewModel: ObservableObject {
     @Published var filmSuggestions: [String] = []
     @Published var developerSuggestions: [String] = []
     
-    private let coreDataService = CoreDataService.shared
+    private let swiftDataService: SwiftDataService
+    
+    init(swiftDataService: SwiftDataService) {
+        self.swiftDataService = swiftDataService
+    }
     
     var isValid: Bool {
         !filmName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
@@ -52,9 +56,9 @@ class CreateRecordViewModel: ObservableObject {
             return
         }
         
-        let allFilms = coreDataService.films
+        let allFilms = swiftDataService.films
         let filteredFilms = allFilms.filter { film in
-            guard let name = film.name else { return false }
+            let name = film.name
             return name.lowercased().contains(searchText)
         }
         
@@ -71,9 +75,9 @@ class CreateRecordViewModel: ObservableObject {
             return
         }
         
-        let allDevelopers = coreDataService.developers
+        let allDevelopers = swiftDataService.developers
         let filteredDevelopers = allDevelopers.filter { developer in
-            guard let name = developer.name else { return false }
+            let name = developer.name
             return name.lowercased().contains(searchText)
         }
         
@@ -107,10 +111,10 @@ class CreateRecordViewModel: ObservableObject {
         name = record.name ?? ""
         filmName = record.filmName ?? ""
         developerName = record.developerName ?? ""
-        iso = record.iso ?? 100
+        iso = record.iso ?? Int32(Constants.ISO.defaultFilmISO)
         process = record.process ?? "push +1"
         dilution = record.dilution ?? ""
-        temperature = record.temperature ?? 20.0
+                    temperature = record.temperature ?? 20
         
         // Конвертируем секунды обратно в минуты и секунды
         let totalSeconds = record.time ?? 0
@@ -122,16 +126,14 @@ class CreateRecordViewModel: ObservableObject {
     }
     
     func saveRecord() {
-        coreDataService.saveRecord(
+        swiftDataService.saveRecord(
             filmName: filmName.trimmingCharacters(in: .whitespacesAndNewlines),
             developerName: developerName.trimmingCharacters(in: .whitespacesAndNewlines),
             dilution: dilution.trimmingCharacters(in: .whitespacesAndNewlines),
-            iso: Int(iso),
             temperature: temperature,
-            time: totalSeconds,
-            name: name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : name.trimmingCharacters(in: .whitespacesAndNewlines),
-            comment: comment.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : comment.trimmingCharacters(in: .whitespacesAndNewlines),
-            date: date
+            iso: Int(iso),
+            calculatedTime: totalSeconds,
+            notes: comment.trimmingCharacters(in: .whitespacesAndNewlines)
         )
     }
     
@@ -152,6 +154,6 @@ class CreateRecordViewModel: ObservableObject {
     
     func getAvailableISOs() -> [Int] {
         // Для журнала возвращаем все стандартные ISO значения
-        return [25, 32, 40, 50, 64, 80, 100, 125, 200, 250, 320, 400, 500, 640, 800, 1000, 1250, 1600, 2000, 2500, 3200, 4000, 5000, 6400, 8000, 12800]
+        return Constants.ISO.allValues
     }
 }

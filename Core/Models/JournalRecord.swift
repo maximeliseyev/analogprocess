@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import CoreData
+import SwiftData
 
 public struct JournalRecord {
     public let id = UUID()
@@ -17,7 +17,7 @@ public struct JournalRecord {
     public var iso: Int32?
     public var process: String?
     public var dilution: String?
-    public var temperature: Double?
+    public var temperature: Int?
     public var time: Int?
     public var comment: String?
     
@@ -29,7 +29,7 @@ public struct JournalRecord {
         iso: Int32? = nil,
         process: String? = nil,
         dilution: String? = nil,
-        temperature: Double? = nil,
+        temperature: Int? = nil,
         time: Int? = nil,
         comment: String? = nil
     ) {
@@ -47,22 +47,22 @@ public struct JournalRecord {
     
     // MARK: - Conversion Methods
     
-    public func toCalculationRecord(context: NSManagedObjectContext) -> CalculationRecord {
-        let record = CalculationRecord(context: context)
+    public func toCalculationRecord(context: ModelContext) -> SwiftDataCalculationRecord {
+        let record = SwiftDataCalculationRecord()
         record.date = date
         record.name = name
         record.filmName = filmName
         record.developerName = developerName
-        record.iso = iso ?? 100
+        record.iso = iso ?? Int32(Constants.ISO.defaultFilmISO)
         record.process = process
         record.dilution = dilution
-        record.temperature = temperature ?? 0.0
+        record.temperature = temperature ?? 20
         record.time = Int32(time ?? 0)
         record.comment = comment
         return record
     }
     
-    public static func fromCalculationRecord(_ record: CalculationRecord) -> JournalRecord {
+    public static func fromCalculationRecord(_ record: SwiftDataCalculationRecord) -> JournalRecord {
         return JournalRecord(
             date: record.date ?? Date(),
             name: record.name,

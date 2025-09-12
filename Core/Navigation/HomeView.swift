@@ -28,15 +28,7 @@ public struct HomeView: View {
                 
                 Spacer()
             }
-            .navigationTitle(LocalizedStringKey("mainTitle"))
             .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: SettingsView(colorScheme: $colorScheme)) {
-                        Image(systemName: "gearshape")
-                    }
-                }
-            }
         }
     }
     

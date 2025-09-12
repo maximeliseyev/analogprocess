@@ -6,15 +6,24 @@
 //
 
 import SwiftUI
-import CoreData
+import SwiftData
+
 
 // MARK: - Main App Preview
 struct AppPreview: View {
     @State private var colorScheme: ColorScheme? = nil
     
     var body: some View {
+        let modelContainer = SwiftDataPersistence.preview.modelContainer
+        let githubService = GitHubDataService()
+        let swiftDataService = SwiftDataService(githubDataService: githubService, modelContainer: modelContainer)
+        let autoSyncService = AutoSyncService(swiftDataService: swiftDataService, githubDataService: githubService)
+        
         ContentView(colorScheme: $colorScheme)
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .modelContainer(modelContainer)
+            .environmentObject(githubService)
+            .environmentObject(swiftDataService)
+            .environmentObject(autoSyncService)
     }
 }
 

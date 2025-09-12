@@ -98,35 +98,6 @@ class TimerViewModel: ObservableObject {
         setupAgitation()
     }
     
-    func presentManualTimeInput() {
-        showManualTimeInput = true
-    }
-    
-    func updateTimerTime(minutes: Int, seconds: Int) {
-        stopTimer()
-        totalMinutes = minutes
-        totalSeconds = seconds
-        timeRemaining = totalTime
-        currentMinute = 1
-        setupAgitation()
-        showManualTimeInput = false
-    }
-    
-    func getPhaseDescription(_ phase: AgitationPhase.PhaseAgitationType) -> String {
-        switch phase {
-        case .continuous:
-            return "Непрерывная ажитация"
-        case .still:
-            return "Без ажитации"
-        case .cycle(let agitation, let rest):
-            return "\(agitation)с ажитации / \(rest)с покоя"
-        case .periodic(let interval):
-            return "Каждые \(interval)с"
-        case .custom(let description):
-            return description
-        }
-    }
-    
     // MARK: - Private Methods
     
     private func startTimer() {
@@ -152,6 +123,37 @@ class TimerViewModel: ObservableObject {
         timer?.invalidate()
         timer = nil
     }
+    
+    func presentManualTimeInput() {
+        showManualTimeInput = true
+    }
+    
+    func updateTimerTime(minutes: Int, seconds: Int) {
+        stopTimer()
+        totalMinutes = minutes
+        totalSeconds = minutes * 60 + seconds
+        timeRemaining = totalTime
+        currentMinute = 1
+        setupAgitation()
+        showManualTimeInput = false
+    }
+    
+    func getPhaseDescription(_ phase: AgitationPhase.PhaseAgitationType) -> String {
+        switch phase {
+        case .continuous:
+            return "Непрерывная ажитация"
+        case .still:
+            return "Без ажитации"
+        case .cycle(let agitation, let rest):
+            return "\(agitation)с ажитации / \(rest)с покоя"
+        case .periodic(let interval):
+            return "Каждые \(interval)с"
+        case .custom(let description):
+            return description
+        }
+    }
+    
+    // MARK: - Private Methods
     
     private func updateCurrentMinute() {
         let elapsedMinutes = (totalTime - timeRemaining) / 60
@@ -264,7 +266,7 @@ class TimerViewModel: ObservableObject {
         // Сбрасываем состояние таймера для фиксирования
         timeRemaining = minutes * 60 + seconds
         totalMinutes = minutes
-        totalSeconds = seconds
+        totalSeconds = minutes * 60 + seconds
         currentMinute = 1
         isTimerFinished = false
         
@@ -283,7 +285,7 @@ class TimerViewModel: ObservableObject {
         print("🔧 Режим отладки включен")
         print("📊 Текущие настройки:")
         print("   - Режим встряхивания: \(selectedAgitationMode?.name ?? "Не выбран")")
-        print("   - Общее время: \(totalMinutes) мин \(totalSeconds) сек")
+        print("   - Общее время: \(totalMinutes) мин \(totalSeconds % 60) сек")
         print("   - Текущая минута: \(currentMinute)")
         print("   - Время встряхивания: \(agitationTimeRemaining)")
         print("   - В режиме встряхивания: \(isInAgitationPhase)")

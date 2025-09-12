@@ -1,18 +1,20 @@
 import SwiftUI
-import CoreData
 import Combine
+import SwiftData
 
 public struct MainTabView: View {
+    let swiftDataService: SwiftDataService
+    
     @Binding var selectedTab: Int
     var onBackToHome: () -> Void
     @Binding var colorScheme: ColorScheme?
 
     
-    private let dataService = CoreDataService.shared
     private let cloudKitService = CloudKitService.shared
     @State private var showingCreateRecord = false
     @State private var syncStatus: CloudKitService.SyncStatus = .idle
     @State private var isCloudAvailable = false
+    @State private var useSwiftDataDevelopmentView = false
 
     
     public var body: some View {
@@ -24,7 +26,7 @@ public struct MainTabView: View {
                 // Остальные экраны с TabView
                 TabView(selection: $selectedTab) {
                     // Экран Development
-                    DevelopmentSetupView()
+                    DevelopmentSetupView<SwiftDataService>(viewModel: DevelopmentSetupViewModel<SwiftDataService>(dataService: swiftDataService))
                         .tabItem {
                             Image(systemName: "slider.horizontal.3")
                             Text(LocalizedStringKey("presets"))
@@ -32,12 +34,20 @@ public struct MainTabView: View {
                         .tag(1)
                     
                     // Экран Calculator
-                    CalculatorView(onStartTimer: { _, _, _ in })
+                    CalculatorView(swiftDataService: swiftDataService, onStartTimer: { _, _, _ in })
                         .tabItem {
                             Image(systemName: "plus.forwardslash.minus")
                             Text(LocalizedStringKey("calculator"))
                         }
                         .tag(2)
+                    
+                    // Экран Staging
+                    StagingView()
+                        .tabItem {
+                            Image(systemName: "list.bullet.rectangle")
+                            Text(LocalizedStringKey("staging"))
+                        }
+                        .tag(3)
                     
                     // Экран Timer
                     TimerTabView()
@@ -45,10 +55,12 @@ public struct MainTabView: View {
                             Image(systemName: "timer")
                             Text(LocalizedStringKey("timer"))
                         }
-                        .tag(3)
+                        .tag(4)
                     
                     // Экран Journal
                     JournalView(
+                        swiftDataService: swiftDataService,
+                        cloudKitService: cloudKitService,
                         onEditRecord: loadRecord,
                         onDeleteRecord: deleteRecord,
                         onClose: goToHome,
@@ -67,7 +79,7 @@ public struct MainTabView: View {
                         Image(systemName: "book")
                         Text(LocalizedStringKey("journal"))
                     }
-                    .tag(4)
+                    .tag(5)
                 }
                 .accentColor(.blue)
                 .toolbar {
@@ -94,6 +106,7 @@ public struct MainTabView: View {
         }
         .sheet(isPresented: $showingCreateRecord) {
             CreateRecordView(
+                swiftDataService: swiftDataService,
                 prefillData: nil,
                 isEditing: false,
                 onUpdate: nil,
@@ -132,6 +145,15 @@ public struct MainTabView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 24) {
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(LocalizedStringKey("mainTitle"))
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(.primary)
+                        .lineLimit(nil)
+                }
+                    
                 Spacer()
                 
                 Text(LocalizedStringKey("homeDescription"))
@@ -142,7 +164,7 @@ public struct MainTabView: View {
                     .padding(.horizontal, 20)
                     .padding(.bottom, 10)
                 
-                ForEach(0..<4, id: \.self) { idx in
+                ForEach(0..<5, id: \.self) { idx in
                     Button(action: {
                         selectedTab = idx + 1 // +1 потому что 0 - это главный экран
                     }) {
@@ -173,7 +195,6 @@ public struct MainTabView: View {
                 Spacer()
             }
         }
-        .navigationTitle(LocalizedStringKey("mainTitle"))
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -185,53 +206,45 @@ public struct MainTabView: View {
     }
     
     func title(for idx: Int) -> String {
-        switch idx {
-        case 0: return String(localized: "presets")
-        case 1: return String(localized: "calculator")
-        case 2: return String(localized: "timer")
-        case 3: return String(localized: "journal")
-        default: return "" }
+        guard let tabInfo = TabInfo.allTabs.first(where: { $0.index == idx }) else {
+            return ""
+        }
+        return String(localized: String.LocalizationValue(tabInfo.titleKey))
     }
     
     func subtitle(for idx: Int) -> String {
-        switch idx {
-                    case 0: return String(localized: "homePresetsSubtitle")
-        case 1: return String(localized: "homeCalculatorSubtitle")
-        case 2: return String(localized: "homeTimerSubtitle")
-        case 3: return String(localized: "homeJournalSubtitle")
-        default: return "" }
+        guard let tabInfo = TabInfo.allTabs.first(where: { $0.index == idx }) else {
+            return ""
+        }
+        return String(localized: String.LocalizationValue(tabInfo.subtitleKey))
     }
     
     func iconName(for idx: Int) -> String {
-        switch idx {
-        case 0: return "slider.horizontal.3"
-        case 1: return "plus.forwardslash.minus"
-        case 2: return "timer"
-        case 3: return "book"
-        default: return "square"
+        guard let tabInfo = TabInfo.allTabs.first(where: { $0.index == idx }) else {
+            return "square"
         }
+        return tabInfo.iconName
     }
     
     func iconColor(for idx: Int) -> Color {
-        switch idx {
-        case 0: return .blue
-        case 1: return .orange
-        case 2: return .red
-        case 3: return .purple
-        default: return .secondary
+        guard let tabInfo = TabInfo.allTabs.first(where: { $0.index == idx }) else {
+            return .secondary
         }
+        return tabInfo.iconColor
     }
         
-    func loadRecord(_ record: CalculationRecord) {
+    func loadRecord(_ record: SwiftDataCalculationRecord) {
         // Здесь можно добавить логику загрузки записи в калькулятор
         print("Loading record: \(record)")
     }
     
-    func deleteRecord(_ record: CalculationRecord) {
-        dataService.deleteCalculationRecord(record)
+    func deleteRecord(_ record: SwiftDataCalculationRecord) {
+        // Delete the record from SwiftData context
+        swiftDataService.deleteCalculationRecord(record)
     }
     
-    public init(selectedTab: Binding<Int>, onBackToHome: @escaping () -> Void, colorScheme: Binding<ColorScheme?>) {
+    public init(swiftDataService: SwiftDataService, selectedTab: Binding<Int>, onBackToHome: @escaping () -> Void, colorScheme: Binding<ColorScheme?>) {
+        self.swiftDataService = swiftDataService
         self._selectedTab = selectedTab
         self.onBackToHome = onBackToHome
         self._colorScheme = colorScheme

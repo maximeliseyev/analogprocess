@@ -6,18 +6,39 @@
 //
 
 import SwiftUI
-import CoreData
+import SwiftData
 
 @main
 struct AnalogProcessApp: App {
-    let persistenceController = PersistenceController.shared
+    @StateObject private var githubDataService: GitHubDataService
+    @StateObject private var swiftDataService: SwiftDataService
+    @StateObject private var autoSyncService: AutoSyncService
+    
+    private let modelContainer: ModelContainer
+
     @State private var colorScheme: ColorScheme? = nil
     @StateObject private var themeManager = ThemeManager.shared
+
+    init() {
+        let persistence = SwiftDataPersistence()
+        self.modelContainer = persistence.modelContainer
+        
+        let githubService = GitHubDataService()
+        let swiftDataService = SwiftDataService(githubDataService: githubService, modelContainer: self.modelContainer)
+        let autoSyncService = AutoSyncService(swiftDataService: swiftDataService, githubDataService: githubService)
+        
+        _githubDataService = StateObject(wrappedValue: githubService)
+        _swiftDataService = StateObject(wrappedValue: swiftDataService)
+        _autoSyncService = StateObject(wrappedValue: autoSyncService)
+    }
 
     var body: some Scene {
         WindowGroup {
             ContentView(colorScheme: $colorScheme)
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .modelContainer(modelContainer)
+                .environmentObject(githubDataService)
+                .environmentObject(swiftDataService)
+                .environmentObject(autoSyncService)
                 .environment(\.theme, NonIsolatedThemeManager())
                 .preferredColorScheme(colorScheme)
                 .onAppear {
@@ -30,6 +51,9 @@ struct AnalogProcessApp: App {
                     Task { @MainActor in
                         themeManager.colorScheme = colorScheme
                     }
+                    
+                    // Запускаем автоматическую синхронизацию данных
+                    autoSyncService.performAutoSyncOnAppLaunch()
                 }
                 .onChange(of: colorScheme) { _, newValue in
                     Task { @MainActor in

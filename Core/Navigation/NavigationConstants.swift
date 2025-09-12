@@ -60,4 +60,22 @@ struct NavigationButtonData {
             iconColor: .purple
         )
     ]
-} 
+}
+
+// MARK: - Tab Data Structure
+public struct TabInfo {
+    let index: Int
+    let titleKey: String
+    let subtitleKey: String
+    let iconName: String
+    let iconColor: Color
+    
+    static let allTabs: [TabInfo] = [
+        TabInfo(index: 0, titleKey: "presets", subtitleKey: "homePresetsSubtitle", iconName: "slider.horizontal.3", iconColor: .blue),
+        TabInfo(index: 1, titleKey: "calculator", subtitleKey: "homeCalculatorSubtitle", iconName: "plus.forwardslash.minus", iconColor: .orange),
+        TabInfo(index: 2, titleKey: "staging", subtitleKey: "homeStagingSubtitle", iconName: "list.bullet.rectangle", iconColor: .green),
+        TabInfo(index: 3, titleKey: "timer", subtitleKey: "homeTimerSubtitle", iconName: "timer", iconColor: .red),
+        TabInfo(index: 4, titleKey: "journal", subtitleKey: "homeJournalSubtitle", iconName: "book", iconColor: .purple)
+    ]
+}
+ 
