@@ -44,8 +44,8 @@ struct ParameterRow: View {
     }
 }
 
-struct DevelopmentParametersView<DataServiceType: DataService>: View where DataServiceType.Film: Identifiable, DataServiceType.Developer: Identifiable, DataServiceType.Fixer: Identifiable {
-    @ObservedObject var viewModel: DevelopmentSetupViewModel<DataServiceType>
+struct DevelopmentParametersView: View {
+    @ObservedObject var viewModel: DevelopmentSetupViewModel<SwiftDataService>
     
     var body: some View {
         VStack(spacing: 12) {

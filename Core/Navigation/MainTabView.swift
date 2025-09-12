@@ -15,6 +15,12 @@ public struct MainTabView: View {
     @State private var syncStatus: CloudKitService.SyncStatus = .idle
     @State private var isCloudAvailable = false
     @State private var useSwiftDataDevelopmentView = false
+    
+    // Состояние для навигации к таймеру
+    @State private var showTimerView = false
+    @State private var timerMinutes = 0
+    @State private var timerSeconds = 0
+    @State private var timerLabel = "Manual Timer"
 
     
     public var body: some View {
@@ -26,7 +32,7 @@ public struct MainTabView: View {
                 // Остальные экраны с TabView
                 TabView(selection: $selectedTab) {
                     // Экран Development
-                    DevelopmentSetupView<SwiftDataService>(viewModel: DevelopmentSetupViewModel<SwiftDataService>(dataService: swiftDataService))
+                    DevelopmentSetupView(viewModel: DevelopmentSetupViewModel<SwiftDataService>(dataService: swiftDataService))
                         .tabItem {
                             Image(systemName: "slider.horizontal.3")
                             Text(LocalizedStringKey("presets"))
@@ -50,7 +56,11 @@ public struct MainTabView: View {
                         .tag(3)
                     
                     // Экран Timer
-                    TimerTabView()
+                    TimerTabView(onStartTimer: { minutes, seconds in
+                        self.timerMinutes = minutes
+                        self.timerSeconds = seconds
+                        self.showTimerView = true
+                    })
                         .tabItem {
                             Image(systemName: "timer")
                             Text(LocalizedStringKey("timer"))
@@ -113,6 +123,13 @@ public struct MainTabView: View {
                 calculatorTemperature: nil,
                 calculatorCoefficient: nil,
                 calculatorProcess: nil
+            )
+        }
+        .navigationDestination(isPresented: $showTimerView) {
+            TimerView(
+                timerLabel: timerLabel,
+                totalMinutes: timerMinutes,
+                totalSeconds: timerSeconds
             )
         }
 

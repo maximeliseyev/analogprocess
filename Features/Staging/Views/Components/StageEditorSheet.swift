@@ -60,7 +60,7 @@ struct StageEditorSheet: View {
                 }
                 if localStage.type == .develop || localStage.type == .fixer {
                     Section(header: Text(LocalizedStringKey("advancedSetup"))) {
-                        NavigationLink(destination: DevelopmentSetupView<SwiftDataService>(
+                        NavigationLink(destination: DevelopmentSetupView(
                             viewModel: DevelopmentSetupViewModel<SwiftDataService>(dataService: swiftDataService),
                             isFromStageEditor: true, 
                             stageType: localStage.type
