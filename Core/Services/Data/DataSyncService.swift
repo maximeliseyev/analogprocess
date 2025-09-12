@@ -134,13 +134,13 @@ public class DataSyncService {
         let allTimesDescriptor = FetchDescriptor<SwiftDataDevelopmentTime>()
         guard let existingTimes = try? repository.modelContext.fetch(allTimesDescriptor) else { return }
         
-        let existingTimesByKey = Dictionary(uniqueKeysWithValues: existingTimes.compactMap { time -> (String, SwiftDataDevelopmentTime)? in
+        let existingTimesByKey = Dictionary(existingTimes.compactMap { time -> (String, SwiftDataDevelopmentTime)? in
             guard let filmId = time.film?.id, let devId = time.developer?.id, let dilution = time.dilution else {
                 return nil
             }
             let key = makeKey(filmId: filmId, developerId: devId, dilution: dilution, iso: String(time.iso))
             return (key, time)
-        })
+        }, uniquingKeysWith: { (first, _) in first })
 
         var incomingKeys = Set<String>()
 
