@@ -1,77 +1,77 @@
 // MARK: - Navigation & Common
-"mainTitle" = "Analog Process Lab";
-"back" = "← Back";
-"close" = "Close";
-"edit" = "Edit";
-"delete" = "Delete";
-"save" = "Save";
-"cancel" = "Cancel";
-"apply" = "Apply";
-"continue" = "Continue";
-"skip" = "Skip";
-"done" = "Done!";
-"timeUp" = "Time's up!";
+"mainTitle" = "類比工藝實驗室";
+"back" = "← 返回";
+"close" = "關閉";
+"edit" = "編輯";
+"delete" = "刪除";
+"save" = "儲存";
+"cancel" = "取消";
+"apply" = "套用";
+"continue" = "繼續";
+"skip" = "跳過";
+"done" = "完成！";
+"timeUp" = "時間到！";
 
 // MARK: - Timer Controls
-"start" = "Start";
-"pause" = "Pause";
-"reset" = "Reset";
-"timer" = "Timer";
-"time" = "Time";
-"minutes" = "Minutes";
-"seconds" = "Seconds";
-"min" = "min.";
-"sec" = "sec.";
-"minute" = "Minute %@";
-"minuteLabel" = "Minute %@";
+"start" = "開始";
+"pause" = "暫停";
+"reset" = "重設";
+"timer" = "計時器";
+"time" = "時間";
+"minutes" = "分鐘";
+"seconds" = "秒";
+"min" = "分鐘";
+"sec" = "秒";
+"minute" = "第%@分鐘";
+"minuteLabel" = "第%@分鐘";
 
 // MARK: - Calculator
-"calculate" = "Calculate";
-"calculator" = "Calculator";
-"calculatorTitle" = "Time Calculator";
-"calculateButton" = "Calculate";
-"results" = "Results:";
-"resultsProcess" = "Results %@ process:";
-"coefficient" = "Coefficient:";
-"standardRatio" = "(standard 1.33)";
-"processType" = "Process type:";
-"pushSteps" = "Number of PUSH steps:";
-"numberOfSteps" = "Number of steps:";
-"from1to5" = "(from 1 to 5)";
+"calculate" = "計算";
+"calculator" = "計算器";
+"calculatorTitle" = "時間計算器";
+"calculateButton" = "計算";
+"results" = "結果：";
+"resultsProcess" = "結果 %@ 流程：";
+"coefficient" = "係數：";
+"standardRatio" = "（標準 1.33）";
+"processType" = "流程類型：";
+"pushSteps" = "推進檔數：";
+"numberOfSteps" = "檔數：";
+"from1to5" = "（1到5檔）";
 
 // MARK: - Development Parameters
-"developmentSetup" = "Development Setup";
-"developmentSetupDescription" = "Select parameters for development time calculation";
-"developmentTime" = "Development time";
-"developmentComplete" = "Development complete!";
-"developmentCompleted" = "Development completed!";
-"developmentCompleteForProcess" = "Development complete for process: %@";
-"selectDevelopmentParameters" = "Select development parameters to start timer";
-"startTimer" = "Start Timer";
-"saveToJournal" = "Save to Journal";
+"developmentSetup" = "沖印設定";
+"developmentSetupDescription" = "選擇沖印時間計算參數";
+"developmentTime" = "沖印時間";
+"developmentComplete" = "沖印完成！";
+"developmentCompleted" = "沖印完成！";
+"developmentCompleteForProcess" = "流程完成：%@";
+"selectDevelopmentParameters" = "選擇沖印參數以啟動計時器";
+"startTimer" = "啟動計時器";
+"saveToJournal" = "儲存至日誌";
 
 // MARK: - Film & Developer
-"film" = "Film:";
-"developer" = "Developer:";
-"dilution" = "Dilution:";
-"iso" = "ISO/EI:";
-"temperature" = "Temperature (°C):";
-"customTime" = "Custom time:";
-"baseTime" = "Base time:";
-"basicTime" = "Basic time:";
-"basicTimeLabel" = "Basic time:";
-"manualInput" = "Manual input";
-"fromDatabase" = "From database:";
-"defaultTime" = "Default time (no data available)";
-"ratio" = "Ratio:";
-"process" = "Process:";
-"push" = "Push";
-"pull" = "Pull";
-"steps" = "Steps:";
-"current" = "Current:";
-"data" = "Data:";
-"available" = "✓ Available";
-"noData" = "✗ No data";
+"film" = "菲林：";
+"developer" = "沖印液：";
+"dilution" = "稀釋比：";
+"iso" = "ISO/EI：";
+"temperature" = "溫度（°C）：";
+"customTime" = "自訂時間：";
+"baseTime" = "基準時間：";
+"basicTime" = "基本時間：";
+"basicTimeLabel" = "基本時間：";
+"manualInput" = "手動輸入";
+"fromDatabase" = "來自資料庫：";
+"defaultTime" = "預設時間（無資料）";
+"ratio" = "比例：";
+"process" = "流程：";
+"push" = "推進";
+"pull" = "拉回";
+"steps" = "檔數：";
+"current" = "目前：";
+"data" = "資料：";
+"available" = "✓ 可用";
+"noData" = "✗ 無資料";
 
 // MARK: - Temperature Options
 "temp14" = "14°C (+80%)";
@@ -80,7 +80,7 @@
 "temp17" = "17°C (+25%)";
 "temp18" = "18°C (+10%)";
 "temp19" = "19°C (+5%)";
-"temp20" = "20°C (Standard)";
+"temp20" = "20°C （標準）";
 "temp21" = "21°C (-5%)";
 "temp22" = "22°C (-15%)";
 "temp23" = "23°C (-25%)";
@@ -88,7 +88,7 @@
 "temp25" = "25°C (-45%)";
 
 // MARK: - Dilution Options
-"stock" = "Stock";
+"stock" = "原液";
 "dilution1+1" = "1+1";
 "dilution1+2" = "1+2";
 "dilution1+3" = "1+3";
@@ -110,29 +110,29 @@
 "hc110E" = "E 1+47 (HC-110)";
 
 // MARK: - Groups
-"groupIlford" = "Ilford";
-"groupKodak" = "Kodak";
-"groupFoma" = "Foma";
-"groupKentmere" = "Kentmere";
-"groupOther" = "Other";
-"groupCustom" = "Custom";
-"groupDevelopersIlford" = "Ilford";
-"groupDevelopersKodak" = "Kodak";
-"groupDevelopersOther" = "Other";
-"groupDevelopersCustom" = "Custom";
-"custom" = "Custom";
+"groupIlford" = "伊爾福";
+"groupKodak" = "柯達";
+"groupFoma" = "福馬";
+"groupKentmere" = "肯特米爾";
+"groupOther" = "其他";
+"groupCustom" = "自訂";
+"groupDevelopersIlford" = "伊爾福";
+"groupDevelopersKodak" = "柯達";
+"groupDevelopersOther" = "其他";
+"groupDevelopersCustom" = "自訂";
+"custom" = "自訂";
 
 // MARK: - Steps
-"step1" = "+1 step";
-"step2" = "+2 steps";
-"step3" = "+3 steps";
-"step4" = "+4 steps";
-"step5" = "+5 steps";
-"pullStep1" = "-1 step";
-"pullStep2" = "-2 steps";
-"pullStep3" = "-3 steps";
-"pullStep4" = "-4 steps";
-"pullStep5" = "-5 steps";
+"step1" = "+1檔";
+"step2" = "+2檔";
+"step3" = "+3檔";
+"step4" = "+4檔";
+"step5" = "+5檔";
+"pullStep1" = "-1檔";
+"pullStep2" = "-2檔";
+"pullStep3" = "-3檔";
+"pullStep4" = "-4檔";
+"pullStep5" = "-5檔";
 
 // MARK: - ISO Options
 "iso25" = "25";
@@ -152,226 +152,233 @@
 "iso12500" = "12500";
 
 // MARK: - Presets Management
-"presetsManagement" = "Presets Management";
-"films" = "Films";
-"developers" = "Developers";
-"developmentTimes" = "Development Times";
-"addFilm" = "Add Film";
-"addDeveloper" = "Add Developer";
-"addTime" = "Add Time";
-"filmPresets" = "Film Presets";
-"developerPresets" = "Developer Presets";
-"timePresets" = "Development Time Presets";
-"presets" = "Presets";
+"presetsManagement" = "預設管理";
+"films" = "菲林";
+"developers" = "沖印液";
+"developmentTimes" = "沖印時間";
+"addFilm" = "新增菲林";
+"addDeveloper" = "新增沖印液";
+"addTime" = "新增時間";
+"filmPresets" = "菲林預設";
+"developerPresets" = "沖印液預設";
+"timePresets" = "沖印時間預設";
+"presets" = "預設";
 
 // MARK: - Fixing Timer
-"goToFixing" = "Go to fixing";
-"fixingTimer" = "Fixing Timer";
-"fixingTimerSetup" = "Fixing Timer Setup";
-"fixingTimerDescription" = "Set the time for fixing your film after development";
-"fixingTime" = "Fixing time";
-"startFixing" = "Start fixing";
+"goToFixing" = "進入定影";
+"fixingTimer" = "定影計時器";
+"fixingTimerSetup" = "定影計時器設定";
+"fixingTimerDescription" = "設定沖印後菲林定影時間";
+"fixingTime" = "定影時間";
+"startFixing" = "開始定影";
 
 // MARK: - Fixer Selection
-"fixer" = "Fixer";
-"selectFixer" = "Select fixer";
-"fixerSelection" = "Fixer Selection";
-"rapidFixer" = "Rapid Fixer";
-"acidFixer" = "Acid Fixer";
-"neutralFixer" = "Neutral Fixer";
+"fixer" = "定影液";
+"selectFixer" = "選擇定影液";
+"fixerSelection" = "定影液選擇";
+"rapidFixer" = "快速定影液";
+"acidFixer" = "酸性定影液";
+"neutralFixer" = "中性定影液";
 
 // MARK: - Agitation
-"agitationSelection" = "Select Agitation Mode";
-"agitationDescription" = "Agitation is the process of stirring the developer for uniform film development";
-"noAgitation" = "No agitation";
-"noAgitationDescription" = "Timer will work without reminders";
-"customAgitation" = "Custom mode";
-"customAgitationDescription" = "Create your own agitation mode";
-"customAgitationSetup" = "Custom mode setup";
-"customAgitationSetupDescription" = "Create your own agitation mode";
-"customAgitationTitle" = "Custom Agitation";
-"agitationTime" = "Agitation time";
-"agitationTimeRemaining" = "(%@с)";
-"restTime" = "Rest time";
-"preview" = "Preview:";
-"cycle" = "Cycle: %@ agitation → %@ rest";
-"totalCycleDuration" = "Total cycle duration: %@";
-"agitation" = "AGITATION";
-"rest" = "REST";
+"agitationSelection" = "選擇攪拌模式";
+"agitationDescription" = "攪拌是攪動沖印液以實現菲林均勻沖印的過程";
+"noAgitation" = "無攪拌";
+"noAgitationDescription" = "計時器將在沒有提示的情況下運作";
+"customAgitation" = "自訂模式";
+"customAgitationDescription" = "建立您自己的攪拌模式";
+"customAgitationSetup" = "自訂模式設定";
+"customAgitationSetupDescription" = "建立您自己的攪拌模式";
+"customAgitationTitle" = "自訂攪拌";
+"agitationTime" = "攪拌時間";
+"agitationTimeRemaining" = "（%@秒）";
+"restTime" = "靜置時間";
+"preview" = "預覽：";
+"cycle" = "循環：%@攪拌 → %@靜置";
+"totalCycleDuration" = "總循環時間：%@";
+"agitation" = "攪拌";
+"rest" = "靜置";
 "phaseDescription" = "%@";
-"continuousAgitation" = "Continuous agitation";
-"cycleAgitationFormat" = "%@s agitation / %@s rest";
-"periodicAgitationFormat" = "Every %@s";
-"agitationContinuous" = "Continuous agitation";
-"agitationStill" = "No agitation";
+"continuousAgitation" = "持續攪拌";
+"cycleAgitationFormat" = "%@秒攪拌 / %@秒靜置";
+"periodicAgitationFormat" = "每%@秒";
+"agitationContinuous" = "持續攪拌";
+"agitationStill" = "無攪拌";
 "agitationCycleFormat" = "%@ / %@";
 "agitationOrwoDescription" = "45 / 15 + 15 / 45";
-"agitationRaeDescription" = "For long developments";
-"agitationFixerDescription" = "Fixer mode";
-"agitationCustomFormat" = "Custom (%@s/%@s)";
-"agitationContinuousName" = "Continuous";
-"agitationStillName" = "Still";
+"agitationRaeDescription" = "用於長時間沖印";
+"agitationFixerDescription" = "定影液模式";
+"agitationCustomFormat" = "自訂（%@秒/%@秒）";
+"agitationContinuousName" = "持續";
+"agitationStillName" = "靜止";
 "agitationOrwoName" = "ORWO";
 "agitationXtolName" = "XTOL";
 "agitationRaeName" = "RAE";
-"agitationFixerName" = "Fixer";
-"agitationRaePhase2Rotations" = "2 rotations";
-"agitationRaePhase1RotationPerMinute" = "1 rotation per minute";
-"agitationRaePhase1Rotation7thMinute" = "1 rotation on 7th minute";
-"agitationRaePhase1Rotation10thMinute" = "1 rotation on 10th minute";
-"agitationRaePhase1RotationEvery5Minutes" = "1 rotation every 5 minutes";
+"agitationFixerName" = "定影液";
+"agitationRaePhase2Rotations" = "2次轉動";
+"agitationRaePhase1RotationPerMinute" = "每分鐘1次轉動";
+"agitationRaePhase1Rotation7thMinute" = "第7分鐘1次轉動";
+"agitationRaePhase1Rotation10thMinute" = "第10分鐘1次轉動";
+"agitationRaePhase1RotationEvery5Minutes" = "每5分鐘1次轉動";
 
 // MARK: - Calculator Results
-"tapToCalculator" = "Tap to go to calculator";
-"calculatedTime" = "Calculated Time";
-"noDilutionsAvailable" = "No dilutions available";
-"noDilutionsDescription" = "No development data available for selected film and developer combination";
-"noISOOptionsAvailable" = "No ISO options available";
-"noISOOptionsDescription" = "Please select a film, developer, and dilution first to see available ISO options.";
-"noOptionsAvailable" = "No options available";
-"noOptionsDescription" = "No options are currently available for selection.";
+"tapToCalculator" = "輕觸進入計算器";
+"calculatedTime" = "計算時間";
+"noDilutionsAvailable" = "無可用稀釋比";
+"noDilutionsDescription" = "所選菲林和沖印液組合無沖印資料";
+"noISOOptionsAvailable" = "無可用ISO選項";
+"noISOOptionsDescription" = "請先選擇菲林、沖印液和稀釋比以檢視可用的ISO選項。";
+"noOptionsAvailable" = "無可用選項";
+"noOptionsDescription" = "目前沒有可選擇的選項。";
 
 // MARK: - Journal
-"journalEmpty" = "Journal is empty";
-"journalEmptyDescription" = "Save your first calculation to see it here";
-"saveCalculation" = "Save calculation";
-"journal" = "Journal";
-"journalCreateRecord" = "Create Record";
-"journalRecordBasicInfo" = "Basic Information";
-"journalRecordName" = "Name (optional)";
-"journalRecordFilm" = "Film";
-"journalRecordDeveloper" = "Developer";
-"journalRecordParameters" = "Development Parameters";
-"journalRecordDilution" = "Dilution";
-"journalRecordTemperature" = "Temperature";
-"journalRecordTime" = "Time";
-"journalRecordComment" = "Comment";
-"journalRecordCommentPlaceholder" = "Add notes about this development...";
-"journalRecordDate" = "Date & Time";
-"journalRecordProcess" = "Process";
-"editRecord" = "Edit";
-"deleteRecord" = "Delete Record";
-"deleteRecordConfirmation" = "Are you sure you want to delete this record?";
-"noRecords" = "No Records";
-"noRecordsDescription" = "Save your first record to see it here";
-"saveRecord" = "Save Record";
-"saveRecordDescription" = "Enter a name to save this record";
-"recordDetails" = "Record Details";
+"journalEmpty" = "日誌為空";
+"journalEmptyDescription" = "儲存您的第一次計算以在此檢視";
+"saveCalculation" = "儲存計算";
+"journal" = "日誌";
+"journalCreateRecord" = "建立記錄";
+"journalRecordBasicInfo" = "基本資訊";
+"journalRecordName" = "名稱（可選）";
+"journalRecordFilm" = "菲林";
+"journalRecordDeveloper" = "沖印液";
+"journalRecordParameters" = "沖印參數";
+"journalRecordDilution" = "稀釋比";
+"journalRecordTemperature" = "溫度";
+"journalRecordTime" = "時間";
+"journalRecordComment" = "備註";
+"journalRecordCommentPlaceholder" = "新增關於此次沖印的筆記...";
+"journalRecordDate" = "日期及時間";
+"journalRecordProcess" = "流程";
+"editRecord" = "編輯";
+"deleteRecord" = "刪除記錄";
+"deleteRecordConfirmation" = "您確定要刪除此記錄嗎？";
+"noRecords" = "無記錄";
+"noRecordsDescription" = "儲存您的第一條記錄以在此檢視";
+"saveRecord" = "儲存記錄";
+"saveRecordDescription" = "輸入名稱以儲存此記錄";
+"recordDetails" = "記錄詳情";
 
 // MARK: - Selection
-"selectFilm" = "Select film";
-"selectDeveloper" = "Select developer";
-"selectDilution" = "Select dilution";
-"selectDeveloperFirst" = "Select developer first";
-"selectISO" = "Select ISO";
-"selectTemperature" = "Select Temperature";
-"selectScreenForTesting" = "Select screen for testing:";
-"recordName" = "Enter name";
-"searchFilms" = "Search films...";
-"searchDevelopers" = "Search developers...";
+"selectFilm" = "選擇菲林";
+"selectDeveloper" = "選擇沖印液";
+"selectDilution" = "選擇稀釋比";
+"selectDeveloperFirst" = "請先選擇沖印液";
+"selectISO" = "選擇ISO";
+"selectTemperature" = "選擇溫度";
+"selectScreenForTesting" = "選擇測試畫面：";
+"recordName" = "輸入名稱";
+"searchFilms" = "搜尋菲林...";
+"searchDevelopers" = "搜尋沖印液...";
 
 // MARK: - Home
-"home" = "Home";
-"homeDescription" = "Complete toolkit for film development: calculator, timer, journal, and guides";
-"homePresetsSubtitle" = "Development parameters";
-"homeCalculatorSubtitle" = "Time calculation";
-"homeTimerSubtitle" = "Development timer";
-"homeJournalSubtitle" = "Saved records";
-"homeManualsSubtitle" = "Articles and guides";
+"home" = "主頁";
+"homeDescription" = "菲林沖印完整工具包：計算器、計時器、日誌和指南";
+"homePresetsSubtitle" = "沖印參數";
+"homeCalculatorSubtitle" = "時間計算";
+"homeTimerSubtitle" = "沖印計時器";
+"homeJournalSubtitle" = "已儲存記錄";
+"homeManualsSubtitle" = "文章和指南";
 
 // MARK: - Staging
-"staging" = "Stages";
-"stagingIntro" = "Add film processing stages in the desired order";
-"totalTime" = "Total time:";
-"stagesInProcess" = "Stages in process:";
-"chooseStage" = "Choose stage";
-"duplicate" = "Duplicate";
-"homeStagingSubtitle" = "Process stages";
-"stagingPrebathName" = "Prebath";
-"stagingPrebathDescription" = "Pre-soak to stabilize temperature";
-"stagingDevelopName" = "Develop";
-"stagingDevelopDescription" = "Film development";
-"stagingStopBathName" = "Stop Bath";
-"stagingStopBathDescription" = "Stop the development";
-"stagingBleachName" = "Bleach";
-"stagingBleachDescription" = "Bleaching";
-"stagingFixerName" = "Fixer";
-"stagingFixerDescription" = "Fixing the image";
-"stagingWashName" = "Wash";
-"stagingWashDescription" = "Rinsing the film";
-"stagingStabilizeName" = "Stabilize";
-"stagingStabilizeDescription" = "Stabilization for long-term storage";
+"staging" = "階段";
+"stagingIntro" = "按所需順序新增菲林處理階段";
+"totalTime" = "總時間：";
+"stagesInProcess" = "處理中的階段：";
+"chooseStage" = "選擇階段";
+"duplicate" = "複製";
+"homeStagingSubtitle" = "處理階段";
+"stagingPrebathName" = "預浴";
+"stagingPrebathDescription" = "穩定溫度的預浸";
+"stagingDevelopName" = "沖印";
+"stagingDevelopDescription" = "菲林沖印";
+"stagingStopBathName" = "停顯液";
+"stagingStopBathDescription" = "停止沖印";
+"stagingBleachName" = "漂白";
+"stagingBleachDescription" = "漂白";
+"stagingFixerName" = "定影液";
+"stagingFixerDescription" = "影像定影";
+"stagingWashName" = "水洗";
+"stagingWashDescription" = "清洗菲林";
+"stagingStabilizeName" = "穩定化";
+"stagingStabilizeDescription" = "長期保存的穩定化";
 
 // MARK: - Stage Editor
-"stageTime" = "STAGE TIME";
-"duration" = "Duration";
-"agitationMode" = "Agitation Mode";
-"advancedSetup" = "ADVANCED SETUP";
-"openDevelopmentSetup" = "Open Development Setup";
-"openFixerSetup" = "Open Fixer Setup";
+"stageTime" = "階段時間";
+"duration" = "持續時間";
+"agitationMode" = "攪拌模式";
+"advancedSetup" = "進階設定";
+"openDevelopmentSetup" = "開啟沖印設定";
+"openFixerSetup" = "開啟定影液設定";
 
 // MARK: - Settings
-"settings" = "Settings";
-"settingsTheme" = "Theme";
-"settingsThemeMode" = "Theme mode";
-"settingsThemeSystem" = "System";
-"settingsThemeLight" = "Light";
-"settingsThemeDark" = "Dark";
-"settingsData" = "Data";
-"settingsSyncData" = "Sync Data";
-"settingsLastSync" = "Last sync:";
-"settingsSyncNow" = "Sync Now";
-"settingsSyncResult" = "Sync Result";
-"settingsSyncSuccess" = "Data synchronized successfully!";
-"settingsSyncError" = "Sync failed";
-"settingsAutoSyncReady" = "Auto-sync ready";
-"settingsAutoSyncChecking" = "Checking connection...";
-"settingsAutoSyncInProgress" = "Auto-sync in progress...";
-"settingsAutoSyncCompleted" = "Auto-sync completed";
-"settingsAutoSyncFailed" = "Auto-sync failed: %@";
-"settingsAutoSyncNoInternet" = "No internet connection";
-"settingsAutoSyncTooSoon" = "Sync performed recently";
-"settingsLastAutoSync" = "Last auto-sync:";
-"settingsAutoSyncEnabled" = "Auto-sync on app launch";
-"settingsAutoSyncDescription" = "Automatically sync data when the app starts if internet is available";
-"settingsAutoSyncDisabled" = "Auto-sync disabled";
-"stagingStartSequential" = "Start Sequential Stages";
-"stagingStageComplete" = "Stage Complete!";
-"stagingGoToNextStage" = "Go to Next Stage";
-"stagingAllStagesComplete" = "All Stages Complete!";
-"stagingFinish" = "Finish";
-"stagingSequentialStages" = "Sequential Stages";
-"stagingStageXofY" = "Stage %@ of %@";
+"settings" = "設定";
+"settingsTheme" = "主題";
+"settingsThemeMode" = "主題模式";
+"settingsThemeSystem" = "系統";
+"settingsThemeLight" = "淺色";
+"settingsThemeDark" = "深色";
+"settingsData" = "資料";
+"settingsSyncData" = "資料同步";
+"settingsLastSync" = "最後同步：";
+"settingsSyncNow" = "立即同步";
+"settingsSyncResult" = "同步結果";
+"settingsSyncSuccess" = "資料同步成功！";
+"settingsSyncError" = "同步失敗";
+"settingsAutoSyncReady" = "自動同步就緒";
+"settingsAutoSyncChecking" = "正在檢查連線...";
+"settingsAutoSyncInProgress" = "自動同步進行中...";
+"settingsAutoSyncCompleted" = "自動同步完成";
+"settingsAutoSyncFailed" = "自動同步失敗：%@";
+"settingsAutoSyncNoInternet" = "無網絡連線";
+"settingsAutoSyncTooSoon" = "最近已執行同步";
+"settingsLastAutoSync" = "最後自動同步：";
+"settingsAutoSyncEnabled" = "應用程式啟動時自動同步";
+"settingsAutoSyncDescription" = "當網絡可用時，應用程式啟動時自動同步資料";
+"settingsAutoSyncDisabled" = "自動同步已停用";
+"stagingStartSequential" = "開始順序階段";
+"stagingStageComplete" = "階段完成！";
+"stagingGoToNextStage" = "進入下一階段";
+"stagingAllStagesComplete" = "所有階段完成！";
+"stagingFinish" = "完成";
+"stagingSequentialStages" = "順序階段";
+"stagingStageXofY" = "階段 %@ / %@";
 
 // MARK: - Manual Time Input
-"setTimeManually" = "Set Time Manually";
-"tapToChangeTime" = "Tap to change time";
-"setTimeToStartTimer" = "Set time to start timer";
+"setTimeManually" = "手動設定時間";
+"tapToChangeTime" = "輕觸更改時間";
+"setTimeToStartTimer" = "設定時間以啟動計時器";
 
 // MARK: - Create Mode
-"createMode" = "Create Mode";
+"createMode" = "建立模式";
 
 // MARK: - Development
-"development" = "Development";
-"noAlternativeOptions" = "Only one option available";
+"development" = "沖印";
+"noAlternativeOptions" = "僅有一個可用選項";
 
 // MARK: - Manuals
-"manuals" = "Manuals";
+"manuals" = "使用手冊";
 
 // MARK: - Version
-"version" = "Version";
+"version" = "版本";
 
 // MARK: - Formatting
-"unknownFilm" = "Film";
-"unknownDeveloper" = "Developer";
+"unknownFilm" = "菲林";
+"unknownDeveloper" = "沖印液";
 "degreesCelsius" = "°C";
 "filmPlusDeveloper" = "%@ + %@";
 "isoLabel" = "ISO %@";
 "timeFormat" = "%@:%@ • %@ • %@%@";
-"cycleFormat" = "Cycle: %@s agitation → %@s rest";
-"totalCycleDuration" = "Total cycle duration: %@s";
+"cycleFormat" = "循環：%@秒攪拌 → %@秒靜置";
+"totalCycleDuration" = "總循環時間：%@秒";
 
 // MARK: - Testing
-"parameterRow" = "Parameter Row";
-"recordRow" = "Record Row";
-"calculatorComponents" = "Calculator Components";
+"parameterRow" = "參數行";
+"recordRow" = "記錄行";
+"calculatorComponents" = "計算器元件";
+
+// MARK: - iCloud Sync Status
+"iCloudSyncStatusIdleAvailable" = "iCloud準備就緒可同步";
+"iCloudSyncStatusIdleUnavailable" = "iCloud無法使用";
+"iCloudSyncStatusSyncing" = "同步中...";
+"iCloudSyncStatusCompleted" = "同步完成";
+"iCloudSyncCtatusFailed" = "錯誤：%@";
