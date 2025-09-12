@@ -1,6 +1,7 @@
 
 import Foundation
 
+@MainActor
 protocol DataService {
     associatedtype Film: FilmProtocol
     associatedtype Developer: DeveloperProtocol
