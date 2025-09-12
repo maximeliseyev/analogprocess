@@ -181,6 +181,11 @@
 		BFA0C7A72E2134B300132936 /* CalculationResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationResultView.swift; sourceTree = "<group>"; };
 		BFA0C7AC2E2134F600132936 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
 		BFA0C7AE2E21351000132936 /* RecordRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRowView.swift; sourceTree = "<group>"; };
+		BFAFE11E2E74491C00DA9DA5 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		BFAFE11F2E74492100DA9DA5 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		BFAFE1202E7449B700DA9DA5 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BFAFE1212E7449D100DA9DA5 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BFAFE1222E7449DD00DA9DA5 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BFB0C3F32E3E511300296B97 /* AnalogProcess-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AnalogProcess-Info.plist"; sourceTree = "<group>"; };
 		BFB0C3F42E3E511300296B97 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		BFB0C3F52E3E511300296B97 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -769,6 +774,11 @@
 				ja,
 				ko,
 				"zh-Hans",
+				"zh-Hant",
+				"zh-HK",
+				vi,
+				th,
+				id,
 			);
 			mainGroup = BFE96A302E2061A0001CF98D;
 			minimizedProjectReferenceProxies = 1;
@@ -908,6 +918,11 @@
 				BFBD39FA2E51E2F900107244 /* ja */,
 				BFBD39FB2E51E34000107244 /* ko */,
 				BFBD39FD2E51E35600107244 /* zh-Hans */,
+				BFAFE11E2E74491C00DA9DA5 /* zh-HK */,
+				BFAFE11F2E74492100DA9DA5 /* zh-Hant */,
+				BFAFE1202E7449B700DA9DA5 /* vi */,
+				BFAFE1212E7449D100DA9DA5 /* th */,
+				BFAFE1222E7449DD00DA9DA5 /* id */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1058,7 +1073,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.11;
+				MARKETING_VERSION = 0.2.12;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1094,7 +1109,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.11;
+				MARKETING_VERSION = 0.2.12;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
