@@ -41,48 +41,25 @@ struct StageRowView: View {
             }
             
             HStack(spacing: 8) {
-                // Иконка стадии
-                Image(systemName: stage.iconName)
-                    .font(.title2)
-                    .foregroundColor(Color(stage.color))
-                    .frame(width: 32, height: 16)
-                
-                // Информация о стадии
                 VStack(alignment: .leading, spacing: 4) {
                     Text(LocalizedStringKey(stage.name))
                         .headlineTextStyle()
-                    
-                    HStack {
-                        Text(LocalizedStringKey(stage.description))
-                            .captionTextStyle()
-                            .lineLimit(1)
-                        
-                        if stage.duration > 0 {
-                            Text("• \(formatDuration(stage.duration))")
-                                .captionTextStyle()
-                                .foregroundColor(.blue)
-                        }
-                    }
                 }
                 
-                Spacer()
-                
-                // Время и индикатор редактирования
-                VStack(alignment: .trailing, spacing: 4) {
-                    if stage.duration > 0 {
-                        Text(formatDuration(stage.duration))
-                            .font(.title3)
-                            .fontWeight(.medium)
-                            .foregroundColor(.blue)
-                    } else {
-                        Text(LocalizedStringKey("tapToSetTime"))
-                            .captionTextStyle()
-                            .foregroundColor(.secondary)
-                    }
-                    
-                    Image(systemName: "chevron.right")
-                        .chevronStyle()
+            Spacer()
+            
+            VStack(alignment: .trailing, spacing: 4) {
+                if stage.duration > 0 {
+                    Text(formatDuration(stage.duration))
+                        .font(.title3)
+                        .fontWeight(.medium)
+                        .foregroundColor(.blue)
+                } else {
+                    Text(LocalizedStringKey("tapToSetTime"))
+                        .captionTextStyle()
+                        .foregroundColor(.secondary)
                 }
+            }
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
