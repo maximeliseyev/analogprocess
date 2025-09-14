@@ -28,7 +28,13 @@ struct DevelopmentSetupView: View {
             modeSelectionPicker
             DevelopmentParametersView(viewModel: viewModel)
             calculatedTimeSection
-            Spacer()
+
+            if isFromStageEditor {
+                Spacer()
+                saveButtonSection
+            } else {
+                Spacer()
+            }
         }
     }
     
@@ -87,7 +93,33 @@ struct DevelopmentSetupView: View {
         .padding(.horizontal, 16)
         .padding(.vertical, 8)
     }
-    
+
+    @ViewBuilder
+    private var saveButtonSection: some View {
+        if let calculatedTime = viewModel.calculatedTime {
+            Button(action: {
+                NotificationCenter.default.post(
+                    name: Notification.Name("DevelopmentCalculatedTime"),
+                    object: nil,
+                    userInfo: ["seconds": calculatedTime]
+                )
+                dismiss()
+            }) {
+                HStack {
+                    Image(systemName: "checkmark")
+                    Text(LocalizedStringKey("save"))
+                        .font(.headline)
+                }
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(.blue)
+                .cornerRadius(10)
+            }
+            .padding(.horizontal, 16)
+        }
+    }
+
     // MARK: - Helper Methods
     private func handleCalculatorTap(calculatedTime: Int) {
         NotificationCenter.default.post(
@@ -225,23 +257,6 @@ struct DevelopmentSetupView: View {
         }
         .navigationTitle(LocalizedStringKey("developmentSetup"))
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            if isFromStageEditor {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(LocalizedStringKey("save")) {
-                        if let calculatedTime = viewModel.calculatedTime {
-                            NotificationCenter.default.post(
-                                name: Notification.Name("DevelopmentCalculatedTime"),
-                                object: nil,
-                                userInfo: ["seconds": calculatedTime]
-                            )
-                        }
-                        dismiss()
-                    }
-                    .disabled(viewModel.calculatedTime == nil)
-                }
-            }
-        }
         .onAppear {
             viewModel.reloadData()
             

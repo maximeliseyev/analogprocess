@@ -359,6 +359,7 @@
 "openDevelopmentSetup" = "Open Development Setup";
 "openFixerSetup" = "Open Fixer Setup";
 "setupTimeByPreset" = "Setup time by preset";
+"resetStages" = "Reset stages";
 
 // MARK: - Settings
 "settings" = "Settings";

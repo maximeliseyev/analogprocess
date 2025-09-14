@@ -6,7 +6,7 @@
 //
 
 import Foundation
-2
+
 // MARK: - Protocols
 
 /// Протокол для стратегии агитации
