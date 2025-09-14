@@ -113,8 +113,25 @@ struct StagingView: View {
                                     .foregroundColor(.secondary)
                             }
                         }
+                        // Cancel button
+                        if !viewModel.selectedStages.isEmpty {
+                            Button(action: {
+                                showingResetConfirmation = true
+                            }) {
+                                HStack {
+                                    Image(systemName: "trash.fill")
+                                    Text(LocalizedStringKey("resetStages"))
+                                        .font(.headline)
+                                }
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(.red)
+                                .cornerRadius(10)
+                            }
+                        }
                         
-                        // Кнопка Start
+                        // Start button
                         Button(action: {
                             showingStagingTimer = true
                         }) {
@@ -141,18 +158,6 @@ struct StagingView: View {
             }
             .navigationTitle(LocalizedStringKey("staging"))
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    if !viewModel.selectedStages.isEmpty {
-                        Button(action: {
-                            showingResetConfirmation = true
-                        }) {
-                            Image(systemName: "trash")
-                                .foregroundColor(.red)
-                        }
-                    }
-                }
-            }
         }
         .sheet(isPresented: $showingStagePicker) {
             StagePickerView(

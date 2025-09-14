@@ -10,7 +10,8 @@ struct StageEditorSheet: View {
     @State private var minutes: Int
     @State private var seconds: Int
     @State private var selectedAgitationKey: String
-    
+    @State private var showingManualTimePicker = false
+
     // For AgitationSelectionView
     @State private var agitationMode: AgitationMode
     
@@ -52,24 +53,126 @@ struct StageEditorSheet: View {
     
     var body: some View {
         NavigationStack {
-            Form {
-                if localStage.type == .develop || localStage.type == .fixer {
-                    Section(header: Text(LocalizedStringKey("timeSetup"))) {
+            VStack(spacing: 0) {
+                Form {
+                if localStage.type == .develop {
+                    // Preset time setup section for development
+                    Section(header: Text(LocalizedStringKey("setupTimeByPreset"))) {
                         NavigationLink(destination: DevelopmentSetupView(
                             viewModel: DevelopmentSetupViewModel<SwiftDataService>(dataService: swiftDataService),
                             isFromStageEditor: true,
                             stageType: localStage.type
                         )) {
-                            Text(LocalizedStringKey("setupTimeByPreset"))
-                        }
-                        
-                        HStack {
-                            Text(LocalizedStringKey("customTime"))
-                            Spacer()
-                            InlineTimePicker(minutes: $minutes, seconds: $seconds)
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(LocalizedStringKey("setupTimeByPreset"))
+                                        .font(.body)
+                                    Text(LocalizedStringKey("fromDatabase"))
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.secondary)
+                                    .font(.caption)
+                            }
                         }
                     }
-                    
+
+                    // Custom time setup section
+                    Section(header: Text(LocalizedStringKey("customTime"))) {
+                        Button(action: {
+                            showingManualTimePicker = true
+                        }) {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(LocalizedStringKey("manualInput"))
+                                        .font(.body)
+                                        .foregroundColor(.primary)
+                                    Text(LocalizedStringKey("setTimeManually"))
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                                Spacer()
+                                VStack(alignment: .trailing, spacing: 4) {
+                                    Text(formatDuration(TimeInterval(minutes * 60 + seconds)))
+                                        .font(.body)
+                                        .fontWeight(.medium)
+                                        .foregroundColor(.blue)
+                                    Text(LocalizedStringKey("tapToChangeTime"))
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .padding(.vertical, 4)
+                    }
+
+                    Section(header: Text(LocalizedStringKey("agitation"))) {
+                        NavigationLink(destination: AgitationSelectionView(selectedMode: $agitationMode)) {
+                            HStack {
+                                Text(LocalizedStringKey("agitationMode"))
+                                Spacer()
+                                Text(agitationMode.name)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                    }
+                } else if localStage.type == .fixer {
+                    // Preset time setup section for fixer
+                    Section(header: Text(LocalizedStringKey("setupTimeByPreset"))) {
+                        NavigationLink(destination: DevelopmentSetupView(
+                            viewModel: DevelopmentSetupViewModel<SwiftDataService>(dataService: swiftDataService),
+                            isFromStageEditor: true,
+                            stageType: localStage.type
+                        )) {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(LocalizedStringKey("openFixerSetup"))
+                                        .font(.body)
+                                    Text(LocalizedStringKey("fromDatabase"))
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.secondary)
+                                    .font(.caption)
+                            }
+                        }
+                    }
+
+                    // Custom time setup section for fixer
+                    Section(header: Text(LocalizedStringKey("customTime"))) {
+                        Button(action: {
+                            showingManualTimePicker = true
+                        }) {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(LocalizedStringKey("manualInput"))
+                                        .font(.body)
+                                        .foregroundColor(.primary)
+                                    Text(LocalizedStringKey("setTimeManually"))
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                                Spacer()
+                                VStack(alignment: .trailing, spacing: 4) {
+                                    Text(formatDuration(TimeInterval(minutes * 60 + seconds)))
+                                        .font(.body)
+                                        .fontWeight(.medium)
+                                        .foregroundColor(.blue)
+                                    Text(LocalizedStringKey("tapToChangeTime"))
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .padding(.vertical, 4)
+                    }
+
                     Section(header: Text(LocalizedStringKey("agitation"))) {
                         NavigationLink(destination: AgitationSelectionView(selectedMode: $agitationMode)) {
                             HStack {
@@ -100,18 +203,32 @@ struct StageEditorSheet: View {
                     }
                 }
             }
-            .navigationTitle(Text(LocalizedStringKey(localStage.name)))
+
+            // Save button at bottom
+            Button(action: {
+                localStage.duration = TimeInterval(minutes * 60 + seconds)
+                localStage.agitationPresetKey = selectedAgitationKey
+                onSave(localStage)
+                dismiss()
+            }) {
+                HStack {
+                    Image(systemName: "checkmark")
+                    Text(LocalizedStringKey("save"))
+                        .font(.headline)
+                }
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(.blue)
+                .cornerRadius(10)
+            }
+            .padding(.horizontal, 16)
+            .padding(.bottom, 16)
+        }
+        .navigationTitle(Text(LocalizedStringKey(localStage.name)))
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(LocalizedStringKey("cancel")) { dismiss() }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(LocalizedStringKey("save")) {
-                        localStage.duration = TimeInterval(minutes * 60 + seconds)
-                        localStage.agitationPresetKey = selectedAgitationKey
-                        onSave(localStage)
-                        dismiss()
-                    }
                 }
             }
             .onReceive(NotificationCenter.default.publisher(for: Notification.Name("DevelopmentCalculatedTime"))) { output in
@@ -133,6 +250,32 @@ struct StageEditorSheet: View {
                     selectedAgitationKey = newKey
                 }
             }
+            .sheet(isPresented: $showingManualTimePicker) {
+                ManualTimeInputView(
+                    minutes: $minutes,
+                    seconds: $seconds,
+                    onApply: {
+                        showingManualTimePicker = false
+                    },
+                    onCancel: {
+                        showingManualTimePicker = false
+                    },
+                    title: "setTimeManually"
+                )
+                .presentationDetents([.medium])
+            }
+        }
+    }
+
+    private func formatDuration(_ duration: TimeInterval) -> String {
+        let totalSeconds = Int(duration)
+        let minutes = totalSeconds / 60
+        let seconds = totalSeconds % 60
+
+        if minutes > 0 {
+            return seconds > 0 ? "\(minutes):\(String(format: "%02d", seconds))" : "\(minutes) мин"
+        } else {
+            return "\(seconds) сек"
         }
     }
 }

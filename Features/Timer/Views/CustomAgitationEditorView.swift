@@ -59,7 +59,7 @@ struct CustomAgitationEditorView: View {
                         dismiss()
                     }
                 }
-                
+
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(LocalizedStringKey("save")) {
                         Task {
