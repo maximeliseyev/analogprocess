@@ -79,6 +79,12 @@
 		BFA0C7A82E2134B400132936 /* CalculationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7A72E2134B300132936 /* CalculationResultView.swift */; };
 		BFA0C7AD2E2134F800132936 /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AC2E2134F600132936 /* JournalView.swift */; };
 		BFA0C7AF2E21351300132936 /* RecordRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AE2E21351000132936 /* RecordRowView.swift */; };
+		BFAFE1242E76F68000DA9DA5 /* SwiftDataCustomAgitationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFE1232E76F68000DA9DA5 /* SwiftDataCustomAgitationMode.swift */; };
+		BFAFE1262E76F6A200DA9DA5 /* CustomAgitationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFE1252E76F6A200DA9DA5 /* CustomAgitationViewModel.swift */; };
+		BFAFE12C2E76F6F900DA9DA5 /* CustomAgitationEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFE12B2E76F6F900DA9DA5 /* CustomAgitationEditorView.swift */; };
+		BFAFE12E2E76F70000DA9DA5 /* SavedCustomAgitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFE12D2E76F70000DA9DA5 /* SavedCustomAgitationView.swift */; };
+		BFAFE1322E76F75E00DA9DA5 /* AgitationPhaseConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFE1312E76F75E00DA9DA5 /* AgitationPhaseConfigView.swift */; };
+		BFAFE1342E76F7B400DA9DA5 /* CustomAgitationModeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFE1332E76F7B400DA9DA5 /* CustomAgitationModeService.swift */; };
 		BFB0C3F62E3E511300296B97 /* AnalogProcess-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3F32E3E511300296B97 /* AnalogProcess-Info.plist */; };
 		BFB0C3F72E3E511300296B97 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3F52E3E511300296B97 /* README.md */; };
 		BFB0C3F82E3E511300296B97 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3F42E3E511300296B97 /* LICENSE */; };
@@ -186,6 +192,12 @@
 		BFAFE1202E7449B700DA9DA5 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BFAFE1212E7449D100DA9DA5 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BFAFE1222E7449DD00DA9DA5 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BFAFE1232E76F68000DA9DA5 /* SwiftDataCustomAgitationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataCustomAgitationMode.swift; sourceTree = "<group>"; };
+		BFAFE1252E76F6A200DA9DA5 /* CustomAgitationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAgitationViewModel.swift; sourceTree = "<group>"; };
+		BFAFE12B2E76F6F900DA9DA5 /* CustomAgitationEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAgitationEditorView.swift; sourceTree = "<group>"; };
+		BFAFE12D2E76F70000DA9DA5 /* SavedCustomAgitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCustomAgitationView.swift; sourceTree = "<group>"; };
+		BFAFE1312E76F75E00DA9DA5 /* AgitationPhaseConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgitationPhaseConfigView.swift; sourceTree = "<group>"; };
+		BFAFE1332E76F7B400DA9DA5 /* CustomAgitationModeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAgitationModeService.swift; sourceTree = "<group>"; };
 		BFB0C3F32E3E511300296B97 /* AnalogProcess-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AnalogProcess-Info.plist"; sourceTree = "<group>"; };
 		BFB0C3F42E3E511300296B97 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		BFB0C3F52E3E511300296B97 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -387,7 +399,9 @@
 				BF41096F2E3166F400BE2AD8 /* Components */,
 				BFF4D9FE2E21BEC90097BE82 /* TimerView.swift */,
 				BFF4DA022E21C31E0097BE82 /* AgitationSelectionView.swift */,
+				BFAFE12B2E76F6F900DA9DA5 /* CustomAgitationEditorView.swift */,
 				BFF4DA042E21C8C30097BE82 /* CustomAgitationView.swift */,
+				BFAFE12D2E76F70000DA9DA5 /* SavedCustomAgitationView.swift */,
 				BF47CA3B2E4F14D70026DEB0 /* StagingTimerView.swift */,
 			);
 			path = Views;
@@ -396,6 +410,7 @@
 		BF41094D2E31352B00BE2AD8 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				BFAFE1252E76F6A200DA9DA5 /* CustomAgitationViewModel.swift */,
 				BF47CA3D2E4F15150026DEB0 /* StagingTimerViewModel.swift */,
 				BF41093E2E31318D00BE2AD8 /* TimerViewModel.swift */,
 			);
@@ -455,6 +470,7 @@
 				BF113D362E3FA8A5008B5578 /* ManualTimeInputView.swift */,
 				BFE12EBE2E34EB960044A3A4 /* TimerTabView.swift */,
 				BF41096B2E3166F400BE2AD8 /* AgitationIndicatorView.swift */,
+				BFAFE1312E76F75E00DA9DA5 /* AgitationPhaseConfigView.swift */,
 				BF41096C2E3166F400BE2AD8 /* TimerControlsView.swift */,
 				BF41096D2E3166F400BE2AD8 /* TimerHeaderView.swift */,
 				BF41096E2E3166F400BE2AD8 /* TimerProgressView.swift */,
@@ -504,6 +520,7 @@
 				BF949EAA2E72CFC2005F9831 /* DataInitializer.swift */,
 				BF949EAB2E72CFC2005F9831 /* DataSyncService.swift */,
 				BF949EAC2E72CFC2005F9831 /* SwiftDataRepository.swift */,
+				BFAFE1332E76F7B400DA9DA5 /* CustomAgitationModeService.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -542,6 +559,7 @@
 				BF949EC42E73799B005F9831 /* SwiftDataFilm.swift */,
 				BF949EC52E73799B005F9831 /* SwiftDataFixer.swift */,
 				BF949EC62E73799B005F9831 /* SwiftDataTemperatureMultiplier.swift */,
+				BFAFE1232E76F68000DA9DA5 /* SwiftDataCustomAgitationMode.swift */,
 			);
 			path = SwiftData;
 			sourceTree = "<group>";
@@ -828,6 +846,7 @@
 				BF949EB52E72CFC2005F9831 /* NetworkSession.swift in Sources */,
 				BF949EB62E72CFC2005F9831 /* SwiftDataRepository.swift in Sources */,
 				BF949EB72E72CFC2005F9831 /* CloudKitService.swift in Sources */,
+				BFAFE1342E76F7B400DA9DA5 /* CustomAgitationModeService.swift in Sources */,
 				BF949EB82E72CFC2005F9831 /* AgitationModeBuilder.swift in Sources */,
 				BF949EB92E72CFC2005F9831 /* DataInitializer.swift in Sources */,
 				BF949EBA2E72CFC2005F9831 /* AgitationMode.swift in Sources */,
@@ -838,6 +857,7 @@
 				BF7FF43E2E71ACC800BE5EA0 /* DataService.swift in Sources */,
 				BF8A59F02E43809C00D689C5 /* HomeView.swift in Sources */,
 				BFE12EBF2E34EB960044A3A4 /* TimerTabView.swift in Sources */,
+				BFAFE1242E76F68000DA9DA5 /* SwiftDataCustomAgitationMode.swift in Sources */,
 				BF4109102E31052900BE2AD8 /* CalculationFormView.swift in Sources */,
 				BF4109112E31052900BE2AD8 /* RatioInputView.swift in Sources */,
 				BF4109122E31052900BE2AD8 /* TimeInputView.swift in Sources */,
@@ -845,8 +865,10 @@
 				BFFA1C642E4A67A9005C24F4 /* SwiftDataService.swift in Sources */,
 				BFDD23652E3F7EE30079688B /* RecordDetailView.swift in Sources */,
 				BFB0C3FE2E3E5AB400296B97 /* CreateRecordView.swift in Sources */,
+				BFAFE12E2E76F70000DA9DA5 /* SavedCustomAgitationView.swift in Sources */,
 				BFFA1C872E4A7A02005C24F4 /* DevelopmentSetupViewModel.swift in Sources */,
 				BFE12EBD2E34DBE10044A3A4 /* SettingsView.swift in Sources */,
+				BFAFE1262E76F6A200DA9DA5 /* CustomAgitationViewModel.swift in Sources */,
 				BF4109142E31052900BE2AD8 /* StepsInputView.swift in Sources */,
 				BF4109622E31641600BE2AD8 /* DilutionPickerView.swift in Sources */,
 				BF4109702E3166F400BE2AD8 /* TimerControlsView.swift in Sources */,
@@ -873,6 +895,7 @@
 				BFF4DA052E21C8C30097BE82 /* CustomAgitationView.swift in Sources */,
 				BFA0C7AD2E2134F800132936 /* JournalView.swift in Sources */,
 				BF99E9A82E4E814300BB7F0C /* DropViewDelegate.swift in Sources */,
+				BFAFE12C2E76F6F900DA9DA5 /* CustomAgitationEditorView.swift in Sources */,
 				BF99E9A92E4E814300BB7F0C /* StagePickerView.swift in Sources */,
 				BF99E9AA2E4E814300BB7F0C /* AddStageButton.swift in Sources */,
 				BF99E9AB2E4E814300BB7F0C /* StageRowView.swift in Sources */,
@@ -902,6 +925,7 @@
 				BF949EE62E73799B005F9831 /* SwiftDataCalculationRecord.swift in Sources */,
 				BF949EE72E73799B005F9831 /* SwiftDataFixer.swift in Sources */,
 				BF949EE82E73799B005F9831 /* SwiftDataDeveloper.swift in Sources */,
+				BFAFE1322E76F75E00DA9DA5 /* AgitationPhaseConfigView.swift in Sources */,
 				BF949EE92E73799B005F9831 /* SwiftDataFilm.swift in Sources */,
 				BF949EEA2E73799B005F9831 /* ProcessMode.swift in Sources */,
 			);
@@ -1058,7 +1082,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = PK2473XF3P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1073,7 +1097,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.14;
+				MARKETING_VERSION = 0.2.15;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1094,7 +1118,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = PK2473XF3P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1109,7 +1133,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.14;
+				MARKETING_VERSION = 0.2.15;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

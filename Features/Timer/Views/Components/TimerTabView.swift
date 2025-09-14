@@ -17,7 +17,7 @@ struct TimerTabView: View {
     var body: some View {
         VStack(spacing: 30) {
             Text(LocalizedStringKey("selectDevelopmentParameters"))
-                .foregroundColor(.gray)
+                .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
             
@@ -29,12 +29,12 @@ struct TimerTabView: View {
                     VStack(spacing: 5) {
                         Text("\(timerMinutes):\(String(format: "%02d", timerSeconds))")
                             .font(.system(size: 48, weight: .bold, design: .monospaced))
-                            .foregroundColor(.white)
+                            .foregroundColor(.primary)
                             .padding(.vertical, 10)
                         
                         Text(LocalizedStringKey("tapToChangeTime"))
                             .font(.caption)
-                            .foregroundColor(.gray)
+                            .foregroundColor(.secondary)
                     }
                 }
                 .buttonStyle(PlainButtonStyle())
@@ -49,9 +49,9 @@ struct TimerTabView: View {
                     Text(LocalizedStringKey("startTimer"))
                         .font(.headline)
                 }
-                .foregroundColor(timerMinutes == 0 && timerSeconds == 0 ? .gray : .white)
+                .foregroundColor(timerMinutes == 0 && timerSeconds == 0 ? .secondary : .white)
                 .padding()
-                .background(timerMinutes == 0 && timerSeconds == 0 ? Color.gray.opacity(0.3) : Color.blue)
+                .background(timerMinutes == 0 && timerSeconds == 0 ? Color.secondary.opacity(0.3) : Color.accentColor)
                 .cornerRadius(10)
             }
             .disabled(timerMinutes == 0 && timerSeconds == 0)
@@ -59,14 +59,13 @@ struct TimerTabView: View {
             if timerMinutes == 0 && timerSeconds == 0 {
                 Text(LocalizedStringKey("setTimeToStartTimer"))
                     .font(.caption)
-                    .foregroundColor(.gray)
+                    .foregroundColor(.secondary)
                     .padding(.top, 5)
             }
             
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.black)
         .padding()
         .navigationTitle(LocalizedStringKey("timer"))
         .navigationBarTitleDisplayMode(.inline)
@@ -90,9 +89,16 @@ struct TimerTabView: View {
 
 struct TimerTabView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
-            TimerTabView(onStartTimer: { _, _ in })
+        Group {
+            NavigationStack {
+                TimerTabView(onStartTimer: { _, _ in })
+            }
+            .preferredColorScheme(.light)
+            
+            NavigationStack {
+                TimerTabView(onStartTimer: { _, _ in })
+            }
+            .preferredColorScheme(.dark)
         }
-        .preferredColorScheme(.dark)
     }
 }

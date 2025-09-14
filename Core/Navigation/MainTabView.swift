@@ -56,11 +56,21 @@ public struct MainTabView: View {
                         .tag(3)
                     
                     // Экран Timer
-                    TimerTabView(onStartTimer: { minutes, seconds in
-                        self.timerMinutes = minutes
-                        self.timerSeconds = seconds
-                        self.showTimerView = true
-                    })
+                    NavigationStack {
+                        TimerTabView(onStartTimer: { minutes, seconds in
+                            self.timerMinutes = minutes
+                            self.timerSeconds = seconds
+                            self.timerLabel = "Manual Timer"
+                            self.showTimerView = true
+                        })
+                        .navigationDestination(isPresented: $showTimerView) {
+                            TimerView(
+                                timerLabel: timerLabel,
+                                totalMinutes: timerMinutes,
+                                totalSeconds: timerSeconds
+                            )
+                        }
+                    }
                         .tabItem {
                             Image(systemName: "timer")
                             Text(LocalizedStringKey("timer"))
@@ -125,14 +135,6 @@ public struct MainTabView: View {
                 calculatorProcess: nil
             )
         }
-        .navigationDestination(isPresented: $showTimerView) {
-            TimerView(
-                timerLabel: timerLabel,
-                totalMinutes: timerMinutes,
-                totalSeconds: timerSeconds
-            )
-        }
-
     }
     
     private func goToHome() {
@@ -168,6 +170,7 @@ public struct MainTabView: View {
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(.primary)
+                        .padding(.horizontal, 20)
                         .lineLimit(nil)
                 }
                     

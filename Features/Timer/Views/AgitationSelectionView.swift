@@ -3,6 +3,8 @@ import SwiftUI
 struct AgitationSelectionView: View {
     @Binding var selectedMode: AgitationMode
     @Environment(\.dismiss) private var dismiss
+    @State private var showingCustomEditor = false
+    @State private var showingSavedModes = false
     
     var body: some View {
         NavigationStack {
@@ -34,19 +36,56 @@ struct AgitationSelectionView: View {
                 }
                 .padding(.horizontal)
                 
-                // Custom agitation option
-                CustomAgitationTab(
-                    onTap: {
-                        // Handle custom agitation - you might want to navigate to custom setup
-                        dismiss()
-                    }
-                )
+                // Custom agitation options
+                VStack(spacing: 12) {
+                    CustomAgitationTab(
+                        title: LocalizedStringKey("createCustomAgitation"),
+                        description: LocalizedStringKey("createCustomAgitationDescription"),
+                        icon: "plus.circle.fill",
+                        color: .green,
+                        onTap: {
+                            showingCustomEditor = true
+                        }
+                    )
+                    
+                    CustomAgitationTab(
+                        title: LocalizedStringKey("savedCustomAgitationModes"),
+                        description: LocalizedStringKey("savedCustomAgitationDescription"),
+                        icon: "folder.fill",
+                        color: .blue,
+                        onTap: {
+                            showingSavedModes = true
+                        }
+                    )
+                }
                 .padding(.horizontal)
                 
                 Spacer()
             }
             .navigationTitle(LocalizedStringKey("agitationSelection"))
             .navigationBarTitleDisplayMode(.inline)
+        }
+        .sheet(isPresented: $showingCustomEditor) {
+            CustomAgitationEditorView(selectedMode: Binding(
+                get: { selectedMode },
+                set: { newMode in
+                    if let mode = newMode {
+                        selectedMode = mode
+                        dismiss()
+                    }
+                }
+            ))
+        }
+        .sheet(isPresented: $showingSavedModes) {
+            SavedCustomAgitationView(selectedMode: Binding(
+                get: { selectedMode },
+                set: { newMode in
+                    if let mode = newMode {
+                        selectedMode = mode
+                        dismiss()
+                    }
+                }
+            ))
         }
     }
 }
@@ -87,38 +126,46 @@ struct AgitationModeTab: View {
 }
 
 struct CustomAgitationTab: View {
+    let title: LocalizedStringKey
+    let description: LocalizedStringKey
+    let icon: String
+    let color: Color
     let onTap: () -> Void
     
     var body: some View {
         Button(action: onTap) {
             HStack(spacing: 12) {
-                Image(systemName: "plus.circle.fill")
-                    .foregroundColor(.green)
+                Image(systemName: icon)
+                    .foregroundColor(color)
                     .font(.title2)
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(LocalizedStringKey("customAgitation"))
+                    Text(title)
                         .font(.headline)
                         .fontWeight(.medium)
                         .foregroundColor(.primary)
                     
-                    Text(LocalizedStringKey("customAgitationDescription"))
+                    Text(description)
                         .font(.caption)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.leading)
                 }
                 
                 Spacer()
+                
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.secondary)
+                    .font(.caption)
             }
             .padding(.vertical, 16)
             .padding(.horizontal, 16)
             .background(
                 RoundedRectangle(cornerRadius: 12)
-                    .fill(Color.green.opacity(0.1))
+                    .fill(color.opacity(0.1))
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
-                    .stroke(Color.green, lineWidth: 2)
+                    .stroke(color, lineWidth: 2)
             )
         }
         .buttonStyle(PlainButtonStyle())

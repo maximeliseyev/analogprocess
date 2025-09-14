@@ -63,7 +63,8 @@ struct SwiftDataPersistence {
                 SwiftDataDevelopmentTime.self,
                 SwiftDataFixer.self,
                 SwiftDataTemperatureMultiplier.self,
-                SwiftDataCalculationRecord.self
+                SwiftDataCalculationRecord.self,
+                SwiftDataCustomAgitationMode.self
             ])
             
             let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: inMemory)
