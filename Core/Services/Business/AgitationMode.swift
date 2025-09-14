@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+2
 // MARK: - Protocols
 
 /// Протокол для стратегии агитации
@@ -27,6 +27,37 @@ protocol AgitationModeRepository {
     func createCustomMode(agitationSeconds: Int, restSeconds: Int) -> AgitationMode
 }
 
+// MARK: - Constants
+
+/// Константы для настроек режимов агитации
+enum AgitationConstants {
+    enum XTOL {
+        static let agitationSeconds = 5
+        static let restSeconds = 25
+    }
+    
+    enum ORWO {
+        static let firstPhaseAgitation = 45
+        static let firstPhaseRest = 15
+        static let secondPhaseAgitation = 15
+        static let secondPhaseRest = 45
+    }
+    
+    enum RAE {
+        static let periodicInterval = 10
+    }
+    
+    enum Fixer {
+        static let agitationSeconds = 0
+        static let restSeconds = 60
+    }
+    
+    enum Default {
+        static let agitationSeconds = 30
+        static let restSeconds = 30
+    }
+}
+
 // MARK: - Core Types
 
 /// Типы режимов агитации
@@ -45,12 +76,32 @@ struct AgitationPhase {
     let agitationType: PhaseAgitationType
     let description: String
     
+    init(agitationType: PhaseAgitationType, description: String = "") {
+        self.agitationType = agitationType
+        self.description = description.isEmpty ? agitationType.defaultDescription : description
+    }
+    
     enum PhaseAgitationType: Equatable, Codable {
         case continuous
         case still
         case cycle(agitationSeconds: Int, restSeconds: Int)
         case periodic(intervalSeconds: Int)
         case custom(description: String)
+        
+        var defaultDescription: String {
+            switch self {
+            case .continuous:
+                return String(localized: "agitationContinuous")
+            case .still:
+                return String(localized: "agitationStill")
+            case .cycle(let agitation, let rest):
+                return String(format: String(localized: "agitationCycleFormat"), "\(agitation)", "\(rest)")
+            case .periodic(let interval):
+                return String(format: String(localized: "agitationPeriodicFormat"), "\(interval)")
+            case .custom(let description):
+                return description
+            }
+        }
     }
 }
 
@@ -87,10 +138,7 @@ struct AgitationMode: Identifiable, Equatable {
 /// Стратегия для непрерывной агитации
 struct ContinuousAgitationStrategy: AgitationStrategy {
     func getAgitationForMinute(_ minute: Int, totalMinutes: Int) -> AgitationPhase {
-        return AgitationPhase(
-            agitationType: .continuous,
-            description: String(localized: "agitationContinuous")
-        )
+        return AgitationPhase(agitationType: .continuous)
     }
     
     var description: String {
@@ -101,10 +149,7 @@ struct ContinuousAgitationStrategy: AgitationStrategy {
 /// Стратегия для неподвижного режима
 struct StillAgitationStrategy: AgitationStrategy {
     func getAgitationForMinute(_ minute: Int, totalMinutes: Int) -> AgitationPhase {
-        return AgitationPhase(
-            agitationType: .still,
-            description: String(localized: "agitationStill")
-        )
+        return AgitationPhase(agitationType: .still)
     }
     
     var description: String {
@@ -118,10 +163,7 @@ struct CycleAgitationStrategy: AgitationStrategy {
     let restSeconds: Int
     
     func getAgitationForMinute(_ minute: Int, totalMinutes: Int) -> AgitationPhase {
-        return AgitationPhase(
-            agitationType: .cycle(agitationSeconds: agitationSeconds, restSeconds: restSeconds),
-            description: String(format: String(localized: "agitationCycleFormat"), "\(agitationSeconds)", "\(restSeconds)")
-        )
+        return AgitationPhase(agitationType: .cycle(agitationSeconds: agitationSeconds, restSeconds: restSeconds))
     }
     
     var description: String {
@@ -129,49 +171,39 @@ struct CycleAgitationStrategy: AgitationStrategy {
     }
 }
 
-/// Стратегия для сложной агитации с фазами
-struct ComplexAgitationStrategy: AgitationStrategy {
-    let phases: [AgitationPhase]
-    let modeName: String
-    
+/// Стратегия для ORWO агитации
+struct ORWOAgitationStrategy: AgitationStrategy {
     func getAgitationForMinute(_ minute: Int, totalMinutes: Int) -> AgitationPhase {
-        // Специальная логика для ORWO
-        if modeName == String(localized: "agitationOrwoName") {
-            if minute == 1 || minute == totalMinutes {
-                return AgitationPhase(
-                    agitationType: .cycle(agitationSeconds: 45, restSeconds: 15),
-                    description: String(format: String(localized: "agitationCycleFormat"), "45", "15")
-                )
-            } else {
-                return AgitationPhase(
-                    agitationType: .cycle(agitationSeconds: 15, restSeconds: 45),
-                    description: String(format: String(localized: "agitationCycleFormat"), "15", "45")
-                )
-            }
+        if minute == 1 || minute == totalMinutes {
+            return AgitationPhase(agitationType: .cycle(agitationSeconds: AgitationConstants.ORWO.firstPhaseAgitation, restSeconds: AgitationConstants.ORWO.firstPhaseRest))
+        } else {
+            return AgitationPhase(agitationType: .cycle(agitationSeconds: AgitationConstants.ORWO.secondPhaseAgitation, restSeconds: AgitationConstants.ORWO.secondPhaseRest))
         }
-        
-        // Для других режимов используем фазы
-        return phases.first { phase in
-            // Здесь нужно добавить логику определения диапазона минут
-            // Пока возвращаем первую фазу
-            return true
-        } ?? phases.first ?? AgitationPhase(
-            agitationType: .still,
-            description: String(localized: "agitationStill")
-        )
     }
     
     var description: String {
-        switch modeName {
-        case String(localized: "agitationOrwoName"):
-            return String(localized: "agitationOrwoDescription")
-        case String(localized: "agitationRaeName"):
-            return String(localized: "agitationRaeDescription")
-        case String(localized: "agitationFixerName"):
-            return String(localized: "agitationFixerDescription")
-        default:
-            return " "
-        }
+        return String(localized: "agitationOrwoDescription")
+    }
+}
+
+/// Стратегия для сложной агитации с фазами
+struct ComplexAgitationStrategy: AgitationStrategy {
+    let phases: [AgitationPhase]
+    let strategyDescription: String
+    private let phaseSelector: (Int, Int, [AgitationPhase]) -> AgitationPhase
+    
+    init(phases: [AgitationPhase], description: String, phaseSelector: @escaping (Int, Int, [AgitationPhase]) -> AgitationPhase = { _, _, phases in phases.first ?? AgitationPhase(agitationType: .still) }) {
+        self.phases = phases
+        self.strategyDescription = description
+        self.phaseSelector = phaseSelector
+    }
+    
+    func getAgitationForMinute(_ minute: Int, totalMinutes: Int) -> AgitationPhase {
+        return phaseSelector(minute, totalMinutes, phases)
+    }
+    
+    var description: String {
+        return strategyDescription
     }
 }
 
@@ -185,38 +217,32 @@ struct AgitationStrategyFactoryImpl: AgitationStrategyFactory {
         case .still:
             return StillAgitationStrategy()
         case .xtol:
-            return CycleAgitationStrategy(agitationSeconds: 5, restSeconds: 25)
+            return CycleAgitationStrategy(agitationSeconds: AgitationConstants.XTOL.agitationSeconds, restSeconds: AgitationConstants.XTOL.restSeconds)
         case .orwo:
-            return ComplexAgitationStrategy(
-                phases: [
-                    AgitationPhase(agitationType: .cycle(agitationSeconds: 45, restSeconds: 15), description: ""),
-                    AgitationPhase(agitationType: .cycle(agitationSeconds: 15, restSeconds: 45), description: "")
-                ],
-                modeName: String(localized: "agitationOrwoName")
-            )
+            return ORWOAgitationStrategy()
         case .rae:
             return ComplexAgitationStrategy(
                 phases: [
-                    AgitationPhase(agitationType: .continuous, description: ""),
-                    AgitationPhase(agitationType: .periodic(intervalSeconds: 10), description: ""),
-                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase2Rotations")), description: ""),
-                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase1RotationPerMinute")), description: ""),
-                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase1Rotation7thMinute")), description: ""),
-                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase1Rotation10thMinute")), description: ""),
-                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase1RotationEvery5Minutes")), description: "")
+                    AgitationPhase(agitationType: .continuous),
+                    AgitationPhase(agitationType: .periodic(intervalSeconds: AgitationConstants.RAE.periodicInterval)),
+                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase2Rotations"))),
+                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase1RotationPerMinute"))),
+                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase1Rotation7thMinute"))),
+                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase1Rotation10thMinute"))),
+                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase1RotationEvery5Minutes")))
                 ],
-                modeName: String(localized: "agitationRaeName")
+                description: String(localized: "agitationRaeDescription")
             )
         case .fixer:
             return ComplexAgitationStrategy(
                 phases: [
-                    AgitationPhase(agitationType: .continuous, description: ""),
-                    AgitationPhase(agitationType: .cycle(agitationSeconds: 0, restSeconds: 60), description: "")
+                    AgitationPhase(agitationType: .continuous),
+                    AgitationPhase(agitationType: .cycle(agitationSeconds: AgitationConstants.Fixer.agitationSeconds, restSeconds: AgitationConstants.Fixer.restSeconds))
                 ],
-                modeName: String(localized: "agitationFixerName")
+                description: String(localized: "agitationFixerDescription")
             )
         case .custom:
-            return CycleAgitationStrategy(agitationSeconds: 30, restSeconds: 30)
+            return CycleAgitationStrategy(agitationSeconds: AgitationConstants.Default.agitationSeconds, restSeconds: AgitationConstants.Default.restSeconds)
         }
     }
 }

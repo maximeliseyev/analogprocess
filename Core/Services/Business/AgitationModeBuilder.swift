@@ -14,9 +14,13 @@ class AgitationModeBuilder {
     private var name: String = ""
     private var type: AgitationModeType = .custom
     private var isCustom: Bool = false
-    private var phases: [AgitationPhase] = []
-    private var agitationSeconds: Int = 30
-    private var restSeconds: Int = 30
+    private var agitationSeconds: Int = AgitationConstants.Default.agitationSeconds
+    private var restSeconds: Int = AgitationConstants.Default.restSeconds
+    private let factory: AgitationStrategyFactory
+    
+    init(factory: AgitationStrategyFactory = AgitationStrategyFactoryImpl()) {
+        self.factory = factory
+    }
     
     func setName(_ name: String) -> AgitationModeBuilder {
         self.name = name
@@ -39,52 +43,13 @@ class AgitationModeBuilder {
         return self
     }
     
-    func addPhase(_ phase: AgitationPhase) -> AgitationModeBuilder {
-        self.phases.append(phase)
-        return self
-    }
-    
     func build() -> AgitationMode {
         let strategy: AgitationStrategy
         
-        switch type {
-        case .continuous:
-            strategy = ContinuousAgitationStrategy()
-        case .still:
-            strategy = StillAgitationStrategy()
-        case .xtol:
-            strategy = CycleAgitationStrategy(agitationSeconds: 5, restSeconds: 25)
-        case .orwo:
-            strategy = ComplexAgitationStrategy(
-                phases: [
-                    AgitationPhase(agitationType: .cycle(agitationSeconds: 45, restSeconds: 15), description: ""),
-                    AgitationPhase(agitationType: .cycle(agitationSeconds: 15, restSeconds: 45), description: "")
-                ],
-                modeName: name
-            )
-        case .rae:
-            strategy = ComplexAgitationStrategy(
-                phases: [
-                    AgitationPhase(agitationType: .continuous, description: ""),
-                    AgitationPhase(agitationType: .periodic(intervalSeconds: 10), description: ""),
-                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase2Rotations")), description: ""),
-                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase1RotationPerMinute")), description: ""),
-                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase1Rotation7thMinute")), description: ""),
-                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase1Rotation10thMinute")), description: ""),
-                    AgitationPhase(agitationType: .custom(description: String(localized: "agitationRaePhase1RotationEvery5Minutes")), description: "")
-                ],
-                modeName: name
-            )
-        case .fixer:
-            strategy = ComplexAgitationStrategy(
-                phases: [
-                    AgitationPhase(agitationType: .continuous, description: ""),
-                    AgitationPhase(agitationType: .cycle(agitationSeconds: 0, restSeconds: 60), description: "")
-                ],
-                modeName: name
-            )
-        case .custom:
+        if type == .custom {
             strategy = CycleAgitationStrategy(agitationSeconds: agitationSeconds, restSeconds: restSeconds)
+        } else {
+            strategy = factory.createStrategy(for: type)
         }
         
         return AgitationMode(name: name, type: type, isCustom: isCustom, strategy: strategy)

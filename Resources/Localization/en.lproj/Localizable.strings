@@ -222,6 +222,54 @@
 "agitationRaePhase1Rotation10thMinute" = "1 rotation on 10th minute";
 "agitationRaePhase1RotationEvery5Minutes" = "1 rotation every 5 minutes";
 
+// MARK: - Custom Agitation Mode
+"createCustomAgitation" = "Create Custom Mode";
+"createCustomAgitationDescription" = "Design your own agitation pattern";
+"savedCustomAgitationModes" = "Saved Custom Modes";
+"savedCustomAgitationDescription" = "Browse and select from your saved modes";
+"customAgitationCreateTitle" = "Create Custom Agitation Mode";
+"customAgitationEditTitle" = "Edit Custom Agitation Mode";
+"customAgitationName" = "Mode Name";
+"customAgitationNamePlaceholder" = "Enter mode name";
+"customAgitationFirstMinute" = "First Minute";
+"customAgitationFirstMinuteDescription" = "Agitation pattern for the initial minute";
+"customAgitationIntermediate" = "Intermediate Minutes";
+"customAgitationIntermediateDescription" = "Agitation pattern for minutes 2 to N-1";
+"customAgitationEnableLastMinute" = "Custom Last Minute";
+"customAgitationLastMinute" = "Last Minute";
+"customAgitationLastMinuteDescription" = "Agitation pattern for the final minute";
+"customAgitationPreview" = "Preview";
+"customAgitationPreviewUnavailable" = "Complete configuration to see preview";
+"customAgitationCreateButton" = "Create Mode";
+"customAgitationUpdateButton" = "Update Mode";
+"customAgitationReset" = "Reset Form";
+"agitationType" = "Agitation Type";
+"agitationCycle" = "Cycle";
+"agitationPeriodic" = "Periodic";
+"agitationCustom" = "Custom Instructions";
+"cycleTimingSettings" = "Cycle Timing";
+"agitationSeconds" = "Agitation";
+"restSeconds" = "Rest";
+"periodicInterval" = "Interval";
+"customAgitationInstructions" = "Instructions";
+"customAgitationInstructionsPlaceholder" = "Enter custom agitation instructions...";
+"agitationPeriodicFormat" = "Every %@s";
+"noCustomAgitationModes" = "No Custom Modes";
+"noCustomAgitationModesDescription" = "Create your first custom agitation mode to get started";
+"createFirstCustomMode" = "Create First Mode";
+"selectThisMode" = "Select This Mode";
+"deleteConfirmation" = "Delete Mode";
+"deleteCustomModeMessage" = "Are you sure you want to delete \"%@\"? This action cannot be undone.";
+"createNew" = "Create New";
+"validationError" = "Validation Error";
+"saveError" = "Save Error";
+"ok" = "OK";
+"customAgitationErrorEmptyName" = "Mode name cannot be empty";
+"customAgitationErrorEmptyCustomDescription" = "Custom instructions required for %@";
+"customAgitationErrorInvalidTiming" = "Invalid timing configuration for %@";
+"customAgitationErrorInvalidInterval" = "Invalid interval for %@";
+"customAgitationErrorNoLastMinuteConfig" = "Last minute configuration is missing";
+
 // MARK: - Calculator Results
 "tapToCalculator" = "Tap to go to calculator";
 "calculatedTime" = "Calculated Time";
@@ -310,6 +358,7 @@
 "advancedSetup" = "ADVANCED SETUP";
 "openDevelopmentSetup" = "Open Development Setup";
 "openFixerSetup" = "Open Fixer Setup";
+"setupTimeByPreset" = "Setup time by preset";
 
 // MARK: - Settings
 "settings" = "Settings";
