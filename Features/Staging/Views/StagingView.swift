@@ -28,12 +28,16 @@ struct Haptics {
 // MARK: - Main Staging View
 struct StagingView: View {
     @EnvironmentObject var swiftDataService: SwiftDataService
-    @StateObject private var viewModel = StagingViewModel()
+    @ObservedObject var viewModel: StagingViewModel
     @State private var showingStagePicker = false
     @State private var draggedStage: StagingStage?
     @State private var showingStagingTimer = false
     @State private var showingResetConfirmation = false
-    
+
+    init(viewModel: StagingViewModel = StagingViewModel()) {
+        self.viewModel = viewModel
+    }
+
     var body: some View {
         NavigationView {
             VStack(spacing: 16) {
