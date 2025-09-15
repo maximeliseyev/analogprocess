@@ -268,15 +268,9 @@ struct StageEditorSheet: View {
     }
 
     private func formatDuration(_ duration: TimeInterval) -> String {
-        let totalSeconds = Int(duration)
-        let minutes = totalSeconds / 60
-        let seconds = totalSeconds % 60
-
-        if minutes > 0 {
-            return seconds > 0 ? "\(minutes):\(String(format: "%02d", seconds))" : "\(minutes) мин"
-        } else {
-            return "\(seconds) сек"
-        }
+        let minutes = Int(duration) / 60
+        let seconds = Int(duration) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
     }
 }
 
