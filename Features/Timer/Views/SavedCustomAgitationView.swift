@@ -1,10 +1,3 @@
-//
-//  SavedCustomAgitationView.swift
-//  AnalogProcess
-//
-//  Created by Claude on 14.09.2025.
-//
-
 import SwiftUI
 import SwiftData
 

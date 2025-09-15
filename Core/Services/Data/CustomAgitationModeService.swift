@@ -1,10 +1,3 @@
-//
-//  CustomAgitationModeService.swift
-//  AnalogProcess
-//
-//  Created by Claude on 14.09.2025.
-//
-
 import Foundation
 import SwiftData
 
