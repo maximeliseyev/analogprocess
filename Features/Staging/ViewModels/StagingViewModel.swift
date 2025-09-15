@@ -55,6 +55,12 @@ class StagingViewModel: ObservableObject {
         selectedStages.remove(at: index)
     }
     
+    func updateStage(_ stage: StagingStage) {
+        if let index = selectedStages.firstIndex(where: { $0.id == stage.id }) {
+            selectedStages[index] = stage
+        }
+    }
+    
     func getAvailableStages() -> [StagingStage] {
         // Возвращаем все стадии - они больше не исчезают из списка
         return allStages
