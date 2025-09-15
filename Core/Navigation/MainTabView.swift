@@ -22,6 +22,9 @@ public struct MainTabView: View {
     @State private var timerSeconds = 0
     @State private var timerLabel = "Manual Timer"
 
+    // Staging ViewModel для сохранения состояния между навигацией
+    @StateObject private var stagingViewModel = StagingViewModel()
+
     
     public var body: some View {
         NavigationStack {
@@ -48,7 +51,7 @@ public struct MainTabView: View {
                         .tag(2)
                     
                     // Экран Staging
-                    StagingView()
+                    StagingView(viewModel: stagingViewModel)
                         .tabItem {
                             Image(systemName: "list.bullet.rectangle")
                             Text(LocalizedStringKey("staging"))
