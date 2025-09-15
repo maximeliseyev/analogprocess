@@ -107,8 +107,8 @@ class TimerViewModel: ObservableObject {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             DispatchQueue.main.async {
                 guard let self = self else { return }
+                self.timeRemaining -= 1
                 if self.timeRemaining > 0 {
-                    self.timeRemaining -= 1
                     self.updateCurrentMinute()
                     self.updateAgitation()
                 } else {

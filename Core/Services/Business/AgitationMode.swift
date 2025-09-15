@@ -237,9 +237,16 @@ struct AgitationStrategyFactoryImpl: AgitationStrategyFactory {
             return ComplexAgitationStrategy(
                 phases: [
                     AgitationPhase(agitationType: .continuous),
-                    AgitationPhase(agitationType: .cycle(agitationSeconds: AgitationConstants.Fixer.agitationSeconds, restSeconds: AgitationConstants.Fixer.restSeconds))
+                    AgitationPhase(agitationType: .still)
                 ],
-                description: String(localized: "agitationFixerDescription")
+                description: String(localized: "agitationFixerDescription"),
+                phaseSelector: { minute, _, phases in
+                    if minute == 1 {
+                        return phases[0] // Continuous
+                    } else {
+                        return phases[1] // Still
+                    }
+                }
             )
         case .custom:
             return CycleAgitationStrategy(agitationSeconds: AgitationConstants.Default.agitationSeconds, restSeconds: AgitationConstants.Default.restSeconds)
