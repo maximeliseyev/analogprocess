@@ -29,9 +29,7 @@ struct DevelopmentSetupView: View {
             DevelopmentParametersView(viewModel: viewModel)
             calculatedTimeSection
 
-            if isFromStageEditor {
-                saveButtonSection
-            } else {
+            if !isFromStageEditor {
                 Spacer()
             }
         }
@@ -57,7 +55,10 @@ struct DevelopmentSetupView: View {
     private var calculatedTimeSection: some View {
         if let calculatedTime = viewModel.calculatedTime {
             if isFromStageEditor {
-                stageEditorCalculatorButton(calculatedTime: calculatedTime)
+                VStack {
+                    stageEditorCalculatorButton(calculatedTime: calculatedTime)
+                    saveButtonSection
+                }
             } else {
                 CalculatedTimeSection(
                     time: calculatedTime,

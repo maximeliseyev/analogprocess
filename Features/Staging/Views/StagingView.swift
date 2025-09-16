@@ -56,7 +56,7 @@ struct StagingView: View {
                         ForEach(viewModel.selectedStages.indices, id: \.self) { index in
                             let stage = viewModel.selectedStages[index]
                             StageRowView(
-                                stage: stage,
+                                stage: $viewModel.selectedStages[index],
                                 swiftDataService: swiftDataService,
                                 onDelete: {
                                     withAnimation(.easeInOut(duration: 0.3)) {
@@ -66,11 +66,6 @@ struct StagingView: View {
                                 onDuplicate: {
                                     withAnimation(.easeInOut(duration: 0.3)) {
                                         viewModel.duplicateStage(stage)
-                                    }
-                                },
-                                onUpdate: { updated in
-                                    if index < viewModel.selectedStages.count {
-                                        viewModel.selectedStages[index] = updated
                                     }
                                 }
                             )
