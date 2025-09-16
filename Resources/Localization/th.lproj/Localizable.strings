@@ -356,6 +356,8 @@
 
 // MARK: - Development
 "development" = "การล้าง";
+"processModesDeveloping" = "การพัฒนา";
+"processModeFixer" = "ผู้แก้ไข";
 "noAlternativeOptions" = "มีตัวเลือกเดียวเท่านั้น";
 
 // MARK: - Manuals

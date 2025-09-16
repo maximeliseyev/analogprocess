@@ -356,6 +356,8 @@
 
 // MARK: - Development
 "development" = "Tráng phim";
+"processModesDeveloping" = "Phát triển";
+"processModeFixer" = "Người sửa chữa";
 "noAlternativeOptions" = "Chỉ có một tùy chọn";
 
 // MARK: - Manuals

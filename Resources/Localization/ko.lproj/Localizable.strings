@@ -356,6 +356,8 @@
 
 // MARK: - Development
 "development" = "현상";
+"processModesDeveloping" = "개발";
+"processModeFixer" = "수정자";
 "noAlternativeOptions" = "하나의 옵션만 사용 가능";
 
 // MARK: - Manuals

@@ -406,6 +406,8 @@
 
 // MARK: - Development
 "development" = "Development";
+"processModesDeveloping" = "Development";
+"processModeFixer" = "Fixer";
 "noAlternativeOptions" = "Only one option available";
 
 // MARK: - Manuals

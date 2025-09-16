@@ -355,6 +355,8 @@
 
 // MARK: - Development
 "development" = "沖印";
+"processModesDeveloping" = "開發";
+"processModeFixer" = "修復者";
 "noAlternativeOptions" = "僅有一個可用選項";
 
 // MARK: - Manuals
