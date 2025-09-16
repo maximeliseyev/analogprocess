@@ -13,16 +13,20 @@ import SwiftData
 @Model
 public final class SwiftDataFilm: FilmProtocol, HasStringId {
     public var stringId: String { id }
-    @Attribute(.unique) public var id: String
-    public var name: String
-    public var manufacturer: String
-    public var type: String
-    public var defaultISO: Int32
+    public var id: String = UUID().uuidString
+    public var name: String = ""
+    public var manufacturer: String = ""
+    public var type: String = ""
+    public var defaultISO: Int32 = 400
     
     // Relationships
     @Relationship(deleteRule: .cascade, inverse: \SwiftDataDevelopmentTime.film)
-    public var developmentTimes: [SwiftDataDevelopmentTime] = []
+    public var developmentTimes: [SwiftDataDevelopmentTime]? = []
     
+    public init() {
+        // Default values are set in property declarations
+    }
+
     public init(id: String, name: String, manufacturer: String, type: String, defaultISO: Int32) {
         self.id = id
         self.name = name

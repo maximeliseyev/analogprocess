@@ -17,29 +17,26 @@ struct SwiftDataPersistence {
         let modelContext = result.modelContainer.mainContext
         
         // Создаем тестовые данные для превью
-        let film = SwiftDataFilm(
-            id: "test-film",
-            name: "Ilford HP5+",
-            manufacturer: "Ilford",
-            type: "Black & White",
-            defaultISO: Int32(400)
-        )
+        let film = SwiftDataFilm()
+        film.id = "test-film"
+        film.name = "Ilford HP5+"
+        film.manufacturer = "Ilford"
+        film.type = "Black & White"
+        film.defaultISO = 400
+
+        let developer = SwiftDataDeveloper()
+        developer.id = "test-developer"
+        developer.name = "Kodak D-76"
+        developer.manufacturer = "Kodak"
+        developer.type = "powder"
+        developer.defaultDilution = "1+1"
         
-        let developer = SwiftDataDeveloper(
-            id: "test-developer",
-            name: "Kodak D-76",
-            manufacturer: "Kodak",
-            type: "powder",
-            defaultDilution: "1+1"
-        )
-        
-        let developmentTime = SwiftDataDevelopmentTime(
-            dilution: "1+1",
-            iso: Int32(400),
-            time: Int32(540),
-            developer: developer,
-            film: film
-        )
+        let developmentTime = SwiftDataDevelopmentTime()
+        developmentTime.dilution = "1+1"
+        developmentTime.iso = 400
+        developmentTime.time = 540
+        developmentTime.developer = developer
+        developmentTime.film = film
         
         modelContext.insert(film)
         modelContext.insert(developer)
@@ -56,22 +53,86 @@ struct SwiftDataPersistence {
     let modelContainer: ModelContainer
     
     init(inMemory: Bool = false) {
+        print("🚀 Starting SwiftData initialization (inMemory: \(inMemory))")
+
         do {
+            // Начинаем с простой схемы для CloudKit
             let schema = Schema([
                 SwiftDataFilm.self,
                 SwiftDataDeveloper.self,
-                SwiftDataDevelopmentTime.self,
-                SwiftDataFixer.self,
-                SwiftDataTemperatureMultiplier.self,
                 SwiftDataCalculationRecord.self,
                 SwiftDataCustomAgitationMode.self
+                // TODO: Добавить остальные модели после успешного теста:
+                // SwiftDataDevelopmentTime.self,
+                // SwiftDataFixer.self,
+                // SwiftDataTemperatureMultiplier.self,
             ])
-            
-            let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: inMemory)
-            
+
+            print("📋 Schema created with \(schema.entities.count) entities")
+
+            let modelConfiguration: ModelConfiguration
+            if inMemory {
+                print("🔧 Using in-memory configuration")
+                modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+            } else {
+                print("☁️ Attempting CloudKit configuration...")
+                // Используем .private для более стабильной работы
+                modelConfiguration = ModelConfiguration(
+                    schema: schema,
+                    isStoredInMemoryOnly: false,
+                    cloudKitDatabase: .private("iCloud.com.maximeliseyev.analogprocess")
+                )
+            }
+
             modelContainer = try ModelContainer(for: schema, configurations: [modelConfiguration])
         } catch {
-            fatalError("Could not initialize SwiftData: \(error)")
+            print("SwiftData CloudKit initialization failed: \(error)")
+            if let swiftDataError = error as? SwiftDataError {
+                print("SwiftData error details: \(swiftDataError)")
+            }
+
+            // Проверяем причину ошибки CloudKit
+            if let nsError = error as NSError? {
+                print("Error domain: \(nsError.domain)")
+                print("Error code: \(nsError.code)")
+                if nsError.code == 134400 {
+                    print("⚠️ CloudKit требует iCloud аккаунт. Войдите в iCloud в Настройках устройства.")
+                }
+            }
+
+            // Try fallback without CloudKit
+            do {
+                let fallbackSchema = Schema([
+                    SwiftDataFilm.self,
+                    SwiftDataDeveloper.self,
+                    SwiftDataCalculationRecord.self,
+                    SwiftDataCustomAgitationMode.self
+                ])
+                let fallbackConfig = ModelConfiguration(
+                    schema: fallbackSchema,
+                    isStoredInMemoryOnly: false
+                )
+                modelContainer = try ModelContainer(for: fallbackSchema, configurations: [fallbackConfig])
+                print("✅ Fallback to local storage successful")
+            } catch {
+                print("❌ Critical error - SwiftData initialization completely failed: \(error)")
+
+                // Last resort: in-memory storage
+                do {
+                    let memorySchema = Schema([
+                        SwiftDataFilm.self,
+                        SwiftDataDeveloper.self,
+                        SwiftDataCalculationRecord.self,
+                        SwiftDataCustomAgitationMode.self
+                    ])
+                    let memoryConfig = ModelConfiguration(schema: memorySchema, isStoredInMemoryOnly: true)
+                    modelContainer = try ModelContainer(for: memorySchema, configurations: [memoryConfig])
+                    print("⚠️ Using in-memory storage as last resort")
+                } catch {
+                    print("💥 Complete SwiftData failure: \(error)")
+                    fatalError("Could not initialize SwiftData in any configuration: \(error)")
+                }
+            }
         }
     }
 }

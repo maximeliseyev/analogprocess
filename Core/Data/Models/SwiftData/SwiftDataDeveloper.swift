@@ -13,16 +13,20 @@ import SwiftData
 @Model
 public final class SwiftDataDeveloper: DeveloperProtocol, HasStringId {
     public var stringId: String { id }
-    @Attribute(.unique) public var id: String
-    public var name: String
-    public var manufacturer: String
-    public var type: String
+    public var id: String = UUID().uuidString
+    public var name: String = ""
+    public var manufacturer: String = ""
+    public var type: String = ""
     public var defaultDilution: String?
     
     // Relationships
     @Relationship(deleteRule: .cascade, inverse: \SwiftDataDevelopmentTime.developer)
-    public var developmentTimes: [SwiftDataDevelopmentTime] = []
+    public var developmentTimes: [SwiftDataDevelopmentTime]? = []
     
+    public init() {
+        // Default values are set in property declarations
+    }
+
     public init(id: String, name: String, manufacturer: String, type: String, defaultDilution: String? = nil) {
         self.id = id
         self.name = name

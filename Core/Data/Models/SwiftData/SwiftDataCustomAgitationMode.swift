@@ -6,30 +6,34 @@ import SwiftData
 /// Модель для сохранения кастомного режима агитации в SwiftData
 @Model
 public final class SwiftDataCustomAgitationMode {
-    @Attribute(.unique) public var id: String
-    public var name: String
-    public var createdAt: Date
-    public var updatedAt: Date
+    public var id: String = UUID().uuidString
+    public var name: String = ""
+    public var createdAt: Date = Date()
+    public var updatedAt: Date = Date()
     
     // Агитация для первой минуты
-    public var firstMinuteAgitationType: String
-    public var firstMinuteAgitationSeconds: Int
-    public var firstMinuteRestSeconds: Int
+    public var firstMinuteAgitationType: String = "continuous"
+    public var firstMinuteAgitationSeconds: Int = 0
+    public var firstMinuteRestSeconds: Int = 0
     public var firstMinuteCustomDescription: String?
     
-    // Агитация для промежуточных минут  
-    public var intermediateAgitationType: String
-    public var intermediateAgitationSeconds: Int
-    public var intermediateRestSeconds: Int
+    // Агитация для промежуточных минут
+    public var intermediateAgitationType: String = "cycle"
+    public var intermediateAgitationSeconds: Int = 10
+    public var intermediateRestSeconds: Int = 50
     public var intermediateCustomDescription: String?
     
     // Агитация для последней минуты (опционально)
-    public var hasLastMinuteCustom: Bool
+    public var hasLastMinuteCustom: Bool = false
     public var lastMinuteAgitationType: String?
-    public var lastMinuteAgitationSeconds: Int
-    public var lastMinuteRestSeconds: Int
+    public var lastMinuteAgitationSeconds: Int = 0
+    public var lastMinuteRestSeconds: Int = 0
     public var lastMinuteCustomDescription: String?
     
+    public init() {
+        // Default values are set in property declarations
+    }
+
     public init(
         id: String = UUID().uuidString,
         name: String,

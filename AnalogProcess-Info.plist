@@ -12,5 +12,9 @@
 	<false/>
 	<key>GitHubDataRepoURL</key>
 	<string>https://raw.githubusercontent.com/maximeliseyev/filmdevelopmentdata/main</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 </dict>
 </plist>
