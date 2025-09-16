@@ -43,7 +43,7 @@ struct DevelopmentSetupView: View {
         if !isFromStageEditor {
             Picker("Process Mode", selection: $viewModel.selectedMode) {
                 ForEach(ProcessMode.allCases, id: \.self) { mode in
-                    Text(mode.rawValue).tag(mode)
+                    Text(mode.localizedName).tag(mode)
                 }
             }
             .pickerStyle(SegmentedPickerStyle())

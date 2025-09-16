@@ -356,6 +356,8 @@
 
 // MARK: - Development
 "development" = "Cuci Film";
+"processModesDeveloping" = "Pengembangan";
+"processModeFixer" = "Perbaiki";
 "noAlternativeOptions" = "Hanya ada satu opsi tersedia";
 
 // MARK: - Manuals

@@ -222,6 +222,54 @@
 "agitationRaePhase1Rotation10thMinute" = "1 оборот на 10-ю минуту";
 "agitationRaePhase1RotationEvery5Minutes" = "1 оборот каждые 5 минут";
 
+// MARK: - Custom Agitation Mode
+"createCustomAgitation" = "Создать пользовательский режим";
+"createCustomAgitationDescription" = "Создайте свой собственный паттерн агитации";
+"savedCustomAgitationModes" = "Сохранённые пользовательские режимы";
+"savedCustomAgitationDescription" = "Просмотрите и выберите из ваших сохранённых режимов";
+"customAgitationCreateTitle" = "Создать пользовательский режим агитации";
+"customAgitationEditTitle" = "Редактировать пользовательский режим агитации";
+"customAgitationName" = "Название режима";
+"customAgitationNamePlaceholder" = "Введите название режима";
+"customAgitationFirstMinute" = "Первая минута";
+"customAgitationFirstMinuteDescription" = "Паттерн агитации для первой минуты";
+"customAgitationIntermediate" = "Промежуточные минуты";
+"customAgitationIntermediateDescription" = "Паттерн агитации для минут от 2 до N-1";
+"customAgitationEnableLastMinute" = "Пользовательская последняя минута";
+"customAgitationLastMinute" = "Последняя минута";
+"customAgitationLastMinuteDescription" = "Паттерн агитации для последней минуты";
+"customAgitationPreview" = "Предварительный просмотр";
+"customAgitationPreviewUnavailable" = "Завершите настройку для просмотра";
+"customAgitationCreateButton" = "Создать режим";
+"customAgitationUpdateButton" = "Обновить режим";
+"customAgitationReset" = "Сбросить форму";
+"agitationType" = "Тип агитации";
+"agitationCycle" = "Цикл";
+"agitationPeriodic" = "Периодическая";
+"agitationCustom" = "Пользовательские инструкции";
+"cycleTimingSettings" = "Настройки времени цикла";
+"agitationSeconds" = "Агитация";
+"restSeconds" = "Покой";
+"periodicInterval" = "Интервал";
+"customAgitationInstructions" = "Инструкции";
+"customAgitationInstructionsPlaceholder" = "Введите пользовательские инструкции по агитации...";
+"agitationPeriodicFormat" = "Каждые %@с";
+"noCustomAgitationModes" = "Нет пользовательских режимов";
+"noCustomAgitationModesDescription" = "Создайте свой первый пользовательский режим агитации для начала работы";
+"createFirstCustomMode" = "Создать первый режим";
+"selectThisMode" = "Выбрать этот режим";
+"deleteConfirmation" = "Удалить режим";
+"deleteCustomModeMessage" = "Вы уверены, что хотите удалить \"%@\"? Это действие невозможно отменить.";
+"createNew" = "Создать новый";
+"validationError" = "Ошибка валидации";
+"saveError" = "Ошибка сохранения";
+"ok" = "OK";
+"customAgitationErrorEmptyName" = "Название режима не может быть пустым";
+"customAgitationErrorEmptyCustomDescription" = "Требуются пользовательские инструкции для %@";
+"customAgitationErrorInvalidTiming" = "Неверная конфигурация времени для %@";
+"customAgitationErrorInvalidInterval" = "Неверный интервал для %@";
+"customAgitationErrorNoLastMinuteConfig" = "Отсутствует конфигурация последней минуты";
+
 // MARK: - Calculator Results
 "tapToCalculator" = "Нажмите чтобы перейти к калькулятору";
 "calculatedTime" = "Вычисленное время";
@@ -310,6 +358,8 @@
 "advancedSetup" = "РАСШИРЕННЫЕ НАСТРОЙКИ";
 "openDevelopmentSetup" = "Открыть настройки проявки";
 "openFixerSetup" = "Открыть настройки фиксажа";
+"setupTimeByPreset" = "Настроить время по пресету";
+"resetStages" = "Сбросить стадии";
 
 // MARK: - Settings
 "settings" = "Настройки";
@@ -356,6 +406,8 @@
 
 // MARK: - Development
 "development" = "Проявка";
+"processModesDeveloping" = "Проявка";
+"processModeFixer" = "Фиксаж";
 "noAlternativeOptions" = "Доступен только один вариант";
 
 // MARK: - Manuals

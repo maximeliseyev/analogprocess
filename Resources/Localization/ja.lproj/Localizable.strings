@@ -356,6 +356,8 @@
 
 // MARK: - Development
 "development" = "現像";
+"processModesDeveloping" = "開発";
+"processModeFixer" = "修復者";
 "noAlternativeOptions" = "オプションは1つのみ利用可能";
 
 // MARK: - Manuals

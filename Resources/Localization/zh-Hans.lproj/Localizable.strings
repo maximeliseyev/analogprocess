@@ -356,6 +356,8 @@
 
 // MARK: - Development
 "development" = "显影";
+"processModesDeveloping" = "开发";
+"processModeFixer" = "修复者";
 "noAlternativeOptions" = "仅有一个可用选项";
 
 // MARK: - Manuals
