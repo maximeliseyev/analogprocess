@@ -13,6 +13,7 @@ protocol DataService {
 
     func getAvailableDilutions(filmId: String, developerId: String) -> [String]
     func getAvailableISOs(filmId: String, developerId: String, dilution: String) -> [Int]
+    func getAvailableDevelopers(filmId: String) -> [Developer]
     func calculateDevelopmentTime(parameters: DevelopmentParameters) -> Int?
     func refreshData()
 }

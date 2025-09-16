@@ -42,7 +42,10 @@ class DevelopmentSetupViewModel<DataServiceType: DataService>: ObservableObject 
     }
     
     var developers: [DataServiceType.Developer] {
-        dataService.developers
+        guard let selectedFilm = selectedFilm else {
+            return dataService.developers
+        }
+        return dataService.getAvailableDevelopers(filmId: selectedFilm.id)
     }
     
     var fixers: [DataServiceType.Fixer] {
@@ -83,6 +86,16 @@ class DevelopmentSetupViewModel<DataServiceType: DataService>: ObservableObject 
     func selectFilm(_ film: DataServiceType.Film) {
         selectedFilm = film
         iso = Int(film.defaultISO)
+
+        // Проверяем, доступен ли текущий проявитель для новой пленки
+        if let currentDeveloper = selectedDeveloper {
+            let availableDevelopers = dataService.getAvailableDevelopers(filmId: film.id)
+            if !availableDevelopers.contains(where: { $0.id == currentDeveloper.id }) {
+                selectedDeveloper = nil
+                selectedDilution = ""
+            }
+        }
+
         calculateTimeAutomatically()
     }
     

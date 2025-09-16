@@ -30,7 +30,6 @@ struct DevelopmentSetupView: View {
             calculatedTimeSection
 
             if isFromStageEditor {
-                Spacer()
                 saveButtonSection
             } else {
                 Spacer()
@@ -73,7 +72,7 @@ struct DevelopmentSetupView: View {
     }
     
     private func stageEditorCalculatorButton(calculatedTime: Int) -> some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 8) {
             Button(action: { handleCalculatorTap(calculatedTime: calculatedTime) }) {
                 HStack {
                     Image(systemName: "plus.forwardslash.minus")
@@ -236,7 +235,7 @@ struct DevelopmentSetupView: View {
             if let calculatedTime = viewModel.calculatedTime {
                 CalculatorView(
                     swiftDataService: viewModel.dataService,
-                    initialTime: calculatedTime, 
+                    initialTime: calculatedTime,
                     initialTemperature: viewModel.temperature,
                     isFromStageEditor: isFromStageEditor
                 )

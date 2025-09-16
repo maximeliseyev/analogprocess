@@ -7,8 +7,13 @@ struct StageEditorSheet: View {
     @State private var localStage: StagingStage
     let onSave: (StagingStage) -> Void
     
-    @State private var minutes: Int
-    @State private var seconds: Int
+    private var minutes: Int {
+        Int(localStage.duration) / 60
+    }
+
+    private var seconds: Int {
+        Int(localStage.duration) % 60
+    }
     @State private var selectedAgitationKey: String
     @State private var showingManualTimePicker = false
 
@@ -32,9 +37,6 @@ struct StageEditorSheet: View {
         self.swiftDataService = swiftDataService
         self._localStage = State(initialValue: stage)
         self.onSave = onSave
-        let totalSeconds = Int(stage.duration)
-        self._minutes = State(initialValue: totalSeconds / 60)
-        self._seconds = State(initialValue: totalSeconds % 60)
         
         let defaultKey: String = {
             switch stage.type {
@@ -189,7 +191,24 @@ struct StageEditorSheet: View {
                         HStack {
                             Text(LocalizedStringKey("duration"))
                             Spacer()
-                            InlineTimePicker(minutes: $minutes, seconds: $seconds)
+                            InlineTimePicker(
+                                minutes: Binding(
+                                    get: { self.minutes },
+                                    set: { newValue in
+                                        let newDuration = TimeInterval(newValue * 60 + self.seconds)
+                                        self.localStage.duration = newDuration
+                                        print("🔄 minutes binding: Updated duration to \(newDuration)")
+                                    }
+                                ),
+                                seconds: Binding(
+                                    get: { self.seconds },
+                                    set: { newValue in
+                                        let newDuration = TimeInterval(self.minutes * 60 + newValue)
+                                        self.localStage.duration = newDuration
+                                        print("🔄 seconds binding: Updated duration to \(newDuration)")
+                                    }
+                                )
+                            )
                         }
                     }
                     if localStage.type == .bleach {
@@ -206,7 +225,7 @@ struct StageEditorSheet: View {
 
             // Save button at bottom
             Button(action: {
-                localStage.duration = TimeInterval(minutes * 60 + seconds)
+                // duration уже обновлена через binding'и
                 localStage.agitationPresetKey = selectedAgitationKey
                 onSave(localStage)
                 dismiss()
@@ -232,9 +251,19 @@ struct StageEditorSheet: View {
                 }
             }
             .onReceive(NotificationCenter.default.publisher(for: Notification.Name("DevelopmentCalculatedTime"))) { output in
+                print("📥 StageEditorSheet: Received DevelopmentCalculatedTime notification")
                 if let secondsVal = output.userInfo?["seconds"] as? Int {
-                    minutes = secondsVal / 60
-                    seconds = secondsVal % 60
+                    let newMinutes = secondsVal / 60
+                    let newSeconds = secondsVal % 60
+                    print("🔄 StageEditorSheet: Updating time from \(minutes):\(String(format: "%02d", seconds)) to \(newMinutes):\(String(format: "%02d", newSeconds))")
+
+                    // Обновляем localStage.duration напрямую
+                    DispatchQueue.main.async {
+                        self.localStage.duration = TimeInterval(secondsVal)
+                        print("✅ StageEditorSheet: Updated duration to \(self.localStage.duration) seconds (now shows \(self.minutes):\(String(format: "%02d", self.seconds)))")
+                    }
+                } else {
+                    print("❌ StageEditorSheet: No seconds found in notification userInfo")
                 }
             }
             .onReceive(NotificationCenter.default.publisher(for: Notification.Name("DismissCalculatorView"))) { _ in
@@ -252,8 +281,22 @@ struct StageEditorSheet: View {
             }
             .sheet(isPresented: $showingManualTimePicker) {
                 ManualTimeInputView(
-                    minutes: $minutes,
-                    seconds: $seconds,
+                    minutes: Binding(
+                        get: { self.minutes },
+                        set: { newValue in
+                            let newDuration = TimeInterval(newValue * 60 + self.seconds)
+                            self.localStage.duration = newDuration
+                            print("🔄 ManualTimeInputView minutes: Updated duration to \(newDuration)")
+                        }
+                    ),
+                    seconds: Binding(
+                        get: { self.seconds },
+                        set: { newValue in
+                            let newDuration = TimeInterval(self.minutes * 60 + newValue)
+                            self.localStage.duration = newDuration
+                            print("🔄 ManualTimeInputView seconds: Updated duration to \(newDuration)")
+                        }
+                    ),
                     onApply: {
                         showingManualTimePicker = false
                     },

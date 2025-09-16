@@ -71,6 +71,10 @@ public class SwiftDataService: ObservableObject, DataService {
     func getAvailableISOs(filmId: String, developerId: String, dilution: String) -> [Int] {
         return repository.getAvailableISOs(filmId: filmId, developerId: developerId, dilution: dilution)
     }
+
+    func getAvailableDevelopers(filmId: String) -> [SwiftDataDeveloper] {
+        return repository.getAvailableDevelopers(filmId: filmId)
+    }
     
     
     func calculateDevelopmentTime(parameters: DevelopmentParameters) -> Int? {
