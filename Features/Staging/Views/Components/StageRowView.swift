@@ -1,11 +1,10 @@
 import SwiftUI
 
 struct StageRowView: View {
-    let stage: StagingStage
+    @Binding var stage: StagingStage
     let swiftDataService: SwiftDataService
     let onDelete: () -> Void
     let onDuplicate: () -> Void
-    let onUpdate: (StagingStage) -> Void
     
     @State private var swipeOffsetX: CGFloat = 0
     private let swipeThreshold: CGFloat = 80
@@ -108,8 +107,8 @@ struct StageRowView: View {
             }
         }
         .sheet(isPresented: $isEditingStage) {
-            StageEditorSheet(swiftDataService: swiftDataService, stage: stage) { updatedStage in
-                onUpdate(updatedStage)
+            StageEditorSheet(swiftDataService: swiftDataService, stage: $stage) {
+                isEditingStage = false
             }
         }
     }

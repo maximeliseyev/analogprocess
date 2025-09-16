@@ -4,15 +4,15 @@ struct StageEditorSheet: View {
     @Environment(\.dismiss) private var dismiss
     let swiftDataService: SwiftDataService
     
-    @State private var localStage: StagingStage
-    let onSave: (StagingStage) -> Void
+    @Binding var stage: StagingStage
+    let onSave: () -> Void
     
     private var minutes: Int {
-        Int(localStage.duration) / 60
+        Int(stage.duration) / 60
     }
 
     private var seconds: Int {
-        Int(localStage.duration) % 60
+        Int(stage.duration) % 60
     }
     @State private var selectedAgitationKey: String
     @State private var showingManualTimePicker = false
@@ -33,19 +33,19 @@ struct StageEditorSheet: View {
         Dictionary(uniqueKeysWithValues: keyToType.map { ($1, $0) })
     }
     
-    init(swiftDataService: SwiftDataService, stage: StagingStage, onSave: @escaping (StagingStage) -> Void) {
+    init(swiftDataService: SwiftDataService, stage: Binding<StagingStage>, onSave: @escaping () -> Void) {
         self.swiftDataService = swiftDataService
-        self._localStage = State(initialValue: stage)
+        self._stage = stage
         self.onSave = onSave
         
         let defaultKey: String = {
-            switch stage.type {
+            switch stage.wrappedValue.type {
             case .bleach: return "agitationContinuousName"
             case .fixer: return "agitationFixerName"
             default: return "agitationXtolName"
             }
         }()
-        let key = stage.agitationPresetKey ?? defaultKey
+        let key = stage.wrappedValue.agitationPresetKey ?? defaultKey
         self._selectedAgitationKey = State(initialValue: key)
         
         let type = keyToType[key]
@@ -57,13 +57,13 @@ struct StageEditorSheet: View {
         NavigationStack {
             VStack(spacing: 0) {
                 Form {
-                if localStage.type == .develop {
+                if stage.type == .develop {
                     // Preset time setup section for development
                     Section(header: Text(LocalizedStringKey("setupTimeByPreset"))) {
                         NavigationLink(destination: DevelopmentSetupView(
                             viewModel: DevelopmentSetupViewModel<SwiftDataService>(dataService: swiftDataService),
                             isFromStageEditor: true,
-                            stageType: localStage.type
+                            stageType: stage.type
                         )) {
                             HStack {
                                 VStack(alignment: .leading, spacing: 4) {
@@ -121,13 +121,13 @@ struct StageEditorSheet: View {
                             }
                         }
                     }
-                } else if localStage.type == .fixer {
+                } else if stage.type == .fixer {
                     // Preset time setup section for fixer
                     Section(header: Text(LocalizedStringKey("setupTimeByPreset"))) {
                         NavigationLink(destination: DevelopmentSetupView(
                             viewModel: DevelopmentSetupViewModel<SwiftDataService>(dataService: swiftDataService),
                             isFromStageEditor: true,
-                            stageType: localStage.type
+                            stageType: stage.type
                         )) {
                             HStack {
                                 VStack(alignment: .leading, spacing: 4) {
@@ -196,7 +196,7 @@ struct StageEditorSheet: View {
                                     get: { self.minutes },
                                     set: { newValue in
                                         let newDuration = TimeInterval(newValue * 60 + self.seconds)
-                                        self.localStage.duration = newDuration
+                                        self.stage.duration = newDuration
                                         print("🔄 minutes binding: Updated duration to \(newDuration)")
                                     }
                                 ),
@@ -204,14 +204,14 @@ struct StageEditorSheet: View {
                                     get: { self.seconds },
                                     set: { newValue in
                                         let newDuration = TimeInterval(self.minutes * 60 + newValue)
-                                        self.localStage.duration = newDuration
+                                        self.stage.duration = newDuration
                                         print("🔄 seconds binding: Updated duration to \(newDuration)")
                                     }
                                 )
                             )
                         }
                     }
-                    if localStage.type == .bleach {
+                    if stage.type == .bleach {
                         Section(header: Text(LocalizedStringKey("agitation"))) {
                             HStack {
                                 Text(LocalizedStringKey("agitationMode"))
@@ -225,9 +225,8 @@ struct StageEditorSheet: View {
 
             // Save button at bottom
             Button(action: {
-                // duration уже обновлена через binding'и
-                localStage.agitationPresetKey = selectedAgitationKey
-                onSave(localStage)
+                stage.agitationPresetKey = selectedAgitationKey
+                onSave()
                 dismiss()
             }) {
                 HStack {
@@ -244,7 +243,7 @@ struct StageEditorSheet: View {
             .padding(.horizontal, 16)
             .padding(.bottom, 16)
         }
-        .navigationTitle(Text(LocalizedStringKey(localStage.name)))
+        .navigationTitle(Text(LocalizedStringKey(stage.name)))
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(LocalizedStringKey("cancel")) { dismiss() }
@@ -257,10 +256,9 @@ struct StageEditorSheet: View {
                     let newSeconds = secondsVal % 60
                     print("🔄 StageEditorSheet: Updating time from \(minutes):\(String(format: "%02d", seconds)) to \(newMinutes):\(String(format: "%02d", newSeconds))")
 
-                    // Обновляем localStage.duration напрямую
                     DispatchQueue.main.async {
-                        self.localStage.duration = TimeInterval(secondsVal)
-                        print("✅ StageEditorSheet: Updated duration to \(self.localStage.duration) seconds (now shows \(self.minutes):\(String(format: "%02d", self.seconds)))")
+                        self.stage.duration = TimeInterval(secondsVal)
+                        print("✅ StageEditorSheet: Updated duration to \(self.stage.duration) seconds (now shows \(self.minutes):\(String(format: "%02d", self.seconds)))")
                     }
                 } else {
                     print("❌ StageEditorSheet: No seconds found in notification userInfo")
@@ -285,7 +283,7 @@ struct StageEditorSheet: View {
                         get: { self.minutes },
                         set: { newValue in
                             let newDuration = TimeInterval(newValue * 60 + self.seconds)
-                            self.localStage.duration = newDuration
+                            self.stage.duration = newDuration
                             print("🔄 ManualTimeInputView minutes: Updated duration to \(newDuration)")
                         }
                     ),
@@ -293,7 +291,7 @@ struct StageEditorSheet: View {
                         get: { self.seconds },
                         set: { newValue in
                             let newDuration = TimeInterval(self.minutes * 60 + newValue)
-                            self.localStage.duration = newDuration
+                            self.stage.duration = newDuration
                             print("🔄 ManualTimeInputView seconds: Updated duration to \(newDuration)")
                         }
                     ),
