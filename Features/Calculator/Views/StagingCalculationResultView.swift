@@ -102,21 +102,33 @@ struct StagingCalculationResultView: View {
     
     private func saveCalculatedTime(result: ProcessStep) {
         let totalSeconds = result.minutes * 60 + result.seconds
-        
+
+        print("🔄 StagingCalculationResultView: Saving time \(totalSeconds) seconds (\(result.minutes):\(String(format: "%02d", result.seconds)))")
+
         // Отправляем уведомление с рассчитанным временем
         NotificationCenter.default.post(
             name: Notification.Name("DevelopmentCalculatedTime"),
             object: nil,
             userInfo: ["seconds": totalSeconds]
         )
-        
-        // Закрываем sheet и возвращаемся на экран настройки Develop stage
+
+        print("📤 StagingCalculationResultView: Sent DevelopmentCalculatedTime notification")
+
+        // Закрываем sheet
         dismiss()
-        
-        // Дополнительно закрываем калькулятор, чтобы вернуться к DevelopmentSetupView
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+
+        // Дополнительно закрываем калькулятор и возвращаемся к DevelopmentSetupView
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             NotificationCenter.default.post(
                 name: Notification.Name("DismissCalculatorView"),
+                object: nil
+            )
+        }
+
+        // Еще через немного времени закрываем и DevelopmentSetupView
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            NotificationCenter.default.post(
+                name: Notification.Name("DismissDevelopmentSetupView"),
                 object: nil
             )
         }

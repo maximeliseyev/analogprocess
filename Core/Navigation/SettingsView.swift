@@ -70,7 +70,7 @@ public struct SettingsView: View {
                     AutoSyncStatusView(autoSyncService: autoSyncService)
                     
                     if githubService.isDownloading {
-                        ProgressView(value: githubService.downloadProgress)
+                        ProgressView(value: min(max(githubService.downloadProgress, 0.0), 1.0))
                             .progressViewStyle(LinearProgressViewStyle())
                     }
                     

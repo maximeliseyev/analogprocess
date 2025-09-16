@@ -154,6 +154,22 @@ public class SwiftDataRepository: ObservableObject {
         let isos = items.map { Int($0.iso) }
         return Array(Set(isos)).sorted()
     }
+
+    func getAvailableDevelopers(filmId: String) -> [SwiftDataDeveloper] {
+        let descriptor = FetchDescriptor<SwiftDataDevelopmentTime>(
+            predicate: #Predicate<SwiftDataDevelopmentTime> { item in
+                item.film?.id == filmId
+            }
+        )
+        let items = (try? modelContext.fetch(descriptor)) ?? []
+        let developerIds = items.compactMap { $0.developer?.id }
+        let uniqueDeveloperIds = Array(Set(developerIds))
+
+        // Получаем уникальных проявителей
+        return uniqueDeveloperIds.compactMap { developerId in
+            getDeveloper(by: developerId)
+        }.sorted { $0.name < $1.name }
+    }
     
     // MARK: - Calculation Records Management
     func saveRecord(filmName: String, developerName: String, dilution: String, temperature: Int, iso: Int, calculatedTime: Int, notes: String = "") {

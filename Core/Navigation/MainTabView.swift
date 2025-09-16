@@ -113,7 +113,7 @@ public struct MainTabView: View {
                         }
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        if selectedTab == 4 {
+                        if selectedTab == 5 {
                             Button(action: {
                                 showingCreateRecord = true
                             }) {
