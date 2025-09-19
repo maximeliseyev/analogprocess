@@ -11,12 +11,14 @@ struct SavedCustomAgitationView: View {
     @State private var showingDeleteAlert = false
     @State private var modeToDelete: AgitationMode?
 
+    // TODO: Refactor to Dependency Injection pattern.
+    // The ViewModel should be initialized in the parent view (e.g., AgitationSelectionView)
+    // with the modelContext and passed in as a parameter.
+    // This would remove the need for the init/onAppear workaround.
     init(selectedMode: Binding<AgitationMode?>) {
-        self._selectedMode = selectedMode
-        // Временный ViewModel, будет заменен в onAppear
-        let tempContainer = try! ModelContainer(for: AgitationModeData.self)
-        self._viewModel = State(initialValue: CustomAgitationViewModel(modelContext: tempContainer.mainContext))
-    }
+            self._selectedMode = selectedMode
+            self._viewModel = State(initialValue: CustomAgitationViewModel(modelContext: nil))
+        }
     
     var body: some View {
         NavigationStack {
