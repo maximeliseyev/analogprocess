@@ -48,6 +48,10 @@
 "developmentCompleteForProcess" = "กระบวนการเสร็จสิ้น: %@";
 "selectDevelopmentParameters" = "เลือกพารามิเตอร์การล้างเพื่อเริ่มตัวจับเวลา";
 "startTimer" = "เริ่มตัวจับเวลา";
+"agitationModeNotSelected" = "ไม่ได้เลือก";
+"setTimeFirstToSelectAgitation" = "กรุณาตั้งเวลาก่อนเพื่อเลือกโหมดการเขย่า";
+"selectAgitationModeToStartTimer" = "กรุณาเลือกโหมดการเขย่าเพื่อเริ่มตัวจับเวลา";
+"setAgitationModeFirstToStartTimer" = "กรุณาเลือกโหมดการเขย่าก่อนเพื่อเริ่มตัวจับเวลา";
 "saveToJournal" = "บันทึกลงบันทึก";
 
 // MARK: - Film & Developer

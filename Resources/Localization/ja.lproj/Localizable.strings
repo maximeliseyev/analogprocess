@@ -48,6 +48,10 @@
 "developmentCompleteForProcess" = "プロセス完了: %@";
 "selectDevelopmentParameters" = "現像パラメータを選択してタイマーを開始";
 "startTimer" = "タイマー開始";
+"agitationModeNotSelected" = "未選択";
+"setTimeFirstToSelectAgitation" = "まず時間を設定してアジテーションを選択してください";
+"selectAgitationModeToStartTimer" = "タイマーを開始するにはアジテーションモードを選択してください";
+"setAgitationModeFirstToStartTimer" = "まずアジテーションモードを選択してタイマーを開始してください";
 "saveToJournal" = "ジャーナルに保存";
 
 // MARK: - Film & Developer

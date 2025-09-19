@@ -61,7 +61,7 @@ struct AgitationArrowsView: View {
     var body: some View {
         ZStack {
             ForEach(0..<5, id: \.self) { index in
-                Image(systemName: "fish.fill") // "arrowshape.forward.fill"
+                Image(systemName: "fish.fill")
                     .font(.system(size: 20, weight: .bold))
                     .foregroundColor(.orange)
                     .offset(y: -100)

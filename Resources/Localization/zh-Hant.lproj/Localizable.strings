@@ -48,6 +48,10 @@
 "developmentCompleteForProcess" = "流程完成：%@";
 "selectDevelopmentParameters" = "選擇沖印參數以啟動計時器";
 "startTimer" = "啟動計時器";
+"agitationModeNotSelected" = "未選擇";
+"setTimeFirstToSelectAgitation" = "請先設定時間以選擇攪拌模式";
+"selectAgitationModeToStartTimer" = "請選擇攪拌模式以啟動計時器";
+"setAgitationModeFirstToStartTimer" = "請先選擇攪拌模式以啟動計時器";
 "saveToJournal" = "儲存到日誌";
 
 // MARK: - Film & Developer

@@ -60,8 +60,8 @@ struct SwiftDataPersistence {
             let schema = Schema([
                 SwiftDataFilm.self,
                 SwiftDataDeveloper.self,
-                SwiftDataCalculationRecord.self,
-                SwiftDataCustomAgitationMode.self
+                SwiftDataJournalRecord.self,
+                // AgitationModeData.self // Временно отключено для диагностики
                 // TODO: Добавить остальные модели после успешного теста:
                 // SwiftDataDevelopmentTime.self,
                 // SwiftDataFixer.self,
@@ -105,8 +105,8 @@ struct SwiftDataPersistence {
                 let fallbackSchema = Schema([
                     SwiftDataFilm.self,
                     SwiftDataDeveloper.self,
-                    SwiftDataCalculationRecord.self,
-                    SwiftDataCustomAgitationMode.self
+                    SwiftDataJournalRecord.self,
+                    // AgitationModeData.self // Временно отключено
                 ])
                 let fallbackConfig = ModelConfiguration(
                     schema: fallbackSchema,
@@ -122,8 +122,8 @@ struct SwiftDataPersistence {
                     let memorySchema = Schema([
                         SwiftDataFilm.self,
                         SwiftDataDeveloper.self,
-                        SwiftDataCalculationRecord.self,
-                        SwiftDataCustomAgitationMode.self
+                        SwiftDataJournalRecord.self,
+                        // AgitationModeData.self // Временно отключено
                     ])
                     let memoryConfig = ModelConfiguration(schema: memorySchema, isStoredInMemoryOnly: true)
                     modelContainer = try ModelContainer(for: memorySchema, configurations: [memoryConfig])

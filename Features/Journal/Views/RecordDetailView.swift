@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct RecordDetailView: View {
-    let record: SwiftDataCalculationRecord
+    let record: SwiftDataJournalRecord
     let swiftDataService: SwiftDataService
     let onEdit: () -> Void
     let onDelete: () -> Void

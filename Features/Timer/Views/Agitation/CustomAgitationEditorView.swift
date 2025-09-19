@@ -10,9 +10,8 @@ struct CustomAgitationEditorView: View {
     
     init(selectedMode: Binding<AgitationMode?>) {
         self._selectedMode = selectedMode
-        // Временный ViewModel, будет заменен в onAppear
-        let tempContainer = try! ModelContainer(for: SwiftDataCustomAgitationMode.self)
-        self._viewModel = State(initialValue: CustomAgitationViewModel(modelContext: tempContainer.mainContext))
+        // Временный пустой ViewModel, будет заменен в onAppear с правильным modelContext
+        self._viewModel = State(initialValue: CustomAgitationViewModel(modelContext: nil))
     }
     
     var body: some View {

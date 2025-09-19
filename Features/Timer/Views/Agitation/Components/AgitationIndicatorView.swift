@@ -63,28 +63,3 @@ struct AgitationIndicatorView: View {
     }
 }
 
-struct AgitationIndicatorView_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack(spacing: 20) {
-            AgitationIndicatorView(
-                shouldAgitate: true,
-                selectedAgitationMode: nil,
-                isInAgitationPhase: true,
-                agitationTimeRemaining: 30,
-                currentMinute: 1,
-                currentAgitationPhase: AgitationPhase.PhaseAgitationType.continuous
-            )
-            
-            AgitationIndicatorView(
-                shouldAgitate: true,
-                selectedAgitationMode: nil,
-                isInAgitationPhase: false,
-                agitationTimeRemaining: 15,
-                currentMinute: 2,
-                currentAgitationPhase: AgitationPhase.PhaseAgitationType.cycle(agitationSeconds: 30, restSeconds: 15)
-            )
-        }
-        .padding()
-        .previewLayout(.sizeThatFits)
-    }
-} 

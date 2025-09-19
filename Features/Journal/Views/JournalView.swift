@@ -11,20 +11,45 @@ import SwiftData
 struct JournalView: View {
     @StateObject private var viewModel: JournalViewModel
     
-    let onEditRecord: (SwiftDataCalculationRecord) -> Void
-    let onDeleteRecord: (SwiftDataCalculationRecord) -> Void
+    let onEditRecord: (SwiftDataJournalRecord) -> Void
+    let onDeleteRecord: (SwiftDataJournalRecord) -> Void
     let onClose: () -> Void
     let onCreateNew: () -> Void
     let syncStatus: CloudKitService.SyncStatus
     let isCloudAvailable: Bool
     let onSync: () -> Void
     
-    @State private var selectedRecord: SwiftDataCalculationRecord?
-    
+    @State private var selectedRecord: SwiftDataJournalRecord?
+    @State private var searchText = ""
+
+    // MARK: - Computed Properties
+
+    var filteredRecords: [SwiftDataJournalRecord] {
+        if searchText.isEmpty {
+            return viewModel.savedRecords
+        } else {
+            return viewModel.savedRecords.filter { record in
+                let searchQuery = searchText.lowercased()
+
+                let name = record.name?.lowercased() ?? ""
+                let filmName = record.filmName?.lowercased() ?? ""
+                let developerName = record.developerName?.lowercased() ?? ""
+                let process = record.process?.lowercased() ?? ""
+                let comment = record.comment?.lowercased() ?? ""
+
+                return name.contains(searchQuery) ||
+                       filmName.contains(searchQuery) ||
+                       developerName.contains(searchQuery) ||
+                       process.contains(searchQuery) ||
+                       comment.contains(searchQuery)
+            }
+        }
+    }
+
     init(swiftDataService: SwiftDataService,
          cloudKitService: CloudKitService,
-         onEditRecord: @escaping (SwiftDataCalculationRecord) -> Void, 
-         onDeleteRecord: @escaping (SwiftDataCalculationRecord) -> Void,
+         onEditRecord: @escaping (SwiftDataJournalRecord) -> Void, 
+         onDeleteRecord: @escaping (SwiftDataJournalRecord) -> Void,
          onClose: @escaping () -> Void, 
          onCreateNew: @escaping () -> Void,
          syncStatus: CloudKitService.SyncStatus = .idle,
@@ -42,16 +67,7 @@ struct JournalView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            // Статус синхронизации
-            SyncStatusView(
-                syncStatus: syncStatus,
-                isCloudAvailable: isCloudAvailable,
-                onSync: onSync
-            )
-            .padding(.horizontal)
-            .padding(.top, 8)
-            
-            if $viewModel.savedRecords.isEmpty {
+            if filteredRecords.isEmpty && searchText.isEmpty {
                 VStack(spacing: 20) {
                     Image(systemName: "book")
                         .font(.system(size: 60))
@@ -68,10 +84,27 @@ struct JournalView: View {
                 }
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else if filteredRecords.isEmpty && !searchText.isEmpty {
+                VStack(spacing: 20) {
+                    Image(systemName: "magnifyingglass")
+                        .font(.system(size: 60))
+                        .foregroundColor(.gray)
+
+                    Text(LocalizedStringKey("noResultsFound"))
+                        .font(.headline)
+                        .foregroundColor(.primary)
+
+                    Text(LocalizedStringKey("trySearchingDifferentKeywords"))
+                        .font(.body)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+                }
+                .padding()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 ScrollView {
                     LazyVStack(spacing: 12) {
-                        ForEach(viewModel.savedRecords, id: \.id) { record in
+                        ForEach(filteredRecords, id: \.id) { record in
                             RecordRowView(
                                 record: record,
                                 onTap: {
@@ -101,6 +134,7 @@ struct JournalView: View {
         }
         .navigationTitle(LocalizedStringKey("journal"))
         .navigationBarTitleDisplayMode(.inline)
+        .searchable(text: $searchText, prompt: String(localized: "searchJournal"))
         .sheet(item: $selectedRecord) { record in
             RecordDetailView(
                 record: record,

@@ -65,8 +65,9 @@ public class GitHubDataService: ObservableObject {
             async let fixersData = downloadFixers()
             async let developmentTimesData = downloadDevelopmentTimes()
             async let temperatureMultipliersData = downloadTemperatureMultipliers()
-            
-            let (films, developers, fixers, developmentTimes, temperatureMultipliers) = try await (filmsData, developersData, fixersData, developmentTimesData, temperatureMultipliersData)
+            async let agitationModesData = downloadAgitationModes()
+
+            let (films, developers, fixers, developmentTimes, temperatureMultipliers, agitationModes) = try await (filmsData, developersData, fixersData, developmentTimesData, temperatureMultipliersData, agitationModesData)
             
             print("DEBUG: All data downloaded successfully")
             print("DEBUG: Films count: \(films.count)")
@@ -74,17 +75,19 @@ public class GitHubDataService: ObservableObject {
             print("DEBUG: Fixers count: \(fixers.count)")
             print("DEBUG: Development times count: \(developmentTimes.count)")
             print("DEBUG: Temperature multipliers count: \(temperatureMultipliers.count)")
-            
+            print("DEBUG: Agitation modes count: \(agitationModes.count)")
+
             downloadProgress = Constants.Progress.maxProgress
             lastSyncDate = Date()
             saveLastSyncDate()
-            
+
             return GitHubDataResponse(
                 films: films,
                 developers: developers,
                 fixers: fixers,
                 developmentTimes: developmentTimes,
-                temperatureMultipliers: temperatureMultipliers
+                temperatureMultipliers: temperatureMultipliers,
+                agitationModes: agitationModes
             )
         } catch {
             print("DEBUG: Error in downloadAllData: \(error)")
@@ -211,7 +214,31 @@ public class GitHubDataService: ObservableObject {
             throw GitHubDataServiceError.decodingError
         }
     }
-    
+
+    private func downloadAgitationModes() async throws -> [String: GitHubAgitationModeData] {
+        guard let url = URL(string: NetworkConstants.baseURL + NetworkConstants.agitationModesEndpoint) else {
+            throw GitHubDataServiceError.networkError(.invalidURL)
+        }
+        let (data, response) = try await networkSession.data(from: url)
+
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw GitHubDataServiceError.networkError(.invalidResponse)
+        }
+
+        guard httpResponse.statusCode == 200 else {
+            throw GitHubDataServiceError.networkError(.serverError(httpResponse.statusCode))
+        }
+
+        do {
+            let agitationResponse = try jsonDecoder.decode(GitHubAgitationResponse.self, from: data)
+            downloadProgress += Constants.Progress.downloadStepIncrement
+            return agitationResponse.modes
+        } catch {
+            print("DEBUG: Agitation modes decoding error: \(error)")
+            throw GitHubDataServiceError.decodingError
+        }
+    }
+
     // MARK: - Sync Date Management
     
     private func loadLastSyncDate() {

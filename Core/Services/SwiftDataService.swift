@@ -135,11 +135,11 @@ public class SwiftDataService: ObservableObject, DataService {
         repository.saveRecord(filmName: filmName, developerName: developerName, dilution: dilution, temperature: temperature, iso: iso, calculatedTime: calculatedTime, notes: notes)
     }
     
-    func getCalculationRecords() -> [SwiftDataCalculationRecord] {
+    func getCalculationRecords() -> [SwiftDataJournalRecord] {
         return repository.getCalculationRecords()
     }
     
-    func deleteCalculationRecord(_ record: SwiftDataCalculationRecord) {
+    func deleteCalculationRecord(_ record: SwiftDataJournalRecord) {
         repository.deleteCalculationRecord(record)
     }
     

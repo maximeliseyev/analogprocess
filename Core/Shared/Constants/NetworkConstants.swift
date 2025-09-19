@@ -21,4 +21,5 @@ public enum NetworkConstants {
     static let fixersEndpoint = "/fixers.json"
     static let developmentTimesEndpoint = "/development-times.json"
     static let temperatureMultipliersEndpoint = "/temperature-multipliers.json"
+    static let agitationModesEndpoint = "/agitation-modes.json"
 }

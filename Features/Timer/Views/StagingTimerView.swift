@@ -9,13 +9,13 @@ import SwiftUI
 
 struct StagingTimerView: View {
     let stages: [StagingStage]
-    
-    @StateObject private var viewModel: StagingTimerViewModel
+
+    @StateObject private var viewModel: UnifiedTimerViewModel
     @Environment(\.dismiss) private var dismiss
-    
+
     init(stages: [StagingStage]) {
         self.stages = stages
-        self._viewModel = StateObject(wrappedValue: StagingTimerViewModel(stages: stages))
+        self._viewModel = StateObject(wrappedValue: UnifiedTimerViewModel(stagingStages: stages))
     }
     
     public var body: some View {
@@ -140,6 +140,6 @@ struct StagingTimerView: View {
     }
 }
 
-//#Preview {
-//    StagingTimerView(stages: StagingStage.defaultStages)
-//}
+#Preview {
+    StagingTimerView(stages: StagingStage.defaultStages)
+}

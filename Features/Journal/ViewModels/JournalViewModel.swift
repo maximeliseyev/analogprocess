@@ -12,7 +12,7 @@ import Combine
 @MainActor
 class JournalViewModel: ObservableObject {
     // MARK: - Published Properties
-    @Published var savedRecords: [SwiftDataCalculationRecord] = []
+    @Published var savedRecords: [SwiftDataJournalRecord] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
     @Published var syncStatus: CloudKitService.SyncStatus = .idle
@@ -64,7 +64,7 @@ class JournalViewModel: ObservableObject {
         savedRecords = swiftDataService.getCalculationRecords()
     }
     
-    func deleteRecord(_ record: SwiftDataCalculationRecord) {
+    func deleteRecord(_ record: SwiftDataJournalRecord) {
         swiftDataService.deleteCalculationRecord(record)
         loadRecords()
     }

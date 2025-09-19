@@ -62,6 +62,60 @@ extension View {
             .background(Color.green)
             .cornerRadius(10)
     }
+
+    /// Стиль для кнопок выбора в таймере (активная)
+    /// Использование: HStack { }.timerSelectorButtonStyle()
+    func timerSelectorButtonStyle() -> some View {
+        self
+            .padding()
+            .frame(maxWidth: .infinity, minHeight: 64)
+            .background(Color(.systemGray6))
+            .cornerRadius(10)
+    }
+
+    /// Стиль для кнопок выбора в таймере (неактивная)
+    /// Использование: HStack { }.timerSelectorButtonDisabledStyle()
+    func timerSelectorButtonDisabledStyle() -> some View {
+        self
+            .padding()
+            .frame(maxWidth: .infinity, minHeight: 64)
+            .background(Color(.systemGray5))
+            .cornerRadius(10)
+    }
+
+    /// Стиль для основной кнопки действия в таймере (активная)
+    /// Использование: HStack { }.timerActionButtonStyle()
+    func timerActionButtonStyle() -> some View {
+        self
+            .padding()
+            .frame(maxWidth: .infinity, minHeight: 64)
+            .background(Color.accentColor)
+            .cornerRadius(10)
+    }
+
+    /// Стиль для основной кнопки действия в таймере (неактивная)
+    /// Использование: HStack { }.timerActionButtonDisabledStyle()
+    func timerActionButtonDisabledStyle() -> some View {
+        self
+            .padding()
+            .frame(maxWidth: .infinity, minHeight: 64)
+            .background(Color(.systemGray5))
+            .cornerRadius(10)
+    }
+}
+
+// MARK: - Conditional View Modifier
+extension View {
+    /// Условный модификатор
+    /// Использование: view.if(condition) { $0.modifier() }
+    @ViewBuilder
+    func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+        if condition {
+            transform(self)
+        } else {
+            self
+        }
+    }
 }
 
 // MARK: - Card Styles

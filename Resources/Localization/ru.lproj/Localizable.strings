@@ -317,6 +317,9 @@
 "selectScreenForTesting" = "Выберете экран для тестирования:";
 "recordName" = "Введите имя";
 "searchFilms" = "Поиск плёнок...";
+"searchJournal" = "Поиск в журнале...";
+"noResultsFound" = "Результатов не найдено";
+"trySearchingDifferentKeywords" = "Попробуйте другие ключевые слова";
 "searchDevelopers" = "Поиск проявителей...";
 
 // MARK: - Home
@@ -355,6 +358,10 @@
 "stageTime" = "ВРЕМЯ СТАДИИ";
 "duration" = "Длительность";
 "agitationMode" = "Режим ажитации";
+"agitationModeNotSelected" = "Не выбрано";
+"setTimeFirstToSelectAgitation" = "Сначала установите время для выбора ажитации";
+"selectAgitationModeToStartTimer" = "Выберите режим ажитации для запуска таймера";
+"setAgitationModeFirstToStartTimer" = "Сначала выберите режим ажитации для запуска таймера";
 "advancedSetup" = "РАСШИРЕННЫЕ НАСТРОЙКИ";
 "openDevelopmentSetup" = "Открыть настройки проявки";
 "openFixerSetup" = "Открыть настройки фиксажа";

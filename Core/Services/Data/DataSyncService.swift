@@ -21,6 +21,7 @@ public class DataSyncService {
                 repository.syncDataGeneric(githubData.fixers, createEntity: createSwiftDataFixer, updateEntity: updateSwiftDataFixer)
                 syncDevelopmentTimesFromGitHub(githubData.developmentTimes)
                 syncTemperatureMultipliersFromGitHub(githubData.temperatureMultipliers)
+                syncAgitationModesFromGitHub(githubData.agitationModes)
                 
                 repository.saveContext()
                 repository.refreshData()
@@ -213,5 +214,11 @@ public class DataSyncService {
                 repository.insertTemperatureMultiplier(newMultiplier)
             }
         }
+    }
+
+    private func syncAgitationModesFromGitHub(_ agitationModes: [String: GitHubAgitationModeData]) {
+        // Обновляем кеш агитации в GitHubAgitationService
+        GitHubAgitationService.shared.updateModes(from: agitationModes)
+        print("DEBUG: Synced \(agitationModes.count) agitation modes to GitHubAgitationService")
     }
 }
