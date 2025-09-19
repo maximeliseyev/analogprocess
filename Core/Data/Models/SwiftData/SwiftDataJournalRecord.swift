@@ -1,5 +1,5 @@
 //
-//  SwiftDataCalculationRecord.swift
+//  SwiftDataJournalRecord.swift
 //  AnalogProcess
 //
 //  Created by Maxim Eliseyev on 11.08.2025.
@@ -8,9 +8,9 @@
 import Foundation
 import SwiftData
 
-// MARK: - SwiftData CalculationRecord Model
+// MARK: - SwiftData Journal Record Model
 @Model
-public final class SwiftDataCalculationRecord {
+public final class SwiftDataJournalRecord {
     public var recordID: String = UUID().uuidString
     public var comment: String?
     public var date: Date?

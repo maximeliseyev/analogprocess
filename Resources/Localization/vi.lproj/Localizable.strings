@@ -48,6 +48,10 @@
 "developmentCompleteForProcess" = "Quy trình hoàn thành: %@";
 "selectDevelopmentParameters" = "Chọn thông số tráng phim để bắt đầu đồng hồ";
 "startTimer" = "Bắt đầu đồng hồ";
+"agitationModeNotSelected" = "Chưa chọn";
+"setTimeFirstToSelectAgitation" = "Vui lòng đặt thời gian trước để chọn chế độ khuấy";
+"selectAgitationModeToStartTimer" = "Vui lòng chọn chế độ khuấy để bắt đầu đồng hồ";
+"setAgitationModeFirstToStartTimer" = "Vui lòng chọn chế độ khuấy trước để bắt đầu đồng hồ";
 "saveToJournal" = "Lưu vào nhật ký";
 
 // MARK: - Film & Developer

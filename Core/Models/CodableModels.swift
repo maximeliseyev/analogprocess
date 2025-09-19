@@ -207,6 +207,84 @@ public struct ProcessStep: Codable, Identifiable {
     }
 }
 
+// MARK: - GitHub Agitation Models
+public struct GitHubAgitationRuleCondition: Codable {
+    public let type: String
+    public let values: [Int]
+
+    public init(type: String, values: [Int]) {
+        self.type = type
+        self.values = values
+    }
+}
+
+public struct GitHubAgitationRule: Codable {
+    public let id: String
+    public let priority: Int
+    public let condition: GitHubAgitationRuleCondition
+    public let action: String
+    public let parameters: [String: Int]
+
+    public init(id: String, priority: Int, condition: GitHubAgitationRuleCondition, action: String, parameters: [String: Int]) {
+        self.id = id
+        self.priority = priority
+        self.condition = condition
+        self.action = action
+        self.parameters = parameters
+    }
+}
+
+public struct GitHubAgitationModeData: Codable {
+    public let name: String
+    public let localizedNameKey: String
+    public let description: String
+    public let isBuiltIn: Bool
+    public let rules: [GitHubAgitationRule]
+
+    public init(name: String, localizedNameKey: String, description: String, isBuiltIn: Bool, rules: [GitHubAgitationRule]) {
+        self.name = name
+        self.localizedNameKey = localizedNameKey
+        self.description = description
+        self.isBuiltIn = isBuiltIn
+        self.rules = rules
+    }
+}
+
+public struct GitHubAgitationResponse: Codable {
+    public let version: String
+    public let updated: String
+    public let modes: [String: GitHubAgitationModeData]
+    public let enums: GitHubAgitationEnums?
+    // Schema игнорируется при декодировании, так как содержит сложную структуру
+
+    public init(version: String, updated: String, modes: [String: GitHubAgitationModeData], enums: GitHubAgitationEnums? = nil) {
+        self.version = version
+        self.updated = updated
+        self.modes = modes
+        self.enums = enums
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case version, updated, modes, enums
+        // schema намеренно исключена
+    }
+}
+
+public struct GitHubAgitationEnums: Codable {
+    public let agitationActions: [String]
+    public let conditionTypes: [String]
+
+    private enum CodingKeys: String, CodingKey {
+        case agitationActions = "agitation_actions"
+        case conditionTypes = "condition_types"
+    }
+
+    public init(agitationActions: [String], conditionTypes: [String]) {
+        self.agitationActions = agitationActions
+        self.conditionTypes = conditionTypes
+    }
+}
+
 // MARK: - GitHub Data Response Models
 public struct GitHubDataResponse: Codable {
     public let films: [String: GitHubFilmData]
@@ -214,12 +292,14 @@ public struct GitHubDataResponse: Codable {
     public let fixers: [String: GitHubFixerData]
     public let developmentTimes: [String: [String: [String: [String: Int]]]]
     public let temperatureMultipliers: [String: Double]
-    
-    public init(films: [String: GitHubFilmData], developers: [String: GitHubDeveloperData], fixers: [String: GitHubFixerData], developmentTimes: [String: [String: [String: [String: Int]]]], temperatureMultipliers: [String: Double]) {
+    public let agitationModes: [String: GitHubAgitationModeData]
+
+    public init(films: [String: GitHubFilmData], developers: [String: GitHubDeveloperData], fixers: [String: GitHubFixerData], developmentTimes: [String: [String: [String: [String: Int]]]], temperatureMultipliers: [String: Double], agitationModes: [String: GitHubAgitationModeData]) {
         self.films = films
         self.developers = developers
         self.fixers = fixers
         self.developmentTimes = developmentTimes
         self.temperatureMultipliers = temperatureMultipliers
+        self.agitationModes = agitationModes
     }
 }

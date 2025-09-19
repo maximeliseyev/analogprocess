@@ -47,8 +47,8 @@ public struct JournalRecord {
     
     // MARK: - Conversion Methods
     
-    public func toCalculationRecord(context: ModelContext) -> SwiftDataCalculationRecord {
-        let record = SwiftDataCalculationRecord()
+    public func toCalculationRecord(context: ModelContext) -> SwiftDataJournalRecord {
+        let record = SwiftDataJournalRecord()
         record.date = date
         record.name = name
         record.filmName = filmName
@@ -62,7 +62,7 @@ public struct JournalRecord {
         return record
     }
     
-    public static func fromCalculationRecord(_ record: SwiftDataCalculationRecord) -> JournalRecord {
+    public static func fromCalculationRecord(_ record: SwiftDataJournalRecord) -> JournalRecord {
         return JournalRecord(
             date: record.date ?? Date(),
             name: record.name,

@@ -188,28 +188,32 @@ struct StageEditorSheet: View {
                 } else {
                     // Fallback for other stage types
                     Section(header: Text(LocalizedStringKey("stageTime"))) {
-                        HStack {
-                            Text(LocalizedStringKey("duration"))
-                            Spacer()
-                            InlineTimePicker(
-                                minutes: Binding(
-                                    get: { self.minutes },
-                                    set: { newValue in
-                                        let newDuration = TimeInterval(newValue * 60 + self.seconds)
-                                        self.stage.duration = newDuration
-                                        print("🔄 minutes binding: Updated duration to \(newDuration)")
-                                    }
-                                ),
-                                seconds: Binding(
-                                    get: { self.seconds },
-                                    set: { newValue in
-                                        let newDuration = TimeInterval(self.minutes * 60 + newValue)
-                                        self.stage.duration = newDuration
-                                        print("🔄 seconds binding: Updated duration to \(newDuration)")
-                                    }
-                                )
-                            )
+                        Button(action: {
+                            showingManualTimePicker = true
+                        }) {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(LocalizedStringKey("manualInput"))
+                                        .font(.body)
+                                        .foregroundColor(.primary)
+                                    Text(LocalizedStringKey("setTimeManually"))
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                                Spacer()
+                                VStack(alignment: .trailing, spacing: 4) {
+                                    Text(formatDuration(TimeInterval(minutes * 60 + seconds)))
+                                        .font(.body)
+                                        .fontWeight(.medium)
+                                        .foregroundColor(.blue)
+                                    Text(LocalizedStringKey("tapToChangeTime"))
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                            }
                         }
+                        .buttonStyle(PlainButtonStyle())
+                        .padding(.vertical, 4)
                     }
                     if stage.type == .bleach {
                         Section(header: Text(LocalizedStringKey("agitation"))) {
@@ -312,35 +316,5 @@ struct StageEditorSheet: View {
         let minutes = Int(duration) / 60
         let seconds = Int(duration) % 60
         return String(format: "%02d:%02d", minutes, seconds)
-    }
-}
-
-private struct InlineTimePicker: View {
-    @Binding var minutes: Int
-    @Binding var seconds: Int
-    var body: some View {
-        HStack(spacing: 12) {
-            VStack(spacing: 4) {
-                Text("min")
-                    .captionTextStyle()
-                Picker("", selection: $minutes) { ForEach(0...59, id: \.self) { Text("\($0)") } }
-                    .pickerStyle(MenuPickerStyle())
-                    .frame(width: 60)
-                    .clipped()
-            }
-            
-            Text(":")
-                .monospacedTitleStyle()
-                .padding(.top, 8)
-            
-            VStack(spacing: 4) {
-                Text("sec")
-                    .captionTextStyle()
-                Picker("", selection: $seconds) { ForEach(0...59, id: \.self) { Text(String(format: "%02d", $0)) } }
-                    .pickerStyle(MenuPickerStyle())
-                    .frame(width: 60)
-                    .clipped()
-            }
-        }
     }
 }

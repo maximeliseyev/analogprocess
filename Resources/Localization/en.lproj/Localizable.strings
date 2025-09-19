@@ -317,6 +317,9 @@
 "selectScreenForTesting" = "Select screen for testing:";
 "recordName" = "Enter name";
 "searchFilms" = "Search films...";
+"searchJournal" = "Search journal...";
+"noResultsFound" = "No results found";
+"trySearchingDifferentKeywords" = "Try searching with different keywords";
 "searchDevelopers" = "Search developers...";
 
 // MARK: - Home
@@ -355,6 +358,10 @@
 "stageTime" = "STAGE TIME";
 "duration" = "Duration";
 "agitationMode" = "Agitation Mode";
+"agitationModeNotSelected" = "Not selected";
+"setTimeFirstToSelectAgitation" = "Set time first to select agitation";
+"selectAgitationModeToStartTimer" = "Select agitation mode to start timer";
+"setAgitationModeFirstToStartTimer" = "Select agitation mode first to start timer";
 "advancedSetup" = "ADVANCED SETUP";
 "openDevelopmentSetup" = "Open Development Setup";
 "openFixerSetup" = "Open Fixer Setup";

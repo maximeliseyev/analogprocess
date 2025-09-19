@@ -173,7 +173,7 @@ public class SwiftDataRepository: ObservableObject {
     
     // MARK: - Calculation Records Management
     func saveRecord(filmName: String, developerName: String, dilution: String, temperature: Int, iso: Int, calculatedTime: Int, notes: String = "") {
-        let record = SwiftDataCalculationRecord(
+        let record = SwiftDataJournalRecord(
             comment: notes,
             date: Date(),
             developerName: developerName,
@@ -188,9 +188,9 @@ public class SwiftDataRepository: ObservableObject {
         saveContext()
     }
     
-    func getCalculationRecords() -> [SwiftDataCalculationRecord] {
+    func getCalculationRecords() -> [SwiftDataJournalRecord] {
         do {
-            let descriptor = FetchDescriptor<SwiftDataCalculationRecord>(sortBy: [SortDescriptor(\.date, order: .reverse)])
+            let descriptor = FetchDescriptor<SwiftDataJournalRecord>(sortBy: [SortDescriptor(\.date, order: .reverse)])
             return try modelContext.fetch(descriptor)
         } catch {
             print("Error fetching calculation records: \(error)")
@@ -198,7 +198,7 @@ public class SwiftDataRepository: ObservableObject {
         }
     }
     
-    func deleteCalculationRecord(_ record: SwiftDataCalculationRecord) {
+    func deleteCalculationRecord(_ record: SwiftDataJournalRecord) {
         modelContext.delete(record)
         saveContext()
     }
@@ -211,7 +211,7 @@ public class SwiftDataRepository: ObservableObject {
             try modelContext.delete(model: SwiftDataDevelopmentTime.self)
             try modelContext.delete(model: SwiftDataFixer.self)
             try modelContext.delete(model: SwiftDataTemperatureMultiplier.self)
-            try modelContext.delete(model: SwiftDataCalculationRecord.self)
+            try modelContext.delete(model: SwiftDataJournalRecord.self)
             
             saveContext()
             refreshData()

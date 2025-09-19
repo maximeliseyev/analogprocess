@@ -21,6 +21,7 @@ public struct MainTabView: View {
     @State private var timerMinutes = 0
     @State private var timerSeconds = 0
     @State private var timerLabel = "Manual Timer"
+    @State private var selectedAgitationMode: AgitationMode?
 
     // Staging ViewModel для сохранения состояния между навигацией
     @StateObject private var stagingViewModel = StagingViewModel()
@@ -60,17 +61,19 @@ public struct MainTabView: View {
                     
                     // Экран Timer
                     NavigationStack {
-                        TimerTabView(onStartTimer: { minutes, seconds in
+                        TimerTabView(onStartTimer: { minutes, seconds, agitationMode in
                             self.timerMinutes = minutes
                             self.timerSeconds = seconds
                             self.timerLabel = "Manual Timer"
+                            self.selectedAgitationMode = agitationMode
                             self.showTimerView = true
                         })
                         .navigationDestination(isPresented: $showTimerView) {
                             TimerView(
                                 timerLabel: timerLabel,
                                 totalMinutes: timerMinutes,
-                                totalSeconds: timerSeconds
+                                totalSeconds: timerSeconds,
+                                selectedAgitationMode: selectedAgitationMode
                             )
                         }
                     }
@@ -256,12 +259,12 @@ public struct MainTabView: View {
         return tabInfo.iconColor
     }
         
-    func loadRecord(_ record: SwiftDataCalculationRecord) {
+    func loadRecord(_ record: SwiftDataJournalRecord) {
         // Здесь можно добавить логику загрузки записи в калькулятор
         print("Loading record: \(record)")
     }
     
-    func deleteRecord(_ record: SwiftDataCalculationRecord) {
+    func deleteRecord(_ record: SwiftDataJournalRecord) {
         // Delete the record from SwiftData context
         swiftDataService.deleteCalculationRecord(record)
     }
@@ -290,7 +293,7 @@ struct MainTabView_PreviewWrapper: View {
                 SwiftDataDeveloper.self,
                 SwiftDataFixer.self,
                 SwiftDataDevelopmentTime.self,
-                SwiftDataCalculationRecord.self,
+                SwiftDataJournalRecord.self,
                 SwiftDataTemperatureMultiplier.self
             ])
             let config = ModelConfiguration(isStoredInMemoryOnly: true)

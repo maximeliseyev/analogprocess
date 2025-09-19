@@ -190,7 +190,7 @@ class CalculatorViewModel: ObservableObject {
         showSaveDialog = false
     }
     
-    func loadRecord(_ record: SwiftDataCalculationRecord) {
+    func loadRecord(_ record: SwiftDataJournalRecord) {
         let totalSeconds = Int(record.time)
         
         self.minutes = "\(totalSeconds / 60)"
@@ -203,7 +203,7 @@ class CalculatorViewModel: ObservableObject {
         calculateTime()
     }
     
-    func deleteRecord(_ record: SwiftDataCalculationRecord) {
+    func deleteRecord(_ record: SwiftDataJournalRecord) {
         swiftDataService.deleteCalculationRecord(record)
     }
     

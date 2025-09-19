@@ -9,12 +9,12 @@ struct SavedCustomAgitationView: View {
     @Binding var selectedMode: AgitationMode?
     @State private var showingEditor = false
     @State private var showingDeleteAlert = false
-    @State private var modeToDelete: SwiftDataCustomAgitationMode?
-    
+    @State private var modeToDelete: AgitationMode?
+
     init(selectedMode: Binding<AgitationMode?>) {
         self._selectedMode = selectedMode
         // Временный ViewModel, будет заменен в onAppear
-        let tempContainer = try! ModelContainer(for: SwiftDataCustomAgitationMode.self)
+        let tempContainer = try! ModelContainer(for: AgitationModeData.self)
         self._viewModel = State(initialValue: CustomAgitationViewModel(modelContext: tempContainer.mainContext))
     }
     
@@ -113,7 +113,7 @@ struct SavedCustomAgitationView: View {
                 SavedAgitationModeRow(
                     mode: mode,
                     onSelect: {
-                        selectedMode = mode.toAgitationMode()
+                        selectedMode = mode
                         dismiss()
                     },
                     onEdit: {
@@ -143,11 +143,11 @@ struct SavedCustomAgitationView: View {
 // MARK: - Row Component
 
 struct SavedAgitationModeRow: View {
-    let mode: SwiftDataCustomAgitationMode
+    let mode: AgitationMode
     let onSelect: () -> Void
     let onEdit: () -> Void
     let onDelete: () -> Void
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             // Header
@@ -156,61 +156,39 @@ struct SavedAgitationModeRow: View {
                     Text(mode.name)
                         .font(.headline)
                         .fontWeight(.medium)
-                    
-                    Text(formatDate(mode.updatedAt))
+
+                    Text(mode.isCustom ? String(localized: "customMode") : String(localized: "systemMode"))
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
-                
+
                 Spacer()
-                
-                HStack(spacing: 12) {
-                    Button(action: onEdit) {
-                        Image(systemName: "pencil")
-                            .foregroundColor(.blue)
+
+                if mode.isCustom {
+                    HStack(spacing: 12) {
+                        Button(action: onEdit) {
+                            Image(systemName: "pencil")
+                                .foregroundColor(.blue)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+
+                        Button(action: onDelete) {
+                            Image(systemName: "trash")
+                                .foregroundColor(.red)
+                        }
+                        .buttonStyle(PlainButtonStyle())
                     }
-                    .buttonStyle(PlainButtonStyle())
-                    
-                    Button(action: onDelete) {
-                        Image(systemName: "trash")
-                            .foregroundColor(.red)
-                    }
-                    .buttonStyle(PlainButtonStyle())
                 }
             }
-            
-            // Configuration preview
-            VStack(alignment: .leading, spacing: 8) {
-                configurationRow(
-                    title: String(localized: "customAgitationFirstMinute"),
-                    type: mode.firstMinuteAgitationType,
-                    agitation: mode.firstMinuteAgitationSeconds,
-                    rest: mode.firstMinuteRestSeconds,
-                    custom: mode.firstMinuteCustomDescription
-                )
-                
-                configurationRow(
-                    title: String(localized: "customAgitationIntermediate"),
-                    type: mode.intermediateAgitationType,
-                    agitation: mode.intermediateAgitationSeconds,
-                    rest: mode.intermediateRestSeconds,
-                    custom: mode.intermediateCustomDescription
-                )
-                
-                if mode.hasLastMinuteCustom {
-                    configurationRow(
-                        title: String(localized: "customAgitationLastMinute"),
-                        type: mode.lastMinuteAgitationType ?? "still",
-                        agitation: mode.lastMinuteAgitationSeconds,
-                        rest: mode.lastMinuteRestSeconds,
-                        custom: mode.lastMinuteCustomDescription
-                    )
-                }
-            }
-            .padding()
-            .background(Color(.systemGray6))
-            .cornerRadius(8)
-            
+
+            // Simple description for the new system
+            Text(mode.localizedName)
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+                .padding()
+                .background(Color(.systemGray6))
+                .cornerRadius(8)
+
             // Select button
             Button(action: onSelect) {
                 HStack {
@@ -227,76 +205,6 @@ struct SavedAgitationModeRow: View {
             .buttonStyle(PlainButtonStyle())
         }
         .padding(.vertical, 8)
-    }
-    
-    // MARK: - Helper Views
-    
-    private func configurationRow(
-        title: String,
-        type: String,
-        agitation: Int,
-        rest: Int,
-        custom: String?
-    ) -> some View {
-        HStack {
-            Text(title)
-                .font(.caption)
-                .fontWeight(.medium)
-                .frame(width: 80, alignment: .leading)
-            
-            Image(systemName: iconForType(type))
-                .foregroundColor(.blue)
-                .frame(width: 20)
-            
-            Text(descriptionForType(type, agitation: agitation, rest: rest, custom: custom))
-                .font(.caption)
-                .foregroundColor(.secondary)
-                .lineLimit(1)
-            
-            Spacer()
-        }
-    }
-    
-    // MARK: - Helper Methods
-    
-    private func formatDate(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-        return formatter.string(from: date)
-    }
-    
-    private func iconForType(_ type: String) -> String {
-        switch type {
-        case "continuous": return "arrow.clockwise"
-        case "still": return "pause"
-        case "cycle": return "repeat"
-        case "periodic": return "timer"
-        case "custom": return "text.alignleft"
-        default: return "questionmark"
-        }
-    }
-    
-    private func descriptionForType(
-        _ type: String,
-        agitation: Int,
-        rest: Int,
-        custom: String?
-    ) -> String {
-        switch type {
-        case "continuous":
-            return String(localized: "agitationContinuous")
-        case "still":
-            return String(localized: "agitationStill")
-        case "cycle":
-            return String(format: String(localized: "agitationCycleFormat"), "\(agitation)", "\(rest)")
-        case "periodic":
-            return String(format: String(localized: "agitationPeriodicFormat"), "\(agitation)")
-        case "custom":
-            return custom ?? String(localized: "agitationCustom")
-        default:
-            return type
-        }
     }
 }
 

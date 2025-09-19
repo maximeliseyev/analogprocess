@@ -4,16 +4,22 @@ public struct TimerView: View {
     let timerLabel: String
     let totalMinutes: Int
     let totalSeconds: Int
-    
-    @StateObject private var viewModel: TimerViewModel
+    let selectedAgitationMode: AgitationMode?
+
+    @StateObject private var viewModel: UnifiedTimerViewModel
     @Environment(\.dismiss) private var dismiss
 
-    
-    public init(timerLabel: String, totalMinutes: Int, totalSeconds: Int) {
+    public init(timerLabel: String, totalMinutes: Int, totalSeconds: Int, selectedAgitationMode: AgitationMode? = nil) {
         self.timerLabel = timerLabel
         self.totalMinutes = totalMinutes
         self.totalSeconds = totalSeconds
-        self._viewModel = StateObject(wrappedValue: TimerViewModel(totalMinutes: totalMinutes, totalSeconds: totalSeconds))
+        self.selectedAgitationMode = selectedAgitationMode
+        let duration = TimeInterval(totalMinutes * 60 + totalSeconds)
+        let viewModel = UnifiedTimerViewModel(duration: duration, name: timerLabel)
+        if let agitationMode = selectedAgitationMode {
+            viewModel.selectedAgitationMode = agitationMode
+        }
+        self._viewModel = StateObject(wrappedValue: viewModel)
     }
     
     public var body: some View {
@@ -151,9 +157,6 @@ public struct TimerView: View {
                     title: "fixingTime"
                 )
                 .presentationDetents([.medium])
-            }
-            .onAppear {
-                viewModel.setupTimer(totalMinutes: totalMinutes, totalSeconds: totalSeconds)
             }
         }
     }

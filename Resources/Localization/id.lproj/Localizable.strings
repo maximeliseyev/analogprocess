@@ -48,6 +48,10 @@
 "developmentCompleteForProcess" = "Proses selesai: %@";
 "selectDevelopmentParameters" = "Pilih parameter cuci film untuk memulai timer";
 "startTimer" = "Mulai Timer";
+"agitationModeNotSelected" = "Belum dipilih";
+"setTimeFirstToSelectAgitation" = "Silakan atur waktu terlebih dahulu untuk memilih mode agitasi";
+"selectAgitationModeToStartTimer" = "Silakan pilih mode agitasi untuk memulai timer";
+"setAgitationModeFirstToStartTimer" = "Silakan pilih mode agitasi terlebih dahulu untuk memulai timer";
 "saveToJournal" = "Simpan ke Jurnal";
 
 // MARK: - Film & Developer

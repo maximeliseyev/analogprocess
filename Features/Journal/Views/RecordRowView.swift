@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct RecordRowView: View {
-    let record: SwiftDataCalculationRecord
+    let record: SwiftDataJournalRecord
     let onTap: () -> Void
     
     private var minutes: Int {
