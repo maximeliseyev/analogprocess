@@ -407,6 +407,7 @@
 "setTimeManually" = "Установить время вручную";
 "tapToChangeTime" = "Нажмите для изменения времени";
 "setTimeToStartTimer" = "Установите время для запуска таймера";
+"manualTimer" = "Таймер установлен вручную";
 
 // MARK: - Create Mode
 "createMode" = "Создать режим";
@@ -418,7 +419,7 @@
 "noAlternativeOptions" = "Доступен только один вариант";
 
 // MARK: - Manuals
-"manuals" = "Мануалы";
+"manuals" = "Рукводства";
 
 // MARK: - Version
 "version" = "Версия";
