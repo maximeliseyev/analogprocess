@@ -407,6 +407,7 @@
 "setTimeManually" = "Set Time Manually";
 "tapToChangeTime" = "Tap to change time";
 "setTimeToStartTimer" = "Set time to start timer";
+"manualTimer" = "Manual timer";
 
 // MARK: - Create Mode
 "createMode" = "Create Mode";
