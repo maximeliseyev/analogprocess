@@ -1,25 +1,83 @@
 import SwiftUI
 
+public enum TimerMode {
+    case single(timerLabel: String, totalMinutes: Int, totalSeconds: Int, selectedAgitationMode: AgitationMode?)
+    case staging(stages: [StagingStage])
+
+    var navigationTitle: String {
+        switch self {
+        case .single(timerLabel: _, totalMinutes: _, totalSeconds: _, selectedAgitationMode: _):
+            return "timer"
+        case .staging(_):
+            return "stagingSequentialStages"
+        }
+    }
+}
+
 public struct TimerView: View {
-    let timerLabel: String
-    let totalMinutes: Int
-    let totalSeconds: Int
-    let selectedAgitationMode: AgitationMode?
+    let mode: TimerMode
 
     @StateObject private var viewModel: UnifiedTimerViewModel
     @Environment(\.dismiss) private var dismiss
 
-    public init(timerLabel: String, totalMinutes: Int, totalSeconds: Int, selectedAgitationMode: AgitationMode? = nil) {
-        self.timerLabel = timerLabel
-        self.totalMinutes = totalMinutes
-        self.totalSeconds = totalSeconds
-        self.selectedAgitationMode = selectedAgitationMode
-        let duration = TimeInterval(totalMinutes * 60 + totalSeconds)
-        let viewModel = UnifiedTimerViewModel(duration: duration, name: timerLabel)
-        if let agitationMode = selectedAgitationMode {
-            viewModel.selectedAgitationMode = agitationMode
+    public init(mode: TimerMode) {
+        self.mode = mode
+
+        switch mode {
+        case .single(timerLabel: let timerLabel, totalMinutes: let totalMinutes, totalSeconds: let totalSeconds, selectedAgitationMode: let selectedAgitationMode):
+            let duration = TimeInterval(totalMinutes * 60 + totalSeconds)
+            let viewModel = UnifiedTimerViewModel(duration: duration, name: timerLabel)
+            if let agitationMode = selectedAgitationMode {
+                viewModel.selectedAgitationMode = agitationMode
+            }
+            self._viewModel = StateObject(wrappedValue: viewModel)
+
+        case .staging(let stages):
+            self._viewModel = StateObject(wrappedValue: UnifiedTimerViewModel(stagingStages: stages))
         }
-        self._viewModel = StateObject(wrappedValue: viewModel)
+    }
+
+    // Convenience initializer for backward compatibility
+    public init(timerLabel: String, totalMinutes: Int, totalSeconds: Int, selectedAgitationMode: AgitationMode? = nil) {
+        self.init(mode: .single(timerLabel: timerLabel, totalMinutes: totalMinutes, totalSeconds: totalSeconds, selectedAgitationMode: selectedAgitationMode))
+    }
+
+    // MARK: - Computed Properties (like old TimerView)
+    private var timerLabel: String {
+        switch mode {
+        case .single(timerLabel: let label, totalMinutes: _, totalSeconds: _, selectedAgitationMode: _):
+            return label
+        case .staging(_):
+            return viewModel.currentStage?.name ?? ""
+        }
+    }
+
+    private var totalMinutes: Int {
+        switch mode {
+        case .single(timerLabel: _, totalMinutes: let minutes, totalSeconds: _, selectedAgitationMode: _):
+            return minutes
+        case .staging(_):
+            return Int(viewModel.currentStage?.duration ?? 0) / 60
+        }
+    }
+
+    private var totalSeconds: Int {
+        switch mode {
+        case .single(timerLabel: _, totalMinutes: _, totalSeconds: let seconds, selectedAgitationMode: _):
+            return seconds
+        case .staging(_):
+            return Int(viewModel.currentStage?.duration ?? 0) % 60
+        }
+    }
+
+    private var isStaging: Bool {
+        if case .staging(_) = mode { return true }
+        return false
+    }
+
+    private var stages: [StagingStage] {
+        if case .staging(let stages) = mode { return stages }
+        return []
     }
     
     public var body: some View {
@@ -29,12 +87,28 @@ public struct TimerView: View {
                     .ignoresSafeArea()
                 
                 VStack(spacing: 30) {
-                    TimerHeaderView(
-                        timerLabel: LocalizedStringKey(timerLabel),
-                        totalMinutes: totalMinutes,
-                        totalSeconds: totalSeconds,
-                        selectedAgitationMode: viewModel.selectedAgitationMode
-                    )
+                    // Header - like old TimerView
+                    if isStaging {
+                        VStack(spacing: 8) {
+                            TimerHeaderView(
+                                timerLabel: LocalizedStringKey(timerLabel),
+                                totalMinutes: totalMinutes,
+                                totalSeconds: totalSeconds,
+                                selectedAgitationMode: viewModel.selectedAgitationMode
+                            )
+
+                            Text(String(format: NSLocalizedString("stagingStageXofY", comment: ""), "\(viewModel.currentStageIndex + 1)", "\(stages.count)"))
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    } else {
+                        TimerHeaderView(
+                            timerLabel: LocalizedStringKey(timerLabel),
+                            totalMinutes: totalMinutes,
+                            totalSeconds: totalSeconds,
+                            selectedAgitationMode: viewModel.selectedAgitationMode
+                        )
+                    }
                     
                     TimerProgressView(
                         progress: viewModel.progress,
@@ -55,22 +129,65 @@ public struct TimerView: View {
                     )
                     
                     if viewModel.isTimerFinished {
-                        VStack(spacing: 16) {
-                            Text(LocalizedStringKey("developmentCompleted"))
-                                .font(.headline)
-                                .foregroundColor(.green)
-                            
-                            Button(action: {
-                                dismiss()
-                            }) {
-                                HStack {
-                                    Text(LocalizedStringKey("stagingFinish"))
-                                        .font(.headline)
+                        if isStaging {
+                            // Staging completion logic
+                            VStack(spacing: 16) {
+                                Text(LocalizedStringKey("stagingStageComplete"))
+                                    .font(.headline)
+                                    .foregroundColor(.green)
+
+                                if viewModel.hasNextStage {
+                                    Button(action: {
+                                        viewModel.startNextStage()
+                                    }) {
+                                        HStack {
+                                            Image(systemName: "arrow.right")
+                                            Text(LocalizedStringKey("stagingGoToNextStage"))
+                                                .font(.headline)
+                                        }
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .background(.blue)
+                                        .cornerRadius(10)
+                                    }
+                                } else {
+                                    VStack(spacing: 12) {
+                                        Text(LocalizedStringKey("stagingAllStagesComplete"))
+                                            .font(.headline)
+                                            .foregroundColor(.green)
+
+                                        Button(action: {
+                                            dismiss()
+                                        }) {
+                                            Text(LocalizedStringKey("stagingFinish"))
+                                                .font(.headline)
+                                                .foregroundColor(.white)
+                                                .padding()
+                                                .background(.green)
+                                                .cornerRadius(10)
+                                        }
+                                    }
                                 }
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(.green)
-                                .cornerRadius(10)
+                            }
+                        } else {
+                            // Single timer completion - like old TimerView
+                            VStack(spacing: 16) {
+                                Text(LocalizedStringKey("developmentCompleted"))
+                                    .font(.headline)
+                                    .foregroundColor(.green)
+
+                                Button(action: {
+                                    dismiss()
+                                }) {
+                                    HStack {
+                                        Text(LocalizedStringKey("stagingFinish"))
+                                            .font(.headline)
+                                    }
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(.green)
+                                    .cornerRadius(10)
+                                }
                             }
                         }
                     } else {
@@ -84,7 +201,7 @@ public struct TimerView: View {
                     Spacer()
                 }
             }
-            .navigationTitle(LocalizedStringKey("timer"))
+            .navigationTitle(LocalizedStringKey(mode.navigationTitle))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarTrailing) {

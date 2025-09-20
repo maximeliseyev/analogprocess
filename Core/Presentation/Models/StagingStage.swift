@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-enum StageType: String, Codable {
+public enum StageType: String, Codable {
     case prebath
     case develop
     case stopBath
@@ -12,19 +12,30 @@ enum StageType: String, Codable {
     case unknown
 }
 
-struct StagingStage: Identifiable, Hashable, Codable {
-    var id = UUID()
-    var name: String
-    let description: String
-    let iconName: String
-    let color: String
-    var isEnabled: Bool = true
-    var duration: TimeInterval = 0
-    var temperature: Int = 20
+public struct StagingStage: Identifiable, Hashable, Codable {
+    public var id = UUID()
+    public var name: String
+    public let description: String
+    public let iconName: String
+    public let color: String
+    public var isEnabled: Bool = true
+    public var duration: TimeInterval = 0
+    public var temperature: Int = 20
     // Store selected agitation preset as localization key to avoid cross-feature dependency
-    var agitationPresetKey: String? = nil
-    
-    var type: StageType {
+    public var agitationPresetKey: String? = nil
+
+    public init(name: String, description: String, iconName: String, color: String, isEnabled: Bool = true, duration: TimeInterval = 0, temperature: Int = 20, agitationPresetKey: String? = nil) {
+        self.name = name
+        self.description = description
+        self.iconName = iconName
+        self.color = color
+        self.isEnabled = isEnabled
+        self.duration = duration
+        self.temperature = temperature
+        self.agitationPresetKey = agitationPresetKey
+    }
+
+    public var type: StageType {
         switch name {
         case "stagingDevelopName": return .develop
         case "stagingFixerName": return .fixer
@@ -37,7 +48,7 @@ struct StagingStage: Identifiable, Hashable, Codable {
         }
     }
     
-    static let defaultStages: [StagingStage] = [
+    public static let defaultStages: [StagingStage] = [
         StagingStage(
             name: "stagingPrebathName",
             description: "stagingPrebathDescription",

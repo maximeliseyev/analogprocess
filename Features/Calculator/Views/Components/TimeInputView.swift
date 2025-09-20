@@ -19,12 +19,30 @@ struct TimeInputView: View {
             HStack {
                 TextField(LocalizedStringKey("minutes"), text: $minutes)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                
+                    .keyboardType(.numberPad)
+                    .onChange(of: minutes) { _, newValue in
+                        let filtered = newValue.filter { $0.isNumber }
+                        if let intValue = Int(filtered), intValue > 59 {
+                            minutes = "59"
+                        } else {
+                            minutes = filtered
+                        }
+                    }
+
                 Text(LocalizedStringKey("min"))
-                
+
                 TextField(LocalizedStringKey("seconds"), text: $seconds)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                
+                    .keyboardType(.numberPad)
+                    .onChange(of: seconds) { _, newValue in
+                        let filtered = newValue.filter { $0.isNumber }
+                        if let intValue = Int(filtered), intValue > 59 {
+                            seconds = "59"
+                        } else {
+                            seconds = filtered
+                        }
+                    }
+
                 Text(LocalizedStringKey("sec"))
             }
         }

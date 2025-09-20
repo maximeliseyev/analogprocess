@@ -50,14 +50,6 @@ struct TemperaturePickerView: View {
                 }
             }
         }
-        .overlay(
-            Group {
-                // если выбора нет (только одна температура в данных) — блокируем взаимодействие прозрачной маской
-                if temperatures.count <= 1 {
-                    Color.black.opacity(0.0001)
-                }
-            }
-        )
     }
     }
 
