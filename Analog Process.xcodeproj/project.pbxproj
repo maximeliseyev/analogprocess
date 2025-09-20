@@ -32,7 +32,6 @@
 		BF4109702E3166F400BE2AD8 /* TimerControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41096C2E3166F400BE2AD8 /* TimerControlsView.swift */; };
 		BF4109712E3166F400BE2AD8 /* TimerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41096D2E3166F400BE2AD8 /* TimerHeaderView.swift */; };
 		BF4109732E3166F400BE2AD8 /* TimerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41096E2E3166F400BE2AD8 /* TimerProgressView.swift */; };
-		BF47CA3C2E4F14D70026DEB0 /* StagingTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF47CA3B2E4F14D70026DEB0 /* StagingTimerView.swift */; };
 		BF52A21C2E7D82B900E305F5 /* GitHubAgitationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF52A21B2E7D82B900E305F5 /* GitHubAgitationService.swift */; };
 		BF553C622E420639009F1525 /* KeyboardAwareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C612E420639009F1525 /* KeyboardAwareView.swift */; };
 		BF553C6A2E43268D009F1525 /* BasePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C692E43268D009F1525 /* BasePickerView.swift */; };
@@ -140,7 +139,6 @@
 		BF41096C2E3166F400BE2AD8 /* TimerControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControlsView.swift; sourceTree = "<group>"; };
 		BF41096D2E3166F400BE2AD8 /* TimerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerHeaderView.swift; sourceTree = "<group>"; };
 		BF41096E2E3166F400BE2AD8 /* TimerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerProgressView.swift; sourceTree = "<group>"; };
-		BF47CA3B2E4F14D70026DEB0 /* StagingTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingTimerView.swift; sourceTree = "<group>"; };
 		BF52A21B2E7D82B900E305F5 /* GitHubAgitationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAgitationService.swift; sourceTree = "<group>"; };
 		BF553C612E420639009F1525 /* KeyboardAwareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAwareView.swift; sourceTree = "<group>"; };
 		BF553C692E43268D009F1525 /* BasePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePickerView.swift; sourceTree = "<group>"; };
@@ -400,7 +398,6 @@
 				BFAFE13C2E780B1900DA9DA5 /* Agitation */,
 				BF41096F2E3166F400BE2AD8 /* Components */,
 				BFF4D9FE2E21BEC90097BE82 /* TimerView.swift */,
-				BF47CA3B2E4F14D70026DEB0 /* StagingTimerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -531,20 +528,6 @@
 			path = Infrastructure;
 			sourceTree = "<group>";
 		};
-		BF949EBF2E73799B005F9831 /* DTOs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DTOs;
-			sourceTree = "<group>";
-		};
-		BF949EC02E73799B005F9831 /* Remote */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Remote;
-			sourceTree = "<group>";
-		};
 		BF949EC72E73799B005F9831 /* SwiftData */ = {
 			isa = PBXGroup;
 			children = (
@@ -562,7 +545,6 @@
 			isa = PBXGroup;
 			children = (
 				BF3B29182E7C7A7400FABD58 /* AgitationModeData.swift */,
-				BF949EC02E73799B005F9831 /* Remote */,
 				BF949EC72E73799B005F9831 /* SwiftData */,
 			);
 			path = Models;
@@ -571,17 +553,9 @@
 		BF949EC92E73799B005F9831 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				BF949EBF2E73799B005F9831 /* DTOs */,
 				BF949EC82E73799B005F9831 /* Models */,
 			);
 			path = Data;
-			sourceTree = "<group>";
-		};
-		BF949ECA2E73799B005F9831 /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Entities;
 			sourceTree = "<group>";
 		};
 		BF949ECF2E73799B005F9831 /* Protocols */ = {
@@ -607,7 +581,6 @@
 		BF949ED32E73799B005F9831 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				BF949ECA2E73799B005F9831 /* Entities */,
 				BF949ECF2E73799B005F9831 /* Protocols */,
 				BF949ED22E73799B005F9831 /* ValueObjects */,
 			);
@@ -640,18 +613,10 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
-		BF949EDA2E73799B005F9831 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		BF949EDB2E73799B005F9831 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
 				BF949ED92E73799B005F9831 /* Constants */,
-				BF949EDA2E73799B005F9831 /* Extensions */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -928,7 +893,6 @@
 				BF3B29192E7C7A7400FABD58 /* AgitationModeData.swift in Sources */,
 				BF3B29152E7C742E00FABD58 /* TimerStage.swift in Sources */,
 				BF4109642E31641B00BE2AD8 /* TemperaturePickerView.swift in Sources */,
-				BF47CA3C2E4F14D70026DEB0 /* StagingTimerView.swift in Sources */,
 				BFFA1C5D2E4A415E005C24F4 /* FixerPickerView.swift in Sources */,
 				BFFA1C5E2E4A415E005C24F4 /* FixerSelectionView.swift in Sources */,
 				BFE12EC12E360C010044A3A4 /* AppPreview.swift in Sources */,
@@ -1124,7 +1088,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.1;
+				MARKETING_VERSION = 0.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1161,7 +1125,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.1;
+				MARKETING_VERSION = 0.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

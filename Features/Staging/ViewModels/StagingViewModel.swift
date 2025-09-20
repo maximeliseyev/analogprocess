@@ -92,7 +92,7 @@ class StagingViewModel: ObservableObject {
     
     func startStagingTimer() {
         // Этот метод будет вызываться из StagingView
-        // Логика показа StagingTimerView находится в StagingView
+        // Логика показа TimerView в staging режиме находится в StagingView
     }
     
     func resetStages() {

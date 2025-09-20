@@ -18,8 +18,8 @@ struct AgitationIndicatorView: View {
 
     
     var body: some View {
-        if shouldAgitate && selectedAgitationMode != nil {
-            VStack(spacing: 8) {
+        VStack(spacing: 8) {
+            if shouldAgitate && selectedAgitationMode != nil {
                 HStack {
                     Text(isInAgitationPhase ? LocalizedStringKey("agitation") : LocalizedStringKey("rest"))
                         .font(.headline)
@@ -30,18 +30,29 @@ struct AgitationIndicatorView: View {
                 .padding(.vertical, 8)
                 .background(isInAgitationPhase ? .orange.opacity(0.1) : .blue.opacity(0.1))
                 .cornerRadius(20)
-                
+
                 VStack(spacing: 4) {
                     Text(String(format: String(localized: "minuteLabel"), "\(currentMinute)"))
                         .font(.caption)
                         .foregroundColor(.secondary)
-                    
+
                     if let phase = currentAgitationPhase {
                         Text(getPhaseDescription(phase))
                             .font(.caption2)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
                     }
+                }
+            } else {
+                // Пустой блок для сохранения высоты
+                VStack(spacing: 8) {
+                    Rectangle()
+                        .fill(Color.clear)
+                        .frame(height: 44)
+
+                    Rectangle()
+                        .fill(Color.clear)
+                        .frame(height: 32)
                 }
             }
         }

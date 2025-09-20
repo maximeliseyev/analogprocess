@@ -171,7 +171,7 @@ struct StagingView: View {
             )
         }
         .sheet(isPresented: $showingStagingTimer) {
-            StagingTimerView(stages: viewModel.selectedStages)
+            TimerView(mode: .staging(stages: viewModel.selectedStages))
         }
         .alert(LocalizedStringKey("stagingResetConfirmation"), isPresented: $showingResetConfirmation) {
             Button(LocalizedStringKey("cancel"), role: .cancel) { }
