@@ -3,12 +3,12 @@ import Combine
 
 
 @MainActor
-class DevelopmentSetupViewModel<DataServiceType: DataService>: ObservableObject where DataServiceType.Film: Identifiable, DataServiceType.Developer: Identifiable, DataServiceType.Fixer: Identifiable {
+class DevelopmentSetupViewModel: ObservableObject {
     
     // MARK: - Properties
-    @Published var selectedFilm: DataServiceType.Film?
-    @Published var selectedDeveloper: DataServiceType.Developer?
-    @Published var selectedFixer: DataServiceType.Fixer?
+    @Published var selectedFilm: SwiftDataFilm?
+    @Published var selectedDeveloper: SwiftDataDeveloper?
+    @Published var selectedFixer: SwiftDataFixer?
     @Published var selectedDilution: String = ""
     @Published var temperature: Int = 20
     @Published var iso: Int = AppConstants.ISO.defaultISO
@@ -30,25 +30,25 @@ class DevelopmentSetupViewModel<DataServiceType: DataService>: ObservableObject 
     @Published var navigateToTimer = false
     
     // MARK: - Services
-    let dataService: DataServiceType
+    let dataService: SwiftDataService
     
-    init(dataService: DataServiceType) {
+    init(dataService: SwiftDataService) {
         self.dataService = dataService
     }
     
     // MARK: - Computed Properties
-    var films: [DataServiceType.Film] {
+    var films: [SwiftDataFilm] {
         dataService.films
     }
     
-    var developers: [DataServiceType.Developer] {
+    var developers: [SwiftDataDeveloper] {
         guard let selectedFilm = selectedFilm else {
             return dataService.developers
         }
         return dataService.getAvailableDevelopers(filmId: selectedFilm.id)
     }
     
-    var fixers: [DataServiceType.Fixer] {
+    var fixers: [SwiftDataFixer] {
         dataService.fixers
     }
     
@@ -83,7 +83,7 @@ class DevelopmentSetupViewModel<DataServiceType: DataService>: ObservableObject 
     }
     
     // MARK: - Public Methods
-    func selectFilm(_ film: DataServiceType.Film) {
+    func selectFilm(_ film: SwiftDataFilm) {
         selectedFilm = film
         iso = Int(film.defaultISO)
 
@@ -99,7 +99,7 @@ class DevelopmentSetupViewModel<DataServiceType: DataService>: ObservableObject 
         calculateTimeAutomatically()
     }
     
-    func selectDeveloper(_ developer: DataServiceType.Developer) {
+    func selectDeveloper(_ developer: SwiftDataDeveloper) {
         selectedDeveloper = developer
         selectedDilution = developer.defaultDilution ?? ""
         calculateTimeAutomatically()
@@ -110,7 +110,7 @@ class DevelopmentSetupViewModel<DataServiceType: DataService>: ObservableObject 
         calculateTimeAutomatically()
     }
     
-    func selectFixer(_ fixer: DataServiceType.Fixer) {
+    func selectFixer(_ fixer: SwiftDataFixer) {
         selectedFixer = fixer
         calculateTimeAutomatically()
     }

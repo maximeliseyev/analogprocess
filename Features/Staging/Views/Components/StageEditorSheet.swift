@@ -66,7 +66,7 @@ struct StageEditorSheet: View {
                     // Preset time setup section for development
                     Section(header: Text(LocalizedStringKey("setupTimeByPreset"))) {
                         NavigationLink(destination: DevelopmentSetupView(
-                            viewModel: DevelopmentSetupViewModel<SwiftDataService>(dataService: swiftDataService),
+                            viewModel: DevelopmentSetupViewModel(dataService: swiftDataService),
                             isFromStageEditor: true,
                             stageType: stage.type
                         )) {
@@ -130,7 +130,7 @@ struct StageEditorSheet: View {
                     // Preset time setup section for fixer
                     Section(header: Text(LocalizedStringKey("setupTimeByPreset"))) {
                         NavigationLink(destination: DevelopmentSetupView(
-                            viewModel: DevelopmentSetupViewModel<SwiftDataService>(dataService: swiftDataService),
+                            viewModel: DevelopmentSetupViewModel(dataService: swiftDataService),
                             isFromStageEditor: true,
                             stageType: stage.type
                         )) {

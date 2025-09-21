@@ -35,13 +35,20 @@ public struct MainTabView: View {
             } else {
                 // Остальные экраны с TabView
                 TabView(selection: $selectedTab) {
-                    // Экран Development
-                    DevelopmentSetupView(viewModel: DevelopmentSetupViewModel<SwiftDataService>(dataService: swiftDataService))
+                    // Экран Staging
+                    StagingView(viewModel: stagingViewModel)
                         .tabItem {
-                            Image(systemName: "slider.horizontal.3")
-                            Text(LocalizedStringKey("presets"))
+                            Image(systemName: "list.bullet.rectangle")
+                            Text(LocalizedStringKey("staging"))
                         }
                         .tag(1)
+                    // Экран Development
+                    DevelopmentSetupView(viewModel: DevelopmentSetupViewModel(dataService: swiftDataService))
+                        .tabItem {
+                            Image(systemName: "slider.horizontal.3")
+                            Text(LocalizedStringKey("developmentSetup"))
+                        }
+                        .tag(2)
                     
                     // Экран Calculator
                     CalculatorView(swiftDataService: swiftDataService, onStartTimer: { _, _, _ in })
@@ -49,16 +56,8 @@ public struct MainTabView: View {
                             Image(systemName: "plus.forwardslash.minus")
                             Text(LocalizedStringKey("calculator"))
                         }
-                        .tag(2)
-                    
-                    // Экран Staging
-                    StagingView(viewModel: stagingViewModel)
-                        .tabItem {
-                            Image(systemName: "list.bullet.rectangle")
-                            Text(LocalizedStringKey("staging"))
-                        }
                         .tag(3)
-                    
+
                     // Экран Timer
                     NavigationStack {
                         TimerTabView(onStartTimer: { minutes, seconds, agitationMode in
@@ -205,6 +204,7 @@ public struct MainTabView: View {
                                     .fontWeight(.semibold)
                                     .foregroundColor(.primary)
                                 Text(subtitle(for: idx))
+                                    .multilineTextAlignment(.leading)
                                     .font(.subheadline)
                                     .foregroundColor(.secondary)
                             }
@@ -276,53 +276,3 @@ public struct MainTabView: View {
         self._colorScheme = colorScheme
     }
 }
-
-#if DEBUG
-
-struct MainTabView_PreviewWrapper: View {
-    @State private var selectedTab = 0
-    @State private var colorScheme: ColorScheme? = .light
-    
-    let swiftDataService: SwiftDataService
-    let container: ModelContainer
-    
-    init() {
-        let container: ModelContainer = {
-            let schema = Schema([
-                SwiftDataFilm.self,
-                SwiftDataDeveloper.self,
-                SwiftDataFixer.self,
-                SwiftDataDevelopmentTime.self,
-                SwiftDataJournalRecord.self,
-                SwiftDataTemperatureMultiplier.self
-            ])
-            let config = ModelConfiguration(isStoredInMemoryOnly: true)
-            do {
-                return try ModelContainer(for: schema, configurations: [config])
-            } catch {
-                fatalError("Failed to create preview ModelContainer: \(error)")
-            }
-        }()
-        
-        self.container = container
-        let githubDataService = GitHubDataService()
-        self.swiftDataService = SwiftDataService(githubDataService: githubDataService, modelContainer: container)
-    }
-    
-    var body: some View {
-        MainTabView(
-            swiftDataService: swiftDataService,
-            selectedTab: $selectedTab,
-            onBackToHome: { selectedTab = 0 },
-            colorScheme: $colorScheme
-        )
-        .modelContainer(container)
-    }
-}
-
-struct MainTabView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainTabView_PreviewWrapper()
-    }
-}
-#endif

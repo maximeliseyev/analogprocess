@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct DevelopmentParametersView: View {
-    @ObservedObject var viewModel: DevelopmentSetupViewModel<SwiftDataService>
+    @ObservedObject var viewModel: DevelopmentSetupViewModel
     
     var body: some View {
         VStack(spacing: 12) {
-            if viewModel.selectedMode == .developing {
+            if viewModel.selectedMode == ProcessMode.developing {
                 // Development parameters
                 ParameterRow(
                     label: String(localized: "film"),

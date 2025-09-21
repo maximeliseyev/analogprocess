@@ -34,14 +34,14 @@
 "resultsProcess" = "Результаты %@-процесса:";
 "coefficient" = "Коэффициент:";
 "standardRatio" = "(стандартно 1.33)";
-"processType" = "Тип процессе:";
-"pushSteps" = "Количество пуш-супеней:";
+"processType" = "Тип процесса:";
+"pushSteps" = "Количество пуш-ступеней:";
 "numberOfSteps" = "Количество ступеней:";
 "from1to5" = "(от 1 до 5)";
 
 // MARK: - Development Parameters
 "developmentSetup" = "Настройка проявки";
-"developmentSetupDescription" = "Select parameters for development time calculation";
+"developmentSetupDescription" = "Выберите параметры для расчёта времени проявки";
 "developmentTime" = "Время проявки";
 "developmentComplete" = "Проявка завершена!";
 "developmentCompleted" = "Проявка завершена!";
@@ -83,9 +83,9 @@
 "temp20" = "20°C (Стандарт)";
 "temp21" = "21°C (-5%)";
 "temp22" = "22°C (-15%)";
-"temp23" = "23°C (-20%)";
-"temp24" = "24°C (-25%)";
-"temp25" = "25°C (-30%)";
+"temp23" = "23°C (-25%)";
+"temp24" = "24°C (-35%)";
+"temp25" = "25°C (-45%)";
 "StandardC" = "°C (Стандарт)";
 
 // MARK: - Dilution Options
@@ -182,18 +182,18 @@
 "neutralFixer" = "Нейтральный фиксаж";
 
 // MARK: - Agitation
-"agitationSelection" = "Select Agitation Mode";
-"agitationDescription" = "Agitation is the process of stirring the developer for uniform film development";
-"noAgitation" = "No agitation";
-"noAgitationDescription" = "Timer will work without reminders";
-"customAgitation" = "Custom mode";
+"agitationSelection" = "Выберите режим ажитации";
+"agitationDescription" = "Ажитация - это процесс перемешивания проявителя для равномерного проявления плёнки";
+"noAgitation" = "Без ажитации";
+"noAgitationDescription" = "Таймер будет работать без напоминаний";
+"customAgitation" = "Пользовательский режим";
 "customAgitationDescription" = "Создать свой режим ажитации";
 "customAgitationSetup" = "Настройка режима";
 "customAgitationSetupDescription" = "Описапние режима ажитации";
 "customAgitationTitle" = "Пользовательская ажитация";
 "agitationTime" = "Время ажитации";
 "agitationTimeRemaining" = "(%@с)";
-"restTime" = "Время покооя";
+"restTime" = "Время покоя";
 "preview" = "Превью:";
 "cycle" = "Цикл: %@ ажитация → %@ покой";
 "totalCycleDuration" = "Общая длительность: %@";
@@ -274,7 +274,7 @@
 "tapToCalculator" = "Нажмите чтобы перейти к калькулятору";
 "calculatedTime" = "Вычисленное время";
 "noDilutionsAvailable" = "Нет доступных разведений";
-"noDilutionsDescription" = "Нет данных для данной комбинации пряовителя и плёнки";
+"noDilutionsDescription" = "Нет данных для данной комбинации проявителя и плёнки";
 "noISOOptionsAvailable" = "Нет доступных ISO";
 "noISOOptionsDescription" = "Сначала выберите плёнку, проявитель и разведение, чтобы увидеть доступные ISO.";
 "noOptionsAvailable" = "Нет доступных опций";
@@ -282,8 +282,8 @@
 
 // MARK: - Journal
 "journalEmpty" = "Журнал пуст";
-"journalEmptyDescription" = "Save your first calculation to see it here";
-"saveCalculation" = "Save calculation";
+"journalEmptyDescription" = "Сохраните свой первый расчёт, чтобы увидеть его здесь";
+"saveCalculation" = "Сохранить расчёт";
 "journal" = "Журнал";
 "journalCreateRecord" = "Создать запись";
 "journalRecordBasicInfo" = "Основная информация";
@@ -324,7 +324,9 @@
 
 // MARK: - Home
 "home" = "Главная";
-"homeDescription" = "Полный набор инструментов для проявки плёнки: калькулятор, таймер, журнал и руководства";
+"staging" = "Стадии";
+"homeStagingSubtitle" = "Настройка последовательных стадий для всего процесса";
+"homeDescription" = "Полный набор инструментов для проявки плёнки: калькулятор, таймер и журнал";
 "homePresetsSubtitle" = "Параметры проявки";
 "homeCalculatorSubtitle" = "Расчет времени";
 "homeTimerSubtitle" = "Таймер проявки";
@@ -332,13 +334,11 @@
 "homeManualsSubtitle" = "Статьи и руководства";
 
 // MARK: - Staging
-"staging" = "Стадии";
 "stagingIntro" = "Добавьте стадии обработки плёнки в нужном порядке";
 "totalTime" = "Общее время:";
 "stagesInProcess" = "Стадий в процессе:";
 "chooseStage" = "Выберите стадию";
 "duplicate" = "Дублировать";
-"homeStagingSubtitle" = "Стадии процесса";
 "stagingPrebathName" = "Предварительная ванна";
 "stagingPrebathDescription" = "Предварительная ванна для стабилизации температуры";
 "stagingDevelopName" = "Проявка";
@@ -407,7 +407,7 @@
 "setTimeManually" = "Установить время вручную";
 "tapToChangeTime" = "Нажмите для изменения времени";
 "setTimeToStartTimer" = "Установите время для запуска таймера";
-"manualTimer" = "Таймер установлен вручную";
+"manualTimer" = "Ручной таймер";
 
 // MARK: - Create Mode
 "createMode" = "Создать режим";
@@ -419,7 +419,7 @@
 "noAlternativeOptions" = "Доступен только один вариант";
 
 // MARK: - Manuals
-"manuals" = "Рукводства";
+"manuals" = "Руководства";
 
 // MARK: - Version
 "version" = "Версия";

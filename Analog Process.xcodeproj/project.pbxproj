@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		BF0FAFF62E80107B006007E3 /* ParameterRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109672E3164A900BE2AD8 /* ParameterRow.swift */; };
+		BF0FAFF92E8023C0006007E3 /* SSCoachMarks in Frameworks */ = {isa = PBXBuildFile; productRef = BF0FAFF82E8023C0006007E3 /* SSCoachMarks */; };
+		BF0FAFFB2E8028AA006007E3 /* CoachMarksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0FAFFA2E8028AA006007E3 /* CoachMarksService.swift */; };
 		BF113D372E3FA8A5008B5578 /* ManualTimeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF113D362E3FA8A5008B5578 /* ManualTimeInputView.swift */; };
 		BF113D412E40DB7D008B5578 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF113D402E40DB7D008B5578 /* ThemeManager.swift */; };
 		BF28FA5E2E41F75200C2E34E /* SyncStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28FA5C2E41F75200C2E34E /* SyncStatusView.swift */; };
@@ -37,10 +39,8 @@
 		BF553C622E420639009F1525 /* KeyboardAwareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C612E420639009F1525 /* KeyboardAwareView.swift */; };
 		BF553C6A2E43268D009F1525 /* BasePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C692E43268D009F1525 /* BasePickerView.swift */; };
 		BF553C6C2E43297C009F1525 /* CreateRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C6B2E43297C009F1525 /* CreateRecordViewModel.swift */; };
-		BF7FF43E2E71ACC800BE5EA0 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7FF43D2E71ACC800BE5EA0 /* DataService.swift */; };
 		BF8A59EF2E43809C00D689C5 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59EE2E43809C00D689C5 /* MainTabView.swift */; };
 		BF8A59F22E4380E600D689C5 /* NavigationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59F12E4380E600D689C5 /* NavigationConstants.swift */; };
-		BF8A59F42E43814200D689C5 /* NavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59F32E43814200D689C5 /* NavigationButton.swift */; };
 		BF8A59FF2E4494A600D689C5 /* AutocompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59FE2E4494A600D689C5 /* AutocompleteView.swift */; };
 		BF8A5A072E44BA8200D689C5 /* StagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A5A042E44BA8200D689C5 /* StagingView.swift */; };
 		BF8A5A082E44BA8200D689C5 /* StagingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A5A022E44BA8200D689C5 /* StagingViewModel.swift */; };
@@ -48,20 +48,13 @@
 		BF949EB32E72CFC2005F9831 /* DevelopmentCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EA82E72CFC2005F9831 /* DevelopmentCalculator.swift */; };
 		BF949EB42E72CFC2005F9831 /* GitHubDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EB02E72CFC2005F9831 /* GitHubDataService.swift */; };
 		BF949EB52E72CFC2005F9831 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EB12E72CFC2005F9831 /* NetworkSession.swift */; };
-		BF949EB62E72CFC2005F9831 /* SwiftDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EAC2E72CFC2005F9831 /* SwiftDataRepository.swift */; };
 		BF949EB72E72CFC2005F9831 /* CloudKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EAF2E72CFC2005F9831 /* CloudKitService.swift */; };
-		BF949EB92E72CFC2005F9831 /* DataInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EAA2E72CFC2005F9831 /* DataInitializer.swift */; };
-		BF949EBB2E72CFC2005F9831 /* DataSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EAB2E72CFC2005F9831 /* DataSyncService.swift */; };
 		BF949EBC2E72CFC2005F9831 /* AutoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EAE2E72CFC2005F9831 /* AutoSyncService.swift */; };
 		BF949EDC2E73799B005F9831 /* StagingStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949ED42E73799B005F9831 /* StagingStage.swift */; };
 		BF949EDD2E73799B005F9831 /* SwiftDataTemperatureMultiplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EC62E73799B005F9831 /* SwiftDataTemperatureMultiplier.swift */; };
-		BF949EDE2E73799B005F9831 /* FilmProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949ECD2E73799B005F9831 /* FilmProtocol.swift */; };
 		BF949EDF2E73799B005F9831 /* SwiftDataDevelopmentTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EC32E73799B005F9831 /* SwiftDataDevelopmentTime.swift */; };
-		BF949EE02E73799B005F9831 /* DeveloperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949ECB2E73799B005F9831 /* DeveloperProtocol.swift */; };
-		BF949EE12E73799B005F9831 /* DevelopmentParametersProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949ECC2E73799B005F9831 /* DevelopmentParametersProtocol.swift */; };
 		BF949EE22E73799B005F9831 /* DevelopmentParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949ED02E73799B005F9831 /* DevelopmentParameters.swift */; };
 		BF949EE32E73799B005F9831 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949ED72E73799B005F9831 /* AppConstants.swift */; };
-		BF949EE42E73799B005F9831 /* FixerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949ECE2E73799B005F9831 /* FixerProtocol.swift */; };
 		BF949EE62E73799B005F9831 /* SwiftDataJournalRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EC12E73799B005F9831 /* SwiftDataJournalRecord.swift */; };
 		BF949EE72E73799B005F9831 /* SwiftDataFixer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EC52E73799B005F9831 /* SwiftDataFixer.swift */; };
 		BF949EE82E73799B005F9831 /* SwiftDataDeveloper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EC22E73799B005F9831 /* SwiftDataDeveloper.swift */; };
@@ -110,6 +103,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BF0FAFFA2E8028AA006007E3 /* CoachMarksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachMarksService.swift; sourceTree = "<group>"; };
 		BF113D362E3FA8A5008B5578 /* ManualTimeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTimeInputView.swift; sourceTree = "<group>"; };
 		BF113D402E40DB7D008B5578 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		BF28FA5C2E41F75200C2E34E /* SyncStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncStatusView.swift; sourceTree = "<group>"; };
@@ -141,18 +135,13 @@
 		BF553C612E420639009F1525 /* KeyboardAwareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAwareView.swift; sourceTree = "<group>"; };
 		BF553C692E43268D009F1525 /* BasePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePickerView.swift; sourceTree = "<group>"; };
 		BF553C6B2E43297C009F1525 /* CreateRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecordViewModel.swift; sourceTree = "<group>"; };
-		BF7FF43D2E71ACC800BE5EA0 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		BF8A59EE2E43809C00D689C5 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		BF8A59F12E4380E600D689C5 /* NavigationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConstants.swift; sourceTree = "<group>"; };
-		BF8A59F32E43814200D689C5 /* NavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButton.swift; sourceTree = "<group>"; };
 		BF8A59FE2E4494A600D689C5 /* AutocompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteView.swift; sourceTree = "<group>"; };
 		BF8A5A022E44BA8200D689C5 /* StagingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingViewModel.swift; sourceTree = "<group>"; };
 		BF8A5A042E44BA8200D689C5 /* StagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingView.swift; sourceTree = "<group>"; };
 		BF8EDB3E2E4FC1CE0040E898 /* StagingCalculationResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingCalculationResultView.swift; sourceTree = "<group>"; };
 		BF949EA82E72CFC2005F9831 /* DevelopmentCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentCalculator.swift; sourceTree = "<group>"; };
-		BF949EAA2E72CFC2005F9831 /* DataInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataInitializer.swift; sourceTree = "<group>"; };
-		BF949EAB2E72CFC2005F9831 /* DataSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSyncService.swift; sourceTree = "<group>"; };
-		BF949EAC2E72CFC2005F9831 /* SwiftDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataRepository.swift; sourceTree = "<group>"; };
 		BF949EAE2E72CFC2005F9831 /* AutoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncService.swift; sourceTree = "<group>"; };
 		BF949EAF2E72CFC2005F9831 /* CloudKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitService.swift; sourceTree = "<group>"; };
 		BF949EB02E72CFC2005F9831 /* GitHubDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubDataService.swift; sourceTree = "<group>"; };
@@ -163,10 +152,6 @@
 		BF949EC42E73799B005F9831 /* SwiftDataFilm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataFilm.swift; sourceTree = "<group>"; };
 		BF949EC52E73799B005F9831 /* SwiftDataFixer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataFixer.swift; sourceTree = "<group>"; };
 		BF949EC62E73799B005F9831 /* SwiftDataTemperatureMultiplier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataTemperatureMultiplier.swift; sourceTree = "<group>"; };
-		BF949ECB2E73799B005F9831 /* DeveloperProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperProtocol.swift; sourceTree = "<group>"; };
-		BF949ECC2E73799B005F9831 /* DevelopmentParametersProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentParametersProtocol.swift; sourceTree = "<group>"; };
-		BF949ECD2E73799B005F9831 /* FilmProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmProtocol.swift; sourceTree = "<group>"; };
-		BF949ECE2E73799B005F9831 /* FixerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerProtocol.swift; sourceTree = "<group>"; };
 		BF949ED02E73799B005F9831 /* DevelopmentParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentParameters.swift; sourceTree = "<group>"; };
 		BF949ED12E73799B005F9831 /* ProcessMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessMode.swift; sourceTree = "<group>"; };
 		BF949ED42E73799B005F9831 /* StagingStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingStage.swift; sourceTree = "<group>"; };
@@ -229,6 +214,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF0FAFF92E8023C0006007E3 /* SSCoachMarks in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,7 +324,6 @@
 		BF4109472E31348C00BE2AD8 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				BF8A59F32E43814200D689C5 /* NavigationButton.swift */,
 				BF8A59F12E4380E600D689C5 /* NavigationConstants.swift */,
 				BF8A59EE2E43809C00D689C5 /* MainTabView.swift */,
 				BFA0C7952E2133FC00132936 /* ContentView.swift */,
@@ -501,19 +486,10 @@
 			path = Business;
 			sourceTree = "<group>";
 		};
-		BF949EAD2E72CFC2005F9831 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				BF949EAA2E72CFC2005F9831 /* DataInitializer.swift */,
-				BF949EAB2E72CFC2005F9831 /* DataSyncService.swift */,
-				BF949EAC2E72CFC2005F9831 /* SwiftDataRepository.swift */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
 		BF949EB22E72CFC2005F9831 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				BF0FAFFA2E8028AA006007E3 /* CoachMarksService.swift */,
 				BF949EAE2E72CFC2005F9831 /* AutoSyncService.swift */,
 				BF949EAF2E72CFC2005F9831 /* CloudKitService.swift */,
 				BF949EB02E72CFC2005F9831 /* GitHubDataService.swift */,
@@ -552,17 +528,6 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		BF949ECF2E73799B005F9831 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				BF949ECB2E73799B005F9831 /* DeveloperProtocol.swift */,
-				BF949ECC2E73799B005F9831 /* DevelopmentParametersProtocol.swift */,
-				BF949ECD2E73799B005F9831 /* FilmProtocol.swift */,
-				BF949ECE2E73799B005F9831 /* FixerProtocol.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
 		BF949ED22E73799B005F9831 /* ValueObjects */ = {
 			isa = PBXGroup;
 			children = (
@@ -575,7 +540,6 @@
 		BF949ED32E73799B005F9831 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				BF949ECF2E73799B005F9831 /* Protocols */,
 				BF949ED22E73799B005F9831 /* ValueObjects */,
 			);
 			path = Domain;
@@ -640,10 +604,8 @@
 		BFA0C7A22E21341400132936 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				BF7FF43D2E71ACC800BE5EA0 /* DataService.swift */,
 				BFFA1C632E4A67A9005C24F4 /* SwiftDataService.swift */,
 				BF949EA92E72CFC2005F9831 /* Business */,
-				BF949EAD2E72CFC2005F9831 /* Data */,
 				BF949EB22E72CFC2005F9831 /* Infrastructure */,
 			);
 			path = Services;
@@ -745,6 +707,7 @@
 			);
 			name = "Analog Process";
 			packageProductDependencies = (
+				BF0FAFF82E8023C0006007E3 /* SSCoachMarks */,
 			);
 			productName = "Film claculator";
 			productReference = BFE96A392E2061A0001CF98D /* Analog Process.app */;
@@ -783,6 +746,9 @@
 			);
 			mainGroup = BFE96A302E2061A0001CF98D;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				BF0FAFF72E8023C0006007E3 /* XCRemoteSwiftPackageReference "SSCoachMarks" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = BFE96A3A2E2061A0001CF98D /* Products */;
 			projectDirPath = "";
@@ -818,7 +784,6 @@
 				BF28FA5E2E41F75200C2E34E /* SyncStatusView.swift in Sources */,
 				BF3B29172E7C745800FABD58 /* UnifiedTimerViewModel.swift in Sources */,
 				BFE12EC32E363AC00044A3A4 /* CalculatedTimeSection.swift in Sources */,
-				BF8A59F42E43814200D689C5 /* NavigationButton.swift in Sources */,
 				BF553C6C2E43297C009F1525 /* CreateRecordViewModel.swift in Sources */,
 				BF8EDB3F2E4FC1CE0040E898 /* StagingCalculationResultView.swift in Sources */,
 				BF41093A2E31308500BE2AD8 /* CalculatorView.swift in Sources */,
@@ -828,15 +793,11 @@
 				BF949EB32E72CFC2005F9831 /* DevelopmentCalculator.swift in Sources */,
 				BF949EB42E72CFC2005F9831 /* GitHubDataService.swift in Sources */,
 				BF949EB52E72CFC2005F9831 /* NetworkSession.swift in Sources */,
-				BF949EB62E72CFC2005F9831 /* SwiftDataRepository.swift in Sources */,
 				BF949EB72E72CFC2005F9831 /* CloudKitService.swift in Sources */,
 				BF3B291D2E7C7BD500FABD58 /* CustomAgitationModeService.swift in Sources */,
-				BF949EB92E72CFC2005F9831 /* DataInitializer.swift in Sources */,
-				BF949EBB2E72CFC2005F9831 /* DataSyncService.swift in Sources */,
 				BF949EBC2E72CFC2005F9831 /* AutoSyncService.swift in Sources */,
 				BF8A59FF2E4494A600D689C5 /* AutocompleteView.swift in Sources */,
 				BFFA1C682E4A69E3005C24F4 /* SwiftDataPersistence.swift in Sources */,
-				BF7FF43E2E71ACC800BE5EA0 /* DataService.swift in Sources */,
 				BFE12EBF2E34EB960044A3A4 /* TimerTabView.swift in Sources */,
 				BF4109102E31052900BE2AD8 /* CalculationFormView.swift in Sources */,
 				BF4109112E31052900BE2AD8 /* RatioInputView.swift in Sources */,
@@ -888,17 +849,14 @@
 				BFFA1C5E2E4A415E005C24F4 /* FixerSelectionView.swift in Sources */,
 				BFE12EC12E360C010044A3A4 /* AppPreview.swift in Sources */,
 				BF949EDC2E73799B005F9831 /* StagingStage.swift in Sources */,
+				BF0FAFFB2E8028AA006007E3 /* CoachMarksService.swift in Sources */,
 				BF949EDD2E73799B005F9831 /* SwiftDataTemperatureMultiplier.swift in Sources */,
 				BFAFE13E2E780B1900DA9DA5 /* CustomAgitationEditorView.swift in Sources */,
 				BFAFE1452E780B2400DA9DA5 /* CustomAgitationViewModel.swift in Sources */,
 				BFAFE13F2E780B1900DA9DA5 /* CustomAgitationView.swift in Sources */,
-				BF949EDE2E73799B005F9831 /* FilmProtocol.swift in Sources */,
 				BF949EDF2E73799B005F9831 /* SwiftDataDevelopmentTime.swift in Sources */,
-				BF949EE02E73799B005F9831 /* DeveloperProtocol.swift in Sources */,
-				BF949EE12E73799B005F9831 /* DevelopmentParametersProtocol.swift in Sources */,
 				BF949EE22E73799B005F9831 /* DevelopmentParameters.swift in Sources */,
 				BF949EE32E73799B005F9831 /* AppConstants.swift in Sources */,
-				BF949EE42E73799B005F9831 /* FixerProtocol.swift in Sources */,
 				BFAFE13D2E780B1900DA9DA5 /* SavedCustomAgitationView.swift in Sources */,
 				BFAFE1402E780B1900DA9DA5 /* AgitationPhaseConfigView.swift in Sources */,
 				BFAFE1412E780B1900DA9DA5 /* AgitationSelectionView.swift in Sources */,
@@ -1072,7 +1030,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1109,7 +1067,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1151,6 +1109,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BF0FAFF72E8023C0006007E3 /* XCRemoteSwiftPackageReference "SSCoachMarks" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimformSolutionsPvtLtd/SSCoachMarks.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BF0FAFF82E8023C0006007E3 /* SSCoachMarks */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF0FAFF72E8023C0006007E3 /* XCRemoteSwiftPackageReference "SSCoachMarks" */;
+			productName = SSCoachMarks;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BFE96A312E2061A0001CF98D /* Project object */;
 }
