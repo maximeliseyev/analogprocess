@@ -49,7 +49,12 @@ struct StageEditorSheet: View {
         self._selectedAgitationKey = State(initialValue: key)
         
         let type = keyToType[key]
-        let mode = AgitationMode.presets.first { $0.type == type } ?? AgitationMode.presets.first { $0.type == .xtol } ?? AgitationMode.presets[0]
+        let mode: AgitationMode
+        if let type = type {
+            mode = AgitationMode.presets.first { $0.type == type } ?? AgitationMode.presets.first { $0.type == .xtol } ?? AgitationMode.safeFirst
+        } else {
+            mode = AgitationMode.safeFirst
+        }
         self._agitationMode = State(initialValue: mode)
     }
     

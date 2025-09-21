@@ -64,7 +64,7 @@ public struct MainTabView: View {
                         TimerTabView(onStartTimer: { minutes, seconds, agitationMode in
                             self.timerMinutes = minutes
                             self.timerSeconds = seconds
-                            self.timerLabel = "Manual Timer"
+                            self.timerLabel = String(localized: "manualTimer")
                             self.selectedAgitationMode = agitationMode
                             self.showTimerView = true
                         })
@@ -297,7 +297,11 @@ struct MainTabView_PreviewWrapper: View {
                 SwiftDataTemperatureMultiplier.self
             ])
             let config = ModelConfiguration(isStoredInMemoryOnly: true)
-            return try! ModelContainer(for: schema, configurations: [config])
+            do {
+                return try ModelContainer(for: schema, configurations: [config])
+            } catch {
+                fatalError("Failed to create preview ModelContainer: \(error)")
+            }
         }()
         
         self.container = container

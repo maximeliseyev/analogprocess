@@ -26,9 +26,11 @@ struct TimerStage {
 
             // Если не нашли по локализованному названию, пробуем найти по ключу
             ?? AgitationMode.presets.first { $0.name == key }
+            ?? AgitationMode.safeFirst
         } else {
             // Если нет настроек ажитации, используем режим Still
             self.agitationMode = AgitationMode.presets.first { $0.type == .still }
+            ?? AgitationMode.safeFirst
         }
     }
 

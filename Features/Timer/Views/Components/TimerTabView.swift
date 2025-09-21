@@ -152,7 +152,9 @@ struct TimerTabView: View {
         .sheet(isPresented: $showAgitationSelection) {
             AgitationSelectionView(
                 selectedMode: Binding(
-                    get: { selectedAgitationMode ?? AgitationMode.presets.first! },
+                    get: {
+                        selectedAgitationMode ?? AgitationMode.safeFirst
+                    },
                     set: { newMode in
                         selectedAgitationMode = newMode
                         showAgitationSelection = false

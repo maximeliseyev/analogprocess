@@ -30,7 +30,12 @@ struct SwiftDataPersistenceTest {
             // Создаем пустой контейнер для предотвращения краша
             let emptySchema = Schema([SwiftDataFilm.self])
             let emptyConfig = ModelConfiguration(schema: emptySchema, isStoredInMemoryOnly: true)
-            modelContainer = try! ModelContainer(for: emptySchema, configurations: [emptyConfig])
+            do {
+                modelContainer = try ModelContainer(for: emptySchema, configurations: [emptyConfig])
+            } catch {
+                XCTFail("Failed to create test ModelContainer: \(error)")
+                return
+            }
         }
     }
 }

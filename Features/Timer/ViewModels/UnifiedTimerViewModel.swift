@@ -38,8 +38,8 @@ class UnifiedTimerViewModel: ObservableObject {
     private let stages: [TimerStage]
     private let isMultiStage: Bool
     private var timer: Timer?
-    private var totalSeconds = 0
-    private var remainingSeconds = 0
+    private var totalSeconds: Int = 0
+    private var remainingSeconds: Int = 0
 
     // MARK: - Computed Properties
 
@@ -109,8 +109,16 @@ class UnifiedTimerViewModel: ObservableObject {
     }
 
     func selectAgitationMode(_ mode: AgitationMode) {
+        print("🎯 [selectAgitationMode] Selected: \(mode.name)")
         selectedAgitationMode = mode
         showAgitationSelection = false
+        setupAgitation()
+        print("📊 [selectAgitationMode] Result - shouldAgitate: \(shouldAgitate), currentAgitationPhase: \(String(describing: currentAgitationPhase))")
+    }
+
+    /// Вызывается после установки режима ажитации в TimerView
+    func setupAgitationAfterModeSet() {
+        print("🔧 [setupAgitationAfterModeSet] Called")
         setupAgitation()
     }
 
@@ -154,12 +162,13 @@ class UnifiedTimerViewModel: ObservableObject {
 
         totalSeconds = Int(stage.duration)
         remainingSeconds = totalSeconds
+        currentMinute = 1 // Устанавливаем начальную минуту
 
         if isMultiStage {
-            // В режиме стадий используем агитацию из стадии
+            // В режиме стадий используем ажитацию из стадии
             selectedAgitationMode = stage.agitationMode
         }
-        // В одиночном режиме агитация выбирается пользователем
+        // В одиночном режиме ажитация выбирается пользователем
 
         updateDisplay()
         updateProgress()
@@ -181,7 +190,7 @@ class UnifiedTimerViewModel: ObservableObject {
         isRunning = false
         timer?.invalidate()
         timer = nil
-        stopAgitation()
+        // Не останавливаем ажитацию при паузе - только приостанавливаем
     }
 
     private func stopTimer() {
@@ -237,33 +246,40 @@ class UnifiedTimerViewModel: ObservableObject {
         }
 
         shouldAgitate = true
-        currentAgitationPhase = mode.getAgitationForMinuteWithTotal(currentMinute, totalMinutes: totalSeconds / 60)?.agitationType
+        // Убеждаемся что минута >= 1 для корректной работы агитации
+        let minute = max(1, currentMinute)
+        let totalMinutes = max(1, totalSeconds / 60) // Убеждаемся что общее время >= 1 минуты
 
-        if let phase = currentAgitationPhase {
-            switch phase {
-            case .continuous:
-                isInAgitationPhase = true
-                agitationTimeRemaining = 0
-            case .still:
-                isInAgitationPhase = false
-                agitationTimeRemaining = 0
-            case .cycle(let agitation, _):
-                isInAgitationPhase = true
-                agitationTimeRemaining = agitation
-            case .periodic(let interval):
-                isInAgitationPhase = true
-                agitationTimeRemaining = interval
-            case .custom:
-                isInAgitationPhase = false
-                agitationTimeRemaining = 0
-            }
+        print("🔍 [setupAgitation] minute: \(minute), totalMinutes: \(totalMinutes), mode: \(mode.name)")
+
+        let agitationPhase = mode.getAgitationForMinuteWithTotal(minute, totalMinutes: totalMinutes)
+        currentAgitationPhase = agitationPhase.agitationType
+
+        print("✅ [setupAgitation] Found phase: \(currentAgitationPhase!)")
+
+        switch currentAgitationPhase! {
+        case .continuous:
+            isInAgitationPhase = true
+            agitationTimeRemaining = 0
+        case .still:
+            isInAgitationPhase = false
+            agitationTimeRemaining = 0
+        case .cycle(let agitation, _):
+            isInAgitationPhase = true
+            agitationTimeRemaining = agitation
+        case .periodic(let interval):
+            isInAgitationPhase = true
+            agitationTimeRemaining = interval
+        case .custom:
+            isInAgitationPhase = false
+            agitationTimeRemaining = 0
         }
     }
 
     private func updateAgitation() {
         guard shouldAgitate, let mode = selectedAgitationMode else { return }
 
-        let newPhase = mode.getAgitationForMinuteWithTotal(currentMinute, totalMinutes: totalSeconds / 60)?.agitationType
+        let newPhase = mode.getAgitationForMinuteWithTotal(currentMinute, totalMinutes: totalSeconds / 60).agitationType
         if newPhase != currentAgitationPhase {
             currentAgitationPhase = newPhase
             setupAgitation()
@@ -296,12 +312,12 @@ class UnifiedTimerViewModel: ObservableObject {
                         let impactFeedback = UIImpactFeedbackGenerator(style: .light)
                         impactFeedback.impactOccurred()
                     } else {
-                        // Отдых не поместится, заканчиваем агитацию
+                        // Отдых не поместится, заканчиваем ажитацию
                         agitationTimeRemaining = 0
                         isInAgitationPhase = false
                     }
                 } else {
-                    // Переключаемся на агитацию только если agitation поместится до конца таймера
+                    // Переключаемся на ажитацию только если agitation поместится до конца таймера
                     if agitation <= maxPossibleDuration {
                         isInAgitationPhase = true
                         agitationTimeRemaining = agitation
@@ -311,7 +327,7 @@ class UnifiedTimerViewModel: ObservableObject {
                         let impactFeedback = UIImpactFeedbackGenerator(style: .light)
                         impactFeedback.impactOccurred()
                     } else {
-                        // Агитация не поместится, остаемся в покое
+                        // Ажитация не поместится, остаемся в покое
                         agitationTimeRemaining = 0
                     }
                 }
