@@ -26,7 +26,7 @@ struct AnalogProcessApp: App {
         
         let githubService = GitHubDataService()
         let swiftDataService = SwiftDataService(githubDataService: githubService, modelContainer: self.modelContainer)
-        let autoSyncService = AutoSyncService(swiftDataService: swiftDataService, githubDataService: githubService)
+        let autoSyncService = AutoSyncService(swiftDataService: swiftDataService)
         
         _githubDataService = StateObject(wrappedValue: githubService)
         _swiftDataService = StateObject(wrappedValue: swiftDataService)

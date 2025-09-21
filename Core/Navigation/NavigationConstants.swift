@@ -22,45 +22,6 @@ enum NavigationConstants {
     static let journalButtonIndex = 3
 }
 
-// MARK: - Navigation Button Data
-struct NavigationButtonData {
-    let index: Int
-    let titleKey: String
-    let subtitleKey: String
-    let iconName: String
-    let iconColor: Color
-    
-    static let allButtons: [NavigationButtonData] = [
-        NavigationButtonData(
-            index: NavigationConstants.presetsButtonIndex,
-            titleKey: "presets",
-            subtitleKey: "homePresetsSubtitle",
-            iconName: "slider.horizontal.3",
-            iconColor: .blue
-        ),
-        NavigationButtonData(
-            index: NavigationConstants.calculatorButtonIndex,
-            titleKey: "calculator",
-            subtitleKey: "homeCalculatorSubtitle",
-            iconName: "plus.forwardslash.minus",
-            iconColor: .orange
-        ),
-        NavigationButtonData(
-            index: NavigationConstants.timerButtonIndex,
-            titleKey: "timer",
-            subtitleKey: "homeTimerSubtitle",
-            iconName: "timer",
-            iconColor: .red
-        ),
-        NavigationButtonData(
-            index: NavigationConstants.journalButtonIndex,
-            titleKey: "journal",
-            subtitleKey: "homeJournalSubtitle",
-            iconName: "book",
-            iconColor: .purple
-        )
-    ]
-}
 
 // MARK: - Tab Data Structure
 public struct TabInfo {
@@ -71,10 +32,11 @@ public struct TabInfo {
     let iconColor: Color
     
     static let allTabs: [TabInfo] = [
-        TabInfo(index: 0, titleKey: "presets", subtitleKey: "homePresetsSubtitle", iconName: "slider.horizontal.3", iconColor: .blue),
-        TabInfo(index: 1, titleKey: "calculator", subtitleKey: "homeCalculatorSubtitle", iconName: "plus.forwardslash.minus", iconColor: .orange),
-        TabInfo(index: 2, titleKey: "staging", subtitleKey: "homeStagingSubtitle", iconName: "list.bullet.rectangle", iconColor: .green),
-        TabInfo(index: 3, titleKey: "timer", subtitleKey: "homeTimerSubtitle", iconName: "timer", iconColor: .red),
+        TabInfo(index: 0, titleKey: "staging", subtitleKey: "homeStagingSubtitle", iconName: "list.bullet.rectangle", iconColor: .green),
+        TabInfo(index: 1, titleKey: "developmentSetup", subtitleKey: "homePresetsSubtitle", iconName: "slider.horizontal.3", iconColor: .blue),
+        TabInfo(index: 2, titleKey: "calculator", subtitleKey: "homeCalculatorSubtitle", iconName: "plus.forwardslash.minus", iconColor: .orange),
+       
+        TabInfo(index: 3, titleKey: "manualTimer", subtitleKey: "homeTimerSubtitle", iconName: "timer", iconColor: .red),
         TabInfo(index: 4, titleKey: "journal", subtitleKey: "homeJournalSubtitle", iconName: "book", iconColor: .purple)
     ]
 }

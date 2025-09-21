@@ -20,7 +20,6 @@ public class AutoSyncService: ObservableObject {
     private let networkMonitor = NWPathMonitor()
     private let queue = DispatchQueue(label: "AutoSyncService")
     private let swiftDataService: SwiftDataService
-    private let githubDataService: GitHubDataService
     
     // Минимальный интервал между автоматическими синхронизациями (24 часа)
     private let minSyncInterval: TimeInterval = 24 * 60 * 60
@@ -56,9 +55,8 @@ public class AutoSyncService: ObservableObject {
         }
     }
     
-    public init(swiftDataService: SwiftDataService, githubDataService: GitHubDataService) {
+    public init(swiftDataService: SwiftDataService) {
         self.swiftDataService = swiftDataService
-        self.githubDataService = githubDataService
         loadLastAutoSyncDate()
         loadAutoSyncEnabled()
         setupNetworkMonitoring()

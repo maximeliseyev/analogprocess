@@ -324,21 +324,21 @@
 
 // MARK: - Home
 "home" = "Home";
+"staging" = "Stages";
+"homeStagingSubtitle" = "Setup sequential stages for the entire process";
 "homeDescription" = "Complete toolkit for film development: calculator, timer, journal, and guides";
-"homePresetsSubtitle" = "Development parameters";
-"homeCalculatorSubtitle" = "Time calculation";
-"homeTimerSubtitle" = "Development timer";
+"homePresetsSubtitle" = "Setup parameters for developing and fixing";
+"homeCalculatorSubtitle" = "Time calculation for push and pull processing";
+"homeTimerSubtitle" = "Setup individual timer";
 "homeJournalSubtitle" = "Saved records";
 "homeManualsSubtitle" = "Articles and guides";
 
 // MARK: - Staging
-"staging" = "Stages";
 "stagingIntro" = "Add film processing stages in the desired order";
 "totalTime" = "Total time:";
 "stagesInProcess" = "Stages in process:";
 "chooseStage" = "Choose stage";
 "duplicate" = "Duplicate";
-"homeStagingSubtitle" = "Process stages";
 "stagingPrebathName" = "Prebath";
 "stagingPrebathDescription" = "Pre-soak to stabilize temperature";
 "stagingDevelopName" = "Develop";

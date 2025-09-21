@@ -221,6 +221,58 @@
 "agitationRaePhase1Rotation7thMinute" = "第7分钟1次旋转";
 "agitationRaePhase1Rotation10thMinute" = "第10分钟1次旋转";
 "agitationRaePhase1RotationEvery5Minutes" = "每5分钟1次旋转";
+"agitationModeNotSelected" = "未选择";
+"setTimeFirstToSelectAgitation" = "请先设置时间以选择搭拌模式";
+"selectAgitationModeToStartTimer" = "请选择搭拌模式以启动计时器";
+"setAgitationModeFirstToStartTimer" = "请先选择搭拌模式以启动计时器";
+
+// MARK: - Custom Agitation Mode
+"createCustomAgitation" = "创建自定义模式";
+"createCustomAgitationDescription" = "设计您自己的搭拌模式";
+"savedCustomAgitationModes" = "已保存的自定义模式";
+"savedCustomAgitationDescription" = "浏览并从您保存的模式中选择";
+"customAgitationCreateTitle" = "创建自定义搭拌模式";
+"customAgitationEditTitle" = "编辑自定义搭拌模式";
+"customAgitationName" = "模式名称";
+"customAgitationNamePlaceholder" = "输入模式名称";
+"customAgitationFirstMinute" = "第一分钟";
+"customAgitationFirstMinuteDescription" = "初始一分钟的搭拌模式";
+"customAgitationIntermediate" = "中间分钟";
+"customAgitationIntermediateDescription" = "第2分钟到第N-1分钟的搭拌模式";
+"customAgitationEnableLastMinute" = "自定义最后一分钟";
+"customAgitationLastMinute" = "最后一分钟";
+"customAgitationLastMinuteDescription" = "最后一分钟的搭拌模式";
+"customAgitationPreview" = "预览";
+"customAgitationPreviewUnavailable" = "完成配置以查看预览";
+"customAgitationCreateButton" = "创建模式";
+"customAgitationUpdateButton" = "更新模式";
+"customAgitationReset" = "重置表单";
+"agitationType" = "搭拌类型";
+"agitationCycle" = "循环";
+"agitationPeriodic" = "周期性";
+"agitationCustom" = "自定义指示";
+"cycleTimingSettings" = "循环时间设置";
+"agitationSeconds" = "搭拌";
+"restSeconds" = "静置";
+"periodicInterval" = "间隔";
+"customAgitationInstructions" = "指示";
+"customAgitationInstructionsPlaceholder" = "输入自定义搭拌指示...";
+"agitationPeriodicFormat" = "每%@秒";
+"noCustomAgitationModes" = "无自定义模式";
+"noCustomAgitationModesDescription" = "创建您的第一个自定义搭拌模式以开始使用";
+"createFirstCustomMode" = "创建第一个模式";
+"selectThisMode" = "选择此模式";
+"deleteConfirmation" = "删除模式";
+"deleteCustomModeMessage" = "您确定要删除“%@”吗？此操作无法撤销。";
+"createNew" = "新建";
+"validationError" = "验证错误";
+"saveError" = "保存错误";
+"ok" = "确定";
+"customAgitationErrorEmptyName" = "模式名称不能为空";
+"customAgitationErrorEmptyCustomDescription" = "%@需要自定义指示";
+"customAgitationErrorInvalidTiming" = "%@的时间配置无效";
+"customAgitationErrorInvalidInterval" = "%@的间隔无效";
+"customAgitationErrorNoLastMinuteConfig" = "缺少最后一分钟配置";
 
 // MARK: - Calculator Results
 "tapToCalculator" = "点击进入计算器";
@@ -270,6 +322,9 @@
 "recordName" = "输入名称";
 "searchFilms" = "搜索胶片...";
 "searchDevelopers" = "搜索显影液...";
+"searchJournal" = "搜索日志...";
+"noResultsFound" = "未找到结果";
+"trySearchingDifferentKeywords" = "请尝试使用不同的关键词";
 
 // MARK: - Home
 "home" = "首页";
@@ -287,7 +342,7 @@
 "stagesInProcess" = "处理中的阶段：";
 "chooseStage" = "选择阶段";
 "duplicate" = "复制";
-"homeStagingSubtitle" = "处理阶段";
+"homeStagingSubtitle" = "为整个流程设置顺序阶段";
 "stagingPrebathName" = "预浴";
 "stagingPrebathDescription" = "稳定温度的预浸";
 "stagingDevelopName" = "显影";
@@ -310,6 +365,8 @@
 "advancedSetup" = "高级设置";
 "openDevelopmentSetup" = "打开显影设置";
 "openFixerSetup" = "打开定影液设置";
+"setupTimeByPreset" = "按预设设置时间";
+"resetStages" = "重置阶段";
 
 // MARK: - Settings
 "settings" = "设置";
@@ -350,14 +407,15 @@
 "setTimeManually" = "手动设置时间";
 "tapToChangeTime" = "点击更改时间";
 "setTimeToStartTimer" = "设置时间以启动计时器";
+"manualTimer" = "手动计时器";
 
 // MARK: - Create Mode
 "createMode" = "创建模式";
 
 // MARK: - Development
 "development" = "显影";
-"processModesDeveloping" = "开发";
-"processModeFixer" = "修复者";
+"processModesDeveloping" = "显影";
+"processModeFixer" = "定影液";
 "noAlternativeOptions" = "仅有一个可用选项";
 
 // MARK: - Manuals

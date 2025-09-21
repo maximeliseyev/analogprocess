@@ -1,0 +1,15 @@
+{
+  "originHash" : "f2ee12c544422859f4179f0712353d9fd3b546832c45ffbae05fc7c9105245ce",
+  "pins" : [
+    {
+      "identity" : "sscoachmarks",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SimformSolutionsPvtLtd/SSCoachMarks.git",
+      "state" : {
+        "revision" : "e8ed46f330b0849e983e8e675f83369272777a96",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 3
+}

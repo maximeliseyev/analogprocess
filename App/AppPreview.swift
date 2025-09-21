@@ -15,7 +15,7 @@ struct AppPreview: View {
         let modelContainer = SwiftDataPersistence.preview.modelContainer
         let githubService = GitHubDataService()
         let swiftDataService = SwiftDataService(githubDataService: githubService, modelContainer: modelContainer)
-        let autoSyncService = AutoSyncService(swiftDataService: swiftDataService, githubDataService: githubService)
+        let autoSyncService = AutoSyncService(swiftDataService: swiftDataService)
         
         ContentView(colorScheme: $colorScheme)
             .modelContainer(modelContainer)

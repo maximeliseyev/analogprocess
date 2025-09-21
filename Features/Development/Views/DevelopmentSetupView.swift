@@ -10,13 +10,13 @@ import SwiftData
 
 
 struct DevelopmentSetupView: View {
-    @StateObject var viewModel: DevelopmentSetupViewModel<SwiftDataService>
+    @StateObject var viewModel: DevelopmentSetupViewModel
     @Environment(\.dismiss) private var dismiss
     
     let isFromStageEditor: Bool
     let stageType: StageType?
     
-    init(viewModel: DevelopmentSetupViewModel<SwiftDataService>, isFromStageEditor: Bool = false, stageType: StageType? = nil) {
+    init(viewModel: DevelopmentSetupViewModel, isFromStageEditor: Bool = false, stageType: StageType? = nil) {
         self._viewModel = StateObject(wrappedValue: viewModel)
         self.isFromStageEditor = isFromStageEditor
         self.stageType = stageType
@@ -290,7 +290,7 @@ struct DevelopmentSetupView_Previews: PreviewProvider {
         let container = SwiftDataPersistence.preview.modelContainer
         let githubService = GitHubDataService()
         let swiftDataService = SwiftDataService(githubDataService: githubService, modelContainer: container)
-        let viewModel = DevelopmentSetupViewModel<SwiftDataService>(dataService: swiftDataService)
+        let viewModel = DevelopmentSetupViewModel(dataService: swiftDataService)
         
         return DevelopmentSetupView(viewModel: viewModel)
     }

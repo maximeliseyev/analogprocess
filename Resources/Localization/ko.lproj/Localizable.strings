@@ -226,6 +226,54 @@
 "agitationRaePhase1Rotation10thMinute" = "10분째에 1회전";
 "agitationRaePhase1RotationEvery5Minutes" = "5분마다 1회전";
 
+// MARK: - Custom Agitation Mode
+"createCustomAgitation" = "사용자 정의 모드 생성";
+"createCustomAgitationDescription" = "자신만의 교반 패턴 디자인";
+"savedCustomAgitationModes" = "저장된 사용자 정의 모드";
+"savedCustomAgitationDescription" = "저장된 모드를 찾아보고 선택하세요";
+"customAgitationCreateTitle" = "사용자 정의 교반 모드 생성";
+"customAgitationEditTitle" = "사용자 정의 교반 모드 편집";
+"customAgitationName" = "모드 이름";
+"customAgitationNamePlaceholder" = "모드 이름 입력";
+"customAgitationFirstMinute" = "첫 번째 분";
+"customAgitationFirstMinuteDescription" = "초기 1분간의 교반 패턴";
+"customAgitationIntermediate" = "중간 분";
+"customAgitationIntermediateDescription" = "2분부터 N-1분까지의 교반 패턴";
+"customAgitationEnableLastMinute" = "사용자 정의 마지막 분";
+"customAgitationLastMinute" = "마지막 분";
+"customAgitationLastMinuteDescription" = "최종 분의 교반 패턴";
+"customAgitationPreview" = "미리보기";
+"customAgitationPreviewUnavailable" = "미리보기를 보려면 설정을 완료하세요";
+"customAgitationCreateButton" = "모드 생성";
+"customAgitationUpdateButton" = "모드 업데이트";
+"customAgitationReset" = "양식 재설정";
+"agitationType" = "교반 유형";
+"agitationCycle" = "사이클";
+"agitationPeriodic" = "주기적";
+"agitationCustom" = "사용자 정의 지시사항";
+"cycleTimingSettings" = "사이클 타이밍 설정";
+"agitationSeconds" = "교반";
+"restSeconds" = "휴식";
+"periodicInterval" = "간격";
+"customAgitationInstructions" = "지시사항";
+"customAgitationInstructionsPlaceholder" = "사용자 정의 교반 지시사항 입력...";
+"agitationPeriodicFormat" = "%@초마다";
+"noCustomAgitationModes" = "사용자 정의 모드 없음";
+"noCustomAgitationModesDescription" = "시작하려면 첫 번째 사용자 정의 교반 모드를 생성하세요";
+"createFirstCustomMode" = "첫 번째 모드 생성";
+"selectThisMode" = "이 모드 선택";
+"deleteConfirmation" = "모드 삭제";
+"deleteCustomModeMessage" = "\"%@\"를 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.";
+"createNew" = "새로 만들기";
+"validationError" = "유효성 검사 오류";
+"saveError" = "저장 오류";
+"ok" = "확인";
+"customAgitationErrorEmptyName" = "모드 이름은 비워둘 수 없습니다";
+"customAgitationErrorEmptyCustomDescription" = "%@에는 사용자 정의 지시사항이 필요합니다";
+"customAgitationErrorInvalidTiming" = "%@에 대한 잘못된 타이밍 설정";
+"customAgitationErrorInvalidInterval" = "%@에 대한 잘못된 간격";
+"customAgitationErrorNoLastMinuteConfig" = "마지막 분 설정이 누락되었습니다";
+
 // MARK: - Calculator Results
 "tapToCalculator" = "탭하여 계산기로 이동";
 "calculatedTime" = "계산된 시간";
@@ -274,6 +322,9 @@
 "recordName" = "이름 입력";
 "searchFilms" = "필름 검색...";
 "searchDevelopers" = "현상액 검색...";
+"searchJournal" = "저널 검색...";
+"noResultsFound" = "결과를 찾을 수 없습니다";
+"trySearchingDifferentKeywords" = "다른 키워드로 검색해보세요";
 
 // MARK: - Home
 "home" = "홈";
@@ -291,7 +342,7 @@
 "stagesInProcess" = "처리 중인 단계:";
 "chooseStage" = "단계 선택";
 "duplicate" = "복제";
-"homeStagingSubtitle" = "프로세스 단계";
+"homeStagingSubtitle" = "전체 프로세스의 순차 단계 설정";
 "stagingPrebathName" = "예비욕";
 "stagingPrebathDescription" = "온도 안정화를 위한 사전 담금";
 "stagingDevelopName" = "현상";
@@ -314,6 +365,8 @@
 "advancedSetup" = "고급 설정";
 "openDevelopmentSetup" = "현상 설정 열기";
 "openFixerSetup" = "정착액 설정 열기";
+"setupTimeByPreset" = "프리셋으로 시간 설정";
+"resetStages" = "단계 재설정";
 
 // MARK: - Settings
 "settings" = "설정";
@@ -354,14 +407,15 @@
 "setTimeManually" = "시간 수동 설정";
 "tapToChangeTime" = "탭하여 시간 변경";
 "setTimeToStartTimer" = "타이머 시작 시간 설정";
+"manualTimer" = "수동 타이머";
 
 // MARK: - Create Mode
 "createMode" = "생성 모드";
 
 // MARK: - Development
 "development" = "현상";
-"processModesDeveloping" = "개발";
-"processModeFixer" = "수정자";
+"processModesDeveloping" = "현상";
+"processModeFixer" = "정착액";
 "noAlternativeOptions" = "하나의 옵션만 사용 가능";
 
 // MARK: - Manuals
