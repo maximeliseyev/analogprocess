@@ -182,7 +182,7 @@ class CalculatorViewModel: ObservableObject {
             developerName: "Пользовательский расчет",
             dilution: "Коэффициент: \(coefficient), Температура: \(temperature)°C",
             temperature: temperature,
-            iso: Constants.ISO.defaultISO,
+            iso: AppConstants.ISO.defaultISO,
             calculatedTime: totalSeconds,
             notes: "Расчет: \(selectedResult.label) - \(selectedResult.formattedTime)"
         )

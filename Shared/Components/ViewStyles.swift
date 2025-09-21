@@ -131,11 +131,11 @@ extension View {
     }
     
     /// Стиль карточки для параметров с более темным фоном
-    /// Использование: HStack { }.parameterCardStyle()
-    func parameterCardStyle() -> some View {
+    /// Использование: HStack { }.parameterCardStyle(isDisabled: Bool)
+    func parameterCardStyle(isDisabled: Bool) -> some View {
         self
             .padding()
-            .background(Color.gray.opacity(0.2))
+            .background(isDisabled ? Color(uiColor: .systemGray6) : Color(uiColor: .secondarySystemBackground))
             .cornerRadius(8)
     }
     

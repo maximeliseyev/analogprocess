@@ -38,7 +38,7 @@ public class GitHubDataService: ObservableObject {
     private let jsonDecoder: JSONDecoder
     
     @Published var isDownloading = false
-    @Published var downloadProgress: Double = Constants.Progress.initialProgress
+    @Published var downloadProgress: Double = AppConstants.Progress.initialProgress
     @Published var lastSyncDate: Date?
     
     public init(networkSession: NetworkSession = URLSession.shared) {
@@ -52,11 +52,11 @@ public class GitHubDataService: ObservableObject {
     public func downloadAllData() async throws -> GitHubDataResponse {
         print("DEBUG: Starting downloadAllData")
         isDownloading = true
-        downloadProgress = Constants.Progress.initialProgress
+        downloadProgress = AppConstants.Progress.initialProgress
         
         defer {
             isDownloading = false
-            downloadProgress = Constants.Progress.initialProgress
+            downloadProgress = AppConstants.Progress.initialProgress
         }
         
         do {
@@ -77,7 +77,7 @@ public class GitHubDataService: ObservableObject {
             print("DEBUG: Temperature multipliers count: \(temperatureMultipliers.count)")
             print("DEBUG: Agitation modes count: \(agitationModes.count)")
 
-            downloadProgress = Constants.Progress.maxProgress
+            downloadProgress = AppConstants.Progress.maxProgress
             lastSyncDate = Date()
             saveLastSyncDate()
 
@@ -96,7 +96,7 @@ public class GitHubDataService: ObservableObject {
     }
     
     private func downloadFilms() async throws -> [String: GitHubFilmData] {
-        guard let url = URL(string: NetworkConstants.baseURL + NetworkConstants.filmsEndpoint) else {
+        guard let url = URL(string: AppConstants.Network.baseURL + AppConstants.Network.filmsEndpoint) else {
             throw GitHubDataServiceError.networkError(.invalidURL)
         }
         let (data, response) = try await networkSession.data(from: url)
@@ -111,7 +111,7 @@ public class GitHubDataService: ObservableObject {
         
         do {
             let films = try jsonDecoder.decode([String: GitHubFilmData].self, from: data)
-            downloadProgress += Constants.Progress.downloadStepIncrement
+            downloadProgress += AppConstants.Progress.downloadStepIncrement
             return films
         } catch {
             print("DEBUG: Films decoding error: \(error)")
@@ -120,7 +120,7 @@ public class GitHubDataService: ObservableObject {
     }
     
     private func downloadDevelopers() async throws -> [String: GitHubDeveloperData] {
-        guard let url = URL(string: NetworkConstants.baseURL + NetworkConstants.developersEndpoint) else {
+        guard let url = URL(string: AppConstants.Network.baseURL + AppConstants.Network.developersEndpoint) else {
             throw GitHubDataServiceError.networkError(.invalidURL)
         }
         let (data, response) = try await networkSession.data(from: url)
@@ -135,7 +135,7 @@ public class GitHubDataService: ObservableObject {
         
         do {
             let developers = try jsonDecoder.decode([String: GitHubDeveloperData].self, from: data)
-            downloadProgress += Constants.Progress.downloadStepIncrement
+            downloadProgress += AppConstants.Progress.downloadStepIncrement
             return developers
         } catch {
             print("DEBUG: Developers decoding error: \(error)")
@@ -144,7 +144,7 @@ public class GitHubDataService: ObservableObject {
     }
     
     private func downloadFixers() async throws -> [String: GitHubFixerData] {
-        guard let url = URL(string: NetworkConstants.baseURL + NetworkConstants.fixersEndpoint) else {
+        guard let url = URL(string: AppConstants.Network.baseURL + AppConstants.Network.fixersEndpoint) else {
             throw GitHubDataServiceError.networkError(.invalidURL)
         }
         let (data, response) = try await networkSession.data(from: url)
@@ -159,7 +159,7 @@ public class GitHubDataService: ObservableObject {
         
         do {
             let fixers = try jsonDecoder.decode([String: GitHubFixerData].self, from: data)
-            downloadProgress += Constants.Progress.downloadStepIncrement
+            downloadProgress += AppConstants.Progress.downloadStepIncrement
             return fixers
         } catch {
             print("DEBUG: Fixer decoding error: \(error)")
@@ -168,7 +168,7 @@ public class GitHubDataService: ObservableObject {
     }
     
     private func downloadDevelopmentTimes() async throws -> [String: [String: [String: [String: Int]]]] {
-        guard let url = URL(string: NetworkConstants.baseURL + NetworkConstants.developmentTimesEndpoint) else {
+        guard let url = URL(string: AppConstants.Network.baseURL + AppConstants.Network.developmentTimesEndpoint) else {
             throw GitHubDataServiceError.networkError(.invalidURL)
         }
         let (data, response) = try await networkSession.data(from: url)
@@ -183,7 +183,7 @@ public class GitHubDataService: ObservableObject {
         
         do {
             let developmentTimes = try jsonDecoder.decode([String: [String: [String: [String: Int]]]].self, from: data)
-            downloadProgress += Constants.Progress.downloadStepIncrement
+            downloadProgress += AppConstants.Progress.downloadStepIncrement
             return developmentTimes
         } catch {
             print("DEBUG: Development times decoding error: \(error)")
@@ -192,7 +192,7 @@ public class GitHubDataService: ObservableObject {
     }
     
     private func downloadTemperatureMultipliers() async throws -> [String: Double] {
-        guard let url = URL(string: NetworkConstants.baseURL + NetworkConstants.temperatureMultipliersEndpoint) else {
+        guard let url = URL(string: AppConstants.Network.baseURL + AppConstants.Network.temperatureMultipliersEndpoint) else {
             throw GitHubDataServiceError.networkError(.invalidURL)
         }
         let (data, response) = try await networkSession.data(from: url)
@@ -207,7 +207,7 @@ public class GitHubDataService: ObservableObject {
         
         do {
             let temperatureMultipliers = try jsonDecoder.decode([String: Double].self, from: data)
-            downloadProgress += Constants.Progress.downloadStepIncrement
+            downloadProgress += AppConstants.Progress.downloadStepIncrement
             return temperatureMultipliers
         } catch {
             print("DEBUG: Temperature multipliers decoding error: \(error)")
@@ -216,7 +216,7 @@ public class GitHubDataService: ObservableObject {
     }
 
     private func downloadAgitationModes() async throws -> [String: GitHubAgitationModeData] {
-        guard let url = URL(string: NetworkConstants.baseURL + NetworkConstants.agitationModesEndpoint) else {
+        guard let url = URL(string: AppConstants.Network.baseURL + AppConstants.Network.agitationModesEndpoint) else {
             throw GitHubDataServiceError.networkError(.invalidURL)
         }
         let (data, response) = try await networkSession.data(from: url)
@@ -231,7 +231,7 @@ public class GitHubDataService: ObservableObject {
 
         do {
             let agitationResponse = try jsonDecoder.decode(GitHubAgitationResponse.self, from: data)
-            downloadProgress += Constants.Progress.downloadStepIncrement
+            downloadProgress += AppConstants.Progress.downloadStepIncrement
             return agitationResponse.modes
         } catch {
             print("DEBUG: Agitation modes decoding error: \(error)")
@@ -242,12 +242,12 @@ public class GitHubDataService: ObservableObject {
     // MARK: - Sync Date Management
     
     private func loadLastSyncDate() {
-        if let date = UserDefaults.standard.object(forKey: Constants.UserDefaultsKeys.lastSyncDate) as? Date {
+        if let date = UserDefaults.standard.object(forKey: AppConstants.UserDefaultsKeys.lastSyncDate) as? Date {
             lastSyncDate = date
         }
     }
     
     private func saveLastSyncDate() {
-        UserDefaults.standard.set(lastSyncDate, forKey: Constants.UserDefaultsKeys.lastSyncDate)
+        UserDefaults.standard.set(lastSyncDate, forKey: AppConstants.UserDefaultsKeys.lastSyncDate)
     }
-} 
+}
