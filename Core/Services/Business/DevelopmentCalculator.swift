@@ -30,9 +30,9 @@ public class DevelopmentCalculator: DevelopmentCalculating {
     
     /// Округляет время до ближайшей 1/4 минуты (15 секунд) и возвращает кортеж
     private func roundToQuarterMinuteComponents(_ totalSeconds: Int) -> (minutes: Int, seconds: Int) {
-        let roundedSeconds = Int(round(Double(totalSeconds) / Double(Constants.Time.quarterMinuteSeconds))) * Constants.Time.quarterMinuteSeconds
-        let minutes = roundedSeconds / Constants.Time.secondsPerMinute
-        let seconds = roundedSeconds % Constants.Time.secondsPerMinute
+        let roundedSeconds = Int(round(Double(totalSeconds) / Double(AppConstants.Time.quarterMinuteSeconds))) * AppConstants.Time.quarterMinuteSeconds
+        let minutes = roundedSeconds / AppConstants.Time.secondsPerMinute
+        let seconds = roundedSeconds % AppConstants.Time.secondsPerMinute
         
         return (minutes: minutes, seconds: seconds)
     }
@@ -46,7 +46,7 @@ public class DevelopmentCalculator: DevelopmentCalculating {
         steps: Int
     ) -> [ProcessStep] {
         
-        let baseSeconds = minutes * Constants.Time.secondsPerMinute + seconds
+        let baseSeconds = minutes * AppConstants.Time.secondsPerMinute + seconds
         var results: [ProcessStep] = []
         
         // Базовое время (+0) - округляем

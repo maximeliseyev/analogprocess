@@ -53,7 +53,7 @@ public struct JournalRecord {
         record.name = name
         record.filmName = filmName
         record.developerName = developerName
-        record.iso = iso ?? Int32(Constants.ISO.defaultFilmISO)
+        record.iso = iso ?? Int32(AppConstants.ISO.defaultFilmISO)
         record.process = process
         record.dilution = dilution
         record.temperature = temperature ?? 20

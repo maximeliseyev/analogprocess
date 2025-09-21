@@ -12,7 +12,7 @@ struct ISOPickerView: View {
     let onDismiss: () -> Void
     let availableISOs: [Int]
     
-    private let allISOs = Constants.ISO.allValues
+    private let allISOs = AppConstants.ISO.allValues
     
     private var items: [ISOItem] {
         allISOs.map { isoValue in
@@ -43,7 +43,7 @@ struct ISOPickerView_Previews: PreviewProvider {
             ISOPickerView(
                 iso: .constant(400),
                 onDismiss: {},
-                availableISOs: Constants.ISO.availableFilmISOs
+                availableISOs: AppConstants.ISO.availableFilmISOs
             )
             
             ISOPickerView(

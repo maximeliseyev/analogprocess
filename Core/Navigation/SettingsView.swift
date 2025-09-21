@@ -175,7 +175,7 @@ public struct SettingsView: View {
     }
     
     private func contactDeveloper() {
-        let email = Constants.Developer.email
+        let email = AppConstants.Developer.email
         let subject = "Analog Process App Feedback"
         let body = "Hello,\n\nI would like to provide feedback about the Analog Process app.\n\n"
         

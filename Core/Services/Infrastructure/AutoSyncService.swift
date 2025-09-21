@@ -156,21 +156,21 @@ public class AutoSyncService: ObservableObject {
     // MARK: - Persistence
     
     private func loadLastAutoSyncDate() {
-        if let date = UserDefaults.standard.object(forKey: Constants.UserDefaultsKeys.lastAutoSyncDate) as? Date {
+        if let date = UserDefaults.standard.object(forKey: AppConstants.UserDefaultsKeys.lastAutoSyncDate) as? Date {
             lastAutoSyncDate = date
         }
     }
     
     private func saveLastAutoSyncDate() {
-        UserDefaults.standard.set(lastAutoSyncDate, forKey: Constants.UserDefaultsKeys.lastAutoSyncDate)
+        UserDefaults.standard.set(lastAutoSyncDate, forKey: AppConstants.UserDefaultsKeys.lastAutoSyncDate)
     }
     
     private func loadAutoSyncEnabled() {
-        isAutoSyncEnabled = UserDefaults.standard.object(forKey: Constants.UserDefaultsKeys.autoSyncEnabled) as? Bool ?? true
+        isAutoSyncEnabled = UserDefaults.standard.object(forKey: AppConstants.UserDefaultsKeys.autoSyncEnabled) as? Bool ?? true
     }
     
     public func setAutoSyncEnabled(_ enabled: Bool) {
         isAutoSyncEnabled = enabled
-        UserDefaults.standard.set(enabled, forKey: Constants.UserDefaultsKeys.autoSyncEnabled)
+        UserDefaults.standard.set(enabled, forKey: AppConstants.UserDefaultsKeys.autoSyncEnabled)
     }
 }
