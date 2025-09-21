@@ -15,6 +15,9 @@ class CustomAgitationViewModel {
     var saveError: Error?
     var showSaveError = false
 
+    /// Последний сохраненный режим
+    var lastSavedMode: AgitationMode?
+
     /// Состояние загрузки
     var isLoading = false
     var savedModes: [AgitationMode] = []
@@ -26,7 +29,7 @@ class CustomAgitationViewModel {
 
     // MARK: - Dependencies
 
-    private let customService: CustomAgitationModeService
+    private var customService: CustomAgitationModeService
 
     // MARK: - Init
 
@@ -38,6 +41,14 @@ class CustomAgitationViewModel {
             // Временная инициализация без service - будет переинициализирован в onAppear
             self.customService = CustomAgitationModeService(modelContext: nil)
         }
+    }
+
+    // MARK: - ModelContext Update
+
+    /// Обновляет modelContext и перезагружает данные
+    func updateModelContext(_ modelContext: ModelContext) {
+        self.customService = CustomAgitationModeService(modelContext: modelContext)
+        loadSavedModes()
     }
 
     // MARK: - Public Methods
@@ -87,18 +98,20 @@ class CustomAgitationViewModel {
         saveError = nil
 
         do {
+            let savedMode: AgitationMode
             if isEditingMode, let oldName = editingModeId {
                 // Обновление существующего режима
                 let enhancedConfig = config.toEnhanced()
-                _ = try customService.updateCustomMode(oldName: oldName, config: enhancedConfig)
+                savedMode = try customService.updateCustomMode(oldName: oldName, config: enhancedConfig)
             } else {
                 // Создание нового режима
                 let enhancedConfig = config.toEnhanced()
-                _ = try customService.saveCustomMode(config: enhancedConfig)
+                savedMode = try customService.saveCustomMode(config: enhancedConfig)
             }
 
+            lastSavedMode = savedMode // Сохраняем созданный режим
             loadSavedModes() // Перезагрузка списка
-            resetConfiguration() // Сброс формы
+            // НЕ сбрасываем форму сразу - это будет сделано в UI после dismiss
         } catch {
             saveError = error
             showSaveError = true
@@ -143,6 +156,7 @@ class CustomAgitationViewModel {
         isEditingMode = false
         editingModeId = nil
         showValidationErrors = false
+        lastSavedMode = nil
     }
 
     /// Переключение использования кастомной последней минуты
@@ -198,13 +212,34 @@ extension CustomAgitationViewModel {
 
     /// Получение режима агитации из текущей конфигурации
     func getAgitationMode() -> AgitationMode? {
+        // Если есть последний сохраненный режим, возвращаем его
+        if let lastSaved = lastSavedMode {
+            return lastSaved
+        }
+
+        // Если конфигурация валидна, создаем временный режим для предварительного просмотра
         guard isConfigurationValid else { return nil }
 
-        do {
-            let enhancedConfig = config.toEnhanced()
-            return try customService.saveCustomMode(config: enhancedConfig)
-        } catch {
-            return nil
+        let enhancedConfig = config.toEnhanced()
+
+        // Создаем временный режим БЕЗ сохранения в базу данных
+        let rules = enhancedConfig.rules.map { ruleConfig in
+            AgitationRule(
+                priority: ruleConfig.priority,
+                condition: AgitationRuleCondition(
+                    type: ruleConfig.conditionType,
+                    values: ruleConfig.conditionValues
+                ),
+                action: ruleConfig.action,
+                parameters: ruleConfig.parameters
+            )
         }
+
+        return AgitationMode(
+            name: enhancedConfig.name,
+            localizedNameKey: enhancedConfig.name,
+            isCustom: true,
+            rules: rules
+        )
     }
 }

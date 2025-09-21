@@ -46,11 +46,11 @@ struct SavedCustomAgitationView: View {
                 }
             }
             .onAppear {
-                viewModel = CustomAgitationViewModel(modelContext: modelContext)
+                viewModel.updateModelContext(modelContext)
             }
             .refreshable {
                 // Перезагрузка данных при pull-to-refresh
-                viewModel = CustomAgitationViewModel(modelContext: modelContext)
+                viewModel.updateModelContext(modelContext)
             }
         }
         .sheet(isPresented: $showingEditor) {
