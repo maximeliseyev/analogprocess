@@ -274,6 +274,9 @@
 "recordName" = "輸入名稱";
 "searchFilms" = "搜尋膠片...";
 "searchDevelopers" = "搜尋沖印液...";
+"searchJournal" = "搜尋日誌...";
+"noResultsFound" = "未找到結果";
+"trySearchingDifferentKeywords" = "請嘗試使用不同的關鍵字";
 
 // MARK: - Home
 "home" = "首頁";
@@ -291,7 +294,7 @@
 "stagesInProcess" = "處理中的階段：";
 "chooseStage" = "選擇階段";
 "duplicate" = "複製";
-"homeStagingSubtitle" = "處理階段";
+"homeStagingSubtitle" = "為整個流程設定順序階段";
 "stagingPrebathName" = "預浴";
 "stagingPrebathDescription" = "穩定溫度的預浸";
 "stagingDevelopName" = "沖印";
@@ -314,6 +317,8 @@
 "advancedSetup" = "進階設定";
 "openDevelopmentSetup" = "開啟沖印設定";
 "openFixerSetup" = "開啟定影液設定";
+"setupTimeByPreset" = "按預設設定時間";
+"resetStages" = "重置階段";
 
 // MARK: - Settings
 "settings" = "設定";
@@ -354,14 +359,15 @@
 "setTimeManually" = "手動設定時間";
 "tapToChangeTime" = "點擊更改時間";
 "setTimeToStartTimer" = "設定時間以啟動計時器";
+"manualTimer" = "手動計時器";
 
 // MARK: - Create Mode
 "createMode" = "建立模式";
 
 // MARK: - Development
 "development" = "沖印";
-"processModesDeveloping" = "開發";
-"processModeFixer" = "修復者";
+"processModesDeveloping" = "沖印";
+"processModeFixer" = "定影液";
 "noAlternativeOptions" = "僅有一個可用選項";
 
 // MARK: - Manuals
@@ -391,3 +397,56 @@
 "iCloudSyncStatusSyncing" = "同步中...";
 "iCloudSyncStatusCompleted" = "同步完成";
 "iCloudSyncCtatusFailed" = "錯誤：%@";
+"agitationModeNotSelected" = "未選擇";
+"setTimeFirstToSelectAgitation" = "請先設定時間以選擇攜拌模式";
+"selectAgitationModeToStartTimer" = "請選擇攜拌模式以啟動計時器";
+"setAgitationModeFirstToStartTimer" = "請先選擇攜拌模式以啟動計時器";
+"saveToJournal" = "儲存至日誌";
+
+// MARK: - Custom Agitation Mode
+"createCustomAgitation" = "建立自定義模式";
+"createCustomAgitationDescription" = "設計您自己的攜拌模式";
+"savedCustomAgitationModes" = "已儲存的自定義模式";
+"savedCustomAgitationDescription" = "瀏覽並從您儲存的模式中選擇";
+"customAgitationCreateTitle" = "建立自定義攜拌模式";
+"customAgitationEditTitle" = "編輯自定義攜拌模式";
+"customAgitationName" = "模式名稱";
+"customAgitationNamePlaceholder" = "輸入模式名稱";
+"customAgitationFirstMinute" = "第一分鐘";
+"customAgitationFirstMinuteDescription" = "初始一分鐘的攜拌模式";
+"customAgitationIntermediate" = "中間分鐘";
+"customAgitationIntermediateDescription" = "第2分鐘到第N-1分鐘的攜拌模式";
+"customAgitationEnableLastMinute" = "自定義最後一分鐘";
+"customAgitationLastMinute" = "最後一分鐘";
+"customAgitationLastMinuteDescription" = "最後一分鐘的攜拌模式";
+"customAgitationPreview" = "預覽";
+"customAgitationPreviewUnavailable" = "完成配置以查看預覽";
+"customAgitationCreateButton" = "建立模式";
+"customAgitationUpdateButton" = "更新模式";
+"customAgitationReset" = "重置表單";
+"agitationType" = "攜拌類型";
+"agitationCycle" = "循環";
+"agitationPeriodic" = "周期性";
+"agitationCustom" = "自定義指示";
+"cycleTimingSettings" = "循環時間設定";
+"agitationSeconds" = "攜拌";
+"restSeconds" = "靜置";
+"periodicInterval" = "間隔";
+"customAgitationInstructions" = "指示";
+"customAgitationInstructionsPlaceholder" = "輸入自定義攜拌指示...";
+"agitationPeriodicFormat" = "每%@秒";
+"noCustomAgitationModes" = "無自定義模式";
+"noCustomAgitationModesDescription" = "建立您的第一個自定義攜拌模式以開始使用";
+"createFirstCustomMode" = "建立第一個模式";
+"selectThisMode" = "選擇此模式";
+"deleteConfirmation" = "刪除模式";
+"deleteCustomModeMessage" = "您確定要刪除「%@」嗎？此操作無法撤銷。";
+"createNew" = "新建";
+"validationError" = "驗證錯誤";
+"saveError" = "儲存錯誤";
+"ok" = "確定";
+"customAgitationErrorEmptyName" = "模式名稱不能為空";
+"customAgitationErrorEmptyCustomDescription" = "%@需要自定義指示";
+"customAgitationErrorInvalidTiming" = "%@的時間配置無效";
+"customAgitationErrorInvalidInterval" = "%@的間隔無效";
+"customAgitationErrorNoLastMinuteConfig" = "缺少最後一分鐘配置";

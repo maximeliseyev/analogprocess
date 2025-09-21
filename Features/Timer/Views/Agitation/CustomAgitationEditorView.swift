@@ -56,9 +56,9 @@ struct CustomAgitationEditorView: View {
                     Button(LocalizedStringKey("save")) {
                         Task {
                             await viewModel.saveMode()
-                            if viewModel.isConfigurationValid && viewModel.saveError == nil {
+                            if viewModel.saveError == nil, let savedMode = viewModel.lastSavedMode {
                                 // Возвращаем созданный режим
-                                selectedMode = viewModel.getAgitationMode()
+                                selectedMode = savedMode
                                 dismiss()
                             }
                         }
@@ -229,8 +229,8 @@ struct CustomAgitationEditorView: View {
             Button(action: {
                 Task {
                     await viewModel.saveMode()
-                    if viewModel.isConfigurationValid && viewModel.saveError == nil {
-                        selectedMode = viewModel.getAgitationMode()
+                    if viewModel.saveError == nil, let savedMode = viewModel.lastSavedMode {
+                        selectedMode = savedMode
                         dismiss()
                     }
                 }
