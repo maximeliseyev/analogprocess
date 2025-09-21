@@ -29,6 +29,7 @@ public struct TimerView: View {
             let viewModel = UnifiedTimerViewModel(duration: duration, name: timerLabel)
             if let agitationMode = selectedAgitationMode {
                 viewModel.selectedAgitationMode = agitationMode
+                viewModel.setupAgitationAfterModeSet() // Вызываем setup после установки режима
             }
             self._viewModel = StateObject(wrappedValue: viewModel)
 
@@ -37,7 +38,7 @@ public struct TimerView: View {
         }
     }
 
-    // Convenience initializer for backward compatibility
+    // Convenience initializer for simpler single timer creation
     public init(timerLabel: String, totalMinutes: Int, totalSeconds: Int, selectedAgitationMode: AgitationMode? = nil) {
         self.init(mode: .single(timerLabel: timerLabel, totalMinutes: totalMinutes, totalSeconds: totalSeconds, selectedAgitationMode: selectedAgitationMode))
     }
@@ -207,7 +208,7 @@ public struct TimerView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: AgitationSelectionView(
                         selectedMode: Binding(
-                            get: { viewModel.selectedAgitationMode ?? AgitationMode.presets[0] },
+                            get: { viewModel.selectedAgitationMode ?? AgitationMode.safeFirst },
                             set: { newMode in
                                 viewModel.selectAgitationMode(newMode)
                             }
@@ -222,7 +223,7 @@ public struct TimerView: View {
             .sheet(isPresented: $viewModel.showAgitationSelection) {
                 AgitationSelectionView(
                     selectedMode: Binding(
-                        get: { viewModel.selectedAgitationMode ?? AgitationMode.presets[0] },
+                        get: { viewModel.selectedAgitationMode ?? AgitationMode.safeFirst },
                         set: { newMode in
                             viewModel.selectAgitationMode(newMode)
                         }

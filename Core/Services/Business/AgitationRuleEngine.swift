@@ -159,12 +159,12 @@ public struct AgitationMode: Identifiable, Equatable {
     }
 
     /// Основной метод получения агитации для минуты
-    public func getAgitationForMinuteWithTotal(_ minute: Int, totalMinutes: Int) -> AgitationPhase? {
+    public func getAgitationForMinuteWithTotal(_ minute: Int, totalMinutes: Int) -> AgitationPhase {
         return AgitationRuleEngine.getAgitationPhase(for: minute, totalMinutes: totalMinutes, rules: rules)
     }
 
     /// Compatibility method
-    public func getAgitationForMinute(_ minute: Int) -> AgitationPhase? {
+    public func getAgitationForMinute(_ minute: Int) -> AgitationPhase {
         return getAgitationForMinuteWithTotal(minute, totalMinutes: Int.max)
     }
 
@@ -283,5 +283,14 @@ extension AgitationMode {
             agitationSeconds: agitationSeconds,
             restSeconds: restSeconds
         )
+    }
+
+    /// Безопасное получение первого режима агитации
+    /// Если presets пустой, это критическая ошибка - приложение должно всегда иметь предустановленные режимы
+    static var safeFirst: AgitationMode {
+        guard let first = presets.first else {
+            fatalError("No agitation presets available - this is a critical application error")
+        }
+        return first
     }
 }

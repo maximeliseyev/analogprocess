@@ -31,23 +31,11 @@ struct TimerProgressView: View {
                 .rotationEffect(.degrees(-90))
                 .animation(.linear(duration: 1), value: progress)
             
-            if isInAgitationPhase {
+            if isInAgitationPhase && isRunning {
                 AgitationArrowsView(rotationAngle: $rotationAngle)
-                    .opacity(isRunning ? 1.0 : 0.3)
                     .onAppear {
-                        if isRunning {
-                            withAnimation(.linear(duration: 5).repeatForever(autoreverses: false)) {
-                                rotationAngle = 360
-                            }
-                        }
-                    }
-                    .onChange(of: isRunning) { _, running in
-                        if running {
-                            withAnimation(.linear(duration: 5).repeatForever(autoreverses: false)) {
-                                rotationAngle = 360
-                            }
-                        } else {
-                            rotationAngle = 0
+                        withAnimation(.linear(duration: 5).repeatForever(autoreverses: false)) {
+                            rotationAngle = 360
                         }
                     }
                     .onDisappear {

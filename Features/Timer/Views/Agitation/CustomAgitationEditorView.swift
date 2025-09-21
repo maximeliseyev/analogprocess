@@ -171,10 +171,17 @@ struct CustomAgitationEditorView: View {
                 Text(LocalizedStringKey("customAgitationLastMinuteDescription"))
                     .font(.caption)
                     .foregroundColor(.secondary)
-                
-                if let lastMinuteConfig = Binding($viewModel.config.lastMinute) {
+
+                if viewModel.config.lastMinute != nil {
                     AgitationPhaseConfigView(
-                        config: lastMinuteConfig,
+                        config: Binding(
+                            get: {
+                                viewModel.config.lastMinute ?? AgitationPhaseConfig(type: .still)
+                            },
+                            set: { newValue in
+                                viewModel.config.lastMinute = newValue
+                            }
+                        ),
                         title: String(localized: "customAgitationLastMinute")
                     )
                 }
