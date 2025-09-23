@@ -3,6 +3,7 @@ import SwiftUI
 struct AgitationSelectionView: View {
     @Binding var selectedMode: AgitationMode
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
     @State private var showingCustomEditor = false
     @State private var showingSavedModes = false
     
@@ -66,7 +67,8 @@ struct AgitationSelectionView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .sheet(isPresented: $showingCustomEditor) {
-            CustomAgitationEditorView(selectedMode: Binding(
+            let viewModel = CustomAgitationViewModel(modelContext: modelContext)
+            CustomAgitationEditorView(viewModel: viewModel, selectedMode: Binding(
                 get: { selectedMode },
                 set: { newMode in
                     if let mode = newMode {

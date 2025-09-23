@@ -9,9 +9,12 @@ class StagingViewModel: ObservableObject {
     @Published var selectedStage: StagingStage?
     @Published var isEditing = false
     
+    let availablePresets: [ProcessPreset]
+    
     private var cancellables = Set<AnyCancellable>()
     
     init() {
+        self.availablePresets = PresetService.getAvailablePresets()
         loadSelectedStages()
         setupBindings()
     }
@@ -23,6 +26,11 @@ class StagingViewModel: ObservableObject {
                 self?.saveSelectedStages()
             }
             .store(in: &cancellables)
+    }
+    
+    func loadPreset(preset: ProcessPreset) {
+        // Replace current stages with preset stages
+        selectedStages = preset.stages
     }
     
     private func loadSelectedStages() {

@@ -132,6 +132,7 @@ public struct SettingsView: View {
             
         }
         .navigationTitle(LocalizedStringKey("settings"))
+        .navigationBarTitleDisplayMode(.inline)
         .overlay(
             VStack {
                 Spacer()

@@ -12,6 +12,14 @@
 "done" = "Done!";
 "timeUp" = "Time's up!";
 
+// MARK: - Home
+"home" = "Home";
+"homeDescription" = "Complete toolkit for film development: calculator, timer, journal, and guides.";
+"startProcess" = "Start New Process";
+"startProcessSubtitle" = "Follow a step-by-step guide for film development.";
+"tools" = "Tools";
+"toolsSubtitle" = "Access individual calculators and timers.";
+
 // MARK: - Timer Controls
 "start" = "Start";
 "pause" = "Pause";
@@ -322,18 +330,8 @@
 "trySearchingDifferentKeywords" = "Try searching with different keywords";
 "searchDevelopers" = "Search developers...";
 
-// MARK: - Home
-"home" = "Home";
-"staging" = "Stages";
-"homeStagingSubtitle" = "Setup sequential stages for the entire process";
-"homeDescription" = "Complete toolkit for film development: calculator, timer, journal, and guides";
-"homePresetsSubtitle" = "Setup parameters for developing and fixing";
-"homeCalculatorSubtitle" = "Time calculation for push and pull processing";
-"homeTimerSubtitle" = "Setup individual timer";
-"homeJournalSubtitle" = "Saved records";
-"homeManualsSubtitle" = "Articles and guides";
-
 // MARK: - Staging
+"staging" = "Stages";
 "stagingIntro" = "Add film processing stages in the desired order";
 "totalTime" = "Total time:";
 "stagesInProcess" = "Stages in process:";

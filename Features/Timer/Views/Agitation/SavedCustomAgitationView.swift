@@ -54,7 +54,7 @@ struct SavedCustomAgitationView: View {
             }
         }
         .sheet(isPresented: $showingEditor) {
-            CustomAgitationEditorView(selectedMode: $selectedMode)
+            CustomAgitationEditorView(viewModel: viewModel, selectedMode: $selectedMode)
         }
         .alert(LocalizedStringKey("deleteConfirmation"), 
                isPresented: $showingDeleteAlert) {

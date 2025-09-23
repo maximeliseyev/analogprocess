@@ -5,13 +5,12 @@ struct CustomAgitationEditorView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
     
-    @State private var viewModel: CustomAgitationViewModel
+    @Bindable var viewModel: CustomAgitationViewModel
     @Binding var selectedMode: AgitationMode?
     
-    init(selectedMode: Binding<AgitationMode?>) {
+    init(viewModel: CustomAgitationViewModel, selectedMode: Binding<AgitationMode?>) {
+        self.viewModel = viewModel
         self._selectedMode = selectedMode
-        // Временный пустой ViewModel, будет заменен в onAppear с правильным modelContext
-        self._viewModel = State(initialValue: CustomAgitationViewModel(modelContext: nil))
     }
     
     var body: some View {
@@ -66,9 +65,7 @@ struct CustomAgitationEditorView: View {
                     .disabled(!viewModel.isConfigurationValid || viewModel.isSaving)
                 }
             }
-            .onAppear {
-                viewModel = CustomAgitationViewModel(modelContext: modelContext)
-            }
+
         }
         .alert(LocalizedStringKey("validationError"), 
                isPresented: $viewModel.showValidationErrors) {
@@ -266,6 +263,10 @@ struct CustomAgitationEditorView: View {
 
 struct CustomAgitationEditorView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomAgitationEditorView(selectedMode: .constant(nil))
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try! ModelContainer(for: AgitationModeData.self, configurations: config)
+        let viewModel = CustomAgitationViewModel(modelContext: container.mainContext)
+        
+        return CustomAgitationEditorView(viewModel: viewModel, selectedMode: .constant(nil))
     }
 }
