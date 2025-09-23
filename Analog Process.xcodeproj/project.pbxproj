@@ -10,6 +10,8 @@
 		BF0FAFF62E80107B006007E3 /* ParameterRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109672E3164A900BE2AD8 /* ParameterRow.swift */; };
 		BF0FAFF92E8023C0006007E3 /* SSCoachMarks in Frameworks */ = {isa = PBXBuildFile; productRef = BF0FAFF82E8023C0006007E3 /* SSCoachMarks */; };
 		BF0FAFFB2E8028AA006007E3 /* CoachMarksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0FAFFA2E8028AA006007E3 /* CoachMarksService.swift */; };
+		BF0FAFFD2E829F02006007E3 /* ToolsHubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0FAFFC2E829F02006007E3 /* ToolsHubView.swift */; };
+		BF0FAFFF2E82A4FE006007E3 /* PresetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0FAFFE2E82A4FE006007E3 /* PresetService.swift */; };
 		BF113D372E3FA8A5008B5578 /* ManualTimeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF113D362E3FA8A5008B5578 /* ManualTimeInputView.swift */; };
 		BF113D412E40DB7D008B5578 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF113D402E40DB7D008B5578 /* ThemeManager.swift */; };
 		BF28FA5E2E41F75200C2E34E /* SyncStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28FA5C2E41F75200C2E34E /* SyncStatusView.swift */; };
@@ -104,6 +106,8 @@
 
 /* Begin PBXFileReference section */
 		BF0FAFFA2E8028AA006007E3 /* CoachMarksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachMarksService.swift; sourceTree = "<group>"; };
+		BF0FAFFC2E829F02006007E3 /* ToolsHubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsHubView.swift; sourceTree = "<group>"; };
+		BF0FAFFE2E82A4FE006007E3 /* PresetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetService.swift; sourceTree = "<group>"; };
 		BF113D362E3FA8A5008B5578 /* ManualTimeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTimeInputView.swift; sourceTree = "<group>"; };
 		BF113D402E40DB7D008B5578 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		BF28FA5C2E41F75200C2E34E /* SyncStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncStatusView.swift; sourceTree = "<group>"; };
@@ -327,6 +331,7 @@
 				BF8A59F12E4380E600D689C5 /* NavigationConstants.swift */,
 				BF8A59EE2E43809C00D689C5 /* MainTabView.swift */,
 				BFA0C7952E2133FC00132936 /* ContentView.swift */,
+				BF0FAFFC2E829F02006007E3 /* ToolsHubView.swift */,
 				BFE12EBB2E34DBE10044A3A4 /* SettingsView.swift */,
 			);
 			path = Navigation;
@@ -482,6 +487,7 @@
 				BF3B291C2E7C7BD500FABD58 /* CustomAgitationModeService.swift */,
 				BF949EA82E72CFC2005F9831 /* DevelopmentCalculator.swift */,
 				BF52A21B2E7D82B900E305F5 /* GitHubAgitationService.swift */,
+				BF0FAFFE2E82A4FE006007E3 /* PresetService.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -811,6 +817,7 @@
 				BFE12EBD2E34DBE10044A3A4 /* SettingsView.swift in Sources */,
 				BF4109142E31052900BE2AD8 /* StepsInputView.swift in Sources */,
 				BF4109622E31641600BE2AD8 /* DilutionPickerView.swift in Sources */,
+				BF0FAFFD2E829F02006007E3 /* ToolsHubView.swift in Sources */,
 				BF4109702E3166F400BE2AD8 /* TimerControlsView.swift in Sources */,
 				BF4109712E3166F400BE2AD8 /* TimerHeaderView.swift in Sources */,
 				BF3B291B2E7C7AB000FABD58 /* AgitationRuleEngine.swift in Sources */,
@@ -829,6 +836,7 @@
 				BF41095C2E3163E400BE2AD8 /* DevelopmentParametersView.swift in Sources */,
 				BF41095D2E3163E400BE2AD8 /* DeveloperPickerView.swift in Sources */,
 				BFDCB75E2E382372000F6CE5 /* AnalogProcessApp.swift in Sources */,
+				BF0FAFFF2E82A4FE006007E3 /* PresetService.swift in Sources */,
 				BFA0C7AD2E2134F800132936 /* JournalView.swift in Sources */,
 				BF99E9A82E4E814300BB7F0C /* DropViewDelegate.swift in Sources */,
 				BF99E9A92E4E814300BB7F0C /* StagePickerView.swift in Sources */,
@@ -1036,7 +1044,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.3;
+				MARKETING_VERSION = 0.3.5;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1073,7 +1081,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.3;
+				MARKETING_VERSION = 0.3.5;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

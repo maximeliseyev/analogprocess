@@ -16,7 +16,6 @@ struct ContentView: View {
         MainTabView(
             swiftDataService: swiftDataService,
             selectedTab: $selectedTab,
-            onBackToHome: {},
             colorScheme: $colorScheme
         )
     }

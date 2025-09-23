@@ -33,6 +33,8 @@ struct StagingView: View {
     @State private var draggedStage: StagingStage?
     @State private var showingStagingTimer = false
     @State private var showingResetConfirmation = false
+    @State private var showingPresetSelector = false
+    @State private var selectedPreset: ProcessPreset? = nil
 
     init(viewModel: StagingViewModel = StagingViewModel()) {
         self.viewModel = viewModel
@@ -157,6 +159,13 @@ struct StagingView: View {
             }
             .navigationTitle(LocalizedStringKey("staging"))
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: { showingPresetSelector = true }) {
+                        Image(systemName: "wand.and.stars")
+                    }
+                }
+            }
         }
         .sheet(isPresented: $showingStagePicker) {
             StagePickerView(
@@ -173,6 +182,24 @@ struct StagingView: View {
         .sheet(isPresented: $showingStagingTimer) {
             TimerView(mode: .staging(stages: viewModel.selectedStages))
         }
+        .confirmationDialog("Load Preset", isPresented: $showingPresetSelector, titleVisibility: .visible) {
+            ForEach(viewModel.availablePresets, id: \.name) { preset in
+                Button(preset.name) {
+                    self.selectedPreset = preset
+                }
+            }
+        }
+        .alert("Load \(selectedPreset?.name ?? "") Preset?", isPresented: .constant(selectedPreset != nil), actions: {
+            Button("Cancel", role: .cancel) { selectedPreset = nil }
+            Button("Load") {
+                if let preset = selectedPreset {
+                    withAnimation { viewModel.loadPreset(preset: preset) }
+                }
+                selectedPreset = nil
+            }
+        }, message: {
+            Text("This will replace your current stages. This action cannot be undone.")
+        })
         .alert(LocalizedStringKey("stagingResetConfirmation"), isPresented: $showingResetConfirmation) {
             Button(LocalizedStringKey("cancel"), role: .cancel) { }
             Button(LocalizedStringKey("reset"), role: .destructive) {

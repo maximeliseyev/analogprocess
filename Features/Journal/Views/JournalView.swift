@@ -1,10 +1,3 @@
-//
-//  JournalView.swift
-//  Film Lab
-//
-//  Created by Maxim Eliseyev on 12.07.2025.
-//
-
 import SwiftUI
 import SwiftData
 
@@ -13,7 +6,6 @@ struct JournalView: View {
     
     let onEditRecord: (SwiftDataJournalRecord) -> Void
     let onDeleteRecord: (SwiftDataJournalRecord) -> Void
-    let onClose: () -> Void
     let onCreateNew: () -> Void
     let syncStatus: CloudKitService.SyncStatus
     let isCloudAvailable: Bool
@@ -49,7 +41,6 @@ struct JournalView: View {
         cloudKitService: CloudKitService,
         onEditRecord: @escaping (SwiftDataJournalRecord) -> Void,
         onDeleteRecord: @escaping (SwiftDataJournalRecord) -> Void,
-        onClose: @escaping () -> Void,
         onCreateNew: @escaping () -> Void,
         syncStatus: CloudKitService.SyncStatus = .idle,
         isCloudAvailable: Bool = false,
@@ -58,7 +49,6 @@ struct JournalView: View {
         self._viewModel = StateObject(wrappedValue: JournalViewModel(swiftDataService: swiftDataService, cloudKitService: cloudKitService))
         self.onEditRecord = onEditRecord
         self.onDeleteRecord = onDeleteRecord
-        self.onClose = onClose
         self.onCreateNew = onCreateNew
         self.syncStatus = syncStatus
         self.isCloudAvailable = isCloudAvailable
@@ -148,10 +138,15 @@ struct JournalView: View {
                 }
             )
         }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: onCreateNew) {
+                    Image(systemName: "plus")
+                }
+            }
+        }
         .onAppear {
             viewModel.loadRecords()
         }
     }
 }
-
-
