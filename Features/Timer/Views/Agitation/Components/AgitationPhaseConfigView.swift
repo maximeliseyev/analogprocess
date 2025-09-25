@@ -100,10 +100,17 @@ struct AgitationPhaseConfigView: View {
                         .foregroundColor(.secondary)
                     
                     HStack {
-                        TextField("0", value: $config.agitationSeconds, format: .number)
+                        TextField("0", text: Binding(
+                            get: { String(config.agitationSeconds) },
+                            set: { newValue in
+                                if let intValue = Int(newValue.filter { $0.isNumber }) {
+                                    config.agitationSeconds = max(0, min(intValue, 60))
+                                }
+                            }
+                        ))
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .keyboardType(.numberPad)
-                        
+
                         Text(LocalizedStringKey("seconds"))
                             .font(.caption)
                             .foregroundColor(.secondary)
@@ -116,10 +123,17 @@ struct AgitationPhaseConfigView: View {
                         .foregroundColor(.secondary)
                     
                     HStack {
-                        TextField("0", value: $config.restSeconds, format: .number)
+                        TextField("0", text: Binding(
+                            get: { String(config.restSeconds) },
+                            set: { newValue in
+                                if let intValue = Int(newValue.filter { $0.isNumber }) {
+                                    config.restSeconds = max(0, min(intValue, 60))
+                                }
+                            }
+                        ))
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .keyboardType(.numberPad)
-                        
+
                         Text(LocalizedStringKey("seconds"))
                             .font(.caption)
                             .foregroundColor(.secondary)
@@ -128,24 +142,26 @@ struct AgitationPhaseConfigView: View {
             }
             
             // Stepper controls for easier adjustment
+            /*
             VStack(spacing: 8) {
                 HStack {
                     Text(LocalizedStringKey("agitationSeconds"))
                     Spacer()
-                    Stepper("", value: $config.agitationSeconds, in: 0...120, step: 5)
+                    Stepper("", value: $config.agitationSeconds, in: 0...60, step: 5)
                         .labelsHidden()
                 }
                 
                 HStack {
                     Text(LocalizedStringKey("restSeconds"))
                     Spacer()
-                    Stepper("", value: $config.restSeconds, in: 0...300, step: 5)
+                    Stepper("", value: $config.restSeconds, in: 0...60, step: 5)
                         .labelsHidden()
                 }
             }
             .padding()
             .background(Color(.systemGray6))
             .cornerRadius(8)
+            */
         }
     }
     
@@ -156,10 +172,17 @@ struct AgitationPhaseConfigView: View {
                 .fontWeight(.medium)
             
             HStack {
-                TextField("10", value: $config.agitationSeconds, format: .number)
+                TextField("10", text: Binding(
+                    get: { String(config.agitationSeconds) },
+                    set: { newValue in
+                        if let intValue = Int(newValue.filter { $0.isNumber }) {
+                            config.agitationSeconds = max(1, min(intValue, 60))
+                        }
+                    }
+                ))
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.numberPad)
-                
+
                 Text(LocalizedStringKey("seconds"))
                     .font(.caption)
                     .foregroundColor(.secondary)
@@ -239,8 +262,8 @@ struct AgitationPhaseConfigView: View {
         switch type {
         case .cycle:
             if config.agitationSeconds == 0 && config.restSeconds == 0 {
-                config.agitationSeconds = AgitationConstants.Default.agitationSeconds
-                config.restSeconds = AgitationConstants.Default.restSeconds
+                config.agitationSeconds = 10
+                config.restSeconds = 50
             }
             config.customDescription = nil
         case .periodic:

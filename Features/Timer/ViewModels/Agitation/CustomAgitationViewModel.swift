@@ -8,7 +8,7 @@ class CustomAgitationViewModel {
     // MARK: - Published Properties
 
     /// Текущая конфигурация режима агитации
-    var config = CustomAgitationConfig()
+    var config = UICustomAgitationConfig()
 
     /// Состояние сохранения
     var isSaving = false
@@ -120,21 +120,29 @@ class CustomAgitationViewModel {
         isSaving = false
     }
 
-    /// Загрузка режима для редактирования (заглушка - требует реализации конвертации)
+    /// Загрузка режима для редактирования с полной конвертацией из AgitationMode
     func loadModeForEditing(_ mode: AgitationMode) {
         guard mode.isCustom else { return }
         isEditingMode = true
         editingModeId = mode.name
 
-        // TODO: Реализовать обратную конвертацию из AgitationMode в CustomAgitationConfig
-        // Пока что просто загружаем имя
-        config.name = mode.name
+        // Конвертируем AgitationMode обратно в CustomAgitationConfig
+        config = convertAgitationModeToConfig(mode)
+    }
 
-        // Устанавливаем значения по умолчанию
-        config.firstMinute = AgitationPhaseConfig(type: .continuous)
-        config.intermediate = AgitationPhaseConfig(type: .cycle, agitationSeconds: 30, restSeconds: 30)
-        config.hasLastMinuteCustom = false
-        config.lastMinute = nil
+    /// Клонирование встроенного режима для создания кастомного
+    func cloneBuiltInMode(_ mode: AgitationMode) {
+        guard !mode.isCustom else { return }
+
+        // Сбрасываем состояние редактирования
+        isEditingMode = false
+        editingModeId = nil
+
+        // Конвертируем встроенный режим в конфигурацию
+        config = convertAgitationModeToConfig(mode)
+
+        // Добавляем префикс к имени для ясности
+        config.name = "Custom \(mode.name)"
     }
 
     /// Удаление режима
@@ -184,6 +192,9 @@ class CustomAgitationViewModel {
                 if phase.agitationSeconds <= 0 && phase.restSeconds <= 0 {
                     return String(format: String(localized: "customAgitationErrorInvalidTiming"), phaseName)
                 }
+                if phase.agitationSeconds + phase.restSeconds > 60 {
+                    return String(format: String(localized: "customAgitationErrorCycleSum"), phaseName)
+                }
             } else if phase.type == .periodic {
                 if phase.agitationSeconds <= 0 {
                     return String(format: String(localized: "customAgitationErrorInvalidInterval"), phaseName)
@@ -199,6 +210,70 @@ class CustomAgitationViewModel {
         isLoading = true
         savedModes = customService.getCustomModes()
         isLoading = false
+    }
+
+    /// Конвертирует AgitationMode в UICustomAgitationConfig для редактирования
+    private func convertAgitationModeToConfig(_ mode: AgitationMode) -> UICustomAgitationConfig {
+        var newConfig = UICustomAgitationConfig()
+        newConfig.name = mode.name
+
+        // Анализируем правила для восстановления структуры первая/промежуточная/последняя
+        // Получаем фазы для каждой минуты из режима
+        let firstPhase = mode.getAgitationForMinuteWithTotal(1, totalMinutes: 10)
+        let intermediatePhase = mode.getAgitationForMinuteWithTotal(5, totalMinutes: 10) // Типичная промежуточная минута
+        let lastPhase = mode.getAgitationForMinuteWithTotal(10, totalMinutes: 10)
+
+        // Конвертируем фазы в конфигурации
+        newConfig.firstMinute = convertPhaseToPhaseConfig(firstPhase)
+        newConfig.intermediate = convertPhaseToPhaseConfig(intermediatePhase)
+
+        // Проверяем, отличается ли последняя минута от промежуточной
+        if !arePhasesEqual(intermediatePhase, lastPhase) {
+            newConfig.hasLastMinuteCustom = true
+            newConfig.lastMinute = convertPhaseToPhaseConfig(lastPhase)
+        } else {
+            newConfig.hasLastMinuteCustom = false
+            newConfig.lastMinute = nil
+        }
+
+        return newConfig
+    }
+
+    /// Конвертирует AgitationPhase в AgitationPhaseConfig
+    private func convertPhaseToPhaseConfig(_ phase: AgitationPhase) -> AgitationPhaseConfig {
+        let phaseType: AgitationPhaseConfig.PhaseType
+        var agitationSeconds = 0
+        var restSeconds = 0
+        var customDescription: String?
+
+        switch phase.agitationType {
+        case .continuous:
+            phaseType = .continuous
+        case .still:
+            phaseType = .still
+        case .cycle(let agitation, let rest):
+            phaseType = .cycle
+            agitationSeconds = agitation
+            restSeconds = rest
+        case .periodic(let interval):
+            phaseType = .periodic
+            agitationSeconds = interval
+        case .custom(let description):
+            phaseType = .custom
+            customDescription = description
+        }
+
+        return AgitationPhaseConfig(
+            type: phaseType,
+            agitationSeconds: agitationSeconds,
+            restSeconds: restSeconds,
+            customDescription: customDescription
+        )
+    }
+
+    /// Сравнивает две фазы на равенство
+    private func arePhasesEqual(_ phase1: AgitationPhase, _ phase2: AgitationPhase) -> Bool {
+        return phase1.agitationType == phase2.agitationType
     }
 }
 

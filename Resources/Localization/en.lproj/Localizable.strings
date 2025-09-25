@@ -277,6 +277,7 @@
 "customAgitationErrorInvalidTiming" = "Invalid timing configuration for %@";
 "customAgitationErrorInvalidInterval" = "Invalid interval for %@";
 "customAgitationErrorNoLastMinuteConfig" = "Last minute configuration is missing";
+"customAgitationErrorCycleSum" = "Cycle Timing Error in %1$@: The sum of agitation and rest should not exceed 60 seconds.";
 
 // MARK: - Calculator Results
 "tapToCalculator" = "Tap to go to calculator";

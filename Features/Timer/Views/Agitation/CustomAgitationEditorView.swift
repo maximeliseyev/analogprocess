@@ -65,6 +65,10 @@ struct CustomAgitationEditorView: View {
                     .disabled(!viewModel.isConfigurationValid || viewModel.isSaving)
                 }
             }
+            .onAppear {
+                // Важно: обновляем modelContext в редакторе
+                viewModel.updateModelContext(modelContext)
+            }
 
         }
         .alert(LocalizedStringKey("validationError"), 

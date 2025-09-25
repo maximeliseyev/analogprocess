@@ -223,7 +223,20 @@ class UnifiedTimerViewModel: ObservableObject {
     }
 
     private func updateProgress() {
-        progress = totalSeconds > 0 ? Double(totalSeconds - remainingSeconds) / Double(totalSeconds) : 0.0
+        guard totalSeconds > 0 else {
+            progress = 0.0
+            return
+        }
+
+        let elapsedSeconds = totalSeconds - remainingSeconds
+        let newProgress = Double(elapsedSeconds) / Double(totalSeconds)
+
+        // Защита от NaN и некорректных значений
+        if newProgress.isFinite && !newProgress.isNaN {
+            progress = max(0.0, min(1.0, newProgress))
+        } else {
+            progress = 0.0
+        }
     }
 
     private func finishTimer() {
