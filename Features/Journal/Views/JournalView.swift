@@ -2,10 +2,10 @@ import SwiftUI
 import SwiftData
 
 struct JournalView: View {
+    @Environment(\.modelContext) private var modelContext
     @StateObject private var viewModel: JournalViewModel
     
     let onEditRecord: (SwiftDataJournalRecord) -> Void
-    let onDeleteRecord: (SwiftDataJournalRecord) -> Void
     let onCreateNew: () -> Void
     let syncStatus: CloudKitService.SyncStatus
     let isCloudAvailable: Bool
@@ -40,7 +40,6 @@ struct JournalView: View {
         swiftDataService: SwiftDataService,
         cloudKitService: CloudKitService,
         onEditRecord: @escaping (SwiftDataJournalRecord) -> Void,
-        onDeleteRecord: @escaping (SwiftDataJournalRecord) -> Void,
         onCreateNew: @escaping () -> Void,
         syncStatus: CloudKitService.SyncStatus = .idle,
         isCloudAvailable: Bool = false,
@@ -48,7 +47,6 @@ struct JournalView: View {
     ) {
         self._viewModel = StateObject(wrappedValue: JournalViewModel(swiftDataService: swiftDataService, cloudKitService: cloudKitService))
         self.onEditRecord = onEditRecord
-        self.onDeleteRecord = onDeleteRecord
         self.onCreateNew = onCreateNew
         self.syncStatus = syncStatus
         self.isCloudAvailable = isCloudAvailable
@@ -111,7 +109,7 @@ struct JournalView: View {
                             }
                             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                 Button(role: .destructive) {
-                                    onDeleteRecord(record)
+                                    deleteRecord(record)
                                 } label: {
                                     Label(LocalizedStringKey("delete"), systemImage: "trash")
                                 }
@@ -134,7 +132,7 @@ struct JournalView: View {
                 },
                 onDelete: {
                     selectedRecord = nil
-                    onDeleteRecord(record)
+                    deleteRecord(record)
                 }
             )
         }
@@ -145,8 +143,9 @@ struct JournalView: View {
                 }
             }
         }
-        .onAppear {
-            viewModel.loadRecords()
-        }
+    }
+    
+    private func deleteRecord(_ record: SwiftDataJournalRecord) {
+        modelContext.delete(record)
     }
 }

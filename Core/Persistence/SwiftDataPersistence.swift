@@ -13,6 +13,7 @@ struct SwiftDataPersistence {
     
     @MainActor
     static let preview: SwiftDataPersistence = {
+        // Используем унифицированную тестовую конфигурацию
         let result = SwiftDataPersistence(inMemory: true)
         let modelContext = result.modelContainer.mainContext
         
@@ -51,88 +52,101 @@ struct SwiftDataPersistence {
     }()
     
     let modelContainer: ModelContainer
-    
+
     init(inMemory: Bool = false) {
         print("🚀 Starting SwiftData initialization (inMemory: \(inMemory))")
 
+        // Пытаемся инициализировать основную конфигурацию
         do {
-            // Начинаем с простой схемы для CloudKit
-            let schema = Schema([
-                SwiftDataFilm.self,
-                SwiftDataDeveloper.self,
-                SwiftDataJournalRecord.self,
-                // AgitationModeData.self // Временно отключено для диагностики
-                // TODO: Добавить остальные модели после успешного теста:
-                // SwiftDataDevelopmentTime.self,
-                // SwiftDataFixer.self,
-                // SwiftDataTemperatureMultiplier.self,
-            ])
+            // Используем унифицированный менеджер конфигураций
+            let (schema, modelConfiguration) = SwiftDataConfigurationManager.createPrimaryConfiguration(inMemory: inMemory)
 
-            print("📋 Schema created with \(schema.entities.count) entities")
-
-            let modelConfiguration: ModelConfiguration
-            if inMemory {
-                print("🔧 Using in-memory configuration")
-                modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
-            } else {
-                print("☁️ Attempting CloudKit configuration...")
-                // Используем .private для более стабильной работы
-                modelConfiguration = ModelConfiguration(
-                    schema: schema,
-                    isStoredInMemoryOnly: false,
-                    cloudKitDatabase: .private("iCloud.com.maximeliseyev.analogprocess")
-                )
+            // Валидируем схему
+            let missingEntities = SwiftDataConfigurationManager.validateSchema(schema)
+            if !missingEntities.isEmpty {
+                print("⚠️ Schema validation warning - missing entities: \(missingEntities)")
             }
 
-            modelContainer = try ModelContainer(for: schema, configurations: [modelConfiguration])
+            print("📋 Using schema v1.1 with entities: \(SwiftDataSchemas.entityNames(for: schema))")
+            print(inMemory ? "🔧 Using in-memory configuration" : "☁️ Attempting CloudKit configuration...")
+
+            self.modelContainer = try ModelContainer(for: schema, configurations: [modelConfiguration])
+            return  // Успешная инициализация
         } catch {
             print("SwiftData CloudKit initialization failed: \(error)")
+
+            // Детальный анализ ошибки
             if let swiftDataError = error as? SwiftDataError {
                 print("SwiftData error details: \(swiftDataError)")
+                print("SwiftData error localizedDescription: \(swiftDataError.localizedDescription)")
             }
 
             // Проверяем причину ошибки CloudKit
             if let nsError = error as NSError? {
                 print("Error domain: \(nsError.domain)")
                 print("Error code: \(nsError.code)")
+                print("Error userInfo: \(nsError.userInfo)")
                 if nsError.code == 134400 {
                     print("⚠️ CloudKit требует iCloud аккаунт. Войдите в iCloud в Настройках устройства.")
                 }
             }
 
-            // Try fallback without CloudKit
-            do {
-                let fallbackSchema = Schema([
-                    SwiftDataFilm.self,
-                    SwiftDataDeveloper.self,
-                    SwiftDataJournalRecord.self,
-                    // AgitationModeData.self // Временно отключено
-                ])
-                let fallbackConfig = ModelConfiguration(
-                    schema: fallbackSchema,
-                    isStoredInMemoryOnly: false
-                )
-                modelContainer = try ModelContainer(for: fallbackSchema, configurations: [fallbackConfig])
-                print("✅ Fallback to local storage successful")
-            } catch {
-                print("❌ Critical error - SwiftData initialization completely failed: \(error)")
+            // Проверяем, связана ли ошибка с моделями
+            print("🔍 Проверка схемы перед fallback:")
+            let currentSchema = SwiftDataSchemas.current
+            for entity in currentSchema.entities {
+                print("   - Entity: \(entity.name)")
+            }
 
-                // Last resort: in-memory storage
+            // Используем стратегический fallback подход
+            let recoveryStrategies: [SwiftDataRecoveryStrategy] = [
+                .resetDatabase,  // Сначала пробуем сбросить базу с полной схемой
+                .useMemory,      // Затем in-memory с полной схемой
+                .useMinimalSchema, // Потом минимальная схема
+                .useJournalOnly    // И наконец только журнал
+            ]
+
+            for strategy in recoveryStrategies {
+                print("⚠️ Attempting recovery strategy: \(strategy.description)")
+
                 do {
-                    let memorySchema = Schema([
-                        SwiftDataFilm.self,
-                        SwiftDataDeveloper.self,
-                        SwiftDataJournalRecord.self,
-                        // AgitationModeData.self // Временно отключено
-                    ])
-                    let memoryConfig = ModelConfiguration(schema: memorySchema, isStoredInMemoryOnly: true)
-                    modelContainer = try ModelContainer(for: memorySchema, configurations: [memoryConfig])
-                    print("⚠️ Using in-memory storage as last resort")
+                    // Специальная обработка для resetDatabase
+                    if strategy == .resetDatabase {
+                        let url = URL.applicationSupportDirectory.appending(path: "default.store")
+                        if FileManager.default.fileExists(atPath: url.path()) {
+                            try FileManager.default.removeItem(at: url)
+                            print("🗑️ Removed corrupted database")
+                        }
+                    }
+
+                    let (schema, configuration) = SwiftDataConfigurationManager.createFallbackConfiguration(strategy: strategy)
+                    let container = try ModelContainer(for: schema, configurations: [configuration])
+
+                    print("✅ Recovery successful using \(strategy.description)")
+                    print("📋 Using entities: \(SwiftDataSchemas.entityNames(for: schema))")
+
+                    self.modelContainer = container
+                    return  // Успешное восстановление
+
                 } catch {
-                    print("💥 Complete SwiftData failure: \(error)")
-                    fatalError("Could not initialize SwiftData in any configuration: \(error)")
+                    print("❌ Recovery strategy '\(strategy.description)' failed: \(error)")
+                    continue
                 }
             }
+
+        // Если все стратегии восстановления провалились, создаём аварийную конфигурацию
+        print("💥 All recovery strategies failed - using emergency configuration")
+        let (emergencySchema, emergencyConfig) = SwiftDataConfigurationManager.createFallbackConfiguration(strategy: .useMemory)
+        do {
+            self.modelContainer = try ModelContainer(for: emergencySchema, configurations: [emergencyConfig])
+            print("🆘 Emergency in-memory configuration successful")
+        } catch {
+            // Последняя попытка с минимальной схемой
+            let minimalSchema = Schema([SwiftDataJournalRecord.self])
+            let minimalConfig = ModelConfiguration(schema: minimalSchema, isStoredInMemoryOnly: true)
+            self.modelContainer = try! ModelContainer(for: minimalSchema, configurations: [minimalConfig])
+            print("🆘🆘 Ultra-minimal emergency configuration - journal only")
+        }
         }
     }
 }

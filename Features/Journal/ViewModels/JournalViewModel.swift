@@ -11,9 +11,6 @@ import Combine
 
 @MainActor
 class JournalViewModel: ObservableObject {
-    // MARK: - Published Properties
-    @Published var savedRecords: [SwiftDataJournalRecord] = []
-    @Published var isLoading = false
     @Published var errorMessage: String?
     @Published var syncStatus: CloudKitService.SyncStatus = .idle
     @Published var isCloudAvailable = false
@@ -28,7 +25,6 @@ class JournalViewModel: ObservableObject {
         self.swiftDataService = swiftDataService
         self.cloudKitService = cloudKitService
         setupCloudKitObservers()
-        loadRecords()
     }
     
     deinit {
@@ -51,22 +47,8 @@ class JournalViewModel: ObservableObject {
     
     // MARK: - Methods
     
-    func loadRecords() {
-        isLoading = true
-        errorMessage = nil
-        
-        loadSwiftDataRecords()
-        
-        isLoading = false
-    }
-    
-    private func loadSwiftDataRecords() {
-        savedRecords = swiftDataService.getCalculationRecords()
-    }
-    
     func deleteRecord(_ record: SwiftDataJournalRecord) {
         swiftDataService.deleteCalculationRecord(record)
-        loadRecords()
     }
     
     func clearError() {

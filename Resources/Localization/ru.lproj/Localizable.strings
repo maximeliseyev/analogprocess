@@ -269,6 +269,7 @@
 "customAgitationErrorInvalidTiming" = "Неверная конфигурация времени для %@";
 "customAgitationErrorInvalidInterval" = "Неверный интервал для %@";
 "customAgitationErrorNoLastMinuteConfig" = "Отсутствует конфигурация последней минуты";
+"customAgitationErrorCycleSum" = "Ошибка времени цикла в %1$@: Сумма агитации и отдыха не должна превышать 60 секунд.";
 
 // MARK: - Calculator Results
 "tapToCalculator" = "Нажмите чтобы перейти к калькулятору";

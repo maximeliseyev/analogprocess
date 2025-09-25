@@ -11,30 +11,22 @@ struct SwiftDataPersistenceTest {
         print("🧪 Testing basic SwiftData setup...")
 
         do {
-            // Начнем с минимальной схемы
-            let testSchema = Schema([
-                SwiftDataFilm.self,
-                SwiftDataDeveloper.self
-            ])
-
-            let config = ModelConfiguration(
-                schema: testSchema,
-                isStoredInMemoryOnly: true  // Начнем с in-memory
-            )
-
-            modelContainer = try ModelContainer(for: testSchema, configurations: [config])
-            print("✅ Basic SwiftData test successful")
+            // Используем унифицированную тестовую конфигурацию
+            let (schema, config) = SwiftDataConfigurationManager.createTestConfiguration()
+            modelContainer = try ModelContainer(for: schema, configurations: [config])
+            print("✅ Unified test configuration successful")
+            print("📋 Test schema entities: \(SwiftDataSchemas.entityNames(for: schema))")
 
         } catch {
-            print("❌ Basic SwiftData test failed: \(error)")
-            // Создаем пустой контейнер для предотвращения краша
+            print("❌ Unified test configuration failed: \(error)")
+            // Fallback к самой простой схеме
             let emptySchema = Schema([SwiftDataFilm.self])
             let emptyConfig = ModelConfiguration(schema: emptySchema, isStoredInMemoryOnly: true)
             do {
                 modelContainer = try ModelContainer(for: emptySchema, configurations: [emptyConfig])
+                print("⚠️ Using fallback test schema")
             } catch {
-                XCTFail("Failed to create test ModelContainer: \(error)")
-                return
+                fatalError("Failed to create even basic test container: \(error)")
             }
         }
     }

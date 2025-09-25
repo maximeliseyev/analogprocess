@@ -12,6 +12,7 @@
 		BF0FAFFB2E8028AA006007E3 /* CoachMarksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0FAFFA2E8028AA006007E3 /* CoachMarksService.swift */; };
 		BF0FAFFD2E829F02006007E3 /* ToolsHubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0FAFFC2E829F02006007E3 /* ToolsHubView.swift */; };
 		BF0FAFFF2E82A4FE006007E3 /* PresetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0FAFFE2E82A4FE006007E3 /* PresetService.swift */; };
+		BF0FB0012E832932006007E3 /* SwiftDataSchemas.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0FB0002E832932006007E3 /* SwiftDataSchemas.swift */; };
 		BF113D372E3FA8A5008B5578 /* ManualTimeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF113D362E3FA8A5008B5578 /* ManualTimeInputView.swift */; };
 		BF113D412E40DB7D008B5578 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF113D402E40DB7D008B5578 /* ThemeManager.swift */; };
 		BF28FA5E2E41F75200C2E34E /* SyncStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28FA5C2E41F75200C2E34E /* SyncStatusView.swift */; };
@@ -42,7 +43,6 @@
 		BF553C6A2E43268D009F1525 /* BasePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C692E43268D009F1525 /* BasePickerView.swift */; };
 		BF553C6C2E43297C009F1525 /* CreateRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C6B2E43297C009F1525 /* CreateRecordViewModel.swift */; };
 		BF8A59EF2E43809C00D689C5 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59EE2E43809C00D689C5 /* MainTabView.swift */; };
-		BF8A59F22E4380E600D689C5 /* NavigationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59F12E4380E600D689C5 /* NavigationConstants.swift */; };
 		BF8A59FF2E4494A600D689C5 /* AutocompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59FE2E4494A600D689C5 /* AutocompleteView.swift */; };
 		BF8A5A072E44BA8200D689C5 /* StagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A5A042E44BA8200D689C5 /* StagingView.swift */; };
 		BF8A5A082E44BA8200D689C5 /* StagingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A5A022E44BA8200D689C5 /* StagingViewModel.swift */; };
@@ -108,6 +108,7 @@
 		BF0FAFFA2E8028AA006007E3 /* CoachMarksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachMarksService.swift; sourceTree = "<group>"; };
 		BF0FAFFC2E829F02006007E3 /* ToolsHubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsHubView.swift; sourceTree = "<group>"; };
 		BF0FAFFE2E82A4FE006007E3 /* PresetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetService.swift; sourceTree = "<group>"; };
+		BF0FB0002E832932006007E3 /* SwiftDataSchemas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataSchemas.swift; sourceTree = "<group>"; };
 		BF113D362E3FA8A5008B5578 /* ManualTimeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTimeInputView.swift; sourceTree = "<group>"; };
 		BF113D402E40DB7D008B5578 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		BF28FA5C2E41F75200C2E34E /* SyncStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncStatusView.swift; sourceTree = "<group>"; };
@@ -140,7 +141,6 @@
 		BF553C692E43268D009F1525 /* BasePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePickerView.swift; sourceTree = "<group>"; };
 		BF553C6B2E43297C009F1525 /* CreateRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecordViewModel.swift; sourceTree = "<group>"; };
 		BF8A59EE2E43809C00D689C5 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
-		BF8A59F12E4380E600D689C5 /* NavigationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConstants.swift; sourceTree = "<group>"; };
 		BF8A59FE2E4494A600D689C5 /* AutocompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteView.swift; sourceTree = "<group>"; };
 		BF8A5A022E44BA8200D689C5 /* StagingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingViewModel.swift; sourceTree = "<group>"; };
 		BF8A5A042E44BA8200D689C5 /* StagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingView.swift; sourceTree = "<group>"; };
@@ -328,7 +328,6 @@
 		BF4109472E31348C00BE2AD8 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				BF8A59F12E4380E600D689C5 /* NavigationConstants.swift */,
 				BF8A59EE2E43809C00D689C5 /* MainTabView.swift */,
 				BFA0C7952E2133FC00132936 /* ContentView.swift */,
 				BF0FAFFC2E829F02006007E3 /* ToolsHubView.swift */,
@@ -398,6 +397,7 @@
 		BF41094E2E31355F00BE2AD8 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				BF0FB0002E832932006007E3 /* SwiftDataSchemas.swift */,
 				BFFA1C672E4A69E3005C24F4 /* SwiftDataPersistence.swift */,
 			);
 			path = Persistence;
@@ -829,6 +829,7 @@
 				BF8A5A082E44BA8200D689C5 /* StagingViewModel.swift in Sources */,
 				BFFA1C8B2E4A8C32005C24F4 /* JournalViewModel.swift in Sources */,
 				BF553C6A2E43268D009F1525 /* BasePickerView.swift in Sources */,
+				BF0FB0012E832932006007E3 /* SwiftDataSchemas.swift in Sources */,
 				BFF4D9FF2E21BECD0097BE82 /* TimerView.swift in Sources */,
 				BFE31C0C2E3A016300310B19 /* ViewStyles.swift in Sources */,
 				BF553C622E420639009F1525 /* KeyboardAwareView.swift in Sources */,
@@ -848,7 +849,6 @@
 				BF4109662E31643100BE2AD8 /* ISOPickerView.swift in Sources */,
 				BF52A21C2E7D82B900E305F5 /* GitHubAgitationService.swift in Sources */,
 				BF113D372E3FA8A5008B5578 /* ManualTimeInputView.swift in Sources */,
-				BF8A59F22E4380E600D689C5 /* NavigationConstants.swift in Sources */,
 				BF99E9B02E4E8E6800BB7F0C /* AutoSyncStatusView.swift in Sources */,
 				BF3B29192E7C7A7400FABD58 /* AgitationModeData.swift in Sources */,
 				BF3B29152E7C742E00FABD58 /* TimerStage.swift in Sources */,

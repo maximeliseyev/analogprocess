@@ -16,7 +16,16 @@ struct TimerProgressView: View {
     let isRunning: Bool
     
     @State private var rotationAngle: Double = 0
-    
+
+    /// Безопасное значение progress, защищённое от NaN
+    private var safeProgress: CGFloat {
+        let progressValue = progress
+        guard progressValue.isFinite && !progressValue.isNaN else {
+            return 0.0
+        }
+        return CGFloat(max(0.0, min(1.0, progressValue)))
+    }
+
     var body: some View {
         ZStack {
             Circle()
@@ -25,7 +34,7 @@ struct TimerProgressView: View {
                 .foregroundColor(.gray)
             
             Circle()
-                .trim(from: 0.0, to: CGFloat(progress))
+                .trim(from: 0.0, to: safeProgress)
                 .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round))
                 .foregroundColor(isInAgitationPhase && isRunning ? .orange : .blue)
                 .rotationEffect(.degrees(-90))

@@ -8,132 +8,15 @@
 import Foundation
 import SwiftData
 
-// MARK: - Legacy Support Types (for UI compatibility)
 
-/// Конфигурация одной фазы агитации (legacy support)
-public struct AgitationPhaseConfig {
-    public enum PhaseType: String, CaseIterable, Identifiable {
-        public var id: String { self.rawValue }
-        case continuous = "continuous"
-        case still = "still"
-        case cycle = "cycle"
-        case periodic = "periodic"
-        case custom = "custom"
+// MARK: - Custom Agitation Configuration
 
-        public var localizedName: String {
-            switch self {
-            case .continuous:
-                return String(localized: "agitationContinuous")
-            case .still:
-                return String(localized: "agitationStill")
-            case .cycle:
-                return String(localized: "agitationCycle")
-            case .periodic:
-                return String(localized: "agitationPeriodic")
-            case .custom:
-                return String(localized: "agitationCustom")
-            }
-        }
-
-        public var requiresTiming: Bool {
-            switch self {
-            case .cycle, .periodic:
-                return true
-            case .continuous, .still, .custom:
-                return false
-            }
-        }
-
-        public var requiresCustomDescription: Bool {
-            return self == .custom
-        }
-    }
-
-    public var type: PhaseType
-    public var agitationSeconds: Int
-    public var restSeconds: Int
-    public var customDescription: String?
-
-    public init(
-        type: PhaseType,
-        agitationSeconds: Int = 0,
-        restSeconds: Int = 0,
-        customDescription: String? = nil
-    ) {
-        self.type = type
-        self.agitationSeconds = agitationSeconds
-        self.restSeconds = restSeconds
-        self.customDescription = customDescription
-    }
-}
-
-/// Полная конфигурация кастомного режима агитации (legacy support)
+/// Конфигурация для создания кастомного режима агитации
 public struct CustomAgitationConfig {
     public var name: String
-    public var firstMinute: AgitationPhaseConfig
-    public var intermediate: AgitationPhaseConfig
-    public var hasLastMinuteCustom: Bool
-    public var lastMinute: AgitationPhaseConfig?
+    public var rules: [CustomAgitationRule]
 
-    public init(
-        name: String = "",
-        firstMinute: AgitationPhaseConfig = AgitationPhaseConfig(type: .continuous),
-        intermediate: AgitationPhaseConfig = AgitationPhaseConfig(type: .cycle, agitationSeconds: 30, restSeconds: 30),
-        hasLastMinuteCustom: Bool = false,
-        lastMinute: AgitationPhaseConfig? = nil
-    ) {
-        self.name = name
-        self.firstMinute = firstMinute
-        self.intermediate = intermediate
-        self.hasLastMinuteCustom = hasLastMinuteCustom
-        self.lastMinute = lastMinute
-    }
-
-    /// Валидация конфигурации
-    public var isValid: Bool {
-        guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return false }
-
-        if firstMinute.type.requiresCustomDescription && (firstMinute.customDescription?.isEmpty ?? true) {
-            return false
-        }
-
-        if intermediate.type.requiresCustomDescription && (intermediate.customDescription?.isEmpty ?? true) {
-            return false
-        }
-
-        if hasLastMinuteCustom {
-            guard let lastMinute = lastMinute else { return false }
-            if lastMinute.type.requiresCustomDescription && (lastMinute.customDescription?.isEmpty ?? true) {
-                return false
-            }
-        }
-
-        return true
-    }
-
-    /// Конвертирует в новую расширенную конфигурацию
-    public func toEnhanced() -> EnhancedCustomAgitationConfig {
-        return EnhancedCustomAgitationConfig.fromLegacyConfig(self)
-    }
-}
-
-// MARK: - Constants for UI compatibility
-
-enum AgitationConstants {
-    enum Default {
-        static let agitationSeconds = 30
-        static let restSeconds = 30
-    }
-}
-
-// MARK: - Enhanced Custom Agitation Configuration
-
-/// Расширенная конфигурация для создания кастомных режимов агитации
-public struct EnhancedCustomAgitationConfig {
-    public var name: String
-    public var rules: [CustomAgitationRuleConfig]
-
-    public init(name: String = "", rules: [CustomAgitationRuleConfig] = []) {
+    public init(name: String = "", rules: [CustomAgitationRule] = []) {
         self.name = name
         self.rules = rules
     }
@@ -147,11 +30,11 @@ public struct EnhancedCustomAgitationConfig {
         intermediateParams: [String: Int] = [:],
         lastMinute: AgitationAction? = nil,
         lastMinuteParams: [String: Int] = [:]
-    ) -> EnhancedCustomAgitationConfig {
-        var rules: [CustomAgitationRuleConfig] = []
+    ) -> CustomAgitationConfig {
+        var rules: [CustomAgitationRule] = []
 
         // Первая минута
-        rules.append(CustomAgitationRuleConfig(
+        rules.append(CustomAgitationRule(
             priority: 10,
             conditionType: .firstMinute,
             conditionValues: [],
@@ -161,7 +44,7 @@ public struct EnhancedCustomAgitationConfig {
 
         // Последняя минута (если указана)
         if let lastAction = lastMinute {
-            rules.append(CustomAgitationRuleConfig(
+            rules.append(CustomAgitationRule(
                 priority: 10,
                 conditionType: .lastMinute,
                 conditionValues: [],
@@ -171,7 +54,7 @@ public struct EnhancedCustomAgitationConfig {
         }
 
         // Промежуточные минуты (всегда в конце, чтобы приоритет был ниже)
-        rules.append(CustomAgitationRuleConfig(
+        rules.append(CustomAgitationRule(
             priority: 1,
             conditionType: .defaultCondition,
             conditionValues: [],
@@ -179,7 +62,7 @@ public struct EnhancedCustomAgitationConfig {
             parameters: intermediateParams
         ))
 
-        return EnhancedCustomAgitationConfig(name: name, rules: rules)
+        return CustomAgitationConfig(name: name, rules: rules)
     }
 
     /// Валидация конфигурации
@@ -194,110 +77,31 @@ public struct EnhancedCustomAgitationConfig {
 }
 
 /// Конфигурация одного правила агитации
-public struct CustomAgitationRuleConfig {
+public struct CustomAgitationRule {
     public var priority: Int
     public var conditionType: AgitationRuleCondition.ConditionType
     public var conditionValues: [Int]
     public var action: AgitationAction
     public var parameters: [String: Int]
-    public var customDescription: String?
 
     public init(
         priority: Int,
         conditionType: AgitationRuleCondition.ConditionType,
         conditionValues: [Int],
         action: AgitationAction,
-        parameters: [String: Int] = [:],
-        customDescription: String? = nil
+        parameters: [String: Int] = [:]
     ) {
         self.priority = priority
         self.conditionType = conditionType
         self.conditionValues = conditionValues
         self.action = action
         self.parameters = parameters
-        self.customDescription = customDescription
     }
-}
-
-// MARK: - Migration Support
-
-/// Поддержка миграции со старой системы
-extension EnhancedCustomAgitationConfig {
-
-    /// Создает конфигурацию из legacy UI-модели CustomAgitationConfig
-    public static func fromLegacyConfig(_ legacy: CustomAgitationConfig) -> EnhancedCustomAgitationConfig {
-        var rules: [CustomAgitationRuleConfig] = []
-
-        // Первая минута
-        let firstAction = convertPhaseTypeToAction(legacy.firstMinute.type)
-        let firstParams = createParametersFromPhase(legacy.firstMinute)
-
-        rules.append(CustomAgitationRuleConfig(
-            priority: 10,
-            conditionType: .firstMinute,
-            conditionValues: [],
-            action: firstAction,
-            parameters: firstParams,
-            customDescription: legacy.firstMinute.customDescription
-        ))
-
-        // Последняя минута (если есть)
-        if legacy.hasLastMinuteCustom, let lastMinute = legacy.lastMinute {
-            let lastAction = convertPhaseTypeToAction(lastMinute.type)
-            let lastParams = createParametersFromPhase(lastMinute)
-
-            rules.append(CustomAgitationRuleConfig(
-                priority: 10,
-                conditionType: .lastMinute,
-                conditionValues: [],
-                action: lastAction,
-                parameters: lastParams,
-                customDescription: lastMinute.customDescription
-            ))
-        }
-
-        // Промежуточные минуты
-        let intermediateAction = convertPhaseTypeToAction(legacy.intermediate.type)
-        let intermediateParams = createParametersFromPhase(legacy.intermediate)
-
-        rules.append(CustomAgitationRuleConfig(
-            priority: 1,
-            conditionType: .defaultCondition,
-            conditionValues: [],
-            action: intermediateAction,
-            parameters: intermediateParams,
-            customDescription: legacy.intermediate.customDescription
-        ))
-
-        return EnhancedCustomAgitationConfig(name: legacy.name, rules: rules)
-    }
-
-    private static func convertPhaseTypeToAction(_ phaseType: AgitationPhaseConfig.PhaseType) -> AgitationAction {
-        switch phaseType {
-        case .continuous: return .continuous
-        case .still: return .still
-        case .cycle: return .cycle
-        case .periodic: return .periodic
-        case .custom: return .rotations  // Fallback for custom
-        }
-    }
-
-    private static func createParametersFromPhase(_ phase: AgitationPhaseConfig) -> [String: Int] {
-        switch phase.type {
-        case .cycle:
-            return ["agitation_seconds": phase.agitationSeconds, "rest_seconds": phase.restSeconds]
-        case .periodic:
-            return ["interval_seconds": phase.agitationSeconds]
-        case .continuous, .still, .custom:
-            return [:]
-        }
-    }
-
 }
 
 // MARK: - Custom Agitation Mode Service
 
-/// Сервис для работы с пользовательскими режимами агитации
+/// Сервис для работы с пользовательскими режимами ажитации
 public class CustomAgitationModeService {
     private let modelContext: ModelContext?
 
@@ -305,29 +109,72 @@ public class CustomAgitationModeService {
         self.modelContext = modelContext
     }
 
-    /// Получает все пользовательские режимы
+    /// Получает все пользовательские режимы (отсортированы по имени)
     public func getCustomModes() -> [AgitationMode] {
-        guard let modelContext = modelContext else { return [] }
+        guard let modelContext = modelContext else {
+            return []
+        }
 
         do {
-            // Сначала ищем новые режимы
-            let newFetchDescriptor = FetchDescriptor<AgitationModeData>(
-                predicate: #Predicate { $0.isCustom }
+            let fetchDescriptor = FetchDescriptor<AgitationModeData>(
+                predicate: #Predicate { $0.isCustom },
+                sortBy: [SortDescriptor(\.name)]
             )
-            let newModes = try modelContext.fetch(newFetchDescriptor)
-
-            // Миграция старых режимов больше не нужна, так как SwiftDataCustomAgitationMode удален
-
-            return newModes.map { AgitationMode(from: $0) }
+            let customModeData = try modelContext.fetch(fetchDescriptor)
+            return customModeData.map { AgitationMode(from: $0) }
 
         } catch {
-            print("Failed to fetch custom agitation modes: \(error)")
+            print("❌ Failed to fetch custom agitation modes: \(error)")
             return []
         }
     }
 
+    /// Получает конкретный пользовательский режим по имени
+    public func getCustomMode(named name: String) -> AgitationMode? {
+        guard let modelContext = modelContext else {
+            return nil
+        }
+
+        do {
+            let fetchDescriptor = FetchDescriptor<AgitationModeData>(
+                predicate: #Predicate<AgitationModeData> { mode in
+                    mode.isCustom && mode.name == name
+                }
+            )
+            let modes = try modelContext.fetch(fetchDescriptor)
+            return modes.first.map { AgitationMode(from: $0) }
+
+        } catch {
+            print("❌ Failed to fetch custom agitation mode '\(name)': \(error)")
+            return nil
+        }
+    }
+
+    /// Проверяет существование пользовательского режима с данным именем
+    public func customModeExists(named name: String) -> Bool {
+        return getCustomMode(named: name) != nil
+    }
+
+    /// Получает количество пользовательских режимов
+    public func getCustomModeCount() -> Int {
+        guard let modelContext = modelContext else {
+            return 0
+        }
+
+        do {
+            let fetchDescriptor = FetchDescriptor<AgitationModeData>(
+                predicate: #Predicate { $0.isCustom }
+            )
+            return try modelContext.fetchCount(fetchDescriptor)
+
+        } catch {
+            print("❌ Failed to count custom agitation modes: \(error)")
+            return 0
+        }
+    }
+
     /// Сохраняет новый пользовательский режим
-    public func saveCustomMode(config: EnhancedCustomAgitationConfig, migrate: Bool = false) throws -> AgitationMode {
+    public func saveCustomMode(config: CustomAgitationConfig) throws {
         guard config.isValid else {
             throw CustomAgitationError.invalidConfiguration
         }
@@ -336,7 +183,12 @@ public class CustomAgitationModeService {
             throw CustomAgitationError.noModelContext
         }
 
-        // Преобразуем конфигурацию в правила
+        // Проверяем, что режим с таким именем не существует
+        if customModeExists(named: config.name) {
+            throw CustomAgitationError.modeAlreadyExists
+        }
+
+        // Преобразуем конфигурацию в business-logic правила
         let rules = config.rules.map { ruleConfig in
             AgitationRule(
                 priority: ruleConfig.priority,
@@ -349,7 +201,7 @@ public class CustomAgitationModeService {
             )
         }
 
-        // Создаем новую модель данных
+        // Создаем новую SwiftData модель (нормализованная структура автоматически создаст связанные AgitationRuleData)
         let agitationModeData = AgitationModeData(
             name: config.name,
             localizedNameKey: config.name, // Для пользовательских режимов имя = ключ
@@ -358,12 +210,7 @@ public class CustomAgitationModeService {
         )
 
         modelContext.insert(agitationModeData)
-
-        if !migrate {
-            try modelContext.save()
-        }
-
-        return AgitationMode(from: agitationModeData)
+        try modelContext.save()
     }
 
     /// Удаляет пользовательский режим
@@ -388,16 +235,50 @@ public class CustomAgitationModeService {
     }
 
     /// Обновляет существующий пользовательский режим
-    public func updateCustomMode(oldName: String, config: EnhancedCustomAgitationConfig) throws -> AgitationMode {
+    public func updateCustomMode(oldName: String, config: CustomAgitationConfig) throws {
         guard config.isValid else {
             throw CustomAgitationError.invalidConfiguration
         }
 
-        // Удаляем старый режим
-        try deleteCustomMode(named: oldName)
+        guard let modelContext = modelContext else {
+            throw CustomAgitationError.noModelContext
+        }
 
-        // Создаем новый
-        return try saveCustomMode(config: config)
+        // Находим существующий режим
+        let fetchDescriptor = FetchDescriptor<AgitationModeData>(
+            predicate: #Predicate<AgitationModeData> { mode in
+                mode.isCustom && mode.name == oldName
+            }
+        )
+
+        let existingModes = try modelContext.fetch(fetchDescriptor)
+
+        if let existingMode = existingModes.first {
+            // Обновляем существующий режим
+            existingMode.name = config.name
+            existingMode.localizedNameKey = config.name
+
+            // Преобразуем новые правила
+            let newRules = config.rules.map { ruleConfig in
+                AgitationRule(
+                    priority: ruleConfig.priority,
+                    condition: AgitationRuleCondition(
+                        type: ruleConfig.conditionType,
+                        values: ruleConfig.conditionValues
+                    ),
+                    action: ruleConfig.action,
+                    parameters: ruleConfig.parameters
+                )
+            }
+
+            // Заменяем правила (SwiftData автоматически удалит старые AgitationRuleData)
+            existingMode.setRules(newRules)
+
+            try modelContext.save()
+        } else {
+            // Если режим не найден, создаем новый
+            try saveCustomMode(config: config)
+        }
     }
 }
 
@@ -407,6 +288,8 @@ public enum CustomAgitationError: LocalizedError {
     case invalidConfiguration
     case noModelContext
     case modeNotFound
+    case modeAlreadyExists
+    case databaseError(Error)
 
     public var errorDescription: String? {
         switch self {
@@ -416,19 +299,23 @@ public enum CustomAgitationError: LocalizedError {
             return "No model context available"
         case .modeNotFound:
             return "Agitation mode not found"
+        case .modeAlreadyExists:
+            return "Agitation mode with this name already exists"
+        case .databaseError(let error):
+            return "Database error: \(error.localizedDescription)"
         }
     }
 }
 
 // MARK: - Quick Creation Helpers
 
-extension EnhancedCustomAgitationConfig {
+extension CustomAgitationConfig {
     /// Быстрое создание простого циклического режима
     public static func simpleCycle(
         name: String,
         agitationSeconds: Int,
         restSeconds: Int
-    ) -> EnhancedCustomAgitationConfig {
+    ) -> CustomAgitationConfig {
         return simple(
             name: name,
             firstMinute: .cycle,
@@ -445,7 +332,7 @@ extension EnhancedCustomAgitationConfig {
         firstLastRest: Int,
         intermediateAgitation: Int,
         intermediateRest: Int
-    ) -> EnhancedCustomAgitationConfig {
+    ) -> CustomAgitationConfig {
         return simple(
             name: name,
             firstMinute: .cycle,
@@ -454,6 +341,24 @@ extension EnhancedCustomAgitationConfig {
             intermediateParams: ["agitation_seconds": intermediateAgitation, "rest_seconds": intermediateRest],
             lastMinute: .cycle,
             lastMinuteParams: ["agitation_seconds": firstLastAgitation, "rest_seconds": firstLastRest]
+        )
+    }
+
+    /// Быстрое создание непрерывного режима
+    public static func continuous(name: String) -> CustomAgitationConfig {
+        return simple(
+            name: name,
+            firstMinute: .continuous,
+            intermediate: .continuous
+        )
+    }
+
+    /// Быстрое создание режима без агитации
+    public static func still(name: String) -> CustomAgitationConfig {
+        return simple(
+            name: name,
+            firstMinute: .still,
+            intermediate: .still
         )
     }
 }

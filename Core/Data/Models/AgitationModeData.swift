@@ -85,6 +85,67 @@ public struct AgitationRule: Codable, Identifiable {
     }
 }
 
+// MARK: - Agitation Rule Data Model (SwiftData)
+
+@Model
+public class AgitationRuleData {
+    var priority: Int
+    var conditionType: String // AgitationRuleCondition.ConditionType as String
+    var conditionValues: String // [Int] as JSON String для простоты
+    var action: String // AgitationAction as String
+    var parameters: String // [String: Int] as JSON String
+
+    @Relationship(inverse: \AgitationModeData.rules)
+    var agitationMode: AgitationModeData?
+
+    public init(priority: Int, conditionType: AgitationRuleCondition.ConditionType, conditionValues: [Int], action: AgitationAction, parameters: [String: Int]) {
+        self.priority = priority
+        self.conditionType = conditionType.rawValue
+        self.action = action.rawValue
+
+        // Кодируем массив в JSON строку
+        if let valuesData = try? JSONEncoder().encode(conditionValues),
+           let valuesString = String(data: valuesData, encoding: .utf8) {
+            self.conditionValues = valuesString
+        } else {
+            self.conditionValues = "[]"
+        }
+
+        // Кодируем параметры в JSON строку
+        if let paramsData = try? JSONEncoder().encode(parameters),
+           let paramsString = String(data: paramsData, encoding: .utf8) {
+            self.parameters = paramsString
+        } else {
+            self.parameters = "{}"
+        }
+    }
+
+    /// Преобразует SwiftData модель обратно в business-logic модель
+    public func toAgitationRule() -> AgitationRule {
+        let condition = AgitationRuleCondition(
+            type: AgitationRuleCondition.ConditionType(rawValue: conditionType) ?? .defaultCondition,
+            values: decodedConditionValues
+        )
+
+        return AgitationRule(
+            priority: priority,
+            condition: condition,
+            action: AgitationAction(rawValue: action) ?? .still,
+            parameters: decodedParameters
+        )
+    }
+
+    private var decodedConditionValues: [Int] {
+        guard let data = conditionValues.data(using: .utf8) else { return [] }
+        return (try? JSONDecoder().decode([Int].self, from: data)) ?? []
+    }
+
+    private var decodedParameters: [String: Int] {
+        guard let data = parameters.data(using: .utf8) else { return [:] }
+        return (try? JSONDecoder().decode([String: Int].self, from: data)) ?? [:]
+    }
+}
+
 // MARK: - Agitation Mode Data Model
 
 @Model
@@ -92,21 +153,92 @@ public class AgitationModeData {
     @Attribute(.unique) var name: String
     var localizedNameKey: String
     var isCustom: Bool
-    var rules: Data  // JSON с массивом AgitationRule
+
+    // Используем SwiftData relationships вместо JSON сериализации
+    @Relationship(deleteRule: .cascade)
+    var rules: [AgitationRuleData] = []
 
     public init(name: String, localizedNameKey: String, isCustom: Bool = false, rules: [AgitationRule] = []) {
         self.name = name
         self.localizedNameKey = localizedNameKey
         self.isCustom = isCustom
-        self.rules = (try? JSONEncoder().encode(rules)) ?? Data()
+
+        // Создаем AgitationRuleData из бизнес-правил
+        self.rules = rules.map { rule in
+            AgitationRuleData(
+                priority: rule.priority,
+                conditionType: rule.condition.type,
+                conditionValues: rule.condition.values,
+                action: rule.action,
+                parameters: rule.parameters
+            )
+        }
     }
 
+    /// Получает business-logic правила из SwiftData моделей
     var decodedRules: [AgitationRule] {
-        (try? JSONDecoder().decode([AgitationRule].self, from: rules)) ?? []
+        return rules.map { $0.toAgitationRule() }
     }
 
+    /// Устанавливает новые правила, заменяя существующие
     func setRules(_ newRules: [AgitationRule]) {
-        self.rules = (try? JSONEncoder().encode(newRules)) ?? Data()
+        // Удаляем существующие правила
+        rules.removeAll()
+
+        // Создаем новые AgitationRuleData
+        rules = newRules.map { rule in
+            AgitationRuleData(
+                priority: rule.priority,
+                conditionType: rule.condition.type,
+                conditionValues: rule.condition.values,
+                action: rule.action,
+                parameters: rule.parameters
+            )
+        }
+    }
+
+    /// Добавляет новое правило
+    func addRule(_ rule: AgitationRule) {
+        let ruleData = AgitationRuleData(
+            priority: rule.priority,
+            conditionType: rule.condition.type,
+            conditionValues: rule.condition.values,
+            action: rule.action,
+            parameters: rule.parameters
+        )
+        rules.append(ruleData)
+    }
+}
+
+// MARK: - Migration Helpers
+
+extension AgitationModeData {
+    /// Создает AgitationModeData из GitHub JSON модели (для миграции)
+    static func from(githubModel: Any) -> AgitationModeData? {
+        // TODO: Реализовать парсинг GitHub JSON когда понадобится
+        return nil
+    }
+
+    /// Создает AgitationModeData из Codable структуры (упрощенная версия)
+    static func from(name: String, localizedKey: String, isCustom: Bool = false, rulesData: [[String: Any]]) -> AgitationModeData {
+        var rules: [AgitationRule] = []
+
+        for ruleData in rulesData {
+            if let priority = ruleData["priority"] as? Int,
+               let conditionTypeString = ruleData["condition_type"] as? String,
+               let conditionType = AgitationRuleCondition.ConditionType(rawValue: conditionTypeString),
+               let conditionValues = ruleData["condition_values"] as? [Int],
+               let actionString = ruleData["action"] as? String,
+               let action = AgitationAction(rawValue: actionString),
+               let parameters = ruleData["parameters"] as? [String: Int] {
+
+                let condition = AgitationRuleCondition(type: conditionType, values: conditionValues)
+                let rule = AgitationRule(priority: priority, condition: condition, action: action, parameters: parameters)
+                rules.append(rule)
+            }
+        }
+
+        return AgitationModeData(name: name, localizedNameKey: localizedKey, isCustom: isCustom, rules: rules)
     }
 }
 

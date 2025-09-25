@@ -32,7 +32,6 @@ public struct MainTabView: View {
                     swiftDataService: swiftDataService,
                     cloudKitService: cloudKitService,
                     onEditRecord: loadRecord,
-                    onDeleteRecord: deleteRecord,
                     onCreateNew: { showingCreateRecord = true },
                     syncStatus: syncStatus,
                     isCloudAvailable: isCloudAvailable,
@@ -154,10 +153,6 @@ public struct MainTabView: View {
     
     private func loadRecord(_ record: SwiftDataJournalRecord) {
         print("Loading record: \(record)")
-    }
-    
-    private func deleteRecord(_ record: SwiftDataJournalRecord) {
-        swiftDataService.deleteCalculationRecord(record)
     }
     
     public init(swiftDataService: SwiftDataService, selectedTab: Binding<Int>, colorScheme: Binding<ColorScheme?>) {
