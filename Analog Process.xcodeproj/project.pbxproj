@@ -67,6 +67,7 @@
 		BF99E9AB2E4E814300BB7F0C /* StageRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9A62E4E814300BB7F0C /* StageRowView.swift */; };
 		BF99E9AC2E4E814300BB7F0C /* StageEditorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9A42E4E814300BB7F0C /* StageEditorSheet.swift */; };
 		BF99E9B02E4E8E6800BB7F0C /* AutoSyncStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9AF2E4E8E6800BB7F0C /* AutoSyncStatusView.swift */; };
+		BF9F34FC2E857C1B00B7B75C /* BasePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9F34FB2E857C1B00B7B75C /* BasePickerView.swift */; };
 		BFA0C79B2E2133FC00132936 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFA0C7932E2133FC00132936 /* Assets.xcassets */; };
 		BFA0C79D2E2133FC00132936 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7952E2133FC00132936 /* ContentView.swift */; };
 		BFA0C7A82E2134B400132936 /* CalculationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7A72E2134B300132936 /* CalculationResultView.swift */; };
@@ -159,6 +160,7 @@
 		BF99E9A52E4E814300BB7F0C /* StagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagePickerView.swift; sourceTree = "<group>"; };
 		BF99E9A62E4E814300BB7F0C /* StageRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageRowView.swift; sourceTree = "<group>"; };
 		BF99E9AF2E4E8E6800BB7F0C /* AutoSyncStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncStatusView.swift; sourceTree = "<group>"; };
+		BF9F34FB2E857C1B00B7B75C /* BasePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePickerView.swift; sourceTree = "<group>"; };
 		BFA0C7932E2133FC00132936 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFA0C7952E2133FC00132936 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BFA0C7A72E2134B300132936 /* CalculationResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationResultView.swift; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 		BF41095A2E3163E400BE2AD8 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				BF9F34FB2E857C1B00B7B75C /* BasePickerView.swift */,
 				BFFA1C5B2E4A415E005C24F4 /* FixerPickerView.swift */,
 				BFFA1C5C2E4A415E005C24F4 /* FixerSelectionView.swift */,
 				BF553C692E43268D009F1525 /* BasePickerView.swift */,
@@ -762,6 +765,7 @@
 				BFA0C7AF2E21351300132936 /* RecordRowView.swift in Sources */,
 				BFA0C79D2E2133FC00132936 /* ContentView.swift in Sources */,
 				BF28FA5E2E41F75200C2E34E /* SyncStatusView.swift in Sources */,
+				BF9F34FC2E857C1B00B7B75C /* BasePickerView.swift in Sources */,
 				BF3B29172E7C745800FABD58 /* UnifiedTimerViewModel.swift in Sources */,
 				BFE12EC32E363AC00044A3A4 /* CalculatedTimeSection.swift in Sources */,
 				BF553C6C2E43297C009F1525 /* CreateRecordViewModel.swift in Sources */,

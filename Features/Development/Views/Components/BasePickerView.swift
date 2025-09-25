@@ -7,10 +7,15 @@
 
 import SwiftUI
 import UIKit
+import SwiftData
 
 protocol BasePickerItem: Hashable {
     var displayTitle: String { get }
     var isAvailable: Bool { get }
+}
+
+protocol Searchable {
+    var searchableText: String { get }
 }
 
 struct BasePickerView<T: BasePickerItem>: View {
@@ -18,50 +23,81 @@ struct BasePickerView<T: BasePickerItem>: View {
     let items: [T]
     let title: LocalizedStringKey
     let onDismiss: () -> Void
-    
+    let enableSearch: Bool
+
+    @State private var searchText = ""
+
+    init(selectedValue: Binding<T>, items: [T], title: LocalizedStringKey, enableSearch: Bool = false, onDismiss: @escaping () -> Void) {
+        self._selectedValue = selectedValue
+        self.items = items
+        self.title = title
+        self.enableSearch = enableSearch
+        self.onDismiss = onDismiss
+    }
+
+    private var filteredItems: [T] {
+        guard enableSearch, !searchText.isEmpty else { return items }
+
+        return items.filter { item in
+            if let searchableItem = item as? Searchable {
+                return searchableItem.searchableText.localizedCaseInsensitiveContains(searchText)
+            } else {
+                return item.displayTitle.localizedCaseInsensitiveContains(searchText)
+            }
+        }
+    }
+
     var body: some View {
         NavigationStack {
             ZStack {
                 Color(.systemBackground).ignoresSafeArea()
                 
-                Group {
-                    if items.isEmpty {
-                        VStack(spacing: 20) {
-                            Image(systemName: "info.circle")
-                                .infoIconStyle()
-                            
-                            Text(LocalizedStringKey("noOptionsAvailable"))
-                                .font(.headline)
-                                .foregroundColor(.primary)
-                            
-                            Text(LocalizedStringKey("noOptionsDescription"))
-                                .disabledTextStyle()
-                                .multilineTextAlignment(.center)
-                        }
-                        .padding()
-                    } else {
-                        List(items, id: \.self) { item in
-                            Button(action: {
-                                if item.isAvailable {
-                                    selectedValue = item
-                                    onDismiss()
-                                }
-                            }) {
-                                HStack {
-                                    Text(item.displayTitle)
-                                        .primaryTextStyle()
-                                        .foregroundColor(item.isAvailable ? .primary : .secondary)
-                                    
-                                    Spacer()
-                                    
-                                    if selectedValue == item {
-                                        Image(systemName: "checkmark")
-                                            .checkmarkStyle()
+                VStack(spacing: 0) {
+                    if enableSearch {
+                        SearchBar(text: $searchText)
+                            .padding(.horizontal)
+                            .padding(.top, 8)
+                    }
+
+                    Group {
+                        if filteredItems.isEmpty {
+                            VStack(spacing: 20) {
+                                Image(systemName: enableSearch && !searchText.isEmpty ? "magnifyingglass" : "info.circle")
+                                    .infoIconStyle()
+
+                                Text(LocalizedStringKey(enableSearch && !searchText.isEmpty ? "noResultsFound" : "noOptionsAvailable"))
+                                    .font(.headline)
+                                    .foregroundColor(.primary)
+
+                                Text(LocalizedStringKey(enableSearch && !searchText.isEmpty ? "trySearchingDifferentKeywords" : "noOptionsDescription"))
+                                    .disabledTextStyle()
+                                    .multilineTextAlignment(.center)
+                            }
+                            .padding()
+                        } else {
+                            List(filteredItems, id: \.self) { item in
+                                Button(action: {
+                                    if item.isAvailable {
+                                        selectedValue = item
+                                        onDismiss()
+                                    }
+                                }) {
+                                    HStack {
+                                        Text(item.displayTitle)
+                                            .primaryTextStyle()
+                                            .foregroundColor(item.isAvailable ? .primary : .secondary)
+
+                                        Spacer()
+
+                                        if selectedValue == item {
+                                            Image(systemName: "checkmark")
+                                                .checkmarkStyle()
+                                        }
                                     }
                                 }
+                                .buttonStyle(PlainButtonStyle())
+                                .disabled(!item.isAvailable)
                             }
-                            .buttonStyle(PlainButtonStyle())
-                            .disabled(!item.isAvailable)
                         }
                     }
                 }
@@ -79,22 +115,99 @@ struct BasePickerView<T: BasePickerItem>: View {
     }
 }
 
-// MARK: - ISO Specific Implementation
+// MARK: - Specific Implementations
 
 struct ISOItem: BasePickerItem {
     let value: Int
     let isAvailable: Bool
-    
+
     var displayTitle: String {
         String(format: String(localized: "isoLabel"), "\(value)")
     }
-    
+
     static func == (lhs: ISOItem, rhs: ISOItem) -> Bool {
         lhs.value == rhs.value
     }
-    
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(value)
+    }
+}
+
+struct FilmItem: BasePickerItem, Searchable {
+    let film: SwiftDataFilm
+
+    var displayTitle: String {
+        "\(film.manufacturer) \(film.name)"
+    }
+
+    var isAvailable: Bool {
+        true // Films are always available for selection
+    }
+
+    var searchableText: String {
+        "\(film.name) \(film.manufacturer)".lowercased()
+    }
+
+    static func == (lhs: FilmItem, rhs: FilmItem) -> Bool {
+        lhs.film.id == rhs.film.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(film.id)
+    }
+}
+
+struct DeveloperItem: BasePickerItem, Searchable {
+    let developer: SwiftDataDeveloper
+
+    var displayTitle: String {
+        "\(developer.manufacturer) \(developer.name)"
+    }
+
+    var isAvailable: Bool {
+        true // Developers are always available for selection
+    }
+
+    var searchableText: String {
+        "\(developer.name) \(developer.manufacturer)".lowercased()
+    }
+
+    static func == (lhs: DeveloperItem, rhs: DeveloperItem) -> Bool {
+        lhs.developer.id == rhs.developer.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(developer.id)
+    }
+}
+
+// MARK: - SearchBar Component
+
+struct SearchBar: View {
+    @Binding var text: String
+
+    var body: some View {
+        HStack {
+            Image(systemName: "magnifyingglass")
+                .foregroundColor(.secondary)
+
+            TextField("Search...", text: $text)
+                .textFieldStyle(PlainTextFieldStyle())
+
+            if !text.isEmpty {
+                Button(action: {
+                    text = ""
+                }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundColor(.secondary)
+                }
+            }
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 8)
+        .background(Color(.systemGray6))
+        .cornerRadius(10)
     }
 }
 
@@ -112,13 +225,15 @@ struct BasePickerView_Previews: PreviewProvider {
                     ISOItem(value: 800, isAvailable: true)
                 ],
                 title: LocalizedStringKey("selectISO"),
+                enableSearch: true,
                 onDismiss: {}
             )
-            
+
             BasePickerView(
                 selectedValue: .constant(ISOItem(value: 400, isAvailable: true)),
                 items: [],
                 title: LocalizedStringKey("selectISO"),
+                enableSearch: false,
                 onDismiss: {}
             )
         }
