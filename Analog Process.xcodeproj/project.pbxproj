@@ -20,7 +20,6 @@
 		BF3B29172E7C745800FABD58 /* UnifiedTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3B29162E7C745800FABD58 /* UnifiedTimerViewModel.swift */; };
 		BF3B29192E7C7A7400FABD58 /* AgitationModeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3B29182E7C7A7400FABD58 /* AgitationModeData.swift */; };
 		BF3B291B2E7C7AB000FABD58 /* AgitationRuleEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3B291A2E7C7AB000FABD58 /* AgitationRuleEngine.swift */; };
-		BF3B291D2E7C7BD500FABD58 /* CustomAgitationModeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3B291C2E7C7BD500FABD58 /* CustomAgitationModeService.swift */; };
 		BF4109102E31052900BE2AD8 /* CalculationFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41090A2E31052900BE2AD8 /* CalculationFormView.swift */; };
 		BF4109112E31052900BE2AD8 /* RatioInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41090B2E31052900BE2AD8 /* RatioInputView.swift */; };
 		BF4109122E31052900BE2AD8 /* TimeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41090F2E31052900BE2AD8 /* TimeInputView.swift */; };
@@ -73,13 +72,8 @@
 		BFA0C7A82E2134B400132936 /* CalculationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7A72E2134B300132936 /* CalculationResultView.swift */; };
 		BFA0C7AD2E2134F800132936 /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AC2E2134F600132936 /* JournalView.swift */; };
 		BFA0C7AF2E21351300132936 /* RecordRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7AE2E21351000132936 /* RecordRowView.swift */; };
-		BFAFE13D2E780B1900DA9DA5 /* SavedCustomAgitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFE13B2E780B1900DA9DA5 /* SavedCustomAgitationView.swift */; };
-		BFAFE13E2E780B1900DA9DA5 /* CustomAgitationEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFE1392E780B1900DA9DA5 /* CustomAgitationEditorView.swift */; };
-		BFAFE13F2E780B1900DA9DA5 /* CustomAgitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFE13A2E780B1900DA9DA5 /* CustomAgitationView.swift */; };
-		BFAFE1402E780B1900DA9DA5 /* AgitationPhaseConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFE1362E780B1900DA9DA5 /* AgitationPhaseConfigView.swift */; };
 		BFAFE1412E780B1900DA9DA5 /* AgitationSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFE1382E780B1900DA9DA5 /* AgitationSelectionView.swift */; };
 		BFAFE1422E780B1900DA9DA5 /* AgitationIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFE1352E780B1900DA9DA5 /* AgitationIndicatorView.swift */; };
-		BFAFE1452E780B2400DA9DA5 /* CustomAgitationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFE1432E780B2400DA9DA5 /* CustomAgitationViewModel.swift */; };
 		BFB0C3F62E3E511300296B97 /* AnalogProcess-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3F32E3E511300296B97 /* AnalogProcess-Info.plist */; };
 		BFB0C3F72E3E511300296B97 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3F52E3E511300296B97 /* README.md */; };
 		BFB0C3F82E3E511300296B97 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = BFB0C3F42E3E511300296B97 /* LICENSE */; };
@@ -116,7 +110,6 @@
 		BF3B29162E7C745800FABD58 /* UnifiedTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnifiedTimerViewModel.swift; sourceTree = "<group>"; };
 		BF3B29182E7C7A7400FABD58 /* AgitationModeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgitationModeData.swift; sourceTree = "<group>"; };
 		BF3B291A2E7C7AB000FABD58 /* AgitationRuleEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgitationRuleEngine.swift; sourceTree = "<group>"; };
-		BF3B291C2E7C7BD500FABD58 /* CustomAgitationModeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAgitationModeService.swift; sourceTree = "<group>"; };
 		BF4109092E31052900BE2AD8 /* ActionButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtonsView.swift; sourceTree = "<group>"; };
 		BF41090A2E31052900BE2AD8 /* CalculationFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationFormView.swift; sourceTree = "<group>"; };
 		BF41090B2E31052900BE2AD8 /* RatioInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioInputView.swift; sourceTree = "<group>"; };
@@ -177,12 +170,7 @@
 		BFAFE1212E7449D100DA9DA5 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BFAFE1222E7449DD00DA9DA5 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BFAFE1352E780B1900DA9DA5 /* AgitationIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgitationIndicatorView.swift; sourceTree = "<group>"; };
-		BFAFE1362E780B1900DA9DA5 /* AgitationPhaseConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgitationPhaseConfigView.swift; sourceTree = "<group>"; };
 		BFAFE1382E780B1900DA9DA5 /* AgitationSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgitationSelectionView.swift; sourceTree = "<group>"; };
-		BFAFE1392E780B1900DA9DA5 /* CustomAgitationEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAgitationEditorView.swift; sourceTree = "<group>"; };
-		BFAFE13A2E780B1900DA9DA5 /* CustomAgitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAgitationView.swift; sourceTree = "<group>"; };
-		BFAFE13B2E780B1900DA9DA5 /* SavedCustomAgitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCustomAgitationView.swift; sourceTree = "<group>"; };
-		BFAFE1432E780B2400DA9DA5 /* CustomAgitationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAgitationViewModel.swift; sourceTree = "<group>"; };
 		BFAFE1462E79550E00DA9DA5 /* Analog Process.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Analog Process.entitlements"; sourceTree = "<group>"; };
 		BFB0C3F32E3E511300296B97 /* AnalogProcess-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AnalogProcess-Info.plist"; sourceTree = "<group>"; };
 		BFB0C3F42E3E511300296B97 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -388,7 +376,6 @@
 		BF41094D2E31352B00BE2AD8 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				BFAFE1442E780B2400DA9DA5 /* Agitation */,
 				BF3B29162E7C745800FABD58 /* UnifiedTimerViewModel.swift */,
 			);
 			path = ViewModels;
@@ -484,7 +471,6 @@
 			isa = PBXGroup;
 			children = (
 				BF3B291A2E7C7AB000FABD58 /* AgitationRuleEngine.swift */,
-				BF3B291C2E7C7BD500FABD58 /* CustomAgitationModeService.swift */,
 				BF949EA82E72CFC2005F9831 /* DevelopmentCalculator.swift */,
 				BF52A21B2E7D82B900E305F5 /* GitHubAgitationService.swift */,
 				BF0FAFFE2E82A4FE006007E3 /* PresetService.swift */,
@@ -639,7 +625,6 @@
 			isa = PBXGroup;
 			children = (
 				BFAFE1352E780B1900DA9DA5 /* AgitationIndicatorView.swift */,
-				BFAFE1362E780B1900DA9DA5 /* AgitationPhaseConfigView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -649,17 +634,6 @@
 			children = (
 				BFAFE1372E780B1900DA9DA5 /* Components */,
 				BFAFE1382E780B1900DA9DA5 /* AgitationSelectionView.swift */,
-				BFAFE1392E780B1900DA9DA5 /* CustomAgitationEditorView.swift */,
-				BFAFE13A2E780B1900DA9DA5 /* CustomAgitationView.swift */,
-				BFAFE13B2E780B1900DA9DA5 /* SavedCustomAgitationView.swift */,
-			);
-			path = Agitation;
-			sourceTree = "<group>";
-		};
-		BFAFE1442E780B2400DA9DA5 /* Agitation */ = {
-			isa = PBXGroup;
-			children = (
-				BFAFE1432E780B2400DA9DA5 /* CustomAgitationViewModel.swift */,
 			);
 			path = Agitation;
 			sourceTree = "<group>";
@@ -800,7 +774,6 @@
 				BF949EB42E72CFC2005F9831 /* GitHubDataService.swift in Sources */,
 				BF949EB52E72CFC2005F9831 /* NetworkSession.swift in Sources */,
 				BF949EB72E72CFC2005F9831 /* CloudKitService.swift in Sources */,
-				BF3B291D2E7C7BD500FABD58 /* CustomAgitationModeService.swift in Sources */,
 				BF949EBC2E72CFC2005F9831 /* AutoSyncService.swift in Sources */,
 				BF8A59FF2E4494A600D689C5 /* AutocompleteView.swift in Sources */,
 				BFFA1C682E4A69E3005C24F4 /* SwiftDataPersistence.swift in Sources */,
@@ -859,14 +832,9 @@
 				BF949EDC2E73799B005F9831 /* StagingStage.swift in Sources */,
 				BF0FAFFB2E8028AA006007E3 /* CoachMarksService.swift in Sources */,
 				BF949EDD2E73799B005F9831 /* SwiftDataTemperatureMultiplier.swift in Sources */,
-				BFAFE13E2E780B1900DA9DA5 /* CustomAgitationEditorView.swift in Sources */,
-				BFAFE1452E780B2400DA9DA5 /* CustomAgitationViewModel.swift in Sources */,
-				BFAFE13F2E780B1900DA9DA5 /* CustomAgitationView.swift in Sources */,
 				BF949EDF2E73799B005F9831 /* SwiftDataDevelopmentTime.swift in Sources */,
 				BF949EE22E73799B005F9831 /* DevelopmentParameters.swift in Sources */,
 				BF949EE32E73799B005F9831 /* AppConstants.swift in Sources */,
-				BFAFE13D2E780B1900DA9DA5 /* SavedCustomAgitationView.swift in Sources */,
-				BFAFE1402E780B1900DA9DA5 /* AgitationPhaseConfigView.swift in Sources */,
 				BFAFE1412E780B1900DA9DA5 /* AgitationSelectionView.swift in Sources */,
 				BFAFE1422E780B1900DA9DA5 /* AgitationIndicatorView.swift in Sources */,
 				BF949EE62E73799B005F9831 /* SwiftDataJournalRecord.swift in Sources */,

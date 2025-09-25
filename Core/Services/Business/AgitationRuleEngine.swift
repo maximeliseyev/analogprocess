@@ -207,38 +207,11 @@ class AgitationModeDataService {
         }
     }
 
-    /// Получает все режимы (предустановленные + пользовательские)
+    /// Получает все режимы (только предустановленные)
     var allModes: [AgitationMode] {
-        var modes = presets // Используем предустановленные из GitHub
-
-        // Добавляем пользовательские режимы, если доступен modelContext
-        if let modelContext = modelContext {
-            let customService = CustomAgitationModeService(modelContext: modelContext)
-            let customModes = customService.getCustomModes()
-            modes.append(contentsOf: customModes)
-        }
-
-        return modes
+        return presets // Используем только предустановленные из GitHub
     }
 
-    /// Создает кастомный режим
-    func createCustomMode(name: String, agitationSeconds: Int, restSeconds: Int) -> AgitationMode {
-        let rules = [
-            AgitationRule(
-                priority: 1,
-                condition: AgitationRuleCondition(type: .defaultCondition, values: []),
-                action: .cycle,
-                parameters: ["agitation_seconds": agitationSeconds, "rest_seconds": restSeconds]
-            )
-        ]
-
-        return AgitationMode(
-            name: name,
-            localizedNameKey: name,
-            isCustom: true,
-            rules: rules
-        )
-    }
 
     /// Инициализация базы данных с предустановленными режимами
     func initializePresetModes() {
@@ -276,14 +249,6 @@ extension AgitationMode {
         return AgitationModeDataService().presets
     }
 
-    static func createCustomMode(agitationSeconds: Int, restSeconds: Int) -> AgitationMode {
-        let name = String(format: String(localized: "agitationCustomFormat"), "\(agitationSeconds)", "\(restSeconds)")
-        return AgitationModeDataService().createCustomMode(
-            name: name,
-            agitationSeconds: agitationSeconds,
-            restSeconds: restSeconds
-        )
-    }
 
     /// Безопасное получение первого режима агитации
     /// Если presets пустой, это критическая ошибка - приложение должно всегда иметь предустановленные режимы
