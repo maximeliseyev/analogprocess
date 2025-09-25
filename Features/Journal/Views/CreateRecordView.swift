@@ -88,19 +88,17 @@ struct CreateRecordView: View {
                                             }
                                         }
                                     
-                                    if viewModel.showFilmSuggestions {
-                                        AutocompleteView(
-                                            suggestions: viewModel.filmSuggestions,
-                                            onSelect: { suggestion in
-                                                viewModel.selectFilmSuggestion(suggestion)
-                                                focusedField = .developerName
-                                            },
-                                            onDismiss: {
-                                                viewModel.hideFilmSuggestions()
-                                            }
-                                        )
-                                        .zIndex(1)
-                                    }
+                                    AutoCompleteManagerView(
+                                        manager: viewModel.filmAutoCompleteManager,
+                                        onSelect: { item in
+                                            viewModel.selectFilmSuggestion(item)
+                                            focusedField = .developerName
+                                        },
+                                        onDismiss: {
+                                            viewModel.hideFilmSuggestions()
+                                        }
+                                    )
+                                    .zIndex(1)
                                 }
                                 
                                 // Поле Developer с автодополнением
@@ -124,19 +122,17 @@ struct CreateRecordView: View {
                                             }
                                         }
                                     
-                                    if viewModel.showDeveloperSuggestions {
-                                        AutocompleteView(
-                                            suggestions: viewModel.developerSuggestions,
-                                            onSelect: { suggestion in
-                                                viewModel.selectDeveloperSuggestion(suggestion)
-                                                focusedField = .process
-                                            },
-                                            onDismiss: {
-                                                viewModel.hideDeveloperSuggestions()
-                                            }
-                                        )
-                                        .zIndex(1)
-                                    }
+                                    AutoCompleteManagerView(
+                                        manager: viewModel.developerAutoCompleteManager,
+                                        onSelect: { item in
+                                            viewModel.selectDeveloperSuggestion(item)
+                                            focusedField = .process
+                                        },
+                                        onDismiss: {
+                                            viewModel.hideDeveloperSuggestions()
+                                        }
+                                    )
+                                    .zIndex(1)
                                 }
                                 
                                 Button(action: {
