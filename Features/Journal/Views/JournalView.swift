@@ -7,9 +7,6 @@ struct JournalView: View {
     
     let onEditRecord: (SwiftDataJournalRecord) -> Void
     let onCreateNew: () -> Void
-    let syncStatus: CloudKitService.SyncStatus
-    let isCloudAvailable: Bool
-    let onSync: () -> Void
     
     @State private var selectedRecord: SwiftDataJournalRecord?
     @State private var searchText = ""
@@ -38,19 +35,12 @@ struct JournalView: View {
 
     init(
         swiftDataService: SwiftDataService,
-        cloudKitService: CloudKitService,
         onEditRecord: @escaping (SwiftDataJournalRecord) -> Void,
         onCreateNew: @escaping () -> Void,
-        syncStatus: CloudKitService.SyncStatus = .idle,
-        isCloudAvailable: Bool = false,
-        onSync: @escaping () -> Void = {}
     ) {
-        self._viewModel = StateObject(wrappedValue: JournalViewModel(swiftDataService: swiftDataService, cloudKitService: cloudKitService))
+        self._viewModel = StateObject(wrappedValue: JournalViewModel(swiftDataService: swiftDataService))
         self.onEditRecord = onEditRecord
         self.onCreateNew = onCreateNew
-        self.syncStatus = syncStatus
-        self.isCloudAvailable = isCloudAvailable
-        self.onSync = onSync
     }
     
     var body: some View {

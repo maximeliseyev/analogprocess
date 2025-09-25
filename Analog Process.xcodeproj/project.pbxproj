@@ -15,7 +15,6 @@
 		BF0FB0012E832932006007E3 /* SwiftDataSchemas.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0FB0002E832932006007E3 /* SwiftDataSchemas.swift */; };
 		BF113D372E3FA8A5008B5578 /* ManualTimeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF113D362E3FA8A5008B5578 /* ManualTimeInputView.swift */; };
 		BF113D412E40DB7D008B5578 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF113D402E40DB7D008B5578 /* ThemeManager.swift */; };
-		BF28FA5E2E41F75200C2E34E /* SyncStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28FA5C2E41F75200C2E34E /* SyncStatusView.swift */; };
 		BF3B29152E7C742E00FABD58 /* TimerStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3B29142E7C742E00FABD58 /* TimerStage.swift */; };
 		BF3B29172E7C745800FABD58 /* UnifiedTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3B29162E7C745800FABD58 /* UnifiedTimerViewModel.swift */; };
 		BF3B29192E7C7A7400FABD58 /* AgitationModeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3B29182E7C7A7400FABD58 /* AgitationModeData.swift */; };
@@ -48,7 +47,6 @@
 		BF949EB32E72CFC2005F9831 /* DevelopmentCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EA82E72CFC2005F9831 /* DevelopmentCalculator.swift */; };
 		BF949EB42E72CFC2005F9831 /* GitHubDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EB02E72CFC2005F9831 /* GitHubDataService.swift */; };
 		BF949EB52E72CFC2005F9831 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EB12E72CFC2005F9831 /* NetworkSession.swift */; };
-		BF949EB72E72CFC2005F9831 /* CloudKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EAF2E72CFC2005F9831 /* CloudKitService.swift */; };
 		BF949EBC2E72CFC2005F9831 /* AutoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EAE2E72CFC2005F9831 /* AutoSyncService.swift */; };
 		BF949EDC2E73799B005F9831 /* StagingStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949ED42E73799B005F9831 /* StagingStage.swift */; };
 		BF949EDD2E73799B005F9831 /* SwiftDataTemperatureMultiplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF949EC62E73799B005F9831 /* SwiftDataTemperatureMultiplier.swift */; };
@@ -107,7 +105,6 @@
 		BF0FB0002E832932006007E3 /* SwiftDataSchemas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataSchemas.swift; sourceTree = "<group>"; };
 		BF113D362E3FA8A5008B5578 /* ManualTimeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTimeInputView.swift; sourceTree = "<group>"; };
 		BF113D402E40DB7D008B5578 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
-		BF28FA5C2E41F75200C2E34E /* SyncStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncStatusView.swift; sourceTree = "<group>"; };
 		BF3B29142E7C742E00FABD58 /* TimerStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStage.swift; sourceTree = "<group>"; };
 		BF3B29162E7C745800FABD58 /* UnifiedTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnifiedTimerViewModel.swift; sourceTree = "<group>"; };
 		BF3B29182E7C7A7400FABD58 /* AgitationModeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgitationModeData.swift; sourceTree = "<group>"; };
@@ -142,7 +139,6 @@
 		BF8EDB3E2E4FC1CE0040E898 /* StagingCalculationResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingCalculationResultView.swift; sourceTree = "<group>"; };
 		BF949EA82E72CFC2005F9831 /* DevelopmentCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentCalculator.swift; sourceTree = "<group>"; };
 		BF949EAE2E72CFC2005F9831 /* AutoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncService.swift; sourceTree = "<group>"; };
-		BF949EAF2E72CFC2005F9831 /* CloudKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitService.swift; sourceTree = "<group>"; };
 		BF949EB02E72CFC2005F9831 /* GitHubDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubDataService.swift; sourceTree = "<group>"; };
 		BF949EB12E72CFC2005F9831 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
 		BF949EC12E73799B005F9831 /* SwiftDataJournalRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataJournalRecord.swift; sourceTree = "<group>"; };
@@ -221,7 +217,6 @@
 		BF28FA5D2E41F75200C2E34E /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				BF28FA5C2E41F75200C2E34E /* SyncStatusView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -490,7 +485,6 @@
 			children = (
 				BF0FAFFA2E8028AA006007E3 /* CoachMarksService.swift */,
 				BF949EAE2E72CFC2005F9831 /* AutoSyncService.swift */,
-				BF949EAF2E72CFC2005F9831 /* CloudKitService.swift */,
 				BF949EB02E72CFC2005F9831 /* GitHubDataService.swift */,
 				BF949EB12E72CFC2005F9831 /* NetworkSession.swift */,
 			);
@@ -769,7 +763,6 @@
 			files = (
 				BFA0C7AF2E21351300132936 /* RecordRowView.swift in Sources */,
 				BFA0C79D2E2133FC00132936 /* ContentView.swift in Sources */,
-				BF28FA5E2E41F75200C2E34E /* SyncStatusView.swift in Sources */,
 				BF9F34FC2E857C1B00B7B75C /* BasePickerView.swift in Sources */,
 				BF3B29172E7C745800FABD58 /* UnifiedTimerViewModel.swift in Sources */,
 				BFE12EC32E363AC00044A3A4 /* CalculatedTimeSection.swift in Sources */,
@@ -782,7 +775,6 @@
 				BF949EB32E72CFC2005F9831 /* DevelopmentCalculator.swift in Sources */,
 				BF949EB42E72CFC2005F9831 /* GitHubDataService.swift in Sources */,
 				BF949EB52E72CFC2005F9831 /* NetworkSession.swift in Sources */,
-				BF949EB72E72CFC2005F9831 /* CloudKitService.swift in Sources */,
 				BF949EBC2E72CFC2005F9831 /* AutoSyncService.swift in Sources */,
 				BF8A59FF2E4494A600D689C5 /* AutocompleteView.swift in Sources */,
 				BFFA1C682E4A69E3005C24F4 /* SwiftDataPersistence.swift in Sources */,
@@ -1022,7 +1014,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.5;
+				MARKETING_VERSION = 0.3.6;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1059,7 +1051,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.5;
+				MARKETING_VERSION = 0.3.6;
 				PRODUCT_BUNDLE_IDENTIFIER = maximeliseyev.analogprocess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

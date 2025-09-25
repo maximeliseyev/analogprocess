@@ -8,10 +8,7 @@ public struct MainTabView: View {
     @Binding var selectedTab: Int
     @Binding var colorScheme: ColorScheme?
     
-    private let cloudKitService = CloudKitService.shared
     @State private var showingCreateRecord = false
-    @State private var syncStatus: CloudKitService.SyncStatus = .idle
-    @State private var isCloudAvailable = false
     
     // Staging ViewModel для сохранения состояния между навигацией
     @StateObject private var stagingViewModel = StagingViewModel()
@@ -30,16 +27,8 @@ public struct MainTabView: View {
             NavigationStack {
                 JournalView(
                     swiftDataService: swiftDataService,
-                    cloudKitService: cloudKitService,
                     onEditRecord: loadRecord,
                     onCreateNew: { showingCreateRecord = true },
-                    syncStatus: syncStatus,
-                    isCloudAvailable: isCloudAvailable,
-                    onSync: {
-                        Task {
-                            await cloudKitService.syncRecords()
-                        }
-                    }
                 )
             }
             .tabItem {
@@ -58,7 +47,6 @@ public struct MainTabView: View {
             .tag(2)
         }
         .accentColor(.blue)
-        .onAppear(perform: setupCloudKitObservers)
         .sheet(isPresented: $showingCreateRecord) {
             CreateRecordView(
                 swiftDataService: swiftDataService,
@@ -70,18 +58,6 @@ public struct MainTabView: View {
                 calculatorProcess: nil
             )
         }
-    }
-    
-    private func setupCloudKitObservers() {
-        cloudKitService.$syncStatus
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.syncStatus, on: self)
-            .store(in: &cancellables)
-        
-        cloudKitService.$isCloudAvailable
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.isCloudAvailable, on: self)
-            .store(in: &cancellables)
     }
     
     @State private var cancellables = Set<AnyCancellable>()
