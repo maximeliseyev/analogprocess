@@ -49,8 +49,7 @@ class CalculatorViewModel: ObservableObject {
     }
     
     // MARK: - UI States
-    @Published var showCoefficientSuggestions = false
-    @Published var coefficientSuggestions: [String] = []
+    @Published var coefficientAutoCompleteManager: AutoCompleteManager<String>
     @Published var showResult = false
     @Published var showTimer = false
     @Published var showSaveDialog = false
@@ -74,10 +73,13 @@ class CalculatorViewModel: ObservableObject {
     
     // MARK: - Dependencies
     private let swiftDataService: SwiftDataService
-        init(swiftDataService: SwiftDataService) {
-            self.swiftDataService = swiftDataService
-        }
     private let calculator = DevelopmentCalculator()
+
+    init(swiftDataService: SwiftDataService) {
+        self.swiftDataService = swiftDataService
+        let standardCoefficients = ["1.33", "1.25", "1.5", "1.67", "2.0", "2.5", "3.0"]
+        self.coefficientAutoCompleteManager = .forStaticData(standardCoefficients)
+    }
     
     // MARK: - Public Methods
     
@@ -97,34 +99,17 @@ class CalculatorViewModel: ObservableObject {
     }
     
     // MARK: - Autocomplete Methods
-    
+
     func updateCoefficientSuggestions() {
-        let searchText = coefficient.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        
-        if searchText.isEmpty {
-            coefficientSuggestions = []
-            showCoefficientSuggestions = false
-            return
-        }
-        
-        let standardCoefficients = ["1.33", "1.25", "1.5", "1.67", "2.0", "2.5", "3.0"]
-        let filteredCoefficients = standardCoefficients.filter { coeff in
-            coeff.lowercased().contains(searchText)
-        }
-        
-        coefficientSuggestions = filteredCoefficients
-        showCoefficientSuggestions = !coefficientSuggestions.isEmpty
+        coefficientAutoCompleteManager.updateSuggestions(for: coefficient)
     }
-    
+
     func selectCoefficientSuggestion(_ coefficient: String) {
-        self.coefficient = coefficient
-        showCoefficientSuggestions = false
-        coefficientSuggestions = []
+        self.coefficient = coefficientAutoCompleteManager.selectSuggestion(coefficient)
     }
-    
+
     func hideCoefficientSuggestions() {
-        showCoefficientSuggestions = false
-        coefficientSuggestions = []
+        coefficientAutoCompleteManager.hideSuggestions()
     }
     
     // MARK: - Calculation Methods

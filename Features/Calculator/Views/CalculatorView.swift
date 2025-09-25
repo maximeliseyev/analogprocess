@@ -106,19 +106,17 @@ struct CalculatorView: View {
                                     .foregroundColor(.gray)
                             }
                             
-                            if viewModel.showCoefficientSuggestions {
-                                AutocompleteView(
-                                    suggestions: viewModel.coefficientSuggestions,
-                                    onSelect: { suggestion in
-                                        viewModel.selectCoefficientSuggestion(suggestion)
-                                        focusedField = nil
-                                    },
-                                    onDismiss: {
-                                        viewModel.hideCoefficientSuggestions()
-                                    }
-                                )
-                                .zIndex(1)
-                            }
+                            StringAutoCompleteView(
+                                manager: viewModel.coefficientAutoCompleteManager,
+                                onSelect: { suggestion in
+                                    viewModel.selectCoefficientSuggestion(suggestion)
+                                    focusedField = nil
+                                },
+                                onDismiss: {
+                                    viewModel.hideCoefficientSuggestions()
+                                }
+                            )
+                            .zIndex(1)
                         }
                     }
                     

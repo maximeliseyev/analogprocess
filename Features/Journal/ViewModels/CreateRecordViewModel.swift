@@ -24,15 +24,15 @@ class CreateRecordViewModel: ObservableObject {
     @Published var showISOPicker = false
     
     // Автодополнение
-    @Published var showFilmSuggestions = false
-    @Published var showDeveloperSuggestions = false
-    @Published var filmSuggestions: [String] = []
-    @Published var developerSuggestions: [String] = []
-    
+    @Published var filmAutoCompleteManager: AutoCompleteManager<FilmAutoCompleteItem>
+    @Published var developerAutoCompleteManager: AutoCompleteManager<DeveloperAutoCompleteItem>
+
     private let swiftDataService: SwiftDataService
-    
+
     init(swiftDataService: SwiftDataService) {
         self.swiftDataService = swiftDataService
+        self.filmAutoCompleteManager = .forFilms(swiftDataService: swiftDataService)
+        self.developerAutoCompleteManager = .forDevelopers(swiftDataService: swiftDataService)
     }
     
     var isValid: Bool {
@@ -46,65 +46,29 @@ class CreateRecordViewModel: ObservableObject {
     }
     
     // MARK: - Autocomplete Methods
-    
+
     func updateFilmSuggestions() {
-        let searchText = filmName.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        
-        if searchText.isEmpty {
-            filmSuggestions = []
-            showFilmSuggestions = false
-            return
-        }
-        
-        let allFilms = swiftDataService.films
-        let filteredFilms = allFilms.filter { film in
-            let name = film.name
-            return name.lowercased().contains(searchText)
-        }
-        
-        filmSuggestions = filteredFilms.compactMap { $0.name }.prefix(5).map { $0 }
-        showFilmSuggestions = !filmSuggestions.isEmpty
+        filmAutoCompleteManager.updateSuggestions(for: filmName)
     }
-    
+
     func updateDeveloperSuggestions() {
-        let searchText = developerName.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        
-        if searchText.isEmpty {
-            developerSuggestions = []
-            showDeveloperSuggestions = false
-            return
-        }
-        
-        let allDevelopers = swiftDataService.developers
-        let filteredDevelopers = allDevelopers.filter { developer in
-            let name = developer.name
-            return name.lowercased().contains(searchText)
-        }
-        
-        developerSuggestions = filteredDevelopers.compactMap { $0.name }.prefix(5).map { $0 }
-        showDeveloperSuggestions = !developerSuggestions.isEmpty
+        developerAutoCompleteManager.updateSuggestions(for: developerName)
     }
-    
-    func selectFilmSuggestion(_ filmName: String) {
-        self.filmName = filmName
-        showFilmSuggestions = false
-        filmSuggestions = []
+
+    func selectFilmSuggestion(_ item: FilmAutoCompleteItem) {
+        filmName = filmAutoCompleteManager.selectSuggestion(item)
     }
-    
-    func selectDeveloperSuggestion(_ developerName: String) {
-        self.developerName = developerName
-        showDeveloperSuggestions = false
-        developerSuggestions = []
+
+    func selectDeveloperSuggestion(_ item: DeveloperAutoCompleteItem) {
+        developerName = developerAutoCompleteManager.selectSuggestion(item)
     }
-    
+
     func hideFilmSuggestions() {
-        showFilmSuggestions = false
-        filmSuggestions = []
+        filmAutoCompleteManager.hideSuggestions()
     }
-    
+
     func hideDeveloperSuggestions() {
-        showDeveloperSuggestions = false
-        developerSuggestions = []
+        developerAutoCompleteManager.hideSuggestions()
     }
     
     func prefill(with record: JournalRecord) {

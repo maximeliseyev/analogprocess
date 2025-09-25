@@ -67,6 +67,8 @@
 		BF99E9AC2E4E814300BB7F0C /* StageEditorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9A42E4E814300BB7F0C /* StageEditorSheet.swift */; };
 		BF99E9B02E4E8E6800BB7F0C /* AutoSyncStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99E9AF2E4E8E6800BB7F0C /* AutoSyncStatusView.swift */; };
 		BF9F34FC2E857C1B00B7B75C /* BasePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9F34FB2E857C1B00B7B75C /* BasePickerView.swift */; };
+		BF9F34FE2E85825000B7B75C /* AutoCompleteManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9F34FD2E85825000B7B75C /* AutoCompleteManagerView.swift */; };
+		BF9F35002E8584E200B7B75C /* AutoCompleteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9F34FF2E8584E200B7B75C /* AutoCompleteManager.swift */; };
 		BFA0C79B2E2133FC00132936 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFA0C7932E2133FC00132936 /* Assets.xcassets */; };
 		BFA0C79D2E2133FC00132936 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7952E2133FC00132936 /* ContentView.swift */; };
 		BFA0C7A82E2134B400132936 /* CalculationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0C7A72E2134B300132936 /* CalculationResultView.swift */; };
@@ -160,6 +162,8 @@
 		BF99E9A62E4E814300BB7F0C /* StageRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageRowView.swift; sourceTree = "<group>"; };
 		BF99E9AF2E4E8E6800BB7F0C /* AutoSyncStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncStatusView.swift; sourceTree = "<group>"; };
 		BF9F34FB2E857C1B00B7B75C /* BasePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePickerView.swift; sourceTree = "<group>"; };
+		BF9F34FD2E85825000B7B75C /* AutoCompleteManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteManagerView.swift; sourceTree = "<group>"; };
+		BF9F34FF2E8584E200B7B75C /* AutoCompleteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteManager.swift; sourceTree = "<group>"; };
 		BFA0C7932E2133FC00132936 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFA0C7952E2133FC00132936 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BFA0C7A72E2134B300132936 /* CalculationResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationResultView.swift; sourceTree = "<group>"; };
@@ -421,8 +425,9 @@
 		BF4109682E3164A900BE2AD8 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				BF99E9AF2E4E8E6800BB7F0C /* AutoSyncStatusView.swift */,
+				BF9F34FD2E85825000B7B75C /* AutoCompleteManagerView.swift */,
 				BF8A59FE2E4494A600D689C5 /* AutocompleteView.swift */,
+				BF99E9AF2E4E8E6800BB7F0C /* AutoSyncStatusView.swift */,
 				BF553C612E420639009F1525 /* KeyboardAwareView.swift */,
 				BF113D402E40DB7D008B5578 /* ThemeManager.swift */,
 				BFE31C0A2E3A011100310B19 /* ViewStyles.swift */,
@@ -598,6 +603,7 @@
 		BFA0C7A22E21341400132936 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				BF9F34FF2E8584E200B7B75C /* AutoCompleteManager.swift */,
 				BFFA1C632E4A67A9005C24F4 /* SwiftDataService.swift */,
 				BF949EA92E72CFC2005F9831 /* Business */,
 				BF949EB22E72CFC2005F9831 /* Infrastructure */,
@@ -801,6 +807,7 @@
 				BF4109732E3166F400BE2AD8 /* TimerProgressView.swift in Sources */,
 				BFB0C3FC2E3E58D900296B97 /* JournalRecord.swift in Sources */,
 				BF4109162E31052900BE2AD8 /* ActionButtonsView.swift in Sources */,
+				BF9F34FE2E85825000B7B75C /* AutoCompleteManagerView.swift in Sources */,
 				BF8A5A072E44BA8200D689C5 /* StagingView.swift in Sources */,
 				BF8A5A082E44BA8200D689C5 /* StagingViewModel.swift in Sources */,
 				BFFA1C8B2E4A8C32005C24F4 /* JournalViewModel.swift in Sources */,
@@ -812,6 +819,7 @@
 				BF41095C2E3163E400BE2AD8 /* DevelopmentParametersView.swift in Sources */,
 				BF41095D2E3163E400BE2AD8 /* DeveloperPickerView.swift in Sources */,
 				BFDCB75E2E382372000F6CE5 /* AnalogProcessApp.swift in Sources */,
+				BF9F35002E8584E200B7B75C /* AutoCompleteManager.swift in Sources */,
 				BF0FAFFF2E82A4FE006007E3 /* PresetService.swift in Sources */,
 				BFA0C7AD2E2134F800132936 /* JournalView.swift in Sources */,
 				BF99E9A82E4E814300BB7F0C /* DropViewDelegate.swift in Sources */,
