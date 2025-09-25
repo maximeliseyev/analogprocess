@@ -91,6 +91,6 @@ struct AgitationModeTab: View {
 // Keep the existing preview
 struct AgitationSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        AgitationSelectionView(selectedMode: .constant(AgitationMode.presets[1]))
+        AgitationSelectionView(selectedMode: .constant(AgitationMode.presets[0]))
     }
 }

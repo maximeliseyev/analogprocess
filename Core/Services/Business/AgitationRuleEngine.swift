@@ -129,7 +129,7 @@ class AgitationRuleEngine {
 
 /// Новая упрощенная модель режима агитации на основе данных
 public struct AgitationMode: Identifiable, Equatable {
-    public let id = UUID()
+    public var id: String { name }
     public let name: String
     public let localizedNameKey: String
     public let isCustom: Bool
