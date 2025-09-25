@@ -52,11 +52,19 @@ struct AgitationModeTab: View {
     var body: some View {
         Button(action: onTap) {
             VStack(spacing: 8) {
-                Text(mode.name)
-                    .font(.headline)
-                    .fontWeight(.medium)
-                    .foregroundColor(isSelected ? .primary : .primary)
-                
+                HStack {
+                    Text(mode.name)
+                        .font(.headline)
+                        .fontWeight(isSelected ? .bold : .medium)
+                        .foregroundColor(isSelected ? .blue : .primary)
+
+                    if isSelected {
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundColor(.blue)
+                            .font(.caption)
+                    }
+                }
+
                 Text(mode.description)
                     .font(.caption)
                     .foregroundColor(.secondary)
@@ -68,11 +76,11 @@ struct AgitationModeTab: View {
             .padding(.horizontal, 12)
             .background(
                 RoundedRectangle(cornerRadius: 12)
-                    .fill(isSelected ? Color.blue.opacity(0.15) : Color.gray.opacity(0.1))
+                    .fill(isSelected ? Color.blue.opacity(0.2) : Color.gray.opacity(0.1))
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
-                    .stroke(isSelected ? Color.blue : Color.clear, lineWidth: 2)
+                    .stroke(isSelected ? Color.blue : Color.clear, lineWidth: 3)
             )
         }
         .buttonStyle(PlainButtonStyle())
