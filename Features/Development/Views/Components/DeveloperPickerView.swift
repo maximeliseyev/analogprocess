@@ -32,7 +32,7 @@ struct DeveloperPickerView: View {
         BasePickerView(
             selectedValue: Binding(
                 get: {
-                    selectedDeveloperItem ?? (developerItems.first ?? DeveloperItem(developer: SwiftDataDeveloper(name: "", manufacturer: "", defaultDilution: "")))
+                    selectedDeveloperItem ?? (developerItems.first ?? DeveloperItem(developer: SwiftDataDeveloper()))
                 },
                 set: { newDeveloperItem in
                     selectedDeveloper = newDeveloperItem.developer

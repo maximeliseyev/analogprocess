@@ -182,6 +182,86 @@ struct DeveloperItem: BasePickerItem, Searchable {
     }
 }
 
+struct FixerItem: BasePickerItem, Searchable {
+    let fixer: SwiftDataFixer
+
+    var displayTitle: String {
+        let typeDisplay = getFixerTypeDisplayName(fixer.type)
+        let timeDisplay = "\(fixer.time / 60) мин"
+        return "\(fixer.name) • \(typeDisplay) • \(timeDisplay)"
+    }
+
+    var isAvailable: Bool {
+        true // Fixers are always available for selection
+    }
+
+    var searchableText: String {
+        "\(fixer.name) \(getFixerTypeDisplayName(fixer.type))".lowercased()
+    }
+
+    static func == (lhs: FixerItem, rhs: FixerItem) -> Bool {
+        lhs.fixer.id == rhs.fixer.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(fixer.id)
+    }
+
+    private func getFixerTypeDisplayName(_ type: String) -> String {
+        switch type {
+        case "rapid":
+            return "Быстрый фиксаж"
+        case "acid":
+            return "Кислый фиксаж"
+        case "neutral":
+            return "Нейтральный фиксаж"
+        default:
+            return type
+        }
+    }
+}
+
+struct DilutionItem: BasePickerItem {
+    let dilution: String
+    let isDisabled: Bool
+
+    var displayTitle: String {
+        dilution
+    }
+
+    var isAvailable: Bool {
+        !isDisabled
+    }
+
+    static func == (lhs: DilutionItem, rhs: DilutionItem) -> Bool {
+        lhs.dilution == rhs.dilution
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(dilution)
+    }
+}
+
+struct TemperatureItem: BasePickerItem {
+    let temperature: Int
+
+    var displayTitle: String {
+        "\(temperature)\(String(localized: "degreesCelsius"))"
+    }
+
+    var isAvailable: Bool {
+        true // All temperatures are available for selection
+    }
+
+    static func == (lhs: TemperatureItem, rhs: TemperatureItem) -> Bool {
+        lhs.temperature == rhs.temperature
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(temperature)
+    }
+}
+
 // MARK: - SearchBar Component
 
 struct SearchBar: View {
