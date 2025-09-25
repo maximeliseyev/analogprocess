@@ -32,7 +32,7 @@ struct FilmPickerView: View {
         BasePickerView(
             selectedValue: Binding(
                 get: {
-                    selectedFilmItem ?? (filmItems.first ?? FilmItem(film: SwiftDataFilm(name: "", manufacturer: "", defaultISO: 400)))
+                    selectedFilmItem ?? (filmItems.first ?? FilmItem(film: SwiftDataFilm()))
                 },
                 set: { newFilmItem in
                     selectedFilm = newFilmItem.film

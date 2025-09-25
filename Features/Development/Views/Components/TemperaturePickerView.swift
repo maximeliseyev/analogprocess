@@ -10,55 +10,41 @@ import SwiftUI
 struct TemperaturePickerView: View {
     @Binding var temperature: Int
     let onDismiss: () -> Void
-
     
     private let temperatures = Array(15...30)
     
+    private var temperatureItems: [TemperatureItem] {
+        temperatures.map { TemperatureItem(temperature: $0) }
+    }
+    
+    private var selectedTemperatureItem: TemperatureItem {
+        TemperatureItem(temperature: temperature)
+    }
+    
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color.clear.ignoresSafeArea()
-                
-                List(temperatures, id: \.self) { temp in
-                    Button(action: {
-                        temperature = temp
-                        onDismiss()
-                    }) {
-                        HStack {
-                            Text("\(temp)\(String(localized: "degreesCelsius"))")
-                                .font(.body)
-                                .foregroundColor(.primary)
-                            
-                            Spacer()
-                            
-                            if temperature == temp {
-                                Image(systemName: "checkmark")
-                                    .checkmarkStyle()
-                            }
-                        }
-                    }
-                    .buttonStyle(PlainButtonStyle())
+        BasePickerView(
+            selectedValue: Binding(
+                get: {
+                    selectedTemperatureItem
+                },
+                set: { newTemperatureItem in
+                    temperature = newTemperatureItem.temperature
                 }
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle(LocalizedStringKey("selectTemperature"))
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button(LocalizedStringKey("cancel")) {
-                        onDismiss()
-                    }
-                }
-            }
-        }
-    }
-    }
-
-
-struct TemperaturePickerView_Previews: PreviewProvider {
-    static var previews: some View {
-        TemperaturePickerView(
-            temperature: .constant(20),
-            onDismiss: {}
+            ),
+            items: temperatureItems,
+            title: LocalizedStringKey("selectTemperature"),
+            onDismiss: onDismiss
         )
     }
-} 
+    
+    
+    struct TemperaturePickerView_Previews: PreviewProvider {
+        static var previews: some View {
+            TemperaturePickerView(
+                temperature: .constant(20),
+                onDismiss: {}
+            )
+        }
+    }
+}
+

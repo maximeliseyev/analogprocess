@@ -39,7 +39,6 @@
 		BF4109732E3166F400BE2AD8 /* TimerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41096E2E3166F400BE2AD8 /* TimerProgressView.swift */; };
 		BF52A21C2E7D82B900E305F5 /* GitHubAgitationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF52A21B2E7D82B900E305F5 /* GitHubAgitationService.swift */; };
 		BF553C622E420639009F1525 /* KeyboardAwareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C612E420639009F1525 /* KeyboardAwareView.swift */; };
-		BF553C6A2E43268D009F1525 /* BasePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C692E43268D009F1525 /* BasePickerView.swift */; };
 		BF553C6C2E43297C009F1525 /* CreateRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF553C6B2E43297C009F1525 /* CreateRecordViewModel.swift */; };
 		BF8A59EF2E43809C00D689C5 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59EE2E43809C00D689C5 /* MainTabView.swift */; };
 		BF8A59FF2E4494A600D689C5 /* AutocompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A59FE2E4494A600D689C5 /* AutocompleteView.swift */; };
@@ -805,7 +804,6 @@
 				BF8A5A072E44BA8200D689C5 /* StagingView.swift in Sources */,
 				BF8A5A082E44BA8200D689C5 /* StagingViewModel.swift in Sources */,
 				BFFA1C8B2E4A8C32005C24F4 /* JournalViewModel.swift in Sources */,
-				BF553C6A2E43268D009F1525 /* BasePickerView.swift in Sources */,
 				BF0FB0012E832932006007E3 /* SwiftDataSchemas.swift in Sources */,
 				BFF4D9FF2E21BECD0097BE82 /* TimerView.swift in Sources */,
 				BFE31C0C2E3A016300310B19 /* ViewStyles.swift in Sources */,
