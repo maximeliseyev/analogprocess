@@ -12,17 +12,23 @@ enum ValidationError: Error, LocalizedError {
     case invalidInteger(String)
     case invalidDouble(String)
     case valueOutOfRange(String, ClosedRange<Int>)
+    case doubleOutOfRange(String, ClosedRange<Double>)
+    case mustBePositive(String)
 
     var errorDescription: String? {
         switch self {
         case .emptyField(let fieldName):
-            return "\(fieldName) cannot be empty."
+            return String(format: String(localized: "validationErrorEmptyField"), fieldName)
         case .invalidInteger(let fieldName):
-            return "\(fieldName) must be a valid integer."
+            return String(format: String(localized: "validationErrorInvalidInteger"), fieldName)
         case .invalidDouble(let fieldName):
-            return "\(fieldName) must be a valid number."
+            return String(format: String(localized: "validationErrorInvalidDouble"), fieldName)
         case .valueOutOfRange(let fieldName, let range):
-            return "\(fieldName) must be between \(range.lowerBound) and \(range.upperBound)."
+            return String(format: String(localized: "validationErrorValueOutOfRange"), fieldName, range.lowerBound, range.upperBound)
+        case .doubleOutOfRange(let fieldName, let range):
+            return String(format: String(localized: "validationErrorDoubleOutOfRange"), fieldName, range.lowerBound, range.upperBound)
+        case .mustBePositive(let fieldName):
+            return String(format: String(localized: "validationErrorMustBePositive"), fieldName)
         }
     }
 }
@@ -54,14 +60,19 @@ struct ValidationManager {
         return []
     }
 
-    static func validateDouble(field: String, fieldName: String, greaterThanZero: Bool = false) -> [ValidationError] {
+    static func validateDouble(field: String, fieldName: String, range: ClosedRange<Double>? = nil, greaterThanZero: Bool = false) -> [ValidationError] {
         guard let doubleValue = Double(field) else {
             return [.invalidDouble(fieldName)]
         }
+
         if greaterThanZero && doubleValue <= 0 {
-            // A more specific error could be created for this case
-            return [.invalidDouble("\(fieldName) must be greater than 0")]
+            return [.mustBePositive(fieldName)]
         }
+
+        if let range = range, !range.contains(doubleValue) {
+            return [.doubleOutOfRange(fieldName, range)]
+        }
+
         return []
     }
 }

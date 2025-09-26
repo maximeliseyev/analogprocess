@@ -198,7 +198,7 @@ struct StagingView: View {
                 selectedPreset = nil
             }
         }, message: {
-            Text("This will replace your current stages. This action cannot be undone.")
+            Text(LocalizedStringKey("stagingPresetReplaceWarning"))
         })
         .alert(LocalizedStringKey("stagingResetConfirmation"), isPresented: $showingResetConfirmation) {
             Button(LocalizedStringKey("cancel"), role: .cancel) { }

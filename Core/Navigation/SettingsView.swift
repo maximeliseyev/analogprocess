@@ -116,11 +116,11 @@ public struct SettingsView: View {
                 #endif
             }
             
-            Section(header: Text("Support")) {
+            Section(header: Text(LocalizedStringKey("support"))) {
                 Button(action: contactDeveloper) {
                     HStack {
                         Image(systemName: "envelope")
-                        Text("Contact Developer")
+                        Text(LocalizedStringKey("contactDeveloper"))
                         Spacer()
                         Image(systemName: "arrow.up.right")
                             .font(.caption)

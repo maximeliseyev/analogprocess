@@ -14,10 +14,14 @@
 
 // MARK: - Timer Controls
 "start" = "Старт";
+"startProcess" = "Начать процесс";
+"startProcessSubtitle" = "Следуйте пошаговому руководству для проявки плёнки.";
 "pause" = "Пауза";
 "reset" = "Сброс";
 "timer" = "Таймер";
 "time" = "Время";
+"tools" = "Инструменты";
+"toolsSubtitle" = "Доступ к отдельным калькуляторам и таймерам.";
 "minutes" = "Минуты";
 "seconds" = "Секунды";
 "min" = "мин.";
@@ -446,3 +450,18 @@
 "iCloudSyncStatusSyncing" = "Синхронизация...";
 "iCloudSyncStatusCompleted" = "Синхронизация завершена";
 "iCloudSyncCtatusFailed" = "Ошибка: %@";
+
+// MARK: - Support
+"support" = "Поддержка";
+"contactDeveloper" = "Связаться с разработчиком";
+
+// MARK: - Staging Warnings
+"stagingPresetReplaceWarning" = "Это заменит ваши текущие стадии. Это действие нельзя отменить.";
+
+// MARK: - Validation Errors
+"validationErrorEmptyField" = "%@ не может быть пустым.";
+"validationErrorInvalidInteger" = "%@ должно быть целым числом.";
+"validationErrorInvalidDouble" = "%@ должно быть числом.";
+"validationErrorValueOutOfRange" = "%@ должно быть между %d и %d.";
+"validationErrorDoubleOutOfRange" = "%@ должно быть между %.1f и %.1f.";
+"validationErrorMustBePositive" = "%@ должно быть больше 0.";

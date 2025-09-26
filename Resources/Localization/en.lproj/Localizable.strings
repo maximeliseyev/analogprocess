@@ -444,3 +444,18 @@
 "iCloudSyncStatusSyncing" = "Syncing...";
 "iCloudSyncStatusCompleted" = "Sync complete";
 "iCloudSyncCtatusFailed" = "Error: %@";
+
+// MARK: - Support
+"support" = "Support";
+"contactDeveloper" = "Contact Developer";
+
+// MARK: - Staging Warnings
+"stagingPresetReplaceWarning" = "This will replace your current stages. This action cannot be undone.";
+
+// MARK: - Validation Errors
+"validationErrorEmptyField" = "%@ cannot be empty.";
+"validationErrorInvalidInteger" = "%@ must be a valid integer.";
+"validationErrorInvalidDouble" = "%@ must be a valid number.";
+"validationErrorValueOutOfRange" = "%@ must be between %d and %d.";
+"validationErrorDoubleOutOfRange" = "%@ must be between %.1f and %.1f.";
+"validationErrorMustBePositive" = "%@ must be greater than 0.";
