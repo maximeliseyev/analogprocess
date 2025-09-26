@@ -7,7 +7,7 @@ struct ToolsHubView: View {
     @State private var showTimerView = false
     @State private var timerMinutes = 0
     @State private var timerSeconds = 0
-    @State private var timerLabel = "Manual Timer"
+    @State private var timerLabel = String(localized: "manualTimer")
     @State private var selectedAgitationMode: AgitationMode?
 
     var body: some View {
