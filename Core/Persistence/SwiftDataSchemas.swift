@@ -8,10 +8,10 @@
 import SwiftData
 import Foundation
 
-/// Управление версиями схем SwiftData
+/// Manages SwiftData schema versions
 enum SwiftDataSchemas {
 
-    /// Версия 1.0 - базовая схема без AgitationModeData
+    /// Version 1.0 - base schema without AgitationModeData
     static var v1_0: Schema {
         Schema([
             SwiftDataFilm.self,
@@ -20,7 +20,7 @@ enum SwiftDataSchemas {
         ])
     }
 
-    /// Версия 1.1 - добавлена поддержка кастомных режимов агитации
+    /// Version 1.1 - added support for custom agitation modes
     static var v1_1: Schema {
         Schema([
             SwiftDataFilm.self,
@@ -30,7 +30,7 @@ enum SwiftDataSchemas {
         ])
     }
 
-    /// Версия 1.3 - нормализованная структура для AgitationModeData с отдельной таблицей правил
+    /// Version 1.3 - normalized structure for AgitationModeData with a separate rules table
     static var v1_3: Schema {
         Schema([
             SwiftDataFilm.self,
@@ -41,7 +41,7 @@ enum SwiftDataSchemas {
         ])
     }
 
-    /// Версия 1.2 - полная схема со всеми моделями
+    /// Version 1.2 - full schema with all models
     static var v1_2: Schema {
         Schema([
             SwiftDataFilm.self,
@@ -54,7 +54,7 @@ enum SwiftDataSchemas {
         ])
     }
 
-    /// Версия 1.4 - полная схема с нормализованными агитационными правилами
+    /// Version 1.4 - full schema with normalized agitation rules and presets
     static var v1_4: Schema {
         Schema([
             SwiftDataFilm.self,
@@ -65,15 +65,17 @@ enum SwiftDataSchemas {
             SwiftDataDevelopmentTime.self,
             SwiftDataFixer.self,
             SwiftDataTemperatureMultiplier.self,
+            SwiftDataProcessPreset.self,
+            SwiftDataStagingStage.self,
         ])
     }
 
-    /// Текущая активная схема - используем v1.3 с нормализованной структурой агитации
+    /// Current active schema - using v1.4 with presets
     static var current: Schema {
-        return v1_3 // Переходим на нормализованную схему
+        return v1_4
     }
 
-    /// Минимальная схема для критических ситуаций
+    /// Minimal schema for critical situations
     static var minimal: Schema {
         Schema([
             SwiftDataJournalRecord.self,
@@ -82,20 +84,20 @@ enum SwiftDataSchemas {
         ])
     }
 
-    /// Абсолютно базовая схема только с журналом
+    /// Absolutely basic schema with only the journal
     static var journalOnly: Schema {
         Schema([
             SwiftDataJournalRecord.self,
         ])
     }
 
-    /// Получить список всех сущностей в строковом виде для логирования
+    /// Get a list of all entities as strings for logging
     static func entityNames(for schema: Schema) -> [String] {
         return schema.entities.map { $0.name }
     }
 }
 
-/// Стратегии восстановления при ошибках схемы
+/// Recovery strategies for schema errors
 enum SwiftDataRecoveryStrategy: CaseIterable {
     case useMemory
     case resetDatabase
@@ -106,15 +108,15 @@ enum SwiftDataRecoveryStrategy: CaseIterable {
     var description: String {
         switch self {
         case .useMemory:
-            return "Переключение на in-memory хранилище"
+            return "Switching to in-memory storage"
         case .resetDatabase:
-            return "Сброс базы данных и создание новой"
+            return "Resetting the database and creating a new one"
         case .useMinimalSchema:
-            return "Использование минимальной схемы"
+            return "Using minimal schema"
         case .useJournalOnly:
-            return "Использование только журнала"
+            return "Using only the journal"
         case .fatal:
-            return "Критическая ошибка"
+            return "Critical error"
         }
     }
 
@@ -127,7 +129,7 @@ enum SwiftDataRecoveryStrategy: CaseIterable {
         case .useJournalOnly:
             return SwiftDataSchemas.journalOnly
         case .fatal:
-            return SwiftDataSchemas.journalOnly // Fallback, хотя не должно использоваться
+            return SwiftDataSchemas.journalOnly // Fallback, although it should not be used
         }
     }
 
@@ -141,29 +143,19 @@ enum SwiftDataRecoveryStrategy: CaseIterable {
     }
 }
 
-/// Менеджер для унифицированного создания SwiftData конфигураций
+/// Manager for unified creation of SwiftData configurations
 struct SwiftDataConfigurationManager {
 
-    /// Создаёт основную конфигурацию для CloudKit или локального хранения
+    /// Creates the main configuration for local storage
     static func createPrimaryConfiguration(inMemory: Bool = false) -> (Schema, ModelConfiguration) {
         let schema = SwiftDataSchemas.current
 
-        let configuration: ModelConfiguration
-        if inMemory {
-            configuration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
-        } else {
-            // Пробуем CloudKit конфигурацию
-            configuration = ModelConfiguration(
-                schema: schema,
-                isStoredInMemoryOnly: false,
-                cloudKitDatabase: .private("iCloud.com.maximeliseyev.analogprocess")
-            )
-        }
+        let configuration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: inMemory)
 
         return (schema, configuration)
     }
 
-    /// Создаёт fallback конфигурацию для восстановления
+    /// Creates a fallback configuration for recovery
     static func createFallbackConfiguration(strategy: SwiftDataRecoveryStrategy) -> (Schema, ModelConfiguration) {
         let schema = strategy.schema
 
@@ -175,9 +167,9 @@ struct SwiftDataConfigurationManager {
         return (schema, configuration)
     }
 
-    /// Создаёт тестовую конфигурацию (всегда in-memory)
+    /// Creates a test configuration (always in-memory)
     static func createTestConfiguration() -> (Schema, ModelConfiguration) {
-        let schema = SwiftDataSchemas.minimal // Используем минимальную схему для тестов
+        let schema = SwiftDataSchemas.minimal // Using minimal schema for tests
 
         let configuration = ModelConfiguration(
             schema: schema,
@@ -187,7 +179,7 @@ struct SwiftDataConfigurationManager {
         return (schema, configuration)
     }
 
-    /// Валидирует схему на полноту
+    /// Validates the schema for completeness
     static func validateSchema(_ schema: Schema) -> [String] {
         var missingEntities: [String] = []
 
@@ -210,7 +202,7 @@ struct SwiftDataConfigurationManager {
         return missingEntities
     }
 
-    /// Более детальная валидация схемы с предупреждениями
+    /// More detailed schema validation with warnings
     static func performDetailedValidation(_ schema: Schema) -> SchemaValidationResult {
         var warnings: [String] = []
         var errors: [String] = []
@@ -228,7 +220,7 @@ struct SwiftDataConfigurationManager {
 
         let currentEntities = schema.entities.map { $0.name }
 
-        // Проверяем критически важные сущности
+        // Checking critical entities
         let criticalEntities = ["SwiftDataJournalRecord"]
         for critical in criticalEntities {
             if !currentEntities.contains(critical) {
@@ -236,7 +228,7 @@ struct SwiftDataConfigurationManager {
             }
         }
 
-        // Проверяем желательные сущности
+        // Checking optional entities
         let optionalEntities = expectedEntities.filter { !criticalEntities.contains($0) }
         for optional in optionalEntities {
             if !currentEntities.contains(optional) {
@@ -244,7 +236,7 @@ struct SwiftDataConfigurationManager {
             }
         }
 
-        // Проверяем неожиданные сущности
+        // Checking for unexpected entities
         for current in currentEntities {
             if !expectedEntities.contains(current) {
                 warnings.append("Unexpected entity found: \(current)")
@@ -259,7 +251,7 @@ struct SwiftDataConfigurationManager {
         )
     }
 
-    /// Сравнивает две схемы на совместимость
+    /// Compares two schemas for compatibility
     static func compareSchemas(_ schema1: Schema, _ schema2: Schema) -> SchemaCompatibilityResult {
         let entities1 = Set(schema1.entities.map { $0.name })
         let entities2 = Set(schema2.entities.map { $0.name })
@@ -268,7 +260,7 @@ struct SwiftDataConfigurationManager {
         let removed = entities1.subtracting(entities2)
         let common = entities1.intersection(entities2)
 
-        let isCompatible = removed.isEmpty // Схемы совместимы если ничего не удалено
+        let isCompatible = removed.isEmpty // Schemas are compatible if nothing is removed
 
         return SchemaCompatibilityResult(
             isCompatible: isCompatible,
@@ -279,7 +271,7 @@ struct SwiftDataConfigurationManager {
     }
 }
 
-/// Результат валидации схемы
+/// Schema validation result
 struct SchemaValidationResult {
     let isValid: Bool
     let errors: [String]
@@ -290,7 +282,7 @@ struct SchemaValidationResult {
     var hasErrors: Bool { !errors.isEmpty }
 }
 
-/// Результат сравнения схем
+/// Schema comparison result
 struct SchemaCompatibilityResult {
     let isCompatible: Bool
     let addedEntities: [String]

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF048A2D2E85CBB6005F0A54 /* ModelProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF048A292E85CBB6005F0A54 /* ModelProtocols.swift */; };
+		BF048A2E2E85CBB6005F0A54 /* ModelConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF048A2B2E85CBB6005F0A54 /* ModelConverter.swift */; };
+		BF048A312E85DC4E005F0A54 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF048A2F2E85DC4E005F0A54 /* Logger.swift */; };
+		BF048A332E85DCE6005F0A54 /* ValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF048A322E85DCE6005F0A54 /* ValidationManager.swift */; };
+		BF048A392E869802005F0A54 /* SwiftDataProcessPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF048A382E869802005F0A54 /* SwiftDataProcessPreset.swift */; };
+		BF048A442E86CEB1005F0A54 /* GitHubProcessPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF048A422E86CEB1005F0A54 /* GitHubProcessPreset.swift */; };
 		BF0FAFF62E80107B006007E3 /* ParameterRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4109672E3164A900BE2AD8 /* ParameterRow.swift */; };
 		BF0FAFF92E8023C0006007E3 /* SSCoachMarks in Frameworks */ = {isa = PBXBuildFile; productRef = BF0FAFF82E8023C0006007E3 /* SSCoachMarks */; };
 		BF0FAFFB2E8028AA006007E3 /* CoachMarksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0FAFFA2E8028AA006007E3 /* CoachMarksService.swift */; };
@@ -99,6 +105,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BF048A292E85CBB6005F0A54 /* ModelProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelProtocols.swift; sourceTree = "<group>"; };
+		BF048A2B2E85CBB6005F0A54 /* ModelConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelConverter.swift; sourceTree = "<group>"; };
+		BF048A2F2E85DC4E005F0A54 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		BF048A322E85DCE6005F0A54 /* ValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationManager.swift; sourceTree = "<group>"; };
+		BF048A382E869802005F0A54 /* SwiftDataProcessPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataProcessPreset.swift; sourceTree = "<group>"; };
+		BF048A422E86CEB1005F0A54 /* GitHubProcessPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubProcessPreset.swift; sourceTree = "<group>"; };
 		BF0FAFFA2E8028AA006007E3 /* CoachMarksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachMarksService.swift; sourceTree = "<group>"; };
 		BF0FAFFC2E829F02006007E3 /* ToolsHubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsHubView.swift; sourceTree = "<group>"; };
 		BF0FAFFE2E82A4FE006007E3 /* PresetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetService.swift; sourceTree = "<group>"; };
@@ -214,6 +226,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF048A2A2E85CBB6005F0A54 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				BF048A292E85CBB6005F0A54 /* ModelProtocols.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		BF048A2C2E85CBB6005F0A54 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				BF048A2B2E85CBB6005F0A54 /* ModelConverter.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		BF048A302E85DC4E005F0A54 /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				BF048A2F2E85DC4E005F0A54 /* Logger.swift */,
+			);
+			path = Logging;
+			sourceTree = "<group>";
+		};
+		BF048A432E86CEB1005F0A54 /* Codable */ = {
+			isa = PBXGroup;
+			children = (
+				BF048A422E86CEB1005F0A54 /* GitHubProcessPreset.swift */,
+			);
+			path = Codable;
+			sourceTree = "<group>";
+		};
 		BF28FA5D2E41F75200C2E34E /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -476,6 +520,7 @@
 				BF949EA82E72CFC2005F9831 /* DevelopmentCalculator.swift */,
 				BF52A21B2E7D82B900E305F5 /* GitHubAgitationService.swift */,
 				BF0FAFFE2E82A4FE006007E3 /* PresetService.swift */,
+				BF048A322E85DCE6005F0A54 /* ValidationManager.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -507,8 +552,10 @@
 		BF949EC82E73799B005F9831 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BF048A382E869802005F0A54 /* SwiftDataProcessPreset.swift */,
 				BF3B29182E7C7A7400FABD58 /* AgitationModeData.swift */,
 				BF949EC72E73799B005F9831 /* SwiftData */,
+				BF048A432E86CEB1005F0A54 /* Codable */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -566,7 +613,10 @@
 		BF949EDB2E73799B005F9831 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				BF048A302E85DC4E005F0A54 /* Logging */,
 				BF949ED92E73799B005F9831 /* Constants */,
+				BF048A2A2E85CBB6005F0A54 /* Protocols */,
+				BF048A2C2E85CBB6005F0A54 /* Utils */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -766,6 +816,8 @@
 				BF9F34FC2E857C1B00B7B75C /* BasePickerView.swift in Sources */,
 				BF3B29172E7C745800FABD58 /* UnifiedTimerViewModel.swift in Sources */,
 				BFE12EC32E363AC00044A3A4 /* CalculatedTimeSection.swift in Sources */,
+				BF048A2D2E85CBB6005F0A54 /* ModelProtocols.swift in Sources */,
+				BF048A2E2E85CBB6005F0A54 /* ModelConverter.swift in Sources */,
 				BF553C6C2E43297C009F1525 /* CreateRecordViewModel.swift in Sources */,
 				BF8EDB3F2E4FC1CE0040E898 /* StagingCalculationResultView.swift in Sources */,
 				BF41093A2E31308500BE2AD8 /* CalculatorView.swift in Sources */,
@@ -774,6 +826,7 @@
 				BFFA1C892E4A7A0F005C24F4 /* CalculatorViewModel.swift in Sources */,
 				BF949EB32E72CFC2005F9831 /* DevelopmentCalculator.swift in Sources */,
 				BF949EB42E72CFC2005F9831 /* GitHubDataService.swift in Sources */,
+				BF048A312E85DC4E005F0A54 /* Logger.swift in Sources */,
 				BF949EB52E72CFC2005F9831 /* NetworkSession.swift in Sources */,
 				BF949EBC2E72CFC2005F9831 /* AutoSyncService.swift in Sources */,
 				BF8A59FF2E4494A600D689C5 /* AutocompleteView.swift in Sources */,
@@ -800,6 +853,7 @@
 				BFB0C3FC2E3E58D900296B97 /* JournalRecord.swift in Sources */,
 				BF4109162E31052900BE2AD8 /* ActionButtonsView.swift in Sources */,
 				BF9F34FE2E85825000B7B75C /* AutoCompleteManagerView.swift in Sources */,
+				BF048A332E85DCE6005F0A54 /* ValidationManager.swift in Sources */,
 				BF8A5A072E44BA8200D689C5 /* StagingView.swift in Sources */,
 				BF8A5A082E44BA8200D689C5 /* StagingViewModel.swift in Sources */,
 				BFFA1C8B2E4A8C32005C24F4 /* JournalViewModel.swift in Sources */,
@@ -815,12 +869,14 @@
 				BF0FAFFF2E82A4FE006007E3 /* PresetService.swift in Sources */,
 				BFA0C7AD2E2134F800132936 /* JournalView.swift in Sources */,
 				BF99E9A82E4E814300BB7F0C /* DropViewDelegate.swift in Sources */,
+				BF048A442E86CEB1005F0A54 /* GitHubProcessPreset.swift in Sources */,
 				BF99E9A92E4E814300BB7F0C /* StagePickerView.swift in Sources */,
 				BF99E9AA2E4E814300BB7F0C /* AddStageButton.swift in Sources */,
 				BF99E9AB2E4E814300BB7F0C /* StageRowView.swift in Sources */,
 				BF99E9AC2E4E814300BB7F0C /* StageEditorSheet.swift in Sources */,
 				BF113D412E40DB7D008B5578 /* ThemeManager.swift in Sources */,
 				BF4109302E31151800BE2AD8 /* DevelopmentSetupView.swift in Sources */,
+				BF048A392E869802005F0A54 /* SwiftDataProcessPreset.swift in Sources */,
 				BF4109662E31643100BE2AD8 /* ISOPickerView.swift in Sources */,
 				BF52A21C2E7D82B900E305F5 /* GitHubAgitationService.swift in Sources */,
 				BF113D372E3FA8A5008B5578 /* ManualTimeInputView.swift in Sources */,

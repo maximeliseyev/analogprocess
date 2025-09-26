@@ -25,6 +25,7 @@ public enum AppConstants {
         static let developmentTimesEndpoint = "/development-times.json"
         static let temperatureMultipliersEndpoint = "/temperature-multipliers.json"
         static let agitationModesEndpoint = "/agitation-modes.json"
+        static let processPresetsEndpoint = "/process-presets.json"
     }
     
     // MARK: - UserDefaults Keys

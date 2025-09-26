@@ -11,8 +11,9 @@ import SwiftData
 
 // MARK: - SwiftData DevelopmentTime Model
 @Model
-public final class SwiftDataDevelopmentTime {
+public final class SwiftDataDevelopmentTime: DevelopmentTimeModel {
     public var id: String = UUID().uuidString
+    public var name: String = ""
     public var dilution: String?
     public var iso: Int32 = 400
     public var time: Int32 = 0
@@ -26,6 +27,7 @@ public final class SwiftDataDevelopmentTime {
     }
 
     public init(dilution: String?, iso: Int32, time: Int32, developer: SwiftDataDeveloper? = nil, film: SwiftDataFilm? = nil) {
+        self.name = ""
         self.dilution = dilution
         self.iso = iso
         self.time = time

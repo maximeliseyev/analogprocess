@@ -10,7 +10,7 @@ import SwiftData
 
 // MARK: - SwiftData TemperatureMultiplier Model
 @Model
-public final class SwiftDataTemperatureMultiplier {
+public final class SwiftDataTemperatureMultiplier: TemperatureModel {
     @Attribute(.unique) public var id: String = UUID().uuidString
     public var temperature: Int
     public var multiplier: Double

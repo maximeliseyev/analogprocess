@@ -48,48 +48,4 @@ public struct StagingStage: Identifiable, Hashable, Codable {
         }
     }
     
-    public static let defaultStages: [StagingStage] = [
-        StagingStage(
-            name: "stagingPrebathName",
-            description: "stagingPrebathDescription",
-            iconName: "drop.fill",
-            color: "blue"
-        ),
-        StagingStage(
-            name: "stagingDevelopName",
-            description: "stagingDevelopDescription",
-            iconName: "flask.fill",
-            color: "orange"
-        ),
-        StagingStage(
-            name: "stagingStopBathName",
-            description: "stagingStopBathDescription",
-            iconName: "stop.fill",
-            color: "red"
-        ),
-        StagingStage(
-            name: "stagingBleachName",
-            description: "stagingBleachDescription",
-            iconName: "flask",
-            color: "yellow"
-        ),
-        StagingStage(
-            name: "stagingFixerName",
-            description: "stagingFixerDescription",
-            iconName: "shield.fill",
-            color: "purple"
-        ),
-        StagingStage(
-            name: "stagingWashName",
-            description: "stagingWashDescription",
-            iconName: "drop",
-            color: "cyan"
-        ),
-        StagingStage(
-            name: "stagingStabilizeName",
-            description: "stagingStabilizeDescription",
-            iconName: "leaf.fill",
-            color: "green"
-        )
-    ]
 }

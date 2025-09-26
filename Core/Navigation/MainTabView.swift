@@ -4,14 +4,16 @@ import SwiftData
 
 public struct MainTabView: View {
     let swiftDataService: SwiftDataService
-    
+
     @Binding var selectedTab: Int
     @Binding var colorScheme: ColorScheme?
-    
+
     @State private var showingCreateRecord = false
-    
+
+    @EnvironmentObject private var presetService: PresetService
+
     // Staging ViewModel для сохранения состояния между навигацией
-    @StateObject private var stagingViewModel = StagingViewModel()
+    @State private var stagingViewModel: StagingViewModel?
     
     public var body: some View {
         TabView(selection: $selectedTab) {
@@ -47,6 +49,11 @@ public struct MainTabView: View {
             .tag(2)
         }
         .accentColor(.blue)
+        .onAppear {
+            if stagingViewModel == nil {
+                stagingViewModel = StagingViewModel(presetService: presetService)
+            }
+        }
         .sheet(isPresented: $showingCreateRecord) {
             CreateRecordView(
                 swiftDataService: swiftDataService,
@@ -79,7 +86,7 @@ public struct MainTabView: View {
             .listRowBackground(Color.clear)
 
             Section {
-                NavigationLink(destination: StagingView(viewModel: stagingViewModel)) {
+                NavigationLink(destination: StagingView(viewModel: stagingViewModel ?? StagingViewModel(presetService: presetService))) {
                     homeCard(
                         title: LocalizedStringKey("startProcess"),
                         subtitle: LocalizedStringKey("startProcessSubtitle"),

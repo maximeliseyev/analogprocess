@@ -293,13 +293,16 @@ public struct GitHubDataResponse: Codable {
     public let developmentTimes: [String: [String: [String: [String: Int]]]]
     public let temperatureMultipliers: [String: Double]
     public let agitationModes: [String: GitHubAgitationModeData]
+    
+   let processPresets: [GitHubProcessPreset]
 
-    public init(films: [String: GitHubFilmData], developers: [String: GitHubDeveloperData], fixers: [String: GitHubFixerData], developmentTimes: [String: [String: [String: [String: Int]]]], temperatureMultipliers: [String: Double], agitationModes: [String: GitHubAgitationModeData]) {
+    init(films: [String: GitHubFilmData], developers: [String: GitHubDeveloperData], fixers: [String: GitHubFixerData], developmentTimes: [String: [String: [String: [String: Int]]]], temperatureMultipliers: [String: Double], agitationModes: [String: GitHubAgitationModeData], processPresets: [GitHubProcessPreset]) {
         self.films = films
         self.developers = developers
         self.fixers = fixers
         self.developmentTimes = developmentTimes
         self.temperatureMultipliers = temperatureMultipliers
         self.agitationModes = agitationModes
+        self.processPresets = processPresets
     }
 }

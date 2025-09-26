@@ -50,7 +50,7 @@ public class GitHubDataService: ObservableObject {
     // MARK: - Data Download
     
     public func downloadAllData() async throws -> GitHubDataResponse {
-        print("DEBUG: Starting downloadAllData")
+        Logger.log(.debug, "Starting downloadAllData")
         isDownloading = true
         downloadProgress = AppConstants.Progress.initialProgress
         
@@ -66,16 +66,18 @@ public class GitHubDataService: ObservableObject {
             async let developmentTimesData = downloadDevelopmentTimes()
             async let temperatureMultipliersData = downloadTemperatureMultipliers()
             async let agitationModesData = downloadAgitationModes()
+            async let processPresetsData = downloadProcessPresets()
 
-            let (films, developers, fixers, developmentTimes, temperatureMultipliers, agitationModes) = try await (filmsData, developersData, fixersData, developmentTimesData, temperatureMultipliersData, agitationModesData)
+            let (films, developers, fixers, developmentTimes, temperatureMultipliers, agitationModes, processPresets) = try await (filmsData, developersData, fixersData, developmentTimesData, temperatureMultipliersData, agitationModesData, processPresetsData)
             
-            print("DEBUG: All data downloaded successfully")
-            print("DEBUG: Films count: \(films.count)")
-            print("DEBUG: Developers count: \(developers.count)")
-            print("DEBUG: Fixers count: \(fixers.count)")
-            print("DEBUG: Development times count: \(developmentTimes.count)")
-            print("DEBUG: Temperature multipliers count: \(temperatureMultipliers.count)")
-            print("DEBUG: Agitation modes count: \(agitationModes.count)")
+            Logger.log(.debug, "All data downloaded successfully")
+            Logger.log(.debug, "Films count: \(films.count)")
+            Logger.log(.debug, "Developers count: \(developers.count)")
+            Logger.log(.debug, "Fixers count: \(fixers.count)")
+            Logger.log(.debug, "Development times count: \(developmentTimes.count)")
+            Logger.log(.debug, "Temperature multipliers count: \(temperatureMultipliers.count)")
+            Logger.log(.debug, "Agitation modes count: \(agitationModes.count)")
+            Logger.log(.debug, "Process presets count: \(processPresets.count)")
 
             downloadProgress = AppConstants.Progress.maxProgress
             lastSyncDate = Date()
@@ -87,10 +89,11 @@ public class GitHubDataService: ObservableObject {
                 fixers: fixers,
                 developmentTimes: developmentTimes,
                 temperatureMultipliers: temperatureMultipliers,
-                agitationModes: agitationModes
+                agitationModes: agitationModes,
+                processPresets: processPresets
             )
         } catch {
-            print("DEBUG: Error in downloadAllData: \(error)")
+            Logger.log(.error, "Error in downloadAllData: \(error)")
             throw error
         }
     }
@@ -114,7 +117,7 @@ public class GitHubDataService: ObservableObject {
             downloadProgress += AppConstants.Progress.downloadStepIncrement
             return films
         } catch {
-            print("DEBUG: Films decoding error: \(error)")
+            Logger.log(.error, "Films decoding error: \(error)")
             throw GitHubDataServiceError.decodingError
         }
     }
@@ -138,7 +141,7 @@ public class GitHubDataService: ObservableObject {
             downloadProgress += AppConstants.Progress.downloadStepIncrement
             return developers
         } catch {
-            print("DEBUG: Developers decoding error: \(error)")
+            Logger.log(.error, "Developers decoding error: \(error)")
             throw GitHubDataServiceError.decodingError
         }
     }
@@ -162,7 +165,7 @@ public class GitHubDataService: ObservableObject {
             downloadProgress += AppConstants.Progress.downloadStepIncrement
             return fixers
         } catch {
-            print("DEBUG: Fixer decoding error: \(error)")
+            Logger.log(.error, "Fixer decoding error: \(error)")
             throw GitHubDataServiceError.decodingError
         }
     }
@@ -186,7 +189,7 @@ public class GitHubDataService: ObservableObject {
             downloadProgress += AppConstants.Progress.downloadStepIncrement
             return developmentTimes
         } catch {
-            print("DEBUG: Development times decoding error: \(error)")
+            Logger.log(.error, "Development times decoding error: \(error)")
             throw GitHubDataServiceError.decodingError
         }
     }
@@ -210,7 +213,7 @@ public class GitHubDataService: ObservableObject {
             downloadProgress += AppConstants.Progress.downloadStepIncrement
             return temperatureMultipliers
         } catch {
-            print("DEBUG: Temperature multipliers decoding error: \(error)")
+            Logger.log(.error, "Temperature multipliers decoding error: \(error)")
             throw GitHubDataServiceError.decodingError
         }
     }
@@ -234,7 +237,26 @@ public class GitHubDataService: ObservableObject {
             downloadProgress += AppConstants.Progress.downloadStepIncrement
             return agitationResponse.modes
         } catch {
-            print("DEBUG: Agitation modes decoding error: \(error)")
+            Logger.log(.error, "Agitation modes decoding error: \(error)")
+            throw GitHubDataServiceError.decodingError
+        }
+    }
+
+    private func downloadProcessPresets() async throws -> [GitHubProcessPreset] {
+        guard let url = URL(string: AppConstants.Network.baseURL + AppConstants.Network.processPresetsEndpoint) else {
+            throw GitHubDataServiceError.networkError(.invalidURL)
+        }
+        let (data, response) = try await networkSession.data(from: url)
+
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw GitHubDataServiceError.networkError(.invalidResponse)
+        }
+
+        do {
+            let presetResponse = try jsonDecoder.decode(GitHubProcessPresetResponse.self, from: data)
+            return presetResponse.presets
+        } catch {
+            Logger.log(.error, "Process presets decoding error: \(error)")
             throw GitHubDataServiceError.decodingError
         }
     }

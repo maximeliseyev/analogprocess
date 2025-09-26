@@ -20,7 +20,7 @@ public enum AgitationAction: String, Codable, CaseIterable {
 
 // MARK: - Rule Conditions
 
-/// Условие для применения правила агитации
+/// Condition for applying an agitation rule
 public struct AgitationRuleCondition: Codable {
     public let type: ConditionType
     public let values: [Int]
@@ -31,13 +31,13 @@ public struct AgitationRuleCondition: Codable {
     }
 
     public enum ConditionType: String, Codable {
-        case exactMinutes = "exact_minutes"      // точные минуты: [1, 5, 10]
-        case minuteRange = "minute_range"        // диапазон: [1, 5] = 1-5 минуты
-        case firstMinute = "first_minute"        // первая минута
-        case lastMinute = "last_minute"          // последняя минута
-        case everyNMinutes = "every_n_minutes"   // каждые N минут: [5] = каждые 5 минут
-        case afterMinute = "after_minute"        // после минуты N: [10] = после 10-й минуты
-        case defaultCondition = "default"       // по умолчанию для всех остальных
+        case exactMinutes = "exact_minutes"      // exact minutes: [1, 5, 10]
+        case minuteRange = "minute_range"        // range: [1, 5] = minutes 1-5
+        case firstMinute = "first_minute"        // first minute
+        case lastMinute = "last_minute"          // last minute
+        case everyNMinutes = "every_n_minutes"   // every N minutes: [5] = every 5 minutes
+        case afterMinute = "after_minute"        // after minute N: [10] = after the 10th minute
+        case defaultCondition = "default"       // default for all others
     }
 
     public func matches(minute: Int, totalMinutes: Int) -> Bool {
@@ -63,13 +63,13 @@ public struct AgitationRuleCondition: Codable {
     }
 }
 
-/// Правило агитации для определенных условий
+/// Agitation rule for specific conditions
 public struct AgitationRule: Codable, Identifiable {
     public let id: UUID
-    public let priority: Int                    // приоритет правила (больше = выше приоритет)
+    public let priority: Int                    // rule priority (higher value = higher priority)
     public let condition: AgitationRuleCondition
     public let action: AgitationAction
-    public let parameters: [String: Int]        // параметры: agitation_seconds, rest_seconds, rotations, etc.
+    public let parameters: [String: Int]        // parameters: agitation_seconds, rest_seconds, rotations, etc.
 
     public var agitationSeconds: Int { parameters["agitation_seconds"] ?? 30 }
     public var restSeconds: Int { parameters["rest_seconds"] ?? 30 }
@@ -91,7 +91,7 @@ public struct AgitationRule: Codable, Identifiable {
 public class AgitationRuleData {
     var priority: Int
     var conditionType: String // AgitationRuleCondition.ConditionType as String
-    var conditionValues: String // [Int] as JSON String для простоты
+    var conditionValues: String // [Int] as JSON String for simplicity
     var action: String // AgitationAction as String
     var parameters: String // [String: Int] as JSON String
 
@@ -103,7 +103,7 @@ public class AgitationRuleData {
         self.conditionType = conditionType.rawValue
         self.action = action.rawValue
 
-        // Кодируем массив в JSON строку
+        // Encoding array to JSON string
         if let valuesData = try? JSONEncoder().encode(conditionValues),
            let valuesString = String(data: valuesData, encoding: .utf8) {
             self.conditionValues = valuesString
@@ -111,7 +111,7 @@ public class AgitationRuleData {
             self.conditionValues = "[]"
         }
 
-        // Кодируем параметры в JSON строку
+        // Encoding parameters to JSON string
         if let paramsData = try? JSONEncoder().encode(parameters),
            let paramsString = String(data: paramsData, encoding: .utf8) {
             self.parameters = paramsString
@@ -120,7 +120,7 @@ public class AgitationRuleData {
         }
     }
 
-    /// Преобразует SwiftData модель обратно в business-logic модель
+    /// Converts SwiftData model back to business-logic model
     public func toAgitationRule() -> AgitationRule {
         let condition = AgitationRuleCondition(
             type: AgitationRuleCondition.ConditionType(rawValue: conditionType) ?? .defaultCondition,
@@ -154,7 +154,7 @@ public class AgitationModeData {
     var localizedNameKey: String
     var isCustom: Bool
 
-    // Используем SwiftData relationships вместо JSON сериализации
+    // Using SwiftData relationships instead of JSON serialization
     @Relationship(deleteRule: .cascade)
     var rules: [AgitationRuleData] = []
 
@@ -163,7 +163,7 @@ public class AgitationModeData {
         self.localizedNameKey = localizedNameKey
         self.isCustom = isCustom
 
-        // Создаем AgitationRuleData из бизнес-правил
+        // Creating AgitationRuleData from business rules
         self.rules = rules.map { rule in
             AgitationRuleData(
                 priority: rule.priority,
@@ -175,17 +175,17 @@ public class AgitationModeData {
         }
     }
 
-    /// Получает business-logic правила из SwiftData моделей
+    /// Gets business-logic rules from SwiftData models
     var decodedRules: [AgitationRule] {
         return rules.map { $0.toAgitationRule() }
     }
 
-    /// Устанавливает новые правила, заменяя существующие
+    /// Sets new rules, replacing existing ones
     func setRules(_ newRules: [AgitationRule]) {
-        // Удаляем существующие правила
+        // Removing existing rules
         rules.removeAll()
 
-        // Создаем новые AgitationRuleData
+        // Creating new AgitationRuleData
         rules = newRules.map { rule in
             AgitationRuleData(
                 priority: rule.priority,
@@ -197,7 +197,7 @@ public class AgitationModeData {
         }
     }
 
-    /// Добавляет новое правило
+    /// Adds a new rule
     func addRule(_ rule: AgitationRule) {
         let ruleData = AgitationRuleData(
             priority: rule.priority,
@@ -213,13 +213,13 @@ public class AgitationModeData {
 // MARK: - Migration Helpers
 
 extension AgitationModeData {
-    /// Создает AgitationModeData из GitHub JSON модели (для миграции)
+    /// Creates AgitationModeData from a GitHub JSON model (for migration)
     static func from(githubModel: Any) -> AgitationModeData? {
-        // TODO: Реализовать парсинг GitHub JSON когда понадобится
+        // TODO: Implement GitHub JSON parsing when needed
         return nil
     }
 
-    /// Создает AgitationModeData из Codable структуры (упрощенная версия)
+    /// Creates AgitationModeData from a Codable struct (simplified version)
     static func from(name: String, localizedKey: String, isCustom: Bool = false, rulesData: [[String: Any]]) -> AgitationModeData {
         var rules: [AgitationRule] = []
 
@@ -248,7 +248,7 @@ struct AgitationModeDataFactory {
 
     static func createORWO() -> AgitationModeData {
         let rules = [
-            // Первая и последняя минуты: 45 сек агитации, 15 сек отдыха
+            // First and last minutes: 45 sec agitation, 15 sec rest
             AgitationRule(
                 priority: 10,
                 condition: AgitationRuleCondition(type: .firstMinute, values: []),
@@ -261,7 +261,7 @@ struct AgitationModeDataFactory {
                 action: .cycle,
                 parameters: ["agitation_seconds": 45, "rest_seconds": 15]
             ),
-            // Все остальные минуты: 15 сек агитации, 45 сек отдыха
+            // All other minutes: 15 sec agitation, 45 sec rest
             AgitationRule(
                 priority: 1,
                 condition: AgitationRuleCondition(type: .defaultCondition, values: []),
@@ -279,49 +279,49 @@ struct AgitationModeDataFactory {
 
     static func createRAE() -> AgitationModeData {
         let rules = [
-            // 1-я минута: непрерывно
+            // 1st minute: continuous
             AgitationRule(
                 priority: 10,
                 condition: AgitationRuleCondition(type: .exactMinutes, values: [1]),
                 action: .continuous,
                 parameters: [:]
             ),
-            // 2-я минута: каждые 10 секунд
+            // 2nd minute: every 10 seconds
             AgitationRule(
                 priority: 10,
                 condition: AgitationRuleCondition(type: .exactMinutes, values: [2]),
                 action: .periodic,
                 parameters: ["interval_seconds": 10]
             ),
-            // 3-я минута: 2 оборота
+            // 3rd minute: 2 rotations
             AgitationRule(
                 priority: 10,
                 condition: AgitationRuleCondition(type: .exactMinutes, values: [3]),
                 action: .rotations,
                 parameters: ["rotations": 2]
             ),
-            // 4-5 минуты: по 1 обороту каждую минуту
+            // 4-5 minutes: 1 rotation per minute
             AgitationRule(
                 priority: 10,
                 condition: AgitationRuleCondition(type: .minuteRange, values: [4, 5]),
                 action: .rotations,
                 parameters: ["rotations": 1]
             ),
-            // 7-я и 10-я минуты: по 1 обороту
+            // 7th and 10th minutes: 1 rotation each
             AgitationRule(
                 priority: 10,
                 condition: AgitationRuleCondition(type: .exactMinutes, values: [7, 10]),
                 action: .rotations,
                 parameters: ["rotations": 1]
             ),
-            // После 10-й минуты каждые 5 минут: 1 оборот (15, 20, 25, 30...)
+            // After the 10th minute, every 5 minutes: 1 rotation (15, 20, 25, 30...)
             AgitationRule(
                 priority: 9,
                 condition: AgitationRuleCondition(type: .afterMinute, values: [10]),
                 action: .rotations,
                 parameters: ["rotations": 1]
             ),
-            // По умолчанию: неподвижно
+            // Default: still
             AgitationRule(
                 priority: 1,
                 condition: AgitationRuleCondition(type: .defaultCondition, values: []),
@@ -330,7 +330,7 @@ struct AgitationModeDataFactory {
             )
         ]
 
-        // Но для правила "каждые 5 минут после 10-й" нужна дополнительная логика
+        // But for the "every 5 minutes after the 10th" rule, additional logic is needed
         return AgitationModeData(
             name: "RAE",
             localizedNameKey: "agitationRaeName",
@@ -357,14 +357,14 @@ struct AgitationModeDataFactory {
 
     static func createFixer() -> AgitationModeData {
         let rules = [
-            // Первая минута: непрерывно
+            // First minute: continuous
             AgitationRule(
                 priority: 10,
                 condition: AgitationRuleCondition(type: .firstMinute, values: []),
                 action: .continuous,
                 parameters: [:]
             ),
-            // Все остальное время: неподвижно
+            // All other time: still
             AgitationRule(
                 priority: 1,
                 condition: AgitationRuleCondition(type: .defaultCondition, values: []),

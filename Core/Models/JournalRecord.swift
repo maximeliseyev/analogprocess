@@ -46,34 +46,12 @@ public struct JournalRecord {
     }
     
     // MARK: - Conversion Methods
-    
+
     public func toCalculationRecord(context: ModelContext) -> SwiftDataJournalRecord {
-        let record = SwiftDataJournalRecord()
-        record.date = date
-        record.name = name
-        record.filmName = filmName
-        record.developerName = developerName
-        record.iso = iso ?? Int32(AppConstants.ISO.defaultFilmISO)
-        record.process = process
-        record.dilution = dilution
-        record.temperature = temperature ?? 20
-        record.time = Int32(time ?? 0)
-        record.comment = comment
-        return record
+        return ModelConverter.createSwiftDataJournalRecord(from: self)
     }
-    
+
     public static func fromCalculationRecord(_ record: SwiftDataJournalRecord) -> JournalRecord {
-        return JournalRecord(
-            date: record.date ?? Date(),
-            name: record.name,
-            filmName: record.filmName,
-            developerName: record.developerName,
-            iso: record.iso,
-            process: record.process,
-            dilution: record.dilution,
-            temperature: record.temperature,
-            time: Int(record.time),
-            comment: record.comment
-        )
+        return ModelConverter.createJournalRecord(from: record)
     }
 } 

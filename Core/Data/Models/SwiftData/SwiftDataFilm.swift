@@ -11,7 +11,7 @@ import SwiftData
 
 // MARK: - SwiftData Film Model
 @Model
-public final class SwiftDataFilm {
+public final class SwiftDataFilm: FilmModel {
     public var id: String = UUID().uuidString
     public var name: String = ""
     public var manufacturer: String = ""

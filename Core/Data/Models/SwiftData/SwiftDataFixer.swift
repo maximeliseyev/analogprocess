@@ -11,7 +11,7 @@ import SwiftData
 
 // MARK: - SwiftData Fixer Model
 @Model
-public final class SwiftDataFixer {
+public final class SwiftDataFixer: FixerModel {
     @Attribute(.unique) public var id: String
     public var name: String
     public var type: String

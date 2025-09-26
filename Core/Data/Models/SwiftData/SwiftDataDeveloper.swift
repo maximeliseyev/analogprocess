@@ -11,7 +11,7 @@ import SwiftData
 
 // MARK: - SwiftData Developer Model
 @Model
-public final class SwiftDataDeveloper {
+public final class SwiftDataDeveloper: DeveloperModel {
     public var id: String = UUID().uuidString
     public var name: String = ""
     public var manufacturer: String = ""

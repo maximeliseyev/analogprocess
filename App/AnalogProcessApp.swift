@@ -14,6 +14,7 @@ struct AnalogProcessApp: App {
     @StateObject private var githubDataService: GitHubDataService
     @StateObject private var swiftDataService: SwiftDataService
     @StateObject private var autoSyncService: AutoSyncService
+    @StateObject private var presetService: PresetService
     
     private let modelContainer: ModelContainer
     
@@ -27,10 +28,12 @@ struct AnalogProcessApp: App {
         let githubService = GitHubDataService()
         let swiftDataService = SwiftDataService(githubDataService: githubService, modelContainer: self.modelContainer)
         let autoSyncService = AutoSyncService(swiftDataService: swiftDataService)
-        
+        let presetService = PresetService(swiftDataService: swiftDataService)
+
         _githubDataService = StateObject(wrappedValue: githubService)
         _swiftDataService = StateObject(wrappedValue: swiftDataService)
         _autoSyncService = StateObject(wrappedValue: autoSyncService)
+        _presetService = StateObject(wrappedValue: presetService)
     }
     
     var body: some Scene {
@@ -40,6 +43,7 @@ struct AnalogProcessApp: App {
                 .environmentObject(githubDataService)
                 .environmentObject(swiftDataService)
                 .environmentObject(autoSyncService)
+                .environmentObject(presetService)
                 .environment(\.theme, NonIsolatedThemeManager())
                 .preferredColorScheme(colorScheme)
                 .onAppear {

@@ -36,7 +36,7 @@ struct StagingView: View {
     @State private var showingPresetSelector = false
     @State private var selectedPreset: ProcessPreset? = nil
 
-    init(viewModel: StagingViewModel = StagingViewModel()) {
+    init(viewModel: StagingViewModel) {
         self.viewModel = viewModel
     }
 
