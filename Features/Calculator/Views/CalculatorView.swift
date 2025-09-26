@@ -385,4 +385,3 @@ struct CalculatorView_Previews: PreviewProvider {
         .previewDisplayName("Calculator")
     }
 }
-

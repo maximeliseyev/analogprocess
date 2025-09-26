@@ -4,19 +4,83 @@ import Combine
 
 
 class StagingViewModel: ObservableObject {
-    @Published var allStages: [StagingStage] = StagingStage.defaultStages
+    @Published var allStages: [StagingStage] = []
     @Published var selectedStages: [StagingStage] = []
     @Published var selectedStage: StagingStage?
     @Published var isEditing = false
-    
-    let availablePresets: [ProcessPreset]
-    
+
+    @Published var availablePresets: [ProcessPreset] = []
+    private let presetService: PresetService
+
     private var cancellables = Set<AnyCancellable>()
-    
-    init() {
-        self.availablePresets = PresetService.getAvailablePresets()
+
+    init(presetService: PresetService) {
+        self.presetService = presetService
+        // Initialize with empty arrays, will be populated in setupPresetUpdates
+        self.availablePresets = []
+        self.allStages = []
         loadSelectedStages()
         setupBindings()
+
+        // Schedule preset setup on main actor
+        Task { @MainActor in
+            await self.setupPresetUpdates()
+        }
+    }
+
+    @MainActor
+    private func setupPresetUpdates() async {
+        // Listen for preset updates from the service
+        presetService.$presets
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] presets in
+                self?.availablePresets = presets
+                if !presets.isEmpty {
+                    self?.allStages = self?.createAllStagesFromPresets() ?? []
+                }
+            }
+            .store(in: &cancellables)
+
+        // Initialize with current presets
+        self.availablePresets = presetService.presets
+        self.allStages = createAllStagesFromPresets()
+    }
+
+    private func createAllStagesFromPresets() -> [StagingStage] {
+        var uniqueStages: [StagingStage] = []
+        var stageTypes: Set<String> = Set()
+
+        // Collect all unique stage types from all presets
+        for preset in availablePresets {
+            for stage in preset.stages {
+                if !stageTypes.contains(stage.name) {
+                    var basicStage = stage
+                    basicStage.duration = 0
+                    basicStage.temperature = 20
+                    uniqueStages.append(basicStage)
+                    stageTypes.insert(stage.name)
+                }
+            }
+        }
+
+        // If no presets are available yet, return basic fallback stages
+        if uniqueStages.isEmpty {
+            return createFallbackStages()
+        }
+
+        return uniqueStages
+    }
+
+    private func createFallbackStages() -> [StagingStage] {
+        return [
+            StagingStage(name: "stagingPrebathName", description: "stagingPrebathDescription", iconName: "drop.fill", color: "blue"),
+            StagingStage(name: "stagingDevelopName", description: "stagingDevelopDescription", iconName: "flask.fill", color: "orange"),
+            StagingStage(name: "stagingStopBathName", description: "stagingStopBathDescription", iconName: "stop.fill", color: "red"),
+            StagingStage(name: "stagingBleachName", description: "stagingBleachDescription", iconName: "flask", color: "yellow"),
+            StagingStage(name: "stagingFixerName", description: "stagingFixerDescription", iconName: "shield.fill", color: "purple"),
+            StagingStage(name: "stagingWashName", description: "stagingWashDescription", iconName: "drop", color: "cyan"),
+            StagingStage(name: "stagingStabilizeName", description: "stagingStabilizeDescription", iconName: "leaf.fill", color: "green")
+        ]
     }
     
     private func setupBindings() {

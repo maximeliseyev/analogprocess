@@ -36,7 +36,7 @@ public class SwiftDataService: ObservableObject {
         refreshData()
         
         if films.isEmpty || developers.isEmpty {
-            print("DEBUG: loadInitialData - loading data from JSON")
+            Logger.log(.debug, "loadInitialData - loading data from JSON")
             loadFilmsFromJSON()
             loadDevelopersFromJSON()
             loadFixersFromJSON()
@@ -247,7 +247,7 @@ public class SwiftDataService: ObservableObject {
             return Int(found.time)
         }
 
-        print("DEBUG: getDevelopmentTime - no development time found")
+        Logger.log(.debug, "getDevelopmentTime - no development time found")
         return nil
     }
     
@@ -324,7 +324,7 @@ public class SwiftDataService: ObservableObject {
             let descriptor = FetchDescriptor<SwiftDataJournalRecord>(sortBy: [SortDescriptor(\.date, order: .reverse)])
             return try modelContext.fetch(descriptor)
         } catch {
-            print("Error fetching calculation records: \(error)")
+            Logger.log(.error, "Error fetching calculation records: \(error)")
             return []
         }
     }
@@ -347,7 +347,7 @@ public class SwiftDataService: ObservableObject {
             saveContext()
             refreshData()
         } catch {
-            print("Error clearing data: \(error)")
+            Logger.log(.error, "Error clearing data: \(error)")
         }
     }
     
@@ -363,12 +363,13 @@ public class SwiftDataService: ObservableObject {
                 syncDevelopmentTimesFromGitHub(githubData.developmentTimes)
                 syncTemperatureMultipliersFromGitHub(githubData.temperatureMultipliers)
                 syncAgitationModesFromGitHub(githubData.agitationModes)
+                syncProcessPresetsFromGitHub(githubData.processPresets)
                 
                 saveContext()
                 refreshData()
             }
         } catch {
-            print("Error syncing data from GitHub: \(error)")
+            Logger.log(.error, "Error syncing data from GitHub: \(error)")
             throw error
         }
     }
@@ -402,97 +403,28 @@ public class SwiftDataService: ObservableObject {
     
     // MARK: - Entity Creation Helpers
     private func createSwiftDataFilm(_ id: String, _ data: GitHubFilmData) -> SwiftDataFilm {
-        return SwiftDataFilm(
-            id: id,
-            name: data.name,
-            manufacturer: data.manufacturer,
-            type: data.type,
-            defaultISO: Int32(data.defaultISO)
-        )
+        return ModelConverter.createSwiftDataFilm(id: id, from: data)
     }
-    
+
     private func createSwiftDataDeveloper(_ id: String, _ data: GitHubDeveloperData) -> SwiftDataDeveloper {
-        return SwiftDataDeveloper(
-            id: id,
-            name: data.name,
-            manufacturer: data.manufacturer,
-            type: data.type,
-            defaultDilution: data.defaultDilution
-        )
+        return ModelConverter.createSwiftDataDeveloper(id: id, from: data)
     }
-    
+
     private func createSwiftDataFixer(_ id: String, _ data: GitHubFixerData) -> SwiftDataFixer {
-        return SwiftDataFixer(
-            id: id,
-            name: data.name,
-            type: data.type.rawValue,
-            time: data.time,
-            warning: data.warning
-        )
+        return ModelConverter.createSwiftDataFixer(id: id, from: data)
     }
     
     // MARK: - Entity Update Helpers
     private func updateSwiftDataFilm(_ entity: SwiftDataFilm, _ data: GitHubFilmData) -> Bool {
-        var hasChanges = false
-        if entity.name != data.name {
-            entity.name = data.name
-            hasChanges = true
-        }
-        if entity.manufacturer != data.manufacturer {
-            entity.manufacturer = data.manufacturer
-            hasChanges = true
-        }
-        if entity.type != data.type {
-            entity.type = data.type
-            hasChanges = true
-        }
-        if entity.defaultISO != Int32(data.defaultISO) {
-            entity.defaultISO = Int32(data.defaultISO)
-            hasChanges = true
-        }
-        return hasChanges
+        return ModelConverter.updateSwiftDataFilm(entity, with: data)
     }
-    
+
     private func updateSwiftDataDeveloper(_ entity: SwiftDataDeveloper, _ data: GitHubDeveloperData) -> Bool {
-        var hasChanges = false
-        if entity.name != data.name {
-            entity.name = data.name
-            hasChanges = true
-        }
-        if entity.manufacturer != data.manufacturer {
-            entity.manufacturer = data.manufacturer
-            hasChanges = true
-        }
-        if entity.type != data.type {
-            entity.type = data.type
-            hasChanges = true
-        }
-        if entity.defaultDilution != data.defaultDilution {
-            entity.defaultDilution = data.defaultDilution
-            hasChanges = true
-        }
-        return hasChanges
+        return ModelConverter.updateSwiftDataDeveloper(entity, with: data)
     }
-    
+
     private func updateSwiftDataFixer(_ entity: SwiftDataFixer, _ data: GitHubFixerData) -> Bool {
-        var hasChanges = false
-        if entity.name != data.name {
-            entity.name = data.name
-            hasChanges = true
-        }
-        if entity.type != data.type.rawValue {
-            entity.type = data.type.rawValue
-            hasChanges = true
-        }
-        if entity.time != data.time {
-            entity.time = data.time
-            hasChanges = true
-        }
-        if entity.warning != data.warning {
-            entity.warning = data.warning
-            hasChanges = true
-        }
-        return hasChanges
+        return ModelConverter.updateSwiftDataFixer(entity, with: data)
     }
     
     private func syncDevelopmentTimesFromGitHub(_ developmentTimes: [String: [String: [String: [String: Int]]]]) {
@@ -587,7 +519,25 @@ public class SwiftDataService: ObservableObject {
     private func syncAgitationModesFromGitHub(_ agitationModes: [String: GitHubAgitationModeData]) {
         // Обновляем кеш агитации в GitHubAgitationService
         GitHubAgitationService.shared.updateModes(from: agitationModes)
-        print("DEBUG: Synced \(agitationModes.count) agitation modes to GitHubAgitationService")
+        Logger.log(.debug, "Synced \(agitationModes.count) agitation modes to GitHubAgitationService")
+    }
+
+    private func syncProcessPresetsFromGitHub(_ presets: [GitHubProcessPreset]) {
+        // This is a simple sync that deletes all existing presets and replaces them.
+        // A more sophisticated sync would update existing presets based on their name.
+        do {
+            try modelContext.delete(model: SwiftDataProcessPreset.self)
+        } catch {
+            Logger.log(.error, "Error deleting process presets: \(error)")
+        }
+
+        for preset in presets {
+            let stages = preset.stages.map { stage in
+                return SwiftDataStagingStage(name: stage.name, description: stage.description, iconName: stage.iconName, color: stage.color, duration: stage.duration, temperature: stage.temperature)
+            }
+            let newPreset = SwiftDataProcessPreset(name: preset.name, description: preset.description, stages: stages)
+            modelContext.insert(newPreset)
+        }
     }
 
     
@@ -596,7 +546,7 @@ public class SwiftDataService: ObservableObject {
         do {
             try modelContext.save()
         } catch {
-            print("Error saving SwiftData context: \(error)")
+            Logger.log(.error, "Error saving SwiftData context: \(error)")
         }
     }
     
@@ -632,6 +582,29 @@ public class SwiftDataService: ObservableObject {
     
     public func getFixers() -> [SwiftDataFixer] {
         return fixers
+    }
+    
+    // MARK: - Process Presets
+    
+    func getProcessPresets() -> [SwiftDataProcessPreset] {
+        do {
+            let descriptor = FetchDescriptor<SwiftDataProcessPreset>(sortBy: [SortDescriptor(\.name)])
+            return try modelContext.fetch(descriptor)
+        } catch {
+            Logger.log(.error, "Error fetching process presets: \(error)")
+            return []
+        }
+    }
+    
+    func saveProcessPresets(_ presets: [ProcessPreset]) {
+        for preset in presets {
+            let stages = preset.stages.map { stage in
+                return SwiftDataStagingStage(name: stage.name, description: stage.description, iconName: stage.iconName, color: stage.color, duration: stage.duration, temperature: stage.temperature)
+            }
+            let newPreset = SwiftDataProcessPreset(name: preset.name, description: preset.description, stages: stages)
+            modelContext.insert(newPreset)
+        }
+        saveContext()
     }
     
     func calculateDevelopmentTime(parameters: DevelopmentParameters) -> Int? {

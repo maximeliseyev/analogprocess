@@ -1,33 +1,46 @@
+//
+//  SwiftDataPersistenceTest.swift
+//  AnalogProcess
+//
+//  Created by Maxim Eliseyev on 25.09.2025.
+//
+
+import XCTest
 import SwiftData
-import SwiftUI
+@testable import AnalogProcess
 
-// Простая тестовая версия для диагностики
-struct SwiftDataPersistenceTest {
-    static let shared = SwiftDataPersistenceTest()
+class SwiftDataPersistenceTests: XCTestCase {
 
-    let modelContainer: ModelContainer
+    var modelContainer: ModelContainer!
 
-    init() {
-        print("🧪 Testing basic SwiftData setup...")
+    @MainActor
+    override func setUp() {
+        super.setUp()
+        modelContainer = TestDataFactory.createContainerWithSampleData()
+    }
 
-        do {
-            // Используем унифицированную тестовую конфигурацию
-            let (schema, config) = SwiftDataConfigurationManager.createTestConfiguration()
-            modelContainer = try ModelContainer(for: schema, configurations: [config])
-            print("✅ Unified test configuration successful")
-            print("📋 Test schema entities: \(SwiftDataSchemas.entityNames(for: schema))")
+    override func tearDown() {
+        modelContainer = nil
+        super.tearDown()
+    }
 
-        } catch {
-            print("❌ Unified test configuration failed: \(error)")
-            // Fallback к самой простой схеме
-            let emptySchema = Schema([SwiftDataFilm.self])
-            let emptyConfig = ModelConfiguration(schema: emptySchema, isStoredInMemoryOnly: true)
-            do {
-                modelContainer = try ModelContainer(for: emptySchema, configurations: [emptyConfig])
-                print("⚠️ Using fallback test schema")
-            } catch {
-                fatalError("Failed to create even basic test container: \(error)")
-            }
-        }
+    @MainActor
+    func testSampleDataIsLoaded() {
+        let context = modelContainer.mainContext
+        
+        let filmDescriptor = FetchDescriptor<SwiftDataFilm>()
+        let films = try! context.fetch(filmDescriptor)
+        XCTAssertEqual(films.count, 1)
+        XCTAssertEqual(films.first?.name, "Ilford HP5+")
+        
+        let devDescriptor = FetchDescriptor<SwiftDataDeveloper>()
+        let developers = try! context.fetch(devDescriptor)
+        XCTAssertEqual(developers.count, 1)
+        XCTAssertEqual(developers.first?.name, "Kodak D-76")
+        
+        let timeDescriptor = FetchDescriptor<SwiftDataDevelopmentTime>()
+        let times = try! context.fetch(timeDescriptor)
+        XCTAssertEqual(times.count, 1)
+        XCTAssertEqual(times.first?.time, 540)
     }
 }

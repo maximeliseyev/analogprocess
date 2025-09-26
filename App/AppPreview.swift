@@ -16,12 +16,14 @@ struct AppPreview: View {
         let githubService = GitHubDataService()
         let swiftDataService = SwiftDataService(githubDataService: githubService, modelContainer: modelContainer)
         let autoSyncService = AutoSyncService(swiftDataService: swiftDataService)
-        
+        let presetService = PresetService(swiftDataService: swiftDataService)
+
         ContentView(colorScheme: $colorScheme)
             .modelContainer(modelContainer)
             .environmentObject(githubService)
             .environmentObject(swiftDataService)
             .environmentObject(autoSyncService)
+            .environmentObject(presetService)
     }
 }
 

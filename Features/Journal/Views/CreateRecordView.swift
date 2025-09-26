@@ -314,8 +314,10 @@ struct CreateRecordView: View {
     let container = SwiftDataPersistence.preview.modelContainer
     let githubService = GitHubDataService()
     let swiftDataService = SwiftDataService(githubDataService: githubService, modelContainer: container)
-    
-    return CreateRecordView(
+    let autoSyncService = AutoSyncService(swiftDataService: swiftDataService)
+    let presetService = PresetService(swiftDataService: swiftDataService)
+
+    CreateRecordView(
         swiftDataService: swiftDataService,
         prefillData: nil,
         isEditing: false,
@@ -324,4 +326,9 @@ struct CreateRecordView: View {
         calculatorCoefficient: nil,
         calculatorProcess: nil
     )
+    .modelContainer(container)
+    .environmentObject(githubService)
+    .environmentObject(swiftDataService)
+    .environmentObject(autoSyncService)
+    .environmentObject(presetService)
 } 

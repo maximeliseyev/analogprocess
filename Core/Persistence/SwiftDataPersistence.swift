@@ -13,41 +13,9 @@ struct SwiftDataPersistence {
     
     @MainActor
     static let preview: SwiftDataPersistence = {
-        // Используем унифицированную тестовую конфигурацию
         let result = SwiftDataPersistence(inMemory: true)
         let modelContext = result.modelContainer.mainContext
-        
-        // Создаем тестовые данные для превью
-        let film = SwiftDataFilm()
-        film.id = "test-film"
-        film.name = "Ilford HP5+"
-        film.manufacturer = "Ilford"
-        film.type = "Black & White"
-        film.defaultISO = 400
-
-        let developer = SwiftDataDeveloper()
-        developer.id = "test-developer"
-        developer.name = "Kodak D-76"
-        developer.manufacturer = "Kodak"
-        developer.type = "powder"
-        developer.defaultDilution = "1+1"
-        
-        let developmentTime = SwiftDataDevelopmentTime()
-        developmentTime.dilution = "1+1"
-        developmentTime.iso = 400
-        developmentTime.time = 540
-        developmentTime.developer = developer
-        developmentTime.film = film
-        
-        modelContext.insert(film)
-        modelContext.insert(developer)
-        modelContext.insert(developmentTime)
-        
-        do {
-            try modelContext.save()
-        } catch {
-            fatalError("Unresolved error \(error)")
-        }
+//        TestDataFactory.createSampleData(modelContext: modelContext)
         return result
     }()
     
@@ -56,61 +24,51 @@ struct SwiftDataPersistence {
     init(inMemory: Bool = false) {
         print("🚀 Starting SwiftData initialization (inMemory: \(inMemory))")
 
-        // Пытаемся инициализировать основную конфигурацию
+        // Trying to initialize the main configuration
         do {
-            // Используем унифицированный менеджер конфигураций
+            // Using a unified configuration manager
             let (schema, modelConfiguration) = SwiftDataConfigurationManager.createPrimaryConfiguration(inMemory: inMemory)
 
-            // Валидируем схему
+            // Validating the schema
             let missingEntities = SwiftDataConfigurationManager.validateSchema(schema)
             if !missingEntities.isEmpty {
                 print("⚠️ Schema validation warning - missing entities: \(missingEntities)")
             }
 
             print("📋 Using schema v1.1 with entities: \(SwiftDataSchemas.entityNames(for: schema))")
-            print(inMemory ? "🔧 Using in-memory configuration" : "☁️ Attempting CloudKit configuration...")
+            print(inMemory ? "🔧 Using in-memory configuration" : "💿 Using on-disk storage")
 
             self.modelContainer = try ModelContainer(for: schema, configurations: [modelConfiguration])
-            return  // Успешная инициализация
+            return  // Successful initialization
         } catch {
-            print("SwiftData CloudKit initialization failed: \(error)")
+            print("SwiftData initialization failed: \(error)")
 
-            // Детальный анализ ошибки
+            // Detailed error analysis
             if let swiftDataError = error as? SwiftDataError {
                 print("SwiftData error details: \(swiftDataError)")
                 print("SwiftData error localizedDescription: \(swiftDataError.localizedDescription)")
             }
 
-            // Проверяем причину ошибки CloudKit
-            if let nsError = error as NSError? {
-                print("Error domain: \(nsError.domain)")
-                print("Error code: \(nsError.code)")
-                print("Error userInfo: \(nsError.userInfo)")
-                if nsError.code == 134400 {
-                    print("⚠️ CloudKit требует iCloud аккаунт. Войдите в iCloud в Настройках устройства.")
-                }
-            }
-
-            // Проверяем, связана ли ошибка с моделями
-            print("🔍 Проверка схемы перед fallback:")
+            // Checking if the error is related to the models
+            print("🔍 Checking schema before fallback:")
             let currentSchema = SwiftDataSchemas.current
             for entity in currentSchema.entities {
                 print("   - Entity: \(entity.name)")
             }
 
-            // Используем стратегический fallback подход
+            // Using a strategic fallback approach
             let recoveryStrategies: [SwiftDataRecoveryStrategy] = [
-                .resetDatabase,  // Сначала пробуем сбросить базу с полной схемой
-                .useMemory,      // Затем in-memory с полной схемой
-                .useMinimalSchema, // Потом минимальная схема
-                .useJournalOnly    // И наконец только журнал
+                .resetDatabase,  // First, try to reset the database with the full schema
+                .useMemory,      // Then in-memory with the full schema
+                .useMinimalSchema, // Then the minimal schema
+                .useJournalOnly    // And finally, only the journal
             ]
 
             for strategy in recoveryStrategies {
                 print("⚠️ Attempting recovery strategy: \(strategy.description)")
 
                 do {
-                    // Специальная обработка для resetDatabase
+                    // Special handling for resetDatabase
                     if strategy == .resetDatabase {
                         let url = URL.applicationSupportDirectory.appending(path: "default.store")
                         if FileManager.default.fileExists(atPath: url.path()) {
@@ -126,7 +84,7 @@ struct SwiftDataPersistence {
                     print("📋 Using entities: \(SwiftDataSchemas.entityNames(for: schema))")
 
                     self.modelContainer = container
-                    return  // Успешное восстановление
+                    return  // Successful recovery
 
                 } catch {
                     print("❌ Recovery strategy '\(strategy.description)' failed: \(error)")
@@ -134,14 +92,14 @@ struct SwiftDataPersistence {
                 }
             }
 
-        // Если все стратегии восстановления провалились, создаём аварийную конфигурацию
+        // If all recovery strategies have failed, create an emergency configuration
         print("💥 All recovery strategies failed - using emergency configuration")
         let (emergencySchema, emergencyConfig) = SwiftDataConfigurationManager.createFallbackConfiguration(strategy: .useMemory)
         do {
             self.modelContainer = try ModelContainer(for: emergencySchema, configurations: [emergencyConfig])
             print("🆘 Emergency in-memory configuration successful")
         } catch {
-            // Последняя попытка с минимальной схемой
+            // Last attempt with a minimal schema
             let minimalSchema = Schema([SwiftDataJournalRecord.self])
             let minimalConfig = ModelConfiguration(schema: minimalSchema, isStoredInMemoryOnly: true)
             self.modelContainer = try! ModelContainer(for: minimalSchema, configurations: [minimalConfig])

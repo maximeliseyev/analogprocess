@@ -35,9 +35,17 @@ class CreateRecordViewModel: ObservableObject {
         self.developerAutoCompleteManager = .forDevelopers(swiftDataService: swiftDataService)
     }
     
+    @Published var validationErrors: [ValidationError] = []
+
     var isValid: Bool {
-        !filmName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
-        !developerName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        validationErrors.isEmpty
+    }
+
+    func validate() {
+        var errors: [ValidationError] = []
+        errors.append(contentsOf: ValidationManager.validateNotEmpty(field: filmName, fieldName: "Film Name"))
+        errors.append(contentsOf: ValidationManager.validateNotEmpty(field: developerName, fieldName: "Developer Name"))
+        self.validationErrors = errors
     }
     
     // Конвертация времени в секунды
@@ -90,6 +98,9 @@ class CreateRecordViewModel: ObservableObject {
     }
     
     func saveRecord() {
+        validate()
+        guard isValid else { return }
+        
         swiftDataService.saveRecord(
             filmName: filmName.trimmingCharacters(in: .whitespacesAndNewlines),
             developerName: developerName.trimmingCharacters(in: .whitespacesAndNewlines),
